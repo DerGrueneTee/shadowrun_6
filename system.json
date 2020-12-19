@@ -1,0 +1,32 @@
+{
+  "name": "shadowrun6eden",
+  "title": "Shadowrun 6",
+  "description": "RPGFramework Eden implementation for Shadowrun 6",
+  "version": "0.0.1",
+  "templateVersion": 1,
+  "author": "Stefan u. Anja Prelle",
+  "scripts": [
+  ],
+  "esmodules": [
+    "module/Shadowrun6.js"
+  ],
+  "styles": [
+    "styles/splittermond.css"
+  ],
+  "packs": [
+  ],
+  "languages": [
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    }
+  ],
+  "socket": false,
+  "initiative": "1d6",
+  "gridDistance": 1.5,
+  "gridUnits": "m",
+  "url": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/",
+  "manifest": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/raw/master/system.json",
+  "download": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/get/master.zip"
+}

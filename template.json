@@ -1,0 +1,47 @@
+{
+  "Actor": {
+    "types": [
+      "pc",
+      "npc"
+    ],
+    "templates": {
+      "attributes": {
+        "aus": {
+          "value": 1
+        },
+        "bew": {
+          "value": 1
+        }
+      },
+      "attributes2": {
+        "gk": {
+          "value": 0
+        }
+      }
+    },
+    "pc": {
+      "name": "",
+      "templates": [
+        "attributes",
+        "attributes2"
+      ],
+      "race": "",
+      "gender": ""
+    },
+    "npc": {
+      "name" : "",
+      "templates": [
+        "attributes",
+        "attributes2"
+      ]
+    }
+  },
+  "Item": {
+    "types": [
+      "spell"
+    ],
+    "spell": {
+      "drain": 1
+    }
+}
+}
