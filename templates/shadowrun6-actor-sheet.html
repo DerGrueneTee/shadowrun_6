@@ -2,38 +2,29 @@
 
     {{!-- Sheet Header --}}
     <header class="sheet-header">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100" />
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
         <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Name" /></h1>
             <h1 class="charname"><input name="rasse" type="text" value="{{actor.metatype}}" placeholder="Meta" /></h1>
             {{!-- Character Summary --}}
-<!--             <ul class="charname"> -->
-<!--                 <li> -->
-<!--                     <input type="text" name="rasse2" value="{{actor.race}}" placeholder="{{ localize 'sm.race' }}"/> -->
-<!--                 </li> -->
-<!--                 <li> -->
-<!--                     <input type="text" name=".background" label="{{ localize 'SPLIMO.background' }}" value="{{actor.background}}" placeholder="{{ localize 'sm.background' }}"/> -->
-<!--                 </li> -->
-<!--                 <li> -->
-<!--                     <input type="text" name="culture" value="{{actor.culture}}" placeholder="{{ localize 'sm.culture' }}"/> -->
-<!--                 </li> -->
-<!--                 <li> -->
-<!--                     <input type="text" name="education" value="{{actor.education}}" placeholder="{{ localize 'sm.education' }}"/> -->
-<!--                 </li> -->
-              
-<!--             </ul> -->
         </div>
     </header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="attributes">{{ localize 'actor.nav.attributes' }}</a>
+        <a class="item" data-tab="skills">{{ localize 'actor.nav.skills' }}</a>
         <a class="item" data-tab="description">{{ localize 'actor.nav.description' }}</a>
         <a class="item" data-tab="items">{{ localize 'actor.nav.items' }}</a>
     </nav>
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+
+        {{!-- Skills Tab --}}
+        <div class="tab skills" data-group="primary" data-tab="skills">
+            {{> "systems/shadowrun6eden/templates/parts/pc-skills.html" skills=data.skills}}
+        </div>
 
         {{!-- Biography Tab --}}
         <div class="tab biography" data-group="primary" data-tab="description">
@@ -102,11 +93,11 @@
             </header>
 
             {{!-- Render the attribute list partial. --}}
-            {{> "systems/worldbuilding/templates/parts/sheet-attributes.html" attributes=data.ungroupedAttributes dtypes=dtypes}}
+            {{!-- "systems/worldbuilding/templates/parts/sheet-attributes.html" attributes=data.ungroupedAttributes dtypes=dtypes--}}
 
             {{!-- Render the grouped attributes partial and control. --}}
             <div class="groups">
-                {{> "systems/worldbuilding/templates/parts/sheet-groups.html" attributes=data.groupedAttributes groups=data.groups dtypes=dtypes}}
+                {{!-- "systems/worldbuilding/templates/parts/sheet-groups.html" attributes=data.groupedAttributes groups=data.groups dtypes=dtypes--}}
 
                 <div class="group-controls flexrow">
                     <input class="group-prefix" type="text" val=""/>

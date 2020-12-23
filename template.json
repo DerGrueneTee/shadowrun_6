@@ -1,47 +1,207 @@
 {
-  "Actor": {
-    "types": [
-      "pc",
-      "npc"
-    ],
-    "templates": {
-      "attributes": {
-        "aus": {
-          "value": 1
-        },
-        "bew": {
-          "value": 1
-        }
-      },
-      "attributes2": {
-        "gk": {
-          "value": 0
-        }
-      }
-    },
-    "pc": {
-      "name": "",
-      "templates": [
-        "attributes",
-        "attributes2"
-      ],
-      "race": "",
-      "gender": ""
-    },
-    "npc": {
-      "name" : "",
-      "templates": [
-        "attributes",
-        "attributes2"
-      ]
-    }
-  },
-  "Item": {
-    "types": [
-      "spell"
-    ],
-    "spell": {
-      "drain": 1
-    }
-}
+	"Actor": {
+		"types": [
+			"Player",
+			"NPC",
+			"Critter"
+		],
+		"templates": {
+			"attributes": {
+				"attr": {
+					"bod": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"agi": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"rea": {
+						"distr": 1,
+						"mod": 0,
+						"current": 1,
+						"augment": 0
+					},
+					"str": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"wil": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"log": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"inn": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"cha": {
+						"distr": 1,
+						"mod": 0,
+						"augment": 0
+					},
+					"mag": {
+						"distr": 0,
+						"mod": 0
+					},
+					"res": {
+						"distr": 0,
+						"mod": 0
+					},
+					"edg": {
+						"distr": 1,
+						"mod": 0
+					}
+				}
+			},
+			"monitor": {
+				"health": {
+					"max": 9
+				},
+				"stun": {
+					"max": 9
+				}
+			},
+			"skills": {
+				"skills": {
+				"astral": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"athletics": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"biotech": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"close_combat": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"con": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"conjuring": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"cracking": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"electronics": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"enchanting": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"engineering": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"exotic_weapons": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"firearms": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"influence": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"outdoors": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"perception": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"piloting": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"sorcery": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"stealth": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				},
+				"tasking": {
+					"distr": 0,
+					"mod": 0,
+					"augment": 0
+				}
+			}
+			}
+		},
+		"Player": {
+			"name": "",
+			"templates": [
+				"attributes",
+				"monitor",
+				"skills"
+			],
+			"race": "",
+			"gender": ""
+		},
+		"NPC": {
+			"name": "",
+			"templates": [
+				"attributes",
+				"monitor"
+			]
+		},
+		"Critter": {
+			"name": "",
+			"templates": [
+				"attributes",
+				"monitor"
+			]
+		}
+	},
+	"Item": {
+		"types": [
+			"spell"
+		],
+		"spell": {
+			"drain": 1
+		}
+	}
 }
