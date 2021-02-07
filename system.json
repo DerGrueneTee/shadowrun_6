@@ -1,10 +1,12 @@
 {
-  "name": "shadowrun6eden",
+  "name": "shadowrun6-eden",
   "title": "Shadowrun 6",
   "description": "RPGFramework Eden implementation for Shadowrun 6",
   "version": "0.0.1",
   "templateVersion": 1,
-  "author": "Stefan u. Anja Prelle",
+  "author": "René Matis, Stefan u. Anja Prelle",
+  "compatibleCoreVersion": "0.7.0",
+  "minimumCoreVersion":"0.5.0",
   "scripts": [
   ],
   "esmodules": [
@@ -15,11 +17,19 @@
   ],
   "packs": [
   ],
+  "dependencies": [
+
+  ],
   "languages": [
     {
       "lang": "de",
       "name": "Deutsch",
       "path": "lang/de.json"
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
     }
   ],
   "socket": false,

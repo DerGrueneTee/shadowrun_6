@@ -6,177 +6,377 @@
 			"Critter"
 		],
 		"templates": {
-			"attributes": {
-				"attr": {
+			"attribute-template": {
+				"attributes": {
 					"bod": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
 					"agi": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
 					"rea": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"current": 1,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
 					"str": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
 					"wil": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
 					"log": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
-					"inn": {
-						"distr": 1,
+					"int": {
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2,
+						"min": 1
 					},
 					"cha": {
-						"distr": 1,
+						"basis": 2,
 						"mod": 0,
-						"augment": 0
+						"augment": 0,
+						"current": 2
 					},
 					"mag": {
-						"distr": 0,
-						"mod": 0
+						"basis": 0,
+						"mod": 0,
+						"current": 0,
+						"min": 0
 					},
 					"res": {
-						"distr": 0,
-						"mod": 0
+						"basis": 0,
+						"mod": 0,
+						"current": 0,
+						"min": 1
 					},
 					"edg": {
-						"distr": 1,
-						"mod": 0
+						"basis": 1,
+						"mod": 0,
+						"current": 0,
+						"min": 0,
+						"max": 7
+					},
+					"essence": {
+						"basis": 6,
+						"mod": 0,
+						"current": 6,
+						"max": 6
+					}
+				},
+				"metatype": "human",
+				"ethnicity": "",
+				"gender": "",
+				"age": "",
+				"height": "",
+				"weight": ""
+			},
+			"monitor-template": {
+				"physical": {
+					"basis": 9,
+					"mod": 0,
+					"current": 9,
+					"max": 19
+				},
+				"physicalDamagePenalty": 0,
+				"stun": {
+					"basis": 9,
+					"mod": 0,
+					"current": 9,
+					"max": 18
+				},
+				"stunDamagePenalty": 0,
+				"overflow": {
+					"basis": 4,
+					"mod": 0,
+					"current": 4,
+					"max": 32
+				},
+				"overallDamagePenalty": 0
+			},
+			"initiative": {
+				"astral": {
+					"bonus": 0,
+					"dice": 2
+				},
+				"matrixar": {
+					"bonus": 0,
+					"dice": 1
+				},
+				"matrixcold": {
+					"bonus": 0,
+					"dice": 2
+				},
+				"matrixhot": {
+					"bonus": 0,
+					"dice": 3
+				},
+				"physical": {
+					"bonus": 0,
+					"dice": 1
+				}
+			},
+			"skill-template": {
+				"skills": {
+					"astral": {
+						"untrained": false,
+						"primaryAttribute": "int",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"athletics": {
+						"untrained": true,
+						"primaryAttribute": "dex",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"biotech": {
+						"untrained": false,
+						"primaryAttribute": "log",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"close_combat": {
+						"untrained": true,
+						"primaryAttribute": "dex",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"con": {
+						"untrained": true,
+						"primaryAttribute": "cha",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"conjuring": {
+						"untrained": false,
+						"primaryAttribute": "mag",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"cracking": {
+						"untrained": false,
+						"primaryAttribute": "log",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"electronics": {
+						"untrained": true,
+						"primaryAttribute": "log",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"enchanting": {
+						"untrained": false,
+						"primaryAttribute": "mag",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"engineering": {
+						"untrained": true,
+						"primaryAttribute": "log",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"exotic_weapons": {
+						"untrained": false,
+						"primaryAttribute": "dex",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"firearms": {
+						"untrained": true,
+						"primaryAttribute": "dex",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"influence": {
+						"untrained": true,
+						"primaryAttribute": "cha",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"outdoors": {
+						"untrained": true,
+						"primaryAttribute": "int",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"perception": {
+						"untrained": true,
+						"primaryAttribute": "int",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"piloting": {
+						"untrained": true,
+						"primaryAttribute": "rea",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"sorcery": {
+						"untrained": false,
+						"primaryAttribute": "mag",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"stealth": {
+						"untrained": true,
+						"primaryAttribute": "dex",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+					},
+					"tasking": {
+						"untrained": false,
+						"primaryAttribute": "res",
+						"specialisation": "",
+						"expertise": "",
+						"basis": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
 					}
 				}
 			},
-			"monitor": {
-				"health": {
-					"max": 9
+			"knowledge-template": {
+				"knowledges": {
 				},
-				"stun": {
-					"max": 9
+				"languages": {
+					"0": {
+						"value": "English",
+						"level": 4
+					}
 				}
 			},
-			"skills": {
-				"skills": {
-				"astral": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"athletics": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"biotech": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"close_combat": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"con": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"conjuring": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"cracking": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"electronics": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"enchanting": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"engineering": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"exotic_weapons": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"firearms": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"influence": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"outdoors": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"perception": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"piloting": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"sorcery": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"stealth": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				},
-				"tasking": {
-					"distr": 0,
-					"mod": 0,
-					"augment": 0
-				}
-			}
+			"magic-template": {
+				"traditionattribute": "logic"
 			}
 		},
 		"Player": {
 			"name": "",
 			"templates": [
-				"attributes",
-				"monitor",
-				"skills"
+				"attribute-template",
+				"monitor-template",
+				"initiative",
+				"skill-template",
+				"knowledge-template",
+				"magic-template"
 			],
 			"race": "",
 			"gender": ""
@@ -184,24 +384,43 @@
 		"NPC": {
 			"name": "",
 			"templates": [
-				"attributes",
-				"monitor"
+				"attribute-template",
+				"monitor-template"
 			]
 		},
 		"Critter": {
 			"name": "",
 			"templates": [
-				"attributes",
-				"monitor"
+				"attribute-template",
+				"monitor-template"
 			]
 		}
 	},
 	"Item": {
 		"types": [
-			"spell"
+			"spell",
+			"weapon"
 		],
+		"templates": {
+			"damage": {
+				"damagecode": 3,
+				"damagetype": "P"
+			}
+		},
 		"spell": {
 			"drain": 1
+		},
+		"thrown": {
+			"quantity": 1,
+			"type": "Wurfspeer",
+			"name": "Wurfspeer",
+			"damage": ["damage"]
+		},
+		"firearm": {
+			"quantity": 1,
+			"type": "Pistol",
+			"name": "Ares Predator VI",
+			"damage": ["damage"]
 		}
 	}
 }
