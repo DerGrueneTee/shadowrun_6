@@ -1,8 +1,5 @@
-.window-app .window-content {
-	background-image: url("../images/borderRight.png"), url("../images/background.png");
-	background-position: right top, left top;
-	background-repeat: no-repeat, repeat;
-}
+@import "color-light.css";
+@import "layout.css";
 
 .sheet header.sheet-header {
 	align-items: normal;
@@ -17,5 +14,34 @@
 }
 
 .shadowrun6 .header-fields h1 {
-	width: 85%;
+	width: 80%;
 }
+
+
+.sheet-header .description {
+                width: 100%;
+                display: flex;
+                align-items: center;
+            }
+.autoexpand {
+ box-sizing: content-box;
+}
+input[type="text"]{
+        font-variant-numeric: lining-nums;
+        border: 0px solid black;
+        background: none;
+        color: var(--input-color);
+        
+
+        padding: 2px;
+        padding-bottom: 2px;
+        margin: 0;
+
+        vertical-align: baseline;
+
+        display: inline-block;
+        height: 100%;
+        border-radius: 4px;
+ 
+        font-weight: bold;
+ }

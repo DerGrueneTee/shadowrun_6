@@ -2,19 +2,19 @@
     <table class="skill-table">
       <thead>
         <tr class="table-head">
-            <th>
+            <th style="width: 10em">
                 <span>{{localize "label.skill"}}</span>
             </th>
-            <th>
+            <th style="width: 2.5em">
                 <span>{{localize "label.attribute"}}</span>
             </th>
-            <th>
+            <th style="width: 2em">
                 <span>{{localize "label.points"}}</span>
             </th>
-            <th>
+            <th style="width: 2em">
                 <span>{{localize "label.modifier"}}</span>
             </th>
-            <th>
+            <th style="width: 3em">
                 <span>{{localize "label.value"}}</span>
             </th>
         </tr>
@@ -25,7 +25,7 @@
             <td style="width: 30%">
                 <span class="skill-value skill-key rollable skill-name">{{localize (concat "skill." id ) }}</span>
             </td>
-            <td><span>{{localize (concat "attrib." (skillAttr id ) )}}</span></td>
+            <td><span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span></td>
             <td><input class="skill-value" type="number" name="data.skills.{{id}}.points" value="{{skill.points}}" /></td>
             <td><input class="skill-value" type="number" name="data.skills.{{id}}.modifier" value="{{skill.modifier}}" /></td>
             <td><input class="skill-value" type="number" name="data.skills.{{id}}.value" value="{{skill.value}}" /></td>

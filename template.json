@@ -9,87 +9,88 @@
 			"attribute-template": {
 				"attributes": {
 					"bod": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"agi": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"rea": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"str": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"wil": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"log": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"int": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2,
 						"min": 1
 					},
 					"cha": {
-						"basis": 2,
+						"base": 2,
 						"mod": 0,
 						"augment": 0,
 						"current": 2
 					},
 					"mag": {
-						"basis": 0,
+						"base": 0,
 						"mod": 0,
 						"current": 0,
 						"min": 0
 					},
 					"res": {
-						"basis": 0,
+						"base": 0,
 						"mod": 0,
 						"current": 0,
 						"min": 1
 					},
 					"edg": {
-						"basis": 1,
+						"base": 1,
 						"mod": 0,
 						"current": 0,
 						"min": 0,
 						"max": 7
 					},
 					"essence": {
-						"basis": 6,
+						"base": 6,
 						"mod": 0,
 						"current": 6,
 						"max": 6
 					}
 				},
 				"metatype": "human",
+				"type" : "mundane",
 				"ethnicity": "",
 				"gender": "",
 				"age": "",
@@ -98,21 +99,21 @@
 			},
 			"monitor-template": {
 				"physical": {
-					"basis": 9,
+					"base": 9,
 					"mod": 0,
 					"current": 9,
 					"max": 19
 				},
 				"physicalDamagePenalty": 0,
 				"stun": {
-					"basis": 9,
+					"base": 9,
 					"mod": 0,
 					"current": 9,
 					"max": 18
 				},
 				"stunDamagePenalty": 0,
 				"overflow": {
-					"basis": 4,
+					"base": 4,
 					"mod": 0,
 					"current": 4,
 					"max": 32
@@ -141,25 +142,32 @@
 					"dice": 1
 				}
 			},
+			"skill-value": {
+						"specialisation": "",
+						"expertise": "",
+						"base": -1,
+						"mod": 0,
+						"augment": 0,
+						"current": -1,
+						"max": 14
+			},
 			"skill-template": {
 				"skills": {
 					"astral": {
-						"untrained": false,
 						"primaryAttribute": "int",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
 						"max": 14
 					},
 					"athletics": {
-						"untrained": true,
 						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -170,7 +178,7 @@
 						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -181,7 +189,7 @@
 						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -192,7 +200,7 @@
 						"primaryAttribute": "cha",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -203,7 +211,7 @@
 						"primaryAttribute": "mag",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -214,7 +222,7 @@
 						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -225,7 +233,7 @@
 						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -236,7 +244,7 @@
 						"primaryAttribute": "mag",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -247,7 +255,7 @@
 						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -258,7 +266,7 @@
 						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -269,7 +277,7 @@
 						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -280,7 +288,7 @@
 						"primaryAttribute": "cha",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -291,7 +299,7 @@
 						"primaryAttribute": "int",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -302,7 +310,7 @@
 						"primaryAttribute": "int",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -313,7 +321,7 @@
 						"primaryAttribute": "rea",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -324,7 +332,7 @@
 						"primaryAttribute": "mag",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -335,7 +343,7 @@
 						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,
@@ -346,7 +354,7 @@
 						"primaryAttribute": "res",
 						"specialisation": "",
 						"expertise": "",
-						"basis": -1,
+						"base": -1,
 						"mod": 0,
 						"augment": 0,
 						"current": -1,

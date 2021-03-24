@@ -4,16 +4,25 @@
  */
 export class Shadowrun6ActorSheet extends ActorSheet {
 
-    /** @override */
-    static get defaultOptions() {
-      return mergeObject(super.defaultOptions, {
-        classes: ["shadowrun6", "sheet", "actor"],
-        template: "systems/shadowrun6eden/templates/shadowrun6-actor-sheet.html",
-        width: 600,
-        height: 800,
-        tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description"}],
-        scrollY: [".biography", ".items", ".attributes"],
-        dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
-      });
-    }
-  }
+	/** @override */
+	static get defaultOptions() {
+		return mergeObject(super.defaultOptions, {
+			classes: ["shadowrun6", "sheet", "actor"],
+			template: "systems/shadowrun6-eden/templates/shadowrun6-actor-sheet.html",
+			width: 600,
+			height: 800,
+			tabs: [{navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "basics"}],
+			scrollY: [".biography", ".items", ".attributes"],
+			dragDrop: [{dragSelector: ".item-list .item", dropSelector: null}]
+		});
+	}
+	
+
+	  /** @overrride */
+	  getData() {
+	    let data = super.getData();
+	    data.config = CONFIG.SR6;
+	    return data;
+	  }
+
+}

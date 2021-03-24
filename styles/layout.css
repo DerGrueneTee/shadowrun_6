@@ -1,0 +1,46 @@
+.window-header::after {
+	display: block;
+	content: "";
+	position: absolute;
+	width: 250px;
+	height: 44px;
+	left: 50%;
+	top: -22px;
+	margin-left: -100px;
+	background: url(../images/SR6Logo2.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+line {
+	width: 100%;
+	display: block;
+}
+
+.section {
+	display: inline-block;
+	background-color: var(--section-background);
+	vertical-align: top;
+	border: solid black 1px;
+	border-radius: 6px;
+	padding: 4px;
+}
+
+th {
+	color: var(--highlight-color);
+	background-color: var(--tablehead-background);
+}
+.sheet-body * table{
+	background-color: rgba(0,0,0,0);
+	border-top: 0px;
+	border-bottom: 0px;
+}
+.sheet-body * thead {
+	background-color: var(--tablehead-background);
+	text-shadow: none;
+	border-bottom: 0px;
+}
+input.centered {
+	text-align: center;
+}

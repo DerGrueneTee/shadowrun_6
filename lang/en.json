@@ -33,5 +33,9 @@
     "skill.piloting": "Piloting",
     "skill.sorcery": "Sorcery",
     "skill.stealth": "Stealth",
-    "skill.tasking": "Tasking"
+    "skill.tasking": "Tasking",
+    "ACTOR.TypePc": "Player Character",
+    "ACTOR.TypeNpc": "NPC",
+    "ITEM.TypeSpell": "Spell",
+    "ITEM.TypeWeapon": "Weapon"
 }

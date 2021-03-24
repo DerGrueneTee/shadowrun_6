@@ -1,0 +1,42 @@
+    <table>
+    	<thead>
+    		<tr>
+    {{#each config.PRIMARY_ATTRIBUTES as |attributeId|}}
+    		  <th class="attribute" id="{{attributeId}}">
+    		    <label for="data.attributes.{{attributeId}}.current" title="{{localize (concat "attrib." attributeId )}}">{{localize (concat3 "attrib." attributeId "_short" )}}</label>
+    		  </th>
+    {{/each}}
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    {{#each attributes as |attribute id|}}
+    {{#ifIn id ../config.PRIMARY_ATTRIBUTES}}
+    		  <td class="attribute" id="{{id}}">
+             <input class="centered" name="data.attributes.{{id}}.current" type="text" value="{{attribute.current}}" data-dtype="Number">
+    		  </td>
+    {{/ifIn}}
+    {{/each}}
+    		</tr>
+    	</tbody>
+    	<thead>
+    		<tr>
+    {{#each config.SECONDARY_ATTRIBUTES as |attributeId|}}
+    		  <th class="attribute" id="{{attributeId}}">
+    		    <label for="data.attributes.{{attributeId}}.value" title="{{localize (concat "attrib." attributeId )}}">{{localize (concat3 "attrib." attributeId "_short" )}}</label>
+    		  </th>
+    {{/each}}
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr>
+    {{#each attributes as |attribute id|}}
+    {{#ifIn id ../config.SECONDARY_ATTRIBUTES}}
+    		  <td class="attribute" id="{{id}}">
+             <input class="centered" name="data.attributes.{{id}}.current" type="text" value="{{attribute.current}}" data-dtype="Number">
+    		  </td>
+    {{/ifIn}}
+    {{/each}}
+   		</tr>
+    	</tbody>
+    </table>
