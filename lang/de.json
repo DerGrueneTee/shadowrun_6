@@ -2,6 +2,7 @@
     "actor.name" : "Name",
     "actor.metatype" : "Metatyp",
     "actor.nav.skills": "Fertigkeiten",
+    "actor.nav.basics": "Basisdaten",
     "attrib.agi": "Geschicklichkeit",
     "attrib.agi_short": "GES",
     "attrib.bod": "Konstitution",
@@ -61,8 +62,9 @@
     "skill.sorcery": "Hexerei",
     "skill.stealth": "Heimlichkeit",
     "skill.tasking": "Tasken",
-    "ACTOR.TypePc": "Spieler-Charakter",
+    "ACTOR.TypePlayer": "Spieler-Charakter",
     "ACTOR.TypeNpc": "NSC",
+    "ACTOR.TypeCritter": "Kreatur",
     "ITEM.TypeSpell": "Zauber",
     "ITEM.TypeWeapon": "Waffe"
 }

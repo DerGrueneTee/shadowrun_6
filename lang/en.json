@@ -34,8 +34,9 @@
     "skill.sorcery": "Sorcery",
     "skill.stealth": "Stealth",
     "skill.tasking": "Tasking",
-    "ACTOR.TypePc": "Player Character",
+    "ACTOR.TypePlayer": "Player Character",
     "ACTOR.TypeNpc": "NPC",
+    "ACTOR.TypeCritter": "Critter",
     "ITEM.TypeSpell": "Spell",
     "ITEM.TypeWeapon": "Weapon"
 }

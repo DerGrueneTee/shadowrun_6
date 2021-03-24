@@ -164,7 +164,6 @@
 						"max": 14
 					},
 					"athletics": {
-						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -174,8 +173,6 @@
 						"max": 14
 					},
 					"biotech": {
-						"untrained": false,
-						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -185,8 +182,6 @@
 						"max": 14
 					},
 					"close_combat": {
-						"untrained": true,
-						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -196,8 +191,6 @@
 						"max": 14
 					},
 					"con": {
-						"untrained": true,
-						"primaryAttribute": "cha",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -207,8 +200,6 @@
 						"max": 14
 					},
 					"conjuring": {
-						"untrained": false,
-						"primaryAttribute": "mag",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -218,8 +209,6 @@
 						"max": 14
 					},
 					"cracking": {
-						"untrained": false,
-						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -229,8 +218,6 @@
 						"max": 14
 					},
 					"electronics": {
-						"untrained": true,
-						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -240,8 +227,6 @@
 						"max": 14
 					},
 					"enchanting": {
-						"untrained": false,
-						"primaryAttribute": "mag",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -251,8 +236,6 @@
 						"max": 14
 					},
 					"engineering": {
-						"untrained": true,
-						"primaryAttribute": "log",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -262,8 +245,6 @@
 						"max": 14
 					},
 					"exotic_weapons": {
-						"untrained": false,
-						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -273,8 +254,6 @@
 						"max": 14
 					},
 					"firearms": {
-						"untrained": true,
-						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -284,8 +263,6 @@
 						"max": 14
 					},
 					"influence": {
-						"untrained": true,
-						"primaryAttribute": "cha",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -295,8 +272,6 @@
 						"max": 14
 					},
 					"outdoors": {
-						"untrained": true,
-						"primaryAttribute": "int",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -306,8 +281,6 @@
 						"max": 14
 					},
 					"perception": {
-						"untrained": true,
-						"primaryAttribute": "int",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -317,8 +290,6 @@
 						"max": 14
 					},
 					"piloting": {
-						"untrained": true,
-						"primaryAttribute": "rea",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -328,8 +299,6 @@
 						"max": 14
 					},
 					"sorcery": {
-						"untrained": false,
-						"primaryAttribute": "mag",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -339,8 +308,6 @@
 						"max": 14
 					},
 					"stealth": {
-						"untrained": true,
-						"primaryAttribute": "dex",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,
@@ -350,8 +317,6 @@
 						"max": 14
 					},
 					"tasking": {
-						"untrained": false,
-						"primaryAttribute": "res",
 						"specialisation": "",
 						"expertise": "",
 						"base": -1,

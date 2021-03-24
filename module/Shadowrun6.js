@@ -15,9 +15,9 @@ Hooks.once("init", async function() {
     console.log(`Initializing Shadowrun 6 System`);
 
     // Create a namespace within the game global
-    game.splimo = {
-     config: SR6,
-   };
+//    game.splimo = {
+//     config: SR6,
+//   };
 
    // Record Configuration Values
    CONFIG.SR6 = SR6;
@@ -54,31 +54,6 @@ function getAttributeValue(attribs, key) {
 }
 
 function getSkillAttribute(key) {
-
-	const skillIDs = [
-		["astral", "agi"],
-		["athletics","agi"],
-		["biotech", "log"],
-		["close_combat", "agi"],
-		["con", "cha"],
-		["conjuring", "mag"],
-		["cracking", "log"],
-		["electronics", "log"],
-		["enchanting", "mag"],
-		["engineering", "log"],
-		["exotic_weapons","agi"],
-		["firearms","agi"],
-		["influence", "cha"],
-		["outdoors", "int"],
-		["perception", "int"],
-		["piloting", "rea"],
-		["sorcery", "mag"],
-		["stealth", "agi"],
-		["tasking", "res"],
-		];
-
-  var myMap = new Map(skillIDs);
-  const myElem = myMap.get(key);
-	console.log("Map "+key+" to "+myElem);
+	const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
 	return myElem;
 };
