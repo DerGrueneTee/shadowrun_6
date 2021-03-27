@@ -23,7 +23,7 @@
         {{#each skills as |skill id|}}
         <tr>
             <td style="width: 30%">
-                <span class="skill-value skill-key rollable skill-name">{{localize (concat "skill." id ) }}</span>
+                <span class="skill-value skill-key rollable skill-name"  data-skill="{{id}}">{{localize (concat "skill." id ) }}</span>
             </td>
             <td><span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span></td>
             <td><input class="skill-value" type="number" name="data.skills.{{id}}.points" value="{{skill.points}}" /></td>
