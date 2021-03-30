@@ -12,48 +12,48 @@
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"agi": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"rea": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"str": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"wil": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"log": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"int": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2,
+						"current": 2
 					},
 					"cha": {
 						"base": 2,
 						"mod": 0,
-						"augment": 0,
+						"augment": 0
 					},
 					"mag": {
 						"base": 0,
@@ -64,17 +64,17 @@
 					"res": {
 						"base": 0,
 						"mod": 0,
-						"current": 0,
+						"current": 0
 					},
 					"edg": {
 						"base": 1,
 						"mod": 0,
-						"current": 0,
+						"current": 0
 					},
 					"essence": {
 						"base": 6,
 						"mod": 0,
-						"current": 6,
+						"current": 6
 					}
 				},
 				"metatype": "human",
