@@ -2,8 +2,11 @@
   <!-- Fertigkeitswert: data.value; Schwierigkeit: data.threshold; Modifikation: data.modifier; Würfelergebnis: data.dieResult; Gesamt: data.total; Erfolgsgrade: data.erfolgsgrade-->
   <div class="dice-roll">
     <div class="dice-result">
-      {{formula}}
-      {{{tooltip}}}
-    </div>
+      <header class="part-header flexrow">
+        {{{tooltip}}}
+        <div>{{formula}}</div>
+        <div> {{total}} Erfolge
+        </div>
+      </header>
   </div>
 </div>

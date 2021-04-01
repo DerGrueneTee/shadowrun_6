@@ -11,6 +11,7 @@ export async function doRoll(data, messageData = {}) {
     if (form) {
       data.mod = parseInt(form.modifier.value);
       data.threshold = parseInt(form.threshold.value);
+      data.explode = form.explode.checked;
       data.type = type;
       messageData.rollMode = form.rollMode.value;
       data.formula = data.skill.value + "d6";
@@ -65,8 +66,12 @@ async function _rollDialog({ data, foo } = {}) {
     data.threshold = 3;
   }
   if (isNaN(data.explode)) {
-	    data.explode = false;
-	  }
+    data.explode = false;
+  }
+
+  if (isNaN(data.modifier)) {
+    data.modifier = 0;
+  }
   // Render modal dialog
   let template = "systems/shadowrun6-eden/templates/chat/roll-dialog.html";
   let dialogData = {

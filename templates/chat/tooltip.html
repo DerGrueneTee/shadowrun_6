@@ -1,45 +1,16 @@
  <div class="dice-tooltip">
     <section class="tooltip-part">
         <div class="dice">
-            <header class="part-header flexrow">
-                <span class="part-formula">{{data.formula}}</span>
-                {{#if this.flavor}}<span class="part-flavor">{{this.flavor}}</span>{{/if}}
-                {{#if data.success}}
-                <span class="part-total roll-success">{{data.total}}</span>
-                {{else}}
-                <span class="part-total roll-nosuccess">{{data.total}}</span>
-                {{/if}}
-            </header>
             <ol class="dice-rolls">
-                {{#each data.rolls as |roll id|}}
-                <li class="roll roll-d10-inactive">id</li>
+                {{#each results as |result id|}}
+                <li class="roll ">{{result.result}}</li>
+              <!--   <li class="roll ">{{result.success}}</li>
+                <li class="roll ">{{result.active}}</li>
+                <li class="roll ">{{result.exploded}}</li>
+                <li class="roll ">{{result.count}}</li> -->
                 {{/each}}
             </ol>
-            {{#if data.success}}
-            <span>Erfolg</span>
-            {{else}}
-            <span>Misserfolg</span>
-            {{/if}}
-            <div>
-                {{{data.egText}}}
-            </div>
         </div>
     </section>
-    {{#each parts}}
-    <section class="tooltip-part">
-        <div class="dice">
-            <header class="part-header flexrow">
-                <span class="part-formula">{{this.formula}}</span>
-                {{#if this.flavor}}<span class="part-flavor">{{this.flavor}}</span>{{/if}}
-                <span class="part-total">{{this.total}}</span>
-            </header>
-            <ol class="dice-rolls">
-            {{#each this.rolls}}
-                <li class="roll {{this.classes}}">{{{this.result}}}</li>
-            {{/each}}
-            </ol>
-        </div>
-    </section>
-    {{/each}}
 </div>
 

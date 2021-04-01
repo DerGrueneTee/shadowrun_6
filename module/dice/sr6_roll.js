@@ -12,19 +12,18 @@ export default class SR6Roll extends Roll {
 
   /** @override */
   evaluate() {
-    let total;
-    let dieResult;
     let data = this.data;
-  //  let _roll = new Roll(this.createFormula(data.value, -1, true));
-    
-  //  _roll = _roll.evaluate();
-    let formula = this.createFormula(data.value, -1, true);
+  
+    console.log("explode: " +data.explode);
+    console.log("modifier: " +data.modifier);
+    console.log("type: " +data.type);
 
-
-    let die = new Die(formula).evaluate();
-
+    let formula = this.createFormula(data.value, -1, data.explode);
+    let die = new Roll(formula).evaluate();
+    console.log(die);
+    this.results = die.terms[0].results;
     this._rolled = true;
-    this._total = total;
+    this._total = die.results[0];
     this._formula = data.formula;
     return this;
   }
@@ -39,7 +38,7 @@ export default class SR6Roll extends Roll {
   /** @override */
   getTooltip() {
     let parts = {};
-    return renderTemplate(this.constructor.TOOLTIP_TEMPLATE, { parts, data: this.data });
+    return renderTemplate(this.constructor.TOOLTIP_TEMPLATE, { parts, data: this.data, results : this.results, total: this._total });
   }
 
   /* -------------------------------------------- 
@@ -59,13 +58,14 @@ export default class SR6Roll extends Roll {
     let isPrivate = chatOptions.isPrivate;
 
     const chatData = {
+      results: isPrivate ? "???" : this.results,
       formula: isPrivate ? "???" : this._formula,
       flavor: isPrivate ? null : chatOptions.flavor,
       user: chatOptions.user,
-      tooltip: isPrivate ? "" : await this.getTooltip(),
-      total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
+      total: isPrivate ? "?" : Math.round(this._total * 100) / 100,
       data: this.data,
       publicRoll: !chatOptions.isPrivate,
+      tooltip: isPrivate ? "" : await this.getTooltip(),
     };
 
     let html = await renderTemplate(chatOptions.template, chatData);
