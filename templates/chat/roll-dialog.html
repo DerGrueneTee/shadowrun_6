@@ -3,12 +3,16 @@
     <span style="color: teal">{{data.extraText}}</span><br/>
     {{/if}}
     <div class="form-group">
-        <label>Schwierigkeit</label>
-        <input type="text" name="difficulty" value="{{data.difficulty}}" />
+        <label>{{localize "shadowrun6.roll.threshold"}}</label>
+        <input type="text" name="threshold" value="{{data.threshold}}" />
     </div>
     <div class="form-group">
-        <label>Mod</label>
-        <input type="text" name="mod" value="0"/>
+        <label>{{localize "shadowrun6.roll.explode"}}</label>
+        <input type="checkbox" name="explode" value="{{data.explode}}" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "shadowrun6.roll.modifier"}}</label>
+        <input type="text" name="modifier" value="0"/>
     </div>
     <div class="form-group">
         <label>Modus</label>

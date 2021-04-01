@@ -5,8 +5,14 @@
 	--input-color: #202020;
 }
 
-.window-app .window-content {
+.app.window-app.shadowrun6.actor .window-content  {
 	background-image: url("../images/borderRight.png"), url("../images/background.png");
 	background-position: right top, left top;
 	background-repeat: no-repeat, repeat;
+}
+
+.app.window-app.dialog .window-content  {
+	background-image: url("../images/background.png");
+	background-position: left top;
+	background-repeat: repeat;
 }

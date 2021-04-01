@@ -28,7 +28,7 @@
             <td><span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span></td>
             <td><input class="skill-value" type="number" name="data.skills.{{id}}.points" value="{{skill.points}}" /></td>
             <td><input class="skill-value" type="number" name="data.skills.{{id}}.modifier" value="{{skill.modifier}}" /></td>
-            <td><input class="skill-value" type="number" name="data.skills.{{id}}.value" value="{{skill.value}}" /></td>
+            <td><input class="skill-value" type="number" name="data.skills.{{id}}.value" value="{{skill.value}}" data-skill="{{id}}" /></td>
         </tr>
         {{/each}}
       </tbody>

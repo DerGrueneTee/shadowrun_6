@@ -2,10 +2,10 @@
 	display: block;
 	content: "";
 	position: absolute;
-	width: 250px;
-	height: 44px;
+	width: 200px;
+	height: 36px;
 	left: 50%;
-	top: -22px;
+	top: -14px;
 	margin-left: -100px;
 	background: url(../images/SR6Logo2.png);
 	background-size: contain;

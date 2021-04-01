@@ -1,4 +1,15 @@
 {
+	"shadowrun6": {
+        "roll": {
+            "threshold": "Schwellenwert",
+            "explode": "Explodiert",
+            "modifier": "Pool Modifikator"
+        },
+        "rollType": {
+            "normal": "Würfeln",
+            "bought": "Erfolge kaufen"
+        }
+	},
     "actor.name" : "Name",
     "actor.metatype" : "Metatyp",
     "actor.nav.skills": "Fertigkeiten",

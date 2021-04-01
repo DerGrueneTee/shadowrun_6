@@ -9,8 +9,8 @@ export async function doRoll(data, messageData = {}) {
   const _roll = (type, form, data) => {
 
     if (form) {
-      data.mod = parseInt(form.mod.value);
-      data.difficulty = parseInt(form.difficulty.value);
+      data.mod = parseInt(form.modifier.value);
+      data.threshold = parseInt(form.threshold.value);
       data.type = type;
       messageData.rollMode = form.rollMode.value;
       data.formula = data.skill.value + "d6";
@@ -29,7 +29,9 @@ export async function doRoll(data, messageData = {}) {
   }
 
   // Create the Roll instance
+  console.log("Await start");
   const _r = await _rollDialog({ data, foo: _roll });
+  console.log("Await done");
   _r.toMessage(messageData);
   return _r;
 }
@@ -59,16 +61,21 @@ async function createFormula(count, limit = -1, explode = false) {
  */
 async function _rollDialog({ data, foo } = {}) {
 
-  if (isNaN(data.difficulty)) {
-    data.difficulty = 15;
+  if (isNaN(data.threshold)) {
+    data.threshold = 3;
   }
+  if (isNaN(data.explode)) {
+	    data.explode = false;
+	  }
   // Render modal dialog
   let template = "systems/shadowrun6-eden/templates/chat/roll-dialog.html";
   let dialogData = {
     data: data,
     rollModes: CONFIG.Dice.rollModes,
   };
+  console.log("call renderTemplate");
   const html = await renderTemplate(template, dialogData);
+  console.log("called renderTemplate");
   const title = data.title;
 
 
@@ -78,20 +85,17 @@ async function _rollDialog({ data, foo } = {}) {
       title: title,
       content: html,
       buttons: {
-        risk: {
-          label: "Risikowurf",
-          callback: html => resolve(foo(-1, html[0].querySelector("form"), data))
-        },
         normal: {
-          label: "Normal",
+          label: game.i18n.localize("shadowrun6.rollType.normal"),
           callback: html => resolve(foo(0, html[0].querySelector("form"), data))
         },
-        security: {
-          label: "Sicherheitswurf",
+        bought: {
+          label: game.i18n.localize("shadowrun6.rollType.bought"),
           callback: html => resolve(foo(1, html[0].querySelector("form"), data))
         }
       },
       default: "normal",
+      render: html => console.log("Register interactivity in the rendered dialog"),
       close: () => resolve(null)
     }).render(true);
   });
