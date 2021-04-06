@@ -8,15 +8,17 @@ export default class SR6Roll extends Roll {
     super(...args);
     this.data = args[1];
     this.p = {};
+    this.results = {};
   }
 
   /** @override */
   evaluate() {
     let data = this.data;
-  
-    console.log("explode: " +data.explode);
-    console.log("modifier: " +data.modifier);
-    console.log("type: " +data.type);
+
+    console.log("explode: " + data.explode);
+    console.log("modifier: " + data.modifier);
+    console.log("type: " + data.type);
+    console.log("threshold" + data.threshold);
 
     let formula = this.createFormula(data.value, -1, data.explode);
     let die = new Roll(formula).evaluate();
@@ -25,6 +27,8 @@ export default class SR6Roll extends Roll {
     this._rolled = true;
     this._total = die.results[0];
     this._formula = data.formula;
+    console.log("Glitch: " + this.isGlitch());    
+    console.log("CritGlitch: " + this.isCriticalGlitch());    
     return this;
   }
 
@@ -38,7 +42,7 @@ export default class SR6Roll extends Roll {
   /** @override */
   getTooltip() {
     let parts = {};
-    return renderTemplate(this.constructor.TOOLTIP_TEMPLATE, { parts, data: this.data, results : this.results, total: this._total });
+    return renderTemplate(this.constructor.TOOLTIP_TEMPLATE, { parts, data: this.data, results: this.results, total: this._total });
   }
 
   /* -------------------------------------------- 
@@ -63,6 +67,9 @@ export default class SR6Roll extends Roll {
       flavor: isPrivate ? null : chatOptions.flavor,
       user: chatOptions.user,
       total: isPrivate ? "?" : Math.round(this._total * 100) / 100,
+      glitch: isPrivate ? false: this.isGlitch(),
+      criticalGlitch: isPrivate ? false : this.isCriticalGlitch(),
+      success: isPrivate ? false : this.isSuccess(),
       data: this.data,
       publicRoll: !chatOptions.isPrivate,
       tooltip: isPrivate ? "" : await this.getTooltip(),
@@ -130,6 +137,46 @@ export default class SR6Roll extends Roll {
     }
 
     return `${formula}cs>=5`;
+  }
+
+  /**
+   * The number of hits rolled.
+   */
+  getHits() {
+    if (!this._rolled) return NaN;
+    return this.total;
+  }
+
+  /**
+   * The number of glitches rolled.
+   */
+  getGlitches() {
+    if (!this._rolled) {
+      return NaN;
+    }
+    return this.results.filter(die => die.result === 1).length;
+  }
+
+  /**
+   * Is this roll a regular (non-critical) glitch?
+   */
+  isGlitch() {
+    return this.getGlitches() > this.results.length / 2;
+  }
+
+  /**
+   * Is this roll a critical glitch?
+   */
+  isCriticalGlitch() {
+    return this.isGlitch() && this.getHits() === 0;
+  }
+
+  isSuccess() {
+    if (this.data.threshold > 0) {
+      return this._total >= this.data.threshold;
+    } else {
+      return this._total > 0;
+    }
   }
 }
 

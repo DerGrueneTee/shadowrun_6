@@ -1,12 +1,22 @@
 <div>
-  <!-- Fertigkeitswert: data.value; Schwierigkeit: data.threshold; Modifikation: data.modifier; Würfelergebnis: data.dieResult; Gesamt: data.total; Erfolgsgrade: data.erfolgsgrade-->
+  <!-- Fertigkeitswert: data.value; Schwierigkeit: data.threshold; Modifikation: data.modifier; Würfelergebnis: data.dieResult; Gesamt: data.total-->
   <div class="dice-roll">
     <div class="dice-result">
       <header class="part-header flexrow">
         {{{tooltip}}}
         <div>{{formula}}</div>
-        <div> {{total}} Erfolge
-        </div>
+        <br/>
+        {{#if success}}
+        <div>Erfolg: {{total}} Treffer</div>
+        {{else}}
+        <div>Misserfolg: {{total}} Treffer bei Schwellenwert: {{data.threshold}}</div>
+        {{/if}} 
+        <br/>
+        {{#if criticalGlitch}}
+        <span style="color: rgb(215, 14, 233)">CriticalGlitch</span><br/>
+        {{else glitch}}
+        <span style="color: rgb(194, 76, 29)">Glitch!!!}</span><br/>
+        {{/if}}
       </header>
   </div>
 </div>
