@@ -37,6 +37,7 @@
   "gridDistance": 1.5,
   "gridUnits": "m",
   "primaryTokenAttribute": "physical",
+  "secondaryTokenAttribute": "stun",
   "url": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/",
   "manifest": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/raw/master/system.json",
   "download": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/get/master.zip"
