@@ -79,12 +79,13 @@ export class Shadowrun6Actor extends Actor {
         			}
         		};
         	});
-//        	
-//            CONFIG.SR6.ATTRIB_BY_SKILL.forEach(skill => {
-//            	let sVal = new Item();
-//            	sVal.type = "skill-value";
-//            	sVal.data.id = skill;
-//            });
+        	
+            CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function(skillDef,id) {
+				let attr = skillDef.attrib;
+				let attribVal =  data.attributes[attr].pool;
+				data.skills[id].pool = attribVal + data.skills[id].points;
+            	console.log(id+" = "+attr+"("+attribVal+") + "+data.skills[id].points+" points = "+data.skills[id].pool );
+            });
         }
     }
 
@@ -96,17 +97,17 @@ export class Shadowrun6Actor extends Actor {
      * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
      */
     rollSkill(skillId, options = {}) {
-    	let skl = "";
-    	this.items.forEach(loopItem => {
-    		let item = loopItem.data;
-    		if (item.type == "skill-value") {
-    			if (item.data.id==skillId) {
-    				console.log("Found "+skillId+" with "+item.data.id);
-    				skl = item.data;
-    			}
-    		}
-    	});
-        //const skl = this.data.i.skills[skillId];
+//    	let skl = "";
+//    	this.items.forEach(loopItem => {
+//    		let item = loopItem.data;
+//    		if (item.type == "skill-value") {
+//    			if (item.data.id==skillId) {
+//    				console.log("Found "+skillId+" with "+item.data.id);
+//    				skl = item.data;
+//    			}
+//    		}
+//    	});
+        const skl = this.data.data.skills[skillId];
     	//const skl = this.getOwnedItem(itemID);
         const value = skl.pool;
         const parts = [];
@@ -116,7 +117,7 @@ export class Shadowrun6Actor extends Actor {
         let data = mergeObject(options, {
             parts: parts,
             value: value,
-            title: game.i18n.localize("skill."+skl.id),
+            title: game.i18n.localize("skill."+skillId),
             skill: skl
         });
         data.speaker = ChatMessage.getSpeaker({ actor: this });

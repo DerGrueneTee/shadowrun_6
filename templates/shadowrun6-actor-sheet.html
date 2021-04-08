@@ -32,7 +32,7 @@
 
         {{!-- Skills Tab --}}
         <div class="tab skills" data-group="primary" data-tab="skills">
-            {{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.skills}}
+            {{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.data.skills}}
         </div>
 
         {{!-- Biography Tab --}}
@@ -103,7 +103,7 @@
         <div class="tab attributes" data-group="primary" data-tab="basics" >
 			<line>
          <div class="section" style="width: 48%">
-         	<h2 class="section-title">{{ localize 'section.attributes'}}</h2>
+         	<h2 class="section-title">{{ localize 'section.attributes'}}&nbsp;<button>+</button></h2>
             {{> "systems/shadowrun6-eden/templates/parts/attributes.html" attributes=data.data.attributes}}
           </div>
          <div class="section" style="width: 48%">

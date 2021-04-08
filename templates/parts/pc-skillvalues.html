@@ -3,6 +3,30 @@
    <div class="section">
      <h2 class="section-title">{{ localize 'shadowrun6.section.skills.action' }}</h2>
 	  <ol class="item-list">
+        {{#each skills as |skill id|}}
+       <li class="item flexrow" data-item-id="{{id}}">
+         <h4 class="skill-value skill-key rollable skill-name" data-skill="{{id}}" style="width: 10em; flex-grow:6">{{localize (concat "skill." id ) }}</h4>
+         <div class="skill-attrib" style="width: 2em">
+           <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
+         </div>
+         <div class="skill-points" style="width: 2em; flex-grow:0.4">
+           <input class="skill-value" type="number" name="data.skills.{{id}}.points" value="{{skill.points}}"  style="width: 2em" />
+         </div>
+         <div class="skill-pool" style="width: 2em">
+           <span>{{skill.pool}}</span>
+         </div>
+         <div class="item-controls" style="width: 3em; flex-grow:1.5">
+           <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+           <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+         </div>
+       </li>
+       {{/each}}
+     </ol> 
+   </div>
+     
+   <div class="section">
+     <h2 class="section-title">{{ localize 'shadowrun6.section.skills.action' }}</h2>
+	  <ol class="item-list">
        {{#each actor.items as |item id|}}
        {{#iff item.type '==' 'skill-value'}}
        {{#iff item.data.data.id '!=' 'knowledge'}}

@@ -67,9 +67,8 @@
 						"pool": 0
 					},
 					"edg": {
-						"base": 1,
-						"mod": 0,
-						"pool": 0
+						"current": 0,
+						"max": 1
 					},
 					"essence": {
 						"base": 6,
@@ -131,133 +130,133 @@
 				"skills": {
 					"astral": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"athletics": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"biotech": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"close_combat": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"con": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"conjuring": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"cracking": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"electronics": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"enchanting": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"engineering": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"exotic_weapons": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"firearms": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"influence": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"outdoors": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"perception": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"piloting": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"sorcery": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"stealth": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
 					},
 					"tasking": {
 						"points": 0,
-						"specialisation": "",
+						"specialization": "",
 						"expertise": "",
 						"modifier": 0,
 						"augment": 0
@@ -288,7 +287,7 @@
 				"knowledge-template",
 				"magic-template"
 			],
-			"race": "",
+			"metatype": "",
 			"gender": ""
 		},
 		"NPC": {
@@ -315,9 +314,7 @@
 		"templates": {
 		   "skill-value": {
 			  "skill": "",
-			  "points": 0,
-			  "specialization": "",
-			  "expertise": ""
+			  "points": 0
 			}, 
 		   
 			"damage": {
