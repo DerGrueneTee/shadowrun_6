@@ -22,8 +22,8 @@ Hooks.once("init", async function() {
    // Record Configuration Values
    CONFIG.SR6 = SR6;
 
-    // Define custom Entity classes
-  CONFIG.Actor.entityClass = Shadowrun6Actor;
+    // Define custom Entity classes (changed for Foundry 0.8.x
+  CONFIG.Actor.documentClass = Shadowrun6Actor;
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -47,6 +47,46 @@ Hooks.once("init", async function() {
 	  }
 	  return options.inverse(this);
 	});
+
+  // Allows {if X = Y} type syntax in html using handlebars
+  Handlebars.registerHelper("iff", function (a, operator, b, opts) {
+    var bool = false;
+    switch (operator) {
+      case "==":
+        bool = a == b;
+        break;
+      case ">":
+        bool = a > b;
+        break;
+      case "<":
+        bool = a < b;
+        break;
+      case "!=":
+        bool = a != b;
+        break;
+      case '&&':
+          boolean = a && b;
+          break;
+      case '||':
+          boolean = a || b;
+          break;
+      case "contains":
+        if (a && b) {
+          bool = a.includes(b);
+        } else {
+          bool = false;
+        }
+        break;
+      default:
+        throw "Unknown operator " + operator;
+    }
+
+    if (bool) {
+      return opts.fn(this);
+    } else {
+      return opts.inverse(this);
+    }
+  });
 }); 
 
 function getAttributeValue(attribs, key) {
@@ -54,6 +94,10 @@ function getAttributeValue(attribs, key) {
 }
 
 function getSkillAttribute(key) {
-	const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
-	return myElem;
+	if (CONFIG.SR6.ATTRIB_BY_SKILL.get(key)) {
+		const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
+		return myElem;
+	} else {
+		return "??";
+	}
 };

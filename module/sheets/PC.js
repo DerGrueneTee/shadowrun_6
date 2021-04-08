@@ -31,7 +31,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
      */
 	activateListeners(html) {
 		// Owner Only Listeners
-		if (this.actor.owner) {
+		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
 		} else {

@@ -24,8 +24,9 @@ export default class SR6Roll extends Roll {
     let die = new Roll(formula).evaluate();
     console.log(die);
     this.results = die.terms[0].results;
-    this._rolled = true;
-    this._total = die.results[0];
+    // this._rolled ist jetzt RO
+    //this._rolled = true;
+    this._total = die.terms[0].results[0];
     this._formula = data.formula;
     console.log("Glitch: " + this.isGlitch());    
     console.log("CritGlitch: " + this.isCriticalGlitch());    
@@ -51,7 +52,7 @@ export default class SR6Roll extends Roll {
   async render(chatOptions = {}) {
     chatOptions = mergeObject(
       {
-        user: game.user._id,
+        user: game.user.id,
         flavor: this.flavorText,
         template: this.constructor.CHAT_TEMPLATE,
       },
@@ -94,7 +95,7 @@ export default class SR6Roll extends Roll {
     // Prepare chat data
     chatOptions = mergeObject(
       {
-        user: game.user._id,
+        user: game.user.id,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         content: this.total,
         sound: CONFIG.sounds.dice,
@@ -151,7 +152,7 @@ export default class SR6Roll extends Roll {
    * The number of glitches rolled.
    */
   getGlitches() {
-    if (!this._rolled) {
+    if (!this._evaluated) {
       return NaN;
     }
     return this.results.filter(die => die.result === 1).length;

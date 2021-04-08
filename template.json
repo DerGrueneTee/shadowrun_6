@@ -12,43 +12,43 @@
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"agi": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"rea": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"str": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"wil": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"log": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"int": {
 						"base": 2,
 						"mod": 0,
 						"augment": 0,
-						"current": 2
+						"pool": 2
 					},
 					"cha": {
 						"base": 2,
@@ -58,23 +58,23 @@
 					"mag": {
 						"base": 0,
 						"mod": 0,
-						"current": 0,
+						"pool": 0,
 						"min": 0
 					},
 					"res": {
 						"base": 0,
 						"mod": 0,
-						"current": 0
+						"pool": 0
 					},
 					"edg": {
 						"base": 1,
 						"mod": 0,
-						"current": 0
+						"pool": 0
 					},
 					"essence": {
 						"base": 6,
 						"mod": 0,
-						"current": 6
+						"pool": 6
 					}
 				},
 				"metatype": "human",
@@ -89,24 +89,21 @@
 				"physical": {
 					"base": 9,
 					"mod": 0,
-					"current": 9,
+					"value": 9,
 					"max": 19
 				},
-				"physicalDamagePenalty": 0,
 				"stun": {
 					"base": 9,
 					"mod": 0,
-					"current": 9,
+					"value": 9,
 					"max": 18
 				},
-				"stunDamagePenalty": 0,
 				"overflow": {
 					"base": 4,
 					"mod": 0,
-					"current": 4,
+					"pool": 4,
 					"max": 32
-				},
-				"overallDamagePenalty": 0
+				}
 			},
 			"initiative": {
 				"astral": {
@@ -311,10 +308,18 @@
 	},
 	"Item": {
 		"types": [
+		   "skill-value",
 			"spell",
 			"weapon"
 		],
 		"templates": {
+		   "skill-value": {
+			  "skill": "",
+			  "points": 0,
+			  "specialization": "",
+			  "expertise": ""
+			}, 
+		   
 			"damage": {
 				"damagecode": 3,
 				"damagetype": "P"
