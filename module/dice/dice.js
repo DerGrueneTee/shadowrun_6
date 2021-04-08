@@ -9,12 +9,16 @@ export async function doRoll(data, messageData = {}) {
   const _roll = (type, form, data) => {
 
     if (form) {
-      data.mod = parseInt(form.modifier.value);
+      data.modifier = parseInt(form.modifier.value);
       data.threshold = parseInt(form.threshold.value);
       data.explode = form.explode.checked;
       data.type = type;
       messageData.rollMode = form.rollMode.value;
-      data.formula = data.skill.value + "d6";
+      if (data.modifier > 0) {
+        data.formula = data.skill.pool + " + " + data.modifier + "d6";
+      } else {
+        data.formula = data.skill.pool + "d6";
+      }
     }
 
     // Execute the roll
@@ -35,25 +39,6 @@ export async function doRoll(data, messageData = {}) {
   console.log("Await done");
   _r.toMessage(messageData);
   return _r;
-}
-
-/**
-    * Build a formula for a Shadowrun dice roll.
-    * Assumes roll will be valid (e.g. you pass a positive count).
-    * @param count The number of dice to roll.
-    * @param limit A limit, if any. Negative for no limit.
-    * @param explode If the dice should explode on sixes.
-    */
-async function createFormula(count, limit = -1, explode = false) {
-  let formula = `${count}d6`;
-  if (explode) {
-    formula += 'x6';
-  }
-  if (limit > 0) {
-    formula += `kh${limit}`;
-  }
-
-  return `${formula}cs>=5`;
 }
 
 /**
