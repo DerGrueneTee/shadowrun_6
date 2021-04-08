@@ -4,27 +4,32 @@
 		      "actions": "Handlungen",
 		      "initiative": "Initiative",
 		      "nav": {
-		      	"basics": "Allhemein",
+		      	"basics": "Allgemein",
 		      	"description": "Beschreibung",
-		      	"equip": "Equipment",
+		      	"equip": "Ausrüstung",
 		      	"skills": "Fertigkeiten"
 		      }
 		  },
         "roll": {
             "threshold": "Schwellenwert",
             "explode": "Explodiert",
+            "failure": "Fehlschlag",
             "wilddie": "Schicksalswürfel verwenden",
-            "modifier": "Pool Modifikator"
+            "modifier": "Pool Modifikator",
+            "success": "Erfolg"
         },
         "rollType": {
             "normal": "Würfeln",
             "bought": "Erfolge kaufen"
+        },
+        "section": {
+          	"skills.action"  : "Fertigkeiten",
+         	"skills.language": "Language Skills",
+         	"skills.knowledge": "Knowledge Skills"
         }
 	},
     "actor.name" : "Name",
     "actor.metatype" : "Metatyp",
-    "actor.nav.skills": "Fertigkeiten",
-    "actor.nav.basics": "Basisdaten",
     "attrib.agi": "Geschicklichkeit",
     "attrib.agi_short": "GES",
     "attrib.bod": "Konstitution",

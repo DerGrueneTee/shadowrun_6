@@ -12,18 +12,20 @@
 		  },
         "roll": {
             "threshold": "Threshold",
-            "explode": "Explodiert",
+            "explode": "Exploded",
+            "failure": "Failure",
             "wilddie": "Use wild die",
-            "modifier": "Pool modifier"
+            "modifier": "Pool modifier",
+            "success": "Success"
         },
         "rollType": {
             "normal": "Würfeln",
             "bought": "Erfolge kaufen"
         },
         "section": {
-        	"skills.action"  : "Skills",
-        	"skills.language": "Language Skills",
-        	"skills.knowledge": "Knowledge Skills"
+        		"skills.action"  : "Skills",
+       	 	"skills.language": "Language Skills",
+      	  	"skills.knowledge": "Knowledge Skills"
         }
 	},
     "actor.name" : "Name",

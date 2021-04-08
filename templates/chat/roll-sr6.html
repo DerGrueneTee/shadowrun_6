@@ -7,9 +7,9 @@
         <div>{{formula}}</div>
         <br/>
         {{#if success}}
-        <div>Erfolg: {{total}} Treffer</div>
+        <div>{{ localize 'shadowrun6.roll.success'}}: {{total}} Treffer</div>
         {{else}}
-        <div>Misserfolg: {{total}} Treffer bei Schwellenwert: {{data.threshold}}</div>
+        <div>{{ localize 'shadowrun6.roll.failure'}}: {{total}} Treffer bei Schwellenwert: {{data.threshold}}</div>
         {{/if}} 
         <br/>
         {{#if criticalGlitch}}
