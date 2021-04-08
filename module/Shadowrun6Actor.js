@@ -64,7 +64,6 @@ export class Shadowrun6Actor extends Actor {
         // Only calculate for PCs - ignore for NPCs/Critter
         if (actorData.type === "Player") {
         	actorData.items.forEach(tmpItem => {
-        		console.log("owned item = "+tmpItem);
         		let item = tmpItem.data;
         		if (item.type == "skill-value" && item.data.id!="knowledge" && item.data.id!="language") {
         			try {
@@ -75,7 +74,6 @@ export class Shadowrun6Actor extends Actor {
         				let attr = skillDef.attrib;
         				let attribVal =  data.attributes[attr].pool;
         				item.data.pool = attribVal + item.data.points;
-        				item.update({"data.pool": item.data.pool});
         			} catch (e) {
         				console.log("Error for skill "+item.data.id+": "+e);
         			}
@@ -102,7 +100,6 @@ export class Shadowrun6Actor extends Actor {
     	this.items.forEach(loopItem => {
     		let item = loopItem.data;
     		if (item.type == "skill-value") {
-    			console.log("Is it "+item.data);
     			if (item.data.id==skillId) {
     				console.log("Found "+skillId+" with "+item.data.id);
     				skl = item.data;
