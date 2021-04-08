@@ -1,5 +1,15 @@
 {
 	"shadowrun6": {
+		  "actor": {
+		      "actions": "Actions",
+		      "initiative": "Initiative",
+		      "nav": {
+		      	"basics": "Basics",
+		      	"description": "Description",
+		      	"equip": "Equipment",
+		      	"skills": "Skills"
+		      }
+		  },
         "roll": {
             "threshold": "Schwellenwert",
             "explode": "Explodiert",
@@ -17,7 +27,6 @@
 	},
     "actor.name" : "Name",
     "actor.metatype" : "Metatype",
-    "actor.nav.skills": "Skills",
     "attrib.agi": "Agility",
     "attrib.agi_short": "AGI",
     "attrib.bod": "Constitution",

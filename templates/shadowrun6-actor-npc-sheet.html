@@ -21,8 +21,8 @@
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="basics">{{ localize 'actor.nav.basics' }}</a>
-        <a class="item" data-tab="description">{{ localize 'actor.nav.description' }}</a>
+        <a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
+        <a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
     </nav>
 
     {{!-- Sheet Body --}}
@@ -36,11 +36,16 @@
         {{!-- Basics Tab --}}
         <div class="tab attributes" data-group="primary" data-tab="basics" >
 			<line>
-         <div class="section" style="width: 48%">
-         	<h2 class="section-title">{{ localize 'section.attributes'}}</h2>
+         <div class="section" style="width: 68%">
             {{> "systems/shadowrun6-eden/templates/parts/npc-attributes.html" attributes=data.data.attributes}}
+            <dl>
+              <dt>{{ localize 'shadowrun6.actor.initiative' }}</dt>
+              <dd>Hallo</dd>
+              <dt>{{ localize 'shadowrun6.actor.actions' }}</dt>
+              <dd>Hallo</dd>
+            </dl>
           </div>
-         <div class="section" style="width: 48%">
+         <div class="section" style="width: 28%">
          	<h2 class="section-title">{{ localize 'section.qualities' }}</h2>
            Hallo
            </div>
