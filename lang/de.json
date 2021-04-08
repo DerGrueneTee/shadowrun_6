@@ -1,5 +1,15 @@
 {
 	"shadowrun6": {
+		  "actor": {
+		      "actions": "Handlungen",
+		      "initiative": "Initiative",
+		      "nav": {
+		      	"basics": "Allhemein",
+		      	"description": "Beschreibung",
+		      	"equip": "Equipment",
+		      	"skills": "Fertigkeiten"
+		      }
+		  },
         "roll": {
             "threshold": "Schwellenwert",
             "explode": "Explodiert",
