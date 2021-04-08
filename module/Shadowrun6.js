@@ -3,6 +3,7 @@ import { Shadowrun6ActorSheet } from "./sheets/PC.js";
 import { Shadowrun6ActorNPCSheet } from "./sheets/NPC.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
+import SR6Roll from "./dice/sr6_roll.js";
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -25,6 +26,8 @@ Hooks.once("init", async function() {
 
     // Define custom Entity classes (changed for Foundry 0.8.x
   CONFIG.Actor.documentClass = Shadowrun6Actor;
+ // Define custom Roll class
+ CONFIG.Dice.rolls.push(SR6Roll);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);

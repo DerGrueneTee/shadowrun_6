@@ -20,16 +20,21 @@ export default class SR6Roll extends Roll {
     console.log("type: " + data.type);
     console.log("threshold" + data.threshold);
 
-    let formula = this.createFormula(data.value, -1, data.explode);
-    let die = new Roll(formula).evaluate();
+    let noOfDice = data.value;
+    if (data.modifier>0) {
+      noOfDice += data.modifier;
+    } 
+    let formula = this.createFormula(noOfDice, -1, data.explode);
+    let die = new Roll(formula).evaluate({async:false});
     console.log(die);
     this.results = die.terms[0].results;
     // this._rolled ist jetzt RO
     //this._rolled = true;
-    this._total = die.terms[0].results[0];
+    this._total = die.result;
     this._formula = data.formula;
     console.log("Glitch: " + this.isGlitch());    
     console.log("CritGlitch: " + this.isCriticalGlitch());    
+    this._evaluated = true;
     return this;
   }
 
@@ -37,6 +42,10 @@ export default class SR6Roll extends Roll {
   /** @override */
   roll() {
     return this.evaluate();
+  }
+
+  total() {
+    return this._total;
   }
 
   /* -------------------------------------------- */
@@ -121,7 +130,7 @@ export default class SR6Roll extends Roll {
     return roll;
   }
 
-  /**
+   /**
     * Build a formula for a Shadowrun dice roll.
     * Assumes roll will be valid (e.g. you pass a positive count).
     * @param count The number of dice to roll.
