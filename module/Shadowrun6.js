@@ -1,5 +1,6 @@
 import { SR6 } from "./config.js";
 import { Shadowrun6ActorSheet } from "./sheets/PC.js";
+import { Shadowrun6ActorNPCSheet } from "./sheets/NPC.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 
@@ -28,6 +29,7 @@ Hooks.once("init", async function() {
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheet, { makeDefault: true });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorNPCSheet, { types: ["NPC"], makeDefault: true });
   console.log(Actors.registeredSheets);
 //   Items.unregisterSheet("core", ItemSheet);
  // Items.registerSheet("worldbuilding", SimpleItemSheet, { makeDefault: true });
