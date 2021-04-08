@@ -3,6 +3,7 @@
         "roll": {
             "threshold": "Schwellenwert",
             "explode": "Explodiert",
+            "wilddie": "Schicksalswürfel verwenden",
             "modifier": "Pool Modifikator"
         },
         "rollType": {

@@ -45,3 +45,91 @@
  
         font-weight: bold;
  }
+
+
+.dice-tooltip .dice-rolls .die{
+  position: relative;
+  width: 24px;
+  line-height: 24px;
+  float: left;
+  margin-right: 1px;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+  font-size: 16px;
+  color: #000;
+  font-weight: bold;
+  text-align: center;
+}
+
+.dice-tooltip .dice-rolls .die_1{
+  background-image: url(../icons/D6_1.svg);
+}
+
+.dice-tooltip .dice-rolls .die_2{
+  background-image: url(../icons/D6_2.svg);
+}
+.dice-tooltip .dice-rolls .die_3{
+  background-image: url(../icons/D6_3.svg);
+}
+.dice-tooltip .dice-rolls .die_4{
+  background-image: url(../icons/D6_4.svg);
+}
+.dice-tooltip .dice-rolls .die_5{
+  background-image: url(../icons/D6_5.svg);
+}
+.dice-tooltip .dice-rolls .die_6{
+  background-image: url(../icons/D6_6.svg);
+}
+
+.dice-tooltip .dice-rolls .die_1_exploded{
+  background-image: url(../icons/D6_1_Plus.svg);
+}
+.dice-tooltip .dice-rolls .die_2_exploded{
+  background-image: url(../icons/D6_2_Plus.svg);
+}
+.dice-tooltip .dice-rolls .die_3_exploded{
+  background-image: url(../icons/D6_3_Plus.svg);
+}
+.dice-tooltip .dice-rolls .die_4_exploded{
+  background-image: url(../icons/D6_4_Plus.svg);
+}
+.dice-tooltip .dice-rolls .die_5_exploded{
+  background-image: url(../icons/D6_5_Plus.svg);
+}
+.dice-tooltip .dice-rolls .die_6_exploded{
+  background-image: url(../icons/D6_6_Plus.svg);
+}
+
+.dice-tooltip .dice-rolls .die_5_exploded_ignored{
+  background-image: url(../icons/D6_5_Plus_Minus.svg);
+}
+
+.dice-tooltip .dice-rolls .die_5_ignored{
+  background-image: url(../icons/D6_5_Minus.svg);
+}
+
+.dice-tooltip .dice-rolls .die_1_wild{
+  background-image: url(../icons/Wild_1.svg);
+}
+
+.dice-tooltip .dice-rolls .die_2_wild{
+  background-image: url(../icons/Wild_2.svg);
+}
+
+.dice-tooltip .dice-rolls .die_3_wild{
+  background-image: url(../icons/Wild_3.svg);
+}
+
+.dice-tooltip .dice-rolls .die_4_wild{
+  background-image: url(../icons/Wild_4.svg);
+}
+
+.dice-tooltip .dice-rolls .die_5_wild{
+  background-image: url(../icons/Wild_5.svg);
+}
+
+.dice-tooltip .dice-rolls .die_6_wild{
+  background-image: url(../icons/Wild_6.svg);
+}
+
+

@@ -116,7 +116,7 @@ export class Shadowrun6Actor extends Actor {
         let data = mergeObject(options, {
             parts: parts,
             value: value,
-            title: skl.name,
+            title: game.i18n.localize("skill."+skl.id),
             skill: skl
         });
         data.speaker = ChatMessage.getSpeaker({ actor: this });

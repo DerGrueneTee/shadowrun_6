@@ -14,28 +14,59 @@ export default class SR6Roll extends Roll {
   /** @override */
   evaluate() {
     let data = this.data;
-
-    console.log("explode: " + data.explode);
-    console.log("modifier: " + data.modifier);
-    console.log("type: " + data.type);
-    console.log("threshold" + data.threshold);
-
     let noOfDice = data.value;
     if (data.modifier>0) {
       noOfDice += data.modifier;
     } 
     let formula = this.createFormula(noOfDice, -1, data.explode);
     let die = new Roll(formula).evaluate({async:false});
-    console.log(die);
     this.results = die.terms[0].results;
-    // this._rolled ist jetzt RO
-    //this._rolled = true;
-    this._total = die.result;
+    this._total = this.calculateTotal(die.result);
+    this.modifyResults();
     this._formula = data.formula;
-    console.log("Glitch: " + this.isGlitch());    
-    console.log("CritGlitch: " + this.isCriticalGlitch());    
     this._evaluated = true;
     return this;
+  }
+
+  calculateTotal(result) {
+    let total = parseInt(result);
+    if (this.data.useWildDie && this.results[0].result == 1) {
+      //5 zählen nicht
+      total -=  this.results.filter(die => die.result === 5).length;
+    } else if (this.data.useWildDie && this.results[0].result == 6) {
+      //3 zusätzliche Erfolge
+      total +=3;
+    }
+
+    return total;
+  }
+
+  modifyResults() {
+    let expl = false;
+    let ignoreFives = false;
+    if (this.data.useWildDie) {
+      this.results[0].wild = true;
+      ignoreFives = this.results[0].result == 1;
+    }
+    
+    this.results.forEach(result => {
+      result.classes = "die die_" + result.result;
+      if (expl) {
+        result.classes += "_exploded";
+      }
+      if (result.result == 5 && ignoreFives) {
+        result.classes += "_ignored";
+      }
+      if (result.exploded) {
+        expl = true;
+      } else {
+        expl = false;
+      }
+      if (result.wild) {
+        result.classes += "_wild";
+      }
+
+    });
   }
 
   /* -------------------------------------------- */

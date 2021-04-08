@@ -12,6 +12,7 @@ export async function doRoll(data, messageData = {}) {
       data.modifier = parseInt(form.modifier.value);
       data.threshold = parseInt(form.threshold.value);
       data.explode = form.explode.checked;
+      data.useWildDie = form.wilddie.checked;
       data.type = type;
       messageData.rollMode = form.rollMode.value;
       if (data.modifier > 0) {

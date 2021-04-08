@@ -1,9 +1,10 @@
 {
 	"shadowrun6": {
         "roll": {
-            "threshold": "Schwellenwert",
+            "threshold": "Threshold",
             "explode": "Explodiert",
-            "modifier": "Pool Modifikator"
+            "wilddie": "Use wild die",
+            "modifier": "Pool modifier"
         },
         "rollType": {
             "normal": "Würfeln",
