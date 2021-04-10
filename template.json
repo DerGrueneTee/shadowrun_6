@@ -11,49 +11,58 @@
 					"bod": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"agi": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"rea": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"str": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"wil": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"log": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"int": {
 						"base": 2,
 						"mod": 0,
+						"modString": "",
 						"augment": 0,
 						"pool": 2
 					},
 					"cha": {
 						"base": 2,
 						"mod": 0,
-						"augment": 0
+						"modString": "",
+						"augment": 0,
+						"pool": 2
 					},
 					"mag": {
 						"base": 0,

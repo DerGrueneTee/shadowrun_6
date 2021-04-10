@@ -5,12 +5,12 @@
          <span>{{attribute.pool}}</span>
          <input type="hidden" data-dtype="Number" name="data.attributes.{{id}}.pool" value="8" />
          <div class="field">
-            <label>base:</label>
-            <input type="number" data-dtype="Number" name="data.attributes.{{id}}.base" value="{{attribute.base}}" placeholder="base" title="Base Body" min="1" max="6" />
+            <label>{{localize 'shadowrun6.numerical.base'}}</label>
+            <input type="number" data-dtype="Number" name="data.attributes.{{id}}.base" value="{{attribute.base}}" placeholder="base" title="{{localize 'shadowrun6.numerical.baseString'}}" min="1" max="6" />
          </div>
          <div class="field">
-            <label>adj:</label>
-            <input type="number" data-dtype="Number" name="data.attributes.{{id}}.mod" value="{{attribute.mod}}" placeholder="±adj" title="Body Adjustment" />
+            <label>{{localize 'shadowrun6.numerical.mod'}}</label>
+            <input type="number" data-dtype="Number" name="data.attributes.{{id}}.mod" value="{{attribute.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
          </div>
       </div>
     {{/ifIn}}

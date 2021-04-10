@@ -10,6 +10,11 @@
 		      	"skills": "Skills"
 		      }
 		  },
+		  "numerical": {
+		  		"base": "base",
+		  		"baseString": "Base Value",
+		  		"mod": "adj"
+		  },
         "roll": {
             "threshold": "Threshold",
             "explode": "Exploded",

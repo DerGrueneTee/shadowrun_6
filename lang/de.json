@@ -10,6 +10,11 @@
 		      	"skills": "Fertigkeiten"
 		      }
 		  },
+		  "numerical": {
+		  		"base": "Basis",
+		  		"baseString": "Grundwert",
+		  		"mod": "Mod"
+		  },
         "roll": {
             "threshold": "Schwellenwert",
             "explode": "Explodiert",

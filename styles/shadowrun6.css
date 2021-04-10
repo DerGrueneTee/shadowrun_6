@@ -177,6 +177,7 @@
         position: absolute;
         bottom: 0;
         left: 0;
+        width: 2em; 
 }
 .app.window-app.shadowrun6.actor .attributes .attribute .field:nth-of-type(2) {
         font-size: .89rem;
