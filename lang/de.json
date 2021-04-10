@@ -16,7 +16,11 @@
             "failure": "Fehlschlag",
             "wilddie": "Schicksalswürfel verwenden",
             "modifier": "Pool Modifikator",
-            "success": "Erfolg"
+            "success": "Erfolgreich",
+            "successes" : "Erfolge",
+            "glitch": "Patzer",
+            "criticalglitch": "Kritischer Patzer",
+            "nosuccess": "Erfolge bei Schwellenwert "
         },
         "rollType": {
             "normal": "Würfeln",

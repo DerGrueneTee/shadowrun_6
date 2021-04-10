@@ -7,15 +7,15 @@
         <div>{{formula}}</div>
         <br/>
         {{#if success}}
-        <div>{{ localize 'shadowrun6.roll.success'}}: {{total}} Treffer</div>
+        <div>{{ localize 'shadowrun6.roll.success'}}: {{total}} {{localize 'shadowrun6.roll.successes'}}</div>
         {{else}}
-        <div>{{ localize 'shadowrun6.roll.failure'}}: {{total}} Treffer bei Schwellenwert: {{data.threshold}}</div>
+        <div>{{ localize 'shadowrun6.roll.failure'}}: {{total}} {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
         {{/if}} 
         <br/>
         {{#if criticalGlitch}}
-        <span style="color: rgb(215, 14, 233)">CriticalGlitch</span><br/>
+        <span style="color: rgb(215, 14, 233)">{{localize 'shadowrun6.roll.criticalglitch'}}</span><br/>
         {{else glitch}}
-        <span style="color: rgb(194, 76, 29)">Glitch!!!}</span><br/>
+        <span style="color: rgb(194, 76, 29)">{{localize 'shadowrun6.roll.glitch'}}</span><br/>
         {{/if}}
       </header>
   </div>

@@ -16,11 +16,15 @@
             "failure": "Failure",
             "wilddie": "Use wild die",
             "modifier": "Pool modifier",
-            "success": "Success"
+            "success": "Success",
+            "successes" : "hits",
+            "glitch": "Glitch",
+            "criticalglitch": "Critical glitch",
+            "nosuccess": "hits, threshold: "
         },
         "rollType": {
-            "normal": "Würfeln",
-            "bought": "Erfolge kaufen"
+            "normal": "Roll dice",
+            "bought": "Buy hits"
         },
         "section": {
         		"skills.action"  : "Skills",
@@ -44,7 +48,7 @@
     "attrib.rea_short": "REA",
     "attrib.str": "Strength",
     "attrib.str_short": "STR",
-    "attrib.wil": "Willenskraft",
+    "attrib.wil": "Willpower",
     "attrib.wil_short": "WIL",
     "attrib.mag": "Magic",
     "attrib.mag_short": "MAG",
@@ -76,7 +80,7 @@
     "skill.con"    : "Con",
     "skill.conjuring": "Conjuring",
     "skill.cracking": "Cracken",
-    "skill.electronics": "Elektronic",
+    "skill.electronics": "Electronics",
     "skill.enchanting":  "Enchanting",
     "skill.engineering": "Mechanics",
     "skill.exotic_weapons": "Exotic Weapons",
