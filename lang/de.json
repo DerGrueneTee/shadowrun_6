@@ -33,8 +33,8 @@
         },
         "section": {
           	"skills.action"  : "Fertigkeiten",
-         	"skills.language": "Language Skills",
-         	"skills.knowledge": "Knowledge Skills"
+         	"skills.language": "Sprachen",
+         	"skills.knowledge": "Wissensfertigkeiten"
         }
 	},
     "actor.name" : "Name",
