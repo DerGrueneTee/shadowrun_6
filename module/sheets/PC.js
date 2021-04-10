@@ -9,8 +9,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		return mergeObject(super.defaultOptions, {
 			classes: ["shadowrun6", "sheet", "actor"],
 			template: "systems/shadowrun6-eden/templates/shadowrun6-actor-sheet.html",
-			width: 600,
-			height: 800,
+			width: 800,
+			height: 900,
 			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "basics" }],
 			scrollY: [".biography", ".items", ".attributes"],
 			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]

@@ -1,4 +1,4 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
+<form class="pc {{cssClass}}" autocomplete="off">
 
     {{!-- Sheet Header --}}
     <header class="sheet-header">
@@ -29,6 +29,13 @@
 
     {{!-- Sheet Body --}}
     <section class="sheet-body">
+
+        {{!-- Basics Tab --}}
+        <div class="tab basics" data-group="primary" data-tab="basics" >
+          <div class="attributes">
+          {{> "systems/shadowrun6-eden/templates/parts/attributes-augmented.html" attributes=data.data.attributes}}
+          </div>
+        </div>
 
         {{!-- Skills Tab --}}
         <div class="tab skills" data-group="primary" data-tab="skills">
@@ -97,20 +104,6 @@
                 {{/each}}
             </ol>
            </div>
-        </div>
-
-        {{!-- Basics Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="basics" >
-			<line>
-         <div class="section" style="width: 48%">
-         	<h2 class="section-title">{{ localize 'section.attributes'}}&nbsp;<button>+</button></h2>
-            {{> "systems/shadowrun6-eden/templates/parts/attributes.html" attributes=data.data.attributes}}
-          </div>
-         <div class="section" style="width: 48%">
-         	<h2 class="section-title">{{ localize 'section.qualities' }}</h2>
-           Hallo
-           </div>
-           </line>
         </div>
     </section>
 </form>

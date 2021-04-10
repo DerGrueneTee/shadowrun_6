@@ -1,5 +1,6 @@
 @import "color-light.css";
 @import "layout.css";
+@import "augmented.css";
 
 .sheet header.sheet-header {
 	align-items: normal;
@@ -132,4 +133,55 @@
   background-image: url(../icons/Wild_6.svg);
 }
 
-
+.app.window-app.shadowrun6.actor .attributes {
+    height: 5.25rem;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-top: 1rem;
+}
+.app.window-app.shadowrun6.actor .attributes .attribute {
+      min-width: 5.25rem;
+      text-align: center;
+      padding: .25rem;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-items: flex-start;
+      --aug-border: 1px;
+      --aug-inset: 2px;
+      --aug-border-bg: rgb(82, 81, 78);
+      --aug-inset-bg: rgba(255, 255, 255, 0);
+      --aug-b-width: 33%;
+      --aug-b-height: 10px;
+      position: relative;
+      background-color: var(--section-background);
+}
+.app.window-app.shadowrun6.actor .attributes .attribute p {
+        text-align: center;
+        margin: 0; }
+.app.window-app.shadowrun6.actor .attributes .attribute span {
+        font-size: 1.125rem;
+        margin-top: .25rem; 
+        color: var(--highlight-color);
+}
+.app.window-app.shadowrun6.actor .attributes .attribute .field {
+        display: flex;
+        flex-flow: column nowrap; }
+.app.window-app.shadowrun6.actor .attributes .attribute input::placeholder,
+.app.window-app.shadowrun6.actor .attributes .attribute label {
+        font-size: .75rem; 
+}
+.app.window-app.shadowrun6.actor .attributes .attribute .field:nth-of-type(1) {
+        font-size: .89rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+}
+.app.window-app.shadowrun6.actor .attributes .attribute .field:nth-of-type(2) {
+        font-size: .89rem;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 2em; 
+}

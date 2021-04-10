@@ -31,6 +31,7 @@ export class Shadowrun6Actor extends Actor {
                 data.attributes[attr].pool =
                 		parseInt(data.attributes[attr].base || 0)
                 	  + parseInt(data.attributes[attr].mod || 0);
+                console.log("Set "+attr+" to "+data.attributes[attr].pool);
             });
         }
     }
