@@ -34,6 +34,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+		    html.find(".calcPHYBar").on("input",this._onRecalculatePhysicalBar(html));
+		    html.find(".bodChanged").on("input",this._onBodyChanged(html));
 		} else {
 			html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
 		}
@@ -52,6 +54,27 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const skill = event.currentTarget.dataset.skill;
 		this.actor.rollSkill(skill, { event: event });
 	}
+
+	  //-----------------------------------------------------
+	_onBodyChanged(html){
+		let actorData = this.object.data.data;
+	    console.log("_onBodyChanged  "+actorData.attributes["bod"].pool);
+	  }
+
+	  //-----------------------------------------------------
+	  _onRecalculatePhysicalBar(html){
+	    console.log("LE editiert  "+html);
+	    let vMax = parseInt(html.find("#dataPhyMax")[0].value);
+	    console.log("vMax = "+vMax);
+	    let vCur = parseInt(html.find("#dataPhyCur")[0].value);
+	    console.log("vCur = "+vCur);
+	    let totalVer = vMax-vCur;  // Wieviel nach Verschnaufpause
+	    console.log("Damage = "+totalVer);
+	    let percVerz = totalVer/vMax *100;
+	    console.log("Percent = "+percVerz);
+	    html.find("#barPhyCur")[0].style.width = percVerz+"%";
+//	    this.object.data.data.le.cur = totalCur;
+	  }
 
 
 }

@@ -31,7 +31,6 @@ export class Shadowrun6Actor extends Actor {
                 data.attributes[attr].pool =
                 		parseInt(data.attributes[attr].base || 0)
                 	  + parseInt(data.attributes[attr].mod || 0);
-                console.log("Set "+attr+" to "+data.attributes[attr].pool);
             });
         }
     }
@@ -46,11 +45,12 @@ export class Shadowrun6Actor extends Actor {
 
         // Store volatile
          
-//        if (actorData.type === "Player") {
-//        	data.physical.base= data.attributes["bod"]/2 + 8; // ToDo: Aufrunden
-//        	data.derivedAttributes.initiative = {};
-//            data.derivedAttributes.initiative.value = 17;  // Irgendwas zum testen
-//        }
+        if (actorData.type === "Player") {
+             data.physical.max = 8 + Math.round(data.attributes["bod"].pool/2) + data.physical.mod; 
+             data.stun.max     = 8 + Math.round(data.attributes["wil"].pool/2) + data.stun.mod;
+             
+             console.log("Set Physical to "+data.physical.max);
+       }
 
     }
 
@@ -85,7 +85,6 @@ export class Shadowrun6Actor extends Actor {
 				let attr = skillDef.attrib;
 				let attribVal =  data.attributes[attr].pool;
 				data.skills[id].pool = attribVal + data.skills[id].points;
-            	console.log(id+" = "+attr+"("+attribVal+") + "+data.skills[id].points+" points = "+data.skills[id].pool );
             });
         }
     }

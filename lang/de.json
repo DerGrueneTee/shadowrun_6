@@ -10,6 +10,10 @@
 		      	"skills": "Fertigkeiten"
 		      }
 		  },
+		  "monitor": {
+		  		"physical": "Körperlich",
+		  		"stun"    : "Geistig"
+		  },
 		  "numerical": {
 		  		"base": "Basis",
 		  		"baseString": "Grundwert",

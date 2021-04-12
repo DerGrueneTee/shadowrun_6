@@ -12,7 +12,7 @@
     		<tr>
     {{#each attributes as |attribute id|}}
     {{#ifIn id ../config.PRIMARY_ATTRIBUTES}}
-    		  <td class="attribute" id="{{id}}">
+    		  <td class="attribute  {{id}}Changed" id="{{id}}">
              <input class="centered" name="data.attributes.{{id}}.current" type="text" value="{{attribute.base}}" data-dtype="Number">
     		  </td>
     {{/ifIn}}

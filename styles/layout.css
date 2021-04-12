@@ -44,3 +44,14 @@ th {
 input.centered {
 	text-align: center;
 }
+
+#barPhyMax {
+    width: 20rem;
+    background-color: transparent;
+}
+#barPhyCur {
+    background-color: green;
+    width: 60%;
+    height: 100%;
+    text-align: center;
+}

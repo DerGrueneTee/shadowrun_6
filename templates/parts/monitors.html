@@ -1,0 +1,34 @@
+<table>
+	<tbody>
+		<tr>
+			<td><img src="systems/shadowrun6-eden/images/heart.svg" style="border:0px; height:32px; width: auto"/></td>
+			<td><label for="data.physical" title="{{localize 'shadowrun6.monitor.physical'}}">{{localize 'shadowrun6.monitor.physical'}}</label></td>
+			<td>
+				<input class="centered calcPHY"	name="data.physical.mod" type="text" value="{{data.data.physical.mod}}" data-dtype="Number" id="dataPhyMod">
+			</td>
+			<td>
+				<label for="data.physical.max" title="{{data.physical.max}}">{{data.data.physical.max}}</label>
+				<input name="data.physical.max" type="hidden" value="{{data.data.physical.max}}" data-dtype="Number" id="dataPhyMax">
+			</td>
+			<td>
+				<input class="centered"	name="data.physical.value" type="text" value="{{data.data.physical.value}}" data-dtype="Number" id="dataPhyCur">
+			</td>
+         <td id="barPhyMax">
+        	   <div id="barPhyCur">{{data.physical.value}}/{{data.physical.max}}</div>
+         </td>
+		</tr>
+		<tr>
+			<td><img src="systems/shadowrun6-eden/images/brain.svg" style="border:0px; height:32px; width: auto"/></td>
+			<td><label for="data.stun" title="{{localize 'shadowrun6.monitor.stun'}}">{{localize 'shadowrun6.monitor.stun'}}</label></td>
+			<td class="attribute" id="{{id}}">
+				<input class="centered"	name="data.stun.mod" type="text" value="{{data.data.stun.mod}}" data-dtype="Number">
+			</td>
+			<td>
+				<label for="data.stun.max" title="{{data.stun.max}}">{{data.data.stun.max}}</label>
+			</td>
+			<td>
+				<input class="centered"	name="data.stun.value" type="text" value="{{data.data.stun.value}}" data-dtype="Number">
+			</td>
+		</tr>
+	</tbody>
+</table>

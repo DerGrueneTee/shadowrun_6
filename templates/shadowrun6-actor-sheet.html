@@ -7,15 +7,16 @@
             <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
              {{!-- Character Summary --}}
                 <div class="description">
-                    <input class="autoexpand" name="data.metatype" type="text" value="{{data.metatype}}"
+                    <input class="autoexpand" name="data.metatype" type="text" value="{{data.data.metatype}}"
                         placeholder="{{localize 'shadowrun6.metatype'}}" />
                     &nbsp;&middot;&nbsp;
-                    <input class="autoexpand" name="data.gender" type="text" value="{{data.gender}}"
+                    <input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
                         placeholder="{{localize 'shadowrun6.gender'}}" />
                     &nbsp;&middot;&nbsp;
-                    <input class="autoexpand" name="data.mortype" type="text" value="{{data.mortype}}"
+                    <input class="autoexpand" name="data.mortype" type="text" value="{{data.data.mortype}}"
                         placeholder="{{localize 'shadowrun6.mortype'}}" />
                 </div>
+          {{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
         </div>
     </header>
 
