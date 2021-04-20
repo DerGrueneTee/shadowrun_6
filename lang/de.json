@@ -20,6 +20,8 @@
 		  		"mod": "Mod"
 		  },
         "roll": {
+            "subject": "Chat-Nachricht",
+            "pool":"Würfel/Pool",
             "threshold": "Schwellenwert",
             "explode": "Explodiert",
             "failure": "Fehlschlag",

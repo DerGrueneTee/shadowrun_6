@@ -49,7 +49,7 @@ export async function doRoll(data, messageData = {}) {
 async function _rollDialog({ data, foo } = {}) {
 
   if (isNaN(data.threshold)) {
-    data.threshold = 3;
+    data.threshold = 0;
   }
   if (isNaN(data.explode)) {
     data.explode = false;

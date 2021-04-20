@@ -4,6 +4,9 @@ import { Shadowrun6ActorNPCSheet } from "./sheets/NPC.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
+import { doRoll } from "./dice/ChatDiceRoller.js";
+
+const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -32,10 +35,6 @@ Hooks.once("init", async function() {
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheet, { makeDefault: true });
-  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorNPCSheet, { types: ["NPC"], makeDefault: true });
-  console.log(Actors.registeredSheets);
-//   Items.unregisterSheet("core", ItemSheet);
- // Items.registerSheet("worldbuilding", SimpleItemSheet, { makeDefault: true });
   preloadHandlebarsTemplates();
 
   Handlebars.registerHelper( 'concat', function(op1,op2) {
@@ -52,6 +51,21 @@ Hooks.once("init", async function() {
 	  }
 	  return options.inverse(this);
 	});
+
+  Hooks.on('ready', () => {
+    // Render a modal on click.
+    $(document).on('click', diceIconSelector, ev => {
+      ev.preventDefault();
+      console.log("geklickt");
+      // Roll and return
+		let data = {
+			value: 0,
+			title: "",
+		};
+		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(data);
+    });
+  });
 
   // Allows {if X = Y} type syntax in html using handlebars
   Handlebars.registerHelper("iff", function (a, operator, b, opts) {
@@ -92,7 +106,9 @@ Hooks.once("init", async function() {
       return opts.inverse(this);
     }
   });
-}); 
+});
+
+
 
 function getAttributeValue(attribs, key) {
 	return 5;
