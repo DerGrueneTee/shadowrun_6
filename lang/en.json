@@ -29,6 +29,8 @@
 		  		"mod": "adj"
 		  },
         "roll": {
+            "subject": "Chatmessage",
+            "pool":"Pool",
             "threshold": "Threshold",
             "explode": "Exploded",
             "failure": "Failure",
