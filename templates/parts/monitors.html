@@ -1,33 +1,114 @@
-<table>
+<table style="width: 500px" border="0">
 	<tbody>
 		<tr>
-			<td><img src="systems/shadowrun6-eden/images/heart.svg" style="border:0px; height:32px; width: auto"/></td>
-			<td><label for="data.physical" title="{{localize 'shadowrun6.monitor.physical'}}">{{localize 'shadowrun6.monitor.physical'}}</label></td>
-			<td>
-				<input class="centered calcPHY"	name="data.physical.mod" type="text" value="{{data.data.physical.mod}}" data-dtype="Number" id="dataPhyMod">
-			</td>
-			<td>
-				<label for="data.physical.max" title="{{data.physical.max}}">{{data.data.physical.max}}</label>
-				<input name="data.physical.max" type="hidden" value="{{data.data.physical.max}}" data-dtype="Number" id="dataPhyMax">
-			</td>
-			<td>
-				<input class="centered"	name="data.physical.value" type="text" value="{{data.data.physical.value}}" data-dtype="Number" id="dataPhyCur">
-			</td>
-         <td id="barPhyMax">
-        	   <div id="barPhyCur">{{data.physical.value}}/{{data.physical.max}}</div>
-         </td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+		  <td></td>
+		  <td>Dmg</td>
 		</tr>
 		<tr>
-			<td><img src="systems/shadowrun6-eden/images/brain.svg" style="border:0px; height:32px; width: auto"/></td>
+			<td><img src="systems/shadowrun6-eden/images/heart.svg" style="border: 0px; height: auto; width: 48px" /></td>
+			<td><label for="data.physical"
+				title="{{localize 'shadowrun6.monitor.physical'}}">{{localize 'shadowrun6.monitor.physical'}}</label></td>
+			<td><input class="centered health-phys calcPHY" name="data.physical.mod"
+				type="text" value="{{data.data.physical.mod}}" data-dtype="Number"
+				id="dataPhyMod"></td>
+			<td><label for="data.physical.max" title="{{data.physical.max}}">{{data.data.physical.max}}</label>
+				<input name="data.physical.max" type="hidden" class="centered health-phys" 
+				value="{{data.data.physical.max}}" data-dtype="Number"
+				id="dataPhyMax"></td>
+			<td>
+				<input name="data.physical.value" class="centered health-phys"
+				type="text" value="{{data.data.physical.value}}" data-dtype="Number"
+				id="dataPhyCur"></td>
+			<td id="barPhyMax">
+				<div style="width: 300px;">
+					<div style="position: relative; z-index: 1; border: solid black 1px;">
+						<div id="barPhyCur" style="background-color: #892378; width: 77%;">&nbsp</div>
+						<div id="barPhyBoxes" style="display: flex; z-index: 2; position: absolute; top: 0em; width: 100%">
+							<!--div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1;">&nbsp;</div-->
+						</div>
+					</div>
+					<div id="barPhyScale" style="display: flex; font-size: x-small">
+						<!--div
+							style="flex: 1; border-right: solid black 1px; text-align: center"></div>
+						<div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-4</div>
+						<div style="flex: 1">&nbsp;</div>
+						<div style="flex: 1"></div>
+						<div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-3</div>
+						<div style="flex: 1"></div>
+						<div style="flex: 1"></div>
+						<div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-2</div>
+						<div style="flex: 1"></div>
+						<div style="flex: 1"></div>
+						<div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-1</div>
+						<div style="flex: 1;"></div>
+						<div style="flex: 1"></div-->
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><img src="systems/shadowrun6-eden/images/brain.svg" style="border: 0px; height: auto; width: 48px" /></td>
 			<td><label for="data.stun" title="{{localize 'shadowrun6.monitor.stun'}}">{{localize 'shadowrun6.monitor.stun'}}</label></td>
 			<td class="attribute" id="{{id}}">
-				<input class="centered"	name="data.stun.mod" type="text" value="{{data.data.stun.mod}}" data-dtype="Number">
+				<input class="centered health-stun" name="data.stun.mod" type="text" value="{{data.data.stun.mod}}"
+				data-dtype="Number" id="dataStunMod"></td>
+			<td><label for="data.stun.max" title="{{data.stun.max}}">{{data.data.stun.max}}</label>
+				<input name="data.stun.max" type="hidden"  class="centered health-stun"
+				value="{{data.data.stun.max}}" data-dtype="Number" id="dataStunMax">
 			</td>
-			<td>
-				<label for="data.stun.max" title="{{data.stun.max}}">{{data.data.stun.max}}</label>
-			</td>
-			<td>
-				<input class="centered"	name="data.stun.value" type="text" value="{{data.data.stun.value}}" data-dtype="Number">
+			<td><input class="centered health-stun" name="data.stun.value" type="text" value="{{data.data.stun.value}}" data-dtype="Number" id="dataStunCur"></td>
+			<td id="barStunMax">
+				<!--div id="barStunCur">{{data.stun.value}}/{{data.stun.max}}</div-->
+				<div style="width: 300px;">
+					<div style="position: relative; z-index: 1; border: solid black 1px;">
+						<div id="barStunCur"
+							style="background-color: #00a8ff; width: 78%;">&nbsp</div>
+						<div id="barStunBoxes" style="display: flex; z-index: 2; position: absolute; top: 0em; width: 100%">
+							<!--div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1;">&nbsp;</div-->
+						</div>
+					</div>
+					<div id="barStunScale" style="display: flex; font-size: x-small">
+						<!--div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-3</div>
+						<div style="flex: 1"></div>
+						<div style="flex: 1"></div>
+						<div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-2</div>
+						<div style="flex: 1"></div>
+						<div style="flex: 1"></div>
+						<div
+							style="flex: 1; border-right: solid black 1px; text-align: center">-1</div>
+						<div style="flex: 1;"></div>
+						<div style="flex: 1"></div-->
+					</div>
+				</div>
 			</td>
 		</tr>
 	</tbody>

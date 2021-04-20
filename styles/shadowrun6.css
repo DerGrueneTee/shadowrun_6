@@ -46,7 +46,14 @@
  
         font-weight: bold;
  }
-
+.shadowrun6 input.health-phys {
+        border: 1px solid var(--highlight-color);
+        background: white;
+}
+.shadowrun6 input.health-stun {
+        border: 1px solid var(--accent-color);
+        background: white;
+}
 
 .dice-tooltip .dice-rolls .die{
   position: relative;

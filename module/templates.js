@@ -10,6 +10,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/attributes-augmented.html",
 		"systems/shadowrun6-eden/templates/parts/monitors.html",
 		"systems/shadowrun6-eden/templates/parts/npc-attributes.html",
+		"systems/shadowrun6-eden/templates/parts/pc-derived.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skillvalues.html",
 		];

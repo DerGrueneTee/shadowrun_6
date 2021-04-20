@@ -55,3 +55,14 @@ input.centered {
     height: 100%;
     text-align: center;
 }
+
+#barStunMax {
+    width: 20rem;
+    background-color: transparent;
+}
+#barStunCur {
+    background-color: blue;
+    width: 60%;
+    height: 100%;
+    text-align: center;
+}
