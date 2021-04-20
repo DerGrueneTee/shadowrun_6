@@ -1,26 +1,18 @@
-<table style="width: 500px" border="0">
+<table style="width: 450px" border="0">
 	<tbody>
 		<tr>
 		  <td></td>
 		  <td></td>
+		  <td>{{ localize 'shadowrun6.label.damage' }}</td>
 		  <td></td>
-		  <td></td>
-		  <td>Dmg</td>
 		</tr>
 		<tr>
 			<td><img src="systems/shadowrun6-eden/images/heart.svg" style="border: 0px; height: auto; width: 48px" /></td>
 			<td><label for="data.physical"
 				title="{{localize 'shadowrun6.monitor.physical'}}">{{localize 'shadowrun6.monitor.physical'}}</label></td>
-			<td><input class="centered health-phys calcPHY" name="data.physical.mod"
-				type="text" value="{{data.data.physical.mod}}" data-dtype="Number"
-				id="dataPhyMod"></td>
-			<td><label for="data.physical.max" title="{{data.physical.max}}">{{data.data.physical.max}}</label>
-				<input name="data.physical.max" type="hidden" class="centered health-phys" 
-				value="{{data.data.physical.max}}" data-dtype="Number"
-				id="dataPhyMax"></td>
 			<td>
-				<input name="data.physical.value" class="centered health-phys"
-				type="text" value="{{data.data.physical.value}}" data-dtype="Number"
+				<input name="data.physical.dmg" class="centered health-phys"
+				type="text" value="{{data.data.physical.dmg}}" data-dtype="Number"
 				id="dataPhyCur"></td>
 			<td id="barPhyMax">
 				<div style="width: 300px;">
@@ -68,14 +60,7 @@
 		<tr>
 			<td><img src="systems/shadowrun6-eden/images/brain.svg" style="border: 0px; height: auto; width: 48px" /></td>
 			<td><label for="data.stun" title="{{localize 'shadowrun6.monitor.stun'}}">{{localize 'shadowrun6.monitor.stun'}}</label></td>
-			<td class="attribute" id="{{id}}">
-				<input class="centered health-stun" name="data.stun.mod" type="text" value="{{data.data.stun.mod}}"
-				data-dtype="Number" id="dataStunMod"></td>
-			<td><label for="data.stun.max" title="{{data.stun.max}}">{{data.data.stun.max}}</label>
-				<input name="data.stun.max" type="hidden"  class="centered health-stun"
-				value="{{data.data.stun.max}}" data-dtype="Number" id="dataStunMax">
-			</td>
-			<td><input class="centered health-stun" name="data.stun.value" type="text" value="{{data.data.stun.value}}" data-dtype="Number" id="dataStunCur"></td>
+			<td><input class="centered health-stun" name="data.stun.dmg" type="text" value="{{data.data.stun.dmg}}" data-dtype="Number" id="dataStunCur"></td>
 			<td id="barStunMax">
 				<!--div id="barStunCur">{{data.stun.value}}/{{data.stun.max}}</div-->
 				<div style="width: 300px;">

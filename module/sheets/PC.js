@@ -34,8 +34,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
-			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy"));
-			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun"));
+			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
+			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find(".bodChanged").on("input", this._onBodyChanged(html));
 		} else {
 			html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
@@ -63,16 +63,15 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	}
 
 	//-----------------------------------------------------
-	_redrawBar(html, id) {
-		let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
-		let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
-		let totalVer = vMax - vCur;  // Wieviel nach Verschnaufpause
-		let percVerz = totalVer / vMax * 100;
-		html.find("#bar"+id+"Cur")[0].style.width = percVerz + "%";
+	_redrawBar(html, id, monitorAttribute) {
+		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
+		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
+		let perc = monitorAttribute.value / monitorAttribute.max * 100;
+		html.find("#bar"+id+"Cur")[0].style.width = perc + "%";
 
 		let myNode = html.find("#bar"+id+"Boxes")[0];
 		// Only change nodes when necessary
-		if (myNode.childElementCount != vMax) {
+		if (myNode.childElementCount != monitorAttribute.max) {
 			// The energy bar
 			// Remove previous boxes
 			while (myNode.firstChild) {
@@ -80,11 +79,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			}
 			// Add new ones
 			let i = 0;
-			while (i < vMax) {
+			while (i < monitorAttribute.max) {
 				i++;
 				var div = document.createElement("div");
 				var text = document.createTextNode("\u00A0");
-				if (i < vMax) {
+				if (i < monitorAttribute.max) {
 					div.setAttribute("style", "flex: 1; border-right: solid black 1px;")
 				} else {
 					div.setAttribute("style", "flex: 1")
@@ -100,7 +99,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			}
 			// Add new
 			i = 0;
-			while (i < vMax) {
+			while (i < monitorAttribute.max) {
 				i++;
 				var div = document.createElement("div");
 				if (i % 3 == 0) {

@@ -41,6 +41,9 @@ th {
 	text-shadow: none;
 	border-bottom: 0px;
 }
+.centered {
+	text-align: center;
+}
 input.centered {
 	text-align: center;
 }

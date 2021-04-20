@@ -10,6 +10,15 @@
 		      	"skills": "Skills"
 		      }
 		  },
+		  "label": {
+		  		"attribute": "Attribute",
+		  		"base"     : "Base",
+		  		"damage"   : "Damage",
+		  		"points"   : "Points",
+		  		"pool"     : "Pool",
+		  		"modifier" : "Adj.",
+		  		"value"    : "Value"
+		  },
 		  "monitor": {
 		  		"physical": "Physical",
 		  		"stun"    : "Stun"
@@ -36,8 +45,9 @@
             "bought": "Buy hits"
         },
         "section": {
-        		"skills.action"  : "Skills",
-       	 	"skills.language": "Language Skills",
+        		"derived"         : "Derived Values",
+        		"skills.action"   : "Skills",
+       	 	"skills.language" : "Language Skills",
       	  	"skills.knowledge": "Knowledge Skills"
         }
 	},
@@ -76,10 +86,6 @@
     "attrib.dr": "Defense Rating",
     "attrib.dr_short": "DR",
     "label.skill" : "Skill",
-    "label.attribute": "Attribute",
-    "label.points": "Points",
-    "label.modifier": "Modif.",
-    "label.value" : "Pool",
     "section.attributes" : "Attributes",
     "section.qualities"  : "Qualities",
     "skill.astral": "Astral",

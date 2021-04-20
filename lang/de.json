@@ -10,6 +10,15 @@
 		      	"skills": "Fertigkeiten"
 		      }
 		  },
+		  "label": {
+		  		"attribute": "Attribut",
+		  		"base"     : "Basis",
+		  		"damage"   : "Schaden",
+		  		"points"   : "Punkte",
+		  		"pool"     : "Pool",
+		  		"modifier" : "Mod.",
+		  		"value"    : "Wert"
+		  },
 		  "monitor": {
 		  		"physical": "Körperlich",
 		  		"stun"    : "Geistig"
@@ -36,8 +45,9 @@
             "bought": "Erfolge kaufen"
         },
         "section": {
-          	"skills.action"  : "Fertigkeiten",
-         	"skills.language": "Sprachen",
+        		"derived"         : "Abgeleitete Werte",
+          	"skills.action"   : "Fertigkeiten",
+         	"skills.language" : "Sprachen",
          	"skills.knowledge": "Wissensfertigkeiten"
         }
 	},
