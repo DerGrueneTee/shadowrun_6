@@ -11,9 +11,9 @@ pipelines:
         script:
           - echo "Your build and test goes here..."
           - mkdir -p package/shadowrun6-eden
-          - cp -r icons images lang module styles system.json template.json templates package/shadowrun6-eden
+          - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
           - set VERSION=0.1.0
-          - cat system-template.json | sed -e 's/DOWNLOAD/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/shadowrun6-eden.zip/' -e 's/MANIFEST/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/system.json/'  -e 's/VERSION/$VERSION/' 
+          - cat system-template.json | sed -e 's/DOWNLOAD/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/shadowrun6-eden.zip/' -e 's/MANIFEST/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/system.json/'  -e 's/VERSION/$VERSION/' > package/system.json  
           - cd package/ ; zip -r ../shadowrun6-eden.zip shadowrun6-eden ; cd ..
           - find
           - pipe: atlassian/bitbucket-upload-file:0.3.2
@@ -21,6 +21,11 @@ pipelines:
               BITBUCKET_USERNAME: $BITBUCKET_USERNAME
               BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
               FILENAME: 'shadowrun6-eden.zip'
+          - pipe: atlassian/bitbucket-upload-file:0.3.2
+            variables:
+              BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+              BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+              FILENAME: 'system.json'
 
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
     - step:
