@@ -2,7 +2,7 @@
   "name": "shadowrun6-eden",
   "title": "Shadowrun 6",
   "description": "RPGFramework Eden implementation for Shadowrun 6",
-  "version": "VERSION",
+  "version": "$VERSION",
   "templateVersion": 1,
   "author": "René Matis, Stefan u. Anja Prelle",
   "compatibleCoreVersion": "0.8.9",
@@ -39,6 +39,6 @@
   "primaryTokenAttribute": "physical",
   "secondaryTokenAttribute": "stun",
   "url": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/",
-  "manifest": "MANIFEST",
-  "download": "DOWNLOAD"
+  "manifest": "$MANIFEST",
+  "download": "$DOWNLOAD"
 }
