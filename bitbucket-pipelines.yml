@@ -21,7 +21,7 @@ pipelines:
           - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
           - export VERSION=`cat version.txt`
           - set
-          - cat system-template.json | sed -e 's/DOWNLOAD/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/shadowrun6-eden-staging.zip/' -e 's/MANIFEST/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/system-staging.json/'  -e 's/VERSION/$VERSION/' > package/shadowrun6-eden/system-staging.json  
+          - cat system-template.json | sed -e 's/DOWNLOAD/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/shadowrun6-eden-staging.zip/' -e 's/MANIFEST/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/system-staging.json/'  -e 's/VERSION/${VERSION}/' > package/shadowrun6-eden/system-staging.json  
           - cd package/ ; zip -r ../shadowrun6-eden-staging.zip shadowrun6-eden ; cd ..
           - cp package/shadowrun6-eden/system-staging.json system-staging.json
           - find
