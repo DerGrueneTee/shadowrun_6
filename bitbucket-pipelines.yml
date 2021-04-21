@@ -35,7 +35,7 @@ pipelines:
             variables:
               BITBUCKET_USERNAME: $BITBUCKET_USERNAME
               BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
-              FILENAME: 'package/shadowrun6-eden/system-staging.json'
+              FILENAME: 'system-staging.json'
     - step:
         name: 'Deployment to Production'
         deployment: production
