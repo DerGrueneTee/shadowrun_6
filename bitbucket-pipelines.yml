@@ -22,13 +22,9 @@ pipelines:
           - export VERSION=`cat version.txt`
           - export MANIFEST="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json"
           - export DOWNLOAD="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/shadowrun6-eden-staging.zip"
-          - set
-          - envsubst < system-template.json > out.txt ; cat out.txt
-          - cat system-template.json | sed -e 's/DOWNLOAD/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/shadowrun6-eden-staging.zip/' -e 's/MANIFEST/https:\/\/bitbucket.org\/rpgframework-cloud\/shadowrun6-eden\/downloads\/system-staging.json/' > package/shadowrun6-eden/system-staging.json  
-          - sed -i 's/VERSION/$VERSION/'  package/shadowrun6-eden/system-staging.json
+          - envsubst < system-template.json > package/shadowrun6-eden/system-staging.json
           - cd package/ ; zip -r ../shadowrun6-eden-staging.zip shadowrun6-eden ; cd ..
           - cp package/shadowrun6-eden/system-staging.json system-staging.json
-          - find
           - pipe: atlassian/bitbucket-upload-file:0.3.2
             variables:
               BITBUCKET_USERNAME: $BITBUCKET_USERNAME
