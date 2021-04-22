@@ -4,7 +4,7 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 
 *This system is under development and currently in very early stages - design and functionality may change without warning. Breaking changes are possible.*
 
-**Installation-URL (Staging/Beta):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json)
+**Installation-URL (Staging/Beta):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json)  (**Requires Foundry 0.8.x**)
 
 ## Features ##
 
