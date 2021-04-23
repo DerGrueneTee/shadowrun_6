@@ -12,14 +12,14 @@
 				<td ><b>{{ localize 'shadowrun6.monitor.physical' }}</b></td>
 				<td class="centered">{{data.data.physical.base}}</td>
 				<td><input class="centered health-phys calcPHY" name="data.physical.mod" type="text" value="{{data.data.physical.mod}}" data-dtype="Number"
-				id="dataPhyMod" style="width: 2em"></td>
+				id="dataPhyMod" style="width: 2em" title="{{data.data.physical.modString}}"></td>
 				<td class="centered">{{data.data.physical.max}}</td>
 			</tr>
 			<tr>
 				<td><b>{{ localize 'shadowrun6.monitor.stun' }}</b></td>
 				<td class="centered"><label class="centered" >{{data.data.stun.base}}</label></td>
 				<td><input class="centered health-stun" name="data.stun.mod" type="text" value="{{data.data.stun.mod}}" data-dtype="Number"
-				id="dataStunMod" style="width: 2em"></td>
+				id="dataStunMod" style="width: 2em" title="{{data.data.stun.modString}}"></td>
 				<td class="centered">{{data.data.stun.max}}</td>
 			</tr>
 		</table>

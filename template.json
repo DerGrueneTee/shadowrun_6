@@ -314,6 +314,7 @@
 	},
 	"Item": {
 		"types": [
+		   "quality-value",
 		   "skill-value",
 			"spell",
 			"weapon"
@@ -328,7 +329,8 @@
 			  "name"   : "",
 			  "description": "",
 			  "value": 0,
-			  "explain": ""
+			  "explain": "",
+			  "modifier": ""
 			} 
 		},
 		"spell": {
