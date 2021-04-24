@@ -7,6 +7,7 @@ export const preloadHandlebarsTemplates = async function() {
 
 	const templatePaths = [
 		"systems/shadowrun6-eden/templates/parts/attributes.html",
+		"systems/shadowrun6-eden/templates/parts/edge-token.html",
 		"systems/shadowrun6-eden/templates/parts/attributes-augmented.html",
 		"systems/shadowrun6-eden/templates/parts/monitors.html",
 		"systems/shadowrun6-eden/templates/parts/npc-attributes.html",

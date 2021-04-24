@@ -1,111 +1,117 @@
 <form class="pc {{cssClass}}" autocomplete="off">
 
-    {{!-- Sheet Header --}}
-    <header class="sheet-header">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
-        <div class="header-fields">
-            <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
-             {{!-- Character Summary --}}
-                <div class="description">
-                    <input class="autoexpand" name="data.metatype" type="text" value="{{data.data.metatype}}"
-                        placeholder="{{localize 'shadowrun6.metatype'}}" />
-                    &nbsp;&middot;&nbsp;
-                    <input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
-                        placeholder="{{localize 'shadowrun6.gender'}}" />
-                    &nbsp;&middot;&nbsp;
-                    <input class="autoexpand" name="data.mortype" type="text" value="{{data.data.mortype}}"
-                        placeholder="{{localize 'shadowrun6.mortype'}}" />
-                </div>
-          {{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
-        </div>
-    </header>
+	{{!-- Sheet Header --}}
+	<header class="sheet-header">
+		<img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
+		<div class="header-fields">
+			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
+			{{!-- Character Summary --}}
+			<div class="description">
+				<input class="autoexpand" name="data.metatype" type="text" value="{{data.data.metatype}}"
+					placeholder="{{localize 'shadowrun6.metatype'}}" />
+				&nbsp;&middot;&nbsp;
+				<input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
+					placeholder="{{localize 'shadowrun6.gender'}}" />
+				&nbsp;&middot;&nbsp;
+				<input class="autoexpand" name="data.mortype" type="text" value="{{data.data.mortype}}"
+					placeholder="{{localize 'shadowrun6.mortype'}}" />
+			</div>
+			<div style="display:flex; flex-direction:row; align-items:center;">
+			{{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
+			{{> "systems/shadowrun6-eden/templates/parts/edge-token.html"}}
+			</div>
+		</div>
+	</header>
 
-    {{!-- Sheet Tab Navigation --}}
-    <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
-        <a class="item" data-tab="skills">{{ localize 'shadowrun6.actor.nav.skills' }}</a>
-        <a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
-        <a class="item" data-tab="items">{{ localize 'shadowrun6.actor.nav.equip' }}</a>
-    </nav>
+	{{!-- Sheet Tab Navigation --}}
+	<nav class="sheet-tabs tabs" data-group="primary">
+		<a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
+		<a class="item" data-tab="skills">{{ localize 'shadowrun6.actor.nav.skills' }}</a>
+		<a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
+		<a class="item" data-tab="items">{{ localize 'shadowrun6.actor.nav.equip' }}</a>
+	</nav>
 
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
+	{{!-- Sheet Body --}}
+	<section class="sheet-body">
 
-        {{!-- Basics Tab --}}
-        <div class="tab basics" data-group="primary" data-tab="basics" >
-          <div class="attributes">
-          {{> "systems/shadowrun6-eden/templates/parts/attributes-augmented.html" attributes=data.data.attributes}}
-          </div>
-          {{> "systems/shadowrun6-eden/templates/parts/pc-derived.html" attributes=data.data.attributes}}
-        </div>
+		{{!-- Basics Tab --}}
+		<div class="tab basics" data-group="primary" data-tab="basics">
+			<div class="attributes">
+				{{> "systems/shadowrun6-eden/templates/parts/attributes-augmented.html" attributes=data.data.attributes}}
+			</div>
+			{{> "systems/shadowrun6-eden/templates/parts/pc-derived.html" attributes=data.data.attributes}}
+		</div>
 
-        {{!-- Skills Tab --}}
-        <div class="tab skills" data-group="primary" data-tab="skills">
-            {{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.data.skills}}
-        </div>
+		{{!-- Skills Tab --}}
+		<div class="tab skills" data-group="primary" data-tab="skills">
+			{{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.data.skills}}
+		</div>
 
-        {{!-- Biography Tab --}}
-        <div class="tab biography" data-group="primary" data-tab="description">
-            {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
-        </div>
+		{{!-- Biography Tab --}}
+		<div class="tab biography" data-group="primary" data-tab="description">
+			{{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+		</div>
 
-        {{!-- Owned Items Tab --}}
-        <div class="tab items" data-group="primary" data-tab="items">
-         <div class="section" style="width: 48%">
-         	<h2 class="section-title">{{ localize 'section.attributes'}}</h2>
-            <ol class="item-list">
-                {{#each actor.items as |item id|}}
-                <li class="item flexrow" data-item-id="{{item.id}}">
-                    <img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
-                    <h4 class="item-name">{{item.name}}</h4>
-                    {{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
-                    <div class="item-buttons">
-                        {{#each item.data.attributes as |itemAttr key|}}
-                        {{#if itemAttr.dtype}}
-                            {{#if itemAttr.isFormula}}
-                                {{!-- Use the items.name.key format for shorthand. --}}
-                                {{#if ../../shorthand}}
-                                <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}" data-label="{{ itemAttr.label }}"
-                                    title="{{itemAttr.value}}">{{itemAttr.label}}</button>
-                                {{!-- Use the items.name.attributes.key.value format otherwise. --}}
-                                {{else}}
-                                <button class="item-button rollable"
-                                    data-roll="@items.{{slugify item.name}}.attributes.{{key}}.value" data-label="{{ itemAttr.label }}"
-                                    title="{{itemAttr.value}}">{{itemAttr.label}}</button>
-                                {{/if}}
-                            {{/if}}
-                        {{else}}
-                            {{#each itemAttr as |itemGroupedAttr groupedKey|}}
-                                {{#if itemGroupedAttr.isFormula}}
-                                    {{!-- Use the items.name.key format for shorthand. --}}
-                                    {{#if ../../../shorthand}}
-                                    <button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}.{{groupedKey}}" data-label="{{ itemGroupedAttr.label }}"
-                                        title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
-                                    {{!-- Use the items.name.attributes.key.value format otherwise. --}}
-                                    {{else}}
-                                    <button class="item-button rollable"
-                                        data-roll="@items.{{slugify item.name}}.attributes.{{key}}.{{groupedKey}}.value" data-label="{{ itemGroupedAttr.label }}"
-                                        title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
-                                    {{/if}}
-                                {{/if}}
-                            {{/each}}
-                        {{/if}}
-                        {{/each}}
-                    </div>
-                    <div class="skill-points">
-                      <span>{{localize (concat3 "attrib." (skillAttr item.data.id) "_short")}}</span>
-                    </div>
-                    <div class="skill-points">
-                      <input class="skill-value" type="number" name="item.data.points" value="{{item.data.points}}" />
-                    </div>
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                </li>
-                {{/each}}
-            </ol>
-           </div>
-        </div>
-    </section>
+		{{!-- Owned Items Tab --}}
+		<div class="tab items" data-group="primary" data-tab="items">
+			<div class="section" style="width: 48%">
+				<h2 class="section-title">{{ localize 'section.attributes'}}</h2>
+				<ol class="item-list">
+					{{#each actor.items as |item id|}}
+					<li class="item flexrow" data-item-id="{{item.id}}">
+						<img src="{{item.img}}" title="{{item.name}}" width="24" height="24" />
+						<h4 class="item-name">{{item.name}}</h4>
+						{{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
+						<div class="item-buttons">
+							{{#each item.data.attributes as |itemAttr key|}}
+							{{#if itemAttr.dtype}}
+							{{#if itemAttr.isFormula}}
+							{{!-- Use the items.name.key format for shorthand. --}}
+							{{#if ../../shorthand}}
+							<button class="item-button rollable" data-roll="@items.{{slugify item.name}}.{{key}}"
+								data-label="{{ itemAttr.label }}" title="{{itemAttr.value}}">{{itemAttr.label}}</button>
+							{{!-- Use the items.name.attributes.key.value format otherwise. --}}
+							{{else}}
+							<button class="item-button rollable"
+								data-roll="@items.{{slugify item.name}}.attributes.{{key}}.value"
+								data-label="{{ itemAttr.label }}" title="{{itemAttr.value}}">{{itemAttr.label}}</button>
+							{{/if}}
+							{{/if}}
+							{{else}}
+							{{#each itemAttr as |itemGroupedAttr groupedKey|}}
+							{{#if itemGroupedAttr.isFormula}}
+							{{!-- Use the items.name.key format for shorthand. --}}
+							{{#if ../../../shorthand}}
+							<button class="item-button rollable"
+								data-roll="@items.{{slugify item.name}}.{{key}}.{{groupedKey}}"
+								data-label="{{ itemGroupedAttr.label }}"
+								title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
+							{{!-- Use the items.name.attributes.key.value format otherwise. --}}
+							{{else}}
+							<button class="item-button rollable"
+								data-roll="@items.{{slugify item.name}}.attributes.{{key}}.{{groupedKey}}.value"
+								data-label="{{ itemGroupedAttr.label }}"
+								title="{{itemGroupedAttr.value}}">{{itemGroupedAttr.label}}</button>
+							{{/if}}
+							{{/if}}
+							{{/each}}
+							{{/if}}
+							{{/each}}
+						</div>
+						<div class="skill-points">
+							<span>{{localize (concat3 "attrib." (skillAttr item.data.id) "_short")}}</span>
+						</div>
+						<div class="skill-points">
+							<input class="skill-value" type="number" name="item.data.points" value="{{item.data.points}}" />
+						</div>
+						<div class="item-controls">
+							<a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+							<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+						</div>
+					</li>
+					{{/each}}
+				</ol>
+			</div>
+		</div>
+	</section>
 </form>

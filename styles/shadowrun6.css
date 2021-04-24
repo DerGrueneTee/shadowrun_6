@@ -140,6 +140,44 @@
   background-image: url(../icons/Wild_6.svg);
 }
 
+.edge {
+      width: 96px;
+      height: 96px;
+      text-align: center;
+      display: flex;
+      flex-flow: column nowrap;
+      justify-items: flex-start;
+      position: relative;
+}
+.edge input.edge-value {
+		z-index: 1; 
+		position:relative; 
+		text-align: center; 
+		font-size: xx-large; 
+		color: white; 
+		font-weight:bold;
+}
+.edge input.edge-value:focus {
+	box-shadow: none;
+}
+.edge label.edge-max-label {
+		z-index: 1; 
+      position: absolute;
+      bottom: 2em;
+      left: 0;
+		text-align: center; 
+		font-size: .75rem; 
+      background-color: rgba(239,239,239,0.8);
+}
+.edge input.edge-max {
+        font-size: .89rem;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 2em; 
+      background-color: var(--section-background);
+}
+
 .app.window-app.shadowrun6.actor .attributes {
     height: 5.25rem;
     display: flex;

@@ -16,6 +16,7 @@
 		  		"damage"   : "Damage",
 		  		"points"   : "Points",
 		  		"pool"     : "Pool",
+		  		"max"      : "Maximum",
 		  		"modifier" : "Adj.",
 		  		"value"    : "Value"
 		  },
@@ -26,6 +27,7 @@
 		  "numerical": {
 		  		"base": "base",
 		  		"baseString": "Base Value",
+		  		"max"      : "Max",
 		  		"mod": "adj"
 		  },
         "roll": {
@@ -112,6 +114,8 @@
     "ACTOR.TypePlayer": "Player Character",
     "ACTOR.TypeNpc": "NPC",
     "ACTOR.TypeCritter": "Critter",
+    "ITEM.TypeQuality": "Quality",
+    "ITEM.TypeSkill": "Language/Knowledge Skill",
     "ITEM.TypeSpell": "Spell",
     "ITEM.TypeWeapon": "Weapon"
 }

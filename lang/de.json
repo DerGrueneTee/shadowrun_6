@@ -16,6 +16,7 @@
 		  		"damage"   : "Schaden",
 		  		"points"   : "Punkte",
 		  		"pool"     : "Pool",
+		  		"max"      : "Maximum",
 		  		"modifier" : "Mod.",
 		  		"value"    : "Wert"
 		  },
@@ -26,7 +27,8 @@
 		  "numerical": {
 		  		"base": "Basis",
 		  		"baseString": "Grundwert",
-		  		"mod": "Mod"
+		  		"mod": "Mod",
+				"max": "Max"
 		  },
         "roll": {
             "subject": "Chat-Nachricht",
@@ -117,6 +119,8 @@
     "ACTOR.TypePlayer": "Spieler-Charakter",
     "ACTOR.TypeNpc": "NSC",
     "ACTOR.TypeCritter": "Kreatur",
+    "ITEM.TypeQuality": "Vor-/Nachteil",
+    "ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
     "ITEM.TypeSpell": "Zauber",
     "ITEM.TypeWeapon": "Waffe"
 }

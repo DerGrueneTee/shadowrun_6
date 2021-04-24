@@ -109,6 +109,10 @@
 					"modString": "",
 					"value": 0,
 					"max": 32
+				},
+				"edge": {
+					"value": 0,
+					"max": 1
 				}
 			},
 			"initiative": {
@@ -315,27 +319,18 @@
 	"Item": {
 		"types": [
 		   "quality",
-		   "skill-value",
-			"spell",
-			"weapon"
+		   "skill"
 		],
 		"templates": {
 		   "skill-value": {
-			  "skill": "",
-			  "points": 0
+			  "points": 0,
+			  "modifier": 0
 			}, 
 		   "quality-value": {
 			  "value": 0,
 			  "explain": "",
 			  "modifier": []
 			} 
-		},
-		"spell": {
-		   "genesisID": "",
-			"category": "",
-			"drain": 1,
-			"type": "",
-			"range": ""
 		},
 		"quality": {
 		   "genesisID": "",
@@ -345,6 +340,19 @@
 			"templates": [
 				"quality-value"
 			]
+		},
+		"skill": {
+		   "genesisID": "",			
+			"templates": [
+				"skill-value"
+			]			
+		},
+		"spell": {
+		   "genesisID": "",
+			"category": "",
+			"drain": 1,
+			"type": "",
+			"range": ""
 		}
 	}
 }
