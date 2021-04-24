@@ -314,7 +314,7 @@
 	},
 	"Item": {
 		"types": [
-		   "quality-value",
+		   "quality",
 		   "skill-value",
 			"spell",
 			"weapon"
@@ -325,22 +325,26 @@
 			  "points": 0
 			}, 
 		   "quality-value": {
-			  "quality": "",
-			  "name"   : "",
-			  "description": "",
 			  "value": 0,
 			  "explain": "",
-			  "modifier": ""
+			  "modifier": []
 			} 
 		},
 		"spell": {
+		   "genesisID": "",
 			"category": "",
 			"drain": 1,
 			"type": "",
 			"range": ""
 		},
 		"quality": {
-			"category": ""
+		   "genesisID": "",
+			"category": "",
+			"level": false,
+		   "description": "",
+			"templates": [
+				"quality-value"
+			]
 		}
 	}
 }
