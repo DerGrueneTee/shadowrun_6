@@ -92,6 +92,7 @@
     "label.skill" : "Skill",
     "section.attributes" : "Attributes",
     "section.qualities"  : "Qualities",
+    "section.qualities_add"  : "Add",
     "skill.astral": "Astral",
     "skill.athletics": "Athletics",
     "skill.biotech": "Biotech",

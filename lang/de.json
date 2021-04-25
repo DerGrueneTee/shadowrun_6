@@ -96,6 +96,7 @@
     "label.value" : "Pool",
     "section.attributes" : "Attribute",
     "section.qualities"  : "Vor-/Nachteile",
+    "section.qualities_add"  : "Hinzufügen",
     "skill.name.pattern": "skull.${id}",
     "skill.astral": "Astral",
     "skill.athletics": "Athletik",
