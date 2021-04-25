@@ -12,7 +12,7 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 			width: 600,
 			height: 800,
 			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "basics" }],
-			scrollY: [".biography", ".items", ".attributes"],
+			scrollY: [".items", ".attributes"],
 			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]
 		});
 	}

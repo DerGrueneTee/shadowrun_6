@@ -34,7 +34,11 @@ Hooks.once("init", async function() {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheet, { makeDefault: true });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheet, { types: ["Player"], makeDefault: true });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorNPCSheet, {
+        types: ["NPC"],
+        makeDefault: true
+    });
   preloadHandlebarsTemplates();
 
   Handlebars.registerHelper( 'concat', function(op1,op2) {

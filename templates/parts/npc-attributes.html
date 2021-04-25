@@ -2,7 +2,7 @@
     	<thead>
     		<tr>
     {{#each config.NPC_ATTRIBUTES as |attributeId|}}
-    		  <th class="attribute" id="{{attributeId}}">
+    		  <th class="attribute2" id="{{attributeId}}">
     		    <label for="data.attributes.{{attributeId}}.current" title="{{localize (concat "attrib." attributeId )}}">{{localize (concat3 "attrib." attributeId "_short" )}}</label>
     		  </th>
     {{/each}}
@@ -12,7 +12,7 @@
     		<tr>
     {{#each attributes as |attribute id|}}
     {{#ifIn id ../config.NPC_ATTRIBUTES}}
-    		  <td class="attribute" id="{{id}}">
+    		  <td class="attribute2" id="{{id}}">
              <input class="centered" name="data.attributes.{{id}}.base" type="text" value="{{attribute.base}}" data-dtype="Number">
     		  </td>
     {{/ifIn}}
