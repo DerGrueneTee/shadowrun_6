@@ -52,7 +52,8 @@
         		"derived"         : "Abgeleitete Werte",
           	"skills.action"   : "Fertigkeiten",
          	"skills.language" : "Sprachen",
-         	"skills.knowledge": "Wissensfertigkeiten"
+         	"skills.knowledge": "Wissensfertigkeiten",
+            "skills.knowledge_add"   : "Neue Wissensfertigket"
         },
         "qualityedit": {
             "new": "Neu"

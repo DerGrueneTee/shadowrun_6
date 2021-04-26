@@ -26,7 +26,21 @@ line {
 	border-radius: 6px;
 	padding: 4px;
 }
-
+.section-head {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid var(--highlight-color);
+	margin: 0 0 0.5rem 0;
+}
+.section-head h2 {
+	border-bottom: 0px;
+	margin: 0px;
+}
+.section-title {
+	color: var(--highlight-color);
+}
 th {
 	color: var(--highlight-color);
 	background-color: var(--tablehead-background);
@@ -69,3 +83,36 @@ input.centered {
     height: 100%;
     text-align: center;
 }
+
+.skill-name {
+	width: 10em; 
+	flex-grow:6; 
+	align-self: center;
+	justify-content: center;
+}
+
+.skill-attrib {
+	flex-grow:1.5; 
+	align-self: center;
+	justify-content: center;
+	padding: 0em;
+}
+
+.skill-pool {
+	width: 2em; 
+	flex-grow:1; 
+	align-self: center;
+	text-align:center;
+	font-size: 150%;
+}
+.item-controls {
+	align-self: center;
+	padding: 0em;
+}
+.item-controls a {
+	font-size: 120%
+}
+.item-control {
+	color: var(--highlight-color);
+}
+

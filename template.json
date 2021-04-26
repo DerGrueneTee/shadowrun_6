@@ -274,16 +274,6 @@
 					}
 				}
 			},
-			"knowledge-template": {
-				"knowledges": {
-				},
-				"languages": {
-					"0": {
-						"value": "English",
-						"level": 4
-					}
-				}
-			},
 			"magic-template": {
 				"traditionattribute": "logic"
 			}
@@ -319,7 +309,9 @@
 	"Item": {
 		"types": [
 		   "quality",
-		   "skill"
+		   "skill",
+         "spell",
+         "weapon"
 		],
 		"templates": {
 		   "skill-value": {

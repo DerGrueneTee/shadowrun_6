@@ -52,7 +52,8 @@
         		"derived"         : "Derived Values",
         		"skills.action"   : "Skills",
        	 	"skills.language" : "Language Skills",
-      	  	"skills.knowledge": "Knowledge Skills"
+      	  	"skills.knowledge": "Knowledge Skills",
+            "skills.knowledge_add" : "New Knowledge Skill"
         }
 	},
     "actor.name" : "Name",
