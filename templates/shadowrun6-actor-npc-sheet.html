@@ -59,16 +59,18 @@
                                 </a>
                             </th>
                         </tr>
-                        {{#each this.qualities as |quality id|}}
-                        <tr class="item list-item" data-item-id="{{quality._id}}">
+                        {{#each actor.items as |item id|}}
+                        {{#iff item.type '==' 'quality'}}
+                        <tr class="item list-item" data-item-id="{{item.data._id}}">
                            <td>
-                               {{quality.name}}
+                               {{item.name}}
                            </td>
                             <td>
                                 <a class="item-control item-edit" title='Bearbeiten'><i class="fas fa-edit"></i></a>
                                 <a class="item-control item-delete" title='Löschen'><i class="fas fa-trash"></i></a>
                             </td>
                         </tr>
+                        {{/iff}}
                         {{/each}}
                     </table>
                 </div>

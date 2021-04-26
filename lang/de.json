@@ -53,6 +53,9 @@
           	"skills.action"   : "Fertigkeiten",
          	"skills.language" : "Sprachen",
          	"skills.knowledge": "Wissensfertigkeiten"
+        },
+        "qualityedit": {
+            "new": "Neu"
         }
 	},
     "actor.name" : "Name",

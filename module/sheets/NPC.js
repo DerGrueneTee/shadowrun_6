@@ -26,14 +26,27 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 	}
 
 	/**
-     * Activate event listeners using the prepared sheet HTML
-     * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
-     */
+	 * Activate event listeners using the prepared sheet HTML
+	 * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
+	 */
 	activateListeners(html) {
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+			html.find('.quality-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.qualityedit.new"),
+					type: "quality",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.item-edit').click(ev => {
+				const element = ev.currentTarget.closest(".item");
+				const item = this.actor.getOwnedItem(element.dataset.itemId);
+				item.sheet.render(true);
+			});
+			html.find('.item-delete').click(this._onItemDelete.bind(this));
 		} else {
 			html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
 		}
@@ -52,6 +65,12 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 		const skill = event.currentTarget.dataset.skill;
 		this.actor.rollSkill(skill, { event: event });
 	}
+
+	_onItemDelete(event) {
+		event.preventDefault();
+		const li = event.currentTarget.closest(".item");
+		this.actor.deleteOwnedItem(li.dataset.itemId);
+	  }
 
 
 }

@@ -1,6 +1,7 @@
 import { SR6 } from "./config.js";
 import { Shadowrun6ActorSheet } from "./sheets/PC.js";
 import { Shadowrun6ActorNPCSheet } from "./sheets/NPC.js";
+import { QualityItemSheet} from "./sheets/Quality.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
@@ -39,6 +40,7 @@ Hooks.once("init", async function() {
         types: ["NPC"],
         makeDefault: true
     });
+    Items.registerSheet("splittermond", QualityItemSheet, { types: ["quality"], makeDefault: true });
   preloadHandlebarsTemplates();
 
   Handlebars.registerHelper( 'concat', function(op1,op2) {
