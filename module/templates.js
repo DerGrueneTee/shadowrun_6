@@ -14,6 +14,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/pc-derived.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skillvalues.html",
+		"systems/shadowrun6-eden/templates/parts/section-qualities.html",
 		];
 
 	console.log(`Load templates`);

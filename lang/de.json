@@ -14,6 +14,8 @@
 		  		"attribute": "Attribut",
 		  		"base"     : "Basis",
 		  		"damage"   : "Schaden",
+		  		"delete"   : "Löschen",
+		  		"edit"     : "Bearbeiten",
 		  		"points"   : "Punkte",
 		  		"pool"     : "Pool",
 		  		"max"      : "Maximum",
@@ -53,7 +55,8 @@
           	"skills.action"   : "Fertigkeiten",
          	"skills.language" : "Sprachen",
          	"skills.knowledge": "Wissensfertigkeiten",
-            "skills.knowledge_add"   : "Neue Wissensfertigket"
+            "skills.knowledge_add"   : "Neue Wissensfertigket",
+				"qualities"       : "Vor/Nachteile"
         },
         "qualityedit": {
             "new": "Neu"

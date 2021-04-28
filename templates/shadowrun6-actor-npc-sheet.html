@@ -46,37 +46,10 @@
                         <dd>Hallo</dd>
                     </dl>
                 </div>
+                
                 <div class="section" style="width: 28%">
-                	 <div class="section-head">
-                     <h2 class="section-title">{{ localize 'section.qualities' }}</h2>
-                     <a class="item-control quality-create" title="{{localize 'section.qualities_add' }}"><h2 class="fas fa-plus"></h2></a>
-                	 </div>
-                    <table>
-                        <!--tr>
-                            <th style="width: 20%">
-                                Vorteile
-                            </th>
-                            <th class="item-controls flexrow">
-                                <a class="item-control quality-create" title="{{localize 'section.qualities_add' }}">
-                                    <i class="fas fa-plus"></i>
-                                </a>
-                            </th>
-                        </tr-->
-                        {{#each actor.items as |item id|}}
-                        {{#iff item.type '==' 'quality'}}
-                        <tr class="item list-item" data-item-id="{{item.data._id}}">
-                           <td>
-                               {{item.name}}
-                           </td>
-                            <td>
-                                <a class="item-control item-edit" title='Bearbeiten'><i class="fas fa-edit"></i></a>
-                                <a class="item-control item-delete" title='Löschen'><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
-                        {{/iff}}
-                        {{/each}}
-                    </table>
-                </div>
+{{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
+              </div>
                 </line>
         </div>
     </section>

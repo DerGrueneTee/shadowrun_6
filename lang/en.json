@@ -14,6 +14,8 @@
 		  		"attribute": "Attribute",
 		  		"base"     : "Base",
 		  		"damage"   : "Damage",
+		  		"delete"   : "Delete",
+		  		"edit"     : "Edit",
 		  		"points"   : "Points",
 		  		"pool"     : "Pool",
 		  		"max"      : "Maximum",
@@ -53,7 +55,8 @@
         		"skills.action"   : "Skills",
        	 	"skills.language" : "Language Skills",
       	  	"skills.knowledge": "Knowledge Skills",
-            "skills.knowledge_add" : "New Knowledge Skill"
+            "skills.knowledge_add" : "New Knowledge Skill",
+				"qualities"       : "Qualities"
         }
 	},
     "actor.name" : "Name",
