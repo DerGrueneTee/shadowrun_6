@@ -5,7 +5,7 @@
 	  <ol class="item-list">
         {{#each skills as |skill id|}}
        <li class="item flexrow" data-item-id="{{id}}">
-         <label class="skill-value skill-key rollable skill-name" data-skill="{{id}}">{{localize (concat "skill." id ) }}</label>
+         <label class="skill-value skill-key rollable skill-name skill-roll" data-skill="{{id}}">{{localize (concat "skill." id ) }}</label>
          <div class="skill-attrib">
            <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
          </div>
@@ -16,8 +16,8 @@
            <span>{{skill.pool}}</span>
          </div>
          <div class="item-controls" style="width: 3em; flex-grow:2">
-           <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-           <a class="item-control item-delete" title="Roll"><i class="fas fa-dice-six"></i></a>
+           <!--a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a-->
+           <a class="item-control item-delete skill-roll" data-skill="{{id}}" title="Roll"><i class="fas fa-dice-six"></i></a>
          </div>
        </li>
        {{/each}}

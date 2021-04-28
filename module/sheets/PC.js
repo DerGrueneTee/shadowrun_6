@@ -33,7 +33,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
-			html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find(".bodChanged").on("input", this._onBodyChanged(html));
