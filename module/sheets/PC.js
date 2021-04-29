@@ -38,7 +38,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find(".bodChanged").on("input", this._onBodyChanged(html));
 
-        html.find('[data-field]').change(event => {
+			html.find('.item-edit').click(ev => {
+				const element = ev.currentTarget.closest(".item");
+				const item = this.actor.items.get(element.dataset.itemId);
+				item.sheet.render(true);
+			});
+			html.find('.item-delete').click(ev => {
+            const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+            this.actor.deleteEmbeddedDocuments("Item",[itemId]);
+			});
+         html.find('[data-field]').change(event => {
             const element = event.currentTarget;
             let value = element.value;
             const itemId = this._getClosestData($(event.currentTarget), 'item-id');
