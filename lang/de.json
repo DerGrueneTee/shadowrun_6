@@ -54,6 +54,12 @@
         		"derived"         : "Abgeleitete Werte",
           	"skills.action"   : "Fertigkeiten",
          	"skills.language" : "Sprachen",
+       	 	"skills.language-level": {
+					"normal" :  "Normal",
+					"special":  "Specialist",
+					"expert" :  "Expert",
+					"native" :  "Native"
+				},
          	"skills.knowledge": "Wissensfertigkeiten",
             "skills.knowledge_add"   : "Neue Wissensfertigket",
 				"qualities"       : "Vor/Nachteile"

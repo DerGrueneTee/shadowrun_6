@@ -54,10 +54,19 @@
         		"derived"         : "Derived Values",
         		"skills.action"   : "Skills",
        	 	"skills.language" : "Language Skills",
+       	 	"skills.language-level": {
+					"normal" :  "Normal",
+					"special":  "Specialist",
+					"expert" :  "Expert",
+					"native" :  "Native"
+				},
       	  	"skills.knowledge": "Knowledge Skills",
             "skills.knowledge_add" : "New Knowledge Skill",
 				"qualities"       : "Qualities"
-        }
+        },
+		  "skills": {
+			
+		}
 	},
     "actor.name" : "Name",
     "actor.metatype" : "Metatype",
