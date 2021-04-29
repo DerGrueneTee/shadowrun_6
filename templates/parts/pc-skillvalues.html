@@ -26,24 +26,21 @@
      
    <div style="display: inline-block;">
 	<!-- Knowledge skills -->
-   <div class="section" style="display:block; min-width: 20rem">
+   <div class="section" style="display:block; min-width: 25rem">
    <div class="section-head">
    <h2 class="section-title">{{ localize 'shadowrun6.section.skills.knowledge' }}</h2>
    <a class="item-control skill-knowledge-create" title="{{localize 'shadowrun6.section.skills.knowledge_add' }}"><h2 class="fas fa-plus"></h2></a>
    </div>
 	<ol class="item-list">
        {{#each actor.items as |item id|}}
-       {{#iff item.type '==' 'skill-value'}}
-       {{#iff item.data.data.skill '==' 'knowledge'}}
+       {{#iff item.type '==' 'skill'}}
+       {{#iff item.data.data.genesisID '==' 'knowledge'}}
 
        <li class="item flexrow" data-item-id="{{item.id}}">
          <h4 class="item-name" style="width: 10em; flex-grow:4">{{item.name}}</h4>
          {{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
-                    <div class="skill-points" style="flex-grow:2">
-                      <input class="skill-value" type="number" name="item.data.data.points" value="{{item.data.data.points}}" />
-                    </div>
                     <div class="item-controls" style="flex-grow:1">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+                        <!--a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a-->
                         <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
                     </div>
                 </li>
@@ -58,23 +55,25 @@
    <h2 class="section-title">{{ localize 'shadowrun6.section.skills.language' }}</h2>
 	<ol class="item-list">
        {{#each actor.items as |item id|}}
-       {{#iff item.type '==' 'skill-value'}}
-       {{#iff item.data.data.skill '==' 'language'}}
+       {{#iff item.type '==' 'skill'}}
+       {{#iff item.data.data.genesisID '==' 'language'}}
 
        <li class="item flexrow" data-item-id="{{item.id}}">
          <h4 class="item-name" style="width: 10em; flex-grow:3">{{item.name}}</h4>
          {{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
-                    <div class="skill-points">
-                      <input class="skill-value" type="number" name="item.data.data.points" value="{{item.data.data.points}}" />
-                    </div>
-                    <div class="item-controls">
-                        <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-                    </div>
-                </li>
-	             {{/iff}}
-	             {{/iff}}
-                {{/each}}
+         <select data-field="data.points">
+         	<option value="1" {{#iff item.data.data.points '==' 1}}selected{{/iff}}>{{ localize 'shadowrun6.section.skills.language-level.normal' }}</option>
+         	<option value="2" {{#iff item.data.data.points '==' 2}}selected{{/iff}}>{{ localize 'shadowrun6.section.skills.language-level.special' }}</option>
+         	<option value="3" {{#iff item.data.data.points '==' 3}}selected{{/iff}}>{{ localize 'shadowrun6.section.skills.language-level.expert' }}</option>
+         	<option value="4" {{#iff item.data.data.points '==' 4}}selected{{/iff}}>{{ localize 'shadowrun6.section.skills.language-level.native' }}</option>
+         </select>
+         <div class="item-controls">
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+         </div>
+       </li>
+       {{/iff}}
+       {{/iff}}
+       {{/each}}
             </ol> 
      </div>
    </div>  
