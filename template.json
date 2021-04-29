@@ -308,10 +308,10 @@
 	},
 	"Item": {
 		"types": [
+			"gear",
 		   "quality",
 		   "skill",
-         "spell",
-         "weapon"
+         "spell"
 		],
 		"templates": {
 		   "skill-value": {
@@ -323,6 +323,16 @@
 			  "explain": "",
 			  "modifier": []
 			} 
+		},
+		"gear": {
+		   "genesisID"  : "",
+			"type"       : "",
+			"subtype"    : "",
+		   "description": "",
+		   "needsRating": false,
+		   "rating"     : 0,
+			"skill"      : "",
+			"skillSpec"  : ""
 		},
 		"quality": {
 		   "genesisID": "",

@@ -9,7 +9,7 @@ export class Shadowrun6Actor extends Actor {
 	/** @Override */
 	prepareData() {
 		super.prepareData();
-		console.log("hallo Welt! " + this.data.name);
+		console.log("Shadowrun6Actor.prepareData() " + this.data.name);
 
 		console.log("TODO: calculate derived attributes (e.g. Initiative) for " + this.data.type);
 		const data = this.data.data;
@@ -46,17 +46,21 @@ export class Shadowrun6Actor extends Actor {
 		// Store volatile
 
 		if (actorData.type === "Player") {
-			data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
-			data.physical.max = data.physical.base + data.physical.mod;
-			data.physical.value = data.physical.max - data.physical.dmg;
-			console.log("Set Physical to " + data.physical.max+" = 8+"+ +Math.round(data.attributes["bod"].pool / 2)+" + "+data.physical.mod);
-			console.log("Set Physical to " + data.physical.max+" = 8+"+ +Math.round(data.attributes["bod"].pool / 2)+" + "+data.physical.mod);
-
+			if (data.physical) {
+			  data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
+			  data.physical.max = data.physical.base + data.physical.mod;
+			  data.physical.value = data.physical.max - data.physical.dmg;
+			  console.log("Set Physical to " + data.physical.max+" = 8+"+ +Math.round(data.attributes["bod"].pool / 2)+" + "+data.physical.mod);
+			  console.log("Set Physical to " + data.physical.max+" = 8+"+ +Math.round(data.attributes["bod"].pool / 2)+" + "+data.physical.mod);
+			}
+			
+			if (data.stun) {
 			data.stun.base = 8 + Math.round(data.attributes["wil"].pool / 2);
 			data.stun.max = data.stun.base + data.stun.mod;
 			data.stun.value = data.stun.max - data.stun.dmg;
 
 			console.log("Set Stun to " + data.stun.max+" = 8+"+ +Math.round(data.attributes["wil"].pool / 2)+" + "+data.stun.mod);
+			}
 		}
 
 	}

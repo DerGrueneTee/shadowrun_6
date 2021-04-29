@@ -37,6 +37,18 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find(".bodChanged").on("input", this._onBodyChanged(html));
+
+        html.find('[data-field]').change(event => {
+            const element = event.currentTarget;
+            let value = element.value;
+//            if (element.type === "checkbox") {
+//                value = element.checked;
+//            }
+            const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+            const field = element.dataset.field;
+            this.actor.items.get(itemId).update({ [field]: value });
+        });
+
 		} else {
 			html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
 		}
@@ -45,6 +57,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		super.activateListeners(html);
 	}
 
+	//-----------------------------------------------------
 	/**
 	 * Handle rolling a Skill check
 	 * @param {Event} event   The originating click event
@@ -55,6 +68,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const skill = event.currentTarget.dataset.skill;
 		this.actor.rollSkill(skill, { event: event });
 	}
+
+
+	//-----------------------------------------------------
+   _getClosestData(jQObject, dataName, defaultValue = "") {
+        let value = jQObject.closest(`[data-${dataName}]`)?.data(dataName);
+        return (value) ? value : defaultValue;
+    }
 
 	//-----------------------------------------------------
 	_onBodyChanged(html) {
