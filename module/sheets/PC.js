@@ -37,7 +37,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find(".bodChanged").on("input", this._onBodyChanged(html));
-
+			html.find('.quality-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.qualityedit.new"),
+					type: "quality",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.item-edit').click(ev => {
 				const element = ev.currentTarget.closest(".item");
 				const item = this.actor.items.get(element.dataset.itemId);

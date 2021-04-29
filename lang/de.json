@@ -130,5 +130,8 @@
     "ITEM.TypeQuality": "Vor-/Nachteil",
     "ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
     "ITEM.TypeSpell": "Zauber",
-    "ITEM.TypeWeapon": "Waffe"
+    "ITEM.TypeWeapon": "Waffe",
+    "QUALITY_CATEGORIES.ADVANTAGE": "Vorteil",
+    "QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil"
+
 }
