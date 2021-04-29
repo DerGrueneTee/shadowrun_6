@@ -58,8 +58,33 @@ th {
 .centered {
 	text-align: center;
 }
+.shadowrun6 input[type="text"]{
+        font-variant-numeric: lining-nums;
+        border: 0px solid black;
+        background: none;
+        color: var(--input-color);
+        
+
+        padding: 2px;
+        padding-bottom: 2px;
+        margin: 0;
+
+        vertical-align: baseline;
+
+        display: inline-block;
+        height: 100%;
+        border-radius: 4px;
+ 
+        font-weight: bold;
+ }
 input.centered {
 	text-align: center;
+}
+.shadowrun6 input[type="text"].secondary {
+	font-weight: normal;
+}
+.shadowrun6 input::placeholder {
+	color: grey;
 }
 
 #barPhyMax {

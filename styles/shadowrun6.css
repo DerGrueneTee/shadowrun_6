@@ -27,25 +27,6 @@
 .autoexpand {
  box-sizing: content-box;
 }
-.shadowrun6 input[type="text"]{
-        font-variant-numeric: lining-nums;
-        border: 0px solid black;
-        background: none;
-        color: var(--input-color);
-        
-
-        padding: 2px;
-        padding-bottom: 2px;
-        margin: 0;
-
-        vertical-align: baseline;
-
-        display: inline-block;
-        height: 100%;
-        border-radius: 4px;
- 
-        font-weight: bold;
- }
 .shadowrun6 input.health-phys {
         border: 1px solid var(--highlight-color);
         background: white;

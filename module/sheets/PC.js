@@ -41,9 +41,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
         html.find('[data-field]').change(event => {
             const element = event.currentTarget;
             let value = element.value;
-//            if (element.type === "checkbox") {
-//                value = element.checked;
-//            }
             const itemId = this._getClosestData($(event.currentTarget), 'item-id');
             const field = element.dataset.field;
             this.actor.items.get(itemId).update({ [field]: value });
