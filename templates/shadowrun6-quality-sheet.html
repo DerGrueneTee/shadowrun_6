@@ -5,7 +5,9 @@
             <dt>Name:</dt>
             <dd><input type="text" value="{{item.name}}" data-field="name" /></td></dd>
             <dt>Beschreibung:</dt>
-            <dd><input type="text" value="{{item.data.data.explain}}" data-field="data.explain" class="secondary" placeholder="Details"/></td></dd>
+            <dd>
+                <textarea type="text" value="{{item.data.data.explain}}" data-field="data.explain" class="secondary" placeholder="Details" cols="20" rows="6">{{item.data.data.explain}}</textarea> 
+            </td></dd>
             <dt>Art:</dt>
             <dd>  
                 <select name="item.data.data.category" data-field="data.category">
