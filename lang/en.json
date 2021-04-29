@@ -57,6 +57,12 @@
       	  	"skills.knowledge": "Knowledge Skills",
             "skills.knowledge_add" : "New Knowledge Skill",
 				"qualities"       : "Qualities"
+        },
+        "qualityedit": {
+            "new": "New",
+            "name": "Name",
+            "explain": "Description",
+            "category": "Category"
         }
 	},
     "actor.name" : "Name",

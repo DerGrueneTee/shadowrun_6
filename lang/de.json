@@ -59,7 +59,10 @@
 				"qualities"       : "Vor/Nachteile"
         },
         "qualityedit": {
-            "new": "Neu"
+            "new": "Neu",
+            "name": "Name",
+            "explain": "Beschreibung",
+            "category": "Art"
         }
 	},
     "actor.name" : "Name",

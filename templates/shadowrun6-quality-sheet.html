@@ -2,13 +2,13 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         <dl>
-            <dt>Name:</dt>
+            <dt>{{localize 'shadowrun6.qualityedit.name'}}</dt>
             <dd><input type="text" value="{{item.name}}" data-field="name" /></td></dd>
-            <dt>Beschreibung:</dt>
+            <dt>{{localize 'shadowrun6.qualityedit.explain'}}:</dt>
             <dd>
                 <textarea type="text" value="{{item.data.data.explain}}" data-field="data.explain" class="secondary" placeholder="Details" cols="20" rows="6">{{item.data.data.explain}}</textarea> 
             </td></dd>
-            <dt>Art:</dt>
+            <dt>{{localize 'shadowrun6.qualityedit.category'}}</dt>
             <dd>  
                 <select name="item.data.data.category" data-field="data.category">
                 {{#select item.data.data.category}}
