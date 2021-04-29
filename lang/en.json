@@ -75,7 +75,8 @@
         "qualityedit": {
             "new": "New",
             "name": "Name",
-            "explain": "Description",
+            "description": "Description",
+            "explain": "Explanation",
             "category": "Category"
         }
 	},
