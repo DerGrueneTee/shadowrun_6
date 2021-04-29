@@ -142,7 +142,7 @@
 	box-shadow: none;
 }
 .edge label.edge-max-label {
-		z-index: 1; 
+		z-index: 2; 
       position: absolute;
       bottom: 2em;
       left: 0;
@@ -151,7 +151,8 @@
       background-color: rgba(239,239,239,0.8);
 }
 .edge input.edge-max {
-        font-size: .89rem;
+		z-index: 2; 
+		font-size: .89rem;
         position: absolute;
         bottom: 0;
         left: 0;
