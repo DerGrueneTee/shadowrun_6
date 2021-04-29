@@ -5,6 +5,7 @@ SR6.PRIMARY_ATTRIBUTES   = ["bod","agi","rea","str","wil","log","int","cha"];
 SR6.SECONDARY_ATTRIBUTES = ["mag","res","edg","ess","ini","inim","inia","dr"];
 SR6.ATTRIBUTES = ["bod","agi","rea","str","wil","log","int","cha","mag","res","edg"];
 SR6.NPC_ATTRIBUTES = ["bod","agi","rea","str","wil","log","int","cha","mag","res","ess"];
+SR6.QUALITY_CATEGORIES =["ADVANTAGE", "DISADVANTAGE"]
 
 class SkillDefinition {
 	constructor(attribute, useUntrained) {
