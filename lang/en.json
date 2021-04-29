@@ -26,6 +26,13 @@
 		  		"physical": "Physical",
 		  		"stun"    : "Stun"
 		  },
+		  "newitem": {
+				"quality": "What is your feat?", 
+			   "skill": {
+		  			"knowledge": "What is your nerd topic?",
+		  			"language": "Gibberish"
+				}
+		  },
 		  "numerical": {
 		  		"base": "base",
 		  		"baseString": "Base Value",
@@ -54,6 +61,7 @@
         		"derived"         : "Derived Values",
         		"skills.action"   : "Skills",
        	 	"skills.language" : "Language Skills",
+       	 	"skills.language_add" : "Add new language skill",
        	 	"skills.language-level": {
 					"normal" :  "Normal",
 					"special":  "Specialist",
@@ -61,12 +69,15 @@
 					"native" :  "Native"
 				},
       	  	"skills.knowledge": "Knowledge Skills",
-            "skills.knowledge_add" : "New Knowledge Skill",
+            "skills.knowledge_add" : "Add new knowledge",
 				"qualities"       : "Qualities"
         },
-		  "skills": {
-			
-		}
+        "qualityedit": {
+            "new": "New",
+            "name": "Name",
+            "explain": "Description",
+            "category": "Category"
+        }
 	},
     "actor.name" : "Name",
     "actor.metatype" : "Metatype",

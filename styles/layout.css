@@ -133,9 +133,11 @@ input.centered {
 .item-controls {
 	align-self: center;
 	padding: 0em;
+	text-align:right;
 }
 .item-controls a {
-	font-size: 120%
+	font-size: 120%;
+	margin: 0 10px 0;
 }
 .item-control {
 	color: var(--highlight-color);

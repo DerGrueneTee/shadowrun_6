@@ -26,6 +26,13 @@
 		  		"physical": "Körperlich",
 		  		"stun"    : "Geistig"
 		  },
+		  "newitem": {
+				"quality": "Was macht dich besonders?", 
+			   "skill": {
+		  			"knowledge": "Worin bist Du Nerd?",
+		  			"language": "Unverständliches Gemurmel"
+				}
+		  },
 		  "numerical": {
 		  		"base": "Basis",
 		  		"baseString": "Grundwert",
@@ -54,18 +61,22 @@
         		"derived"         : "Abgeleitete Werte",
           	"skills.action"   : "Fertigkeiten",
          	"skills.language" : "Sprachen",
+            "skills.language_add"   : "Neue Sprache hinzufügen",
        	 	"skills.language-level": {
 					"normal" :  "Normal",
-					"special":  "Specialist",
-					"expert" :  "Expert",
-					"native" :  "Native"
+					"special":  "Spezialist",
+					"expert" :  "Experte",
+					"native" :  "Muttersprache"
 				},
          	"skills.knowledge": "Wissensfertigkeiten",
-            "skills.knowledge_add"   : "Neue Wissensfertigket",
+            "skills.knowledge_add"   : "Neue Wissensfertigket hinzufügen",
 				"qualities"       : "Vor/Nachteile"
         },
         "qualityedit": {
-            "new": "Neu"
+            "new": "Neu",
+            "name": "Name",
+            "explain": "Beschreibung",
+            "category": "Art"
         }
 	},
     "actor.name" : "Name",
