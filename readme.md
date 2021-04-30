@@ -9,17 +9,18 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 ## Features ##
 
 ### Working ###
- * Attributes, (Action) Skills
+ * Attributes, Skills
  * Tracking physical and stun damage
  * Dice rolling (exploding dice and wild die)
  * Importing from Genesis (special Foundry JSON export)
  * German and English language support
+ * Edge Tracking
+ * Qualities (not their effects though)
  
 ### Not working yet ###
- * Skill specializations, other skill types
+ * Skill specializations
  * Auto-calculating modifiers from condition monitors
- * Edge tracking
- * Gear and everything else character related (qualities, powers, spells ...)
+ * Gear and everything else character related (Powers, Spells ...)
  * Other actor types than SCs
 
 ## The future ##
