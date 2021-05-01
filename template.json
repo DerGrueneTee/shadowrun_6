@@ -295,14 +295,22 @@
 			"name": "",
 			"templates": [
 				"attribute-template",
-				"monitor-template"
+				"monitor-template",
+				"initiative",
+				"skill-template",
+				"knowledge-template",
+				"magic-template"
 			]
 		},
 		"Critter": {
 			"name": "",
 			"templates": [
 				"attribute-template",
-				"monitor-template"
+				"monitor-template",
+				"initiative",
+				"skill-template",
+				"knowledge-template",
+				"magic-template"
 			]
 		}
 	},

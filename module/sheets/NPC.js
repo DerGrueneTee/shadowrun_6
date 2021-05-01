@@ -9,9 +9,9 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 		return mergeObject(super.defaultOptions, {
 			classes: ["shadowrun6", "sheet", "actor"],
 			template: "systems/shadowrun6-eden/templates/shadowrun6-actor-npc-sheet.html",
-			width: 600,
+			width: 700,
 			height: 800,
-			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "basics" }],
+			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "overview" }],
 			scrollY: [".items", ".attributes"],
 			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]
 		});

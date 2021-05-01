@@ -40,7 +40,7 @@ Hooks.once("init", async function() {
         types: ["NPC"],
         makeDefault: true
     });
-    Items.registerSheet("splittermond", QualityItemSheet, { types: ["quality"], makeDefault: true });
+    Items.registerSheet("shadowrun6-eden", QualityItemSheet, { types: ["quality"], makeDefault: true });
   preloadHandlebarsTemplates();
 
   Handlebars.registerHelper( 'concat', function(op1,op2) {

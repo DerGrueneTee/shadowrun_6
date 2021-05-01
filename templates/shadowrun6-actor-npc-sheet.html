@@ -3,26 +3,17 @@
     {{!-- Sheet Header --}}
     <header class="sheet-header">
         <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
-        <div class="header-fields">
-            <h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" />
-            </h1>
-            {{!-- Character Summary --}}
-            <div class="description">
-                <input class="autoexpand" name="data.metatype" type="text" value="{{data.metatype}}"
-                    placeholder="{{localize 'shadowrun6.metatype'}}" />
-                &nbsp;&middot;&nbsp;
-                <input class="autoexpand" name="data.gender" type="text" value="{{data.gender}}"
-                    placeholder="{{localize 'shadowrun6.gender'}}" />
-                &nbsp;&middot;&nbsp;
-                <input class="autoexpand" name="data.mortype" type="text" value="{{data.mortype}}"
-                    placeholder="{{localize 'shadowrun6.mortype'}}" />
-            </div>
+			<div style="display:flex; flex-direction:row; align-items:center;">
+			{{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
+			{{> "systems/shadowrun6-eden/templates/parts/edge-token.html"}}
+			</div>
         </div>
     </header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">
-        <a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
+        <a class="item" data-tab="overview">{{ localize 'shadowrun6.actor.nav.overview' }}</a>
+        <a class="item" data-tab="edit">{{ localize 'shadowrun6.actor.nav.input' }}</a>
         <a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
     </nav>
 
@@ -30,12 +21,12 @@
     <section class="sheet-body">
 
         {{!-- Biography Tab --}}
-        <div class="tab biography" data-group="primary" data-tab="description">
+        <div class="tab description" data-group="primary" data-tab="description">
             {{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
         </div>
 
         {{!-- Basics Tab --}}
-        <div class="tab attributes" data-group="primary" data-tab="basics">
+        <div class="tab overview" data-group="primary" data-tab="overview">
             <line>
                 <div class="section" style="width: 68%">
                     {{> "systems/shadowrun6-eden/templates/parts/npc-attributes.html" attributes=data.data.attributes}}
@@ -52,5 +43,10 @@
               </div>
                 </line>
         </div>
+
+		{{!-- Input Tab --}}
+		<div class="tab edit" data-group="primary" data-tab="edit">
+			{{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.data.skills}}
+		</div>
     </section>
 </form>

@@ -7,7 +7,9 @@
 		      	"basics": "Allgemein",
 		      	"description": "Beschreibung",
 		      	"equip": "Ausrüstung",
-		      	"skills": "Fertigkeiten"
+		      	"input": "Eingabe",
+		      	"skills": "Fertigkeiten",
+		      	"overview": "Übersicht"
 		      }
 		  },
 		  "label": {

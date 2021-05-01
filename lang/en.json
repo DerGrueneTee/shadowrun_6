@@ -7,7 +7,9 @@
 		      	"basics": "Basics",
 		      	"description": "Description",
 		      	"equip": "Equipment",
-		      	"skills": "Skills"
+		      	"input": "Input",
+		      	"skills": "Skills",
+					"overview": "Overview"
 		      }
 		  },
 		  "label": {
