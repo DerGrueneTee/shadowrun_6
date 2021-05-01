@@ -1,7 +1,8 @@
 import { SR6 } from "./config.js";
 import { Shadowrun6ActorSheet } from "./sheets/PC.js";
 import { Shadowrun6ActorNPCSheet } from "./sheets/NPC.js";
-import { QualityItemSheet} from "./sheets/Quality.js";
+import { QualityItemSheet } from "./sheets/Quality.js";
+import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
@@ -16,47 +17,48 @@ const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 /**
  * Init hook.
  */
-Hooks.once("init", async function() {
-  
-    console.log(`Initializing Shadowrun 6 System`);
+Hooks.once("init", async function () {
 
-    // Create a namespace within the game global
-//    game.splimo = {
-//     config: SR6,
-//   };
+  console.log(`Initializing Shadowrun 6 System`);
 
-   // Record Configuration Values
-   CONFIG.SR6 = SR6;
+  // Create a namespace within the game global
+  //    game.splimo = {
+  //     config: SR6,
+  //   };
 
-    // Define custom Entity classes (changed for Foundry 0.8.x
+  // Record Configuration Values
+  CONFIG.SR6 = SR6;
+
+  // Define custom Entity classes (changed for Foundry 0.8.x
   CONFIG.Actor.documentClass = Shadowrun6Actor;
- // Define custom Roll class
- CONFIG.Dice.rolls.push(SR6Roll);
+  // Define custom Roll class
+  CONFIG.Dice.rolls.push(SR6Roll);
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheet, { types: ["Player"], makeDefault: true });
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorNPCSheet, {
-        types: ["NPC"],
-        makeDefault: true
-    });
-    Items.registerSheet("shadowrun6-eden", QualityItemSheet, { types: ["quality"], makeDefault: true });
+    types: ["NPC"],
+    makeDefault: true
+  });
+  Items.registerSheet("shadowrun6-eden", QualityItemSheet, { types: ["quality"], makeDefault: true });
+  Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear"], makeDefault: true });
   preloadHandlebarsTemplates();
 
-  Handlebars.registerHelper( 'concat', function(op1,op2) {
-	  return op1+op2;
-	});
-  Handlebars.registerHelper( 'concat3', function(op1,op2,op3) {
-	  return op1+op2+op3;
-	});
-  Handlebars.registerHelper( 'skillAttr', getSkillAttribute);
-  Handlebars.registerHelper( 'attrVal', getAttributeValue);
-  Handlebars.registerHelper('ifIn', function(elem, list, options) {
-	  if(list.indexOf(elem) > -1) {
-	    return options.fn(this);
-	  }
-	  return options.inverse(this);
-	});
+  Handlebars.registerHelper('concat', function (op1, op2) {
+    return op1 + op2;
+  });
+  Handlebars.registerHelper('concat3', function (op1, op2, op3) {
+    return op1 + op2 + op3;
+  });
+  Handlebars.registerHelper('skillAttr', getSkillAttribute);
+  Handlebars.registerHelper('attrVal', getAttributeValue);
+  Handlebars.registerHelper('ifIn', function (elem, list, options) {
+    if (list.indexOf(elem) > -1) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  });
 
   Hooks.on('ready', () => {
     // Render a modal on click.
@@ -64,12 +66,12 @@ Hooks.once("init", async function() {
       ev.preventDefault();
       console.log("geklickt");
       // Roll and return
-		let data = {
-			value: 0,
-			title: "",
-		};
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doRoll(data);
+      let data = {
+        value: 0,
+        title: "",
+      };
+      data.speaker = ChatMessage.getSpeaker({ actor: this });
+      return doRoll(data);
     });
   });
 
@@ -90,11 +92,11 @@ Hooks.once("init", async function() {
         bool = a != b;
         break;
       case '&&':
-          boolean = a && b;
-          break;
+        boolean = a && b;
+        break;
       case '||':
-          boolean = a || b;
-          break;
+        boolean = a || b;
+        break;
       case "contains":
         if (a && b) {
           bool = a.includes(b);
@@ -117,14 +119,14 @@ Hooks.once("init", async function() {
 
 
 function getAttributeValue(attribs, key) {
-	return 5;
+  return 5;
 }
 
 function getSkillAttribute(key) {
-	if (CONFIG.SR6.ATTRIB_BY_SKILL.get(key)) {
-		const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
-		return myElem;
-	} else {
-		return "??";
-	}
+  if (CONFIG.SR6.ATTRIB_BY_SKILL.get(key)) {
+    const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
+    return myElem;
+  } else {
+    return "??";
+  }
 };
