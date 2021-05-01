@@ -33,9 +33,9 @@ export default class SR6Roll extends Roll {
     if (this.data.useWildDie && this.results[0].result == 1) {
       //5 zählen nicht
       total -=  this.results.filter(die => die.result === 5).length;
-    } else if (this.data.useWildDie && this.results[0].result == 6) {
-      //3 zusätzliche Erfolge
-      total +=3;
+    } else if (this.data.useWildDie && (this.results[0].result == 6 || this.results[0].result == 5)) {
+      //2 zusätzliche Erfolge
+      total +=2;
     }
 
     return total;
