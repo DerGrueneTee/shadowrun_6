@@ -86,7 +86,7 @@
 					}
 				},
 				"metatype": "human",
-				"type" : "mundane",
+				"type": "mundane",
 				"gender": ""
 			},
 			"monitor-template": {
@@ -309,48 +309,51 @@
 	"Item": {
 		"types": [
 			"gear",
-		   "quality",
-		   "skill",
-         "spell"
+			"quality",
+			"skill",
+			"spell"
 		],
 		"templates": {
-		   "skill-value": {
-			  "points": 0,
-			  "modifier": 0
-			}, 
-		   "quality-value": {
-			  "value": 0,
-			  "explain": "",
-			  "modifier": []
-			} 
+			"skill-value": {
+				"points": 0,
+				"modifier": 0
+			},
+			"quality-value": {
+				"value": 0,
+				"explain": "",
+				"modifier": []
+			}
 		},
 		"gear": {
-		   "genesisID"  : "",
-			"type"       : "",
-			"subtype"    : "",
-		   "description": "",
-		   "needsRating": false,
-		   "rating"     : 0,
-			"skill"      : "",
-			"skillSpec"  : ""
+			"genesisID": "",
+			"type": "",
+			"subtype": "",
+			"availability": "",
+			"price": 0,
+			"description": "",
+			"needsRating": false,
+			"rating": 0,
+			"skill": "",
+			"skillSpec": "",
+			"damage": ""
 		},
 		"quality": {
-		   "genesisID": "",
+			"genesisID": "",
 			"category": "",
 			"level": false,
-		   "description": "",
+			"description": "",
 			"templates": [
 				"quality-value"
 			]
 		},
 		"skill": {
-		   "genesisID": "",			
+			"genesisID": "",
 			"templates": [
 				"skill-value"
-			]			
+			]
 		},
 		"spell": {
-		   "genesisID": "",
+			"genesisID": "",
 			"category": "",
 			"drain": 1,
 			"type": "",

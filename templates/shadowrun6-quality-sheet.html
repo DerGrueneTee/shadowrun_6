@@ -15,7 +15,7 @@
                 <select name="item.data.data.category" data-field="data.category">
                 {{#select item.data.data.category}}
                 {{#each config.QUALITY_CATEGORIES as |category id|}}
-                <option value="{{@id}}">{{localize (concat "QUALITY_CATEGORIES." category)}}</option>
+                <option value="{{@category}}">{{localize (concat "QUALITY_CATEGORIES." category)}}</option>
                 {{/each}}
                 {{/select}}
               </select></dd>

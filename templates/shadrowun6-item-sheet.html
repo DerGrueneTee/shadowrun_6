@@ -1,20 +1,67 @@
 <form class="flexcol {{cssClass}}" autocomplete="off">
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-        <h3><input type="text" value="{{item.name}}" data-field="name" /></h3>
+        <h2><input type="text" value="{{item.name}}" data-field="name" /></h2>
         <table>
             <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <!--Typ, Subtyp, Verfügbarkeit, Preis-->
+                <th>{{localize 'shadowrun6.item.type'}}</th>
+                <th>{{localize 'shadowrun6.item.subtype'}}</th>
+                <th>{{localize 'shadowrun6.item.availability'}}</th>
+                <th>{{localize 'shadowrun6.item.price'}}</th>
             </tr>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <select name="item.data.data.type" data-field="data.type">
+                        {{#select item.data.data.type}}
+                        {{#each config.GEAR_TYPES as |type id|}}
+                        <option value="{{@type}}">{{localize (concat "GEAR." type)}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td><input type="text" value="{{item.data.data.subtype}}" data-field="data.subtype" /></td>
+                <td><input type="text" value="{{item.data.data.availability}}" data-field="data.availability" /></td>
+                <td><input type="text" value="{{item.data.data.price}}" data-field="data.price" /></td>
             </tr>
         </table>
+    <!-- ********** WAFFEN ********** -->
+        {{#if (or
+        (eq item.data.data.type "WEAPON_FIREARMS")
+        (eq item.data.data.type "WEAPON_RANGED")
+        (eq item.data.data.type "WEAPON_CLOSE_COMBAT")
+        (eq item.data.data.type "WEAPON_SPECIAL"))}}
+        <table>
+            <tr>
+                <!--SCHADEN MODUS ANGRIFFSWERTE MUNITION-->
+                <th>{{localize 'shadowrun6.item.damage'}}</th>
+                <th>{{localize 'shadowrun6.item.mode'}}</th>
+                <th>{{localize 'shadowrun6.item.attackvalues'}}</th>
+                <th>{{localize 'shadowrun6.item.ammunition'}}</th>
+            </tr>
+            <tr>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+            </tr>
+        </table>
+        {{/if}}
+    <!-- ********** Rüstung ********** -->
+        {{#if (eq item.data.data.type "ARMOR")}}
+        <table>
+            <tr>
+                <th>{{localize 'shadowrun6.item.defencerating'}}</th>
+                <th>{{localize 'shadowrun6.item.capacity'}}</th>
+            </tr>
+            <tr>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+            </tr>
+        </table>
+        {{/if}}
+    <!-- ********** Beschreibung ********** -->
+        <h3>{{localize 'shadowrun6.item.description'}}</h3>
+        <textarea type="text" value="{{item.data.data.description}}" data-field="data.description" cols="20" rows="6">{{item.data.data.description}}</textarea> 
     </section>
 </form>
