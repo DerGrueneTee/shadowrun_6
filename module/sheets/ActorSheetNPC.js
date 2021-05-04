@@ -33,7 +33,7 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
-			html.find('.skill-name').click(this._onRollSkillCheck.bind(this));
+			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
 			html.find('.quality-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.qualityedit.new"),

@@ -26,7 +26,7 @@ export class Shadowrun6Actor extends Actor {
 		const actorData = this.data;
 		const data = this.data.data;
 		// Only calculate for PCs - ignore for NPCs/Critter
-		if (actorData.type === "Player") {
+		if (actorData.type === "Player" || actorData.type === "NPC") {
 			CONFIG.SR6.ATTRIBUTES.forEach(attr => {
 				data.attributes[attr].pool =
 					parseInt(data.attributes[attr].base || 0)
@@ -45,7 +45,7 @@ export class Shadowrun6Actor extends Actor {
 
 		// Store volatile
 
-		if (actorData.type === "Player") {
+		if (actorData.type === "Player" || actorData.type === "NPC") {
 			if (data.physical) {
 			  data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
 			  data.physical.max = data.physical.base + data.physical.mod;
@@ -72,9 +72,10 @@ export class Shadowrun6Actor extends Actor {
 	_prepareSkills() {
 		const actorData = this.data;
 		const data = this.data.data;
-		console.log("PrepareSkills");
+		console.log("PrepareSkills "+this.name);
 		// Only calculate for PCs - ignore for NPCs/Critter
-		if (actorData.type === "Player") {
+		if (actorData.type === "Player" || actorData.type === "NPC") {
+			/*
 			actorData.items.forEach(tmpItem => {
 				let item = tmpItem.data;
 				if (item.type == "skill-value" && item.data.id != "knowledge" && item.data.id != "language") {
@@ -91,6 +92,7 @@ export class Shadowrun6Actor extends Actor {
 					}
 				};
 			});
+			*/
 
 			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function(skillDef, id) {
 				let attr = skillDef.attrib;
