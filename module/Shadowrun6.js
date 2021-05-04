@@ -1,7 +1,7 @@
 import { SR6 } from "./config.js";
-import { Shadowrun6ActorSheet } from "./sheets/PC.js";
-import { Shadowrun6ActorNPCSheet } from "./sheets/NPC.js";
-import { QualityItemSheet } from "./sheets/Quality.js";
+import { Shadowrun6ActorSheet } from "./sheets/ActorSheetPC.js";
+import { Shadowrun6ActorNPCSheet } from "./sheets/ActorSheetNPC.js";
+import { QualityItemSheet } from "./sheets/ItemSheetQuality.js";
 import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
