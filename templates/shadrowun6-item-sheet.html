@@ -15,14 +15,14 @@
                     <select name="item.data.data.type" data-field="data.type">
                         {{#select item.data.data.type}}
                         {{#each config.GEAR_TYPES as |type id|}}
-                        <option value="{{@type}}">{{localize (concat "GEAR." type)}}</option>
+                        <option value="{{@type}}">{{localize (concat "shadowrun6.itemtype." type)}}</option>
                         {{/each}}
                         {{/select}}
                     </select>
                 </td>
                 <td><input type="text" value="{{item.data.data.subtype}}" data-field="data.subtype" /></td>
-                <td><input type="text" value="{{item.data.data.availability}}" data-field="data.availability" /></td>
-                <td><input type="text" value="{{item.data.data.price}}" data-field="data.price" /></td>
+                <td><input type="text" value="{{item.data.data.availDef}}" data-field="data.availDef" /></td>
+                <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef" /></td>
             </tr>
         </table>
     <!-- ********** WAFFEN ********** -->
@@ -38,12 +38,22 @@
                 <th>{{localize 'shadowrun6.item.mode'}}</th>
                 <th>{{localize 'shadowrun6.item.attackvalues'}}</th>
                 <th>{{localize 'shadowrun6.item.ammunition'}}</th>
+                <th>{{localize 'shadowrun6.item.skill'}}</th>
             </tr>
             <tr>
                 <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
                 <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
                 <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
                 <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+                <td>
+                    <select name="item.data.data.skill" data-field="data.skill">
+                        {{#select item.data.data.skill}}
+                        {{#each config.SKILLS_WEAPON as |skill id|}}
+                        <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>            
             </tr>
         </table>
         {{/if}}

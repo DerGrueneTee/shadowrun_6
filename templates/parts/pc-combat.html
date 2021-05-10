@@ -1,0 +1,52 @@
+<section>
+	<!-- Range Weapons -->
+   <div class="section">
+     <h2 class="section-title">{{ localize 'shadowrun6.section.weapon.ranged' }}</h2>
+	  <table>
+ 		{{#each actor.items as |item id|}} 
+		{{#iff item.type '==' 'gear'}}
+		{{#iff item.data.data.type '==' "WEAPON_FIREARMS"}}
+       <tr class="draggable" data-item-id="{{this._id}}"  title="{{item.data.data.description}}">
+       	<td style="margin-right: 1rem"><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
+         <td><label class="middle-column" data-skill="{{item.data.data.attackRating}}">{{item.data.data.attackRating}}</label></td>
+         <td><label class="middle-column">{{item.data.data.modes}}</label></td>
+         <td class="skill-pool" style="width: 3em">
+         	<label class="item-pool" data-skill="{{item.data.data.skill}}">{{item.data.data.pool}}</label>
+         	<a class="item-control skill-roll" data-skill="{{item.data.data.skill}}" data-item="{{item}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         </td>
+			<td class="item-controls">
+         	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+         </td>
+       </tr>
+		{{/iff}}
+		{{/iff}}
+       {{/each}}
+     </table> 
+   </div>
+	<!-- Close Combat Weapons -->
+   <div class="section">
+     <h2 class="section-title">{{ localize 'shadowrun6.section.weapon.close' }}</h2>
+	  <table>
+ 		{{#each actor.items as |item id|}} 
+		{{#iff item.type '==' 'gear'}}
+		{{#iff item.data.data.type '==' "WEAPON_CLOSE_COMBAT"}}
+       <tr class="draggable" data-item-id="{{this._id}}"  title="{{item.data.data.description}}">
+       	<td style="margin-right: 1rem"><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
+         <td><label class="middle-column" data-skill="{{item.data.data.attackRating}}">{{item.data.data.attackRating}}</label></td>
+         <td><label class="middle-column">{{item.data.data.modes}}</label></td>
+         <td class="skill-pool" style="width: 3em">
+         	<label class="item-pool" data-skill="{{item.data.data.skill}}">{{item.data.data.pool}}</label>
+         	<a class="item-control skill-roll" data-skill="{{item.data.data.skill}}" data-item="{{item}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         </td>
+			<td class="item-controls">
+         	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+         </td>
+       </tr>
+		{{/iff}}
+		{{/iff}}
+       {{/each}}
+     </table> 
+   </div>
+</section>

@@ -7,6 +7,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import { doRoll } from "./dice/ChatDiceRoller.js";
+import * as Macros from "./util/macros.js"
 
 const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 
@@ -21,11 +22,6 @@ Hooks.once("init", async function () {
 
   console.log(`Initializing Shadowrun 6 System`);
 
-  // Create a namespace within the game global
-  //    game.splimo = {
-  //     config: SR6,
-  //   };
-
   // Record Configuration Values
   CONFIG.SR6 = SR6;
 
@@ -33,6 +29,12 @@ Hooks.once("init", async function () {
   CONFIG.Actor.documentClass = Shadowrun6Actor;
   // Define custom Roll class
   CONFIG.Dice.rolls.push(SR6Roll);
+
+  // Create a namespace within the game global
+  game.shadowrun6 = {
+        itemCheck: Macros.itemCheck
+    }
+  game.system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dice)d6";
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -74,6 +76,49 @@ Hooks.once("init", async function () {
       return doRoll(data);
     });
   });
+
+
+	/*
+	 * Something has been dropped on the HotBar 
+	 */
+	Hooks.on("hotbarDrop", async (bar, data, slot) => {
+		console.log("DROP to Hotbar");
+    let macroData = {
+        name: "",
+        type: "script",
+        img: "icons/svg/dice-target.svg",
+        command: ""
+    };
+
+	// For items, memorize the skill check	
+    if (data.type === "Item") {
+		  console.log("Item dropped "+data);
+        if (data.id) {
+            data.data = game.items.get(data.id).data;
+        }
+        if (data.data) {
+            macroData.name = data.data.name;
+            macroData.img = data.data.img;
+
+            let actorId = data.actorId || "";
+
+            if (actorId && game.user.isGM) {
+                const actorName = game.actors.get(actorId)?.data.name;
+                macroData.name += ` (${actorName})`;
+            }
+
+            macroData.command = `game.shadowrun6.itemCheck("${data.data.type}","${data.data.name}","${actorId}","${data.data._id}")`;
+
+        }
+    };
+
+    if (macroData.command != "" && macroData.name != "") {
+        let macro = await Macro.create(macroData, { displaySheet: false });
+
+        game.user.assignHotbarMacro(macro, slot);
+    }
+});
+
 
   // Allows {if X = Y} type syntax in html using handlebars
   Handlebars.registerHelper("iff", function (a, operator, b, opts) {

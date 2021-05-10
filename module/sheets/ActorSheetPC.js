@@ -82,6 +82,26 @@ export class Shadowrun6ActorSheet extends ActorSheet {
             this.actor.items.get(itemId).update({ [field]: value });
         });
 
+	/*
+	 * Drag & Drop
+	 */
+        $(".draggable").on("dragstart", event => {
+			  console.log("DRAG START");
+            const itemId = event.currentTarget.dataset.itemId;
+            if (itemId) {
+			 		 console.log("Item "+itemId+" dragged");
+                const itemData = this.actor.data.items.find(el => el._id === itemId);
+                event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify({
+                    type: "Item",
+                    data: itemData,
+                    actorId: this.actor._id
+                }));
+                event.stopPropagation();
+                return;
+            }
+
+        }).attr('draggable', true);
+
 		} else {
 			html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
 		}

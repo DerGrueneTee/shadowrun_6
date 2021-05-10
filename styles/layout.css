@@ -142,4 +142,10 @@ input.centered {
 .item-control {
 	color: var(--highlight-color);
 }
+.middle-column {
+	margin: 0 5px 0;
+}
+.important-column {
+	font-weight: bold;
+}
 

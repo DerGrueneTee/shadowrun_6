@@ -1,0 +1,1090 @@
+{
+  "name": "Gaius",
+  "type": "Player",
+  "data": {
+    "overflow": {
+      "base": 0,
+      "mod": 0,
+      "value": 0,
+      "max": 0
+    },
+    "attributes": {
+      "bod": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4,
+        "modString": ""
+      },
+      "agi": {
+        "base": 6,
+        "mod": 1,
+        "pool": 7,
+        "modString": "1 Kraft Verbessertes körperliches Attribut "
+      },
+      "rea": {
+        "base": 5,
+        "mod": 0,
+        "pool": 5,
+        "modString": ""
+      },
+      "str": {
+        "base": 2,
+        "mod": 0,
+        "pool": 2,
+        "modString": ""
+      },
+      "wil": {
+        "base": 5,
+        "mod": 0,
+        "pool": 5,
+        "modString": ""
+      },
+      "log": {
+        "base": 2,
+        "mod": 0,
+        "pool": 2,
+        "modString": ""
+      },
+      "int": {
+        "base": 5,
+        "mod": 0,
+        "pool": 5,
+        "modString": ""
+      },
+      "cha": {
+        "base": 8,
+        "mod": 0,
+        "pool": 8,
+        "modString": ""
+      },
+      "edg": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      },
+      "mag": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      },
+      "res": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      }
+    },
+    "physical": {
+      "base": 10,
+      "mod": 0,
+      "modString": "",
+      "value": 10,
+      "max": 0
+    },
+    "stun": {
+      "base": 11,
+      "mod": 0,
+      "modString": "",
+      "value": 11,
+      "max": 0
+    },
+    "initiative": {
+      "physical": {
+        "bonus": 10,
+        "dice": 1
+      },
+      "astral": {
+        "bonus": 7,
+        "dice": 2
+      }
+    },
+    "skills": {
+      "astral": {
+        "points": 1,
+        "modifier": 0,
+        "modString": "1 Fertigkeit Astral \n5 Intuition ",
+        "augment": 0
+      },
+      "athletics": {
+        "points": 1,
+        "modifier": 0,
+        "modString": "1 Fertigkeit Athletik \n6 Geschicklichkeit \n1 Kraft Verbessertes körperliches Attribut ",
+        "augment": 0
+      },
+      "biotech": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "close_combat": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "con": {
+        "points": 5,
+        "modifier": 0,
+        "modString": "5 Fertigkeit Überreden \n8 Charisma ",
+        "augment": 0
+      },
+      "conjuring": {
+        "points": 0,
+        "modifier": 2,
+        "modString": "0 Fertigkeit Beschwören \n2 Kraftfokus \n6 Magie \n0 Essenz ",
+        "augment": 0
+      },
+      "cracking": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "electronics": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "enchanting": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "engineering": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "exotic_weapons": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "firearms": {
+        "points": 4,
+        "modifier": 0,
+        "modString": "4 Fertigkeit Feuerwaffen \n6 Geschicklichkeit \n1 Kraft Verbessertes körperliches Attribut ",
+        "augment": 0,
+        "specialization": "pistols_heavy"
+      },
+      "influence": {
+        "points": 2,
+        "modifier": 0,
+        "modString": "2 Fertigkeit Einfluss \n8 Charisma ",
+        "augment": 0
+      },
+      "outdoors": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "perception": {
+        "points": 2,
+        "modifier": 0,
+        "modString": "2 Fertigkeit Wahrnehmung \n5 Intuition ",
+        "augment": 0
+      },
+      "piloting": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "sorcery": {
+        "points": 5,
+        "modifier": 2,
+        "modString": "5 Fertigkeit Hexerei \n2 Kraftfokus \n6 Magie \n0 Essenz ",
+        "augment": 0,
+        "specialization": "spellcasting"
+      },
+      "stealth": {
+        "points": 1,
+        "modifier": 0,
+        "modString": "1 Fertigkeit Heimlichkeit \n6 Geschicklichkeit \n1 Kraft Verbessertes körperliches Attribut ",
+        "augment": 0
+      },
+      "tasking": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      }
+    }
+  },
+  "items": [
+    {
+      "name": "Deutsch",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 4,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Englisch",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Vorantike Kraftorte",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Das römische Reich",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Kraftorte der ADL",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Weingüter Europas",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Das antike Griechenland",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Deutsche Sagen",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Irische Sagen",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Skandinavische Sagen",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Restlichtverstärkung",
+      "type": "quality",
+      "data": {
+        "genesisID": "low-light_vision",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Magieadept",
+      "type": "quality",
+      "data": {
+        "genesisID": "mysticadept",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Sin-Mensch",
+      "type": "quality",
+      "data": {
+        "genesisID": "sinner",
+        "category": "NEGATIVE",
+        "level": false,
+        "value": 1,
+        "explain": "Universitätslehrer",
+        "modifier": []
+      }
+    },
+    {
+      "name": "Gezeichnet",
+      "type": "quality",
+      "data": {
+        "genesisID": "scorched",
+        "category": "NEGATIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Allergie (saisonal, leicht)",
+      "type": "quality",
+      "data": {
+        "genesisID": "allergy_seasonal_mild",
+        "category": "NEGATIVE",
+        "level": false,
+        "value": 1,
+        "explain": "Pollen",
+        "modifier": []
+      }
+    },
+    {
+      "name": "Inkompetenz",
+      "type": "quality",
+      "data": {
+        "genesisID": "incompetent",
+        "category": "NEGATIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Charismatic Defense",
+      "type": "quality",
+      "data": {
+        "genesisID": "charismatic_defense",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 0,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Akademischer Zauberer",
+      "type": "quality",
+      "data": {
+        "genesisID": "scholastic_mage",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Alkohol",
+      "type": "gear",
+      "data": {
+        "genesisID": "alcohol",
+        "type": "CHEMICALS",
+        "subtype": "DRUGS",
+        "availDef": "1",
+        "avail": 1,
+        "price": 35,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 7
+      }
+    },
+    {
+      "name": "Atemschutzmaske",
+      "type": "gear",
+      "data": {
+        "genesisID": "respirator",
+        "type": "SURVIVAL",
+        "subtype": "SURVIVAL_GEAR",
+        "availDef": "1",
+        "avail": 1,
+        "price": 300,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Automatischer Dietrich",
+      "type": "gear",
+      "data": {
+        "genesisID": "autopicker",
+        "type": "ELECTRONICS",
+        "subtype": "BREAKING",
+        "availDef": "4 L",
+        "avail": 4,
+        "price": 500,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Bliss",
+      "type": "gear",
+      "data": {
+        "genesisID": "bliss",
+        "type": "CHEMICALS",
+        "subtype": "DRUGS",
+        "availDef": "2 I",
+        "avail": 2,
+        "price": 60,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 4
+      }
+    },
+    {
+      "name": "Colt Secret Agent",
+      "type": "gear",
+      "data": {
+        "dmgDef": "2K",
+        "dmg": 2,
+        "stun": false,
+        "attackRating": [
+          11,
+          9,
+          0,
+          0,
+          0
+        ],
+        "modes": "SS",
+        "genesisID": "colt_secret_agent",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "HOLDOUTS",
+        "availDef": "3",
+        "avail": 3,
+        "price": 550,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "holdouts",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "DMSO-Gelpack (10x) (Gelmunition)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_dmso",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "1",
+        "avail": 1,
+        "price": 15,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "DocWagon Platinvertrag (1 Jahr)",
+      "type": "gear",
+      "data": {
+        "genesisID": "docwagon_platinum_year",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "1",
+        "avail": 1,
+        "price": 50000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Einweg-Plastikstreifen (10)",
+      "type": "gear",
+      "data": {
+        "genesisID": "plastic_straps",
+        "type": "ELECTRONICS",
+        "subtype": "SECURITY",
+        "availDef": "1",
+        "avail": 1,
+        "price": 5,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Erste-Hilfe-Set",
+      "type": "gear",
+      "data": {
+        "genesisID": "first_aid_kit",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "1",
+        "avail": 1,
+        "price": 50,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Fernglas (Optisch)",
+      "type": "gear",
+      "data": {
+        "genesisID": "binoculars_optical",
+        "type": "ELECTRONICS",
+        "subtype": "OPTICAL",
+        "availDef": "1",
+        "avail": 1,
+        "price": 50,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Hermes Ikon",
+      "type": "gear",
+      "data": {
+        "genesisID": "hermes_ikon",
+        "type": "ELECTRONICS",
+        "subtype": "COMMLINK",
+        "availDef": "3",
+        "avail": 3,
+        "price": 6110,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Kleidung (Luxus)",
+      "type": "gear",
+      "data": {
+        "genesisID": "clothing_luxury",
+        "type": "ARMOR",
+        "subtype": "ARMOR_CLOTHES",
+        "availDef": "1",
+        "avail": 1,
+        "price": 10000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Kontaktlinsen",
+      "type": "gear",
+      "data": {
+        "genesisID": "contacts",
+        "type": "ELECTRONICS",
+        "subtype": "IMAGING",
+        "availDef": "2",
+        "avail": 2,
+        "price": 2850,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Kunstlederjacke",
+      "type": "gear",
+      "data": {
+        "genesisID": "synthleather_jacket",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "1",
+        "avail": 1,
+        "price": 300,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Mänade (Ares Pred. VI)",
+      "type": "gear",
+      "data": {
+        "dmgDef": "3K",
+        "dmg": 3,
+        "stun": false,
+        "attackRating": [
+          15,
+          15,
+          14,
+          0,
+          0
+        ],
+        "modes": "SA, BF",
+        "genesisID": "ares_predator_vi",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "PISTOLS_HEAVY",
+        "availDef": "2 L",
+        "avail": 2,
+        "price": 3135,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "pistols_heavy",
+        "wild": false,
+        "customName": "Mänade (Ares Pred. VI)",
+        "count": 0
+      }
+    },
+    {
+      "name": "Medkit",
+      "type": "gear",
+      "data": {
+        "genesisID": "medkit",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "3",
+        "avail": 3,
+        "price": 1500,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Medkit-Nachfüllpack",
+      "type": "gear",
+      "data": {
+        "genesisID": "medkit_supplies",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "1",
+        "avail": 1,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Mercedes W-SR 290 \"Wesir“",
+      "type": "gear",
+      "data": {
+        "genesisID": "mercedes_w-SR290_wesir",
+        "type": "VEHICLES",
+        "subtype": "CARS",
+        "availDef": "2",
+        "avail": 2,
+        "price": 20000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Mortimer o.L. Greatcoat",
+      "type": "gear",
+      "data": {
+        "genesisID": "mortimer_greatcoats",
+        "type": "ARMOR",
+        "subtype": "ARMOR_SOCIAL",
+        "availDef": "5",
+        "avail": 5,
+        "price": 2500,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Mystische Panzerung",
+      "type": "gear",
+      "data": {
+        "genesisID": "mystic_armor_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Ohrstöpsel",
+      "type": "gear",
+      "data": {
+        "genesisID": "earbuds",
+        "type": "ELECTRONICS",
+        "subtype": "AUDIO",
+        "availDef": "1",
+        "avail": 1,
+        "price": 1150,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Schwere Pistole/M-Pistole (10x) (Explosivmunition)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_heavy_smg",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "1",
+        "avail": 1,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 5
+      }
+    },
+    {
+      "name": "Schwere Pistole/M-Pistole (10x) (Standardmunition)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_heavy_smg",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "1",
+        "avail": 1,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 10
+      }
+    },
+    {
+      "name": "Tragbares Sensorgehäuse",
+      "type": "gear",
+      "data": {
+        "genesisID": "handheld_housing",
+        "type": "ELECTRONICS",
+        "subtype": "SENSOR_HOUSING",
+        "availDef": "1",
+        "avail": 1,
+        "price": 3300,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Transys Avalon",
+      "type": "gear",
+      "data": {
+        "genesisID": "transys_avalon",
+        "type": "ELECTRONICS",
+        "subtype": "COMMLINK",
+        "availDef": "3",
+        "avail": 3,
+        "price": 9350,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Troden",
+      "type": "gear",
+      "data": {
+        "genesisID": "trodes",
+        "type": "ELECTRONICS",
+        "subtype": "ELECTRONIC_ACCESSORIES",
+        "availDef": "1",
+        "avail": 1,
+        "price": 70,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Trollkleidung Mittelschicht",
+      "type": "gear",
+      "data": {
+        "genesisID": "clothing_middle",
+        "type": "ARMOR",
+        "subtype": "ARMOR_CLOTHES",
+        "availDef": "1",
+        "avail": 1,
+        "price": 1000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "customName": "Trollkleidung Mittelschicht",
+        "count": 0
+      }
+    },
+    {
+      "name": "Überlebensmesser",
+      "type": "gear",
+      "data": {
+        "dmgDef": "3K",
+        "dmg": 3,
+        "stun": false,
+        "attackRating": [
+          10,
+          4,
+          0,
+          0,
+          0
+        ],
+        "modes": "",
+        "genesisID": "survival_knife",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "BLADES",
+        "availDef": "2",
+        "avail": 2,
+        "price": 220,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "blades",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "VI Synergist Business Suit",
+      "type": "gear",
+      "data": {
+        "genesisID": "vi_synergist",
+        "type": "ARMOR",
+        "subtype": "ARMOR_SOCIAL",
+        "availDef": "4",
+        "avail": 4,
+        "price": 1900,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Vitalmonitor",
+      "type": "gear",
+      "data": {
+        "genesisID": "biomonitor",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "2",
+        "avail": 2,
+        "price": 300,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Waffenlos",
+      "type": "gear",
+      "data": {
+        "dmgDef": "2G",
+        "dmg": 2,
+        "stun": true,
+        "attackRating": [
+          7,
+          0,
+          0,
+          0,
+          0
+        ],
+        "modes": "",
+        "genesisID": "unarmed",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "UNARMED",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "unarmed",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Walther Secura II",
+      "type": "gear",
+      "data": {
+        "dmgDef": "3K",
+        "dmg": 3,
+        "stun": false,
+        "attackRating": [
+          15,
+          14,
+          15,
+          0,
+          0
+        ],
+        "modes": "SA, BF",
+        "genesisID": "walther_secura_II",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "PISTOLS_HEAVY",
+        "availDef": "3 L",
+        "avail": 3,
+        "price": 2610,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "pistols_heavy",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Wanzenscanner",
+      "type": "gear",
+      "data": {
+        "genesisID": "bug_scanner",
+        "type": "ELECTRONICS",
+        "subtype": "COMMUNICATION",
+        "availDef": "3",
+        "avail": 3,
+        "price": 200,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Zen",
+      "type": "gear",
+      "data": {
+        "genesisID": "zen",
+        "type": "CHEMICALS",
+        "subtype": "DRUGS",
+        "availDef": "3 L",
+        "avail": 3,
+        "price": 15,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 3
+      }
+    },
+    {
+      "name": "Manablitz",
+      "type": "spell",
+      "data": {
+        "genesisID": "manabolt",
+        "category": "combat",
+        "drain": 4,
+        "range": "line_of_sight",
+        "type": "mana"
+      }
+    },
+    {
+      "name": "Manafenster",
+      "type": "spell",
+      "data": {
+        "genesisID": "mana_window",
+        "category": "detection",
+        "drain": 3,
+        "range": "line_of_sight",
+        "type": "mana"
+      }
+    },
+    {
+      "name": "Heilen",
+      "type": "spell",
+      "data": {
+        "genesisID": "heal",
+        "category": "health",
+        "drain": 3,
+        "range": "touch",
+        "type": "physical"
+      }
+    },
+    {
+      "name": "Reflexe steigern",
+      "type": "spell",
+      "data": {
+        "genesisID": "increase_reflexes",
+        "category": "health",
+        "drain": 5,
+        "range": "touch",
+        "type": "physical"
+      }
+    },
+    {
+      "name": "Trideo-Trugbild",
+      "type": "spell",
+      "data": {
+        "genesisID": "trid_phantasm",
+        "category": "illusion",
+        "drain": 4,
+        "range": "line_of_sight_area",
+        "type": "physical"
+      }
+    },
+    {
+      "name": "Verbesserte Unsichtbarkeit",
+      "type": "spell",
+      "data": {
+        "genesisID": "improved_invisibility",
+        "category": "illusion",
+        "drain": 4,
+        "range": "touch",
+        "type": "physical"
+      }
+    },
+    {
+      "name": "Handlungen Beherrschen",
+      "type": "spell",
+      "data": {
+        "genesisID": "control_actions",
+        "category": "manipulation",
+        "drain": 4,
+        "range": "line_of_sight",
+        "type": "mana"
+      }
+    },
+    {
+      "name": "Levitieren",
+      "type": "spell",
+      "data": {
+        "genesisID": "levitate",
+        "category": "manipulation",
+        "drain": 6,
+        "range": "line_of_sight",
+        "type": "physical"
+      }
+    }
+  ]
+}

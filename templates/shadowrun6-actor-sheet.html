@@ -27,6 +27,7 @@
 	<nav class="sheet-tabs tabs" data-group="primary">
 		<a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
 		<a class="item" data-tab="skills">{{ localize 'shadowrun6.actor.nav.skills' }}</a>
+		<a class="item" data-tab="combat">{{ localize 'shadowrun6.actor.nav.combat' }}</a>
 		<!--a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
 		<a class="item" data-tab="items">{{ localize 'shadowrun6.actor.nav.equip' }}</a-->
 	</nav>
@@ -48,6 +49,11 @@
 		{{!-- Skills Tab --}}
 		<div class="tab skills" data-group="primary" data-tab="skills">
 			{{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.data.skills}}
+		</div>
+
+		{{!-- Combat Tab --}}
+		<div class="tab combat" data-group="primary" data-tab="combat">
+			{{> "systems/shadowrun6-eden/templates/parts/pc-combat.html" }}
 		</div>
 
 		{{!-- Biography Tab --}}

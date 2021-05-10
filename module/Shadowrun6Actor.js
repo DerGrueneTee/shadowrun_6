@@ -11,11 +11,12 @@ export class Shadowrun6Actor extends Actor {
 		super.prepareData();
 		console.log("Shadowrun6Actor.prepareData() " + this.data.name);
 
-		console.log("TODO: calculate derived attributes (e.g. Initiative) for " + this.data.type);
+		console.log("TODO: calculate derived attributes for " + this.data.type);
 		const data = this.data.data;
 		this._prepareAttributes();
 		this._prepareDerivedAttributes();
 		this._prepareSkills();
+		this._prepareItemPools();
 	}
 
 	//---------------------------------------------------------
@@ -63,6 +64,8 @@ export class Shadowrun6Actor extends Actor {
 			}
 		}
 
+		if (data.initiative)
+		data.initiative.physical.pool = data.attributes["rea"].pool + data.attributes["int"].pool + data.initiative.physical.bonus;
 	}
 
 	//---------------------------------------------------------
@@ -102,6 +105,28 @@ export class Shadowrun6Actor extends Actor {
 		}
 	}
 
+	//---------------------------------------------------------
+	/*
+	 * Calculate the pool when using items with assigned skills
+	 */
+	_prepareItemPools() {
+		const actorData = this.data;
+		console.log("_prepareItemPools "+this.name);
+		
+		actorData.items.forEach(tmpItem => {
+			let item = tmpItem.data;
+			if (item.type == "gear" && item.data && item.data.skill) {
+				console.log("Skill for item " + item.name + ": " + item.data.skill);
+				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
+				// TODO: Check if actor has specialization or mastery
+				console.log("Pool for item " + item.name + ": " + item.data.pool);
+				
+				
+			};
+		});
+		console.log("_prepareItemPools done");
+	}
+
 	/**
 	 * Roll a Skill Check
 	 * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
@@ -136,5 +161,11 @@ export class Shadowrun6Actor extends Actor {
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(data);
 	}
+
+    async rollAttack(attackId, options = {}) {
+		  console.log("rollAttack("+attackId+", options="+options+")");
+        const actorData = this.data.data;
+		  console.log("NOT IMPLEMENTED YET");
+    }
 
 }

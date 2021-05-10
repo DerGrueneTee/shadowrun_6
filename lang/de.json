@@ -5,12 +5,49 @@
 		      "initiative": "Initiative",
 		      "nav": {
 		      	"basics": "Allgemein",
+					"combat": "Kampf",
 		      	"description": "Beschreibung",
 		      	"equip": "Ausrüstung",
 		      	"input": "Eingabe",
 		      	"skills": "Fertigkeiten",
 		      	"overview": "Übersicht"
 		      }
+        },
+        "item": {
+            "type": "Art",
+            "subtype": "Unterart",
+            "availability": "Verfügbarkeit",
+            "price": "Preis",
+			   "skill": "Fertigkeit",
+            "damage": "Schaden", 
+            "mode": "Modus",
+            "attackvalues": "Angriffswerte",
+            "ammunition": "Munition",
+            "description": "Beschreibung",
+            "defencerating": "Verteidigungswert",
+            "capacity": "Kapazität"
+        },
+		  "itemtype": {
+				"ACCESSORY": "Zubehör",
+    			"ARMOR": "Rüstung",
+    			"ARMOR_ADDITION": "Rüstungszubehor",
+    			"BIOWARE": "BIOWARE",
+    			"CYBERWARE": "CYBERWARE",
+    			"TOOLS": "TOOLS",
+    			"ELECTRONICS": "ELECTRONICS",
+    			"NANOWARE": "NANOWARE",
+    			"GENETICS": "GENETICS",
+    			"AMMUNITION": "AMMUNITION",
+    			"CHEMICALS": "CHEMICALS",
+    			"SURVIVAL": "SURVIVAL",
+    			"BIOLOGY": "BIOLOGY",
+    			"VEHICLES": "VEHICLES",
+    			"DRONES": "DRONES",
+    			"MAGICAL": "MAGICAL",
+				"WEAPON_CLOSE_COMBAT": "Nahkampfwaffen",
+				"WEAPON_FIREARMS": "Feuerwaffen",
+				"WEAPON_RANGED": "Projektilwaffen",
+				"WEAPON_SPECIAL": "Spezialwaffen"
 		  },
 		  "label": {
 		  		"attribute": "Attribut",
@@ -72,7 +109,11 @@
             },
             "skills.knowledge": "Wissensfertigkeiten",
             "skills.knowledge_add": "Neue Wissensfertigket hinzufügen",
-            "qualities": "Vor/Nachteile"
+            "qualities": "Vor/Nachteile",
+            "weapon": {
+                "ranged": "Fernkampf",
+                "close" : "Nahkampf"
+            }
         },
         "qualityedit": {
             "new": "Neu",
@@ -80,20 +121,7 @@
             "explain": "Erklärung",
             "description": "Beschreibung",
             "category": "Art"
-        },
-        "item": {
-            "type": "Art",
-            "subtype": "Unterart",
-            "availability": "Verfügbarkeit",
-            "price": "Preis",
-            "damage": "Schaden", 
-            "mode": "Modus",
-            "attackvalues": "Angriffswerte",
-            "ammunition": "Munition",
-            "description": "Beschreibung",
-            "defencerating": "Verteidigungswert",
-            "capacity": "Kapazität"
-        }
+	 	  }
     },
     "actor.name": "Name",
     "actor.metatype": "Metatyp",
@@ -165,25 +193,5 @@
     "ITEM.TypeSpell": "Zauber",
     "ITEM.TypeWeapon": "Waffe",
     "QUALITY_CATEGORIES.ADVANTAGE": "Vorteil",
-    "QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil",
-    "GEAR.ACCESSORY": "ACCESSORY",
-    "GEAR.ARMOR": "ARMOR",
-    "GEAR.ARMOR_ADDITION": "ARMOR_ADDITION",
-    "GEAR.BIOWARE": "BIOWARE",
-    "GEAR.CYBERWARE": "CYBERWARE",
-    "GEAR.TOOLS": "TOOLS",
-    "GEAR.ELECTRONICS": "ELECTRONICS",
-    "GEAR.NANOWARE": "NANOWARE",
-    "GEAR.GENETICS": "GENETICS",
-    "GEAR.WEAPON_CLOSE_COMBAT": "WEAPON_CLOSE_COMBAT",
-    "GEAR.WEAPON_RANGED": "WEAPON_RANGED",
-    "GEAR.WEAPON_FIREARMS": "WEAPON_FIREARMS",
-    "GEAR.WEAPON_SPECIAL": "WEAPON_SPECIAL",
-    "GEAR.AMMUNITION": "AMMUNITION",
-    "GEAR.CHEMICALS": "CHEMICALS",
-    "GEAR.SURVIVAL": "SURVIVAL",
-    "GEAR.BIOLOGY": "BIOLOGY",
-    "GEAR.VEHICLES": "VEHICLES",
-    "GEAR.DRONES": "DRONES",
-    "GEAR.MAGICAL": "MAGICAL"
+    "QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil"
 }

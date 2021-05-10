@@ -5,12 +5,49 @@
 		      "initiative": "Initiative",
 		      "nav": {
 		      	"basics": "Basics",
+					"combat": "Combat",
 		      	"description": "Description",
 		      	"equip": "Equipment",
 		      	"input": "Input",
 		      	"skills": "Skills",
 					"overview": "Overview"
 		      }
+        },
+        "item": {
+            "type": "Type",
+            "subtype": "Subtype",
+            "availability": "Avail.",
+            "price": "Price",
+ 			   "skill": "Skill",
+           "damage": "Damage", 
+            "mode": "Modes",
+            "attackvalues": "Attack rtg.",
+            "ammunition": "Ammo",
+            "description": "Description",
+            "defencerating": "Defence rtg",
+            "capacity": "Capacity"
+		  },
+		  "itemtype": {
+				"ACCESSORY": "Accessory",
+    			"ARMOR": "Armor",
+    			"ARMOR_ADDITION": "ARMOR_ADDITION",
+    			"BIOWARE": "BIOWARE",
+    			"CYBERWARE": "CYBERWARE",
+    			"TOOLS": "TOOLS",
+    			"ELECTRONICS": "ELECTRONICS",
+    			"NANOWARE": "NANOWARE",
+    			"GENETICS": "GENETICS",
+    			"AMMUNITION": "AMMUNITION",
+    			"CHEMICALS": "CHEMICALS",
+    			"SURVIVAL": "SURVIVAL",
+    			"BIOLOGY": "BIOLOGY",
+    			"VEHICLES": "VEHICLES",
+    			"DRONES": "DRONES",
+    			"MAGICAL": "MAGICAL",
+				"WEAPON_CLOSE_COMBAT": "Weapon, Close Combat",
+				"WEAPON_FIREARMS": "Weapon, Firearms",
+				"WEAPON_RANGED": "Weapon, Projectiles",
+				"WEAPON_SPECIAL": "Weapon, Special"
 		  },
 		  "label": {
 		  		"attribute": "Attribute",
@@ -72,7 +109,11 @@
             },
             "skills.knowledge": "Knowledge Skills",
             "skills.knowledge_add": "Add new knowledge",
-            "qualities": "Qualities"
+            "qualities": "Qualities",
+            "weapon": {
+                "ranged": "Ranged Weapons",
+                "close" : "Melee Weapons"
+            }
         },
         "qualityedit": {
             "new": "New",
@@ -80,19 +121,6 @@
             "description": "Description",
             "explain": "Explanation",
             "category": "Category"
-        },
-        "item": {
-            "type": "Type",
-            "subtype": "Subtype",
-            "availability": "Avail.",
-            "price": "Price",
-            "damage": "Damage", 
-            "mode": "Modes",
-            "attackvalues": "Attack rtg.",
-            "ammunition": "Ammo",
-            "description": "Description",
-            "defencerating": "Defence rtg",
-            "capacity": "Capacity"
         }
     },
     "actor.name": "Name",
@@ -160,25 +188,5 @@
     "ITEM.TypeSpell": "Spell",
     "ITEM.TypeGear": "Gear",
     "QUALITY_CATEGORIES.ADVANTAGE": "Advantage",
-    "QUALITY_CATEGORIES.DISADVANTAGE": "Disadvantage",
-    "GEAR.ACCESSORY": "ACCESSORY",
-    "GEAR.ARMOR": "ARMOR",
-    "GEAR.ARMOR_ADDITION": "ARMOR_ADDITION",
-    "GEAR.BIOWARE": "BIOWARE",
-    "GEAR.CYBERWARE": "CYBERWARE",
-    "GEAR.TOOLS": "TOOLS",
-    "GEAR.ELECTRONICS": "ELECTRONICS",
-    "GEAR.NANOWARE": "NANOWARE",
-    "GEAR.GENETICS": "GENETICS",
-    "GEAR.WEAPON_CLOSE_COMBAT": "WEAPON_CLOSE_COMBAT",
-    "GEAR.WEAPON_RANGED": "WEAPON_RANGED",
-    "GEAR.WEAPON_FIREARMS": "WEAPON_FIREARMS",
-    "GEAR.WEAPON_SPECIAL": "WEAPON_SPECIAL",
-    "GEAR.AMMUNITION": "AMMUNITION",
-    "GEAR.CHEMICALS": "CHEMICALS",
-    "GEAR.SURVIVAL": "SURVIVAL",
-    "GEAR.BIOLOGY": "BIOLOGY",
-    "GEAR.VEHICLES": "VEHICLES",
-    "GEAR.DRONES": "DRONES",
-    "GEAR.MAGICAL": "MAGICAL"
+    "QUALITY_CATEGORIES.DISADVANTAGE": "Disadvantage"
 }

@@ -115,7 +115,8 @@
 					"max": 1
 				}
 			},
-			"initiative": {
+			"initiative-template": {
+				"initiative": {
 				"astral": {
 					"bonus": 0,
 					"dice": 2
@@ -135,6 +136,7 @@
 				"physical": {
 					"bonus": 0,
 					"dice": 1
+				}
 				}
 			},
 			"skill-template": {
@@ -283,7 +285,7 @@
 			"templates": [
 				"attribute-template",
 				"monitor-template",
-				"initiative",
+				"initiative-template",
 				"skill-template",
 				"knowledge-template",
 				"magic-template"
@@ -296,7 +298,7 @@
 			"templates": [
 				"attribute-template",
 				"monitor-template",
-				"initiative",
+				"initiative-template",
 				"skill-template",
 				"knowledge-template",
 				"magic-template"
@@ -307,7 +309,7 @@
 			"templates": [
 				"attribute-template",
 				"monitor-template",
-				"initiative",
+				"initiative-template",
 				"skill-template",
 				"knowledge-template",
 				"magic-template"
@@ -326,6 +328,11 @@
 				"points": 0,
 				"modifier": 0
 			},
+			"dice-pool": {
+				"modifier": 0,
+				"wild"    : false,
+				"pool"    : 0
+			},
 			"quality-value": {
 				"value": 0,
 				"explain": "",
@@ -334,16 +341,26 @@
 		},
 		"gear": {
 			"genesisID": "",
-			"type": "",
+			"type": "WEAPON_FIREARMS",
 			"subtype": "",
-			"availability": "",
+			"count":  0,
+			"availDef": "",
+			"avail": 0,
+			"priceDef": "",
 			"price": 0,
 			"description": "",
+			"customName": "",
+			"notes": "",
 			"needsRating": false,
 			"rating": 0,
 			"skill": "",
 			"skillSpec": "",
-			"damage": ""
+			"damageDef": "",
+			"attackRating": [0,0,0,0,0],
+			"modes": "",
+			"templates": [
+				"dice-pool"
+			]
 		},
 		"quality": {
 			"genesisID": "",

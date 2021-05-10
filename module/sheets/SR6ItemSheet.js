@@ -5,8 +5,8 @@ export class SR6ItemSheet extends ItemSheet {
       return mergeObject(super.defaultOptions, {
         classes: ["shadowrun6", "sheet", "item", "gear"],
         template: "systems/shadowrun6-eden/templates/shadrowun6-item-sheet.html",
-        width: 400,
-        height: 500,
+        width: 500,
+        height: 600,
       });
     }
   

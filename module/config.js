@@ -9,6 +9,7 @@ SR6.QUALITY_CATEGORIES = ["ADVANTAGE", "DISADVANTAGE"];
 SR6.GEAR_TYPES = ["ACCESSORY", "ARMOR", "ARMOR_ADDITION", "BIOWARE", "CYBERWARE", "TOOLS",
 	"ELECTRONICS", "NANOWARE", "GENETICS", "WEAPON_CLOSE_COMBAT", "WEAPON_RANGED", "WEAPON_FIREARMS", "WEAPON_SPECIAL", 
 	"AMMUNITION", "CHEMICALS", "SURVIVAL", "BIOLOGY", "VEHICLES", "DRONES", "MAGICAL"];
+SR6.SKILLS_WEAPON = ["firearms","close_combat","exotic_weapons","athletics"];
 
 class SkillDefinition {
 	constructor(attribute, useUntrained) {
@@ -38,3 +39,4 @@ SR6.ATTRIB_BY_SKILL = new Map([
 	["stealth", new SkillDefinition("agi", true)],
 	["tasking", new SkillDefinition("res", false)],
 ]);
+
