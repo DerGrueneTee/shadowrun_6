@@ -15,16 +15,31 @@ export default class SR6Roll extends Roll {
   evaluate() {
     let data = this.data;
     let noOfDice = data.value;
-    if (data.modifier>0) {
+    if (data.modifier > 0) {
       noOfDice += data.modifier;
-    } 
-    let formula = this.createFormula(noOfDice, -1, data.explode);
-    let die = new Roll(formula).evaluate({async:false});
+    }
+    let formula = "";
+    if (this.data.useWildDie) {
+      formula = this.createFormula(1, -1, data.explode);
+      if (noOfDice - 1 > 0) {
+        formula += "+" + this.createFormula(noOfDice - 1, -1, data.explode);
+      }
+    } else {
+      formula = this.createFormula(noOfDice, -1, data.explode);
+    }
+    let die = new Roll(formula).evaluate({ async: false });
     this.results = die.terms[0].results;
+    if (this.data.useWildDie) {
+      this.results = this.results.concat(die.terms[2].results);
+    }
     this._total = this.calculateTotal(die.result);
     this.modifyResults();
     this._formula = data.formula;
     this._evaluated = true;
+    this._dice = die.terms;
+    if (this.data.useWildDie) {
+      this._dice[0].options.colorset = "white";
+    }
     return this;
   }
 
@@ -32,10 +47,10 @@ export default class SR6Roll extends Roll {
     let total = parseInt(result);
     if (this.data.useWildDie && this.results[0].result == 1) {
       //5 zählen nicht
-      total -=  this.results.filter(die => die.result === 5).length;
+      total -= this.results.filter(die => die.result === 5).length;
     } else if (this.data.useWildDie && (this.results[0].result == 6 || this.results[0].result == 5)) {
       //2 zusätzliche Erfolge
-      total +=2;
+      total += 2;
     }
 
     return total;
@@ -48,7 +63,7 @@ export default class SR6Roll extends Roll {
       this.results[0].wild = true;
       ignoreFives = this.results[0].result == 1;
     }
-    
+
     this.results.forEach(result => {
       result.classes = "die die_" + result.result;
       if (expl) {
@@ -108,7 +123,7 @@ export default class SR6Roll extends Roll {
       flavor: isPrivate ? null : chatOptions.flavor,
       user: chatOptions.user,
       total: isPrivate ? "?" : Math.round(this._total * 100) / 100,
-      glitch: isPrivate ? false: this.isGlitch(),
+      glitch: isPrivate ? false : this.isGlitch(),
       criticalGlitch: isPrivate ? false : this.isCriticalGlitch(),
       success: isPrivate ? false : this.isSuccess(),
       data: this.data,
@@ -139,6 +154,7 @@ export default class SR6Roll extends Roll {
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         content: this.total,
         sound: CONFIG.sounds.dice,
+        roll: this
       },
       chatOptions
     );
@@ -161,13 +177,13 @@ export default class SR6Roll extends Roll {
     return roll;
   }
 
-   /**
-    * Build a formula for a Shadowrun dice roll.
-    * Assumes roll will be valid (e.g. you pass a positive count).
-    * @param count The number of dice to roll.
-    * @param limit A limit, if any. Negative for no limit.
-    * @param explode If the dice should explode on sixes.
-    */
+  /**
+   * Build a formula for a Shadowrun dice roll.
+   * Assumes roll will be valid (e.g. you pass a positive count).
+   * @param count The number of dice to roll.
+   * @param limit A limit, if any. Negative for no limit.
+   * @param explode If the dice should explode on sixes.
+   */
   createFormula(count, limit = -1, explode = false) {
     let formula = `${count}d6`;
     if (explode) {
