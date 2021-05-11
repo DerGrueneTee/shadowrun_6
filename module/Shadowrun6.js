@@ -34,7 +34,7 @@ Hooks.once("init", async function () {
   game.shadowrun6 = {
         itemCheck: Macros.itemCheck
     }
-  game.system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dice)d6";
+  game.system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);

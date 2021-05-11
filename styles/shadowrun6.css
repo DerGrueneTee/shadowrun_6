@@ -35,6 +35,10 @@
         border: 1px solid var(--accent-color);
         background: white;
 }
+.shadowrun6 input.box {
+        border: 1px solid var(--highlight-color);
+        background: white;
+}
 
 .dice-tooltip .dice-rolls .die{
   position: relative;

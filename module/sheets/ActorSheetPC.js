@@ -37,7 +37,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.item-roll').click(this._onRollItemCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
-			html.find(".bodChanged").on("input", this._onBodyChanged(html));
 			html.find('.quality-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.quality"),
@@ -135,12 +134,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
         let value = jQObject.closest(`[data-${dataName}]`)?.data(dataName);
         return (value) ? value : defaultValue;
     }
-
-	//-----------------------------------------------------
-	_onBodyChanged(html) {
-		let actorData = this.object.data.data;
-		console.log("_onBodyChanged  " + actorData.attributes["bod"].pool);
-	}
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {

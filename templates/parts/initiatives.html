@@ -1,0 +1,33 @@
+<section style="padding: 10px 10px 0 0;">
+	<div class="section">
+		<h2 class="section-title">{{ localize 'shadowrun6.section.initiative' }}</h2>
+		<table>
+			<tr>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.attribute' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.base' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.dice' }}</th>
+			</tr>
+			<!-- Physical initiative -->
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.initiative.physical' }}</b></td>
+				<td class="centered">{{initiative.physical.base}} + <input class="centered box calcIni" name="data.initiative.physical.mod" type="text" value="{{initiative.physical.mod}}" data-dtype="Number"
+				id="dataIniPhyMod" style="width: 1.2em" ></td>
+				<td class="centered">
+				( {{data.data.initiative.physical.dice}} + 
+				<input class="centered box calcIni" name="data.initiative.physical.diceMod" type="text" value="{{initiative.physical.mod}}" data-dtype="Number"
+				id="dataIniPhyDiceMod" style="width: 1.2em" >) {{initiative.physical.dicePool}}d6</td>
+			</tr>
+			
+			<!-- Astral initiative -->
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.initiative.astral' }}</b></td>
+				<td class="centered">{{initiative.astral.base}} + <input class="centered box calcIni" name="data.initiative.astral.mod" type="text" value="{{initiative.astral.mod}}" data-dtype="Number"
+				id="dataIniAstMod" style="width: 1.2em" ></td>
+				<td class="centered">
+				( {{data.data.initiative.physical.dice}} + 
+				<input class="centered box calcIni" name="data.initiative.astral.diceMod" type="text" value="{{initiative.astral.mod}}" data-dtype="Number"
+				id="dataIniAstDiceMod" style="width: 1.2em" >) d6</td>
+			</tr>
+		</table>
+	</div>
+</section>
