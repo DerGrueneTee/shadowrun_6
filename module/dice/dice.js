@@ -1,8 +1,7 @@
 import SR6Roll from "./sr6_roll.js"
 
 export async function doRoll(data, messageData = {}) {
-
-  messageData.flavor = data.title;
+  messageData.flavor = "<h2>" + data.title + "</h2>";
   messageData.speaker = ChatMessage.getSpeaker();
 
   // Define the inner roll function
@@ -15,6 +14,7 @@ export async function doRoll(data, messageData = {}) {
       data.useWildDie = form.wilddie.checked;
       data.type = type;
       messageData.rollMode = form.rollMode.value;
+      data.weapon = data.item ? true : false; 
       if (data.modifier > 0) {
         data.formula = data.skill.pool + " + " + data.modifier + "d6";
       } else {

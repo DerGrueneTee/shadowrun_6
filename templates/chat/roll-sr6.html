@@ -18,5 +18,10 @@
         <span style="color: rgb(194, 76, 29)">{{localize 'shadowrun6.roll.glitch'}}</span><br/>
         {{/if}}
       </header>
+      <div>
+        {{#if data.weapon}}
+        <b>{{localize 'shadowrun6.roll.damage'}}</b> {{data.item.data.data.dmgDef}}
+      </div>
+      {{/if}}
   </div>
 </div>

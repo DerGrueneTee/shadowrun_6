@@ -34,6 +34,7 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
+			html.find('.item-roll').click(this._onRollItemCheck.bind(this));
 			html.find('.quality-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.qualityedit.new"),
@@ -64,6 +65,13 @@ export class Shadowrun6ActorNPCSheet extends ActorSheet {
 		event.preventDefault();
 		const skill = event.currentTarget.dataset.skill;
 		this.actor.rollSkill(skill, { event: event });
+	}
+
+	_onRollItemCheck(event, html) {
+		event.preventDefault();
+		const skill = event.currentTarget.dataset.skill;
+		const item = event.currentTarget.dataset.itemId;
+		this.actor.rollItem(skill, item, { event: event });
 	}
 
 	_onItemDelete(event) {

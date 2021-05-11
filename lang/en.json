@@ -97,7 +97,8 @@
             "successes": "hits",
             "glitch": "Glitch",
             "criticalglitch": "Critical glitch",
-            "nosuccess": "hits, threshold: "
+            "nosuccess": "hits, threshold: ",
+            "damage" : "Damage: "
         },
         "rollType": {
             "normal": "Roll dice",
