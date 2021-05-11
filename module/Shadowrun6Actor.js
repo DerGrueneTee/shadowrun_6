@@ -162,6 +162,25 @@ export class Shadowrun6Actor extends Actor {
 		return doRoll(data);
 	}
 
+	rollItem(skillId, itemId, options = {}) {
+		const skl = this.data.data.skills[skillId];
+		const item = this.items.get(itemId);
+		const value = skl.pool;
+		const parts = [];
+
+		// Roll and return
+		let data = mergeObject(options, {
+			parts: parts,
+			value: value,
+			title: item.name + " ("+game.i18n.localize("skill." + skillId) +")",
+			skill: skl,
+			item: item
+		});
+		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(data);
+	}
+
+
     async rollAttack(attackId, options = {}) {
 		  console.log("rollAttack("+attackId+", options="+options+")");
         const actorData = this.data.data;

@@ -34,6 +34,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
+			html.find('.item-roll').click(this._onRollItemCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find(".bodChanged").on("input", this._onBodyChanged(html));
@@ -122,6 +123,12 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		this.actor.rollSkill(skill, { event: event });
 	}
 
+	_onRollItemCheck(event, html) {
+		event.preventDefault();
+		const skill = event.currentTarget.dataset.skill;
+		const item = event.currentTarget.dataset.itemId;
+		this.actor.rollItem(skill, item, { event: event });
+	}
 
 	//-----------------------------------------------------
    _getClosestData(jQObject, dataName, defaultValue = "") {
@@ -247,6 +254,4 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 		}
 	}
-
-
 }
