@@ -13,6 +13,11 @@
 		      	"overview": "Übersicht"
 		      }
         },
+		  "initiative": {
+				"physical": "Initiative",
+				"matrix"  : "Matrix-Initiative",
+				"astral"  : "Astrale Initiative"
+		  },
         "item": {
             "type": "Art",
             "subtype": "Unterart",
@@ -53,6 +58,8 @@
 		  		"attribute": "Attribut",
 		  		"base"     : "Basis",
 		  		"damage"   : "Schaden",
+		  		"dice"     : "Würfel",
+		  		"d6"       : "W6",
 		  		"delete"   : "Löschen",
 		  		"edit"     : "Bearbeiten",
 		  		"points"   : "Punkte",
@@ -98,6 +105,7 @@
         },
         "section": {
             "derived": "Abgeleitete Werte",
+			   "initiative": "Initiative",
             "skills.action": "Fertigkeiten",
             "skills.language": "Sprachen",
             "skills.language_add": "Neue Sprache hinzufügen",
