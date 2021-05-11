@@ -118,24 +118,29 @@
 			"initiative-template": {
 				"initiative": {
 				"astral": {
-					"bonus": 0,
-					"dice": 2
+					"mod": 0,
+					"dice": 1,
+					"diceMod": 0
 				},
 				"matrixar": {
-					"bonus": 0,
-					"dice": 1
+					"mod": 0,
+					"dice": 1,
+					"diceMod": 0
 				},
 				"matrixcold": {
-					"bonus": 0,
-					"dice": 2
+					"mod": 0,
+					"dice": 2,
+					"diceMod": 0
 				},
 				"matrixhot": {
-					"bonus": 0,
-					"dice": 3
+					"mod": 0,
+					"dice": 3,
+					"diceMod": 0
 				},
 				"physical": {
-					"bonus": 0,
-					"dice": 1
+					"mod": 0,
+					"dice": 1,
+					"diceMod": 0
 				}
 				}
 			},
@@ -355,7 +360,9 @@
 			"rating": 0,
 			"skill": "",
 			"skillSpec": "",
-			"damageDef": "",
+			"dmg": 0,
+			"stun": false,
+			"dmgDef": "",
 			"attackRating": [0,0,0,0,0],
 			"modes": "",
 			"templates": [
