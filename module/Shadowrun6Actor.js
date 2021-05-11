@@ -64,8 +64,16 @@ export class Shadowrun6Actor extends Actor {
 			}
 		}
 
-		if (data.initiative)
-		data.initiative.physical.pool = data.attributes["rea"].pool + data.attributes["int"].pool + data.initiative.physical.bonus;
+		if (data.initiative) {
+			data.initiative.physical.base = data.attributes["rea"].pool + data.attributes["int"].pool;
+			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
+			data.initiative.physical.dicePool = data.initiative.physical.dice + data.initiative.physical.diceMod;
+			console.log("Initiative: "+data.initiative.physical.dicePool);
+
+			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
+			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
+			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
+		}
 	}
 
 	//---------------------------------------------------------
@@ -116,7 +124,6 @@ export class Shadowrun6Actor extends Actor {
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
 			if (item.type == "gear" && item.data && item.data.skill) {
-				console.log("Skill for item " + item.name + ": " + item.data.skill);
 				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
 				// TODO: Check if actor has specialization or mastery
 				console.log("Pool for item " + item.name + ": " + item.data.pool);
