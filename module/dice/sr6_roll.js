@@ -32,7 +32,7 @@ export default class SR6Roll extends Roll {
     if (this.data.useWildDie) {
       this.results = this.results.concat(die.terms[2].results);
     }
-    this._total = this.calculateTotal(die.result);
+    this._total = this.calculateTotal(die._total);
     this.modifyResults();
     this._formula = data.formula;
     this._evaluated = true;
