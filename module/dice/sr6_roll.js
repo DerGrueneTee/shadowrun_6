@@ -38,7 +38,7 @@ export default class SR6Roll extends Roll {
     this._evaluated = true;
     this._dice = die.terms;
     if (this.data.useWildDie) {
-      this._dice[0].options.colorset = "white";
+      this._dice[0].options.colorset = "SR6_light";
     }
     return this;
   }
