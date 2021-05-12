@@ -98,7 +98,8 @@
             "glitch": "Patzer",
             "criticalglitch": "Kritischer Patzer",
             "nosuccess": "Erfolge bei Schwellenwert ",
-            "damage": "Schaden: "
+            "damage": "Schaden: ",
+            "target" : "Ziel: "
         },
         "rollType": {
             "normal": "Würfeln",
