@@ -47,6 +47,13 @@ Hooks.once("init", async function () {
   Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear"], makeDefault: true });
   preloadHandlebarsTemplates();
 
+  Handlebars.registerHelper('attackrating', function (val) {
+    return 	val[0]+"/"+
+		((val[1]!=0)?val[1]:"-")+"/"+
+		((val[2]!=0)?val[2]:"-")+"/"+
+		((val[3]!=0)?val[3]:"-")+"/"+
+		((val[4]!=0)?val[4]:"-");
+  });
   Handlebars.registerHelper('concat', function (op1, op2) {
     return op1 + op2;
   });

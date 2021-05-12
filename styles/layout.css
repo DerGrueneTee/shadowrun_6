@@ -41,6 +41,9 @@ line {
 .section-title {
 	color: var(--highlight-color);
 }
+table td {
+	padding: 1px;
+}
 th {
 	color: var(--highlight-color);
 	background-color: var(--tablehead-background);
@@ -57,6 +60,23 @@ th {
 }
 .centered {
 	text-align: center;
+}
+.content {
+  padding: 0 8px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+.shadowrun6 .colladpsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 8px;
+  color: white;
+  float: right;
+}
+
+.shadowrun6 .colldpsed:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
 .shadowrun6 input[type="text"]{
         font-variant-numeric: lining-nums;

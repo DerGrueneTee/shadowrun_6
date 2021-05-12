@@ -72,11 +72,14 @@
 		  		"d6"       : "W6",
 		  		"delete"   : "Löschen",
 		  		"edit"     : "Bearbeiten",
+		      "firemodes": "Feuermodi",
 		  		"points"   : "Punkte",
 		  		"pool"     : "Pool",
+		  		"poolmod"  : "Pool-Modifikator",
 		  		"max"      : "Maximum",
 		  		"modifier" : "Mod.",
-		  		"value"    : "Wert"
+		  		"value"    : "Wert",
+		  		"wilddie"  : "Schicksalswürfel"
 		  },
 		  "monitor": {
 		  		"physical": "Körperlich",

@@ -11,7 +11,6 @@ export class Shadowrun6Actor extends Actor {
 		super.prepareData();
 		console.log("Shadowrun6Actor.prepareData() " + this.data.name);
 
-		console.log("TODO: calculate derived attributes for " + this.data.type);
 		const data = this.data.data;
 		this._prepareAttributes();
 		this._prepareDerivedAttributes();
@@ -51,16 +50,12 @@ export class Shadowrun6Actor extends Actor {
 				data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
 				data.physical.max = data.physical.base + data.physical.mod;
 				data.physical.value = data.physical.max - data.physical.dmg;
-				console.log("Set Physical to " + data.physical.max + " = 8+" + +Math.round(data.attributes["bod"].pool / 2) + " + " + data.physical.mod);
-				console.log("Set Physical to " + data.physical.max + " = 8+" + +Math.round(data.attributes["bod"].pool / 2) + " + " + data.physical.mod);
 			}
 
 			if (data.stun) {
 				data.stun.base = 8 + Math.round(data.attributes["wil"].pool / 2);
 				data.stun.max = data.stun.base + data.stun.mod;
 				data.stun.value = data.stun.max - data.stun.dmg;
-
-				console.log("Set Stun to " + data.stun.max + " = 8+" + +Math.round(data.attributes["wil"].pool / 2) + " + " + data.stun.mod);
 			}
 		}
 
@@ -68,7 +63,6 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.physical.base = data.attributes["rea"].pool + data.attributes["int"].pool;
 			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
 			data.initiative.physical.dicePool = data.initiative.physical.dice + data.initiative.physical.diceMod;
-			console.log("Initiative: " + data.initiative.physical.dicePool);
 
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
@@ -147,11 +141,10 @@ export class Shadowrun6Actor extends Actor {
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
 			if (item.type == "gear" && item.data && item.data.skill) {
-				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
+				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool; 
 				// TODO: Check if actor has specialization or mastery
+				item.data.pool = item.data.pool + eval(item.data.modifier); 
 				console.log("Pool for item " + item.name + ": " + item.data.pool);
-
-
 			};
 		});
 		console.log("_prepareItemPools done");

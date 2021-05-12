@@ -79,7 +79,32 @@ export class Shadowrun6ActorSheet extends ActorSheet {
             let value = element.value;
             const itemId = this._getClosestData($(event.currentTarget), 'item-id');
             const field = element.dataset.field;
+				console.log("Update field "+field+" with "+value);
             this.actor.items.get(itemId).update({ [field]: value });
+        });
+         html.find('[data-check]').click(event => {
+            const element = event.currentTarget;
+				console.log("Came here with checked="+element.checked+"  and value="+element.value);
+            let value = element.checked;
+            const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+            const field = element.dataset.check;
+				console.log("Update field "+field+" with "+value);
+            this.actor.items.get(itemId).update({ [field]: value });
+        });
+ 		  //Collapsible
+		  html.find('.collapsible').click(event => {
+			   console.log("collapsible");
+            const element = event.currentTarget;
+				element.classList.toggle("collapsed");
+//				let content = element.parentElement.parentElement.nextElementSibling; 
+				let content = element.nextElementSibling.firstElementChild.firstElementChild; 
+				if (content.style.maxHeight){
+      			content.style.maxHeight = null;
+    			} else {
+      			content.style.maxHeight = content.scrollHeight + "px";
+    			}     
+				//let content2 = element.closest('div').nextAll(':has(.content):first').find('.content');
+			   console.log("collapsible done: "+content.style.maxHeight+" , active="+element.classList);
         });
 
 	/*
