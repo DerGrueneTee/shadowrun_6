@@ -48,19 +48,19 @@ export class Shadowrun6Actor extends Actor {
 
 		if (actorData.type === "Player" || actorData.type === "NPC") {
 			if (data.physical) {
-			  data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
-			  data.physical.max = data.physical.base + data.physical.mod;
-			  data.physical.value = data.physical.max - data.physical.dmg;
-			  console.log("Set Physical to " + data.physical.max+" = 8+"+ +Math.round(data.attributes["bod"].pool / 2)+" + "+data.physical.mod);
-			  console.log("Set Physical to " + data.physical.max+" = 8+"+ +Math.round(data.attributes["bod"].pool / 2)+" + "+data.physical.mod);
+				data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
+				data.physical.max = data.physical.base + data.physical.mod;
+				data.physical.value = data.physical.max - data.physical.dmg;
+				console.log("Set Physical to " + data.physical.max + " = 8+" + +Math.round(data.attributes["bod"].pool / 2) + " + " + data.physical.mod);
+				console.log("Set Physical to " + data.physical.max + " = 8+" + +Math.round(data.attributes["bod"].pool / 2) + " + " + data.physical.mod);
 			}
-			
-			if (data.stun) {
-			data.stun.base = 8 + Math.round(data.attributes["wil"].pool / 2);
-			data.stun.max = data.stun.base + data.stun.mod;
-			data.stun.value = data.stun.max - data.stun.dmg;
 
-			console.log("Set Stun to " + data.stun.max+" = 8+"+ +Math.round(data.attributes["wil"].pool / 2)+" + "+data.stun.mod);
+			if (data.stun) {
+				data.stun.base = 8 + Math.round(data.attributes["wil"].pool / 2);
+				data.stun.max = data.stun.base + data.stun.mod;
+				data.stun.value = data.stun.max - data.stun.dmg;
+
+				console.log("Set Stun to " + data.stun.max + " = 8+" + +Math.round(data.attributes["wil"].pool / 2) + " + " + data.stun.mod);
 			}
 		}
 
@@ -68,7 +68,7 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.physical.base = data.attributes["rea"].pool + data.attributes["int"].pool;
 			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
 			data.initiative.physical.dicePool = data.initiative.physical.dice + data.initiative.physical.diceMod;
-			console.log("Initiative: "+data.initiative.physical.dicePool);
+			console.log("Initiative: " + data.initiative.physical.dicePool);
 
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
@@ -125,7 +125,7 @@ export class Shadowrun6Actor extends Actor {
 	_prepareSkills() {
 		const actorData = this.data;
 		const data = this.data.data;
-		console.log("PrepareSkills "+this.name);
+		console.log("PrepareSkills " + this.name);
 		// Only calculate for PCs - ignore for NPCs/Critter
 		if (actorData.type === "Player" || actorData.type === "NPC") {
 			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function(skillDef, id) {
@@ -142,16 +142,16 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	_prepareItemPools() {
 		const actorData = this.data;
-		console.log("_prepareItemPools "+this.name);
-		
+		console.log("_prepareItemPools " + this.name);
+
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
 			if (item.type == "gear" && item.data && item.data.skill) {
 				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
 				// TODO: Check if actor has specialization or mastery
 				console.log("Pool for item " + item.name + ": " + item.data.pool);
-				
-				
+
+
 			};
 		});
 		console.log("_prepareItemPools done");
@@ -197,24 +197,44 @@ export class Shadowrun6Actor extends Actor {
 		const item = this.items.get(itemId);
 		const value = skl.pool;
 		const parts = [];
+		let targetId = this.userHasTargets() ? this.getUsersFirstTargetId() : null;
+		let title;
+		if (this.userHasTargets()) {
+			title = item.name + " (" + game.i18n.localize("skill." + skillId) + ")" + game.i18n.localize("shadowrun6.roll.target") + game.actors.get(targetId).name;
+		} else {
+			title = item.name + " (" + game.i18n.localize("skill." + skillId) + ")";
+		}
 
 		// Roll and return
 		let data = mergeObject(options, {
 			parts: parts,
 			value: value,
-			title: item.name + " ("+game.i18n.localize("skill." + skillId) +")",
+			title: title,
 			skill: skl,
-			item: item
+			item: item,
+			targetId: targetId
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(data);
 	}
 
+	getUsersFirstTargetId() {
+		if (this.userHasTargets()) {
+			return game.user.targets.values().next().value.data.actorId;
+		} else {
+			return null;
+		}
+	}
 
-    async rollAttack(attackId, options = {}) {
-		  console.log("rollAttack("+attackId+", options="+options+")");
-        const actorData = this.data.data;
-		  console.log("NOT IMPLEMENTED YET");
-    }
+	userHasTargets() {
+		let user = game.user;
+		return user.targets.size > 0;
+	}
+
+	async rollAttack(attackId, options = {}) {
+		console.log("rollAttack(" + attackId + ", options=" + options + ")");
+		const actorData = this.data.data;
+		console.log("NOT IMPLEMENTED YET");
+	}
 
 }

@@ -108,7 +108,8 @@
             "glitch": "Glitch",
             "criticalglitch": "Critical glitch",
             "nosuccess": "hits, threshold: ",
-            "damage" : "Damage: "
+            "damage" : "Damage: ",
+            "target" : "Target: "
         },
         "rollType": {
             "normal": "Roll dice",
