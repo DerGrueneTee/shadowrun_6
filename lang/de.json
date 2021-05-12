@@ -13,6 +13,16 @@
 		      	"overview": "Übersicht"
 		      }
         },
+		  "derived": {
+				"attack_rating" : "Angriffswert",
+				"defense_rating": "Verteidigungswert",
+				"resist_damage" : "Schadenswiderstand",
+				"resist_toxin"  : "Toxinwiderstand",
+				"composure"     : "Sebstbeherrschung",
+				"judge_intentions": "Menschenkenntnis",
+				"memory"        : "Erinnerungsvermögen",
+				"lift_carry"    : "Heben / Tragen"
+        },
 		  "initiative": {
 				"physical": "Initiative",
 				"matrix"  : "Matrix-Initiative",

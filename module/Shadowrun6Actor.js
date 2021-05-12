@@ -74,6 +74,48 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 		}
+		
+		/* (Unarmed) Attack and Defense Rating */
+		if (data.derived) {
+			// Attack Rating
+			data.derived.attack_rating.base = data.attributes["rea"].pool + data.attributes["str"].pool;
+			data.derived.attack_rating.pool = data.derived.attack_rating.base + data.derived.attack_rating.mod;
+			// Defense Rating
+			if (data.derived.defense_rating) {				
+				data.derived.defense_rating.base = data.attributes["bod"].pool;
+				data.derived.defense_rating.pool = data.derived.defense_rating.base + data.derived.defense_rating.mod;
+			}
+			// Composure
+			if (data.derived.composure) {				
+				data.derived.composure.base = data.attributes["wil"].pool + data.attributes["cha"].pool;
+				data.derived.composure.pool = data.derived.composure.base + data.derived.composure.mod;
+			}
+			// Judge Intentions
+			if (data.derived.judge_intentions) {				
+				data.derived.judge_intentions.base = data.attributes["wil"].pool + data.attributes["int"].pool;
+				data.derived.judge_intentions.pool = data.derived.judge_intentions.base + data.derived.judge_intentions.mod;
+			}
+			// Memory
+			if (data.derived.memory) {				
+				data.derived.memory.base = data.attributes["log"].pool + data.attributes["int"].pool;
+				data.derived.memory.pool = data.derived.memory.base + data.derived.memory.mod;
+			}
+			// Lift/Carry
+			if (data.derived.lift_carry) {				
+				data.derived.lift_carry.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
+				data.derived.lift_carry.pool = data.derived.lift_carry.base + data.derived.lift_carry.mod;
+			}
+			// Soak / Damage Resistance
+			if (data.derived.resist_damage) {				
+				data.derived.resist_damage.base = data.attributes["bod"].pool;
+				data.derived.resist_damage.pool = data.derived.resist_damage.base + data.derived.resist_damage.mod;
+			}
+			// Toxin Resistance
+			if (data.derived.resist_toxin) {				
+				data.derived.resist_toxin.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
+				data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
+			}
+		}
 	}
 
 	//---------------------------------------------------------
@@ -86,25 +128,6 @@ export class Shadowrun6Actor extends Actor {
 		console.log("PrepareSkills "+this.name);
 		// Only calculate for PCs - ignore for NPCs/Critter
 		if (actorData.type === "Player" || actorData.type === "NPC") {
-			/*
-			actorData.items.forEach(tmpItem => {
-				let item = tmpItem.data;
-				if (item.type == "skill-value" && item.data.id != "knowledge" && item.data.id != "language") {
-					try {
-						let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(item.data.id);
-						if (!skillDef) {
-							console.log("No skill definition for " + skillDef);
-						}
-						let attr = skillDef.attrib;
-						let attribVal = data.attributes[attr].pool;
-						item.data.pool = attribVal + item.data.points;
-					} catch (e) {
-						console.log("Error for skill " + item.data.id + ": " + e);
-					}
-				};
-			});
-			*/
-
 			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function(skillDef, id) {
 				let attr = skillDef.attrib;
 				let attribVal = data.attributes[attr].pool;

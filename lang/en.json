@@ -13,6 +13,16 @@
 					"overview": "Overview"
 		      }
         },
+		  "derived": {
+				"attack_rating" : "Attack Rating",
+				"defense_rating": "Defense Rating",
+				"resist_damage" : "Soak",
+				"resist_toxin"  : "Resist Toxin",
+				"composure"     : "Composure",
+				"judge_intentions": "Judge Intentions",
+				"memory"        : "Memory",
+				"lift_carry"    : "Lift / Carry"
+        },
 		  "initiative": {
 				"physical": "Initiative",
 				"matrix"  : "Matrix-Initiative",

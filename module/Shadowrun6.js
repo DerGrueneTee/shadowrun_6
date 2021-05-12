@@ -124,7 +124,7 @@ Hooks.once('diceSoNiceReady', (dice3d) => {
   dice3d.addDicePreset({
     type: "d6",
     labels: [
-      "1","2","3","4",
+      "","2","3","4",
       "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
       "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
     ],
@@ -162,7 +162,7 @@ dice3d.addColorset({
   outline: '#2e2b2e',
   texture: 'none',
   edge: '#470146',
-  material: 'glass',
+  material: 'metal',
   font: 'Arial Black',
   fontScale:{
      "d6":1.1,

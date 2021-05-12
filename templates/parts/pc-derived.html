@@ -15,12 +15,77 @@
 				id="dataPhyMod" style="width: 2em" title="{{data.data.physical.modString}}"></td>
 				<td class="centered">{{data.data.physical.max}}</td>
 			</tr>
+			<!-- Stun Condition Monitor -->
 			<tr>
 				<td><b>{{ localize 'shadowrun6.monitor.stun' }}</b></td>
 				<td class="centered"><label class="centered" >{{data.data.stun.base}}</label></td>
 				<td><input class="centered health-stun" name="data.stun.mod" type="text" value="{{data.data.stun.mod}}" data-dtype="Number"
 				id="dataStunMod" style="width: 2em" title="{{data.data.stun.modString}}"></td>
 				<td class="centered">{{data.data.stun.max}}</td>
+			</tr>
+			<!-- Attack Rating -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.attack_rating' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.attack_rating.base}}</label></td>
+				<td><input class="centered box" name="data.derived.attack_rating.mod" type="text" value="{{data.data.derived.attack_rating.mod}}" data-dtype="Number"
+				id="derived1" style="width: 2em" title="{{data.data.derived.attack_rating.modString}}"></td>
+				<td class="centered">{{data.data.derived.attack_rating.pool}}</td>
+			</tr>
+			<!-- Defense Rating -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.defense_rating' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.defense_rating.base}}</label></td>
+				<td><input class="centered box" name="data.derived.defense_rating.mod" type="text" value="{{data.data.derived.defense_rating.mod}}" data-dtype="Number"
+				  style="width: 2em" title="{{data.data.derived.defense_rating.modString}}"></td>
+				<td class="centered">{{data.data.derived.defense_rating.pool}}</td>
+			</tr>
+			<!-- Soak / Resist Damage-->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.resist_damage' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.resist_damage.base}}</label></td>
+				<td><input class="centered box" name="data.derived.resist_damage.mod" type="text" value="{{data.data.derived.resist_damage.mod}}" data-dtype="Number"
+				  style="width: 2em" title="{{data.data.derived.resist_damage.modString}}"></td>
+				<td class="centered">{{data.data.derived.resist_damage.pool}}</td>
+			</tr>
+			<!-- Resist Toxin -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.resist_toxin' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.resist_toxin.base}}</label></td>
+				<td><input class="centered box" name="data.derived.resist_toxin.mod" type="text" value="{{data.data.derived.resist_toxin.mod}}" data-dtype="Number"
+				  style="width: 2em" title="{{data.data.derived.resist_toxin.modString}}"></td>
+				<td class="centered">{{data.data.derived.resist_toxin.pool}}</td>
+			</tr>
+			<!-- Composure -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.composure' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.composure.base}}</label></td>
+				<td><input class="centered box" name="data.derived.composure.mod" type="text" value="{{data.data.derived.composure.mod}}" data-dtype="Number"
+				id="derived1" style="width: 2em" title="{{data.data.derived.composure.modString}}"></td>
+				<td class="centered">{{data.data.derived.composure.pool}}</td>
+			</tr>
+			<!-- Judge Intentions -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.judge_intentions' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.judge_intentions.base}}</label></td>
+				<td><input class="centered box" name="data.derived.judge_intentions.mod" type="text" value="{{data.data.derived.judge_intentions.mod}}" data-dtype="Number"
+				id="derived1" style="width: 2em" title="{{data.data.derived.judge_intentions.modString}}"></td>
+				<td class="centered">{{data.data.derived.judge_intentions.pool}}</td>
+			</tr>
+			<!-- Memory -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.memory' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.memory.base}}</label></td>
+				<td><input class="centered box" name="data.derived.memory.mod" type="text" value="{{data.data.derived.memory.mod}}" data-dtype="Number"
+				id="derived1" style="width: 2em" title="{{data.data.derived.memory.modString}}"></td>
+				<td class="centered">{{data.data.derived.memory.pool}}</td>
+			</tr>
+			<!-- Lift/Carry -->
+			<tr>
+				<td><b>{{ localize 'shadowrun6.derived.lift_carry' }}</b></td>
+				<td class="centered"><label >{{data.data.derived.lift_carry.base}}</label></td>
+				<td><input class="centered box" name="data.derived.lift_carry.mod" type="text" value="{{data.data.derived.lift_carry.mod}}" data-dtype="Number"
+				id="derived1" style="width: 2em" title="{{data.data.derived.lift_carry.modString}}"></td>
+				<td class="centered">{{data.data.derived.lift_carry.pool}}</td>
 			</tr>
 		</table>
 	</div>
