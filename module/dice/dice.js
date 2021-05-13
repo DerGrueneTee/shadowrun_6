@@ -159,26 +159,31 @@ async function _attackRollDialog({ data, foo } = {}) {
   const html = await renderTemplate(template, dialogData);
   const title = data.title;
 
-let d = new CombatDialog({
-  title: title,
-  content: html,
-  buttons: {
-    normal: {
-      label: game.i18n.localize("shadowrun6.rollType.normal"),
-      callback: html => resolve(foo(0, html[0].querySelector("form"), data))
-    }
-  },
-  default: "normal",
-  render: html => console.log("Register interactivity in the rendered dialog"),
-  close: () => resolve(null) 
-});
-  // Create the Dialog window
-  return new Promise(resolve => d.render(true));
+  return new Promise(resolve => {
+    new CombatDialog({
+      title: title,
+      content: html,
+      buttons: {
+        normal: {
+          label: game.i18n.localize("shadowrun6.rollType.normal"),
+          callback: html => resolve(foo(0, html[0].querySelector("form"), data))
+        },
+        bought: {
+          label: game.i18n.localize("shadowrun6.rollType.bought"),
+          callback: html => resolve(foo(1, html[0].querySelector("form"), data))
+        }
+      },
+      default: "normal",
+      render: html => console.log("Register interactivity in the rendered dialog"),
+      close: () => resolve(null)
+    }).render(true);
+  });
 }
 
 export class CombatDialog extends Dialog{
   activateListeners(html) {
     console.log("foo");
+	super.activateListeners(html);
   }
 }
 

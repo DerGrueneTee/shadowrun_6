@@ -41,8 +41,8 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDerivedAttributes() {
-		let actorData = this.data;
-		let data = this.data.data;
+		const actorData = this.data;
+		const data = this.data.data;
 
 		// Store volatile
 
@@ -65,6 +65,7 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
 			data.initiative.physical.dicePool = Math.min(5, data.initiative.physical.dice + data.initiative.physical.diceMod);
 			
+			data.initiative.actions = data.initiative.physical.dicePool +1;
 
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;

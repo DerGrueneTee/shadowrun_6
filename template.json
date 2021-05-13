@@ -169,7 +169,8 @@
 					"mod": 0,
 					"dice": 1,
 					"diceMod": 0
-				  }
+				  },
+				  "actions": 0
 				}
 			},
 			"skill-template": {
