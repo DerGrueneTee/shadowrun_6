@@ -68,16 +68,6 @@ th {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
-.shadowrun6 .colladpsible:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
-  font-size: 8px;
-  color: white;
-  float: right;
-}
-
-.shadowrun6 .colldpsed:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
-}
 .shadowrun6 input[type="text"]{
         font-variant-numeric: lining-nums;
         border: 0px solid black;
