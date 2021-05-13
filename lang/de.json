@@ -2,7 +2,10 @@
 	"shadowrun6": {
 		  "actor": {
 		      "actions": "Handlungen",
+		      "actions_major": "Haupt",
+		      "actions_minor": "Neben",
 		      "initiative": "Initiative",
+		      "initiative_astral": "Astrale Initiative",
 		      "nav": {
 		      	"basics": "Allgemein",
 					"combat": "Kampf",
@@ -11,7 +14,8 @@
 		      	"input": "Eingabe",
 		      	"skills": "Fertigkeiten",
 		      	"overview": "Übersicht"
-		      }
+		      },
+		      "skills": "Fertigkeiten"
         },
 		  "derived": {
 				"attack_rating" : "Angriffswert",

@@ -62,7 +62,8 @@ export class Shadowrun6Actor extends Actor {
 		if (data.initiative) {
 			data.initiative.physical.base = data.attributes["rea"].pool + data.attributes["int"].pool;
 			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
-			data.initiative.physical.dicePool = data.initiative.physical.dice + data.initiative.physical.diceMod;
+			data.initiative.physical.dicePool = Math.min(5, data.initiative.physical.dice + data.initiative.physical.diceMod);
+			
 
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;

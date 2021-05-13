@@ -145,31 +145,31 @@
 			},
 			"initiative-template": {
 				"initiative": {
-				"astral": {
+				  "astral": {
 					"mod": 0,
 					"dice": 1,
 					"diceMod": 0
-				},
-				"matrixar": {
+				  },
+				  "matrixar": {
 					"mod": 0,
 					"dice": 1,
 					"diceMod": 0
-				},
-				"matrixcold": {
+				  },
+				  "matrixcold": {
 					"mod": 0,
 					"dice": 2,
 					"diceMod": 0
-				},
-				"matrixhot": {
+				  },
+			     "matrixhot": {
 					"mod": 0,
 					"dice": 3,
 					"diceMod": 0
-				},
-				"physical": {
+				  },
+				  "physical": {
 					"mod": 0,
 					"dice": 1,
 					"diceMod": 0
-				}
+				  }
 				}
 			},
 			"skill-template": {
