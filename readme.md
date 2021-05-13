@@ -22,12 +22,18 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * German and English language support
  * Edge Tracking
  * Qualities (not their effects though)
+ * (since 0.2.x) More derived attributes shown on the "Basics"-Tab
+ * (since 0.2.x) An extra page with weapons and the possibility to make attack rolls with them
+ * (since 0.2.x) Having selected a target, the weapons attack rating and defense rating are shown in the roll dialog
+ * (since 0.2.x) Rolling initiative is working now
+ * (since 0.2.x) Compatible with "Dice so Nice"
+ * (since 0.2.x) Improve NPC sheet: Have skills on "Overview"-Tab, calculate initiative and actions, allow dice rolls
  
 ### Not working yet ###
  * Skill specializations
  * Auto-calculating modifiers from condition monitors
  * Gear and everything else character related (Powers, Spells ...)
- * Other actor types than SCs
+ * Critters, better NPC support
 
 ## The future ##
 Progess is rather slow, since Genesis and other projects keeps me busy. But I intend to keep adding functionality, until you can at least completely see everything you have in your Genesis character. 
