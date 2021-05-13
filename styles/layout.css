@@ -171,4 +171,6 @@ input.centered {
 .important-column {
 	font-weight: bold;
 }
-
+.shadowrun6 .sheet-tabs {
+	background-color: rgba(255,255,255,0.3);
+}
