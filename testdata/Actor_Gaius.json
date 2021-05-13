@@ -97,6 +97,48 @@
         "dice": 2
       }
     },
+    "derived": {
+      "attack_rating": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      },
+      "defense_rating": {
+        "base": 16,
+        "mod": 0,
+        "pool": 16
+      },
+      "composure": {
+        "base": 13,
+        "mod": 0,
+        "pool": 0
+      },
+      "judge_intentions": {
+        "base": 10,
+        "mod": 0,
+        "pool": 0
+      },
+      "memory": {
+        "base": 7,
+        "mod": 0,
+        "pool": 0
+      },
+      "lift_carry": {
+        "base": 9,
+        "mod": 0,
+        "pool": 0
+      },
+      "resist_damage": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4
+      },
+      "resist_toxin": {
+        "base": 9,
+        "mod": 0,
+        "pool": 9
+      }
+    },
     "skills": {
       "astral": {
         "points": 1,
