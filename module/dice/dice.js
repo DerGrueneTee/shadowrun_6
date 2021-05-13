@@ -36,7 +36,9 @@ export async function doRoll(data, messageData = {}) {
 
   // Create the Roll instance
   const _r = await _rollDialog({ data, foo: _roll });
-  _r.toMessage(messageData);
+  if (_r) {
+    _r.toMessage(messageData);
+  }
   return _r;
 }
 

@@ -1,6 +1,7 @@
 import { SR6 } from "./config.js";
-import { Shadowrun6ActorSheet } from "./sheets/ActorSheetPC.js";
-import { Shadowrun6ActorNPCSheet } from "./sheets/ActorSheetNPC.js";
+import { Shadowrun6ActorSheet } from "./sheets/SR6ActorSheet.js";
+import { Shadowrun6ActorSheetPC } from "./sheets/ActorSheetPC.js";
+import { Shadowrun6ActorSheetNPC } from "./sheets/ActorSheetNPC.js";
 import { QualityItemSheet } from "./sheets/ItemSheetQuality.js";
 import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
@@ -38,8 +39,8 @@ Hooks.once("init", async function () {
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheet, { types: ["Player"], makeDefault: true });
-  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorNPCSheet, { types: ["NPC"], makeDefault: true });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetPC, { types: ["Player"], makeDefault: true });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetNPC, { types: ["NPC"], makeDefault: true });
 
   Items.registerSheet("shadowrun6-eden", QualityItemSheet, { types: ["quality"], makeDefault: true });
   Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear"], makeDefault: true });

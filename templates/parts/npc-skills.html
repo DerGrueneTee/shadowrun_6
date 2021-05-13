@@ -1,0 +1,11 @@
+<dt>{{ localize 'shadowrun6.actor.skills' }}</dt>
+<dd>
+	<!-- Action skills -->
+   {{#each skills as |skill id|}}
+   {{#iff skill.points ">" 0}}
+   <label class="skill-key rollable skill-name skill-roll" data-skill="{{id}}">{{localize (concat "skill." id ) }}</label>
+   <label type="number" name="data.skills.{{id}}.points" style="font-weight: bold">{{skill.points}}</label>
+   <a class="item-control skill-roll" data-skill="{{id}}" title="Roll"><i class="fas fa-dice-six"></i></a> ,
+   {{/iff}}
+   {{/each}}
+</dd>

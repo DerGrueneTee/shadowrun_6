@@ -87,6 +87,19 @@ th {
  
         font-weight: bold;
  }
+dt {
+  float: left;
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+dt::after { 
+  content: ": "; 
+}
+dd::after {
+  clear: left;
+  content: " ";
+  display: block;
+}
 input.centered {
 	text-align: center;
 }
