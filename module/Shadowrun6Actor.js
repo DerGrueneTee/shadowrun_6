@@ -40,8 +40,8 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDerivedAttributes() {
-		const actorData = this.data;
-		const data = this.data.data;
+		let actorData = this.data;
+		let data = this.data.data;
 
 		// Store volatile
 
