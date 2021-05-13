@@ -129,13 +129,13 @@ Hooks.once("init", async function () {
     dice3d.addDicePreset({
       type: "d6",
       labels: [
-        "", "2", "3", "4",
-        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
-        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
+        "", "2", "3", "4", "5", "6"
+//        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
+//        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
       ],
-      bumpMaps: [, , , ,
-        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
-        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
+      bumpMaps: [, , , , ,
+//        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
+//        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
       ],
       colorset: "SR6_dark",
       system: "SR6"
