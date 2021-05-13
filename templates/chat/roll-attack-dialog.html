@@ -1,0 +1,48 @@
+<form class="calc-edge">
+    {{#if data.extraText}}
+    <h3>{{data.extraText}}</h3>
+    {{/if}}
+    <hr/>
+    <div class="form-group">
+        {{localize "shadowrun6.roll.attackRating"}}
+        <select name="attackRating">
+            {{#select attackRating}}
+            {{#each data.item.data.data.attackRating as |rating id|}}
+            <option value="{{data.attackRating}}">{{localize (concat "shadowrun6.roll.ar_" id)}} - ({{rating}})</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <label>{{localize "shadowrun6.roll.defRating"}}</label>
+        <input type="number" name="defRating" value="{{data.defRating}}" />
+    </div>
+    {{#if data.edgeText}}
+        <label>{{data.edgeText}}</label>
+    {{/if}}
+    <hr/>
+    <div class="form-group">
+        <label>{{localize "shadowrun6.roll.threshold"}}</label>
+        <input type="text" name="threshold" value="{{data.threshold}}" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "shadowrun6.roll.explode"}}</label>
+        <input type="checkbox" name="explode" value="{{data.explode}}" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "shadowrun6.roll.wilddie"}}</label>
+        <input type="checkbox" name="wilddie" value="{{data.wilddie}}" />
+    </div>
+    <div class="form-group">
+        <label>{{localize "shadowrun6.roll.modifier"}}</label>
+        <input type="text" name="modifier" value="{{data.modifier}}" />
+    </div>
+    <div class="form-group">
+        <label>Modus</label>
+        <select name="rollMode">
+            {{#select rollMode}}
+            {{#each rollModes as |label mode|}}
+            <option value="{{mode}}">{{localize label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+    </div>
+</form>

@@ -102,7 +102,7 @@
             "subject": "Chatmessage",
             "pool": "Pool",
             "threshold": "Threshold",
-            "explode": "Exploded",
+            "explode": "Explode",
             "failure": "Failure",
             "wilddie": "Use wild die",
             "modifier": "Pool modifier",
@@ -112,7 +112,16 @@
             "criticalglitch": "Critical glitch",
             "nosuccess": "hits, threshold: ",
             "damage" : "Damage: ",
-            "target" : "Target: "
+            "target" : "Target: ",
+            "attack" : "Attack",
+            "with" : "with",
+            "ar_0": "Close",
+            "ar_1": "Near",
+            "ar_2": "Medium",
+            "ar_3": "Far",
+            "ar_4": "Extreme",
+            "defRating": "Defense: ",
+            "attackRating": "Att.Rtg:"
         },
         "rollType": {
             "normal": "Roll dice",

@@ -1,4 +1,5 @@
 import { doRoll } from "../module/dice/dice.js";
+import { doAttackRoll } from "../module/dice/dice.js";
 import { SR6 } from "./config.js";
 
 /**
@@ -40,8 +41,8 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDerivedAttributes() {
-		const actorData = this.data;
-		const data = this.data.data;
+		let actorData = this.data;
+		let data = this.data.data;
 
 		// Store volatile
 
@@ -191,14 +192,8 @@ export class Shadowrun6Actor extends Actor {
 		const value = skl.pool;
 		const parts = [];
 		let targetId = this.userHasTargets() ? this.getUsersFirstTargetId() : null;
-		let title;
-		if (this.userHasTargets()) {
-			title = item.name + " (" + game.i18n.localize("skill." + skillId) + ")" + game.i18n.localize("shadowrun6.roll.target") + game.actors.get(targetId).name;
-		} else {
-			title = item.name + " (" + game.i18n.localize("skill." + skillId) + ")";
-		}
+		let title = item.name + " (" + game.i18n.localize("skill." + skillId) + ")";
 
-		// Roll and return
 		let data = mergeObject(options, {
 			parts: parts,
 			value: value,
@@ -208,7 +203,7 @@ export class Shadowrun6Actor extends Actor {
 			targetId: targetId
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doRoll(data);
+		return doAttackRoll(data);
 	}
 
 	getUsersFirstTargetId() {
