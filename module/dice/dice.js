@@ -35,10 +35,10 @@ export async function doRoll(data, messageData = {}) {
   }
 
   // Create the Roll instance
-  console.log("Await start");
   const _r = await _rollDialog({ data, foo: _roll });
-  console.log("Await done");
-  _r.toMessage(messageData);
+  if (_r) {
+    _r.toMessage(messageData);
+  }
   return _r;
 }
 
