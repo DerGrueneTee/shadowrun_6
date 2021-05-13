@@ -50,7 +50,7 @@ export function itemCheck(itemType, itemName, actorId = "", itemId = "") {
         }
 
     } else {
-        ui.notifications.info(game.i18n.localize("splittermond.pleaseSelectAToken"));
+        ui.notifications.info(game.i18n.localize("shadowrun6.message.pleaseSelectAToken"));
     }
 
 
