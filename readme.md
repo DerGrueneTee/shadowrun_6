@@ -12,6 +12,8 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 
 **Discussion:** [Discord](https://discord.gg/vKBcE2CZ)
 
+**For Support:** [Patreon](https://patreon.com/rpgframework)
+
 ## Features ##
 
 ### Working ###
