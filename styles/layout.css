@@ -173,6 +173,9 @@ input.centered {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
+.collapsible-content.open {
+  max-height: 200px;
+}
 button.collapsible {
 	width: 1.5em;
 	padding: 0.1em;
@@ -186,7 +189,7 @@ button:before {
   visibility: visible;
   font-size: 13px;
 }
-button.collapsed:before {
+button.open:before {
 	content: "\2796"; /* Unicode character for "minus" sign (-) */
 	font-size: 13px;
 }

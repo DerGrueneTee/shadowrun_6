@@ -10,6 +10,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		data.config = CONFIG.SR6;
 		return data;
 	}
+	
+	async  _test() {
+		console.log("Bla");
+		return 4;
+	}
 
 	/**
 	 * Activate event listeners using the prepared sheet HTML
@@ -80,18 +85,23 @@ export class Shadowrun6ActorSheet extends ActorSheet {
         });
  		  //Collapsible
 		  html.find('.collapsible').click(event => {
-			   console.log("collapsible");
             const element = event.currentTarget;
-				element.classList.toggle("collapsed");
-//				let content = element.parentElement.parentElement.nextElementSibling; 
+				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+				const item = this.actor.items.get(itemId);
+				console.log("Collapsible: old styles are '"+element.classList+"'' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
+				element.classList.toggle("open");
 				let content = element.parentElement.parentElement.nextElementSibling.firstElementChild.firstElementChild; 
 				if (content.style.maxHeight){
       			content.style.maxHeight = null;
     			} else {
       			content.style.maxHeight = content.scrollHeight + "px";
-    			}     
-				//let content2 = element.closest('div').nextAll(':has(.content):first').find('.content');
-			   console.log("collapsible done: "+content.style.maxHeight+" , active="+element.classList);
+    			}
+				console.log("Collapsible: temp style are '"+element.classList);
+				let value = element.classList.contains("open")?"open":"closed";
+				console.log("Update flag 'collapse-state' with "+value);
+				this.actor.items.get(itemId).data.flags["shadowrun6-eden"]["collapse-state"] = value;
+				//item.setFlag("shadowrun6-eden","collapse-state",value);
+				console.log("Collapsible: new styles are '"+element.classList+"' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
         });
 
 	/*
