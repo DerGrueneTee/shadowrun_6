@@ -84,7 +84,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
             const element = event.currentTarget;
 				element.classList.toggle("collapsed");
 //				let content = element.parentElement.parentElement.nextElementSibling; 
-				let content = element.nextElementSibling.firstElementChild.firstElementChild; 
+				let content = element.parentElement.parentElement.nextElementSibling.firstElementChild.firstElementChild; 
 				if (content.style.maxHeight){
       			content.style.maxHeight = null;
     			} else {
