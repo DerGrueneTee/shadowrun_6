@@ -116,7 +116,7 @@
             "criticalglitch": "Kritischer Patzer",
             "nosuccess": "Erfolge bei Schwellenwert ",
             "damage": "Schaden: ",
-            "target" : "Ziel: ",
+            "target" : "Ziel",
             "attack" : "Angriff gegen ",
             "with" : "mit ",
             "ar_0": "Sehr nah",
@@ -126,7 +126,11 @@
             "ar_4": "Sehr weit",
             "defRating": "VTD",
             "edge": "Edge",
-            "attackRating": "Angr:"
+            "attackRating": "Angr:",
+            "notarget" : "Kein Ziel ausgewählt",
+            "edgegain" : "Edge-Gewinn (max): ",
+            "edgegain_player" : " (Spieler)",
+            "noedgegain": "Kein Edge-Gewinn"
 
         },
         "rollType": {

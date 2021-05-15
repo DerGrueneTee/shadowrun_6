@@ -116,7 +116,7 @@
             "criticalglitch": "Critical glitch",
             "nosuccess": "hits, threshold: ",
             "damage" : "Damage: ",
-            "target" : "Target: ",
+            "target" : "Target",
             "attack" : "Attack",
             "with" : "with",
             "ar_0": "Close",
@@ -125,7 +125,11 @@
             "ar_3": "Far",
             "ar_4": "Extreme",
             "defRating": "Defense: ",
-            "attackRating": "Att.Rtg:"
+            "attackRating": "Att.Rtg:",
+            "notarget": "No target selected",
+            "edgegain" : "Edge-Gain (max): ",
+            "edgegain_player" : " (Player)",
+            "noedgegain": "No edge gain"
         },
         "rollType": {
             "normal": "Roll dice",
