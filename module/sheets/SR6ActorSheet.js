@@ -99,7 +99,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 //				console.log("Collapsible: temp style are '"+element.classList);
 				let value = element.classList.contains("open")?"open":"closed";
 //				console.log("Update flag 'collapse-state' with "+value);
-				item.data.flags["shadowrun6-eden"]["collapse-state"] = value;
+//				item.data.flags["shadowrun6-eden"]["collapse-state"] = value;
 				item.setFlag("shadowrun6-eden","collapse-state",value);
 //				console.log("Collapsible: new styles are '"+element.classList+"' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
         });
