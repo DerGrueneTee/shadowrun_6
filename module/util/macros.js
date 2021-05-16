@@ -28,9 +28,9 @@ export function itemCheck(itemType, itemName, actorId = "", itemId = "") {
     if (actor) {
         let item;
         if (itemId) {
-            item = actor.data.items.find(el => el._id === itemId)
+            item = actor.data.items.find(el => el.id === itemId)
             if (!item) {
-                item = game.data.items.find(el => el._id === itemId);
+                item = game.data.items.find(el => el.id === itemId);
                 item = actor.data.items.find(el => el.name === item?.name && el.type === item?.type)
             }
         } else {
@@ -43,7 +43,7 @@ export function itemCheck(itemType, itemName, actorId = "", itemId = "") {
             }
 
             if (item.type === "gear" && item.data.data.type=="WEAPON_RANGED") {
-                actor.rollAttack(item._id);
+                actor.rollAttack(item.id);
             }
         } else {
             ui.notifications.error(game.i18n.localize("shadowrun6.invalidItem"));

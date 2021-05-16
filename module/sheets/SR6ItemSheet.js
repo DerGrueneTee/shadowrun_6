@@ -27,7 +27,7 @@ export class SR6ItemSheet extends ItemSheet {
       html.find('[data-field]').change(event => {
         const element = event.currentTarget;
         let value = element.value;
-        const itemId = this.object.data._id;
+        const itemId = this.object.data.id;
         const field = element.dataset.field;
         this.actor.items.get(itemId).update({ [field]: value });
       });

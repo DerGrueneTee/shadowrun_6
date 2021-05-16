@@ -112,11 +112,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
             const itemId = event.currentTarget.dataset.itemId;
             if (itemId) {
 			 		 console.log("Item "+itemId+" dragged");
-                const itemData = this.actor.data.items.find(el => el._id === itemId);
+                const itemData = this.actor.data.items.find(el => el.id === itemId);
                 event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify({
                     type: "Item",
                     data: itemData,
-                    actorId: this.actor._id
+                    actorId: this.actor.id
                 }));
                 event.stopPropagation();
                 return;

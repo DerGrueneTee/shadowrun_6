@@ -7,12 +7,12 @@
 		{{#iff item.type '==' 'gear'}}
 		{{#iff item.data.data.type '==' "WEAPON_FIREARMS"}}
        <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><button class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
          <td><label class="middle-column" >{{attackrating item.data.data.attackRating}}</label></td>
          <td class="skill-pool" style="width: 3em">
          	<label class="item-pool" data-skill="{{item.data.data.skill}}">{{item.data.data.pool}}</label>
-         	<a class="item-control item-roll" data-skill="{{item.data.data.skill}}" data-item-id="{{this._id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         	<a class="item-control item-roll" data-skill="{{item.data.data.skill}}" data-item-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
          </td>
 			<td class="item-controls">
          	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -35,8 +35,8 @@
  		{{#each actor.items as |item id|}} 
 		{{#iff item.type '==' 'gear'}}
 		{{#iff item.data.data.type '==' "WEAPON_CLOSE_COMBAT"}}
-       <tr class="draggable collapsible" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+       <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
          <td><label class="middle-column" >{{attackrating item.data.data.attackRating}}</label></td>
          <td class="skill-pool" style="width: 3em">
@@ -48,7 +48,12 @@
          </td>
        </tr>
        <tr>
-         <td colspan="6"><div class="content">Not implemented yet</div></td>
+         <td colspan="6">
+         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
+         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" data-check="data.wild"     type="checkbox" value="{{item.data.data.wild}}"     data-dtype="Boolean"/><br/>
+         	{{ localize 'shadowrun6.label.poolmod' }} <input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.modifier" type="text"     value="{{item.data.data.modifier}}" data-dtype="Number" style="width: 1.5em"/>
+         	</div>
+         </td>
        </tr>
 		{{/iff}}
 		{{/iff}}

@@ -112,7 +112,7 @@ Hooks.once("init", async function () {
           macroData.name += ` (${actorName})`;
         }
 
-        macroData.command = `game.shadowrun6.itemCheck("${data.data.type}","${data.data.name}","${actorId}","${data.data._id}")`;
+        macroData.command = `game.shadowrun6.itemCheck("${data.data.type}","${data.data.name}","${actorId}","${data.data.id}")`;
 
       }
     };
@@ -200,10 +200,10 @@ Hooks.once("init", async function () {
         bool = a != b;
         break;
       case '&&':
-        boolean = a && b;
+        bool = a && b;
         break;
       case '||':
-        boolean = a || b;
+        bool = a || b;
         break;
       case "contains":
         if (a && b) {
