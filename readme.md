@@ -10,7 +10,7 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 
 **Documentation:** [Wiki](https://rpgframework.atlassian.net/wiki/spaces/SR6FVTT/),  [Roadmap](https://rpgframework.atlassian.net/wiki/spaces/SR6FVTT/pages/1714421761/Roadmap)
 
-**Discussion:** [Discord](https://discord.gg/vKBcE2CZ)
+**Discussion:** [Discord](https://discord.gg/USE9Gte)
 
 **For Support:** [Patreon](https://patreon.com/rpgframework)
 
