@@ -25,7 +25,7 @@
                 <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef" /></td>
             </tr>
         </table>
-    <!-- ********** WAFFEN ********** -->
+        <!-- ********** WAFFEN ********** -->
         {{#if (or
         (eq item.data.data.type "WEAPON_FIREARMS")
         (eq item.data.data.type "WEAPON_RANGED")
@@ -37,27 +37,48 @@
                 <th>{{localize 'shadowrun6.item.damage'}}</th>
                 <th>{{localize 'shadowrun6.item.mode'}}</th>
                 <th>{{localize 'shadowrun6.item.attackvalues'}}</th>
-                <th>{{localize 'shadowrun6.item.ammunition'}}</th>
-                <th>{{localize 'shadowrun6.item.skill'}}</th>
+                <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
             </tr>
             <tr>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
-                <td>
-                    <select name="item.data.data.skill" data-field="data.skill">
-                        {{#select item.data.data.skill}}
-                        {{#each config.SKILLS_WEAPON as |skill id|}}
-                        <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option>
-                        {{/each}}
-                        {{/select}}
-                    </select>
-                </td>            
+                <td><input type="number" value="{{item.data.data.dmg}}" data-field="data.dmg" /></td>
+                <td><input type="text" value="{{item.data.data.modes}}" data-field="data.modes" /></td>
+                <td data-array="data.attackRating">
+                    {{#each item.data.data.attackRating as |rating id|}}
+                    <input type="number" value="{{rating}}" data-array-field data-index="{{id}}" style="width:1em" />
+                    {{/each}}
+                </td>
+                <!-- <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td> -->
             </tr>
         </table>
+        <table>
+            <tr>
+            <th>{{localize 'shadowrun6.item.skill'}}</th>
+            <th>{{localize 'shadowrun6.item.skillspec'}}</th>
+        </tr>
+        <tr>
+            <td>
+                <select name="item.data.data.skill" data-field="data.skill">
+                    {{#select item.data.data.skill}}
+                    {{#each config.SKILLS_WEAPON as |skill id|}}
+                    <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </td>
+            <td>
+                <select name="item.data.data.skillSpec" data-field="data.skillSpec">
+                    {{#select item.data.data.skillSpec}}
+                    <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
+                    <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
+                    <option value="n.a.">n.a</option>
+                    <!-- {{/each}} -->
+                    {{/select}}
+                </select>
+            </td>
+        </tr>
+        </table>
         {{/if}}
-    <!-- ********** Rüstung ********** -->
+        <!-- ********** Rüstung ********** -->
         {{#if (eq item.data.data.type "ARMOR")}}
         <table>
             <tr>
@@ -65,13 +86,14 @@
                 <th>{{localize 'shadowrun6.item.capacity'}}</th>
             </tr>
             <tr>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert"/></td>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td>
+                <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td>
             </tr>
         </table>
         {{/if}}
-    <!-- ********** Beschreibung ********** -->
+        <!-- ********** Beschreibung ********** -->
         <h3>{{localize 'shadowrun6.item.description'}}</h3>
-        <textarea type="text" value="{{item.data.data.description}}" data-field="data.description" cols="20" rows="6">{{item.data.data.description}}</textarea> 
+        <textarea type="text" value="{{item.data.data.description}}" data-field="data.description" cols="20"
+            rows="6">{{item.data.data.description}}</textarea>
     </section>
 </form>

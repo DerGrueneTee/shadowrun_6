@@ -44,7 +44,8 @@
             "ammunition": "Ammo",
             "description": "Description",
             "defencerating": "Defence rtg",
-            "capacity": "Capacity"
+            "capacity": "Capacity",
+            "skillspec" : "Specialisation"
 		  },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
