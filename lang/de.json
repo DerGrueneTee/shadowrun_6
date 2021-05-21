@@ -69,6 +69,7 @@
 				"WEAPON_SPECIAL": "Spezialwaffen"
 		  },
 		  "label": {
+				"accessories": "Zubehör",
 		  		"attribute": "Attribut",
 		  		"base"     : "Basis",
 		  		"damage"   : "Schaden",
@@ -81,6 +82,7 @@
 		  		"pool"     : "Pool",
 		  		"poolmod"  : "Pool-Modifikator",
 		  		"max"      : "Maximum",
+		  		"modifications" : "Modifikationen",
 		  		"modifier" : "Mod.",
 		  		"value"    : "Wert",
 		  		"wilddie"  : "Schicksalswürfel"
@@ -138,6 +140,14 @@
             "bought": "Erfolge kaufen"
         },
         "section": {
+				"ammo" : "Munition",
+				"armor.title" : "Panzerung",
+				"armor.column": {
+					"action" : "Aktion",
+					"name"   : "Name",
+					"defense": "Panz",
+					"social" : "Sozial"
+				},
             "derived": "Abgeleitete Werte",
 			   "initiative": "Initiative",
             "skills.action": "Fertigkeiten",

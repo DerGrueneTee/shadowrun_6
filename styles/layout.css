@@ -93,7 +93,7 @@ dd::after {
   content: " ";
   display: block;
 }
-input.centered {
+.centered {
 	text-align: center;
 }
 .shadowrun6 input[type="text"].secondary {

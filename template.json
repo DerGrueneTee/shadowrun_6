@@ -387,6 +387,7 @@
 			"description": "",
 			"customName": "",
 			"notes": "",
+			"accessories": "",
 			"needsRating": false,
 			"rating": 0,
 			"skill": "",
@@ -396,6 +397,8 @@
 			"dmgDef": "",
 			"attackRating": [0,0,0,0,0],
 			"modes": "",
+			"defense": 0,
+			"social": 0,
 			"templates": [
 				"dice-pool"
 			]

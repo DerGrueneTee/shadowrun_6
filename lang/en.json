@@ -69,6 +69,7 @@
 				"WEAPON_SPECIAL": "Weapon, Special"
 		  },
 		  "label": {
+				"accessories": "Accessories",
 		  		"attribute": "Attribute",
 		  		"base"     : "Base",
 		  		"damage"   : "Damage",
@@ -82,6 +83,7 @@
 		  		"poolmod"  : "Pool modifier",
 		  		"max"      : "Maximum",
 		  		"modifier" : "Adj.",
+		  		"modifications" : "Modifications",
 		  		"value"    : "Value",
 		  		"wilddie"  : "Wild Die"
 		  },
@@ -136,6 +138,14 @@
             "bought": "Buy hits"
         },
         "section": {
+				"ammo" : "Ammunition",
+				"armor.title" : "Armor",
+				"armor.column": {
+					"action" : "Action",
+					"name"   : "Name",
+					"defense": "DR",
+					"social" : "Social"
+				},
             "derived": "Derived Values",
 			   "initiative": "Initiative",
             "skills.action": "Skills",
