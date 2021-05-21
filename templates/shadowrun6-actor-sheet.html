@@ -37,14 +37,12 @@
 
 		{{!-- Basics Tab --}}
 		<div class="tab basics" data-group="primary" data-tab="basics">
-			<div class="attributes">
+			<div class="attributes" style="margin-bottom: 10px">
 				{{> "systems/shadowrun6-eden/templates/parts/attributes-augmented.html" attributes=data.data.attributes}}
 			</div>
 			{{> "systems/shadowrun6-eden/templates/parts/pc-derived.html" attributes=data.data.attributes}}
+		   {{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
 			{{> "systems/shadowrun6-eden/templates/parts/initiatives.html" initiative=data.data.initiative}}
-                <div class="section" style="width: 48%; margin: 10px 0 0 0;">
-{{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
-              </div>
 		</div>
 
 		{{!-- Skills Tab --}}
