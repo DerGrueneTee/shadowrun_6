@@ -44,7 +44,8 @@
             "ammunition": "Munition",
             "description": "Beschreibung",
             "defencerating": "Verteidigungswert",
-            "capacity": "Kapazität"
+            "capacity": "Kapazität",
+            "skillspec" : "Spezialisierung"
         },
 		  "itemtype": {
 				"ACCESSORY": "Zubehör",

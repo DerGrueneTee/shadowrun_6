@@ -37,9 +37,36 @@ export class SR6ItemSheet extends ItemSheet {
         const element = event.currentTarget;
         let value = element.value;
         const field = element.dataset.field;
+        const arrayId = element.dataset.arrayid;
+        if (arrayId) {
+          this.object.update({ [field]: [,,3,,] });
+        } else {
         this.object.update({ [field]: value });
+        }
       });
+      html.find('[data-array-field]').change(event => {
+        const element = event.currentTarget
+        const idx = parseInt($(event.currentTarget).closestData('index', "0"));
+        const array = $(event.currentTarget).closestData('array');
+        const field = $(event.currentTarget).closestData('array-field');
+        let newValue = [];
+        if (!(idx >= 0 && array !== "")) return;
+        if (field) {
+            newValue = duplicate(array.split('.').reduce(function (prev, curr) {
+                return prev ? prev[curr] : null
+            }, this.object.data));
+            newValue[idx][field] = element.value;
+        } else {
+            newValue = duplicate(array.split('.').reduce(function (prev, curr) {
+                return prev ? prev[curr] : null
+            }, this.object.data));
+            newValue[idx] = element.value;
+        }
+        this.object.update({ [array]: newValue });
+    });
     }
 
   }
+
+  	
 }

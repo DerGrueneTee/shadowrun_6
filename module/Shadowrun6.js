@@ -232,3 +232,8 @@ function getSkillAttribute(key) {
     return "??";
   }
 };
+
+$.fn.closestData = function (dataName, defaultValue = "") {
+  let value = this.closest(`[data-${dataName}]`)?.data(dataName);
+  return (value) ? value : defaultValue;
+}
