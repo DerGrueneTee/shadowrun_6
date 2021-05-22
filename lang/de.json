@@ -45,7 +45,11 @@
             "description": "Beschreibung",
             "defencerating": "Verteidigungswert",
             "capacity": "Kapazität",
-            "skillspec" : "Spezialisierung"
+            "skillspec" : "Spezialisierung",
+            "mode_bf": "SM",
+            "mode_fa": "VM",
+            "mode_sa": "HM",
+            "mode_ss": "EM"
         },
 		  "itemtype": {
 				"ACCESSORY": "Zubehör",

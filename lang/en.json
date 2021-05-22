@@ -45,7 +45,11 @@
             "description": "Description",
             "defencerating": "Defence rtg",
             "capacity": "Capacity",
-            "skillspec" : "Specialisation"
+            "skillspec" : "Specialisation",
+            "mode_bf": "BF",
+            "mode_fa": "FA",
+            "mode_sa": "SA",
+            "mode_ss": "SS"
 		  },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
