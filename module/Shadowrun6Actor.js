@@ -72,6 +72,7 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 		}
 		
+		const items = this.data.items;
 		/* (Unarmed) Attack and Defense Rating */
 		if (data.derived) {
 			// Attack Rating
@@ -80,7 +81,21 @@ export class Shadowrun6Actor extends Actor {
 			// Defense Rating
 			if (data.derived.defense_rating) {				
 				data.derived.defense_rating.base = data.attributes["bod"].pool;
-				data.derived.defense_rating.pool = data.derived.defense_rating.base + data.derived.defense_rating.mod;
+				data.derived.defense_rating.modString = game.i18n.localize("attrib.bod_short")+" "+data.attributes["bod"].pool;
+				if (data.derived.defense_rating.mod) {
+					data.derived.defense_rating.pool = data.derived.defense_rating.base + data.derived.defense_rating.mod;
+					data.derived.defense_rating.modString += "\n+"+data.derived.defense_rating.mod;
+				} else {
+					data.derived.defense_rating.pool = data.attributes["bod"].pool;
+				}
+				items.forEach(function(item, key) {
+					if (item.type=="gear" && item.data.data.type=="ARMOR") {
+						if (item.data.data.usedForPool) {
+							data.derived.defense_rating.pool += item.data.data.defense;
+							data.derived.defense_rating.modString += "\n+"+item.data.data.defense+" "+item.name;
+						}
+					}
+				});
 			}
 			// Composure
 			if (data.derived.composure) {				
@@ -103,16 +118,9 @@ export class Shadowrun6Actor extends Actor {
 				data.derived.lift_carry.pool = data.derived.lift_carry.base + data.derived.lift_carry.mod;
 			}
 			
-			const items = this.data.items;
 			// Soak / Damage Resistance
 			if (data.derived.resist_damage) {				
 				data.derived.resist_damage.base = data.attributes["bod"].pool;
-				items.forEach(function(item, key) {
-					if (item.type=="gear" && item.data.data.type=="ARMOR") {
-						console.log("Armor of "+item.name+" is "+item.data.data.defense);
-					}
-				});
-				
 				data.derived.resist_damage.pool = data.derived.resist_damage.base + data.derived.resist_damage.mod;
 			}
 			// Toxin Resistance
