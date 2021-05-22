@@ -386,6 +386,7 @@
 			"price": 0,
 			"description": "",
 			"customName": "",
+			"usedForPool": false,
 			"notes": "",
 			"accessories": "",
 			"needsRating": false,
@@ -396,7 +397,12 @@
 			"stun": false,
 			"dmgDef": "",
 			"attackRating": [0,0,0,0,0],
-			"modes": "",
+			"modes": {
+				"BF": false,
+				"FA": false,
+				"SA": false,
+				"SS": false
+			},
 			"defense": 0,
 			"social": 0,
 			"templates": [
