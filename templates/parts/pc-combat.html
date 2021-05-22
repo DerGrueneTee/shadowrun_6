@@ -23,7 +23,7 @@
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
          	{{ localize 'shadowrun6.label.firemodes' }} {{item.data.data.modes}}<br/>
-         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" data-check="data.wild"     type="checkbox" value="{{item.data.data.wild}}"     data-dtype="Boolean"/><br/>
+         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" {{checked item.data.data.wild}} data-check="data.wild"     type="checkbox" data-dtype="Boolean"/><br/>
          	{{ localize 'shadowrun6.label.poolmod' }} <input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.modifier" type="text"     value="{{item.data.data.modifier}}" data-dtype="Number" style="width: 1.5em"/>
          	</div>
          </td>
@@ -52,7 +52,7 @@
          <td colspan="6">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 20em" rows="2">{{item.data.data.accessories}}</textarea>
-         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" data-check="data.wild"     type="checkbox" value="{{item.data.data.wild}}"     data-dtype="Boolean"/><br/>
+         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" {{checked item.data.data.wild}} data-item-id="{{this.id}}" data-check="data.wild"     type="checkbox"  data-dtype="Boolean"/><br/>
          	{{ localize 'shadowrun6.label.poolmod' }} <input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.modifier" type="text"     value="{{item.data.data.modifier}}" data-dtype="Number" style="width: 1.5em"/>
          	</div>
          </td>
@@ -102,7 +102,7 @@
        <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
        	<td><label class="switch">
-       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" type="checkbox" value="{{item.data.data.usedForPool}}"     data-dtype="Boolean"/>
+       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
                         <span class="shadowrun6-slider round"></span>
                     </label></td>
          <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.defense" value="{{item.data.data.defense}}" data-dtype="Number" style="width: 1.5em" /></td>
