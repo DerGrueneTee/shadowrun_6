@@ -90,6 +90,7 @@
 	    <thead>
 	      <tr>
 	        <th>{{ localize 'shadowrun6.section.armor.column.name' }}</th>
+	        <th></th>
 	        <th>{{ localize 'shadowrun6.section.armor.column.defense' }}</th>
 	        <th>{{ localize 'shadowrun6.section.armor.column.social' }}</th>
 	        <th>{{ localize 'shadowrun6.section.armor.column.action' }}</th>
@@ -100,8 +101,12 @@
 		{{#iff item.data.data.type '==' "ARMOR"}}
        <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.defense" type="text" value="{{item.data.data.defense}}" data-dtype="Number" style="width: 1.5em" /></td>
-         <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.social" type="text"  value="{{item.data.data.social}}" data-dtype="Number" style="width: 1.5em" /></td>
+       	<td><label class="switch">
+       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" type="checkbox" value="{{item.data.data.usedForPool}}"     data-dtype="Boolean"/>
+                        <span class="shadowrun6-slider round"></span>
+                    </label></td>
+         <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.defense" value="{{item.data.data.defense}}" data-dtype="Number" style="width: 1.5em" /></td>
+         <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.social"  value="{{item.data.data.social}}" data-dtype="Number" style="width: 1.5em" /></td>
 			<td class="item-controls">
          	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
          </td>
