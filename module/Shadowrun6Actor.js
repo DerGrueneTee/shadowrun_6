@@ -102,9 +102,17 @@ export class Shadowrun6Actor extends Actor {
 				data.derived.lift_carry.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
 				data.derived.lift_carry.pool = data.derived.lift_carry.base + data.derived.lift_carry.mod;
 			}
+			
+			const items = this.data.items;
 			// Soak / Damage Resistance
 			if (data.derived.resist_damage) {				
 				data.derived.resist_damage.base = data.attributes["bod"].pool;
+				items.forEach(function(item, key) {
+					if (item.type=="gear" && item.data.data.type=="ARMOR") {
+						console.log("Armor of "+item.name+" is "+item.data.data.defense);
+					}
+				});
+				
 				data.derived.resist_damage.pool = data.derived.resist_damage.base + data.derived.resist_damage.mod;
 			}
 			// Toxin Resistance
