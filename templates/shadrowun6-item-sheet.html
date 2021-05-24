@@ -2,6 +2,7 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         <h2><input type="text" value="{{item.name}}" data-field="name" /></h2>
+        <div class="section">
         <table>
             <tr>
                 <!--Typ, Subtyp, Verfügbarkeit, Preis-->
@@ -20,9 +21,16 @@
                         {{/select}}
                     </select>
                 </td>
-                <td><input type="text" value="{{item.data.data.subtype}}" data-field="data.subtype" class="box centered" /></td>
-                <td><input type="text" value="{{item.data.data.availDef}}" data-field="data.availDef" class="box centered"/></td>
-                <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef" class="box centered"/></td>
+                <td><select name="item.data.data.subtype" data-field="data.subtype">
+                        {{#select item.data.data.subtype}}
+                        <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
+                        <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
+                        <option value="n.a.">n.a</option>
+                        <!-- {{/each}} -->
+                        {{/select}}
+                    </select></td>
+                <td><input type="text" value="{{item.data.data.availDef}}" data-field="data.availDef" class="box centered" style="width: 2em"/></td>
+                <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef" class="box centered" style="width: 3em"/></td>
             </tr>
         </table>
         <!-- ********** WAFFEN ********** -->
@@ -40,7 +48,7 @@
                 <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
             </tr>
             <tr>
-                <td><input type="number" value="{{item.data.data.dmg}}" data-field="data.dmg" class="box centered"/></td>
+                <td><input type="number" value="{{item.data.data.dmg}}" data-field="data.dmg" class="box centered" style="width: 3em"/></td>
                 <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input style="vertical-align: middle;"  type="checkbox" {{checked item.data.data.modes.BF}} name="data.modes.BF"
                         data-field="data.modes.BF"/>
                 </td>
@@ -129,5 +137,6 @@
         <h3>{{localize 'shadowrun6.item.description'}}</h3>
         <textarea class="box" type="text" value="{{item.data.data.description}}" data-field="data.description" cols="20"
             rows="6">{{item.data.data.description}}</textarea>
+        </div>
     </section>
 </form>
