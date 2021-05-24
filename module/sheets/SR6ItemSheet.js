@@ -39,6 +39,7 @@ export class SR6ItemSheet extends ItemSheet {
     } else if (this.isEditable) {
       html.find('[data-field]').change(event => {
         const element = event.currentTarget;
+        let value;
         if (element.type == "checkbox") {
           value = element.checked;
         } else {

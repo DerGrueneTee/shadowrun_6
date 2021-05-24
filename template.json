@@ -405,6 +405,8 @@
 			},
 			"defense": 0,
 			"social": 0,
+			"essence": 0,
+			"capacity": 0,
 			"templates": [
 				"dice-pool"
 			]

@@ -20,9 +20,9 @@
                         {{/select}}
                     </select>
                 </td>
-                <td><input type="text" value="{{item.data.data.subtype}}" data-field="data.subtype" /></td>
-                <td><input type="text" value="{{item.data.data.availDef}}" data-field="data.availDef" /></td>
-                <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef" /></td>
+                <td><input type="text" value="{{item.data.data.subtype}}" data-field="data.subtype" class="box centered" /></td>
+                <td><input type="text" value="{{item.data.data.availDef}}" data-field="data.availDef" class="box centered"/></td>
+                <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef" class="box centered"/></td>
             </tr>
         </table>
         <!-- ********** WAFFEN ********** -->
@@ -40,23 +40,22 @@
                 <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
             </tr>
             <tr>
-                <td><input type="number" value="{{item.data.data.dmg}}" data-field="data.dmg" /></td>
-          
-                <td><input type="checkbox" {{checked item.data.data.modes.BF}} name="data.modes.BF" data-field="data.modes.BF" id="mode_bf"/>
-                    <label for="mode_bf">{{localize 'shadowrun6.item.mode_bf'}}</label>
+                <td><input type="number" value="{{item.data.data.dmg}}" data-field="data.dmg" class="box centered"/></td>
+                <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input style="vertical-align: middle;"  type="checkbox" {{checked item.data.data.modes.BF}} name="data.modes.BF"
+                        data-field="data.modes.BF"/>
                 </td>
-                <td><input type="checkbox" {{checked item.data.data.modes.FA}} name="data.modes.FA" data-field="data.modes.FA" id="mode_fa"/>
-                    <label for="mode_fa">{{localize 'shadowrun6.item.mode_fa'}}</label>
+                <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_fa'}}</span><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.FA}} name="data.modes.FA"
+                        data-field="data.modes.FA"/>
                 </td>
-                <td><input type="checkbox" {{checked item.data.data.modes.SA}} name="data.modes.SA" data-field="data.modes.SA" id="mode_sa"/>
-                    <label for="mode_sa">{{localize 'shadowrun6.item.mode_sa'}}</label>
+                <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SA}} name="data.modes.SA"
+                    data-field="data.modes.SA"/>
                 </td>
-                <td><input type="checkbox" {{checked item.data.data.modes.SS}} name="data.modes.SS" data-field="data.modes.SS" id="mode_ss"/>
-                    <label for="mode_ss">{{localize 'shadowrun6.item.mode_ss'}}</label>
+                <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}} name="data.modes.SS"
+                        data-field="data.modes.SS"/>
                 </td>
                 {{#each item.data.data.attackRating as |rating id|}}
                 <td data-array="data.attackRating">
-                    <input type="number" value="{{rating}}" data-array-field data-index="{{id}}" style="width:1em" />
+                    <input type="number" value="{{rating}}" data-array-field data-index="{{id}}" style="width:1em" class="centered box"/>
                 </td>
                 {{/each}}
                 <!-- <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td> -->
@@ -98,14 +97,37 @@
                 <th>{{localize 'shadowrun6.item.capacity'}}</th>
             </tr>
             <tr>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td>
+                <td><input type="number" value="{{item.data.data.defencerating}}" data-field="data.defencerating" class="box centered" />
+                </td>
+                <td><input type="number" value="{{item.data.data.capacity}}" data-field="data.capacity" class="box centered"/></td>
             </tr>
         </table>
         {{/if}}
+        {{#if (or
+        (eq item.data.data.type "BIOWARE")
+        (eq item.data.data.type "NANOWARE")
+        )}}
+        <label for="ware_essence">{{localize 'shadowrun6.item.essence'}}</label>
+        <input type="number" value="{{item.data.data.essence}}" data-field="data.essence" id="ware_essence" class="box centered"/>
+        {{/if}}
+        {{#if (eq item.data.data.type "CYBERWARE")}}
+        <table>
+            <tr>
+                <th>{{localize 'shadowrun6.item.essence'}}</th>
+                <th>{{localize 'shadowrun6.item.capacity'}}</th>
+            </tr>
+            <tr>
+           <td> <input type="number" value="{{item.data.data.essence}}" data-field="data.essence" id="ware_essence" class="box centered" /></td>
+           <td> <input type="number" value="{{item.data.data.capacity}}" data-field="data.capacity" id="ware_cap" class="box centered"/></td>
+        </tr>
+        </table>
+        {{/if}}
+        <h3>{{localize 'shadowrun6.item.accessories'}}</h3>
+        <textarea class="box" type="text" value="{{item.data.data.accessories}}" data-field="data.accessories" cols="20"
+            rows="4">{{item.data.data.accessories}}</textarea>
         <!-- ********** Beschreibung ********** -->
         <h3>{{localize 'shadowrun6.item.description'}}</h3>
-        <textarea type="text" value="{{item.data.data.description}}" data-field="data.description" cols="20"
+        <textarea class="box" type="text" value="{{item.data.data.description}}" data-field="data.description" cols="20"
             rows="6">{{item.data.data.description}}</textarea>
     </section>
 </form>

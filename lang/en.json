@@ -49,7 +49,9 @@
             "mode_bf": "BF",
             "mode_fa": "FA",
             "mode_sa": "SA",
-            "mode_ss": "SS"
+            "mode_ss": "SS",
+            "accessories": "Accessories",
+            "essence": "Essence"
 		  },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
