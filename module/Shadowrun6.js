@@ -182,19 +182,20 @@ Hooks.once("init", async function () {
   });
 
 
-/**
- * If a player actor is created, change default token settings
- */
-Hooks.on('preCreateActor', (actor) => {
+  /**
+   * If a player actor is created, change default token settings
+   */
+  Hooks.on('preCreateActor', (actor, createData, options, userId) => {
     if (actor.type === 'Player') {
-        actor.token = {
-            vision: true,
-            actorLink: true,
-            name: actor.name
-        };
+ 	   actor.data.token.update({"actorLink":"true"});
+	   actor.data.token.update({"vision":"true"});
     }
-});
+  });
 
+//  Hooks.on("modifyTokenAttribute", (attribute,value,isDelta,isBar,updates={}) => {
+//	console.log("Token modified "+attribute+" with "+value);
+//	const hp = getProperty(this.data.data, attribute);
+//  });
 
   // Allows {if X = Y} type syntax in html using handlebars
   Handlebars.registerHelper("iff", function (a, operator, b, opts) {
