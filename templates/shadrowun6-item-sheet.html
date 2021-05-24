@@ -98,8 +98,8 @@
                 <th>{{localize 'shadowrun6.item.capacity'}}</th>
             </tr>
             <tr>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td>
-                <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td>
+                <td><input type="number" value="{{item.data.data.defencerating}}" data-field="data.defencerating" /></td>
+                <td><input type="number" value="{{item.data.data.capacity}}" data-field="data.capacity" /></td>
             </tr>
         </table>
         {{/if}}
