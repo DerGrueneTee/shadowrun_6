@@ -44,7 +44,14 @@
             "ammunition": "Mun.",
             "description": "Description",
             "defencerating": "Score Déf",
-            "capacity": "Capacité"
+            "capacity": "Capacité",
+            "skillspec" : "Spécialisation",
+            "mode_bf": "TR",
+            "mode_fa": "TA",
+            "mode_sa": "SA",
+            "mode_ss": "CC",
+            "accessories": "Accessoires",
+            "essence": "Essence"
 		  },
 		  "itemtype": {
 				"ACCESSORY": "Accessoire",
@@ -69,6 +76,7 @@
 				"WEAPON_SPECIAL": "Arme, Spéciale"
 		  },
 		  "label": {
+                "accessories": "Accessoires",
 		  		"attribute": "Attributs",
 		  		"base"     : "Base",
 		  		"damage"   : "Dégâts",
@@ -82,6 +90,7 @@
 		  		"poolmod"  : "réserve de dés",
 		  		"max"      : "Maximum",
 		  		"modifier" : "Mod.",
+                "modifications" : "Modifications",
 		  		"value"    : "Score",
 		  		"wilddie"  : "Dé Libre"
 		  },
@@ -92,7 +101,7 @@
 		  "newitem": {
 				"quality": "Ce qui vous rend spécial", 
 			   "skill": {
-		  			"knowledge": "Qu'est-ce que tu es toi, un nerd ?",
+		  			"knowledge": "T'es quoi toi ? un nerd ?",
 		  			"language": "Charabia"
 				}
 		  },
@@ -125,13 +134,25 @@
             "ar_3": "Longue",
             "ar_4": "Extrême",
             "defRating": "Défense: ",
-            "attackRating": "Score Off.:"
+            "attackRating": "Score Off.:",
+            "notarget": "Aucune cible sélectionnée",
+            "edgegain" : "Atout-Gain (max): ",
+            "edgegain_player" : " (Joueur)",
+            "noedgegain": "Pas de gain d'atout"
         },
         "rollType": {
             "normal": "lancer les dés",
             "bought": "Acheter succès"
         },
         "section": {
+            "ammo" : "Munitions",
+            "armor.title" : "Armure",
+            "armor.column": {
+                "action" : "Action",
+                "name"   : "Nom",
+                "defense": "SD",
+                "social" : "Social"
+            },
             "derived": "Scores Dérivés",
 			   "initiative": "Initiative",
             "skills.action": "Compétences",
@@ -195,26 +216,26 @@
     "attrib.dr_short": "SD",
     "label.skill": "Compétence",
     "section.attributes": "Attributs",
-    "section.qualities": "Qualities",
+    "section.qualities": "Qualités",
     "section.qualities_add": "Add",
-    "skill.firearms": "Armes à feu",
-    "skill.exotic_weapons": "Armes exotiques",
     "skill.astral": "Astral",
     "skill.athletics": "Athlétisme",
     "skill.biotech": "Biotech",
     "skill.close_combat": "Combat rapproché",
+    "skill.con": "Escroquerie",
     "skill.conjuring": "Conjuration",
+    "skill.cracking": "Piratage",
     "skill.electronics": "Électronique",
     "skill.enchanting": "Enchantement",
-    "skill.con": "Escroquerie",
-    "skill.stealth": "Furtivité",
-    "skill.influence": "Influence",
     "skill.engineering": "Ingénierie",
+    "skill.exotic_weapons": "Armes exotiques",
+    "skill.firearms": "Armes à feu",
+    "skill.influence": "Influence",
+    "skill.outdoors": "Plein air",
     "skill.perception": "Perception",
     "skill.piloting": "Pilotage",
-    "skill.cracking": "Piratage",
-    "skill.outdoors": "Plein air",
     "skill.sorcery": "Sorcellerie",
+    "skill.stealth": "Furtivité",
     "skill.tasking": "Technomancie",
     "ACTOR.TypePlayer": "Personnage Joueur",
     "ACTOR.TypeNpc": "PNJ",
@@ -222,7 +243,7 @@
     "ITEM.TypeQuality": "Qualité",
     "ITEM.TypeSkill": "Langue/Connaissance",
     "ITEM.TypeSpell": "Sort",
-    "ITEM.TypeGear": "Matériel",
+    "ITEM.TypeGear": "Équipement",
     "QUALITY_CATEGORIES.ADVANTAGE": "Avantage",
     "QUALITY_CATEGORIES.DISADVANTAGE": "Désavantage"
 }
