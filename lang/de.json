@@ -49,7 +49,8 @@
             "mode_bf": "SM",
             "mode_fa": "VM",
             "mode_sa": "HM",
-            "mode_ss": "EM"
+            "mode_ss": "EM",
+            "accessories":"Einbauten"
         },
 		  "itemtype": {
 				"ACCESSORY": "Zubehör",
