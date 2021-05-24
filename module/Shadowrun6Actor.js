@@ -7,6 +7,7 @@ import { SR6 } from "./config.js";
  * @extends {Actor}
  */
 export class Shadowrun6Actor extends Actor {
+
 	/** @Override */
 	prepareData() {
 		super.prepareData();
@@ -18,6 +19,23 @@ export class Shadowrun6Actor extends Actor {
 		this._prepareSkills();
 		this._prepareItemPools();
 	}
+
+	//---------------------------------------------------------
+	/*
+	 * Calculate the final attribute values
+	 */
+    async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
+	    console.log("modifyTokenAttribute "+attribute);
+	   if (attribute=="stun" || attribute=="physical") {
+        const current = getProperty(this.data.data, attribute);
+		  current.dmg = current.max - value;
+        if (current.dmg<0) current.dmg = 0;
+        console.log("damage is "+current.dmg);
+		  this.update({[`data.${attribute}.dmg`]: current.dmg});
+	   }
+		return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
+    }
+
 
 	//---------------------------------------------------------
 	/*
@@ -155,7 +173,6 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	_prepareItemPools() {
 		const actorData = this.data;
-		console.log("_prepareItemPools " + this.name);
 
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
@@ -163,10 +180,8 @@ export class Shadowrun6Actor extends Actor {
 				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool; 
 				// TODO: Check if actor has specialization or mastery
 				item.data.pool = item.data.pool + eval(item.data.modifier); 
-				console.log("Pool for item " + item.name + ": " + item.data.pool);
 			};
 		});
-		console.log("_prepareItemPools done");
 	}
 
 	/**
