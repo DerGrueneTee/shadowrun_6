@@ -50,7 +50,8 @@
             "mode_fa": "VM",
             "mode_sa": "HM",
             "mode_ss": "EM",
-            "accessories":"Einbauten"
+            "accessories":"Einbauten",
+            "essence": "Essenz"
         },
 		  "itemtype": {
 				"ACCESSORY": "Zubehör",
