@@ -182,6 +182,19 @@ Hooks.once("init", async function () {
   });
 
 
+/**
+ * If a player actor is created, change default token settings
+ */
+Hooks.on('preCreateActor', (actor) => {
+    if (actor.type === 'Player') {
+        actor.token = {
+            vision: true,
+            actorLink: true,
+            name: actor.name
+        };
+    }
+});
+
 
   // Allows {if X = Y} type syntax in html using handlebars
   Handlebars.registerHelper("iff", function (a, operator, b, opts) {
