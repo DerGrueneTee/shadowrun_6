@@ -15,30 +15,47 @@ export default class SR6Roll extends Roll {
   evaluate() {
     let data = this.data;
     let noOfDice = data.value;
+    let die;
     if (data.modifier > 0) {
       noOfDice += data.modifier;
     }
     let formula = "";
-    if (this.data.useWildDie) {
-      formula = this.createFormula(1, -1, data.explode);
-      if (noOfDice - 1 > 0) {
-        formula += "+" + this.createFormula(noOfDice - 1, -1, data.explode);
+    if (data.type == 0) {
+      if (this.data.useWildDie) {
+        formula = this.createFormula(1, -1, data.explode);
+        if (noOfDice - 1 > 0) {
+          formula += "+" + this.createFormula(noOfDice - 1, -1, data.explode);
+        }
+      } else {
+        formula = this.createFormula(noOfDice, -1, data.explode);
       }
-    } else {
-      formula = this.createFormula(noOfDice, -1, data.explode);
-    }
-    let die = new Roll(formula).evaluate({ async: false });
-    this.results = die.terms[0].results;
-    if (this.data.useWildDie) {
-      this.results = this.results.concat(die.terms[2].results);
-    }
-    this._total = this.calculateTotal(die._total);
-    this.modifyResults();
-    this._formula = data.formula;
-    this._evaluated = true;
-    this._dice = die.terms;
-    if (this.data.useWildDie) {
-      this._dice[0].options.colorset = "SR6_light";
+      die = new Roll(formula).evaluate({ async: false });
+      this.results = die.terms[0].results;
+      if (this.data.useWildDie) {
+        this.results = this.results.concat(die.terms[2].results);
+      }
+      this._total = this.calculateTotal(die._total);
+      this.modifyResults();
+      this._formula = data.formula;
+      this._evaluated = true;
+      this._dice = die.terms;
+      if (this.data.useWildDie) {
+        this._dice[0].options.colorset = "SR6_light";
+      }
+    } else  if (data.type == 1) {
+      noOfDice = Math.floor(noOfDice / 4);
+      formula = this.createFormula(noOfDice, -1, false);
+      die = new Roll(formula).evaluate({ async: false });
+      this.results = die.terms[0].results;
+      this.results.forEach(result => {
+        result.result = 6;
+        result.success = true;
+        result.classes = "die die_" + result.result;
+      });
+      this._total = noOfDice;
+      this._formula = game.i18n.localize("shadowrun6.roll.hits_bought");
+      this._evaluated = true;
+      this._dice = die.terms;
     }
     return this;
   }

@@ -139,7 +139,8 @@
             "notarget" : "Kein Ziel ausgewählt",
             "edgegain" : "Edge-Gewinn (max): ",
             "edgegain_player" : " (Spieler)",
-            "noedgegain": "Kein Edge-Gewinn"
+            "noedgegain": "Kein Edge-Gewinn",
+            "hits_bought" : "Erfolge gekauft"
 
         },
         "rollType": {
