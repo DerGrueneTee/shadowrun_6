@@ -138,7 +138,8 @@
             "notarget": "No target selected",
             "edgegain" : "Edge-Gain (max): ",
             "edgegain_player" : " (Player)",
-            "noedgegain": "No edge gain"
+            "noedgegain": "No edge gain",
+            "hits_bought" : "Hits bought"
         },
         "rollType": {
             "normal": "Roll dice",
