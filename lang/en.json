@@ -153,6 +153,8 @@
 					"defense": "DR",
 					"social" : "Social"
 				},
+				"bodyware": "Bodyware",
+				"bodyware_add": "Add Bodyware",
             "derived": "Derived Values",
 			   "initiative": "Initiative",
             "skills.action": "Skills",
@@ -167,6 +169,7 @@
             "skills.knowledge": "Knowledge Skills",
             "skills.knowledge_add": "Add new knowledge",
             "qualities": "Qualities",
+            "qualities_add": "Add",
             "weapon": {
                 "ranged": "Ranged Weapons",
                 "close" : "Melee Weapons"
@@ -216,8 +219,6 @@
     "attrib.dr_short": "DR",
     "label.skill": "Skill",
     "section.attributes": "Attributes",
-    "section.qualities": "Qualities",
-    "section.qualities_add": "Add",
     "skill.astral": "Astral",
     "skill.athletics": "Athletics",
     "skill.biotech": "Biotech",

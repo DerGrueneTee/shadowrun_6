@@ -153,6 +153,8 @@
                 "defense": "SD",
                 "social" : "Social"
             },
+				"bodyware": "TRANSLATE ME",
+    			"bodyware_add": "Add",
             "derived": "Scores Dérivés",
 			   "initiative": "Initiative",
             "skills.action": "Compétences",
@@ -166,7 +168,8 @@
             },
             "skills.knowledge": "Connaissances",
             "skills.knowledge_add": "Nouvelle connaissance",
-            "qualities": "Qualité",
+            "qualities": "Qualités",
+    			"qualities_add": "Add",
             "weapon": {
                 "ranged": "Armes à Distance",
                 "close" : "Armes de Mélée"
@@ -216,8 +219,6 @@
     "attrib.dr_short": "SD",
     "label.skill": "Compétence",
     "section.attributes": "Attributs",
-    "section.qualities": "Qualités",
-    "section.qualities_add": "Add",
     "skill.astral": "Astral",
     "skill.athletics": "Athlétisme",
     "skill.biotech": "Biotech",

@@ -155,6 +155,8 @@
 					"defense": "Panz",
 					"social" : "Sozial"
 				},
+				"bodyware": "Bodyware",
+				"bodyware_add": "Bodyware hinzufügen",
             "derived": "Abgeleitete Werte",
 			   "initiative": "Initiative",
             "skills.action": "Fertigkeiten",
@@ -169,6 +171,7 @@
             "skills.knowledge": "Wissensfertigkeiten",
             "skills.knowledge_add": "Neue Wissensfertigket hinzufügen",
             "qualities": "Vor/Nachteile",
+    			"qualities_add": "Hinzufügen",
             "weapon": {
                 "ranged": "Fernkampf",
                 "close" : "Nahkampf"
@@ -222,8 +225,6 @@
     "label.modifier": "Modif.",
     "label.value": "Pool",
     "section.attributes": "Attribute",
-    "section.qualities": "Vor-/Nachteile",
-    "section.qualities_add": "Hinzufügen",
     "skill.name.pattern": "skull.${id}",
     "skill.astral": "Astral",
     "skill.athletics": "Athletik",
