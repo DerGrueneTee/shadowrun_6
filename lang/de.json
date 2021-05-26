@@ -79,6 +79,10 @@
 				"accessories": "Zubehör",
 		  		"attribute": "Attribut",
 		  		"base"     : "Basis",
+			   "column": {
+					"name": "Name",
+					"action": "Aktion"
+				},
 		  		"damage"   : "Schaden",
 		  		"dice"     : "Würfel",
 		  		"d6"       : "W6",
@@ -156,8 +160,12 @@
 					"defense": "Panz",
 					"social" : "Sozial"
 				},
-				"bodyware": "Bodyware",
-				"bodyware_add": "Bodyware hinzufügen",
+				"bodyware": {
+					"title": "Bodyware",
+					"column.essence": "Ess.",
+					"column.capacity": "Kap.",
+					"footer.total_essence": "Verbleibende Essenz"
+				},
             "derived": "Abgeleitete Werte",
 			   "initiative": "Initiative",
             "skills.action": "Fertigkeiten",

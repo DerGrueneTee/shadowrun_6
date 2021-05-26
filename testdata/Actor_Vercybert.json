@@ -1,0 +1,560 @@
+{
+  "name": "Vercybert",
+  "type": "Player",
+  "data": {
+    "overflow": {
+      "base": 0,
+      "mod": 0,
+      "value": 0,
+      "max": 0
+    },
+    "attributes": {
+      "bod": {
+        "base": 10,
+        "mod": 0,
+        "pool": 10,
+        "modString": ""
+      },
+      "agi": {
+        "base": 3,
+        "mod": 0,
+        "pool": 3,
+        "modString": ""
+      },
+      "rea": {
+        "base": 3,
+        "mod": 2,
+        "pool": 5,
+        "modString": "2 Reflexbooster, Stufe 2 "
+      },
+      "str": {
+        "base": 6,
+        "mod": 0,
+        "pool": 6,
+        "modString": ""
+      },
+      "wil": {
+        "base": 2,
+        "mod": 0,
+        "pool": 2,
+        "modString": ""
+      },
+      "log": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4,
+        "modString": ""
+      },
+      "int": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4,
+        "modString": ""
+      },
+      "cha": {
+        "base": 1,
+        "mod": 0,
+        "pool": 1,
+        "modString": ""
+      },
+      "mag": {
+        "base": 0,
+        "mod": -5,
+        "pool": -5,
+        "modString": "-5 Essenz "
+      },
+      "res": {
+        "base": 0,
+        "mod": -5,
+        "pool": -5,
+        "modString": "-5 Essenz "
+      }
+    },
+    "physical": {
+      "base": 13,
+      "mod": 3,
+      "modString": "2 Robust gebaut \n1 Cyberbein, offensichtlich ",
+      "value": 16,
+      "max": 0
+    },
+    "stun": {
+      "base": 9,
+      "mod": 0,
+      "modString": "",
+      "value": 9,
+      "max": 0
+    },
+    "edge": {
+      "value": 4,
+      "max": 4
+    },
+    "initiative": {
+      "physical": {
+        "bonus": 9,
+        "dice": 3
+      },
+      "astral": {
+        "bonus": 8,
+        "dice": 2
+      }
+    },
+    "derived": {
+      "attack_rating": {
+        "base": 0,
+        "mod": 3,
+        "pool": 3
+      },
+      "defense_rating": {
+        "base": 18,
+        "mod": 0,
+        "pool": 18
+      },
+      "composure": {
+        "base": 3,
+        "mod": 0,
+        "pool": 0
+      },
+      "judge_intentions": {
+        "base": 6,
+        "mod": 0,
+        "pool": 0
+      },
+      "memory": {
+        "base": 8,
+        "mod": 0,
+        "pool": 0
+      },
+      "lift_carry": {
+        "base": 12,
+        "mod": 0,
+        "pool": 0
+      },
+      "resist_damage": {
+        "base": 12,
+        "mod": 0,
+        "pool": 12
+      },
+      "resist_toxin": {
+        "base": 12,
+        "mod": 0,
+        "pool": 12
+      }
+    },
+    "skills": {
+      "astral": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "athletics": {
+        "points": 4,
+        "modifier": 0,
+        "modString": "4 Fertigkeit Athletik \n3 Geschicklichkeit ",
+        "augment": 0
+      },
+      "biotech": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "close_combat": {
+        "points": 4,
+        "modifier": 0,
+        "modString": "4 Fertigkeit Nahkampf \n3 Geschicklichkeit ",
+        "augment": 0
+      },
+      "con": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "conjuring": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "cracking": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "electronics": {
+        "points": 2,
+        "modifier": 0,
+        "modString": "2 Fertigkeit Elektronik \n4 Logik ",
+        "augment": 0
+      },
+      "enchanting": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "engineering": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "exotic_weapons": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "firearms": {
+        "points": 6,
+        "modifier": 0,
+        "modString": "6 Fertigkeit Feuerwaffen \n3 Geschicklichkeit ",
+        "augment": 0
+      },
+      "influence": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "outdoors": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "perception": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "piloting": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "sorcery": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "stealth": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "tasking": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      }
+    },
+    "metatype": "Troll",
+    "gender": "männlich"
+  },
+  "items": [
+    {
+      "name": "Sprache",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 4,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Sprache",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Wissen",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Wissen",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Wissen",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Infrarotsicht",
+      "type": "quality",
+      "data": {
+        "genesisID": "thermographic_vision",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Robust gebaut 2",
+      "type": "quality",
+      "data": {
+        "genesisID": "built_tough",
+        "category": "POSITIVE",
+        "level": true,
+        "value": 0,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Dermalablagerungen",
+      "type": "quality",
+      "data": {
+        "genesisID": "dermal_deposits",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Außergewöhnliches Attribut",
+      "type": "quality",
+      "data": {
+        "genesisID": "exceptional_attribute",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Cyberbein, offensichtlich",
+      "type": "gear",
+      "data": {
+        "genesisID": "cyberleg_obvious",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_LIMBS",
+        "availDef": "4",
+        "avail": 4,
+        "price": 48000,
+        "accessories": "Stärkeerhöhung, Stufe 5",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Dermalpanzerung",
+      "type": "gear",
+      "data": {
+        "genesisID": "dermal_plating",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "4 L",
+        "avail": 4,
+        "price": 4000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Dermalpanzerung",
+      "type": "gear",
+      "data": {
+        "defense": 1,
+        "social": 0,
+        "genesisID": "dermal_plating_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Kompositknochen",
+      "type": "gear",
+      "data": {
+        "defense": 2,
+        "social": 0,
+        "genesisID": "bone_lacing_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Kompositknochen, Titan",
+      "type": "gear",
+      "data": {
+        "genesisID": "bone_lacing_titanium",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "6 L",
+        "avail": 6,
+        "price": 30000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Orthoskin",
+      "type": "gear",
+      "data": {
+        "genesisID": "orthoskin",
+        "type": "BIOWARE",
+        "subtype": "BIOWARE_STANDARD",
+        "availDef": "4 L",
+        "avail": 4,
+        "price": 6000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Orthoskin",
+      "type": "gear",
+      "data": {
+        "defense": 1,
+        "social": 0,
+        "genesisID": "orthoskin_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Panzerjacke",
+      "type": "gear",
+      "data": {
+        "defense": 4,
+        "social": -3,
+        "genesisID": "armor_jacket",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "2",
+        "avail": 2,
+        "price": 1000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Reflexbooster, Stufe 2",
+      "type": "gear",
+      "data": {
+        "genesisID": "wired_reflexes2",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "3 L",
+        "avail": 3,
+        "price": 225000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Steyr TMP",
+      "type": "gear",
+      "data": {
+        "dmgDef": "2K",
+        "dmg": 2,
+        "stun": false,
+        "attackRating": [
+          8,
+          8,
+          6,
+          0,
+          0
+        ],
+        "modes": {
+          "BF": false,
+          "FA": true,
+          "SA": true,
+          "SS": false
+        },
+        "genesisID": "steyr_tmp",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "MACHINE_PISTOLS",
+        "availDef": "3 L",
+        "avail": 3,
+        "price": 690,
+        "accessories": "Lasermarkierer (Basis)",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "machine_pistols",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Waffenlos",
+      "type": "gear",
+      "data": {
+        "dmgDef": "4K",
+        "dmg": 4,
+        "stun": false,
+        "attackRating": [
+          14,
+          0,
+          0,
+          0,
+          0
+        ],
+        "modes": {
+          "BF": false,
+          "FA": false,
+          "SA": false,
+          "SS": false
+        },
+        "genesisID": "unarmed",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "UNARMED",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "unarmed",
+        "wild": false,
+        "count": 0
+      }
+    }
+  ]
+}

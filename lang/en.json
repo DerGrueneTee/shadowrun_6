@@ -79,6 +79,10 @@
 				"accessories": "Accessories",
 		  		"attribute": "Attribute",
 		  		"base"     : "Base",
+			   "column": {
+					"name": "Name",
+					"action": "Action"
+				},
 		  		"damage"   : "Damage",
 		  		"dice"     : "Dice",
 		  		"d6"       : "D6",
@@ -154,8 +158,12 @@
 					"defense": "DR",
 					"social" : "Social"
 				},
-				"bodyware": "Bodyware",
-				"bodyware_add": "Add Bodyware",
+				"bodyware": {
+					"title": "Bodyware",
+					"column.essence": "Ess.",
+					"column.capacity": "Cap.",
+					"footer.total_essence": "Remaining Essence"
+				},
             "derived": "Derived Values",
 			   "initiative": "Initiative",
             "skills.action": "Skills",
