@@ -90,11 +90,11 @@
     },
     "initiative": {
       "physical": {
-        "bonus": 9,
+        "mod": 9,
         "dice": 3
       },
       "astral": {
-        "bonus": 8,
+        "mod": 8,
         "dice": 2
       }
     },
@@ -338,6 +338,8 @@
       "name": "Cyberbein, offensichtlich",
       "type": "gear",
       "data": {
+        "essence": 0.8,
+        "capacity": 0,
         "genesisID": "cyberleg_obvious",
         "type": "CYBERWARE",
         "subtype": "CYBER_LIMBS",
@@ -355,14 +357,16 @@
       "name": "Dermalpanzerung",
       "type": "gear",
       "data": {
+        "essence": 0.3,
+        "capacity": 0,
         "genesisID": "dermal_plating",
         "type": "CYBERWARE",
         "subtype": "CYBER_BODYWARE",
         "availDef": "4 L",
         "avail": 4,
         "price": 4000,
-        "needsRating": false,
-        "rating": 0,
+        "needsRating": true,
+        "rating": 1,
         "wild": false,
         "count": 0
       }
@@ -379,8 +383,8 @@
         "availDef": "0",
         "avail": 0,
         "price": 0,
-        "needsRating": false,
-        "rating": 0,
+        "needsRating": true,
+        "rating": 1,
         "wild": false,
         "count": 0
       }
@@ -397,8 +401,8 @@
         "availDef": "0",
         "avail": 0,
         "price": 0,
-        "needsRating": false,
-        "rating": 0,
+        "needsRating": true,
+        "rating": 2,
         "wild": false,
         "count": 0
       }
@@ -407,6 +411,8 @@
       "name": "Kompositknochen, Titan",
       "type": "gear",
       "data": {
+        "essence": 1.5,
+        "capacity": 0,
         "genesisID": "bone_lacing_titanium",
         "type": "CYBERWARE",
         "subtype": "CYBER_BODYWARE",
@@ -423,14 +429,16 @@
       "name": "Orthoskin",
       "type": "gear",
       "data": {
+        "essence": 0.25,
+        "capacity": 0,
         "genesisID": "orthoskin",
         "type": "BIOWARE",
         "subtype": "BIOWARE_STANDARD",
         "availDef": "4 L",
         "avail": 4,
         "price": 6000,
-        "needsRating": false,
-        "rating": 0,
+        "needsRating": true,
+        "rating": 1,
         "wild": false,
         "count": 0
       }
@@ -447,8 +455,8 @@
         "availDef": "0",
         "avail": 0,
         "price": 0,
-        "needsRating": false,
-        "rating": 0,
+        "needsRating": true,
+        "rating": 1,
         "wild": false,
         "count": 0
       }
@@ -475,6 +483,8 @@
       "name": "Reflexbooster, Stufe 2",
       "type": "gear",
       "data": {
+        "essence": 1.4,
+        "capacity": 0,
         "genesisID": "wired_reflexes2",
         "type": "CYBERWARE",
         "subtype": "CYBER_BODYWARE",
