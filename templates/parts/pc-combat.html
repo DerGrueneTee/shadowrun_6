@@ -4,8 +4,8 @@
      <h2 class="section-title">{{ localize 'shadowrun6.section.weapon.ranged' }}</h2>
 	  <table>
  		{{#each actor.items as |item id|}} 
-		{{#iff item.type '==' 'gear'}}
-		{{#iff item.data.data.type '==' "WEAPON_FIREARMS"}}
+		{{#if (eq item.type 'gear')}}
+		{{#if (eq item.data.data.type "WEAPON_FIREARMS") }}
        <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
@@ -39,8 +39,8 @@
          	</div>
          </td>
        </tr>
-		{{/iff}}
-		{{/iff}}
+		{{/if}}
+		{{/if}}
        {{/each}}
 		<!-- Close Combat Weapons -->
        <tr><td colspan="6"><h2 class="section-title">{{ localize 'shadowrun6.section.weapon.close' }}</h2></td></tr>
