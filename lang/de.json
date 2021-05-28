@@ -160,13 +160,16 @@
 					"defense": "Panz",
 					"social" : "Sozial"
 				},
+            "biology": "Biologie",
 				"bodyware": {
 					"title": "Bodyware",
 					"column.essence": "Ess.",
 					"column.capacity": "Kap.",
 					"footer.total_essence": "Verbleibende Essenz"
 				},
+            "chemicals": "Drogen",
             "derived": "Abgeleitete Werte",
+				"electronics": "Elektronik",
 			   "initiative": "Initiative",
             "skills.action": "Fertigkeiten",
             "skills.language": "Sprachen",

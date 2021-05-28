@@ -81,6 +81,7 @@
 		  		"base"     : "Base",
 			   "column": {
 					"name": "Name",
+			      "rating"   : "Rtg.",
 					"action": "Action"
 				},
 		  		"damage"   : "Damage",
@@ -89,12 +90,12 @@
 		  		"delete"   : "Delete",
 		  		"edit"     : "Edit",
 		      "firemodes": "Firemodes",
-		  		"points"   : "Points",
-		  		"pool"     : "Pool",
-		  		"poolmod"  : "Pool modifier",
 		  		"max"      : "Maximum",
 		  		"modifier" : "Adj.",
 		  		"modifications" : "Modifications",
+		  		"points"   : "Points",
+		  		"pool"     : "Pool",
+		  		"poolmod"  : "Pool modifier",
 		  		"value"    : "Value",
 		  		"wilddie"  : "Wild Die"
 		  },
@@ -158,13 +159,16 @@
 					"defense": "DR",
 					"social" : "Social"
 				},
+				"biology": "Biology",
 				"bodyware": {
 					"title": "Bodyware",
 					"column.essence": "Ess.",
 					"column.capacity": "Cap.",
 					"footer.total_essence": "Remaining Essence"
 				},
+            "chemicals": "Chemicals",
             "derived": "Derived Values",
+            "electronics": "Electronics",
 			   "initiative": "Initiative",
             "skills.action": "Skills",
             "skills.language": "Language Skills",

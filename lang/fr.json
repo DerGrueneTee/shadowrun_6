@@ -80,8 +80,9 @@
 		  		"attribute": "Attributs",
 		  		"base"     : "Base",
 			   "column": {
-					"name": "Nom",
-					"action": "Action"
+					"action": "Action",
+					"rating": "TRANSLATE",
+					"name": "Nom"
 				},
 		  		"damage"   : "Dégâts",
 		  		"dice"     : "Dé",
@@ -157,13 +158,16 @@
                 "defense": "SD",
                 "social" : "Social"
             },
+				"biology": "TRANSLATE",
 				"bodyware": {
 					"title": "TRANSLATE",
 					"column.essence": "TRANSLATE",
 					"column.capacity": "TRANSLATE",
 					"footer.total_essence": "TRANSLATE"
 				},
+            "chemicals": "TRANSLATE",
             "derived": "Scores Dérivés",
+            "electronics":"TRANSLATE",
 			   "initiative": "Initiative",
             "skills.action": "Compétences",
             "skills.language": "Langues",
