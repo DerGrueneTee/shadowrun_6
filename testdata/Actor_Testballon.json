@@ -1,0 +1,1280 @@
+{
+  "name": "Testballon",
+  "type": "Player",
+  "data": {
+    "overflow": {
+      "base": 0,
+      "mod": 0,
+      "value": 0,
+      "max": 0
+    },
+    "attributes": {
+      "bod": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4,
+        "modString": ""
+      },
+      "agi": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4,
+        "modString": ""
+      },
+      "rea": {
+        "base": 3,
+        "mod": 1,
+        "pool": 4,
+        "modString": "1 Power Improved Reflexes "
+      },
+      "str": {
+        "base": 5,
+        "mod": 0,
+        "pool": 5,
+        "modString": ""
+      },
+      "wil": {
+        "base": 5,
+        "mod": 0,
+        "pool": 5,
+        "modString": ""
+      },
+      "log": {
+        "base": 4,
+        "mod": 0,
+        "pool": 4,
+        "modString": ""
+      },
+      "int": {
+        "base": 6,
+        "mod": 0,
+        "pool": 6,
+        "modString": ""
+      },
+      "cha": {
+        "base": 7,
+        "mod": 0,
+        "pool": 7,
+        "modString": ""
+      },
+      "mag": {
+        "base": 6,
+        "mod": -3,
+        "pool": 3,
+        "modString": "-3 Essence "
+      },
+      "res": {
+        "base": 0,
+        "mod": -3,
+        "pool": -3,
+        "modString": "-3 Essence "
+      }
+    },
+    "physical": {
+      "base": 10,
+      "mod": 0,
+      "modString": "",
+      "value": 10,
+      "max": 0
+    },
+    "stun": {
+      "base": 11,
+      "mod": 0,
+      "modString": "",
+      "value": 11,
+      "max": 0
+    },
+    "edge": {
+      "value": 6,
+      "max": 6
+    },
+    "initiative": {
+      "physical": {
+        "mod": 10,
+        "dice": 2
+      },
+      "astral": {
+        "mod": 10,
+        "dice": 2
+      }
+    },
+    "derived": {
+      "attack_rating": {
+        "base": 0,
+        "mod": 2,
+        "pool": 2
+      },
+      "defense_rating": {
+        "base": 19,
+        "mod": 0,
+        "pool": 19
+      },
+      "composure": {
+        "base": 12,
+        "mod": 0,
+        "pool": 0
+      },
+      "judge_intentions": {
+        "base": 11,
+        "mod": 0,
+        "pool": 0
+      },
+      "memory": {
+        "base": 10,
+        "mod": 0,
+        "pool": 0
+      },
+      "lift_carry": {
+        "base": 9,
+        "mod": 0,
+        "pool": 0
+      },
+      "resist_damage": {
+        "base": 6,
+        "mod": 0,
+        "pool": 6
+      },
+      "resist_toxin": {
+        "base": 9,
+        "mod": 0,
+        "pool": 9
+      }
+    },
+    "skills": {
+      "astral": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "athletics": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "biotech": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "close_combat": {
+        "points": 5,
+        "modifier": 0,
+        "modString": "5 Skill Close Combat \n4 Agility ",
+        "augment": 0
+      },
+      "con": {
+        "points": 1,
+        "modifier": 0,
+        "modString": "1 Skill Con \n7 Charisma ",
+        "augment": 0,
+        "specialization": "performance"
+      },
+      "conjuring": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "cracking": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "electronics": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "enchanting": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "engineering": {
+        "points": 5,
+        "modifier": 0,
+        "modString": "5 Skill Engineering \n4 Logic ",
+        "augment": 0
+      },
+      "exotic_weapons": {
+        "points": 1,
+        "modifier": 0,
+        "modString": "1 Skill Exotic Weapons \n4 Agility ",
+        "augment": 0,
+        "specialization": "ares_s3_super_squirt,horizon_flynn_dcom_light_pistol,under_micro_bolo_launcher,bullwhip,ash_arms_monofilament_combat_chainsaw"
+      },
+      "firearms": {
+        "points": 3,
+        "modifier": 0,
+        "modString": "3 Skill Firearms \n4 Agility ",
+        "augment": 0
+      },
+      "influence": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "outdoors": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "perception": {
+        "points": 5,
+        "modifier": 0,
+        "modString": "5 Skill Perception \n6 Intuition ",
+        "augment": 0
+      },
+      "piloting": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "sorcery": {
+        "points": 4,
+        "modifier": 0,
+        "modString": "4 Skill Sorcery \n6 Magic \n-3 Essence ",
+        "augment": 0
+      },
+      "stealth": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      },
+      "tasking": {
+        "points": 0,
+        "modifier": 0,
+        "augment": 0
+      }
+    },
+    "metatype": "Elf",
+    "gender": "male"
+  },
+  "items": [
+    {
+      "name": "Knowledge",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Knowledge",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Knowledge",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Language",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 4,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Language",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Language",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Low-Light Vision",
+      "type": "quality",
+      "data": {
+        "genesisID": "low-light_vision",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Mystic Adept",
+      "type": "quality",
+      "data": {
+        "genesisID": "mysticadept",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Arcane Resilience Training",
+      "type": "quality",
+      "data": {
+        "genesisID": "arcane_resilience",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Mentor Spirit",
+      "type": "quality",
+      "data": {
+        "genesisID": "mentor_spirit",
+        "category": "POSITIVE",
+        "level": false,
+        "value": 1,
+        "modifier": []
+      }
+    },
+    {
+      "name": "Acid On Demand",
+      "type": "gear",
+      "data": {
+        "genesisID": "acid_on_demand",
+        "type": "MAGICAL",
+        "subtype": "PREPARATION",
+        "availDef": "4",
+        "avail": 4,
+        "price": 900,
+        "needsRating": true,
+        "rating": 6,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Allegiance Control Center",
+      "type": "gear",
+      "data": {
+        "genesisID": "allegiance_control_center",
+        "type": "ELECTRONICS",
+        "subtype": "RIGGER_CONSOLE",
+        "availDef": "3 (L)",
+        "avail": 3,
+        "price": 9005,
+        "accessories": "Deprecated Item (Delete Me), Electronic paper, Stealth, Rating 2",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Ares Roadmaster",
+      "type": "gear",
+      "data": {
+        "genesisID": "ares_roadmaster",
+        "type": "VEHICLES",
+        "subtype": "TRUCKS",
+        "availDef": "2",
+        "avail": 2,
+        "price": 97175,
+        "accessories": "Heavy weapon mount, Krime Calliope, Heavy weapon mount +manual op.",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "engineering",
+        "skillSpec": "gunnery",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Battery for Pulse (Krime Laser Bullets)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_battery_pulse",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "7 (I)",
+        "avail": 7,
+        "price": 200,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Bearded Axe (Zoé Heritage)",
+      "type": "gear",
+      "data": {
+        "dmgDef": "3P",
+        "dmg": 3,
+        "stun": false,
+        "attackRating": [
+          11,
+          0,
+          0,
+          0,
+          0
+        ],
+        "modes": {
+          "BF": false,
+          "FA": false,
+          "SA": false,
+          "SS": false
+        },
+        "genesisID": "bearded_axe",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "BLADES",
+        "availDef": "3 (L)",
+        "avail": 3,
+        "price": 600,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "blades",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Black Wolf",
+      "type": "gear",
+      "data": {
+        "dmgDef": "5P",
+        "dmg": 5,
+        "stun": false,
+        "attackRating": [
+          6,
+          14,
+          15,
+          12,
+          4
+        ],
+        "modes": {
+          "BF": true,
+          "FA": true,
+          "SA": true,
+          "SS": false
+        },
+        "genesisID": "black_wolf",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "RIFLE_ASSAULT",
+        "availDef": "5 (L)",
+        "avail": 5,
+        "price": 6330,
+        "accessories": "Spare clip, Spare clip, Tactical Sling, Silencer, Laser sight (base), Shock pads, Grenade Launcher",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "rifles",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Bone lacing",
+      "type": "gear",
+      "data": {
+        "defense": 1,
+        "social": 0,
+        "genesisID": "bone_lacing_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": true,
+        "rating": 1,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Bone lacing, Aluminium",
+      "type": "gear",
+      "data": {
+        "essence": 1.0,
+        "capacity": 0,
+        "genesisID": "bone_lacing_aluminium",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 18000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "CNH Harvesting Supporter G12 \"Geodezist\"",
+      "type": "gear",
+      "data": {
+        "genesisID": "CNH_G12",
+        "type": "DRONES",
+        "subtype": "MEDIUM_DRONES",
+        "availDef": "2",
+        "avail": 2,
+        "price": 8000,
+        "accessories": "Rigger interface, Standard weapon mount, Targeting (AK-97), Rating 6",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Crackshot Arms Regulator “Gun Gauntlets”",
+      "type": "gear",
+      "data": {
+        "genesisID": "crackshot_arms_regulator",
+        "type": "ACCESSORY",
+        "subtype": "FIREARMS_ACCESSORY",
+        "availDef": "3 (L)",
+        "avail": 3,
+        "price": 850,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Cybereyes, Rating 3",
+      "type": "gear",
+      "data": {
+        "essence": 0.21,
+        "capacity": 0,
+        "genesisID": "cybereye3",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_EYEWARE",
+        "availDef": "3",
+        "avail": 3,
+        "price": 12000,
+        "accessories": "Image link, Camera, Rating 0, Vision magnification",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Cyberspace Designs Quadrotor",
+      "type": "gear",
+      "data": {
+        "genesisID": "cyberspace_designs_quadrotor",
+        "type": "DRONES",
+        "subtype": "SMALL_DRONES",
+        "availDef": "2",
+        "avail": 2,
+        "price": 5290,
+        "accessories": "Rigger interface, Mount with crossbow for Quadrotor",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "engineering",
+        "skillSpec": "gunnery",
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Dermal Plating",
+      "type": "gear",
+      "data": {
+        "essence": 1.2,
+        "capacity": 0,
+        "genesisID": "dermal_plating",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 16000,
+        "needsRating": true,
+        "rating": 4,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Dermal Plating",
+      "type": "gear",
+      "data": {
+        "defense": 4,
+        "social": 0,
+        "genesisID": "dermal_plating_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": true,
+        "rating": 4,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "DocWagon Basic Contract (1 Year)",
+      "type": "gear",
+      "data": {
+        "genesisID": "docwagon_basic_year",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "1",
+        "avail": 1,
+        "price": 15000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 3
+      }
+    },
+    {
+      "name": "DocWagon Gold Contract (1 Month)",
+      "type": "gear",
+      "data": {
+        "genesisID": "docwagon_gold_month",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "1",
+        "avail": 1,
+        "price": 2500,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Erika MCD-6",
+      "type": "gear",
+      "data": {
+        "genesisID": "erika_mcd6",
+        "type": "ELECTRONICS",
+        "subtype": "CYBERDECK",
+        "availDef": "3 (I)",
+        "avail": 3,
+        "price": 25000,
+        "accessories": "Stealth",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Glasses",
+      "type": "gear",
+      "data": {
+        "genesisID": "glasses",
+        "type": "ELECTRONICS",
+        "subtype": "IMAGING",
+        "availDef": "1",
+        "avail": 1,
+        "price": 650,
+        "accessories": "Vision magnification",
+        "needsRating": true,
+        "rating": 4,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Grenade, Cleaner",
+      "type": "gear",
+      "data": {
+        "genesisID": "krime_cleaner",
+        "type": "AMMUNITION",
+        "subtype": "GRENADES",
+        "availDef": "10 (I)",
+        "avail": 10,
+        "price": 200,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Grenade, Cocktails",
+      "type": "gear",
+      "data": {
+        "genesisID": "krime_cocktails",
+        "type": "AMMUNITION",
+        "subtype": "GRENADES",
+        "availDef": "7 (I)",
+        "avail": 7,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Grenade, Party",
+      "type": "gear",
+      "data": {
+        "genesisID": "krime_party",
+        "type": "AMMUNITION",
+        "subtype": "GRENADES",
+        "availDef": "7 (I)",
+        "avail": 7,
+        "price": 190,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Grenade, Stinger",
+      "type": "gear",
+      "data": {
+        "genesisID": "krime_stinger",
+        "type": "AMMUNITION",
+        "subtype": "GRENADES",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 125,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Hand Talons (Weapon focus)",
+      "type": "gear",
+      "data": {
+        "dmgDef": "2P",
+        "dmg": 2,
+        "stun": false,
+        "attackRating": [
+          8,
+          0,
+          0,
+          0,
+          0
+        ],
+        "modes": {
+          "BF": false,
+          "FA": false,
+          "SA": false,
+          "SS": false
+        },
+        "genesisID": "hand_talons",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "BLADES",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 190,
+        "accessories": "Melee Quick-Draw Sheath",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "blades",
+        "wild": false,
+        "customName": "Hand Talons (Weapon focus)",
+        "count": 0
+      }
+    },
+    {
+      "name": "Holdout/L.Pistol/Mach. Pistol (10x) (Revo Rounds)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_holdout_light_machine",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "1",
+        "avail": 1,
+        "price": 10,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Krime Euskaldunak Tankette",
+      "type": "gear",
+      "data": {
+        "genesisID": "krime_tankette",
+        "type": "VEHICLES",
+        "subtype": "TRUCKS",
+        "availDef": "9 (I)",
+        "avail": 9,
+        "price": 200000,
+        "accessories": "Rigger interface, Heavy weapon mount, Standard weapon mount",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Krime Ripper",
+      "type": "gear",
+      "data": {
+        "genesisID": "krime_ripper",
+        "type": "DRONES",
+        "subtype": "LARGE_DRONES",
+        "availDef": "10 (I)",
+        "avail": 10,
+        "price": 10000,
+        "accessories": "Rigger interface, Krime Ripper Machine Gun, Krime Ripper Machine Gun, Clearsight , Rating 1, Targeting, Rating 2",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "engineering",
+        "skillSpec": "gunnery",
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "MCT-Nissan Roto-Drone",
+      "type": "gear",
+      "data": {
+        "genesisID": "mct-nissan_roto_drone",
+        "type": "DRONES",
+        "subtype": "MEDIUM_DRONES",
+        "availDef": "2",
+        "avail": 2,
+        "price": 16000,
+        "accessories": "Rigger interface, Heavy weapon mount",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "machine_guns",
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Mini-Betäubung",
+      "type": "gear",
+      "data": {
+        "genesisID": "stun_grenade",
+        "type": "AMMUNITION",
+        "subtype": "GRENADES",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "customName": "Mini-Betäubung",
+        "count": 1
+      }
+    },
+    {
+      "name": "Mortimer o.L. Greatcoats",
+      "type": "gear",
+      "data": {
+        "defense": 4,
+        "social": 4,
+        "genesisID": "mortimer_greatcoats",
+        "type": "ARMOR",
+        "subtype": "ARMOR_SOCIAL",
+        "availDef": "5",
+        "avail": 5,
+        "price": 3250,
+        "accessories": "Hidden Pocket, Hidden Pocket, Electrochromic Feature, Programmable Camouflage Package, Hidden Pocket",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Mystic Armor",
+      "type": "gear",
+      "data": {
+        "defense": 2,
+        "social": 0,
+        "genesisID": "mystic_armor_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": true,
+        "rating": 2,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Orthoskin",
+      "type": "gear",
+      "data": {
+        "essence": 0.5,
+        "capacity": 0,
+        "genesisID": "orthoskin",
+        "type": "BIOWARE",
+        "subtype": "BIOWARE_STANDARD",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 12000,
+        "needsRating": true,
+        "rating": 2,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Orthoskin",
+      "type": "gear",
+      "data": {
+        "defense": 2,
+        "social": 0,
+        "genesisID": "orthoskin_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": true,
+        "rating": 2,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Reagents (in dram)",
+      "type": "gear",
+      "data": {
+        "genesisID": "reagents_per_dram",
+        "type": "MAGICAL",
+        "subtype": "MAGICAL_SUPPLIES",
+        "availDef": "2",
+        "avail": 2,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 2
+      }
+    },
+    {
+      "name": "Remington 900",
+      "type": "gear",
+      "data": {
+        "dmgDef": "5P",
+        "dmg": 5,
+        "stun": false,
+        "attackRating": [
+          2,
+          7,
+          12,
+          14,
+          13
+        ],
+        "modes": {
+          "BF": false,
+          "FA": false,
+          "SA": false,
+          "SS": true
+        },
+        "genesisID": "remington_900",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "RIFLE_HUNTING",
+        "availDef": "3 (L)",
+        "avail": 3,
+        "price": 12000,
+        "accessories": "Imaging scope",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "rifles",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Rifles (10x) (Krime Power Rounds)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_rifles",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "2 (L)",
+        "avail": 2,
+        "price": 90,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 3
+      }
+    },
+    {
+      "name": "Ruhrmetall Selket",
+      "type": "gear",
+      "data": {
+        "genesisID": "ruhrmetall_selket",
+        "type": "VEHICLES",
+        "subtype": "WALKER",
+        "availDef": "4 (I)",
+        "avail": 4,
+        "price": 130000,
+        "accessories": "RPK HMG, ArmTech MGL-12",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "machine_guns",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Ruhrmetall Skarabäus",
+      "type": "gear",
+      "data": {
+        "genesisID": "ruhrmetall_skarabaeus",
+        "type": "DRONES",
+        "subtype": "SMALL_DRONES",
+        "availDef": "6",
+        "avail": 6,
+        "price": 7500,
+        "accessories": "Rigger interface, Standard weapon mount, Clearsight , Rating 3, Targeting, Rating 3",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "machine_pistols",
+        "wild": false,
+        "count": 1
+      }
+    },
+    {
+      "name": "Security Armor",
+      "type": "gear",
+      "data": {
+        "defense": 6,
+        "social": -6,
+        "genesisID": "security_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "7 (L)",
+        "avail": 7,
+        "price": 12800,
+        "accessories": "MEMS Basic Harness",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Stapeltest",
+      "type": "gear",
+      "data": {
+        "genesisID": "placeholder_stackable",
+        "type": "TOOLS",
+        "subtype": "PLACEHOLDERS",
+        "availDef": "1",
+        "avail": 1,
+        "price": 5,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "customName": "Stapeltest",
+        "count": 5
+      }
+    },
+    {
+      "name": "Test",
+      "type": "gear",
+      "data": {
+        "genesisID": "placeholder",
+        "type": "TOOLS",
+        "subtype": "PLACEHOLDERS",
+        "availDef": "1",
+        "avail": 1,
+        "price": 2,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "customName": "Test",
+        "count": 0
+      }
+    },
+    {
+      "name": "Transys Avalon",
+      "type": "gear",
+      "data": {
+        "genesisID": "transys_avalon",
+        "type": "ELECTRONICS",
+        "subtype": "COMMLINK",
+        "availDef": "3",
+        "avail": 3,
+        "price": 8250,
+        "accessories": "Stealth",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Unarmed",
+      "type": "gear",
+      "data": {
+        "dmgDef": "4P",
+        "dmg": 4,
+        "stun": false,
+        "attackRating": [
+          11,
+          0,
+          0,
+          0,
+          0
+        ],
+        "modes": {
+          "BF": false,
+          "FA": false,
+          "SA": false,
+          "SS": false
+        },
+        "genesisID": "unarmed",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "UNARMED",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": false,
+        "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "unarmed",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Yamaha Raiden",
+      "type": "gear",
+      "data": {
+        "dmgDef": "4P",
+        "dmg": 4,
+        "stun": false,
+        "attackRating": [
+          4,
+          11,
+          12,
+          9,
+          4
+        ],
+        "modes": {
+          "BF": true,
+          "FA": true,
+          "SA": true,
+          "SS": false
+        },
+        "genesisID": "yamaha_raiden",
+        "type": "WEAPON_FIREARMS",
+        "subtype": "RIFLE_ASSAULT",
+        "availDef": "5 (L)",
+        "avail": 5,
+        "price": 3300,
+        "accessories": "Yamaha R. Shotgun, Yamaha R. Grenade Launcher, Silencer, Flashlight, Thermographic",
+        "needsRating": false,
+        "rating": 0,
+        "skill": "firearms",
+        "skillSpec": "rifles",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Carromeleg",
+      "type": "martialartstyle",
+      "data": {
+        "genesisID": "careomeleg",
+        "category": "mobility, striking, weapon"
+      }
+    },
+    {
+      "name": "Bending of the Reed (Melee)",
+      "type": "martialarttech",
+      "data": {
+        "genesisID": "bending_of_the_reed_melee"
+      }
+    },
+    {
+      "name": "Bending of the Reed (Ranged)",
+      "type": "martialarttech",
+      "data": {
+        "genesisID": "bending_of_the_reed_ranged"
+      }
+    },
+    {
+      "name": "Bane (Pistolen)",
+      "type": "spell",
+      "data": {
+        "genesisID": "bane",
+        "category": "combat",
+        "drain": 3,
+        "range": "line_of_sight",
+        "type": "mana"
+      }
+    },
+    {
+      "name": "Lightning Bolt",
+      "type": "spell",
+      "data": {
+        "genesisID": "lightning_bolt",
+        "category": "combat",
+        "drain": 5,
+        "range": "line_of_sight",
+        "type": "physical"
+      }
+    },
+    {
+      "name": "Powerbolt",
+      "type": "spell",
+      "data": {
+        "genesisID": "powerbolt",
+        "category": "combat",
+        "drain": 4,
+        "range": "line_of_sight",
+        "type": "physical"
+      }
+    },
+    {
+      "name": "Stunball",
+      "type": "spell",
+      "data": {
+        "genesisID": "stunball",
+        "category": "combat",
+        "drain": 4,
+        "range": "line_of_sight_area",
+        "type": "mana"
+      }
+    },
+    {
+      "name": "Chaos",
+      "type": "spell",
+      "data": {
+        "genesisID": "chaos",
+        "category": "illusion",
+        "drain": 4,
+        "range": "line_of_sight",
+        "type": "physical"
+      }
+    }
+  ]
+}

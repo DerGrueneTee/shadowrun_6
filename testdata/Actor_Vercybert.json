@@ -25,7 +25,7 @@
         "base": 3,
         "mod": 2,
         "pool": 5,
-        "modString": "2 Reflexbooster, Stufe 2 "
+        "modString": "2 Wired reflexes 2 "
       },
       "str": {
         "base": 6,
@@ -61,19 +61,19 @@
         "base": 0,
         "mod": -5,
         "pool": -5,
-        "modString": "-5 Essenz "
+        "modString": "-5 Essence "
       },
       "res": {
         "base": 0,
         "mod": -5,
         "pool": -5,
-        "modString": "-5 Essenz "
+        "modString": "-5 Essence "
       }
     },
     "physical": {
       "base": 13,
       "mod": 3,
-      "modString": "2 Robust gebaut \n1 Cyberbein, offensichtlich ",
+      "modString": "2 Built Tough \n1 Cyberleg, obvious ",
       "value": 16,
       "max": 0
     },
@@ -149,7 +149,7 @@
       "athletics": {
         "points": 4,
         "modifier": 0,
-        "modString": "4 Fertigkeit Athletik \n3 Geschicklichkeit ",
+        "modString": "4 Skill Athletics \n3 Agility ",
         "augment": 0
       },
       "biotech": {
@@ -160,7 +160,7 @@
       "close_combat": {
         "points": 4,
         "modifier": 0,
-        "modString": "4 Fertigkeit Nahkampf \n3 Geschicklichkeit ",
+        "modString": "4 Skill Close Combat \n3 Agility ",
         "augment": 0
       },
       "con": {
@@ -181,7 +181,7 @@
       "electronics": {
         "points": 2,
         "modifier": 0,
-        "modString": "2 Fertigkeit Elektronik \n4 Logik ",
+        "modString": "2 Skill Electronics \n4 Logic ",
         "augment": 0
       },
       "enchanting": {
@@ -202,7 +202,7 @@
       "firearms": {
         "points": 6,
         "modifier": 0,
-        "modString": "6 Fertigkeit Feuerwaffen \n3 Geschicklichkeit ",
+        "modString": "6 Skill Firearms \n3 Agility ",
         "augment": 0
       },
       "influence": {
@@ -242,11 +242,38 @@
       }
     },
     "metatype": "Troll",
-    "gender": "männlich"
+    "gender": "male"
   },
   "items": [
     {
-      "name": "Sprache",
+      "name": "Knowledge",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Knowledge",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Knowledge",
+      "type": "skill",
+      "data": {
+        "genesisID": "knowledge",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Language",
       "type": "skill",
       "data": {
         "genesisID": "language",
@@ -255,7 +282,7 @@
       }
     },
     {
-      "name": "Sprache",
+      "name": "Language",
       "type": "skill",
       "data": {
         "genesisID": "language",
@@ -264,34 +291,7 @@
       }
     },
     {
-      "name": "Wissen",
-      "type": "skill",
-      "data": {
-        "genesisID": "knowledge",
-        "points": 1,
-        "modifier": 0
-      }
-    },
-    {
-      "name": "Wissen",
-      "type": "skill",
-      "data": {
-        "genesisID": "knowledge",
-        "points": 1,
-        "modifier": 0
-      }
-    },
-    {
-      "name": "Wissen",
-      "type": "skill",
-      "data": {
-        "genesisID": "knowledge",
-        "points": 1,
-        "modifier": 0
-      }
-    },
-    {
-      "name": "Infrarotsicht",
+      "name": "Thermographic Vision",
       "type": "quality",
       "data": {
         "genesisID": "thermographic_vision",
@@ -302,7 +302,7 @@
       }
     },
     {
-      "name": "Robust gebaut 2",
+      "name": "Built Tough 2",
       "type": "quality",
       "data": {
         "genesisID": "built_tough",
@@ -313,7 +313,7 @@
       }
     },
     {
-      "name": "Dermalablagerungen",
+      "name": "Dermal Deposits",
       "type": "quality",
       "data": {
         "genesisID": "dermal_deposits",
@@ -324,7 +324,7 @@
       }
     },
     {
-      "name": "Außergewöhnliches Attribut",
+      "name": "Exceptional Attribute",
       "type": "quality",
       "data": {
         "genesisID": "exceptional_attribute",
@@ -335,18 +335,17 @@
       }
     },
     {
-      "name": "Cyberbein, offensichtlich",
+      "name": "Armor jacket",
       "type": "gear",
       "data": {
-        "essence": 0.8,
-        "capacity": 0,
-        "genesisID": "cyberleg_obvious",
-        "type": "CYBERWARE",
-        "subtype": "CYBER_LIMBS",
-        "availDef": "4",
-        "avail": 4,
-        "price": 48000,
-        "accessories": "Stärkeerhöhung, Stufe 5",
+        "defense": 4,
+        "social": -3,
+        "genesisID": "armor_jacket",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "2",
+        "avail": 2,
+        "price": 1000,
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -354,43 +353,7 @@
       }
     },
     {
-      "name": "Dermalpanzerung",
-      "type": "gear",
-      "data": {
-        "essence": 0.3,
-        "capacity": 0,
-        "genesisID": "dermal_plating",
-        "type": "CYBERWARE",
-        "subtype": "CYBER_BODYWARE",
-        "availDef": "4 L",
-        "avail": 4,
-        "price": 4000,
-        "needsRating": true,
-        "rating": 1,
-        "wild": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Dermalpanzerung",
-      "type": "gear",
-      "data": {
-        "defense": 1,
-        "social": 0,
-        "genesisID": "dermal_plating_armor",
-        "type": "ARMOR",
-        "subtype": "ARMOR_BODY",
-        "availDef": "0",
-        "avail": 0,
-        "price": 0,
-        "needsRating": true,
-        "rating": 1,
-        "wild": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Kompositknochen",
+      "name": "Bone lacing",
       "type": "gear",
       "data": {
         "defense": 2,
@@ -408,7 +371,7 @@
       }
     },
     {
-      "name": "Kompositknochen, Titan",
+      "name": "Bone lacing, Titanium",
       "type": "gear",
       "data": {
         "essence": 1.5,
@@ -416,11 +379,66 @@
         "genesisID": "bone_lacing_titanium",
         "type": "CYBERWARE",
         "subtype": "CYBER_BODYWARE",
-        "availDef": "6 L",
+        "availDef": "6 (L)",
         "avail": 6,
         "price": 30000,
         "needsRating": false,
         "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Cyberleg, obvious",
+      "type": "gear",
+      "data": {
+        "essence": 0.8,
+        "capacity": 0,
+        "genesisID": "cyberleg_obvious",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_LIMBS",
+        "availDef": "4",
+        "avail": 4,
+        "price": 48000,
+        "accessories": "Strength increase, Rating 5",
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Dermal Plating",
+      "type": "gear",
+      "data": {
+        "essence": 0.3,
+        "capacity": 0,
+        "genesisID": "dermal_plating",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "4 (L)",
+        "avail": 4,
+        "price": 4000,
+        "needsRating": true,
+        "rating": 1,
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Dermal Plating",
+      "type": "gear",
+      "data": {
+        "defense": 1,
+        "social": 0,
+        "genesisID": "dermal_plating_armor",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
+        "availDef": "0",
+        "avail": 0,
+        "price": 0,
+        "needsRating": true,
+        "rating": 1,
         "wild": false,
         "count": 0
       }
@@ -434,7 +452,7 @@
         "genesisID": "orthoskin",
         "type": "BIOWARE",
         "subtype": "BIOWARE_STANDARD",
-        "availDef": "4 L",
+        "availDef": "4 (L)",
         "avail": 4,
         "price": 6000,
         "needsRating": true,
@@ -462,46 +480,10 @@
       }
     },
     {
-      "name": "Panzerjacke",
-      "type": "gear",
-      "data": {
-        "defense": 4,
-        "social": -3,
-        "genesisID": "armor_jacket",
-        "type": "ARMOR",
-        "subtype": "ARMOR_BODY",
-        "availDef": "2",
-        "avail": 2,
-        "price": 1000,
-        "needsRating": false,
-        "rating": 0,
-        "wild": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Reflexbooster, Stufe 2",
-      "type": "gear",
-      "data": {
-        "essence": 1.4,
-        "capacity": 0,
-        "genesisID": "wired_reflexes2",
-        "type": "CYBERWARE",
-        "subtype": "CYBER_BODYWARE",
-        "availDef": "3 L",
-        "avail": 3,
-        "price": 225000,
-        "needsRating": false,
-        "rating": 0,
-        "wild": false,
-        "count": 0
-      }
-    },
-    {
       "name": "Steyr TMP",
       "type": "gear",
       "data": {
-        "dmgDef": "2K",
+        "dmgDef": "2P",
         "dmg": 2,
         "stun": false,
         "attackRating": [
@@ -520,10 +502,10 @@
         "genesisID": "steyr_tmp",
         "type": "WEAPON_FIREARMS",
         "subtype": "MACHINE_PISTOLS",
-        "availDef": "3 L",
+        "availDef": "3 (L)",
         "avail": 3,
         "price": 690,
-        "accessories": "Lasermarkierer (Basis)",
+        "accessories": "Laser sight (base)",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -533,10 +515,10 @@
       }
     },
     {
-      "name": "Waffenlos",
+      "name": "Unarmed",
       "type": "gear",
       "data": {
-        "dmgDef": "4K",
+        "dmgDef": "4P",
         "dmg": 4,
         "stun": false,
         "attackRating": [
@@ -562,6 +544,24 @@
         "rating": 0,
         "skill": "close_combat",
         "skillSpec": "unarmed",
+        "wild": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Wired reflexes 2",
+      "type": "gear",
+      "data": {
+        "essence": 1.4,
+        "capacity": 0,
+        "genesisID": "wired_reflexes2",
+        "type": "CYBERWARE",
+        "subtype": "CYBER_BODYWARE",
+        "availDef": "3 (L)",
+        "avail": 3,
+        "price": 225000,
+        "needsRating": false,
+        "rating": 0,
         "wild": false,
         "count": 0
       }

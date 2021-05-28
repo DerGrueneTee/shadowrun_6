@@ -355,6 +355,8 @@
 	"Item": {
 		"types": [
 			"gear",
+			"martialartstyle",
+			"martialarttech",
 			"quality",
 			"skill",
 			"spell"
@@ -410,6 +412,15 @@
 			"templates": [
 				"dice-pool"
 			]
+		},
+		"martialartstyle": {
+			"genesisID": "",
+			"category": "",
+			"description": ""
+		},
+		"martialarttech": {
+			"genesisID": "",
+			"description": ""
 		},
 		"quality": {
 			"genesisID": "",
