@@ -259,6 +259,8 @@
     "ITEM.TypeSkill": "Language/Knowledge Skill",
     "ITEM.TypeSpell": "Spell",
     "ITEM.TypeGear": "Gear",
+    "ITEM.TypeMartialartstyle": "Martial Art Style (PLACEHOLDER)",
+    "ITEM.TypeMartialarttech": "Martial Art Technique (PLACEHOLDER)",
     "QUALITY_CATEGORIES.ADVANTAGE": "Advantage",
     "QUALITY_CATEGORIES.DISADVANTAGE": "Disadvantage"
 }
