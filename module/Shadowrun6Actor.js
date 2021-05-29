@@ -1,5 +1,6 @@
 import { doRoll } from "../module/dice/dice.js";
 import { doAttackRoll } from "../module/dice/dice.js";
+import { doCommonCheck } from "../module/dice/dice.js";
 import { SR6 } from "./config.js";
 
 /**
@@ -24,17 +25,17 @@ export class Shadowrun6Actor extends Actor {
 	/*
 	 * Calculate the final attribute values
 	 */
-    async modifyTokenAttribute(attribute, value, isDelta=false, isBar=true) {
-	    console.log("modifyTokenAttribute "+attribute);
-	   if (attribute=="stun" || attribute=="physical") {
-        const current = getProperty(this.data.data, attribute);
-		  current.dmg = current.max - value;
-        if (current.dmg<0) current.dmg = 0;
-        console.log("damage is "+current.dmg);
-		  this.update({[`data.${attribute}.dmg`]: current.dmg});
-	   }
+	async modifyTokenAttribute(attribute, value, isDelta = false, isBar = true) {
+		console.log("modifyTokenAttribute " + attribute);
+		if (attribute == "stun" || attribute == "physical") {
+			const current = getProperty(this.data.data, attribute);
+			current.dmg = current.max - value;
+			if (current.dmg < 0) current.dmg = 0;
+			console.log("damage is " + current.dmg);
+			this.update({ [`data.${attribute}.dmg`]: current.dmg });
+		}
 		return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
-    }
+	}
 
 
 	//---------------------------------------------------------
@@ -79,18 +80,18 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 		if (data.initiative) {
-			console.log("Initiative: mod="+ data.initiative.physical.mod);
+			console.log("Initiative: mod=" + data.initiative.physical.mod);
 			data.initiative.physical.base = data.attributes["rea"].pool + data.attributes["int"].pool;
 			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
 			data.initiative.physical.dicePool = Math.min(5, data.initiative.physical.dice + data.initiative.physical.diceMod);
-			
-			data.initiative.actions = data.initiative.physical.dicePool +1;
+
+			data.initiative.actions = data.initiative.physical.dicePool + 1;
 
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 		}
-		
+
 		const items = this.data.items;
 		/* (Unarmed) Attack and Defense Rating */
 		if (data.derived) {
@@ -98,52 +99,52 @@ export class Shadowrun6Actor extends Actor {
 			data.derived.attack_rating.base = data.attributes["rea"].pool + data.attributes["str"].pool;
 			data.derived.attack_rating.pool = data.derived.attack_rating.base + data.derived.attack_rating.mod;
 			// Defense Rating
-			if (data.derived.defense_rating) {				
+			if (data.derived.defense_rating) {
 				data.derived.defense_rating.base = data.attributes["bod"].pool;
-				data.derived.defense_rating.modString = game.i18n.localize("attrib.bod_short")+" "+data.attributes["bod"].pool;
+				data.derived.defense_rating.modString = game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
 				if (data.derived.defense_rating.mod) {
 					data.derived.defense_rating.pool = data.derived.defense_rating.base + data.derived.defense_rating.mod;
-					data.derived.defense_rating.modString += "\n+"+data.derived.defense_rating.mod;
+					data.derived.defense_rating.modString += "\n+" + data.derived.defense_rating.mod;
 				} else {
 					data.derived.defense_rating.pool = data.attributes["bod"].pool;
 				}
-				items.forEach(function(item, key) {
-					if (item.type=="gear" && item.data.data.type=="ARMOR") {
+				items.forEach(function (item, key) {
+					if (item.type == "gear" && item.data.data.type == "ARMOR") {
 						if (item.data.data.usedForPool) {
 							data.derived.defense_rating.pool += item.data.data.defense;
-							data.derived.defense_rating.modString += "\n+"+item.data.data.defense+" "+item.name;
+							data.derived.defense_rating.modString += "\n+" + item.data.data.defense + " " + item.name;
 						}
 					}
 				});
 			}
 			// Composure
-			if (data.derived.composure) {				
+			if (data.derived.composure) {
 				data.derived.composure.base = data.attributes["wil"].pool + data.attributes["cha"].pool;
 				data.derived.composure.pool = data.derived.composure.base + data.derived.composure.mod;
 			}
 			// Judge Intentions
-			if (data.derived.judge_intentions) {				
+			if (data.derived.judge_intentions) {
 				data.derived.judge_intentions.base = data.attributes["wil"].pool + data.attributes["int"].pool;
 				data.derived.judge_intentions.pool = data.derived.judge_intentions.base + data.derived.judge_intentions.mod;
 			}
 			// Memory
-			if (data.derived.memory) {				
+			if (data.derived.memory) {
 				data.derived.memory.base = data.attributes["log"].pool + data.attributes["int"].pool;
 				data.derived.memory.pool = data.derived.memory.base + data.derived.memory.mod;
 			}
 			// Lift/Carry
-			if (data.derived.lift_carry) {				
+			if (data.derived.lift_carry) {
 				data.derived.lift_carry.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
 				data.derived.lift_carry.pool = data.derived.lift_carry.base + data.derived.lift_carry.mod;
 			}
-			
+
 			// Soak / Damage Resistance
-			if (data.derived.resist_damage) {				
+			if (data.derived.resist_damage) {
 				data.derived.resist_damage.base = data.attributes["bod"].pool;
 				data.derived.resist_damage.pool = data.derived.resist_damage.base + data.derived.resist_damage.mod;
 			}
 			// Toxin Resistance
-			if (data.derived.resist_toxin) {				
+			if (data.derived.resist_toxin) {
 				data.derived.resist_toxin.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
 				data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
 			}
@@ -160,7 +161,7 @@ export class Shadowrun6Actor extends Actor {
 		console.log("PrepareSkills " + this.name);
 		// Only calculate for PCs - ignore for NPCs/Critter
 		if (actorData.type === "Player" || actorData.type === "NPC") {
-			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function(skillDef, id) {
+			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function (skillDef, id) {
 				let attr = skillDef.attrib;
 				let attribVal = data.attributes[attr].pool;
 				data.skills[id].pool = attribVal + data.skills[id].points;
@@ -178,9 +179,9 @@ export class Shadowrun6Actor extends Actor {
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
 			if (item.type == "gear" && item.data && item.data.skill) {
-				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool; 
+				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
 				// TODO: Check if actor has specialization or mastery
-				item.data.pool = item.data.pool + eval(item.data.modifier); 
+				item.data.pool = item.data.pool + eval(item.data.modifier);
 			};
 		});
 	}
@@ -193,21 +194,9 @@ export class Shadowrun6Actor extends Actor {
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
 	rollSkill(skillId, options = {}) {
-		//    	let skl = "";
-		//    	this.items.forEach(loopItem => {
-		//    		let item = loopItem.data;
-		//    		if (item.type == "skill-value") {
-		//    			if (item.data.id==skillId) {
-		//    				console.log("Found "+skillId+" with "+item.data.id);
-		//    				skl = item.data;
-		//    			}
-		//    		}
-		//    	});
 		const skl = this.data.data.skills[skillId];
-		//const skl = this.getOwnedItem(itemID);
 		const value = skl.pool;
 		const parts = [];
-
 
 		// Roll and return
 		let data = mergeObject(options, {
@@ -238,6 +227,16 @@ export class Shadowrun6Actor extends Actor {
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doAttackRoll(data);
+	}
+
+	rollCommonCheck(pool, title, dialogConfig, options = {}) {
+		let data = mergeObject(options, {
+			value: pool,
+			title: title,
+			dialogConfig: dialogConfig	
+		});
+		data.speaker = ChatMessage.getSpeaker({actor: this});
+		return doCommonCheck(data);
 	}
 
 	getUsersFirstTargetId() {

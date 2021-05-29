@@ -10,8 +10,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		data.config = CONFIG.SR6;
 		return data;
 	}
-	
-	async  _test() {
+
+	async _test() {
 		console.log("Bla");
 		return 4;
 	}
@@ -26,6 +26,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			// Roll Skill Checks
 			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
 			html.find('.item-roll').click(this._onRollItemCheck.bind(this));
+			html.find(".defense-roll").click(this._onCommonCheck.bind(this));
+			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find('.quality-create').click(ev => {
@@ -62,67 +64,67 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				item.sheet.render(true);
 			});
 			html.find('.item-delete').click(ev => {
-            const itemId = this._getClosestData($(event.currentTarget), 'item-id');
-            console.log("Delete item "+itemId)
-            this.actor.deleteEmbeddedDocuments("Item",[itemId]);
+				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+				console.log("Delete item " + itemId)
+				this.actor.deleteEmbeddedDocuments("Item", [itemId]);
 			});
-         html.find('[data-field]').change(event => {
-            const element = event.currentTarget;
-            let value = element.value;
-            const itemId = this._getClosestData($(event.currentTarget), 'item-id');
-            const field = element.dataset.field;
-				console.log("Update field "+field+" with "+value);
-            this.actor.items.get(itemId).update({ [field]: value });
-        });
-         html.find('[data-check]').click(event => {
-            const element = event.currentTarget;
-				console.log("Came here with checked="+element.checked+"  and value="+element.value);
-            let value = element.checked;
-            const itemId = this._getClosestData($(event.currentTarget), 'item-id');
-            const field = element.dataset.check;
-				console.log("Update field "+field+" with "+value);
-            this.actor.items.get(itemId).update({ [field]: value });
-        });
- 		  //Collapsible
-		  html.find('.collapsible').click(event => {
-            const element = event.currentTarget;
+			html.find('[data-field]').change(event => {
+				const element = event.currentTarget;
+				let value = element.value;
+				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+				const field = element.dataset.field;
+				console.log("Update field " + field + " with " + value);
+				this.actor.items.get(itemId).update({ [field]: value });
+			});
+			html.find('[data-check]').click(event => {
+				const element = event.currentTarget;
+				console.log("Came here with checked=" + element.checked + "  and value=" + element.value);
+				let value = element.checked;
+				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+				const field = element.dataset.check;
+				console.log("Update field " + field + " with " + value);
+				this.actor.items.get(itemId).update({ [field]: value });
+			});
+			//Collapsible
+			html.find('.collapsible').click(event => {
+				const element = event.currentTarget;
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const item = this.actor.items.get(itemId);
-//				console.log("Collapsible: old styles are '"+element.classList+"'' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
+				//				console.log("Collapsible: old styles are '"+element.classList+"'' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
 				element.classList.toggle("open");
-				let content = element.parentElement.parentElement.nextElementSibling.firstElementChild.firstElementChild; 
-				if (content.style.maxHeight){
-      			content.style.maxHeight = null;
-    			} else {
-      			content.style.maxHeight = content.scrollHeight + "px";
-    			}
-//				console.log("Collapsible: temp style are '"+element.classList);
-				let value = element.classList.contains("open")?"open":"closed";
-//				console.log("Update flag 'collapse-state' with "+value);
-//				item.data.flags["shadowrun6-eden"]["collapse-state"] = value;
-				item.setFlag("shadowrun6-eden","collapse-state",value);
-//				console.log("Collapsible: new styles are '"+element.classList+"' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
-        });
+				let content = element.parentElement.parentElement.nextElementSibling.firstElementChild.firstElementChild;
+				if (content.style.maxHeight) {
+					content.style.maxHeight = null;
+				} else {
+					content.style.maxHeight = content.scrollHeight + "px";
+				}
+				//				console.log("Collapsible: temp style are '"+element.classList);
+				let value = element.classList.contains("open") ? "open" : "closed";
+				//				console.log("Update flag 'collapse-state' with "+value);
+				//				item.data.flags["shadowrun6-eden"]["collapse-state"] = value;
+				item.setFlag("shadowrun6-eden", "collapse-state", value);
+				//				console.log("Collapsible: new styles are '"+element.classList+"' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
+			});
 
-	/*
-	 * Drag & Drop
-	 */
-        $(".draggable").on("dragstart", event => {
-			  console.log("DRAG START");
-            const itemId = event.currentTarget.dataset.itemId;
-            if (itemId) {
-			 		 console.log("Item "+itemId+" dragged");
-                const itemData = this.actor.data.items.find(el => el.id === itemId);
-                event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify({
-                    type: "Item",
-                    data: itemData,
-                    actorId: this.actor.id
-                }));
-                event.stopPropagation();
-                return;
-            }
+			/*
+			 * Drag & Drop
+			 */
+			$(".draggable").on("dragstart", event => {
+				console.log("DRAG START");
+				const itemId = event.currentTarget.dataset.itemId;
+				if (itemId) {
+					console.log("Item " + itemId + " dragged");
+					const itemData = this.actor.data.items.find(el => el.id === itemId);
+					event.originalEvent.dataTransfer.setData("text/plain", JSON.stringify({
+						type: "Item",
+						data: itemData,
+						actorId: this.actor.id
+					}));
+					event.stopPropagation();
+					return;
+				}
 
-        }).attr('draggable', true);
+			}).attr('draggable', true);
 
 		} else {
 			html.find(".rollable").each((i, el) => el.classList.remove("rollable"));
@@ -151,20 +153,54 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		this.actor.rollItem(skill, item, { event: event });
 	}
 
+	_onCommonCheck(event, html) {
+		event.preventDefault();
+		const pool = event.currentTarget.dataset.pool;
+		let classList = event.currentTarget.classList;
+		let title;
+		if (classList.contains("defense-roll") || classList.contains("attributeonly-roll")) {
+			title = game.i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
+		} else {
+			title = game.i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
+		}
+		let dialogConfig;
+		if (classList.contains("defense-roll")) {
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: false,
+				buyHits: false
+			};
+		} else if (classList.contains("attributeonly-roll")) {
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: true,
+				buyHits: true
+			};
+		} else {
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: true,
+				buyHits: true,
+				useWilddie: true
+			};
+		}
+		this.actor.rollCommonCheck(pool, title, dialogConfig);
+	}
+
 	//-----------------------------------------------------
-   _getClosestData(jQObject, dataName, defaultValue = "") {
-        let value = jQObject.closest(`[data-${dataName}]`)?.data(dataName);
-        return (value) ? value : defaultValue;
-    }
+	_getClosestData(jQObject, dataName, defaultValue = "") {
+		let value = jQObject.closest(`[data-${dataName}]`)?.data(dataName);
+		return (value) ? value : defaultValue;
+	}
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
 		let perc = monitorAttribute.value / monitorAttribute.max * 100;
-		html.find("#bar"+id+"Cur")[0].style.width = perc + "%";
+		html.find("#bar" + id + "Cur")[0].style.width = perc + "%";
 
-		let myNode = html.find("#bar"+id+"Boxes")[0];
+		let myNode = html.find("#bar" + id + "Boxes")[0];
 		// Only change nodes when necessary
 		if (myNode.childElementCount != monitorAttribute.max) {
 			// The energy bar
@@ -188,7 +224,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			}
 
 			// The scale
-			myNode = html.find("#bar"+id+"Scale")[0];
+			myNode = html.find("#bar" + id + "Scale")[0];
 			while (myNode.firstChild) {
 				myNode.removeChild(myNode.lastChild);
 			}
