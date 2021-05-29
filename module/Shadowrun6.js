@@ -124,7 +124,7 @@ Hooks.once("init", async function () {
   });
 
   Hooks.once('diceSoNiceReady', (dice3d) => {
-    dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "force");
+    dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "default");
     dice3d.addDicePreset({
       type: "d6",
       labels: [
@@ -154,7 +154,7 @@ Hooks.once("init", async function () {
         "d6": 1.1,
         "df": 2.5
       },
-      visibility: 'visible'
+      visibility: 'hidden'
     }, "no");
 
     dice3d.addColorset({
