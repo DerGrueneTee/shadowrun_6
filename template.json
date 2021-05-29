@@ -436,7 +436,8 @@
 		},
 		"martialarttech": {
 			"genesisID": "",
-			"description": ""
+			"description": "",
+			"style": ""
 		},
 		"quality": {
 			"genesisID": "",
@@ -456,7 +457,9 @@
 		"spell": {
 			"genesisID": "",
 			"category": "",
+			"duration": "",
 			"drain": 1,
+			"direct": false,
 			"type": "",
 			"range": ""
 		}

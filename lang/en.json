@@ -180,6 +180,10 @@
             "derived": "Derived Values",
             "electronics": "Electronics",
 			   "initiative": "Initiative",
+			   "martialarts": {
+					"add"  : "Add new style",
+					"title": "Martial Arts"
+				},
             "skills.action": "Skills",
             "skills.language": "Language Skills",
             "skills.language_add": "Add new language skill",
