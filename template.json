@@ -382,6 +382,7 @@
 			"type": "WEAPON_FIREARMS",
 			"subtype": "",
 			"count":  0,
+			"countable": false,
 			"availDef": "",
 			"avail": 0,
 			"priceDef": "",
