@@ -28,7 +28,7 @@
 		<a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
 		<a class="item" data-tab="skills">{{ localize 'shadowrun6.actor.nav.skills' }}</a>
 		<a class="item" data-tab="combat">{{ localize 'shadowrun6.actor.nav.combat' }}</a>
-		<!--a class="item" data-tab="equip" >{{ localize 'shadowrun6.actor.nav.equip'  }}</a-->
+		<a class="item" data-tab="equip" >{{ localize 'shadowrun6.actor.nav.equip'  }}</a>
 		<!--a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
 		<a class="item" data-tab="items">{{ localize 'shadowrun6.actor.nav.equip' }}</a-->
 	</nav>
@@ -44,6 +44,7 @@
 			{{> "systems/shadowrun6-eden/templates/parts/pc-derived.html" attributes=data.data.attributes}}
 		   {{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
 			{{> "systems/shadowrun6-eden/templates/parts/initiatives.html" initiative=data.data.initiative}}
+		   {{> "systems/shadowrun6-eden/templates/parts/section-bodyware.html"}}
 		</div>
 
 		{{!-- Skills Tab --}}
