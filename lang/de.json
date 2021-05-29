@@ -80,8 +80,10 @@
 		  		"attribute": "Attribut",
 		  		"base"     : "Basis",
 			   "column": {
-					"name": "Name",
-					"action": "Aktion"
+					"action": "Aktion",
+					"count" : "Anz.",
+					"rating": "St.",
+					"name": "Name"
 				},
 		  		"damage"   : "Schaden",
 		  		"dice"     : "Würfel",

@@ -80,9 +80,10 @@
 		  		"attribute": "Attribute",
 		  		"base"     : "Base",
 			   "column": {
-					"name": "Name",
-			      "rating"   : "Rtg.",
-					"action": "Action"
+					"action": "Action",
+					"count" : "Cnt",
+					"name"  : "Name",
+			      "rating": "Rtg."
 				},
 		  		"damage"   : "Damage",
 		  		"dice"     : "Dice",

@@ -80,9 +80,10 @@
 		  		"attribute": "Attributs",
 		  		"base"     : "Base",
 			   "column": {
-          "name": "Nom",
-					"rating": "Scr.",
-					"action": "Action"
+					"action": "Action",
+					"count" : "TRANSLATE",
+               "name"  : "Nom",
+					"rating": "Scr."
 				},
 		  		"damage"   : "Dégâts",
 		  		"dice"     : "Dé",
