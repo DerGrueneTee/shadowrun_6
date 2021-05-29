@@ -416,7 +416,12 @@
 		},
 		"martialartstyle": {
 			"genesisID": "",
-			"category": "",
+			"category": {
+				"grappling": false,
+				"mobility": false,
+				"striking": false,
+				"weapon": false
+			},
 			"description": ""
 		},
 		"martialarttech": {
