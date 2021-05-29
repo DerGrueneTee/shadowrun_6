@@ -27,8 +27,7 @@
 
         {{!-- Basics Tab --}}
         <div class="tab overview" data-group="primary" data-tab="overview">
-            <line>
-                <div class="section" style="width: 68%">
+                <div class="section" style="width: 68%; margin: 5px">
                     {{> "systems/shadowrun6-eden/templates/parts/npc-attributes.html" attributes=data.data.attributes}}
                     <dl>                    
                         <dt>{{ localize 'shadowrun6.actor.initiative' }}</dt>
@@ -40,12 +39,8 @@
                         {{> "systems/shadowrun6-eden/templates/parts/npc-skills.html" skills=data.data.skills}}
                     </dl>
                 </div>
-                
-                <div class="section" style="width: 48%">
-{{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
-              </div>
-                </line>
-        </div>
+			{{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
+         </div>
 
 		{{!-- Input Tab --}}
 		<div class="tab edit" data-group="primary" data-tab="edit">
