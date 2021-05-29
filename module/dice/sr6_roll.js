@@ -14,7 +14,7 @@ export default class SR6Roll extends Roll {
   /** @override */
   evaluate() {
     let data = this.data;
-    let noOfDice = data.value;
+    let noOfDice = parseInt(data.value);
     let die;
     if (data.modifier > 0) {
       noOfDice += data.modifier;
