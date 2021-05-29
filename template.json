@@ -354,6 +354,7 @@
 	},
 	"Item": {
 		"types": [
+			"adeptpower",
 			"gear",
 			"martialartstyle",
 			"martialarttech",
@@ -376,6 +377,15 @@
 				"explain": "",
 				"modifier": []
 			}
+		},
+		"adeptpower": {
+			"genesisID": "",
+			"hasLevel": false,
+			"level": 0,
+			"description": "",
+			"choice": "",
+			"cost": 0.0,
+			"activation": ""
 		},
 		"gear": {
 			"genesisID": "",

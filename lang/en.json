@@ -264,6 +264,7 @@
     "ACTOR.TypePlayer": "Player Character",
     "ACTOR.TypeNpc": "NPC",
     "ACTOR.TypeCritter": "Critter",
+    "ITEM.TypeAdeptpower": "Adept Power (Placeholder)",
     "ITEM.TypeQuality": "Quality",
     "ITEM.TypeSkill": "Language/Knowledge Skill",
     "ITEM.TypeSpell": "Spell",
