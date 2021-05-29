@@ -80,22 +80,22 @@
 		  		"attribute": "Attributs",
 		  		"base"     : "Base",
 			   "column": {
-					"action": "Action",
-					"rating": "TRANSLATE",
-					"name": "Nom"
+          "name": "Nom",
+					"rating": "Scr.",
+					"action": "Action"
 				},
 		  		"damage"   : "Dégâts",
 		  		"dice"     : "Dé",
 		  		"d6"       : "D6",
 		  		"delete"   : "Effacer",
 		  		"edit"     : "Éditer",
-		        "firemodes": "Modes de tir",
+		      "firemodes": "Modes de tir",
+          "max"      : "Maximum",
+		  		"modifier" : "Mod.",
+          "modifications" : "Modifications",
 		  		"points"   : "Points",
 		  		"pool"     : "Réserve",
 		  		"poolmod"  : "réserve de dés",
-		  		"max"      : "Maximum",
-		  		"modifier" : "Mod.",
-                "modifications" : "Modifications",
 		  		"value"    : "Score",
 		  		"wilddie"  : "Dé Libre"
 		  },
@@ -143,7 +143,8 @@
             "notarget": "Aucune cible sélectionnée",
             "edgegain" : "Atout-Gain (max): ",
             "edgegain_player" : " (Joueur)",
-            "noedgegain": "Pas de gain d'atout"
+            "noedgegain": "Pas de gain d'atout",
+            "hits_bought" : "Coups achetés"
         },
         "rollType": {
             "normal": "lancer les dés",
@@ -158,16 +159,16 @@
                 "defense": "SD",
                 "social" : "Social"
             },
-				"biology": "TRANSLATE",
+				"biology": "Biologie",
 				"bodyware": {
-					"title": "TRANSLATE",
-					"column.essence": "TRANSLATE",
-					"column.capacity": "TRANSLATE",
-					"footer.total_essence": "TRANSLATE"
+					"title": "Implants Corporels",
+					"column.essence": "Ess.",
+					"column.capacity": "Cap.",
+					"footer.total_essence": "Essence restante"
 				},
-            "chemicals": "TRANSLATE",
+            "chemicals": "chimiques",
             "derived": "Scores Dérivés",
-            "electronics":"TRANSLATE",
+            "electronics":"électroniques",
 			   "initiative": "Initiative",
             "skills.action": "Compétences",
             "skills.language": "Langues",
