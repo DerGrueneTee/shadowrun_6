@@ -3,11 +3,16 @@ export class SR6ItemSheet extends ItemSheet {
   /** @override */
   static get defaultOptions() {
     return mergeObject(super.defaultOptions, {
-      classes: ["shadowrun6", "sheet", "item", "gear"],
-      template: "systems/shadowrun6-eden/templates/shadrowun6-item-sheet.html",
+      classes: ["shadowrun6", "sheet", "item"],
       width: 500,
       height: 600,
     });
+  }
+
+
+  get template() {
+    const path = 'systems/shadowrun6-eden/templates/item/';
+    return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
   }
 
   /** @overrride */
