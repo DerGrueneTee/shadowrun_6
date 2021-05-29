@@ -186,13 +186,16 @@ dd::after {
 	visibility: hidden;
 }
 .shadowrun6 button:before {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  content: '\025B6'; /* 02795 Unicode character for "plus" sign (+) */
   visibility: visible;
   font-size: 13px;
 }
+.shadowrun6 button.empty:before {
+  content: '\025B7'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+}
 .shadowrun6 button.open:before {
-	content: "\2796"; /* Unicode character for "minus" sign (-) */
-	font-size: 13px;
+	content: "\25BC"; /* 2796 Unicode character for "minus" sign (-) */
 }
 
  /* The switch - the box around the slider */
