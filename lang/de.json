@@ -51,7 +51,16 @@
             "mode_sa": "HM",
             "mode_ss": "EM",
             "accessories":"Einbauten",
-            "essence": "Essenz"
+            "essence": "Essenz",
+            "category" : "Kategorie",
+            "mastyle" : {
+                "category" : {
+                   "grappling" : "Grappling",
+                   "mobility" : "Mobility",
+                   "striking" : "Striking",
+                   "weapon": "weapon"
+                }
+            }
         },
 		  "itemtype": {
 				"ACCESSORY": "Zubehör",

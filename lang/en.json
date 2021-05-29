@@ -51,7 +51,16 @@
             "mode_sa": "SA",
             "mode_ss": "SS",
             "accessories": "Accessories",
-            "essence": "Essence"
+            "essence": "Essence",
+            "category": "Category",
+            "mastyle" : {
+                "category" : {
+                   "grappling" : "Grappling",
+                   "mobility" : "Mobility",
+                   "striking" : "Striking",
+                   "weapon": "weapon"
+                }
+            }
 		  },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
