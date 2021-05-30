@@ -41,17 +41,23 @@ SR6.ATTRIB_BY_SKILL = new Map([
 ]);
 
 SR6.icons = {
+    adeptpower: {
+        default: "systems/shadowrun6-eden/icons/van-damme-split.svg"
+    },
     gear: {
-        default: "icons/svg/chest.svg"
+        default: "systems/shadowrun6-eden/icons/pistol-gun.svg"
     },
     martialartstyle: {
-        default: "icons/svg/shield.svg"
+        default: "systems/shadowrun6-eden/icons/kimono.svg"
     },
     martialarttech: {
         default: "systems/shadowrun6-eden/icons/nunchaku.svg"
     },
     quality: {
-        default: "icons/svg/sword.svg"
+        default: "systems/shadowrun6-eden/icons/skills.svg"
+    },
+    spell: {
+        default: "systems/shadowrun6-eden/icons/bolt-spell-cast.svg"
     }
 }
 
