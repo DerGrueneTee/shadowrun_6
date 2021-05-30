@@ -14,23 +14,17 @@
                 <tr>
                     <td>
                         <select name="data.category">
-                            {{#select item.data.data.category}}
-                            <option value="n.a">n.a.</option>
-                            {{/select}}
+                            {{selectOptions config.spell_category selected=item.data.data.category localize=true}}
                         </select>
                     </td>
                     <td>
                         <select name="data.type">
-                            {{#select item.data.data.type}}
-                            <option value="n.a">n.a.</option>
-                            {{/select}}
+                            {{selectOptions config.spell_type selected=item.data.data.type localize=true}}
                         </select>
                     </td>
                     <td>
                         <select name="data.range">
-                            {{#select item.data.data.range}}
-                            <option value="n.a">n.a.</option>
-                            {{/select}}
+                            {{selectOptions config.spell_range selected=item.data.data.range localize=true}}
                         </select>
                     </td>
                 </tr>
@@ -40,7 +34,9 @@
                     <th>{{localize 'shadowrun6.spell.direct'}}</th>           
                 </tr>
                 <td>
-                    <input name="data.duration" value="{{item.data.data.duration}}" type="text" class="box centered"/>
+                    <select name="data.duration">
+                        {{selectOptions config.spell_duration selected=item.data.data.duration localize=true}}
+                    </select>
                 </td>
                 <td>
                     <input name="data.drain" value="{{item.data.data.drain}}" type="text" class="box centered"/>
