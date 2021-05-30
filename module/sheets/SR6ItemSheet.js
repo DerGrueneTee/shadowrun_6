@@ -27,6 +27,7 @@ export class SR6ItemSheet extends ItemSheet {
 * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
 */
   activateListeners(html) {
+    super.activateListeners(html);
     // Owner Only Listeners
     if ((this.actor && this.actor.isOwner)) {
       html.find('[data-field]').change(event => {
