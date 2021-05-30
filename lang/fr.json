@@ -171,6 +171,10 @@
             "derived": "Scores Dérivés",
             "electronics":"électroniques",
 			   "initiative": "Initiative",
+			   "martialarts": {
+					"add"  : "TRANSLATE",
+					"title": "TRANSLATE"
+				},
             "skills.action": "Compétences",
             "skills.language": "Langues",
             "skills.language_add": "Nouvelle Langue",

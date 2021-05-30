@@ -185,6 +185,10 @@
             "derived": "Derived Values",
             "electronics": "Electronics",
 			   "initiative": "Initiative",
+			   "martialarts": {
+					"add"  : "Add new style",
+					"title": "Martial Arts"
+				},
             "skills.action": "Skills",
             "skills.language": "Language Skills",
             "skills.language_add": "Add new language skill",
@@ -269,6 +273,7 @@
     "ACTOR.TypePlayer": "Player Character",
     "ACTOR.TypeNpc": "NPC",
     "ACTOR.TypeCritter": "Critter",
+    "ITEM.TypeAdeptpower": "Adept Power (Placeholder)",
     "ITEM.TypeQuality": "Quality",
     "ITEM.TypeSkill": "Language/Knowledge Skill",
     "ITEM.TypeSpell": "Spell",

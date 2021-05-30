@@ -1,21 +1,34 @@
-<div class="section" style="display: inline-block; width: 38%; margin: 0 0 0 10px;">
+<div class="section" style="display: inline-block; width: 38%; margin: 10px 0 0 10px;">
  <div class="section-head">
-	<h2 class="section-title">{{ localize 'shadowrun6.section.martialart' }}</h2>
-	<a class="item-control quality-create" title="{{localize 'shadowrun6.section.martialarts_add' }}">
+	<h2 class="section-title">{{ localize 'shadowrun6.section.martialarts.title' }}</h2>
+	<a class="item-control quality-create" title="{{localize 'shadowrun6.section.martialarts.add' }}">
 		<h2 class="fas fa-plus"></h2>
 	</a>
 </div>
 <table>
-		{{#each actor.items as |item id|}} 
-		{{#iff item.type '==' 'martialartstyle'}}
+  {{#each actor.items as |item id|}} 
+    {{#iff item.type '==' 'martialartstyle'}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
-			<td> <input type="text" value="{{item.data.data.explain}}" data-field="data.explain" class="secondary" placeholder="Details"/></td>
+			<td style="width: 85%" colspan="2"> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
+			<td style="width: 15%"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
+					class="fas fa-edit"></i></a> <a class="item-control item-delete"
+				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
+	   </tr>
+		{{#each actor.items as |subitem idx|}} 
+		{{#iff subitem.type '==' 'martialarttech'}}
+		{{#iff subitem.data.data.style '==' item.data.data.genesisId}}
+		<tr class="item list-item" data-item-id="{{subitem.id}}">
+			<td style="width: 60%"><input style="font-weight: normal; padding-left: 10px" type="text" value="{{subitem.name}}" data-field="name" title="{{subitem.data.data.description}}"/></td>
+			<td style="width: 25%"><input type="text" value="{{subitem.data.data.explain}}" data-field="data.explain" class="secondary" placeholder="?"/></td>
 			<td><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
 					class="fas fa-edit"></i></a> <a class="item-control item-delete"
 				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
 	   </tr>
+	   {{/iff}}
 		{{/iff}} 
 		{{/each}}
+		
+    {{/iff}} 
+  {{/each}}
 </table>
 </div>

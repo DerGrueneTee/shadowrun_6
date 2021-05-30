@@ -187,6 +187,10 @@
             "derived": "Abgeleitete Werte",
 				"electronics": "Elektronik",
 			   "initiative": "Initiative",
+			   "martialarts": {
+					"add"  : "Neuen Kampfstil hinzufügen",
+					"title": "Kampfkünste"
+				},
             "skills.action": "Fertigkeiten",
             "skills.language": "Sprachen",
             "skills.language_add": "Neue Sprache hinzufügen",
