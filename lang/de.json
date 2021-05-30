@@ -65,7 +65,10 @@
         "spell": {
             "range": "Reichweite",
             "category": "Kategorie",
-            "drain": "Entzug"
+            "drain": "Entzug",
+            "type": "Art",
+            "duration": "Dauer",
+            "direct": "Direkt"
         },
 		  "itemtype": {
 				"ACCESSORY": "Zubehör",

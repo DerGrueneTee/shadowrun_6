@@ -65,7 +65,10 @@
           "spell": {
             "range": "Range",
             "category": "Category",
-            "drain": "Drain"
+            "drain": "Drain",
+            "type": "Type",
+            "duration": "Duration",
+            "direct": "Direct"
         },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
