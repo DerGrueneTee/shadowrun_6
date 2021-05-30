@@ -21,7 +21,7 @@ const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 Hooks.once("init", async function () {
 
   console.log(`Initializing Shadowrun 6 System`);
-
+  CONFIG.debug.hooks = false;
   // Record Configuration Values
   CONFIG.SR6 = SR6;
 
@@ -66,6 +66,19 @@ Hooks.once("init", async function () {
     }
     return options.inverse(this);
   });
+
+  function onCreateItem(item, options, userId) {
+	console.log("onCreateItem");
+	let createData = item.data;
+	if (createData.img=="icons/svg/item-bag.svg") {
+		createData.img = CONFIG.SR6.icons[createData.type].default;
+ 	   item.update( {["img"]: createData.img });
+    }
+	console.log("onCreateItem: "+createData.img);
+  }
+
+  Hooks.on("createItem", (doc, options, userId) => onCreateItem(doc, options, userId));
+
 
   Hooks.on('ready', () => {
     // Render a modal on click.

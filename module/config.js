@@ -40,3 +40,18 @@ SR6.ATTRIB_BY_SKILL = new Map([
 	["tasking", new SkillDefinition("res", false)],
 ]);
 
+SR6.icons = {
+    gear: {
+        default: "icons/svg/chest.svg"
+    },
+    martialartstyle: {
+        default: "icons/svg/shield.svg"
+    },
+    martialarttech: {
+        default: "systems/shadowrun6-eden/icons/nunchaku.svg"
+    },
+    quality: {
+        default: "icons/svg/sword.svg"
+    }
+}
+
