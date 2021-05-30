@@ -279,8 +279,8 @@
     "ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
     "ITEM.TypeSpell": "Zauber",
     "ITEM.TypeWeapon": "Waffe",
-    "ITEM.TypeMartialartstyle": "Martial Art Style (PLACEHOLDER)",
-    "ITEM.TypeMartialarttechn": "Martial Art Technik (PLACEHOLDER)",
+    "ITEM.TypeMartialartstyle": "Kampfkunststil",
+    "ITEM.TypeMartialarttechn": "Kampfkunstechnik",
     "QUALITY_CATEGORIES.ADVANTAGE": "Vorteil",
     "QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil"
 }
