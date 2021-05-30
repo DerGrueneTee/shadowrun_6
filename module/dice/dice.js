@@ -70,13 +70,13 @@ async function _rollDialog({ data, foo } = {}) {
       title: title,
       content: html,
       buttons: {
-        normal: {
-          label: game.i18n.localize("shadowrun6.rollType.normal"),
-          callback: html => resolve(foo(0, html[0].querySelector("form"), data))
-        },
         bought: {
           label: game.i18n.localize("shadowrun6.rollType.bought"),
           callback: html => resolve(foo(1, html[0].querySelector("form"), data))
+        },
+        normal: {
+          label: game.i18n.localize("shadowrun6.rollType.normal"),
+          callback: html => resolve(foo(0, html[0].querySelector("form"), data))
         }
       },
       default: "normal",
@@ -152,13 +152,13 @@ async function _configurableRollDialog({ data, foo } = {}) {
         title: title,
         content: html,
         buttons: {
-          normal: {
-            label: game.i18n.localize("shadowrun6.rollType.normal"),
-            callback: html => resolve(foo(0, html[0].querySelector("form"), data))
-          },
           bought: {
             label: game.i18n.localize("shadowrun6.rollType.bought"),
             callback: html => resolve(foo(1, html[0].querySelector("form"), data))
+          },
+          normal: {
+            label: game.i18n.localize("shadowrun6.rollType.normal"),
+            callback: html => resolve(foo(0, html[0].querySelector("form"), data))
           }
         },
         default: "normal",
