@@ -19,6 +19,7 @@ export class Shadowrun6Actor extends Actor {
 		this._prepareDerivedAttributes();
 		this._prepareSkills();
 		this._prepareItemPools();
+		this._calculateEssense();
 	}
 
 	//---------------------------------------------------------
@@ -186,6 +187,25 @@ export class Shadowrun6Actor extends Actor {
 		});
 	}
 
+	//---------------------------------------------------------
+	/*
+	 * Calculate the attributes like Initiative
+	 */
+	_calculateEssense() {
+		const actorData = this.data;
+		const data = this.data.data;
+		
+		let essence = 6.0;
+		actorData.items.forEach(tmpItem => {
+			let item = tmpItem.data;
+			if (item.type == "gear" && item.data && item.data.essence) {
+				essence -= item.data.essence;
+			};
+		});
+		data.essence = Number((essence).toFixed(2));
+	}
+
+	//---------------------------------------------------------
 	/**
 	 * Roll a Skill Check
 	 * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
