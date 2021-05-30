@@ -1,139 +1,156 @@
 {
-	"shadowrun6": {
-		  "actor": {
-		      "actions": "Handlungen",
-		      "actions_major": "Haupt",
-		      "actions_minor": "Neben",
-		      "initiative": "Initiative",
-		      "initiative_astral": "Astrale Initiative",
-		      "nav": {
-		      	"basics": "Allgemein",
-					"combat": "Kampf",
-		      	"description": "Beschreibung",
-		      	"equip": "Ausrüstung",
-		      	"input": "Eingabe",
-		      	"skills": "Fertigkeiten",
-		      	"overview": "Übersicht"
-		      },
-		      "skills": "Fertigkeiten"
+    "shadowrun6": {
+        "actor": {
+            "actions": "Handlungen",
+            "actions_major": "Haupt",
+            "actions_minor": "Neben",
+            "initiative": "Initiative",
+            "initiative_astral": "Astrale Initiative",
+            "nav": {
+                "basics": "Allgemein",
+                "combat": "Kampf",
+                "description": "Beschreibung",
+                "equip": "Ausrüstung",
+                "input": "Eingabe",
+                "skills": "Fertigkeiten",
+                "overview": "Übersicht"
+            },
+            "skills": "Fertigkeiten"
         },
-		  "derived": {
-				"attack_rating" : "Angriffswert",
-				"defense_rating": "Verteidigungswert",
-				"resist_damage" : "Schadenswiderstand",
-				"resist_toxin"  : "Toxinwiderstand",
-				"composure"     : "Sebstbeherrschung",
-				"judge_intentions": "Menschenkenntnis",
-				"memory"        : "Erinnerungsvermögen",
-				"lift_carry"    : "Heben / Tragen"
+        "derived": {
+            "attack_rating": "Angriffswert",
+            "defense_rating": "Verteidigungswert",
+            "resist_damage": "Schadenswiderstand",
+            "resist_toxin": "Toxinwiderstand",
+            "composure": "Sebstbeherrschung",
+            "judge_intentions": "Menschenkenntnis",
+            "memory": "Erinnerungsvermögen",
+            "lift_carry": "Heben / Tragen"
         },
-		  "initiative": {
-				"physical": "Initiative",
-				"matrix"  : "Matrix-Initiative",
-				"astral"  : "Astrale Initiative"
-		  },
+        "initiative": {
+            "physical": "Initiative",
+            "matrix": "Matrix-Initiative",
+            "astral": "Astrale Initiative"
+        },
         "item": {
             "type": "Art",
             "subtype": "Unterart",
             "availability": "Verfügbarkeit",
             "price": "Preis",
-			   "skill": "Fertigkeit",
-            "damage": "Schaden", 
+            "skill": "Fertigkeit",
+            "damage": "Schaden",
             "mode": "Modus",
             "attackvalues": "Angriffswerte",
             "ammunition": "Munition",
             "description": "Beschreibung",
             "defencerating": "Verteidigungswert",
             "capacity": "Kapazität",
-            "skillspec" : "Spezialisierung",
+            "skillspec": "Spezialisierung",
             "mode_bf": "SM",
             "mode_fa": "VM",
             "mode_sa": "HM",
             "mode_ss": "EM",
-            "accessories":"Einbauten",
+            "accessories": "Einbauten",
             "essence": "Essenz",
-            "category" : "Kategorie",
-            "mastyle" : {
-                "category" : {
-                   "grappling" : "Grappling",
-                   "mobility" : "Mobility",
-                   "striking" : "Striking",
-                   "weapon": "weapon"
+            "category": "Kategorie",
+            "mastyle": {
+                "category": {
+                    "grappling": "Grappling",
+                    "mobility": "Mobility",
+                    "striking": "Striking",
+                    "weapon": "weapon"
                 }
             }
         },
         "spell": {
             "range": "Reichweite",
             "category": "Kategorie",
+            "category_combat" : "Kampf",
+            "category_health" : "Heilung",
+            "category_manipulation" : "Manipultaion",
+            "category_illusion" : "Illusion",
+            "category_detection" : "Wahrnehmung",
+            "range_line_of_sight": "BLickfeld",
+            "range_line_of_sight_area" : "Blickfeld (Fläche)",
+            "range_touch" : "Berührung",
+            "range_self": "Selbst",
+            "range_self_area": "Selbst (Fläche)",
+            "duration_instantaneous" : "Sofort",
+            "duration_sustained": "Aufrechterhalten",
+            "duration_permanent" : "Permanent",
+            "duration_limited" : "Begrenzt",
+            "duration_special": "Speziell",
+            "type_physical" : "Physisch",
+            "type_mana" : "Mana",
             "drain": "Entzug",
             "type": "Art",
             "duration": "Dauer",
             "direct": "Direkt"
         },
-		  "itemtype": {
-				"ACCESSORY": "Zubehör",
-    			"ARMOR": "Rüstung",
-    			"ARMOR_ADDITION": "Rüstungszubehor",
-    			"BIOWARE": "BIOWARE",
-    			"CYBERWARE": "CYBERWARE",
-    			"TOOLS": "TOOLS",
-    			"ELECTRONICS": "ELECTRONICS",
-    			"NANOWARE": "NANOWARE",
-    			"GENETICS": "GENETICS",
-    			"AMMUNITION": "AMMUNITION",
-    			"CHEMICALS": "CHEMICALS",
-    			"SURVIVAL": "SURVIVAL",
-    			"BIOLOGY": "BIOLOGY",
-    			"VEHICLES": "VEHICLES",
-    			"DRONES": "DRONES",
-    			"MAGICAL": "MAGICAL",
-				"WEAPON_CLOSE_COMBAT": "Nahkampfwaffen",
-				"WEAPON_FIREARMS": "Feuerwaffen",
-				"WEAPON_RANGED": "Projektilwaffen",
-				"WEAPON_SPECIAL": "Spezialwaffen"
-		  },
-		  "label": {
-				"accessories": "Zubehör",
-		  		"attribute": "Attribut",
-		  		"base"     : "Basis",
-			   "column": {
-					"action": "Aktion",
-					"count" : "Anz.",
-					"rating": "St.",
-					"name": "Name"
-				},
-		  		"damage"   : "Schaden",
-		  		"dice"     : "Würfel",
-		  		"d6"       : "W6",
-		  		"delete"   : "Löschen",
-		  		"edit"     : "Bearbeiten",
-		      "firemodes": "Feuermodi",
-		  		"points"   : "Punkte",
-		  		"pool"     : "Pool",
-		  		"poolmod"  : "Pool-Modifikator",
-		  		"max"      : "Maximum",
-		  		"modifications" : "Modifikationen",
-		  		"modifier" : "Mod.",
-		  		"value"    : "Wert",
-		  		"wilddie"  : "Schicksalswürfel"
-		  },
-		  "monitor": {
-		  		"physical": "Körperlich",
-		  		"stun"    : "Geistig"
-		  },
-		  "newitem": {
-				"quality": "Was macht dich besonders?", 
-			   "skill": {
-		  			"knowledge": "Worin bist Du Nerd?",
-		  			"language": "Unverständliches Gemurmel"
-				}
-		  },
-		  "numerical": {
-		  		"base": "Basis",
-		  		"baseString": "Grundwert",
-		  		"mod": "Mod",
-				"max": "Max"
-		  },
+        "itemtype": {
+            "ACCESSORY": "Zubehör",
+            "ARMOR": "Rüstung",
+            "ARMOR_ADDITION": "Rüstungszubehor",
+            "BIOWARE": "BIOWARE",
+            "CYBERWARE": "CYBERWARE",
+            "TOOLS": "TOOLS",
+            "ELECTRONICS": "ELECTRONICS",
+            "NANOWARE": "NANOWARE",
+            "GENETICS": "GENETICS",
+            "AMMUNITION": "AMMUNITION",
+            "CHEMICALS": "CHEMICALS",
+            "SURVIVAL": "SURVIVAL",
+            "BIOLOGY": "BIOLOGY",
+            "VEHICLES": "VEHICLES",
+            "DRONES": "DRONES",
+            "MAGICAL": "MAGICAL",
+            "WEAPON_CLOSE_COMBAT": "Nahkampfwaffen",
+            "WEAPON_FIREARMS": "Feuerwaffen",
+            "WEAPON_RANGED": "Projektilwaffen",
+            "WEAPON_SPECIAL": "Spezialwaffen"
+        },
+        "label": {
+            "accessories": "Zubehör",
+            "attribute": "Attribut",
+            "base": "Basis",
+            "column": {
+                "action": "Aktion",
+                "count": "Anz.",
+                "rating": "St.",
+                "name": "Name"
+            },
+            "damage": "Schaden",
+            "dice": "Würfel",
+            "d6": "W6",
+            "delete": "Löschen",
+            "edit": "Bearbeiten",
+            "firemodes": "Feuermodi",
+            "points": "Punkte",
+            "pool": "Pool",
+            "poolmod": "Pool-Modifikator",
+            "max": "Maximum",
+            "modifications": "Modifikationen",
+            "modifier": "Mod.",
+            "value": "Wert",
+            "wilddie": "Schicksalswürfel"
+        },
+        "monitor": {
+            "physical": "Körperlich",
+            "stun": "Geistig"
+        },
+        "newitem": {
+            "quality": "Was macht dich besonders?",
+            "skill": {
+                "knowledge": "Worin bist Du Nerd?",
+                "language": "Unverständliches Gemurmel"
+            }
+        },
+        "numerical": {
+            "base": "Basis",
+            "baseString": "Grundwert",
+            "mod": "Mod",
+            "max": "Max"
+        },
         "roll": {
             "subject": "Chat-Nachricht",
             "pool": "Würfel/Pool",
@@ -148,9 +165,9 @@
             "criticalglitch": "Kritischer Patzer",
             "nosuccess": "Erfolge bei Schwellenwert ",
             "damage": "Schaden: ",
-            "target" : "Ziel",
-            "attack" : "Angriff gegen ",
-            "with" : "mit ",
+            "target": "Ziel",
+            "attack": "Angriff gegen ",
+            "with": "mit ",
             "ar_0": "Sehr nah",
             "ar_1": "Nah",
             "ar_2": "Mittel",
@@ -159,41 +176,40 @@
             "defRating": "VTD",
             "edge": "Edge",
             "attackRating": "Angr:",
-            "notarget" : "Kein Ziel ausgewählt",
-            "edgegain" : "Edge-Gewinn (max): ",
-            "edgegain_player" : " (Spieler)",
+            "notarget": "Kein Ziel ausgewählt",
+            "edgegain": "Edge-Gewinn (max): ",
+            "edgegain_player": " (Spieler)",
             "noedgegain": "Kein Edge-Gewinn",
-            "hits_bought" : "Erfolge gekauft"
-
+            "hits_bought": "Erfolge gekauft"
         },
         "rollType": {
             "normal": "Würfeln",
             "bought": "Erfolge kaufen"
         },
         "section": {
-				"ammo" : "Munition",
-				"armor.title" : "Panzerung",
-				"armor.column": {
-					"action" : "Aktion",
-					"name"   : "Name",
-					"defense": "Panz",
-					"social" : "Sozial"
-				},
+            "ammo": "Munition",
+            "armor.title": "Panzerung",
+            "armor.column": {
+                "action": "Aktion",
+                "name": "Name",
+                "defense": "Panz",
+                "social": "Sozial"
+            },
             "biology": "Biologie",
-				"bodyware": {
-					"title": "Bodyware",
-					"column.essence": "Ess.",
-					"column.capacity": "Kap.",
-					"footer.total_essence": "Verbleibende Essenz"
-				},
+            "bodyware": {
+                "title": "Bodyware",
+                "column.essence": "Ess.",
+                "column.capacity": "Kap.",
+                "footer.total_essence": "Verbleibende Essenz"
+            },
             "chemicals": "Drogen",
             "derived": "Abgeleitete Werte",
-				"electronics": "Elektronik",
-			   "initiative": "Initiative",
-			   "martialarts": {
-					"add"  : "Neuen Kampfstil hinzufügen",
-					"title": "Kampfkünste"
-				},
+            "electronics": "Elektronik",
+            "initiative": "Initiative",
+            "martialarts": {
+                "add": "Neuen Kampfstil hinzufügen",
+                "title": "Kampfkünste"
+            },
             "skills.action": "Fertigkeiten",
             "skills.language": "Sprachen",
             "skills.language_add": "Neue Sprache hinzufügen",
@@ -206,10 +222,10 @@
             "skills.knowledge": "Wissensfertigkeiten",
             "skills.knowledge_add": "Neue Wissensfertigket hinzufügen",
             "qualities": "Vor/Nachteile",
-    			"qualities_add": "Hinzufügen",
+            "qualities_add": "Hinzufügen",
             "weapon": {
                 "ranged": "Fernkampf",
-                "close" : "Nahkampf"
+                "close": "Nahkampf"
             }
         },
         "qualityedit": {
@@ -218,7 +234,7 @@
             "explain": "Erklärung",
             "description": "Beschreibung",
             "category": "Art"
-	 	  }
+        }
     },
     "actor.name": "Name",
     "actor.metatype": "Metatyp",
