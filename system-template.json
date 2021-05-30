@@ -5,6 +5,19 @@
   "version": "$VERSION",
   "templateVersion": 1,
   "author": "René Matis, Stefan u. Anja Prelle",
+  "authors": [
+	{
+    "name": "Stefan Prelle",
+    "email": "stefan@rpgframework.de",
+    "discord": "taranion#5388",
+    "patreon": "rpgframework",
+    "reddit": "u/taranion"
+   },
+	{
+    "name": "Anja Prelle",
+    "email": "anja@rpgframework.de"
+   }
+  ],
   "compatibleCoreVersion": "0.8.9",
   "minimumCoreVersion":"0.8.0",
   "scripts": [

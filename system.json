@@ -3,7 +3,19 @@
   "title": "Shadowrun 6",
   "description": "RPGFramework Eden implementation for Shadowrun 6",
   "author": "René Matis, Stefan u. Anja Prelle",
-  "authors": [],
+  "authors": [
+	{
+    "name": "Stefan Prelle",
+    "email": "stefan@rpgframework.de",
+    "discord": "taranion#5388",
+    "patreon": "rpgframework",
+    "reddit": "u/taranion"
+   },
+	{
+    "name": "Anja Prelle",
+    "email": "anja@rpgframework.de"
+   }
+  ],
   "url": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/",
   "flags": {},
   "version": "0.0.1",
