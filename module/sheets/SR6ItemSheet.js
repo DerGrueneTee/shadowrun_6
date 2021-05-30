@@ -27,6 +27,7 @@ export class SR6ItemSheet extends ItemSheet {
 * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
 */
   activateListeners(html) {
+    super.activateListeners(html);
     // Owner Only Listeners
     if ((this.actor && this.actor.isOwner)) {
       html.find('[data-field]').change(event => {
@@ -58,6 +59,7 @@ export class SR6ItemSheet extends ItemSheet {
           this.object.update({ [field]: value });
         }
       });
+    }
       html.find('[data-array-field]').change(event => {
         const element = event.currentTarget
         const idx = parseInt($(event.currentTarget).closestData('index', "0"));
@@ -78,7 +80,7 @@ export class SR6ItemSheet extends ItemSheet {
         }
         this.object.update({ [array]: newValue });
       });
-    }
+    //}
 
   }
 

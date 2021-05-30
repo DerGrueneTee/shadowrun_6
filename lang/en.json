@@ -58,10 +58,18 @@
                    "grappling" : "Grappling",
                    "mobility" : "Mobility",
                    "striking" : "Striking",
-                   "weapon": "weapon"
+                   "weapon": "Weapon"
                 }
             }
 		  },
+          "spell": {
+            "range": "Range",
+            "category": "Category",
+            "drain": "Drain",
+            "type": "Type",
+            "duration": "Duration",
+            "direct": "Direct"
+        },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
     			"ARMOR": "Armor",
