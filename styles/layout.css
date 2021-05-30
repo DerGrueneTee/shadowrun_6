@@ -25,6 +25,7 @@ line {
 	border: solid black 1px;
 	border-radius: 6px;
 	padding: 4px;
+	margin: 5px;
 }
 .section-head {
 	display:flex;
