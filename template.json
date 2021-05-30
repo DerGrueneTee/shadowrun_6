@@ -354,12 +354,12 @@
 	},
 	"Item": {
 		"types": [
-			"adeptpower",
 			"gear",
 			"martialartstyle",
 			"martialarttech",
 			"quality",
 			"skill",
+			"adeptpower",
 			"spell"
 		],
 		"templates": {
