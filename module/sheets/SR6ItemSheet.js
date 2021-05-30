@@ -58,6 +58,7 @@ export class SR6ItemSheet extends ItemSheet {
           this.object.update({ [field]: value });
         }
       });
+    }
       html.find('[data-array-field]').change(event => {
         const element = event.currentTarget
         const idx = parseInt($(event.currentTarget).closestData('index', "0"));
@@ -78,7 +79,7 @@ export class SR6ItemSheet extends ItemSheet {
         }
         this.object.update({ [array]: newValue });
       });
-    }
+    //}
 
   }
 

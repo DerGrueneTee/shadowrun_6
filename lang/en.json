@@ -62,6 +62,11 @@
                 }
             }
 		  },
+          "spell": {
+            "range": "Range",
+            "category": "Category",
+            "drain": "Drain"
+        },
 		  "itemtype": {
 				"ACCESSORY": "Accessory",
     			"ARMOR": "Armor",

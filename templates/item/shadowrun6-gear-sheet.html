@@ -1,7 +1,7 @@
 <form class="flexcol {{cssClass}}" autocomplete="off">
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-        <h2><input type="text" value="{{item.name}}" data-field="name" /></h2>
+        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
         <div class="section">
             <table>
                 <tr>
@@ -15,15 +15,15 @@
                 </tr>
                 <tr>
                     <td>
-                        <select name="item.data.data.type" data-field="data.type">
+                        <select name="data.type" data-field="data.type">
                             {{#select item.data.data.type}}
                             {{#each config.GEAR_TYPES as |type id|}}
-                            <option value="{{@type}}">{{localize (concat "shadowrun6.itemtype." type)}}</option>
+                            <option value="{{@type}}" name=data.type>{{localize (concat "shadowrun6.itemtype." type)}}</option>
                             {{/each}}
                             {{/select}}
                         </select>
                     </td>
-                    <td><select name="item.data.data.subtype" data-field="data.subtype">
+                    <td><select name="data.subtype" data-field="data.subtype">
                             {{#select item.data.data.subtype}}
                             <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
                             <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
@@ -32,12 +32,12 @@
                             {{/select}}
                         </select></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.countable}}
-                            name="data.countable" data-field="data.countable" /></td>
+                            name="data.countable" name="data.countable" /></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.needsRating}}
-                            name="data.needsRating" data-field="data.needsRating" /></td>
-                    <td><input type="text" value="{{item.data.data.availDef}}" data-field="data.availDef"
+                            name="data.needsRating" name="data.needsRating" /></td>
+                    <td><input type="text" value="{{item.data.data.availDef}}" name="data.availDef"
                             class="box centered" style="width: 2em" /></td>
-                    <td><input type="text" value="{{item.data.data.priceDef}}" data-field="data.priceDef"
+                    <td><input type="text" value="{{item.data.data.priceDef}}" name="data.priceDef"
                             class="box centered" style="width: 3em" /></td>
                 </tr>
             </table>
@@ -56,23 +56,23 @@
                     <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
                 </tr>
                 <tr>
-                    <td><input type="number" value="{{item.data.data.dmg}}" data-field="data.dmg" class="box centered"
+                    <td><input type="number" value="{{item.data.data.dmg}}" name="data.dmg" class="box centered"
                             style="width: 3em" /></td>
                     <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.BF}}
-                            name="data.modes.BF" data-field="data.modes.BF" />
+                            name="data.modes.BF" name="data.modes.BF" />
                     </td>
                     <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_fa'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.FA}}
-                            name="data.modes.FA" data-field="data.modes.FA" />
+                            name="data.modes.FA" name="data.modes.FA" />
                     </td>
                     <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SA}}
-                            name="data.modes.SA" data-field="data.modes.SA" />
+                            name="data.modes.SA" name="data.modes.SA" />
                     </td>
                     <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}}
-                            name="data.modes.SS" data-field="data.modes.SS" />
+                            name="data.modes.SS" name="data.modes.SS" />
                     </td>
                     {{#each item.data.data.attackRating as |rating id|}}
                     <td data-array="data.attackRating">
@@ -80,7 +80,6 @@
                             class="centered box" />
                     </td>
                     {{/each}}
-                    <!-- <td><input type="text" disabled value="n.a." title="noch nicht implementiert" /></td> -->
                 </tr>
             </table>
             <table>
@@ -90,7 +89,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select name="item.data.data.skill" data-field="data.skill">
+                        <select name="data.skill" data-field="data.skill">
                             {{#select item.data.data.skill}}
                             {{#each config.SKILLS_WEAPON as |skill id|}}
                             <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option>
@@ -99,7 +98,7 @@
                         </select>
                     </td>
                     <td>
-                        <select name="item.data.data.skillSpec" data-field="data.skillSpec">
+                        <select name="data.skillSpec">
                             {{#select item.data.data.skillSpec}}
                             <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
                             <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
@@ -119,10 +118,10 @@
                     <th>{{localize 'shadowrun6.item.capacity'}}</th>
                 </tr>
                 <tr>
-                    <td><input type="number" value="{{item.data.data.defencerating}}" data-field="data.defencerating"
+                    <td><input type="number" value="{{item.data.data.defencerating}}" name="data.defencerating"
                             class="box centered" />
                     </td>
-                    <td><input type="number" value="{{item.data.data.capacity}}" data-field="data.capacity"
+                    <td><input type="number" value="{{item.data.data.capacity}}" name="data.capacity"
                             class="box centered" /></td>
                 </tr>
             </table>
@@ -132,7 +131,7 @@
             (eq item.data.data.type "NANOWARE")
             )}}
             <label for="ware_essence">{{localize 'shadowrun6.item.essence'}}</label>
-            <input type="number" value="{{item.data.data.essence}}" data-field="data.essence" id="ware_essence"
+            <input type="number" value="{{item.data.data.essence}}" name="data.essence" id="ware_essence"
                 class="box centered" />
             {{/if}}
             {{#if (eq item.data.data.type "CYBERWARE")}}
@@ -142,19 +141,19 @@
                     <th>{{localize 'shadowrun6.item.capacity'}}</th>
                 </tr>
                 <tr>
-                    <td> <input type="number" value="{{item.data.data.essence}}" data-field="data.essence"
+                    <td> <input type="number" value="{{item.data.data.essence}}" name="data.essence"
                             id="ware_essence" class="box centered" /></td>
-                    <td> <input type="number" value="{{item.data.data.capacity}}" data-field="data.capacity"
+                    <td> <input type="number" value="{{item.data.data.capacity}}" name="data.capacity"
                             id="ware_cap" class="box centered" /></td>
                 </tr>
             </table>
             {{/if}}
             <h3>{{localize 'shadowrun6.item.accessories'}}</h3>
-            <textarea class="box" type="text" value="{{item.data.data.accessories}}" data-field="data.accessories"
+            <textarea class="box" type="text" name="data.accessories"
                 cols="20" rows="4">{{item.data.data.accessories}}</textarea>
             <!-- ********** Beschreibung ********** -->
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
-            <textarea class="box" type="text" value="{{item.data.data.description}}" data-field="data.description"
+            <textarea class="box" type="text"  name="data.description"
                 cols="20" rows="6">{{item.data.data.description}}</textarea>
         </div>
     </section>
