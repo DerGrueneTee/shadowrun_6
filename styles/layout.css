@@ -178,6 +178,14 @@ dd::after {
 .collapsible-content.open {
   max-height: 200px;
 }
+.shadowrun6 button.collapsible-skill {
+	width: 1.5em;
+	padding: 0.1em;
+	margin: 0px;
+	line-height: 10px;
+	background-color: transparent;
+	visibility: hidden;
+}
 .shadowrun6 button.collapsible {
 	width: 1.5em;
 	padding: 0.1em;

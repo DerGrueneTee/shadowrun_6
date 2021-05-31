@@ -124,6 +124,7 @@
 		  		"d6"       : "D6",
 		  		"delete"   : "Delete",
 		  		"edit"     : "Edit",
+            "expertise": "Expertise",
 		      "firemodes": "Firemodes",
 		  		"max"      : "Maximum",
 		  		"modifier" : "Adj.",
@@ -131,6 +132,7 @@
 		  		"points"   : "Points",
 		  		"pool"     : "Pool",
 		  		"poolmod"  : "Pool modifier",
+            "specialization": "Specialization",
 		  		"value"    : "Value",
 		  		"wilddie"  : "Wild Die"
 		  },
@@ -227,6 +229,125 @@
                 "close" : "Melee Weapons"
             }
         },
+			"special": {
+   "astral": {
+      "astral_combat": "Astral Combat",
+      "astral_signatures": "Astral Signatures",
+      "emotional_stress": "Emotional Stress",
+      "spirit_types": "Spirit Types"
+   },
+   "athletics": {
+      "climbing": "Climbing",
+      "flying": "Flying",
+      "gymnastics": "Gymnastics",
+      "sprinting": "Sprinting",
+      "swimming": "Swimming",
+      "throwing": "Throwing",
+      "archery": "Archery"
+   },
+   "biotech": {
+      "biotechnology": "Biotechnology",
+      "cybertechnology": "Cybertechnology",
+      "first_aid": "First Aid",
+      "medicine": "Medicine"
+   },
+   "close_combat": {
+      "blades": "Blades",
+      "clubs": "Clubs",
+      "unarmed": "Unarmed Combat"
+   },
+   "con": {
+      "acting": "Acting",
+      "disguise": "Disguise",
+      "impersonation": "Impersonation",
+      "performance": "Performance"
+   },
+   "conjuring": {
+      "banishing": "Banishing",
+      "summoning": "Summoning"
+   },
+   "cracking": {
+      "cybercombat": "Cybercombat",
+      "electronic_warfare": "Electronic Warface",
+      "hacking": "Hacking"
+   },
+   "electronics": {
+      "computer": "Computer",
+      "hardware": "Hardware",
+      "software": "Software"
+   },
+   "enchanting": {
+      "alchemy": "Alchemy",
+      "artificing": "Artificing",
+      "disenchanting": "Disenchanting"
+   },
+   "engineering": {
+      "aeronautics_mechanic": "Aeronautics Mechanic",
+      "armorer": "Armorer",
+      "automotive_mechanic": "Automotive Mechanic",
+      "demolitions": "Demolitions",
+      "gunnery": "Gunnery",
+      "industrial_mechanic": "Industrial Mechanic",
+      "lockpicking": "Lockpicking",
+      "nautical_mechanic": "Nautical Mechanic"
+   },
+   "exotic_weapons": {
+   },
+   "firearms": {
+      "automatics": "Automatics",
+      "pistols": "Pistols",
+      "longarms": "Longarms",
+      "rifles": "Rifles",
+      "shotguns": "Shotguns"
+   },
+   "influence": {
+      "etiquette": "Etiquette",
+      "instruction": "Instruction",
+      "intimidation": "Intimidation",
+      "leadership": "Leadership",
+      "negotiation": "Negotiation"
+   },
+   "outdoors": {
+      "navigation": "Navigation",
+      "survival": "Survival",
+      "tracking_woods": "Environment Woods",
+      "tracking_desert": "Environment Desert",
+      "tracking_urban": "Environment Urban",
+      "tracking_other": "Environment Other"
+   },
+   "perception": {
+      "visual": "Visual",
+      "aural": "Aural",
+      "tactile": "Tactile",
+      "scent": "Scent",
+      "taste": "Taste",
+      "perception_woods": "Environment Woods",
+      "perception_desert": "Environment Desert",
+      "perception_urban": "Environment Urban",
+      "perception_other": "Environment Other"
+   },
+   "piloting": {
+      "ground_craft": "Ground Craft",
+      "aircraft": "Aircraft",
+      "watercraft": "Watercraft"
+   },
+   "sorcery": {
+      "counterspelling": "Counterspelling",
+      "ritual_spellcasting": "Ritual Spellcasting",
+      "spellcasting": "Spellcasting"
+   },
+   "stealth": {
+      "disguise": "Disguise",
+      "palming": "Palming",
+      "sneaking": "Sneaking",
+      "camouflage": "Camouflage"
+   },
+   "tasking": {
+      "compiling": "Compiling",
+      "decompiling": "Decompiling",
+      "registering": "Registering"
+   }				
+			},
         "qualityedit": {
             "new": "New",
             "name": "Name",

@@ -3,7 +3,12 @@
      <h2 class="section-title">{{ localize 'shadowrun6.section.skills.action' }}</h2>
 	  <ol class="item-list">
         {{#each skills as |skill id|}}
-       <li class="item flexrow draggable" data-item-id="{{id}}">
+       <li class="item flexrow draggable" data-skill-id="{{id}}">
+		   {{#if skill.specialization }}
+       	<button type="button" class="collapsible-skill {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button>
+       	{{else}}
+       	<button type="button" class="collapsible-skill {{item.data.flags.shadowrun6-eden.collapse-state}} empty" data-item-id="{{this.id}}">+</button>
+       	{{/if}}
          <label class="skill-value skill-key rollable skill-name skill-roll" data-skill="{{id}}">{{localize (concat "skill." id ) }}</label>
          <div class="skill-attrib">
            <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
@@ -17,6 +22,16 @@
          <div class="item-controls" style="width: 3em; flex-grow:2">
            <!--a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a-->
            <a class="item-control skill-roll" data-skill="{{id}}" title="Roll"><i class="fas fa-dice-six"></i></a>
+         </div>
+         <div>
+         <div style="display:block; width:22rem; margin-left: 2em">
+         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
+         	   {{ localize 'shadowrun6.label.specialization' }} 
+         	   <select name="skill.specialization">
+                   {{selectOptions (lookup ../config.skill_special id) selected=none localize=true}}        
+               </select><br/>
+         	</div>
+         </div>
          </div>
        </li>
        {{/each}}

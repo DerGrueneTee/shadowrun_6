@@ -124,6 +124,7 @@
             "d6": "W6",
             "delete": "Löschen",
             "edit": "Bearbeiten",
+            "expertise": "Expertise",
             "firemodes": "Feuermodi",
             "points": "Punkte",
             "pool": "Pool",
@@ -131,6 +132,7 @@
             "max": "Maximum",
             "modifications": "Modifikationen",
             "modifier": "Mod.",
+            "specialization": "Spezialisierung",
             "value": "Wert",
             "wilddie": "Schicksalswürfel"
         },
@@ -228,6 +230,125 @@
                 "close": "Nahkampf"
             }
         },
+			"special": {
+   "astral": {
+      "astral_combat": "Astralkampf",
+      "astral_signatures": "Astrale Signaturen",
+      "emotional_stress": "Gefühlszustände",
+      "spirit_types": "Geisterarten"
+   },
+   "athletics": {
+      "climbing": "Klettern",
+      "flying": "Fliegen",
+      "gymnastics": "Akrobatik",
+      "sprinting": "Sprinten",
+      "swimming": "Schwimmen",
+      "throwing": "Werfen",
+      "archery": "Projektilwaffen"
+   },
+   "biotech": {
+      "biotechnology": "Biotechnologie",
+      "cybertechnology": "Cybertechnologie",
+      "first_aid": "Erste Hilfe",
+      "medicine": "Medizin"
+   },
+   "close_combat": {
+      "blades": "Klingenwaffen",
+      "clubs": "Knüppel",
+      "unarmed": "Waffenloser Kampf"
+   },
+   "con": {
+      "acting": "Schauspielerei",
+      "disguise": "Verkleiden",
+      "impersonation": "Verkörpern",
+      "performance": "Vorführen"
+   },
+   "conjuring": {
+      "banishing": "Verbannen",
+      "summoning": "Herbeirufen"
+   },
+   "cracking": {
+      "cybercombat": "Matrixkampf",
+      "electronic_warfare": "Elektronische Kriegsführung",
+      "hacking": "Hacken"
+   },
+   "electronics": {
+      "computer": "Computer",
+      "hardware": "Hardware",
+      "software": "Software"
+   },
+   "enchanting": {
+      "alchemy": "Alchemie",
+      "artificing": "Fokusherstellung",
+      "disenchanting": "Entzaubern"
+   },
+   "engineering": {
+      "aeronautics_mechanic": "Luftfahrzeugmechanik",
+      "armorer": "Waffenbau",
+      "automotive_mechanic": "Fahrzeugmechanik",
+      "demolitions": "Sprengstoffe",
+      "gunnery": "Geschütze",
+      "industrial_mechanic": "Industriemechanik",
+      "lockpicking": "Schlösserknacken",
+      "nautical_mechanic": "Seefahrtmechanik"
+   },
+   "exotic_weapons": {
+   },
+   "firearms": {
+      "automatics": "Automatikwaffen",
+      "pistols": "Pistolen",
+      "longarms": "Maschinengewehre",
+      "rifles": "Gewehre",
+      "shotguns": "Schrotflinten"
+   },
+   "influence": {
+      "etiquette": "Gebräuche",
+      "instruction": "Unterrichten",
+      "intimidation": "Einschüchtern",
+      "leadership": "Führen",
+      "negotiation": "Verhandeln"
+   },
+   "outdoors": {
+      "navigation": "Navigation",
+      "survival": "Survival",
+      "tracking_woods": "Umgebung Wald",
+      "tracking_desert": "Umgebung Wüste",
+      "tracking_urban": "Umgebung Stadt",
+      "tracking_other": "Umgebung Sonstige"
+   },
+   "perception": {
+      "visual": "Sehen",
+      "aural": "Hören",
+      "tactile": "Tasten",
+      "scent": "Riechen",
+      "taste": "Schmecken",
+      "perception_woods": "Umgebung Wald",
+      "perception_desert": "Umgebung Wüste",
+      "perception_urban": "Umgebung Stadt",
+      "perception_other": "Umgebung Sonstige"
+   },
+   "piloting": {
+      "ground_craft": "Bodenfahrzeuge",
+      "aircraft": "Luftfahrzeuge",
+      "watercraft": "Wasserfahrzeuge"
+   },
+   "sorcery": {
+      "counterspelling": "Antimagie",
+      "ritual_spellcasting": "Ritualzauberei",
+      "spellcasting": "Spruchzauberei"
+   },
+   "stealth": {
+      "disguise": "Verkleiden",
+      "palming": "Fingerfertigkeit",
+      "sneaking": "Schleichen",
+      "camouflage": "Tarnung"
+   },
+   "tasking": {
+      "compiling": "Kompilieren",
+      "decompiling": "Dekompilieren",
+      "registering": "Registrieren"
+   }
+			},
         "qualityedit": {
             "new": "Neu",
             "name": "Name",
