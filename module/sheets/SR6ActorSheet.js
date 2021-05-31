@@ -109,24 +109,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.collapsible-skill').click(event => {
 				const element = event.currentTarget;
 				const skillId = this._getClosestData($(event.currentTarget), 'skill-id');
-				console.log("skillId "+skillId);
 				const item = this.actor.data.data.skills[skillId];
-				console.log("skill "+item);
-				console.log("Collapsible: old styles are '"+element.classList+"'' and flag is "+this.actor.getFlag("shadowrun6-eden","collapse-state-"+skillId));
 				element.classList.toggle("open");
 				let content = $(element.parentElement).find('.collapsible-content')[0];
-				console.log("content = "+content);
 				if (content.style.maxHeight) {
 					content.style.maxHeight = null;
 				} else {
 					content.style.maxHeight = content.scrollHeight + "px";
 				}
-				//				console.log("Collapsible: temp style are '"+element.classList);
 				let value = element.classList.contains("open") ? "open" : "closed";
-				//				console.log("Update flag 'collapse-state' with "+value);
-				//				item.data.flags["shadowrun6-eden"]["collapse-state"] = value;
 				this.actor.setFlag("shadowrun6-eden", "collapse-state-"+skillId, value);
-				//				console.log("Collapsible: new styles are '"+element.classList+"' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
 			});
 
 			/*
