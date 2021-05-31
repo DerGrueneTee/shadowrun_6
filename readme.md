@@ -17,7 +17,7 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 ## Features ##
 
 ### Working ###
- * Attributes, Skills
+ * Attributes, Skills and specializations
  * Tracking physical and stun damage
  * Dice rolling (exploding dice and wild die)
  * Importing from Genesis (special Foundry JSON export)
@@ -30,11 +30,12 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.2.x) Rolling initiative is working now
  * (since 0.2.x) Compatible with "Dice so Nice"
  * (since 0.2.x) Improve NPC sheet: Have skills on "Overview"-Tab, calculate initiative and actions, allow dice rolls
+ * (since 0.3.x) Gear (Bodyware, Chemicals ...)
+ * (since 0.3.x) Roll on derived attributes
  
 ### Not working yet ###
- * Skill specializations
  * Auto-calculating modifiers from condition monitors
- * Gear and everything else character related (Powers, Spells ...)
+ * Everything else character related (Powers, Spells ...)
  * Critters, better NPC support
 
 ## The future ##
