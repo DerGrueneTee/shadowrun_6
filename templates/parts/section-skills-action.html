@@ -1,5 +1,5 @@
 <!-- Action skills -->
-   <div class="section" style="min-width: 22rem; max-width: 28rem">
+   <div class="section" style="min-width: 22rem; max-width: 29rem">
      <h2 class="section-title">{{ localize 'shadowrun6.section.skills.action' }}</h2>
 	  <ol class="item-list">
         {{#each skills as |skill id|}}
@@ -13,7 +13,7 @@
          <div class="skill-attrib">
            <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
          </div>
-         <div class="skill-points" style="width: 2em; flex-grow:0.4">
+         <div class="skill-points centered" style="width: 2em; flex-grow:0.4">
            <input class="skill-value" type="number" name="data.skills.{{id}}.points" value="{{skill.points}}"  style="width: 2em" />
          </div>
          <div class="skill-pool">
@@ -24,16 +24,30 @@
            <a class="item-control skill-roll" data-skill="{{id}}" title="Roll"><i class="fas fa-dice-six"></i></a>
          </div>
          <div>
-         <div style="display:block; width:22rem; margin-left: 2em">
-         	<div class="collapsible-content {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}}">
-         	   {{ localize 'shadowrun6.label.specialization' }} 
-         	   <select name="data.skills.{{id}}.specialization" >
+         <div style="display:block; width:20rem; margin-left: 2em">
+         	<div class="collapsible-content {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}}" style="padding:0px">
+         	  <table style="margin:1px;">
+         	    <tr>
+         	    	<td style="width: 7.5em; font-size: smaller; vertical-align:middle">{{ localize 'shadowrun6.label.specialization' }}</td>
+         	    	<td style="width: 8em">
+         	    		<select name="data.skills.{{id}}.specialization" >
                    {{selectOptions (lookup ../config.skill_special id) selected=skill.specialization blank=(localize "shadowrun6.label.none") localize=true}}        
-               </select><br/>
-         	   {{ localize 'shadowrun6.label.expertise' }} 
-         	   <select name="data.skills.{{id}}.expertise" >
+               		</select>
+               	</td>
+               	<td class="skill-pool" style="width: 2em"><span>{{skill.poolS}}</span></td>
+               	<td class="item-controls" style="width: 3em; text-align:right"><a class="item-control skill-roll" data-skill="{{id}}" data-skillspec="{{skill.specialization}}" title="Roll"><i class="fas fa-dice-six"></i></a></td>
+         	    </tr>
+         	    <tr>
+         	    	<td style="width: 7.5em; font-size: smaller; vertical-align:middle">{{ localize 'shadowrun6.label.expertise' }} </td>
+         	    	<td>
+         	    		<select name="data.skills.{{id}}.expertise" >
                    {{selectOptions (lookup ../config.skill_special id) selected=skill.expertise blank=(localize "shadowrun6.label.none") localize=true}}        
-               </select><br/>
+               		</select>
+               	</td>
+               	<td class="skill-pool" style="width: 2em"><span>{{skill.poolE}}</span></td>
+               	<td class="item-controls" style="width: 3em; text-align:right"><a class="item-control skill-roll" data-skill="{{id}}" data-skillspec="{{skill.expertise}}" title="Roll"><i class="fas fa-dice-six"></i></a></td>
+         	    </tr>
+         	  </table>
          	</div>
          </div>
          </div>

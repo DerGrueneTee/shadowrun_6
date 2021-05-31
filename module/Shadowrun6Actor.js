@@ -165,6 +165,12 @@ export class Shadowrun6Actor extends Actor {
 				let attr = skillDef.attrib;
 				let attribVal = data.attributes[attr].pool;
 				data.skills[id].pool = attribVal + data.skills[id].points;
+				data.skills[id].poolS = attribVal + data.skills[id].points;
+				data.skills[id].poolE = attribVal + data.skills[id].points;
+				if (data.skills[id].specialization)
+					data.skills[id].poolS = data.skills[id].pool+2;
+				if (data.skills[id].expertise)
+					data.skills[id].poolE = data.skills[id].pool+3;
 			});
 		}
 	}
@@ -214,14 +220,23 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	rollSkill(skillId, options = {}) {
 		const skl = this.data.data.skills[skillId];
-		const value = skl.pool;
+		let rollName = game.i18n.localize("skill." + skillId);
+		let value = skl.pool;
+		if (options.spec) {
+			rollName += "("+game.i18n.localize("shadowrun6.special." + skillId+"."+options.spec)+")";
+			if (options.spec==skl.expertise) {
+				value+=3;
+			} else if (options.spec==skl.specialization) {
+				value+=2;
+			}
+		}
 		const parts = [];
 
 		// Roll and return
 		let data = mergeObject(options, {
 			parts: parts,
 			value: value,
-			title: game.i18n.localize("skill." + skillId),
+			title: rollName,
 			skill: skl
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });

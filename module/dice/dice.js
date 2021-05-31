@@ -15,10 +15,15 @@ export async function doRoll(data, messageData = {}) {
       data.type = type;
       messageData.rollMode = form.rollMode.value;
       data.weapon = false;
+//      if (data.modifier > 0) {
+//        data.formula = data.skill.pool + " + " + data.modifier + "d6";
+//      } else {
+//        data.formula = data.skill.pool + "d6";
+//      }
       if (data.modifier > 0) {
-        data.formula = data.skill.pool + " + " + data.modifier + "d6";
+        data.formula = data.value + " + " + data.modifier + "d6";
       } else {
-        data.formula = data.skill.pool + "d6";
+        data.formula = data.value + "d6";
       }
     }
 
