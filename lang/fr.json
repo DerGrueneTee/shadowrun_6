@@ -95,6 +95,7 @@
             "max": "Maximum",
             "modifier": "Mod.",
             "modifications": "Modifications",
+				"none": "-",
             "points": "Points",
             "pool": "Réserve",
             "poolmod": "réserve de dés",

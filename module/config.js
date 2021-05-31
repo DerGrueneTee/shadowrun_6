@@ -153,11 +153,15 @@ SR6.skill_special = {
    "exotic_weapons": {
    },
    "firearms": {
-      "automatics": "shadowrun6.special.firearms.automatics",
-      "pistols": "shadowrun6.special.firearms.pistols",
-      "longarms": "shadowrun6.special.firearms.longarms",
+      "tasers": "shadowrun6.special.firearms.tasers",
+      "holdouts": "shadowrun6.special.firearms.holdouts",
+      "pistols_light": "shadowrun6.special.firearms.pistols_light",
+      "pistols_heavy": "shadowrun6.special.firearms.pistols_heavy",
+      "machine_pistols": "shadowrun6.special.firearms.machine_pistols",
+      "submachine_guns": "shadowrun6.special.firearms.submachine_guns",
       "rifles": "shadowrun6.special.firearms.rifles",
       "shotguns": "shadowrun6.special.firearms.shotguns",
+      "assault_cannons": "shadowrun6.special.firearms.assault_cannons",
    },
    "influence": {
       "etiquette": "shadowrun6.special.influence.etiquette",

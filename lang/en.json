@@ -129,6 +129,7 @@
             "max": "Maximum",
             "modifier": "Adj.",
             "modifications": "Modifications",
+				"none": "-",
             "points": "Points",
             "pool": "Pool",
             "poolmod": "Pool modifier",
@@ -293,11 +294,15 @@
             },
             "exotic_weapons": {},
             "firearms": {
-                "automatics": "Automatics",
-                "pistols": "Pistols",
-                "longarms": "Longarms",
+                "tasers": "Taser",
+                "holdouts": "Holdouts",
+                "pistols_light": "Light Pistols",
+                "pistols_heavy": "Heavy Pistols",
+                "machine_pistols": "Machine Pistols",
+                "submachine_guns": "Submachine Guns",
                 "rifles": "Rifles",
-                "shotguns": "Shotguns"
+                "shotguns": "Shotguns",
+                "assault_cannons": "Assault Cannons"
             },
             "influence": {
                 "etiquette": "Etiquette",

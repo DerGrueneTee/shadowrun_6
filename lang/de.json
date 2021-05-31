@@ -132,6 +132,7 @@
             "max": "Maximum",
             "modifications": "Modifikationen",
             "modifier": "Mod.",
+				"none": "-",
             "specialization": "Spezialisierung",
             "value": "Wert",
             "wilddie": "Schicksalswürfel"
@@ -294,9 +295,13 @@
             },
             "exotic_weapons": {},
             "firearms": {
-                "automatics": "Automatikwaffen",
-                "pistols": "Pistolen",
-                "longarms": "Maschinengewehre",
+                "tasers": "Taser",
+                "holdouts": "Holdouts",
+                "pistols_light": "Leichte Pistolen",
+                "pistols_heavy": "Schwere Pistolen",
+                "machine_pistols": "Maschinenpistolen",
+                "submachine_guns": "Maschinengewehre",
+                "assault_cannons": "Sturmgewehre",
                 "rifles": "Gewehre",
                 "shotguns": "Schrotflinten"
             },
