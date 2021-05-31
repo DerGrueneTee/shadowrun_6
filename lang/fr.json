@@ -1,124 +1,124 @@
 {
-	"shadowrun6": {
-		  "actor": {
-		      "actions": "Actions",
-		      "actions_major": "Majeure",
-		      "actions_minor": "Mineure",
-		      "initiative": "Initiative",
-		      "initiative_astral": "Initiative Astrale ",
-		      "nav": {
-		      	"basics": "Bases",
-					"combat": "Combat",
-		      	"description": "Description",
-		      	"equip": "Équipement",
-		      	"input": "Entrée",
-		      	"skills": "Compétences",
-					"overview": "Aperçu"
-		      },
-		      "skills": "Compétences"
+    "shadowrun6": {
+        "actor": {
+            "actions": "Actions",
+            "actions_major": "Majeure",
+            "actions_minor": "Mineure",
+            "initiative": "Initiative",
+            "initiative_astral": "Initiative Astrale ",
+            "nav": {
+                "basics": "Bases",
+                "combat": "Combat",
+                "description": "Description",
+                "equip": "Équipement",
+                "input": "Entrée",
+                "skills": "Compétences",
+                "overview": "Aperçu"
+            },
+            "skills": "Compétences"
         },
-		  "derived": {
-				"attack_rating" : "Valeur d'attaques",
-				"defense_rating": "Valeur de défense",
-				"resist_damage" : "Résistance aux dommages",
-				"resist_toxin"  : "Résistance aux Toxines",
-				"composure"     : "Sang-froid",
-				"judge_intentions": "Jauger les intentions",
-				"memory"        : "Mémoire",
-				"lift_carry"    : "Soulev./Transport"
+        "derived": {
+            "attack_rating": "Valeur d'attaques",
+            "defense_rating": "Valeur de défense",
+            "resist_damage": "Résistance aux dommages",
+            "resist_toxin": "Résistance aux Toxines",
+            "composure": "Sang-froid",
+            "judge_intentions": "Jauger les intentions",
+            "memory": "Mémoire",
+            "lift_carry": "Soulev./Transport"
         },
-		  "initiative": {
-				"physical": "Initiative",
-				"matrix"  : "Initiative matricielle",
-				"astral"  : "Initiative Astrale"
-		  },
+        "initiative": {
+            "physical": "Initiative",
+            "matrix": "Initiative matricielle",
+            "astral": "Initiative Astrale"
+        },
         "item": {
             "type": "Type",
             "subtype": "Sous-type",
             "availability": "Disp.",
             "price": "Prix",
- 			   "skill": "Compétence",
-           "damage": "Dégâts", 
+            "skill": "Compétence",
+            "damage": "Dégâts",
             "mode": "Modes",
             "attackvalues": "Scores Off.",
             "ammunition": "Mun.",
             "description": "Description",
             "defencerating": "Score Déf",
             "capacity": "Capacité",
-            "skillspec" : "Spécialisation",
+            "skillspec": "Spécialisation",
             "mode_bf": "TR",
             "mode_fa": "TA",
             "mode_sa": "SA",
             "mode_ss": "CC",
             "accessories": "Accessoires",
             "essence": "Essence"
-		  },
-		  "itemtype": {
-				"ACCESSORY": "Accessoire",
-    			"ARMOR": "Armure",
-    			"ARMOR_ADDITION": "AJOUTER_ARMURE",
-    			"BIOWARE": "BIOWARE",
-    			"CYBERWARE": "CYBERWARE",
-    			"TOOLS": "OUTILS",
-    			"ELECTRONICS": "ÉLECTRONIQUE",
-    			"NANOWARE": "NANOWARE",
-    			"GENETICS": "GÉNÉTIQUE",
-    			"AMMUNITION": "MUNITIONS",
-    			"CHEMICALS": "CHIMIQUE",
-    			"SURVIVAL": "SURVIE",
-    			"BIOLOGY": "BIOLOGIE",
-    			"VEHICLES": "VÉHICULES",
-    			"DRONES": "DRONES",
-    			"MAGICAL": "MAGIQUE",
-				"WEAPON_CLOSE_COMBAT": "Arme, Contact",
-				"WEAPON_FIREARMS": "Arme, Armes à Feu",
-				"WEAPON_RANGED": "Arme, Projectiles",
-				"WEAPON_SPECIAL": "Arme, Spéciale"
-		  },
-		  "label": {
-                "accessories": "Accessoires",
-		  		"attribute": "Attributs",
-		  		"base"     : "Base",
-			   "column": {
-					"action": "Action",
-					"count" : "TRANSLATE",
-               "name"  : "Nom",
-					"rating": "Scr."
-				},
-		  		"damage"   : "Dégâts",
-		  		"dice"     : "Dé",
-		  		"d6"       : "D6",
-		  		"delete"   : "Effacer",
-		  		"edit"     : "Éditer",
+        },
+        "itemtype": {
+            "ACCESSORY": "Accessoire",
+            "ARMOR": "Armure",
+            "ARMOR_ADDITION": "AJOUTER_ARMURE",
+            "BIOWARE": "BIOWARE",
+            "CYBERWARE": "CYBERWARE",
+            "TOOLS": "OUTILS",
+            "ELECTRONICS": "ÉLECTRONIQUE",
+            "NANOWARE": "NANOWARE",
+            "GENETICS": "GÉNÉTIQUE",
+            "AMMUNITION": "MUNITIONS",
+            "CHEMICALS": "CHIMIQUE",
+            "SURVIVAL": "SURVIE",
+            "BIOLOGY": "BIOLOGIE",
+            "VEHICLES": "VÉHICULES",
+            "DRONES": "DRONES",
+            "MAGICAL": "MAGIQUE",
+            "WEAPON_CLOSE_COMBAT": "Arme, Contact",
+            "WEAPON_FIREARMS": "Arme, Armes à Feu",
+            "WEAPON_RANGED": "Arme, Projectiles",
+            "WEAPON_SPECIAL": "Arme, Spéciale"
+        },
+        "label": {
+            "accessories": "Accessoires",
+            "attribute": "Attributs",
+            "base": "Base",
+            "column": {
+                "action": "Action",
+                "count": "TRANSLATE",
+                "name": "Nom",
+                "rating": "Scr."
+            },
+            "damage": "Dégâts",
+            "dice": "Dé",
+            "d6": "D6",
+            "delete": "Effacer",
+            "edit": "Éditer",
             "expertise": "TRANSLATE",
-		      "firemodes": "Modes de tir",
-          "max"      : "Maximum",
-		  		"modifier" : "Mod.",
-          "modifications" : "Modifications",
-		  		"points"   : "Points",
-		  		"pool"     : "Réserve",
-		  		"poolmod"  : "réserve de dés",
+            "firemodes": "Modes de tir",
+            "max": "Maximum",
+            "modifier": "Mod.",
+            "modifications": "Modifications",
+            "points": "Points",
+            "pool": "Réserve",
+            "poolmod": "réserve de dés",
             "specialization": "TRANSLATE",
-		  		"value"    : "Score",
-		  		"wilddie"  : "Dé Libre"
-		  },
-		  "monitor": {
-		  		"physical": "Physique",
-		  		"stun"    : "Étourdissant"
-		  },
-		  "newitem": {
-				"quality": "Ce qui vous rend spécial", 
-			   "skill": {
-		  			"knowledge": "T'es quoi toi ? un nerd ?",
-		  			"language": "Charabia"
-				}
-		  },
-		  "numerical": {
-		  		"base": "base",
-		  		"baseString": "Valeur de base",
-		  		"max"      : "Max",
-		  		"mod": "adj"
-		  },
+            "value": "Score",
+            "wilddie": "Dé Libre"
+        },
+        "monitor": {
+            "physical": "Physique",
+            "stun": "Étourdissant"
+        },
+        "newitem": {
+            "quality": "Ce qui vous rend spécial",
+            "skill": {
+                "knowledge": "T'es quoi toi ? un nerd ?",
+                "language": "Charabia"
+            }
+        },
+        "numerical": {
+            "base": "base",
+            "baseString": "Valeur de base",
+            "max": "Max",
+            "mod": "adj"
+        },
         "roll": {
             "subject": "Message dans le Chat",
             "pool": "Nb. de Dé à lancer",
@@ -132,10 +132,10 @@
             "glitch": "Complication",
             "criticalglitch": "Échec Critique",
             "nosuccess": "Succès, seuil: ",
-            "damage" : "Dégâts: ",
-            "target" : "Cible: ",
-            "attack" : "Attaque",
-            "with" : "avec",
+            "damage": "Dégâts: ",
+            "target": "Cible: ",
+            "attack": "Attaque",
+            "with": "avec",
             "ar_0": "Proche",
             "ar_1": "Courte",
             "ar_2": "Moyenne",
@@ -144,39 +144,39 @@
             "defRating": "Défense: ",
             "attackRating": "Score Off.:",
             "notarget": "Aucune cible sélectionnée",
-            "edgegain" : "Atout-Gain (max): ",
-            "edgegain_player" : " (Joueur)",
+            "edgegain": "Atout-Gain (max): ",
+            "edgegain_player": " (Joueur)",
             "noedgegain": "Pas de gain d'atout",
-            "hits_bought" : "Coups achetés"
+            "hits_bought": "Coups achetés"
         },
         "rollType": {
             "normal": "lancer les dés",
             "bought": "Acheter succès"
         },
         "section": {
-            "ammo" : "Munitions",
-            "armor.title" : "Armure",
+            "ammo": "Munitions",
+            "armor.title": "Armure",
             "armor.column": {
-                "action" : "Action",
-                "name"   : "Nom",
+                "action": "Action",
+                "name": "Nom",
                 "defense": "SD",
-                "social" : "Social"
+                "social": "Social"
             },
-				"biology": "Biologie",
-				"bodyware": {
-					"title": "Implants Corporels",
-					"column.essence": "Ess.",
-					"column.capacity": "Cap.",
-					"footer.total_essence": "Essence restante"
-				},
+            "biology": "Biologie",
+            "bodyware": {
+                "title": "Implants Corporels",
+                "column.essence": "Ess.",
+                "column.capacity": "Cap.",
+                "footer.total_essence": "Essence restante"
+            },
             "chemicals": "chimiques",
             "derived": "Scores Dérivés",
-            "electronics":"électroniques",
-			   "initiative": "Initiative",
-			   "martialarts": {
-					"add"  : "TRANSLATE",
-					"title": "TRANSLATE"
-				},
+            "electronics": "électroniques",
+            "initiative": "Initiative",
+            "martialarts": {
+                "add": "TRANSLATE",
+                "title": "TRANSLATE"
+            },
             "skills.action": "Compétences",
             "skills.language": "Langues",
             "skills.language_add": "Nouvelle Langue",
@@ -189,10 +189,10 @@
             "skills.knowledge": "Connaissances",
             "skills.knowledge_add": "Nouvelle connaissance",
             "qualities": "Qualités",
-    			"qualities_add": "Add",
+            "qualities_add": "Add",
             "weapon": {
                 "ranged": "Armes à Distance",
-                "close" : "Armes de Mélée"
+                "close": "Armes de Mélée"
             }
         },
         "qualityedit": {
