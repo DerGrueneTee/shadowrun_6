@@ -26,14 +26,12 @@
          <div>
          <div style="display:block; width:22rem; margin-left: 2em">
          	<div class="collapsible-content {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}}">
-         	{{log "skill.spec=" skill.specialization}}
-         	{{log "skill.expert=" skill.expertise}}
          	   {{ localize 'shadowrun6.label.specialization' }} 
-         	   <select name="skill.specialization">
+         	   <select name="data.skills.{{id}}.specialization" >
                    {{selectOptions (lookup ../config.skill_special id) selected=skill.specialization blank=(localize "shadowrun6.label.none") localize=true}}        
                </select><br/>
          	   {{ localize 'shadowrun6.label.expertise' }} 
-         	   <select name="skill.expertise">
+         	   <select name="data.skills.{{id}}.expertise" >
                    {{selectOptions (lookup ../config.skill_special id) selected=skill.expertise blank=(localize "shadowrun6.label.none") localize=true}}        
                </select><br/>
          	</div>
