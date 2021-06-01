@@ -461,7 +461,8 @@
 			"drain": 1,
 			"direct": false,
 			"type": "",
-			"range": ""
+			"range": "",
+			"alchemic": false
 		}
 	}
 }

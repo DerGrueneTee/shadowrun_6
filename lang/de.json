@@ -11,6 +11,7 @@
                 "combat": "Kampf",
                 "description": "Beschreibung",
                 "equip": "Ausrüstung",
+					 "magic": "Magie",
                 "input": "Eingabe",
                 "skills": "Fertigkeiten",
                 "overview": "Übersicht"
@@ -234,6 +235,9 @@
             "skills.knowledge_add": "Neue Wissensfertigket hinzufügen",
             "qualities": "Vor/Nachteile",
             "qualities_add": "Hinzufügen",
+            "spells": {
+                "title": "Zauber"
+            },
             "weapon": {
                 "ranged": "Fernkampf",
                 "close": "Nahkampf"

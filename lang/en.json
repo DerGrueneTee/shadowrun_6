@@ -11,6 +11,7 @@
                 "combat": "Combat",
                 "description": "Description",
                 "equip": "Equipment",
+					 "magic": "Magic",
                 "input": "Input",
                 "skills": "Skills",
                 "overview": "Overview"
@@ -71,10 +72,15 @@
             "category_illusion": "Illusion",
             "category_detection": "Detection",
             "range_line_of_sight": "Line of sight",
+            "range_line_of_sight_short": "LOS",
             "range_line_of_sight_area": "Line of sight (area)",
+            "range_line_of_sight_area_short": "LOS(A)",
             "range_touch": "Touch",
+            "range_touch_short": "T",
             "range_self": "Self",
+            "range_self_short": "Self",
             "range_self_area": "Self (Area)",
+            "range_self_area_short": "S(A)",
             "duration_instantaneous": "Instantaneous",
             "duration_sustained": "Sustained",
             "duration_permanent": "Permanent",
@@ -197,8 +203,12 @@
             "bought": "Buy hits"
         },
         "section": {
+            "adeptpowers": {
+                "title": "Adept Powers",
+					 "column.points": "PP"
+            },
             "ammo": "Ammunition",
-            "armor.title": "Armor",
+           "armor.title": "Armor",
             "armor.column": {
                 "action": "Action",
                 "name": "Name",
@@ -233,6 +243,12 @@
             "skills.knowledge_add": "Add new knowledge",
             "qualities": "Qualities",
             "qualities_add": "Add",
+            "spells": {
+                "title": "Spells",
+					 "column.drain": "Drain",
+					 "column.alchemic": "Alch.",
+				    "column.range": "Range"
+            },
             "weapon": {
                 "ranged": "Ranged Weapons",
                 "close": "Melee Weapons"

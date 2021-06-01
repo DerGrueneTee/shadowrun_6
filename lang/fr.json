@@ -11,6 +11,7 @@
                 "combat": "Combat",
                 "description": "Description",
                 "equip": "Équipement",
+					 "magic": "TRANSLATE",
                 "input": "Entrée",
                 "skills": "Compétences",
                 "overview": "Aperçu"
@@ -191,6 +192,9 @@
             "skills.knowledge_add": "Nouvelle connaissance",
             "qualities": "Qualités",
             "qualities_add": "Add",
+            "spells": {
+                "title": "TRANSLATE"
+            },
             "weapon": {
                 "ranged": "Armes à Distance",
                 "close": "Armes de Mélée"

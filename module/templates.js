@@ -17,6 +17,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/pc-derived.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skillvalues.html",
+		"systems/shadowrun6-eden/templates/parts/section-adeptpowers.html",
 		"systems/shadowrun6-eden/templates/parts/section-bodyware.html",
 		"systems/shadowrun6-eden/templates/parts/section-gear.html",
 		"systems/shadowrun6-eden/templates/parts/section-martialart.html",
@@ -24,6 +25,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-skills-action.html",
 		"systems/shadowrun6-eden/templates/parts/section-skills-knowledge.html",
 		"systems/shadowrun6-eden/templates/parts/section-skills-language.html",
+		"systems/shadowrun6-eden/templates/parts/section-spells.html",
 		];
 
 	console.log(`Load templates`);

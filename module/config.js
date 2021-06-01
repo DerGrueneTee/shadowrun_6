@@ -63,11 +63,11 @@ SR6.icons = {
 };
 
 SR6.spell_range = {
-	"LINE_OF_SIGHT": "shadowrun6.spell.range_line_of_sight",
-	"LINE_OF_SIGHT_AREA": "shadowrun6.spell.range_line_of_sight_area",
-	"TOUCH": "shadowrun6.spell.range_touch",
-	"SELF": "shadowrun6.spell.range_self",
-	"SELF_AREA": "shadowrun6.spell.range_self_area"
+	"line_of_sight": "shadowrun6.spell.range_line_of_sight",
+	"line_of_sight_area": "shadowrun6.spell.range_line_of_sight_area",
+	"touch": "shadowrun6.spell.range_touch",
+	"self": "shadowrun6.spell.range_self",
+	"self_area": "shadowrun6.spell.range_self_area"
 };
 SR6.spell_category = {
 	"COMBAT": "shadowrun6.spell.category_combat",
@@ -90,9 +90,9 @@ SR6.spell_duration = {
 };
 
 SR6.adeptpower_activation = {
-	"PASSIVE" : "shadowrun6.adeptpower.activation_passive",
-	"MINOR_ACTION" : "shadowrun6.adeptpower.activation_minor",
-	"MAJOR_ACTION" : "shadowrun6.adeptpower.activation_major",
+	"passive" : "shadowrun6.adeptpower.activation_passive",
+	"minor_action" : "shadowrun6.adeptpower.activation_minor",
+	"major_action" : "shadowrun6.adeptpower.activation_major",
 };
 SR6.skill_special = {
    "astral": {
