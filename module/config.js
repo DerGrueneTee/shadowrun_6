@@ -88,6 +88,12 @@ SR6.spell_duration = {
 	"LIMITED": "shadowrun6.spell.duration_limited",
 	"SPECIAL" :  "shadowrun6.spell.duration_special"
 };
+
+SR6.adeptpower_activation = {
+	"PASSIVE" : "shadowrun6.adeptpower.activation_passive",
+	"MINOR_ACTION" : "shadowrun6.adeptpower.activation_minor",
+	"MAJOR_ACTION" : "shadowrun6.adeptpower.activation_major",
+};
 SR6.skill_special = {
    "astral": {
       "astral_combat": "shadowrun6.special.astral.astral_combat",

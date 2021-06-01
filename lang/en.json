@@ -87,6 +87,14 @@
             "duration": "Duration",
             "direct": "Direct"
         },
+        "adeptpower": {
+            "cost": "Cost",
+            "activation" : "Activation",
+            "haslevel" : "Has level",
+            "activation_passive": "Passive",
+            "activation_minor" : "Minor Action",
+            "activation_major" : "Major Action"
+        },
         "itemtype": {
             "ACCESSORY": "Accessory",
             "ARMOR": "Armor",

@@ -87,6 +87,14 @@
             "duration": "Dauer",
             "direct": "Direkt"
         },
+        "adeptpower": {
+            "cost": "Kosten",
+            "activation" : "Aktivierung",
+            "haslevel" : "Hat Stufe",
+            "activation_passive": "Passiv",
+            "activation_minor" : "Nebenhandlung",
+            "activation_major" : "Haupthandlung"
+        },
         "itemtype": {
             "ACCESSORY": "Zubehör",
             "ARMOR": "Rüstung",
