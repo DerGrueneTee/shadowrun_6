@@ -360,7 +360,8 @@
 			"quality",
 			"skill",
 			"adeptpower",
-			"spell"
+			"spell",
+			"ritual"
 		],
 		"templates": {
 			"skill-value": {
@@ -447,6 +448,17 @@
 			"templates": [
 				"quality-value"
 			]
+		},
+		"ritual": {
+			"genesisID": "",
+			"threshold": 1,
+			"features": {
+				"anchored": false,
+				"material_link": false,
+				"minion": false,
+				"spell": false,
+				"spotter": false
+			}
 		},
 		"skill": {
 			"genesisID": "",
