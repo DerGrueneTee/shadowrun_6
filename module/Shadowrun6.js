@@ -59,6 +59,7 @@ Hooks.once("init", async function () {
     return op1 + op2 + op3;
   });
   Handlebars.registerHelper('skillAttr', getSkillAttribute);
+  Handlebars.registerHelper('ritualFeat', getRitualFeatures);
   Handlebars.registerHelper('ifIn', function (elem, list, options) {
     if (list.indexOf(elem) > -1) {
       return options.fn(this);
@@ -256,6 +257,16 @@ function getSkillAttribute(key) {
   } else {
     return "??";
   }
+};
+function getRitualFeatures(ritual) {
+	console.log("getRitualFeatures "+ritual);
+	let ret = [];
+	if (ritual.features.material_link) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.material_link"));
+	if (ritual.features.anchored) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.anchored"));
+	if (ritual.features.minion) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.minion"));
+	if (ritual.features.spell) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spell"));
+	if (ritual.features.spotter) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spotter"));
+	return ret.join(", ");
 };
 
 $.fn.closestData = function (dataName, defaultValue = "") {

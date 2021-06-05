@@ -164,6 +164,14 @@ export class Shadowrun6Actor extends Actor {
 		// Store volatile
 
 		if (actorData.type === "Player" || actorData.type === "NPC") {
+			if (!data.defense) {
+				data.defense = {};
+				data.defense.physical = {};
+				data.defense.astral = {};
+				data.defense.social = {};
+			}
+			
+			
 			// Physical Defense Rating
 			data.defense.physical.base = data.attributes["bod"].pool;
 			data.defense.physical.modString = game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;

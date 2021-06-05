@@ -164,6 +164,13 @@
             "mod": "Mod",
             "max": "Max"
         },
+        "ritualfeatures": {
+            "anchored": "Verankert",
+            "material_link": "Materielle Verbindung",
+            "minion": "Diener",
+            "spell": "Zauber",
+            "spotter": "Späher"
+        },
         "roll": {
             "subject": "Chat-Nachricht",
             "pool": "Würfel/Pool",

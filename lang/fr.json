@@ -122,6 +122,13 @@
             "max": "Max",
             "mod": "adj"
         },
+        "ritualfeatures": {
+            "anchored": "TRANSLATE",
+            "material_link": "TRANSLATE",
+            "minion": "TRANSLATE",
+            "spell": "TRANSLATE",
+            "spotter": "TRANSLATE"
+        },
         "roll": {
             "subject": "Message dans le Chat",
             "pool": "Nb. de Dé à lancer",

@@ -169,6 +169,13 @@
             "max": "Max",
             "mod": "adj"
         },
+        "ritualfeatures": {
+            "anchored": "Anchored",
+            "material_link": "Material Link",
+            "minion": "Minion",
+            "spell": "Spell",
+            "spotter": "Spotter"
+        },
         "roll": {
             "subject": "Chatmessage",
             "pool": "Pool",

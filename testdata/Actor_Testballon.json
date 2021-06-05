@@ -375,7 +375,7 @@
         "availDef": "3 (L)",
         "avail": 3,
         "price": 9005,
-        "accessories": "Deprecated Item (Delete Me), Electronic paper, Stealth, Rating 2",
+        "accessories": "Electronic paper, Deprecated Item (Delete Me), Stealth, Rating 2",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -481,7 +481,7 @@
         "availDef": "5 (L)",
         "avail": 5,
         "price": 6330,
-        "accessories": "Silencer, Laser sight (base), Shock pads, Grenade Launcher, Spare clip, Spare clip, Tactical Sling",
+        "accessories": "Laser sight (base), Spare clip, Spare clip, Tactical Sling, Shock pads, Silencer, Grenade Launcher",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -539,7 +539,7 @@
         "availDef": "2",
         "avail": 2,
         "price": 8000,
-        "accessories": "Standard weapon mount, Rigger interface, Targeting (AK-97), Rating 6",
+        "accessories": "Standard weapon mount, Targeting (AK-97), Rating 6, Rigger interface",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -862,7 +862,7 @@
         "availDef": "10 (I)",
         "avail": 10,
         "price": 10000,
-        "accessories": "Krime Ripper Machine Gun, Krime Ripper Machine Gun, Rigger interface, Clearsight , Rating 1, Targeting, Rating 2",
+        "accessories": "Krime Ripper Machine Gun, Krime Ripper Machine Gun, Clearsight , Rating 1, Targeting, Rating 2, Rigger interface",
         "needsRating": false,
         "rating": 0,
         "skill": "engineering",
@@ -1087,7 +1087,7 @@
         "availDef": "6",
         "avail": 6,
         "price": 7500,
-        "accessories": "Standard weapon mount, Rigger interface, Clearsight , Rating 3, Targeting, Rating 3",
+        "accessories": "Standard weapon mount, Clearsight , Rating 3, Targeting, Rating 3, Rigger interface",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -1232,7 +1232,7 @@
         "availDef": "5 (L)",
         "avail": 5,
         "price": 3300,
-        "accessories": "Silencer, Flashlight, Thermographic, Yamaha R. Shotgun, Yamaha R. Grenade Launcher",
+        "accessories": "Flashlight, Thermographic, Silencer, Yamaha R. Shotgun, Yamaha R. Grenade Launcher",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -1274,8 +1274,13 @@
         "range": "line_of_sight",
         "type": "mana",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": true,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1288,8 +1293,13 @@
         "range": "line_of_sight",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": true,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1302,8 +1312,13 @@
         "range": "line_of_sight",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": true,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1316,8 +1331,13 @@
         "range": "line_of_sight_area",
         "type": "mana",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": true,
+          "direct": true,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1330,8 +1350,13 @@
         "range": "line_of_sight",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": true
+        }
       }
     },
     {
@@ -1403,21 +1428,13 @@
       "data": {
         "genesisID": "curse",
         "threshold": 5,
-        "features": [
-          "material_link",
-          "spell"
-        ]
-      }
-    },
-    {
-      "name": "Watcher",
-      "type": "ritual",
-      "data": {
-        "genesisID": "watcher",
-        "threshold": 4,
-        "features": [
-          "minion"
-        ]
+        "features": {
+          "anchored": false,
+          "material_link": true,
+          "minion": false,
+          "spell": true,
+          "spotter": false
+        }
       }
     }
   ]
