@@ -355,12 +355,13 @@
         "genesisID": "acid_on_demand",
         "type": "MAGICAL",
         "subtype": "PREPARATION",
-        "availDef": "4",
-        "avail": 4,
+        "availDef": "6 (L)",
+        "avail": 6,
         "price": 900,
         "needsRating": true,
         "rating": 6,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -378,6 +379,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -397,6 +399,7 @@
         "skill": "engineering",
         "skillSpec": "gunnery",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -413,6 +416,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -447,6 +451,7 @@
         "skill": "close_combat",
         "skillSpec": "blades",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -476,12 +481,13 @@
         "availDef": "5 (L)",
         "avail": 5,
         "price": 6330,
-        "accessories": "Spare clip, Spare clip, Tactical Sling, Silencer, Laser sight (base), Shock pads, Grenade Launcher",
+        "accessories": "Silencer, Laser sight (base), Shock pads, Grenade Launcher, Spare clip, Spare clip, Tactical Sling",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
         "skillSpec": "rifles",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -500,6 +506,7 @@
         "needsRating": true,
         "rating": 1,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -518,6 +525,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -531,10 +539,11 @@
         "availDef": "2",
         "avail": 2,
         "price": 8000,
-        "accessories": "Rigger interface, Standard weapon mount, Targeting (AK-97), Rating 6",
+        "accessories": "Standard weapon mount, Rigger interface, Targeting (AK-97), Rating 6",
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -551,6 +560,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -570,6 +580,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -583,12 +594,13 @@
         "availDef": "2",
         "avail": 2,
         "price": 5290,
-        "accessories": "Rigger interface, Mount with crossbow for Quadrotor",
+        "accessories": "Mount with crossbow for Quadrotor, Rigger interface",
         "needsRating": false,
         "rating": 0,
         "skill": "engineering",
         "skillSpec": "gunnery",
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -607,6 +619,7 @@
         "needsRating": true,
         "rating": 4,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -625,6 +638,7 @@
         "needsRating": true,
         "rating": 4,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -641,6 +655,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 3
       }
     },
@@ -657,6 +672,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -674,6 +690,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -691,6 +708,7 @@
         "needsRating": true,
         "rating": 4,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -707,6 +725,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -723,6 +742,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -739,6 +759,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -755,6 +776,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -791,6 +813,7 @@
         "skillSpec": "blades",
         "wild": false,
         "customName": "Hand Talons (Weapon focus)",
+        "countable": false,
         "count": 0
       }
     },
@@ -807,6 +830,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -820,10 +844,11 @@
         "availDef": "9 (I)",
         "avail": 9,
         "price": 200000,
-        "accessories": "Rigger interface, Heavy weapon mount, Standard weapon mount",
+        "accessories": "Heavy weapon mount, Standard weapon mount, Rigger interface",
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -837,12 +862,13 @@
         "availDef": "10 (I)",
         "avail": 10,
         "price": 10000,
-        "accessories": "Rigger interface, Krime Ripper Machine Gun, Krime Ripper Machine Gun, Clearsight , Rating 1, Targeting, Rating 2",
+        "accessories": "Krime Ripper Machine Gun, Krime Ripper Machine Gun, Rigger interface, Clearsight , Rating 1, Targeting, Rating 2",
         "needsRating": false,
         "rating": 0,
         "skill": "engineering",
         "skillSpec": "gunnery",
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -856,12 +882,13 @@
         "availDef": "2",
         "avail": 2,
         "price": 16000,
-        "accessories": "Rigger interface, Heavy weapon mount",
+        "accessories": "Heavy weapon mount, Rigger interface",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
         "skillSpec": "machine_guns",
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -879,6 +906,7 @@
         "rating": 0,
         "wild": false,
         "customName": "Mini-Betäubung",
+        "countable": true,
         "count": 1
       }
     },
@@ -898,6 +926,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -916,6 +945,7 @@
         "needsRating": true,
         "rating": 2,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -934,6 +964,7 @@
         "needsRating": true,
         "rating": 2,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -952,6 +983,7 @@
         "needsRating": true,
         "rating": 2,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -968,6 +1000,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 2
       }
     },
@@ -1003,6 +1036,7 @@
         "skill": "firearms",
         "skillSpec": "rifles",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -1019,6 +1053,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": true,
         "count": 3
       }
     },
@@ -1038,6 +1073,7 @@
         "skill": "firearms",
         "skillSpec": "machine_guns",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -1051,12 +1087,13 @@
         "availDef": "6",
         "avail": 6,
         "price": 7500,
-        "accessories": "Rigger interface, Standard weapon mount, Clearsight , Rating 3, Targeting, Rating 3",
+        "accessories": "Standard weapon mount, Rigger interface, Clearsight , Rating 3, Targeting, Rating 3",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
         "skillSpec": "machine_pistols",
         "wild": false,
+        "countable": true,
         "count": 1
       }
     },
@@ -1076,6 +1113,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -1093,6 +1131,7 @@
         "rating": 0,
         "wild": false,
         "customName": "Stapeltest",
+        "countable": true,
         "count": 5
       }
     },
@@ -1110,6 +1149,7 @@
         "rating": 0,
         "wild": false,
         "customName": "Test",
+        "countable": false,
         "count": 0
       }
     },
@@ -1127,6 +1167,7 @@
         "needsRating": false,
         "rating": 0,
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -1161,6 +1202,7 @@
         "skill": "close_combat",
         "skillSpec": "unarmed",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -1190,12 +1232,13 @@
         "availDef": "5 (L)",
         "avail": 5,
         "price": 3300,
-        "accessories": "Yamaha R. Shotgun, Yamaha R. Grenade Launcher, Silencer, Flashlight, Thermographic",
+        "accessories": "Silencer, Flashlight, Thermographic, Yamaha R. Shotgun, Yamaha R. Grenade Launcher",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
         "skillSpec": "rifles",
         "wild": false,
+        "countable": false,
         "count": 0
       }
     },
@@ -1229,7 +1272,10 @@
         "category": "combat",
         "drain": 3,
         "range": "line_of_sight",
-        "type": "mana"
+        "type": "mana",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1240,7 +1286,10 @@
         "category": "combat",
         "drain": 5,
         "range": "line_of_sight",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1251,7 +1300,10 @@
         "category": "combat",
         "drain": 4,
         "range": "line_of_sight",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1262,7 +1314,10 @@
         "category": "combat",
         "drain": 4,
         "range": "line_of_sight_area",
-        "type": "mana"
+        "type": "mana",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1273,7 +1328,96 @@
         "category": "illusion",
         "drain": 4,
         "range": "line_of_sight",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
+      }
+    },
+    {
+      "name": "Combat Sense 0",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "combat_sense",
+        "activation": "passive",
+        "cost": 0.0
+      }
+    },
+    {
+      "name": "Improved Reflexes 1",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "improved_reflexes",
+        "activation": "passive",
+        "cost": 0.0
+      }
+    },
+    {
+      "name": "Improved Sense (Vision)",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "improved_sense",
+        "activation": "passive",
+        "cost": 0.25
+      }
+    },
+    {
+      "name": "Improved Sense",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "improved_sense",
+        "activation": "passive",
+        "cost": 0.25
+      }
+    },
+    {
+      "name": "Killing Hands",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "killing_hands",
+        "activation": "minor_action",
+        "cost": 0.5
+      }
+    },
+    {
+      "name": "Mystic Armor 2",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "mystic_armor",
+        "activation": "passive",
+        "cost": 0.5
+      }
+    },
+    {
+      "name": "Rapid Healing 1",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "rapid_healing",
+        "activation": "passive",
+        "cost": 0.5
+      }
+    },
+    {
+      "name": "Curse",
+      "type": "ritual",
+      "data": {
+        "genesisID": "curse",
+        "threshold": 5,
+        "features": [
+          "material_link",
+          "spell"
+        ]
+      }
+    },
+    {
+      "name": "Watcher",
+      "type": "ritual",
+      "data": {
+        "genesisID": "watcher",
+        "threshold": 4,
+        "features": [
+          "minion"
+        ]
       }
     }
   ]

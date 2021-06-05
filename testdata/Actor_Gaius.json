@@ -771,7 +771,7 @@
         "availDef": "2 (L)",
         "avail": 2,
         "price": 3135,
-        "accessories": "Flashlight, Low-Light, Concealable Quick Draw Holster, Spare clip, Silencer, Vision magnification",
+        "accessories": "Vision magnification, Silencer, Flashlight, Low-Light, Concealable Quick Draw Holster, Spare clip",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -1095,7 +1095,7 @@
         "availDef": "3 (L)",
         "avail": 3,
         "price": 2610,
-        "accessories": "Flashlight, Laser Sight (Low Power), Concealable holster, Spare clip, Guncam, Vision magnification",
+        "accessories": "Vision magnification, Guncam, Laser Sight (Low Power), Flashlight, Concealable holster, Spare clip",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -1130,7 +1130,10 @@
         "category": "combat",
         "drain": 4,
         "range": "line_of_sight",
-        "type": "mana"
+        "type": "mana",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1141,7 +1144,10 @@
         "category": "detection",
         "drain": 3,
         "range": "line_of_sight",
-        "type": "mana"
+        "type": "mana",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1152,7 +1158,10 @@
         "category": "health",
         "drain": 3,
         "range": "touch",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1163,7 +1172,10 @@
         "category": "health",
         "drain": 5,
         "range": "touch",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1174,7 +1186,10 @@
         "category": "illusion",
         "drain": 4,
         "range": "touch",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1185,7 +1200,10 @@
         "category": "illusion",
         "drain": 4,
         "range": "line_of_sight_area",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1196,7 +1214,10 @@
         "category": "manipulation",
         "drain": 4,
         "range": "line_of_sight",
-        "type": "mana"
+        "type": "mana",
+        "alchemic": false,
+        "features": [],
+        "direct": false
       }
     },
     {
@@ -1207,7 +1228,64 @@
         "category": "manipulation",
         "drain": 6,
         "range": "line_of_sight",
-        "type": "physical"
+        "type": "physical",
+        "alchemic": false,
+        "features": [],
+        "direct": false
+      }
+    },
+    {
+      "name": "Astral Perception",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "astral_perception",
+        "activation": "minor_action",
+        "cost": 1.0
+      }
+    },
+    {
+      "name": "Cosmetic Control 2",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "cosmetic_control",
+        "activation": "major_action",
+        "cost": 2.0
+      }
+    },
+    {
+      "name": "Enhanced Accuracy",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "enhanced_accuracy",
+        "activation": "passive",
+        "cost": 0.5
+      }
+    },
+    {
+      "name": "Improved Physical Attribute (Agility) 1",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "improved_physical_attribute",
+        "activation": "passive",
+        "cost": 0.0
+      }
+    },
+    {
+      "name": "Mystic Armor 4",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "mystic_armor",
+        "activation": "passive",
+        "cost": 1.0
+      }
+    },
+    {
+      "name": "Vocal Control 1",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "vocal_control",
+        "activation": "passive",
+        "cost": 0.5
       }
     }
   ]
