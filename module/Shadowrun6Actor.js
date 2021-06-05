@@ -17,6 +17,7 @@ export class Shadowrun6Actor extends Actor {
 		const data = this.data.data;
 		this._prepareAttributes();
 		this._prepareDerivedAttributes();
+		this._prepareDefenses();
 		this._prepareSkills();
 		this._prepareItemPools();
 		this._calculateEssense();
@@ -148,6 +149,45 @@ export class Shadowrun6Actor extends Actor {
 				data.derived.resist_toxin.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
 				data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
 			}
+		}
+	}
+
+	//---------------------------------------------------------
+	/*
+	 * Calculate the attributes like Initiative
+	 */
+	_prepareDefenses() {
+		const actorData = this.data;
+		const data = this.data.data;
+
+		// Store volatile
+
+		if (actorData.type === "Player" || actorData.type === "NPC") {
+			// Physical Defense Rating
+			data.defense.physical.base = data.attributes["bod"].pool;
+			data.defense.physical.modString = game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
+			data.derived.defense_rating.pool = data.defense.physical.base;
+			if (data.defense.physical.mod) {
+				data.defense.physical.pool += data.defense.physical.mod;
+				data.defense.physical.modString += "\n+" + data.defense.physical.mod;
+			} 
+			items.forEach(function (item, key) {
+				if (item.type == "gear" && item.data.data.type == "ARMOR") {
+					if (item.data.data.usedForPool) {
+						data.defense.physical.pool += item.data.data.defense;
+						data.defense.physical.modString += "\n+" + item.data.data.defense + " " + item.name;
+					}
+				}
+			});
+			
+			// Astral Defense Rating
+			data.defense.astral.base = data.attributes["int"].pool;
+			data.defense.astral.modString = game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.derived.defense_rating.pool = data.defense.physical.base;
+			if (data.defense.astral.mod) {
+				data.defense.astral.pool += data.defense.astral.mod;
+				data.defense.astral.modString += "\n+" + data.defense.astral.mod;
+			} 
 		}
 	}
 
