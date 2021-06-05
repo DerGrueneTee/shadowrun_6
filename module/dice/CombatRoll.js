@@ -15,9 +15,9 @@ export async function doAttackRoll(data, messageData = {}) {
       messageData.rollMode = form.rollMode.value;
       data.weapon = data.item ? true : false;
       if (data.modifier > 0) {
-        data.formula = data.skill.pool + " + " + data.modifier + "d6";
+        data.formula = data.value + " + " + data.modifier + "d6";
       } else {
-        data.formula = data.skill.pool + "d6";
+        data.formula = data.value + "d6";
       }
     }
 

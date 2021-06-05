@@ -159,6 +159,7 @@ export class Shadowrun6Actor extends Actor {
 	_prepareDefenses() {
 		const actorData = this.data;
 		const data = this.data.data;
+		const items = this.data.items;
 
 		// Store volatile
 
@@ -311,7 +312,7 @@ export class Shadowrun6Actor extends Actor {
 		let value = parseInt(skl.pool);
 		const parts = [];
 		let hasSpec = skl.specialization === "spellcasting";
-		let hasExp = skl.specialization === "spellcasting";
+		let hasExp = skl.expertise === "spellcasting";
 		let isCombat = item.data.data.category === "combat";
 		let targetId = this.userHasTargets() ? this.getUsersFirstTargetId() : null;
 		let title;
