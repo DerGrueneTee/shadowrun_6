@@ -1,5 +1,5 @@
 import { doRoll } from "../module/dice/dice.js";
-import { doAttackRoll } from "../module/dice/dice.js";
+import { doAttackRoll } from "./dice/CombatRoll.js";
 import { doCommonCheck } from "../module/dice/dice.js";
 import { SR6 } from "./config.js";
 
@@ -297,11 +297,49 @@ export class Shadowrun6Actor extends Actor {
 			title: title,
 			skill: skl,
 			item: item,
-			targetId: targetId
+			targetId: targetId,
+			attackType: "weapon",
+			buyHits: false
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doAttackRoll(data);
 	}
+
+	rollSpell(itemId, options = {}) {
+		const skl = this.data.data.skills["sorcery"];
+		const item = this.items.get(itemId);
+		let value = parseInt(skl.pool);
+		const parts = [];
+		let hasSpec = skl.specialization === "spellcasting";
+		let hasExp = skl.specialization === "spellcasting";
+		let isCombat = item.data.data.category === "combat";
+		let targetId = this.userHasTargets() ? this.getUsersFirstTargetId() : null;
+		let title;
+		if (hasExp) {
+			title = item.name + " (" + game.i18n.localize("shadowrun6.roll.exp") + ")";
+			value += 3;
+		} else if (hasSpec) 	{
+			title = item.name + " (" + game.i18n.localize("shadowrun6.roll.spec") + ")";
+			value += 2; 
+		} else {
+			title = item.name;
+		}
+
+		let data = mergeObject(options, {
+			parts: parts,
+			value: value,
+			title: title,
+			skill: skl,
+			item: item,
+			targetId: targetId,
+			isCombat: isCombat,
+			attackType: "spell",
+			buyHits: true
+		});
+		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doAttackRoll(data);
+	}
+
 
 	rollCommonCheck(pool, title, dialogConfig, options = {}) {
 		let data = mergeObject(options, {

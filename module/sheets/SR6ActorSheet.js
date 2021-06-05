@@ -25,6 +25,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (this.actor.isOwner) {
 			// Roll Skill Checks
 			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
+			html.find('.spell-roll').click(this._onRollSpellCheck.bind(this));
 			html.find('.item-roll').click(this._onRollItemCheck.bind(this));
 			html.find(".defense-roll").click(this._onCommonCheck.bind(this));
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
@@ -167,6 +168,12 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const skill = event.currentTarget.dataset.skill;
 		const item = event.currentTarget.dataset.itemId;
 		this.actor.rollItem(skill, item, { event: event });
+	}
+
+	_onRollSpellCheck(event, html) {
+		event.preventDefault();
+		const item = event.currentTarget.dataset.itemId;
+		this.actor.rollSpell(item, { event: event });
 	}
 
 	_onCommonCheck(event, html) {
