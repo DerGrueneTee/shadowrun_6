@@ -391,6 +391,13 @@
                 "registering": "Registering"
             }
         },
+        "spellfeatures": {
+            "area": "Area",
+            "indirect": "Indirect Combat",
+            "direct": "Direct Combat",
+            "sense_single": "Single-Sense",
+            "sense_multi": "Multi-Sense"
+        },
         "qualityedit": {
             "new": "New",
             "name": "Name",

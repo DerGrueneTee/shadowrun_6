@@ -60,6 +60,7 @@ Hooks.once("init", async function () {
   });
   Handlebars.registerHelper('skillAttr', getSkillAttribute);
   Handlebars.registerHelper('ritualFeat', getRitualFeatures);
+  Handlebars.registerHelper('spellFeat', getSpellFeatures);
   Handlebars.registerHelper('ifIn', function (elem, list, options) {
     if (list.indexOf(elem) > -1) {
       return options.fn(this);
@@ -259,13 +260,23 @@ function getSkillAttribute(key) {
   }
 };
 function getRitualFeatures(ritual) {
-	console.log("getRitualFeatures "+ritual);
 	let ret = [];
 	if (ritual.features.material_link) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.material_link"));
 	if (ritual.features.anchored) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.anchored"));
 	if (ritual.features.minion) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.minion"));
 	if (ritual.features.spell) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spell"));
 	if (ritual.features.spotter) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spotter"));
+	return ret.join(", ");
+};
+function getSpellFeatures(spell) {
+	let ret = [];
+	if (spell.features) {
+		if (spell.features.area        ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.area"));
+		if (spell.features.direct      ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.direct"));
+		if (spell.features.indirect    ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.indirect"));
+		if (spell.features.sense_single) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_single"));
+		if (spell.features.sense_multi ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_multi"));
+	}
 	return ret.join(", ");
 };
 
