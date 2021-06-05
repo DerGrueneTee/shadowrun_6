@@ -324,7 +324,12 @@
 				}
 			},
 			"magic-template": {
-				"traditionattribute": "logic"
+				"tradition": {
+					"genesisId": "",
+					"name": "",
+					"attribute": "log",
+					"mod": 0
+				}
 			}
 		},
 		"Player": {
