@@ -2,22 +2,25 @@
     {{#if data.extraText}}
     <h3>{{data.extraText}}</h3>
     {{/if}}
-    <hr/>
+    <hr />
     <div class="form-group">
+        {{#if (eq data.attackType "weapon")}}
         {{localize "shadowrun6.roll.attackRating"}}
         <select name="attackRating" class="calc-edge-edit ar-value" id="ar">
             {{#select attackRating}}
             {{#each data.item.data.data.attackRating as |rating id|}}
-            <option value="{{data.attackRating}}" data-item-ar="{{rating}}">{{localize (concat "shadowrun6.roll.ar_" id)}} - ({{rating}})</option>
+            <option value="{{data.attackRating}}" data-item-ar="{{rating}}">{{localize (concat "shadowrun6.roll.ar_"
+                id)}} - ({{rating}})</option>
             {{/each}}
             {{/select}}
         </select>
         <label>&nbsp;&nbsp; vs. {{localize "shadowrun6.roll.defRating"}}</label>
-        <input id="dr" type="number" name="defRating" value="{{data.defRating}}" class="calc-edge-edit dr-value"/>
+        <input id="dr" type="number" name="defRating" value="{{data.defRating}}" class="calc-edge-edit dr-value" />
+        {{/if}}
     </div>
-        <label id="edgeLabel"></label><br/>
-        <label id="noTargetLabel"></label>
-    <hr/>
+    <label id="edgeLabel"></label><br />
+    <label id="noTargetLabel"></label>
+    <hr />
     <div class="form-group">
         <label>{{localize "shadowrun6.roll.threshold"}}</label>
         <input type="text" name="threshold" value="{{data.threshold}}" />

@@ -70,23 +70,23 @@ SR6.spell_range = {
 	"self_area": "shadowrun6.spell.range_self_area"
 };
 SR6.spell_category = {
-	"COMBAT": "shadowrun6.spell.category_combat",
-	"DETECTION": "shadowrun6.spell.category_detection",
-	"HEALTH": "shadowrun6.spell.category_health",
-	"ILLUSION": "shadowrun6.spell.category_illusion",
-	"MANIPULATION": "shadowrun6.spell.category_manipulation"
+	"combat": "shadowrun6.spell.category_combat",
+	"detection": "shadowrun6.spell.category_detection",
+	"health": "shadowrun6.spell.category_health",
+	"illusion": "shadowrun6.spell.category_illusion",
+	"manipulation": "shadowrun6.spell.category_manipulation"
 
 };
 SR6.spell_type = {
-	"PHYSICAL" : "shadowrun6.spell.type_physical",
-	"MANA": "shadowrun6.spell.type_mana"
+	"physical" : "shadowrun6.spell.type_physical",
+	"mana": "shadowrun6.spell.type_mana"
 };
 SR6.spell_duration = {
-	"INSTANTANEOUS" : "shadowrun6.spell.duration_instantaneous",
-	"SUSTAINED" : "shadowrun6.spell.duration_sustained",
-	"PERMANENT" : "shadowrun6.spell.duration_permanent",
-	"LIMITED": "shadowrun6.spell.duration_limited",
-	"SPECIAL" :  "shadowrun6.spell.duration_special"
+	"instantaneous" : "shadowrun6.spell.duration_instantaneous",
+	"sustained" : "shadowrun6.spell.duration_sustained",
+	"permanent" : "shadowrun6.spell.duration_permanent",
+	"limited": "shadowrun6.spell.duration_limited",
+	"special" :  "shadowrun6.spell.duration_special"
 };
 
 SR6.adeptpower_activation = {

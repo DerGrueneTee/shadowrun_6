@@ -192,7 +192,9 @@
             "edgegain": "Edge-Gewinn (max): ",
             "edgegain_player": " (Spieler)",
             "noedgegain": "Kein Edge-Gewinn",
-            "hits_bought": "Erfolge gekauft"
+            "hits_bought": "Erfolge gekauft",
+            "exp": "Expertise",
+            "spec": "Spezialiszierung"
         },
         "rollType": {
             "normal": "Würfeln",

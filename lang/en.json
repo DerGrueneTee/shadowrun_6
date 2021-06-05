@@ -196,7 +196,9 @@
             "edgegain": "Edge-Gain (max): ",
             "edgegain_player": " (Player)",
             "noedgegain": "No edge gain",
-            "hits_bought": "Hits bought"
+            "hits_bought": "Hits bought",
+            "exp": "Expertise",
+            "spec": "Specialization"
         },
         "rollType": {
             "normal": "Roll dice",
