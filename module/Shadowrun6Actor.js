@@ -175,7 +175,7 @@ export class Shadowrun6Actor extends Actor {
 			// Physical Defense Rating
 			data.defense.physical.base = data.attributes["bod"].pool;
 			data.defense.physical.modString = game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
-			data.derived.defense_rating.pool = data.defense.physical.base;
+			data.defense.astral.pool = data.defense.physical.base;
 			if (data.defense.physical.mod) {
 				data.defense.physical.pool += data.defense.physical.mod;
 				data.defense.physical.modString += "\n+" + data.defense.physical.mod;
@@ -192,11 +192,28 @@ export class Shadowrun6Actor extends Actor {
 			// Astral Defense Rating
 			data.defense.astral.base = data.attributes["int"].pool;
 			data.defense.astral.modString = game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
-			data.derived.defense_rating.pool = data.defense.physical.base;
+			data.defense.astral.pool = data.defense.physical.base;
 			if (data.defense.astral.mod) {
 				data.defense.astral.pool += data.defense.astral.mod;
 				data.defense.astral.modString += "\n+" + data.defense.astral.mod;
 			} 
+			
+			// Social Defense Rating
+			data.defense.social.base = data.attributes["cha"].pool;
+			data.defense.social.modString = game.i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
+			data.defense.social.pool = data.defense.social.base;
+			if (data.defense.social.mod) {
+				data.defense.social.pool += data.defense.social.mod;
+				data.defense.social.modString += "\n+" + data.defense.social.mod;
+			} 
+			items.forEach(function (item, key) {
+				if (item.type == "gear" && item.data.data.type == "ARMOR") {
+					if (item.data.data.usedForPool) {
+						data.defense.social.pool += item.data.data.social;
+						data.defense.social.modString += "\n+" + item.data.data.social + " " + item.name;
+					}
+				}
+			});
 		}
 	}
 
