@@ -92,6 +92,7 @@
             "delete": "Effacer",
             "edit": "Éditer",
             "expertise": "TRANSLATE",
+			   "features": "TRANSLATE",
             "firemodes": "Modes de tir",
             "max": "Maximum",
             "modifier": "Mod.",
@@ -177,6 +178,11 @@
             "initiative": "Initiative",
             "martialarts": {
                 "add": "TRANSLATE",
+                "title": "TRANSLATE"
+            },
+            "rituals": {
+                "add": "TRANSLATE",
+                "column.threshold": "TRANSLATE",
                 "title": "TRANSLATE"
             },
             "skills.action": "Compétences",

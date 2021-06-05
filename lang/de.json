@@ -134,6 +134,7 @@
             "delete": "Löschen",
             "edit": "Bearbeiten",
             "expertise": "Expertise",
+			   "features": "Merkmale",
             "firemodes": "Feuermodi",
             "points": "Punkte",
             "pool": "Pool",
@@ -221,6 +222,11 @@
             "martialarts": {
                 "add": "Neuen Kampfstil hinzufügen",
                 "title": "Kampfkünste"
+            },
+            "rituals": {
+                "add": "Neues Ritual hinzufügen",
+                "column.threshold": "Schwell",
+                "title": "Rituale"
             },
             "skills.action": "Fertigkeiten",
             "skills.language": "Sprachen",

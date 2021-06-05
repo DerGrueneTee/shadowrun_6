@@ -139,6 +139,7 @@
             "delete": "Delete",
             "edit": "Edit",
             "expertise": "Expertise",
+			   "features": "Features",
             "firemodes": "Firemodes",
             "max": "Maximum",
             "modifier": "Adj.",
@@ -229,6 +230,11 @@
             "martialarts": {
                 "add": "Add new style",
                 "title": "Martial Arts"
+            },
+            "rituals": {
+                "add": "Add new ritual",
+                "column.threshold": "Thresh.",
+                "title": "Rituals"
             },
             "skills.action": "Skills",
             "skills.language": "Language Skills",

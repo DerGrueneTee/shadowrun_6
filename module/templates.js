@@ -21,6 +21,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-bodyware.html",
 		"systems/shadowrun6-eden/templates/parts/section-gear.html",
 		"systems/shadowrun6-eden/templates/parts/section-martialart.html",
+		"systems/shadowrun6-eden/templates/parts/section-rituals.html",
 		"systems/shadowrun6-eden/templates/parts/section-qualities.html",
 		"systems/shadowrun6-eden/templates/parts/section-skills-action.html",
 		"systems/shadowrun6-eden/templates/parts/section-skills-knowledge.html",
