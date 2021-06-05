@@ -213,6 +213,13 @@
                 "close": "Armes de Mélée"
             }
         },
+        "spellfeatures": {
+            "area": "TRANSLATE",
+            "indirect": "TRANSLATE",
+            "direct": "TRANSLATE",
+            "sense_single": "TRANSLATE",
+            "sense_multi": "TRANSLATE"
+        },
         "qualityedit": {
             "new": "Nouveau",
             "name": "Nom",

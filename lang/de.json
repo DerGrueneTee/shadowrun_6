@@ -380,6 +380,13 @@
                 "registering": "Registrieren"
             }
         },
+        "spellfeatures": {
+            "area": "Flächenwirkung",
+            "indirect": "Indirekter Kampfzauber",
+            "direct": "Direkter Kampfzauber",
+            "sense_single": "Monosensorisch",
+            "sense_multi": "Vollsensorisch"
+        },
         "qualityedit": {
             "new": "Neu",
             "name": "Name",
