@@ -209,6 +209,11 @@
             "bought": "Erfolge kaufen"
         },
         "section": {
+            "adeptpowers": {
+					 "add": "Adeptenkraft hinzufügen",
+                "title": "Adeptenkräfte",
+					 "column.points": "KP"
+            },
             "ammo": "Munition",
             "armor.title": "Panzerung",
             "armor.column": {
@@ -251,7 +256,11 @@
             "qualities": "Vor/Nachteile",
             "qualities_add": "Hinzufügen",
             "spells": {
-                "title": "Zauber"
+					 "add": "Zauber hinzufügen",
+                "title": "Zauber",
+					 "column.drain": "Entzug",
+					 "column.alchemic": "Alch.",
+				    "column.range": "Reichw"
             },
             "weapon": {
                 "ranged": "Fernkampf",

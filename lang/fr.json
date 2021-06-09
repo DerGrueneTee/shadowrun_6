@@ -164,6 +164,11 @@
             "bought": "Acheter succès"
         },
         "section": {
+            "adeptpowers": {
+					 "add": "TRANSLATE",
+                "title": "TRANSLATE",
+					 "column.points": "PP"
+            },
             "ammo": "Munitions",
             "armor.title": "Armure",
             "armor.column": {
@@ -206,7 +211,11 @@
             "qualities": "Qualités",
             "qualities_add": "Add",
             "spells": {
-                "title": "TRANSLATE"
+					 "add": "TRANSLATE",
+                "title": "TRANSLATE",
+					 "column.drain": "TRANSLATE",
+					 "column.alchemic": "TRANSLATE",
+				    "column.range": "TRANSLATE"
             },
             "weapon": {
                 "ranged": "Armes à Distance",

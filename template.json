@@ -491,10 +491,16 @@
 			"category": "",
 			"duration": "",
 			"drain": 1,
-			"direct": false,
 			"type": "",
 			"range": "",
-			"alchemic": false
+			"alchemic": false,
+			"features": {
+				"area": false,
+				"direct": false,
+				"indirect": false,
+				"sense_single": false,
+				"sense_multi": false
+			}
 		}
 	}
 }

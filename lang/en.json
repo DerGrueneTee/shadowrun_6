@@ -214,6 +214,7 @@
         },
         "section": {
             "adeptpowers": {
+					 "add": "Add new power",
                 "title": "Adept Powers",
 					 "column.points": "PP"
             },
@@ -259,6 +260,7 @@
             "qualities": "Qualities",
             "qualities_add": "Add",
             "spells": {
+					 "add": "Add new spell",
                 "title": "Spells",
 					 "column.drain": "Drain",
 					 "column.alchemic": "Alch.",
