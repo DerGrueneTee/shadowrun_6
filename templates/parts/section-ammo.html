@@ -1,0 +1,19 @@
+	<!-- Ammunition -->
+   <div class="section" style="display: inline-block; width: 38%; margin: 5px;">
+     <h2 class="section-title">{{ localize 'shadowrun6.section.ammo' }}</h2>
+	  <table>
+ 		{{#each actor.items as |item id|}} 
+		{{#iff item.type '==' 'gear'}}
+		{{#iff item.data.data.type '==' "AMMUNITION"}}
+       <tr data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       	<td style="margin-right: 1rem"><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.count" type="text"     value="{{item.data.data.count}}" data-dtype="Number" style="width: 1.5em" /></td>
+			<td class="item-controls">
+         	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+         </td>
+       </tr>
+		{{/iff}}
+		{{/iff}}
+       {{/each}}
+		</table>
+	</div>

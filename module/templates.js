@@ -18,6 +18,8 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/pc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skillvalues.html",
 		"systems/shadowrun6-eden/templates/parts/section-adeptpowers.html",
+		"systems/shadowrun6-eden/templates/parts/section-ammo.html",
+		"systems/shadowrun6-eden/templates/parts/section-armor.html",
 		"systems/shadowrun6-eden/templates/parts/section-bodyware.html",
 		"systems/shadowrun6-eden/templates/parts/section-gear.html",
 		"systems/shadowrun6-eden/templates/parts/section-martialart.html",

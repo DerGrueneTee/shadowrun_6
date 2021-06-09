@@ -1,66 +1,7 @@
 <section>
 {{> "systems/shadowrun6-eden/templates/parts/section-weapons.html" }}
 {{> "systems/shadowrun6-eden/templates/parts/section-soakresist.html" }}
-	<!-- Ammunition -->
-   <div class="section" style="display: inline-block; width: 38%; margin: 5px;">
-     <h2 class="section-title">{{ localize 'shadowrun6.section.ammo' }}</h2>
-	  <table>
- 		{{#each actor.items as |item id|}} 
-		{{#iff item.type '==' 'gear'}}
-		{{#iff item.data.data.type '==' "AMMUNITION"}}
-       <tr data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td><input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.count" type="text"     value="{{item.data.data.count}}" data-dtype="Number" style="width: 1.5em" /></td>
-			<td class="item-controls">
-         	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-         </td>
-       </tr>
-		{{/iff}}
-		{{/iff}}
-       {{/each}}
-		</table>
-	</div>
-
-	<!-- Armor -->
-   <div class="section" style="width: 58%; margin: 5px;">
-     <h2 class="section-title">{{ localize 'shadowrun6.section.armor.title' }}</h2>
-	  <table>
-	    <thead>
-	      <tr>
-	        <th>{{ localize 'shadowrun6.section.armor.column.name' }}</th>
-	        <th></th>
-	        <th>{{ localize 'shadowrun6.section.armor.column.defense' }}</th>
-	        <th>{{ localize 'shadowrun6.section.armor.column.social' }}</th>
-	        <th>{{ localize 'shadowrun6.section.armor.column.action' }}</th>
-	      </tr>
-	    </thead>
- 		{{#each actor.items as |item id|}} 
-		{{#iff item.type '==' 'gear'}}
-		{{#iff item.data.data.type '==' "ARMOR"}}
-       <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-       	<td><label class="switch">
-       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
-                        <span class="shadowrun6-slider round"></span>
-                    </label></td>
-         <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.defense" value="{{item.data.data.defense}}" data-dtype="Number" style="width: 1.5em" /></td>
-         <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.social"  value="{{item.data.data.social}}" data-dtype="Number" style="width: 1.5em" /></td>
-			<td class="item-controls">
-         	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
-         </td>
-       </tr>
-       <tr>
-         <td colspan="6">
-         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}" style="vertical-align: top">
-         	{{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text"  data-dtype="Text" rows="3" style="width: 20em">{{item.data.data.accessories}}</textarea></div>
-         	</div>
-         </td>
-       </tr>
-		{{/iff}}
-		{{/iff}}
-       {{/each}}
-	</table>
-	</div>
-	
+{{> "systems/shadowrun6-eden/templates/parts/section-armor.html" }}
+{{> "systems/shadowrun6-eden/templates/parts/section-ammo.html" }}
 {{> "systems/shadowrun6-eden/templates/parts/section-martialart.html" }}
 </section>

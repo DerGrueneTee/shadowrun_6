@@ -48,8 +48,8 @@
 				<td><b>{{ localize 'shadowrun6.resist.toxin' }}</b></td>
 				<td class="centered"><label >{{data.data.resist.toxin.base}}</label></td>
 				<td><input class="centered box" name="data.resist.toxin.mod" type="text" value="{{data.data.resist.toxin.mod}}" data-dtype="Number"
-				  style="width: 2em" title="{{data.data.resist.toxin.modString}}"></td>
-				<td class="centered">{{data.data.derived.resist_toxin.pool}}</td>
+				  style="width: 2em"></td>
+				<td class="centered" title="{{data.data.resist.toxin.modString}}">{{data.data.derived.resist_toxin.pool}}</td>
 				<td><a class="item-control defense-roll skill-pool" data-pool="{{data.data.resist.toxin.pool}}" data-item-id="resist_toxin"><i class="fas fa-dice-six"></i></a></td>
 			</tr>
 			<!-- Soak / Resist Damage-->
@@ -57,8 +57,8 @@
 				<td><b>{{ localize 'shadowrun6.resist.damage' }}</b></td>
 				<td class="centered"><label >{{data.data.resist.damage.base}}</label></td>
 				<td><input class="centered box" name="data.resist.damage.mod" type="text" value="{{data.data.resist.damage.mod}}" data-dtype="Number"
-				  style="width: 2em" title="{{data.data.resist.damage.modString}}"></td>
-				<td class="centered">{{data.data.derived.resist_damage.pool}}</td>
+				  style="width: 2em"></td>
+				<td class="centered" title="{{data.data.resist.damage.modString}}">{{data.data.derived.resist_damage.pool}}</td>
 				<td><a class="item-control defense-roll skill-pool" data-pool="{{data.data.resist.damage.pool}}" data-item-id="resist_damage"><i class="fas fa-dice-six"></i></a></td>
 			</tr>
 		</table>
