@@ -128,13 +128,30 @@
         "base": 9,
         "mod": 0,
         "pool": 0
-      },
-      "resist_damage": {
+      }
+    },
+    "resist": {
+      "attacks": {
         "base": 4,
         "mod": 0,
         "pool": 4
       },
-      "resist_toxin": {
+      "damage": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      },
+      "astral_direct": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      },
+      "astral_indirect": {
+        "base": 0,
+        "mod": 0,
+        "pool": 0
+      },
+      "toxin": {
         "base": 9,
         "mod": 0,
         "pool": 9
@@ -737,7 +754,7 @@
         "availDef": "3",
         "avail": 3,
         "price": 6110,
-        "accessories": "Edit, Mapsoft (Orient), Mapsoft (Balkan), Mapsoft (Europa), Satellite link, Trid projector, Subvocal microphone",
+        "accessories": "Satellite link, Trid projector, Subvocal microphone, Edit, Mapsoft (Orient), Mapsoft (Balkan), Mapsoft (Europa)",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -771,7 +788,7 @@
         "availDef": "2 (L)",
         "avail": 2,
         "price": 3135,
-        "accessories": "Vision magnification, Silencer, Flashlight, Low-Light, Concealable Quick Draw Holster, Spare clip",
+        "accessories": "Vision magnification, Silencer, Concealable Quick Draw Holster, Spare clip, Flashlight, Low-Light",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -989,7 +1006,7 @@
         "availDef": "3",
         "avail": 3,
         "price": 9350,
-        "accessories": "Edit, Browse, Mapsoft (ADL), Shopsoft (Weine und Spirituosen), Signal Scrubber, Toolbox, Configurator, AR gloves, Satellite link, SIM module, Subvocal microphone",
+        "accessories": "AR gloves, Satellite link, SIM module, Subvocal microphone, Edit, Browse, Mapsoft (ADL), Shopsoft (Weine und Spirituosen), Signal Scrubber, Toolbox, Configurator",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -1095,7 +1112,7 @@
         "availDef": "3 (L)",
         "avail": 3,
         "price": 2610,
-        "accessories": "Vision magnification, Guncam, Laser Sight (Low Power), Flashlight, Concealable holster, Spare clip",
+        "accessories": "Vision magnification, Guncam, Concealable holster, Spare clip, Laser Sight (Low Power), Flashlight",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -1132,8 +1149,13 @@
         "range": "line_of_sight",
         "type": "mana",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": true,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1146,8 +1168,13 @@
         "range": "line_of_sight",
         "type": "mana",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1160,8 +1187,13 @@
         "range": "touch",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1174,8 +1206,13 @@
         "range": "touch",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1188,8 +1225,13 @@
         "range": "touch",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": true,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1202,8 +1244,13 @@
         "range": "line_of_sight_area",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": true
+        }
       }
     },
     {
@@ -1216,8 +1263,13 @@
         "range": "line_of_sight",
         "type": "mana",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {
@@ -1230,8 +1282,13 @@
         "range": "line_of_sight",
         "type": "physical",
         "alchemic": false,
-        "features": [],
-        "direct": false
+        "features": {
+          "area": false,
+          "direct": false,
+          "indirect": false,
+          "sense_single": false,
+          "sense_multi": false
+        }
       }
     },
     {

@@ -21,12 +21,17 @@
         "derived": {
             "attack_rating": "Angriffswert",
             "defense_rating": "Verteidigungswert",
-            "resist_damage": "Schadenswiderstand",
-            "resist_toxin": "Toxinwiderstand",
             "composure": "Sebstbeherrschung",
             "judge_intentions": "Menschenkenntnis",
             "memory": "Erinnerungsvermögen",
             "lift_carry": "Heben / Tragen"
+        },
+        "resist": {
+            "attacks": "Verteidigung: Angriffe",
+            "astral_direct": "Vtd: Direkte K.Zauber",
+            "astral_indirect": "Vtd: Ind. K.Zauber",
+            "damage": "Schadenswiderstand",
+            "toxin": "Toxinwiderstand"
         },
         "initiative": {
             "physical": "Initiative",
@@ -233,6 +238,7 @@
                 "footer.total_essence": "Verbleibende Essenz"
             },
             "chemicals": "Drogen",
+            "defense": "Verteidigung & Widerstände",
             "derived": "Abgeleitete Werte",
             "electronics": "Elektronik",
             "initiative": "Initiative",

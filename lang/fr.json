@@ -21,12 +21,17 @@
         "derived": {
             "attack_rating": "Valeur d'attaques",
             "defense_rating": "Valeur de défense",
-            "resist_damage": "Résistance aux dommages",
-            "resist_toxin": "Résistance aux Toxines",
             "composure": "Sang-froid",
             "judge_intentions": "Jauger les intentions",
             "memory": "Mémoire",
             "lift_carry": "Soulev./Transport"
+        },
+        "resist": {
+            "attacks": "TRANSLATE",
+            "astral_direct": "TRANSLATE",
+            "astral_indirect": "TRANSLATE",
+            "damage": "Résistance aux dommages",
+            "toxin": "Résistance aux Toxines"
         },
         "initiative": {
             "physical": "Initiative",
@@ -188,6 +193,7 @@
                 "footer.total_essence": "Essence restante"
             },
             "chemicals": "chimiques",
+            "defense": "TRANSLATE",
             "derived": "Scores Dérivés",
             "electronics": "électroniques",
             "initiative": "Initiative",

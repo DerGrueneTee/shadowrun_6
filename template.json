@@ -108,17 +108,11 @@
 				  },
 				  "lift_carry": {
 					"mod": 0
-				  },
-				  "resist_damage": {
-					"mod": 0
-				  },
-				  "resist_toxin": {
-					"mod": 0
 				  }
 				}
 			},
-			"defense-template": {
-				"defense": {
+			"defenserating-template": {
+				"defenserating": {
 				  "physical": {
 					"mod": 0
 				  },
@@ -129,6 +123,24 @@
 					"mod": 0
 				  }
 				}
+			},
+			"resist-template": {
+				"resist": {
+				  "attacks": {
+					 "mod": 0
+				  },
+				  "damage": {
+					 "mod": 0
+				  },
+				  "astral_direct": {
+					 "mod": 0
+				  },
+				  "astral_indirect": {
+					 "mod": 0
+				  },
+				  "toxin": {
+					 "mod": 0
+				  }
 			},
 			"monitor-template": {
 				"physical": {
@@ -338,7 +350,8 @@
 				"attribute-template",
 				"monitor-template",
 				"derived-template",
-				"defense-template",
+				"defenserating-template",
+				"resist-template",
 				"initiative-template",
 				"skill-template",
 				"knowledge-template",
@@ -353,7 +366,8 @@
 				"attribute-template",
 				"monitor-template",
 				"derived-template",
-				"defense-template",
+				"defenserating-template",
+				"resist-template",
 				"initiative-template",
 				"skill-template",
 				"knowledge-template",

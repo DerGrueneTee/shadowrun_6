@@ -21,12 +21,17 @@
         "derived": {
             "attack_rating": "Attack Rating",
             "defense_rating": "Defense Rating",
-            "resist_damage": "Soak",
-            "resist_toxin": "Resist Toxin",
             "composure": "Composure",
             "judge_intentions": "Judge Intentions",
             "memory": "Memory",
             "lift_carry": "Lift / Carry"
+        },
+        "resist": {
+            "attacks": "Defense: Attacks",
+            "astral_direct": "Defense: Direct Spells",
+            "astral_indirect": "Defense: Ind. Spells",
+            "damage": "Soak",
+            "toxin": "Resist Toxin"
         },
         "initiative": {
             "physical": "Initiative",
@@ -237,6 +242,7 @@
                 "footer.total_essence": "Remaining Essence"
             },
             "chemicals": "Chemicals",
+            "defense": "Defenses & Resistances",
             "derived": "Derived Values",
             "electronics": "Electronics",
             "initiative": "Initiative",
