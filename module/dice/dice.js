@@ -16,7 +16,9 @@ export async function doRoll(data, messageData = {}) {
       messageData.rollMode = form.rollMode.value;
       data.weapon = false;
       if (data.modifier > 0) {
-        data.formula = data.value + " + " + data.modifier + "d6";
+        data.formula = "("+data.value + " + " + data.modifier + ")d6";
+      } else if (data.modifier <0) {
+        data.formula = "("+data.value + " " + data.modifier + ")d6";
       } else {
         data.formula = data.value + "d6";
       }
