@@ -231,6 +231,11 @@ export class Shadowrun6Actor extends Actor {
 				let attr = skillDef.attrib;
 				let attribVal = data.attributes[attr].pool;
 				data.skills[id].pool = attribVal + data.skills[id].points;
+				if (data.skills[id].points==0 && !skillDef.useUntrained) {
+					data.skills[id].pool--;
+				}
+				
+				
 				data.skills[id].poolS = attribVal + data.skills[id].points;
 				data.skills[id].poolE = attribVal + data.skills[id].points;
 				if (data.skills[id].specialization)
