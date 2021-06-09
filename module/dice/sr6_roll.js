@@ -16,8 +16,10 @@ export default class SR6Roll extends Roll {
     let data = this.data;
     let noOfDice = parseInt(data.value);
     let die;
-    if (data.modifier > 0) {
-      noOfDice += data.modifier;
+    noOfDice += data.modifier;
+
+    if (noOfDice < 0) {
+      noOfDice = 0;
     }
     let formula = "";
     if (data.type == 0) {

@@ -38,6 +38,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
+			html.find('.martialartstyle-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.martialartstyle"),
+					type: "martialartstyle",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.quality-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.quality"),
