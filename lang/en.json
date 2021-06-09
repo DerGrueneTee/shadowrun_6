@@ -157,11 +157,14 @@
             "stun": "Stun"
         },
         "newitem": {
+            "adeptpower": "Name your power",
             "quality": "What is your feat?",
+            "ritual": "Singing Hallelujah",
             "skill": {
                 "knowledge": "What is your nerd topic?",
                 "language": "Gibberish"
-            }
+            },
+            "spell": "Abracadabra"
         },
         "numerical": {
             "base": "base",

@@ -31,10 +31,31 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
+			html.find('.adeptpower-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.adeptpower"),
+					type: "adeptpower",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.quality-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.quality"),
 					type: "quality",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.ritual-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.ritual"),
+					type: "ritual",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.spell-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.spell"),
+					type: "spell",
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});

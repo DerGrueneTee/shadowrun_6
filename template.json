@@ -488,11 +488,11 @@
 		},
 		"spell": {
 			"genesisID": "",
-			"category": "",
-			"duration": "",
+			"category": "health",
+			"duration": "instantaneous",
 			"drain": 1,
-			"type": "",
-			"range": "",
+			"type": "physical",
+			"range": "self",
 			"alchemic": false,
 			"features": {
 				"area": false,

@@ -110,11 +110,14 @@
             "stun": "Étourdissant"
         },
         "newitem": {
+            "adeptpower": "TRANSLATE",
             "quality": "Ce qui vous rend spécial",
+            "ritual": "TRANSLATE",
             "skill": {
                 "knowledge": "T'es quoi toi ? un nerd ?",
                 "language": "Charabia"
-            }
+            },
+            "spell": "TRANSLATE"
         },
         "numerical": {
             "base": "base",
