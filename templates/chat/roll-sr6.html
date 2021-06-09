@@ -21,6 +21,7 @@
       <div>
         {{#if data.weapon}}
         <b>{{localize 'shadowrun6.roll.damage'}}</b> {{data.item.data.data.dmgDef}}
+        <button class="rollable" data-roll-type="defense" data-targetid="{{data.targetId}}">VTD</button>
       </div>
       {{/if}}
   </div>

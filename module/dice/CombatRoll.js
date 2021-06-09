@@ -2,6 +2,7 @@ import SR6Roll from "./sr6_roll.js"
 export async function doAttackRoll(data, messageData = {}) {
   messageData.flavor = "<h2>" + data.title + "</h2>";
   messageData.speaker = ChatMessage.getSpeaker();
+  messageData.targetId = data.targetId;
 
   // Define the inner roll function
   const _roll = (type, form, data) => {

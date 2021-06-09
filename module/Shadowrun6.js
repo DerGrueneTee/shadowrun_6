@@ -69,13 +69,13 @@ Hooks.once("init", async function () {
   });
 
   function onCreateItem(item, options, userId) {
-	console.log("onCreateItem");
-	let createData = item.data;
-	if (createData.img=="icons/svg/item-bag.svg") {
-		createData.img = CONFIG.SR6.icons[createData.type].default;
- 	   item.update( {["img"]: createData.img });
+    console.log("onCreateItem");
+    let createData = item.data;
+    if (createData.img == "icons/svg/item-bag.svg") {
+      createData.img = CONFIG.SR6.icons[createData.type].default;
+      item.update({ ["img"]: createData.img });
     }
-	console.log("onCreateItem: "+createData.img);
+    console.log("onCreateItem: " + createData.img);
   }
 
   Hooks.on("createItem", (doc, options, userId) => onCreateItem(doc, options, userId));
@@ -143,12 +143,12 @@ Hooks.once("init", async function () {
       type: "d6",
       labels: [
         "", "2", "3", "4", "5", "6"
-//        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
-//        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
+        //        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
+        //        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
       ],
       bumpMaps: [, , , , ,
-//        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
-//        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
+        //        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
+        //        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
       ],
       colorset: "SR6_dark",
       system: "SR6"
@@ -188,10 +188,17 @@ Hooks.once("init", async function () {
       },
       visibility: 'visible'
     }, "default");
+  });
 
+  Hooks.on('renderChatMessage', function (app, html, data) {
+    html.find(".rollable").click(event => {
+      const type = $(event.currentTarget).closestData("roll-type");
 
-
-
+      if (type === "defense") {
+        const targetId = $(event.currentTarget).closestData("targetid");
+        console.log(targetId);
+      }
+    });
   });
 
 
@@ -200,15 +207,15 @@ Hooks.once("init", async function () {
    */
   Hooks.on('preCreateActor', (actor, createData, options, userId) => {
     if (actor.type === 'Player') {
- 	   actor.data.token.update({"actorLink":"true"});
-	   actor.data.token.update({"vision":"true"});
+      actor.data.token.update({ "actorLink": "true" });
+      actor.data.token.update({ "vision": "true" });
     }
   });
 
-//  Hooks.on("modifyTokenAttribute", (attribute,value,isDelta,isBar,updates={}) => {
-//	console.log("Token modified "+attribute+" with "+value);
-//	const hp = getProperty(this.data.data, attribute);
-//  });
+  //  Hooks.on("modifyTokenAttribute", (attribute,value,isDelta,isBar,updates={}) => {
+  //	console.log("Token modified "+attribute+" with "+value);
+  //	const hp = getProperty(this.data.data, attribute);
+  //  });
 
   // Allows {if X = Y} type syntax in html using handlebars
   Handlebars.registerHelper("iff", function (a, operator, b, opts) {
@@ -260,24 +267,24 @@ function getSkillAttribute(key) {
   }
 };
 function getRitualFeatures(ritual) {
-	let ret = [];
-	if (ritual.features.material_link) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.material_link"));
-	if (ritual.features.anchored) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.anchored"));
-	if (ritual.features.minion) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.minion"));
-	if (ritual.features.spell) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spell"));
-	if (ritual.features.spotter) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spotter"));
-	return ret.join(", ");
+  let ret = [];
+  if (ritual.features.material_link) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.material_link"));
+  if (ritual.features.anchored) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.anchored"));
+  if (ritual.features.minion) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.minion"));
+  if (ritual.features.spell) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spell"));
+  if (ritual.features.spotter) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.spotter"));
+  return ret.join(", ");
 };
 function getSpellFeatures(spell) {
-	let ret = [];
-	if (spell.features) {
-		if (spell.features.area        ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.area"));
-		if (spell.features.direct      ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.direct"));
-		if (spell.features.indirect    ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.indirect"));
-		if (spell.features.sense_single) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_single"));
-		if (spell.features.sense_multi ) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_multi"));
-	}
-	return ret.join(", ");
+  let ret = [];
+  if (spell.features) {
+    if (spell.features.area) ret.push(game.i18n.localize("shadowrun6.spellfeatures.area"));
+    if (spell.features.direct) ret.push(game.i18n.localize("shadowrun6.spellfeatures.direct"));
+    if (spell.features.indirect) ret.push(game.i18n.localize("shadowrun6.spellfeatures.indirect"));
+    if (spell.features.sense_single) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_single"));
+    if (spell.features.sense_multi) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_multi"));
+  }
+  return ret.join(", ");
 };
 
 $.fn.closestData = function (dataName, defaultValue = "") {
