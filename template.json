@@ -141,6 +141,7 @@
 				  "toxin": {
 					 "mod": 0
 				  }
+		      }
 			},
 			"monitor-template": {
 				"physical": {
