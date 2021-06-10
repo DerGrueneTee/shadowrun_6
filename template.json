@@ -475,6 +475,10 @@
 			"description": "",
 			"style": ""
 		},
+		"metamagic": {
+			"genesisID": "",
+			"description": ""
+		},
 		"quality": {
 			"genesisID": "",
 			"category": "",
