@@ -201,6 +201,10 @@
                 "add": "TRANSLATE",
                 "title": "TRANSLATE"
             },
+            "metamagic": {
+                "add": "TRANSLATE",
+                "title": "TRANSLATE"
+            },
             "rituals": {
                 "add": "TRANSLATE",
                 "column.threshold": "TRANSLATE",

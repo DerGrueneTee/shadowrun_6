@@ -250,6 +250,10 @@
                 "add": "Add new style",
                 "title": "Martial Arts"
             },
+            "metamagic": {
+                "add": "Add new metamagic",
+                "title": "Metamagics"
+            },
             "rituals": {
                 "add": "Add new ritual",
                 "column.threshold": "Thresh.",

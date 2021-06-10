@@ -199,6 +199,7 @@ Hooks.once("init", async function () {
         console.log(targetId);
       }
     });
+    //html.on("click", ".dice-roll", this._onDiceRollClick.bind(this));
   });
 
 

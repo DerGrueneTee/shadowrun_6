@@ -246,6 +246,10 @@
                 "add": "Neuen Kampfstil hinzufügen",
                 "title": "Kampfkünste"
             },
+            "metamagic": {
+                "add": "Metamagie hinzufügen",
+                "title": "Metamagie"
+            },
             "rituals": {
                 "add": "Neues Ritual hinzufügen",
                 "column.threshold": "Schwell",
