@@ -14,6 +14,7 @@
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="overview">{{ localize 'shadowrun6.actor.nav.overview' }}</a>
         <a class="item" data-tab="edit">{{ localize 'shadowrun6.actor.nav.input' }}</a>
+        <a class="item" data-tab="magic">{{ localize 'shadowrun6.actor.nav.magic' }}</a>
         <a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
     </nav>
 
@@ -37,6 +38,7 @@
                         <dt>{{ localize 'shadowrun6.actor.actions' }}</dt>
                         <dd>1 {{ localize 'shadowrun6.actor.actions_major' }}, {{data.data.initiative.actions}} {{localize 'shadowrun6.actor.actions_minor'}}</dd>
                         {{> "systems/shadowrun6-eden/templates/parts/npc-skills.html" skills=data.data.skills}}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-spells.html" }}
                     </dl>
                 </div>
 			{{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
@@ -45,6 +47,17 @@
 		{{!-- Input Tab --}}
 		<div class="tab edit" data-group="primary" data-tab="edit">
 			{{> "systems/shadowrun6-eden/templates/parts/pc-skillvalues.html" skills=data.data.skills}}
+		</div>
+
+		{{!-- Magic Tab --}}
+		<div class="tab magic" data-group="primary" data-tab="magic">
+		  <section>
+			{{> "systems/shadowrun6-eden/templates/parts/section-spells.html"}}
+			{{> "systems/shadowrun6-eden/templates/parts/section-adeptpowers.html"}}
+			{{> "systems/shadowrun6-eden/templates/parts/section-rituals.html"}}
+			{{> "systems/shadowrun6-eden/templates/parts/section-metamagics.html"}}
+			{{> "systems/shadowrun6-eden/templates/parts/section-magicbase.html"}}
+		  </section>
 		</div>
     </section>
 </form>

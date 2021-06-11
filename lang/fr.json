@@ -6,6 +6,7 @@
             "actions_minor": "Mineure",
             "initiative": "Initiative",
             "initiative_astral": "Initiative Astrale ",
+   			"name": "Nom",
             "nav": {
                 "basics": "Bases",
                 "combat": "Combat",
@@ -16,7 +17,9 @@
                 "skills": "Compétences",
                 "overview": "Aperçu"
             },
-            "skills": "Compétences"
+     			"metatype": "Métatype",
+            "skills": "Compétences",
+            "spells": "TRANSLATE"
         },
         "derived": {
             "attack_rating": "Valeur d'attaques",
@@ -250,8 +253,6 @@
             "category": "Catégorie"
         }
     },
-    "actor.name": "Nom",
-    "actor.metatype": "Métatype",
     "attrib.agi": "Agilité",
     "attrib.agi_short": "AGI",
     "attrib.bod": "Constitution",

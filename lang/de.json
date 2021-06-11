@@ -6,6 +6,7 @@
             "actions_minor": "Neben",
             "initiative": "Initiative",
             "initiative_astral": "Astrale Initiative",
+    			"name": "Name",
             "nav": {
                 "basics": "Allgemein",
                 "combat": "Kampf",
@@ -16,7 +17,9 @@
                 "skills": "Fertigkeiten",
                 "overview": "Übersicht"
             },
-            "skills": "Fertigkeiten"
+            "metatype": "Metatyp",
+            "skills": "Fertigkeiten",
+            "spells": "Zauber"
         },
         "derived": {
             "attack_rating": "Angriffswert",
@@ -417,8 +420,6 @@
             "category": "Art"
         }
     },
-    "actor.name": "Name",
-    "actor.metatype": "Metatyp",
     "attrib.agi": "Geschicklichkeit",
     "attrib.agi_short": "GES",
     "attrib.bod": "Konstitution",

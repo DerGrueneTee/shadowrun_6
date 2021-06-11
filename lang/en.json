@@ -6,6 +6,7 @@
             "actions_minor": "Minor",
             "initiative": "Initiative",
             "initiative_astral": "Astral Initiative",
+   		   "name": "Name",
             "nav": {
                 "basics": "Basics",
                 "combat": "Combat",
@@ -16,7 +17,9 @@
                 "skills": "Skills",
                 "overview": "Overview"
             },
-            "skills": "Skills"
+     	 	   "metatype": "Metatype",
+            "skills": "Skills",
+				"spells": "Spells"
         },
         "derived": {
             "attack_rating": "Attack Rating",
@@ -421,8 +424,6 @@
             "category": "Category"
         }
     },
-    "actor.name": "Name",
-    "actor.metatype": "Metatype",
     "attrib.agi": "Agility",
     "attrib.agi_short": "AGI",
     "attrib.bod": "Body",
