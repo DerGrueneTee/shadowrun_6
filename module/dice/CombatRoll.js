@@ -3,6 +3,7 @@ export async function doAttackRoll(data, messageData = {}) {
   messageData.flavor = "<h2>" + data.title + "</h2>";
   messageData.speaker = ChatMessage.getSpeaker();
   messageData.targetId = data.targetId;
+	console.log("doAttackRoll: data.speaker="+data.speaker.name+"  \n"+messageData.speaker.name);
 
   // Define the inner roll function
   const _roll = (type, form, data) => {
@@ -58,6 +59,30 @@ async function _attackRollDialog({ data, foo } = {}) {
   }
 
   data.defRating = 0;
+
+	/*
+	 * Fill dialog head
+	 */
+	if (data.attackType === "weapon") {
+		if (data.targetId) {
+    		data.actionText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
+		} else {
+    		data.actionText = game.i18n.localize("shadowrun6.roll.attack") + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
+		}
+		data.checkText = 
+			game.i18n.localize("skill."+data.item.data.data.skill) +"/" + 
+			game.i18n.localize("shadowrun6.special."+data.item.data.data.skill+"."+data.item.data.data.skillSpec) + " + " +
+			game.i18n.localize("attrib."+CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib);
+	}
+
+	/*
+	 * Edge, Edge Boosts and Edge Actions
+	 */
+    data.actor = game.actors.get(data.speaker.actor);
+    data.edge = (data.actor)?data.actor.data.data.edge.value:0;
+    data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=data.edge);
+	 
+
   if (data.targetId && data.attackType === "weapon") {
     data.targetName = game.actors.get(data.targetId).name;
     data.extraText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
@@ -66,8 +91,11 @@ async function _attackRollDialog({ data, foo } = {}) {
     data.extraText = " Spell targeting not implemented yet ";
   }
   // Render modal dialog
-  let template = "systems/shadowrun6-eden/templates/chat/roll-attack-dialog.html";
+//  let template = "systems/shadowrun6-eden/templates/chat/roll-attack-dialog.html";
+  let template = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
   let dialogData = {
+	 isOpposed: true,
+	 checkText: data.extraText,
     data: data,
     rollModes: CONFIG.Dice.rollModes,
   };
@@ -97,13 +125,14 @@ async function _attackRollDialog({ data, foo } = {}) {
         }
       };
     }
-    new CombatDialog({
+    let x =  new CombatDialog({
       title: title,
       content: html,
       target: data.targetId ? true : false,
       targetName: data.targetName,
       buttons: buttons,
       default: "normal",
+      data: data,
       attackType: data.attackType,
       render: html => console.log("Register interactivity in the rendered dialog"),
       close: () => resolve(null)
@@ -121,33 +150,72 @@ export class CombatDialog extends Dialog {
     }
     html.find('.calc-edge-edit').change(this._onCalcEdge.bind(this));
     html.find('.calc-edge-edit').keyup(this._onCalcEdge.bind(this));
+	 html.show(this._onCalcEdge.bind(this));
   }
 
+	//-------------------------------------------------------------
+	/*
+	 * Called when something edge gain relevant changes on the
+	 * HTML form
+	 */
   _onCalcEdge(event) {
+	 console.log("onCalcEdge");
+    this.data.edgePlayer = 0;
+    this.data.edgeTarget = 0;
+
+    // Check situational edge
+    const situationA = document.getElementById("situationalEdgeA");
+    if (situationA.checked) {
+			this.data.edgePlayer++;
+	 }
+    const situationD = document.getElementById("situationalEdgeD");
+    if (situationD.checked) {
+			this.data.edgeTarget++;
+	 }
+
     if (this.data.attackType === "weapon") {
       const arElement = document.getElementById("ar");
       const drElement = document.getElementById("dr");
+      const arModElem = document.getElementById("arMod");
       const dr = drElement.value;
-      const ar = arElement.children[arElement.selectedIndex].dataset.itemAr;
+      let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
+      if (arModElem.value && parseInt(arModElem.value)!=0) {
+			ar += parseInt(arModElem.value);
+      }
       let result = ar - dr;
-      let edgeOffsetPlayer = 0;
-      let edgeOffsetTarget = 0;
-      if (result > 0) {
-        edgeOffsetPlayer = Math.min(2, Math.floor(result / 4));
-      } else {
-        edgeOffsetTarget = Math.min(2, Math.floor((result * -1) / 4));
-      }
-      if (edgeOffsetPlayer > 0) {
-        document.getElementById("edgeLabel").innerText = game.i18n.localize("shadowrun6.roll.edgegain") + edgeOffsetPlayer + " " + game.i18n.localize("shadowrun6.roll.edgegain_player");
-      } else if (edgeOffsetTarget > 0) {
-        let targetName = this.targetName ? this.targetName : game.i18n.localize("shadowrun6.roll.target");
-        document.getElementById("edgeLabel").innerText = game.i18n.localize("shadowrun6.roll.edgegain") + edgeOffsetTarget + " (" + targetName + ")";
-      } else {
-        document.getElementById("edgeLabel").innerText = game.i18n.localize("shadowrun6.roll.noedgegain");
-      }
+      if (result >= 4) {
+			this.data.edgePlayer++;
+      } else if (result <= -4) {
+			this.data.edgeTarget++;
+		}
+	 }
+
+    // Calculate effective edge
+    let effective = this.data.edgePlayer - this.data.edgeTarget;
+    if (effective>0) {
+	   this.data.edgePlayer = this.data.edgePlayer - this.data.edgeTarget;
+      this.data.edgeTarget = 0;
+    } else if (effective<0) {
+	   this.data.edgePlayer = this.data.edgeTarget - this.data.edgePlayer;
+      this.data.edgePlayer = 0;
     } else {
-      document.getElementById("edgeLabel").innerText = "Edgegain for spells not implemented yet";
+      this.data.edgePlayer = 0;
+      this.data.edgeTarget = 0;
     }
+	 // Set new edge value
+    this.data.edge = this.data.data.actor.data.data.edge.value + this.data.edgePlayer;
+
+    // Prepare text for player
+    let innerText = "";
+    if (this.data.edgePlayer) {
+		innerText = game.i18n.format("shadowrun6.roll.edge.gain_player", {name:this.data.data.speaker.alias, value:this.data.edgePlayer});
+	 }
+    if (this.data.edgeTarget!=0) {
+      let targetName = this.targetName ? this.targetName : game.i18n.localize("shadowrun6.roll.target");
+		innerText += "\n"+game.i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:this.data.edgeTarget});
+	 }
+
+	 document.getElementById("edgeLabel").innerText = innerText;
   }
 
   _onNoTarget() {

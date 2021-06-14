@@ -1,39 +1,113 @@
+<!-- data.dialogConfig.actionText = Display string on what is happening -->
+<!-- data.dialogConfig.checkText  = What is rolled                -->
+<!--                   Survival + Intuition (3)      -->
+<!--                   Sorcery/Spellcasting + Magic  -->
+<!-- data.dialogConfig.isOpposed  = Test is made against a defense rating -->
+<!-- data.dialogConfig.useThreshold = Entering a threshold is required  -->
 <form>
-    {{#if data.extraText}}
-    <span style="color: teal">{{data.extraText}}</span><br/>
+    <h3>{{data.actionText}}</h3>
+    <h2 class="highlight" id="rolldia-checkText">{{data.checkText}}</h2>
+    {{#if isOpposed}}
+    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.edge.getting"}}</h4>
+    <table style="background-color: transparent; border: 0px">
+    	<tr>
+    	  <td>{{localize "shadowrun6.roll.attackRating"}}</td>
+    	  <td>
+    	  {{#if (eq data.attackType "weapon")}}
+        <select name="attackRating" class="calc-edge-edit ar-value" id="ar">
+            {{#select attackRating}}
+            {{#each data.item.data.data.attackRating as |rating id|}}
+            <option value="{{data.attackRating}}" data-item-ar="{{rating}}">{{localize (concat "shadowrun6.roll.ar_"
+                id)}} - ({{rating}})</option>
+            {{/each}}
+            {{/select}}
+        </select> + 
+        {{else}}
+        <span>{{data.dialogConfig.attackRating}}</span>
+        {{/if}}
+    	  </td>
+    	  <td><input id="arMod" type="number" name="attackRatingMod" value="{{data.attackRatingMod}}" class="calc-edge-edit armod-value" style="width: 2em"/></td>
+    	  <td>vs</td>
+    	  <td>{{localize "shadowrun6.roll.defRating"}}</td>
+    	  <td><input id="dr" type="number" name="defRating" value="{{data.defRating}}" class="calc-edge-edit dr-value" style="width: 2em"/></td>
+    	</tr>
+    	<tr>
+    	  <td colspan="2">{{localize "shadowrun6.roll.edge.situational"}}<input type="checkbox" class="calc-edge-edit" name="situationalEdgeA" value="{{data.situationalEdgeA}}" id="situationalEdgeA" /></td>
+    	  <td colspan="2"></td>
+    	  <td colspan="2">{{localize "shadowrun6.roll.edge.situational"}}<input type="checkbox" class="calc-edge-edit" name="situationalEdgeD" value="{{data.situationalEdgeD}}" id="situationalEdgeD" /></td>
+    	</tr>
+    	<tr>
+    	  <td colspan="6" >
+    	    <label id="edgeLabel" style="font-style:italic"></label><br />
+          <label id="noTargetLabel"></label>
+    	  </td>
+    	</tr>
+    </table>
+    <hr/>
     {{/if}}
+
+	<!-- Edge Boosts and Actions -->
+    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.edge.spending"}}</h4>
+    <table style="background-color: transparent; border: 0px">
+    	<tr>
+    	  <td rowspan="2">
+    	    <div class="edge-roll" style="flex: 0.48; margin-right: 10px">
+	         <img src="systems/shadowrun6-eden/images/EdgeToken.png" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
+		      <label class="edge-value" >{{data.edge}}</label>
+	       </div>
+	     </td>
+	     <td>Boost</td>
+	     <td><select name="edgeBoost" id="edgeBoosts">
+            <option value="none" data-item-boostid="none"> - </option>
+            {{#each data.edgeBoosts as |boost id|}}
+            <option value="{{boost.id}}" data-item-boostid="{{boost.id}}">{{localize (concat "shadowrun6.edge_boost."
+                boost.id)}} - ({{boost.cost}})</option>
+            {{/each}}
+            <option value="edge_action" data-item-boostid="edge_action">{{localize "shadowrun6.edge_boost.edge_action"}}</option>
+        </select></td>
+    	</tr>
+    	<tr>
+    		<td>Action</td>
+    		<td><select name="edgeAction" id="edgeActions">
+             <option value="none" data-item-actionid="none"> - </option>
+        </select></td>
+    	</tr>
+    </table>
+	<hr/>
+
+	<!-- Final calculations -->
+    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.configure"}}</h4>
+    <table style="background-color: transparent; border: 0px">
+    	<tr>
+    	  <td rowspan="2">
+    	    <div class="edge-roll" style="flex: 0.48; margin-right: 10px">
+	         <img src="systems/shadowrun6-eden/images/BlankDice.png" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
+		      <label class="edge-value" >{{data.value}}</label>
+	       </div>
+	     </td>
+	     <td colspan="2">{{localize "shadowrun6.roll.modifier"}}</td>
+	     <td><input type="text" name="modifier" value="{{data.modifier}}" style="width: 3em"/></td>
+    		<td>{{localize "shadowrun6.roll.explode"}}</td>
+    		<td><input type="checkbox" name="explode" value="{{data.explode}}" /></td>
+    	</tr>
+    	<tr>
+     		<td>{{localize "shadowrun6.roll.mode"}}</td>
+     		<td colspan="2"><select name="rollMode">
+        {{#select rollMode}}
+        {{#each rollModes as |label mode|}}
+            <option value="{{mode}}">{{localize label}}</option>
+        {{/each}}
+        {{/select}}
+        </select></td>     		
+    		<td>{{localize "shadowrun6.roll.wilddie"}}</td>
+    		<td><input type="checkbox" name="wilddie" value="{{data.wilddie}}" /></td>
+    	</tr>
+    </table>
+
     {{#if data.dialogConfig.useThreshold}}
     <div class="form-group">
         <label>{{localize "shadowrun6.roll.threshold"}}</label>
         <input type="text" name="threshold" value="{{data.threshold}}" />
     </div>
     {{/if}}
-    {{#if data.dialogConfig.useExplode}}
-    <div class="form-group">
-        <label>{{localize "shadowrun6.roll.explode"}}</label>
-        <input type="checkbox" name="explode" value="{{data.explode}}" />
-    </div>
-    {{/if}}
-    {{#if data.dialogConfig.useWildDie}}
-    <div class="form-group">
-        <label>{{localize "shadowrun6.roll.wilddie"}}</label>
-        <input type="checkbox" name="wilddie" value="{{data.wilddie}}" />
-    </div>
-    {{/if}}
-    {{#if data.dialogConfig.useModifier}}
-    <div class="form-group">
-        <label>{{localize "shadowrun6.roll.modifier"}}</label>
-        <input type="text" name="modifier" value="{{data.modifier}}"/>
-    </div>
-    {{/if}}
-    <div class="form-group">
-        <label>Modus</label>
-        <select name="rollMode">
-        {{#select rollMode}}
-        {{#each rollModes as |label mode|}}
-            <option value="{{mode}}">{{localize label}}</option>
-        {{/each}}
-        {{/select}}
-        </select>
-    </div>
 </form>
