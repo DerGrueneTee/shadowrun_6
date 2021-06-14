@@ -270,3 +270,6 @@ dd::after {
   border-radius: 50%;
 } 
 
+h3.highlight, h4.highlight {
+	color: var(--highlight-color)
+}

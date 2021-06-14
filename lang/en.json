@@ -29,6 +29,22 @@
             "memory": "Memory",
             "lift_carry": "Lift / Carry"
         },
+		  "edge_action": {
+				
+			},
+		  "edge_boost": {
+				"edge_action": "Edge Action - (1-5)",
+				"reroll_one": "Reroll one die",
+				"plus_3_ini": "Add 3 to your Initiative Score",
+				"negate_1_edge": "Negate 1 Edge of a foe",
+				"buy_auto_hit": "Buy one automatic hit",
+				"heal_1_stun": "Heal one box of Stun damage",
+				"add_edge_pool": "Add Edge to your dice pool",
+				"heal_1_physic": "Heal 1 point of Physical damage",
+				"reroll_failed": "Reroll all failed dice",
+				"count_2_glitch": "Count 2s as glitches for the target",
+				"create_special": "Create special effect"
+		  },
         "resist": {
             "attacks": "Defense: Attacks",
             "astral_direct": "Defense: Direct Spells",
@@ -188,6 +204,17 @@
             "spotter": "Spotter"
         },
         "roll": {
+				"actionText": {
+					"cast": "Casting {name}"
+				},
+            "ar_0": "Close",
+            "ar_1": "Near",
+            "ar_2": "Medium",
+            "ar_3": "Far",
+            "ar_4": "Extreme",
+            "attack": "Attack",
+            "attackRating": "Attack Rating",
+				"configure": "Configure your roll",
             "subject": "Chatmessage",
             "pool": "Pool",
             "threshold": "Threshold",
@@ -197,27 +224,41 @@
             "modifier": "Pool modifier",
             "success": "Success",
             "successes": "hits",
+				"mode": "Mode",
             "glitch": "Glitch",
             "criticalglitch": "Critical glitch",
             "nosuccess": "hits, threshold: ",
             "damage": "Damage: ",
             "target": "Target",
-            "attack": "Attack",
             "with": "with",
-            "ar_0": "Close",
-            "ar_1": "Near",
-            "ar_2": "Medium",
-            "ar_3": "Far",
-            "ar_4": "Extreme",
             "defRating": "Defense: ",
-            "attackRating": "Att.Rtg:",
             "notarget": "No target selected",
             "edgegain": "Edge-Gain (max): ",
             "edgegain_player": " (Player)",
             "noedgegain": "No edge gain",
             "hits_bought": "Hits bought",
             "exp": "Expertise",
-            "spec": "Specialization"
+            "spec": "Specialization",
+				"spell": {
+					"ampUp": {
+						"title": "Amp up",
+						"1": "Damage+1, Drain+2",
+						"2": "Damage+2, Drain+4"
+					},
+					"incArea": {
+						"title": "Increase Area",
+						"1": "Radius +2m, Drain+1",
+						"2": "Radius +4m, Drain+2"
+					},
+					"title": "Adjust the spell"
+				},
+				"edge": {
+					"gain_player": "{name} gets {value} Edge",
+			   	"getting": "Getting Edge",
+			   	"spending": "Spending Edge",
+			   	"situational": "Situational Edge"
+					
+				}
         },
         "rollType": {
             "normal": "Roll dice",

@@ -12,15 +12,14 @@ SR6.GEAR_TYPES = ["ACCESSORY", "ARMOR", "ARMOR_ADDITION", "BIOWARE", "CYBERWARE"
 SR6.SKILLS_WEAPON = ["firearms", "close_combat", "exotic_weapons", "athletics"];
 
 class SkillDefinition {
-	constructor(attribute, useUntrained, specializations={}) {
+	constructor(attribute, useUntrained) {
 		this.attrib = attribute;
 		this.useUntrained = useUntrained;
-		this.specializations = specializations;
 	}
 }
 
 SR6.ATTRIB_BY_SKILL = new Map([
-	["astral", new SkillDefinition("int", false, ["astral_combat","astral_signatures","emotional_stress","spirit_types"])],
+	["astral", new SkillDefinition("int", false)],
 	["athletics", new SkillDefinition("agi", true)],
 	["biotech", new SkillDefinition("log", false)],
 	["close_combat", new SkillDefinition("agi", true)],
@@ -40,6 +39,28 @@ SR6.ATTRIB_BY_SKILL = new Map([
 	["stealth", new SkillDefinition("agi", true)],
 	["tasking", new SkillDefinition("res", false)],
 ]);
+
+class EdgeBoost {
+	constructor(cost, id, when) {
+		this.cost = cost;
+		this.id = id;
+		this.when = when;
+	}
+}
+SR6.EDGE_BOOSTS = [
+	new EdgeBoost(1, "reroll_one", "POST"),
+	new EdgeBoost(1, "plus_3_ini", "ANYTIME"),
+	new EdgeBoost(2, "plus_1_roll", "POST"),
+	new EdgeBoost(2, "give_ally_1_edge", "ANYTIME"),
+	new EdgeBoost(2, "negate_1_edge", "PRE"),
+	new EdgeBoost(3, "buy_auto_hit", "ANYTIME"),
+	new EdgeBoost(3, "heal_1_stun", "ANYTIME"),
+	new EdgeBoost(4, "add_edge_pool", "PRE"),
+	new EdgeBoost(4, "heal_1_physic", "ANYTIME"),
+	new EdgeBoost(4, "reroll_failed", "POST"),
+	new EdgeBoost(5, "count_2_glitch", "PRE"),
+	new EdgeBoost(5, "create_special", "ANYTIME"),
+];
 
 SR6.icons = {
 	adeptpower: {

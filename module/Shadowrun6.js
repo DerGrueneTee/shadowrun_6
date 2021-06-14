@@ -196,10 +196,25 @@ Hooks.once("init", async function () {
 
       if (type === "defense") {
         const targetId = $(event.currentTarget).closestData("targetid");
-        console.log(targetId);
+        console.log("Target "+targetId);
       }
     });
-    //html.on("click", ".dice-roll", this._onDiceRollClick.bind(this));
+    html.on("click", ".chat-edge", event => {
+		 console.log("chat-edge");
+		 event.preventDefault();
+	    let roll = $(event.currentTarget), 
+		    tip = roll.find(".chat-edge-collapsible");
+		 console.log("tip = "+tip+"  // "+tip.is(":visible"));
+	    if (!tip.is(":visible")) {
+		    console.log("Call slideDown");
+			 tip.style["display"] = "block";
+		    tip.slideDown(200);	
+	    } else {
+		    console.log("Call slideup");
+			 tip.style["display"] = "none";
+		    tip.slideUp(200);
+	    }
+		});
   });
 
 
@@ -292,3 +307,4 @@ $.fn.closestData = function (dataName, defaultValue = "") {
   let value = this.closest(`[data-${dataName}]`)?.data(dataName);
   return (value) ? value : defaultValue;
 }
+

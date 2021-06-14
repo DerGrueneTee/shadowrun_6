@@ -23,7 +23,7 @@
             {{/select}}
         </select> + 
         {{else}}
-        <span>{{data.dialogConfig.attackRating}}</span>
+        <span>{{data.attackRating}} +</span>
         {{/if}}
     	  </td>
     	  <td><input id="arMod" type="number" name="attackRatingMod" value="{{data.attackRatingMod}}" class="calc-edge-edit armod-value" style="width: 2em"/></td>
@@ -75,11 +75,45 @@
     </table>
 	<hr/>
 
+   <!-- Spell modification -->
+   {{log this}}
+   {{#if data.canModifySpell}}
+    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.spell.title"}}</h4>
+    <table style="background-color: transparent; border: 0px">
+    	<tr>
+    	  <td rowspan="2">
+    	  	 <div class="edge-roll" >
+    	      <img src="systems/shadowrun6-eden/images/magic-swirl.svg" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
+    	    </div>
+	     </td>
+	     {{#if data.canAmpUpSpell}}
+	     <td>{{localize "shadowrun6.roll.spell.ampUp.title"}}</td>
+	     <td><select name="ampUp" id="ampUp">
+            <option value="0" data-item-ampid="amp0"> - </option>
+            <option value="1" data-item-ampid="amp1">{{localize "shadowrun6.roll.spell.ampUp.1"}}</option>
+            <option value="2" data-item-ampid="amp2">{{localize "shadowrun6.roll.spell.ampUp.2"}}</option>
+        </select></td>
+        {{/if}}
+    	</tr>
+    	<tr>
+	     {{#if data.canIncreaseArea}}
+	     <td>{{localize "shadowrun6.roll.spell.incArea.title"}}</td>
+	     <td><select name="incArea" id="incArea">
+            <option value="0" data-item-ampid="inc0"> - </option>
+            <option value="1" data-item-ampid="inc1">{{localize "shadowrun6.roll.spell.incArea.1"}}</option>
+            <option value="2" data-item-ampid="inc2">{{localize "shadowrun6.roll.spell.incArea.2"}}</option>
+        </select></td>
+        {{/if}}
+    	</tr>
+    </table>
+	<hr/>
+   {{/if}}
+
 	<!-- Final calculations -->
     <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.configure"}}</h4>
     <table style="background-color: transparent; border: 0px">
     	<tr>
-    	  <td rowspan="2">
+    	  <td rowspan="3">
     	    <div class="edge-roll" style="flex: 0.48; margin-right: 10px">
 	         <img src="systems/shadowrun6-eden/images/BlankDice.png" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
 		      <label class="edge-value" >{{data.value}}</label>
@@ -102,12 +136,12 @@
     		<td>{{localize "shadowrun6.roll.wilddie"}}</td>
     		<td><input type="checkbox" name="wilddie" value="{{data.wilddie}}" /></td>
     	</tr>
+    	<tr>
+        {{#if data.useThreshold}}
+    		<td>{{localize "shadowrun6.roll.threshold"}}</td>
+    		<td colspan="2"><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
+    {{/if}}
+    	</tr>
     </table>
 
-    {{#if data.dialogConfig.useThreshold}}
-    <div class="form-group">
-        <label>{{localize "shadowrun6.roll.threshold"}}</label>
-        <input type="text" name="threshold" value="{{data.threshold}}" />
-    </div>
-    {{/if}}
 </form>

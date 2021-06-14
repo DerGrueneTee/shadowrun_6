@@ -522,7 +522,9 @@
 				"indirect": false,
 				"sense_single": false,
 				"sense_multi": false
-			}
+			},
+			"isOpposed": true,
+			"withEssence": false
 		}
 	}
 }

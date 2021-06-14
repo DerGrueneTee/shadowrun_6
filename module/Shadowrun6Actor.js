@@ -1,6 +1,5 @@
-import { doRoll } from "../module/dice/dice.js";
-import { doAttackRoll } from "./dice/CombatRoll.js";
 import { doCommonCheck } from "../module/dice/dice.js";
+import { doRoll } from "./dice/CommonRoll.js";
 import { SR6 } from "./config.js";
 
 /**
@@ -95,11 +94,24 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 		const items = this.data.items;
+		if (!data.derived) {
+			data.derived = {};
+		}
 		/* (Unarmed) Attack and Defense Rating */
-		if (data.derived) {
 			// Attack Rating
 			data.derived.attack_rating.base = data.attributes["rea"].pool + data.attributes["str"].pool;
 			data.derived.attack_rating.pool = data.derived.attack_rating.base + data.derived.attack_rating.mod;
+			// Astral Attack Rating
+		// Astral Attack Rating
+		if (!data.derived.attack_rating_astral)
+			data.derived.attack_rating_astral = {};
+		console.log("TODO: tradition");
+		let traditionAttr = data.attributes["cha"];
+		data.derived.attack_rating_astral.base = data.attributes["mag"].pool + traditionAttr.pool;
+		data.derived.attack_rating_astral.pool = data.derived.attack_rating_astral.base
+		if (data.derived.attack_rating_astral.mod)
+			data.derived.attack_rating_astral.pool += data.derived.attack_rating_astral.mod;
+
 			// Defense Rating
 			if (data.derived.defense_rating) {
 				data.derived.defense_rating.base = data.attributes["bod"].pool;
@@ -150,7 +162,6 @@ export class Shadowrun6Actor extends Actor {
 				data.derived.resist_toxin.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
 				data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
 			}
-		}
 	}
 
 	//---------------------------------------------------------
@@ -362,95 +373,262 @@ export class Shadowrun6Actor extends Actor {
 
 	//---------------------------------------------------------
 	/**
-	 * Roll a Skill Check
-	 * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-	 * @param {string} skillId      The skill id (e.g. "ins")
-	 * @param {Object} options      Options which configure how the skill check is rolled
-	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+	 * Convert skill, optional skill specialization and optional threshold 
+	 * into a roll name for display
+	 * @param {string} skillId      The skill id (e.g. "con")
+	 * @param {string} spec         The skill specialization
+	 * @param {int}    threshold    Optional threshold
+	 * @return Roll name
 	 */
-	rollSkill(skillId, options = {}) {
+	_getSkillCheckText(skillId, spec, threshold) {
 		const skl = this.data.data.skills[skillId];
+		// Build test name
 		let rollName = game.i18n.localize("skill." + skillId);
+		if (spec) {
+			rollName += "/"+game.i18n.localize("shadowrun6.special." + skillId+"."+spec);
+		}
+		rollName += " + ";
+		// Attribute
+		let attrName = game.i18n.localize("attrib."+CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId).attrib);
+		rollName += attrName;
+		
+		if (threshold) {
+			rollName += " ("+threshold+")";
+		}
+
+		return rollName;		
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * Calculate the skill pool
+	 * @param {string} skillId      The skill id (e.g. "con")
+	 * @param {string} spec         Optional: The skill specialization
+	 * @return Roll name
+	 */
+	_getSkillPool(skillId, spec) {
+		const skl = this.data.data.skills[skillId];
+		// Calculate pool
 		let value = skl.pool;
-		if (options.spec) {
-			rollName += "("+game.i18n.localize("shadowrun6.special." + skillId+"."+options.spec)+")";
-			if (options.spec==skl.expertise) {
-				value+=3;
-			} else if (options.spec==skl.specialization) {
-				value+=2;
+		if (spec) {
+			if (spec==skl.expertise) {
+				value=skl.poolE;
+			} else if (spec==skl.specialization) {
+				value=skl.poolS;
 			}
 		}
+		return value;		
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * Return a translated spell name
+	 * @param {Object} spell      The spell to cast
+	 * @return Roll name
+	 */
+	_getSpellName(spell) {
+		if (spell.genesisId) {
+			const key = "shadowrun6.compendium.spell." + spell.genesisId;
+			let name = game.i18n.localize(key);
+			if (key!=name)
+				return name;
+		}
+		
+		return spell.name;
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * Return a translated gear name
+	 * @param {Object} item   The gear to use
+	 * @return Display name
+	 */
+	_getGearName(item) {
+		if (item.genesisId) {
+			const key = "shadowrun6.compendium.gear." + item.genesisId;
+			let name = game.i18n.localize(key);
+			if (key!=name)
+				return name;
+		}
+		
+		return item.name;
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * @param {Function} func   function to return value from actor
+	 * @return Value
+	 */
+	_getHighestDefenseRating(map) {
+		let highest = 0;
+		for (var it = game.user.targets.values(), val= null; val=it.next().value; ) {
+			let actor   = val.actor;
+			let here    = map(actor);
+			if (here>highest)
+				highest = here;
+      }
+		return highest;
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * Roll a simple skill test
+	 * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+	 * @param {string} skillId      The skill id (e.g. "con")
+	 * @param {string} spec         The skill specialization
+	 * @param {int}    threshold    Optional threshold
+	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+	 */
+	rollSkill(skillId, spec, threshold=3, options={}) {
+		console.log("rollSkill("+skillId+", threshold=",threshold);
+		const skl = this.data.data.skills[skillId];
+		// Prepare action text
+		let actionText;
+		// Prepare check text
+		let checkText = this._getSkillCheckText(skillId,spec,threshold);
+		// Calculate pool
+		let value = this._getSkillPool(skillId, spec);
+		
+		
 		const parts = [];
 
 		// Roll and return
 		let data = mergeObject(options, {
-			parts: parts,
 			value: value,
-			title: rollName,
-			skill: skl
+			actionText: actionText,
+			checkText  : checkText,
+			skill: skl,
+			spec: spec,
+			threshold: threshold,
+			isOpposed: false,
+			useThreshold: true,
+			buyHits: true
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(data);
 	}
 
-	rollItem(skillId, itemId, options = {}) {
-		const skl = this.data.data.skills[skillId];
+	//-------------------------------------------------------------
+	/*
+	 *
+	 */
+	rollItem(itemId, options = {}) {
+		console.log("rollItem(item="+itemId+", options="+options+")");
 		const item = this.items.get(itemId);
-		const value = skl.pool;
+		const skillId = item.skill;
+		const spec = item.skillSpec;
+		const skl = this.data.data.skills[skillId];
+		// Prepare action text
+		let actionText;
+		switch (game.user.targets.size) {
+		case 0:
+			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
+			break;
+		case 1:
+		   let targetName = game.user.targets.values().next().value.name;
+			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
+			break;
+		default:
+			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:this._getGearName(item)});
+		}
+		// Prepare check text
+		let checkText = this._getSkillCheckText(skillId,spec,threshold);
+		// Get pool
+		let pool = item.data.data.pool;
+
 		const parts = [];
-		let targetId = this.userHasTargets() ? this.getUsersFirstTargetId() : null;
-		let title = item.name + " (" + game.i18n.localize("skill." + skillId) + ")";
+		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
 
 		let data = mergeObject(options, {
 			parts: parts,
-			value: value,
-			title: title,
-			skill: skl,
+			value: pool,
+			actionText: actionText,
+			checkText  : checkText,
+			skill: this.data.data.skills[skillId],
+			spec: spec,
 			item: item,
-			targetId: targetId,
+			defRating : highestDefenseRating,
+			targets: game.user.targets.forEach( val => val.actor),
+			isOpposed: true,
 			attackType: "weapon",
+			hasDamageResist: true,
 			buyHits: false
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doAttackRoll(data);
+		return doRoll(data);
 	}
 
-	rollSpell(itemId, options = {}) {
-		const skl = this.data.data.skills["sorcery"];
+	//-------------------------------------------------------------
+	/**
+	 * Roll a spell test. Some spells are opposed, some are simple tests.
+	 * @param {string} itemId       The item id of the spell
+	 * @param {boolean} ritual      TRUE if ritual spellcasting is used
+	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+	 */
+	rollSpell(itemId, ritual=false, options={}) {
+		console.log("rollSpell("+itemId+")");
+		const skillId = "sorcery";
+		const spec    = (ritual)?"spellcasting":"ritual_spellcasting";
 		const item = this.items.get(itemId);
-		let value = parseInt(skl.pool);
-		const parts = [];
-		let hasSpec = skl.specialization === "spellcasting";
-		let hasExp = skl.expertise === "spellcasting";
-		let isCombat = item.data.data.category === "combat";
-		let targetId = this.userHasTargets() ? this.getUsersFirstTargetId() : null;
-		let title;
-		if (hasExp) {
-			title = item.name + " (" + game.i18n.localize("shadowrun6.roll.exp") + ")";
-			value += 3;
-		} else if (hasSpec) 	{
-			title = item.name + " (" + game.i18n.localize("shadowrun6.roll.spec") + ")";
-			value += 2; 
-		} else {
-			title = item.name;
+		// Prepare action text
+		let actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+		// Get pool
+		let pool = this._getSkillPool(skillId, spec);
+		let rollName = this._getSkillCheckText(skillId, spec);		
+
+		// Determine whether or not the spell is an opposed test
+		// and what defense eventually applies
+		let isOpposed = false;
+		let hasDamageResist = true;
+		let attackRating = this.data.data.derived.attack_rating_astral.pool;
+		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
+		let threshold = 0;
+		let canAmpUpSpell = item.data.data.category === "combat";
+		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
+		if (item.data.data.category === "combat") {
+			isOpposed = true;
+			if (item.data.data.features.direct) {
+				hasDamageResist = false;
+			}
+		} else if (item.data.data.category === "manipulation") {
+			isOpposed = true;
+		} else if (item.data.data.category === "heal") {
+			if (item.data.data.withEssence) {
+				threshold = 5 - Math.ceil(this.data.data.essence);
+			}
 		}
 
 		let data = mergeObject(options, {
-			parts: parts,
-			value: value,
-			title: title,
-			skill: skl,
-			item: item,
-			targetId: targetId,
-			isCombat: isCombat,
-			attackType: "spell",
-			buyHits: true
+			isSpell : true,
+			value: pool,
+			actionText: actionText,
+			checkText  : rollName,
+			skill: this.data.data.skills[skillId],
+			spec: spec,
+			spell: item,
+			canModifySpell: canAmpUpSpell || canIncreaseArea,
+			canAmpUpSpell : canAmpUpSpell,
+			canIncreaseArea : canIncreaseArea,
+			attackRating: attackRating,
+			defRating : highestDefenseRating,
+			targets: game.user.targets.forEach( val => val.actor),
+			isOpposed: isOpposed,
+			hasDamageResist: hasDamageResist,
+			buyHits: !isOpposed
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doAttackRoll(data);
+		if (isOpposed) {
+			return doRoll(data);
+		} else {
+			return doRoll(data);
+		}
 	}
 
 
+	//-------------------------------------------------------------
+	/*
+	 *
+	 */
 	rollCommonCheck(pool, title, dialogConfig, options = {}) {
 		let data = mergeObject(options, {
 			value: pool,
