@@ -1,4 +1,3 @@
-import { doCommonCheck } from "../module/dice/dice.js";
 import { doRoll } from "./dice/CommonRoll.js";
 import { SR6 } from "./config.js";
 
@@ -488,9 +487,6 @@ export class Shadowrun6Actor extends Actor {
 		let checkText = this._getSkillCheckText(skillId,spec,threshold);
 		// Calculate pool
 		let value = this._getSkillPool(skillId, spec);
-		
-		
-		const parts = [];
 
 		// Roll and return
 		let data = mergeObject(options, {
@@ -515,8 +511,8 @@ export class Shadowrun6Actor extends Actor {
 	rollItem(itemId, options = {}) {
 		console.log("rollItem(item="+itemId+", options="+options+")");
 		const item = this.items.get(itemId);
-		const skillId = item.skill;
-		const spec = item.skillSpec;
+		const skillId = item.data.data.skill;
+		const spec = item.data.data.skillSpec;
 		const skl = this.data.data.skills[skillId];
 		// Prepare action text
 		let actionText;
@@ -532,7 +528,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:this._getGearName(item)});
 		}
 		// Prepare check text
-		let checkText = this._getSkillCheckText(skillId,spec,threshold);
+		let checkText = this._getSkillCheckText(skillId,spec,0);
 		// Get pool
 		let pool = item.data.data.pool;
 
@@ -624,19 +620,86 @@ export class Shadowrun6Actor extends Actor {
 		}
 	}
 
+	//-------------------------------------------------------------
+	/**
+	 * Roll a spell test. Some spells are opposed, some are simple tests.
+	 * @param {string} itemId       The item id of the spell
+	 * @param {boolean} ritual      TRUE if ritual spellcasting is used
+	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+	 */
+	rollDefense(itemId, ritual=false, options={}) {
+		console.log("rollDefense("+itemId+")");
+		const skillId = "sorcery";
+		const spec    = (ritual)?"spellcasting":"ritual_spellcasting";
+		const item = this.items.get(itemId);
+		// Prepare action text
+		let actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+		// Get pool
+		let pool = this._getSkillPool(skillId, spec);
+		let rollName = this._getSkillCheckText(skillId, spec);		
+
+		// Determine whether or not the spell is an opposed test
+		// and what defense eventually applies
+		let isOpposed = false;
+		let hasDamageResist = true;
+		let attackRating = this.data.data.derived.attack_rating_astral.pool;
+		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
+		let threshold = 0;
+		let canAmpUpSpell = item.data.data.category === "combat";
+		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
+		if (item.data.data.category === "combat") {
+			isOpposed = true;
+			if (item.data.data.features.direct) {
+				hasDamageResist = false;
+			}
+		} else if (item.data.data.category === "manipulation") {
+			isOpposed = true;
+		} else if (item.data.data.category === "heal") {
+			if (item.data.data.withEssence) {
+				threshold = 5 - Math.ceil(this.data.data.essence);
+			}
+		}
+
+		let data = mergeObject(options, {
+			isSpell : true,
+			value: pool,
+			actionText: actionText,
+			checkText  : rollName,
+			skill: this.data.data.skills[skillId],
+			spec: spec,
+			spell: item,
+			canModifySpell: canAmpUpSpell || canIncreaseArea,
+			canAmpUpSpell : canAmpUpSpell,
+			canIncreaseArea : canIncreaseArea,
+			attackRating: attackRating,
+			defRating : highestDefenseRating,
+			targets: game.user.targets.forEach( val => val.actor),
+			isOpposed: isOpposed,
+			hasDamageResist: hasDamageResist,
+			buyHits: !isOpposed
+		});
+		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		if (isOpposed) {
+			return doRoll(data);
+		} else {
+			return doRoll(data);
+		}
+	}
+
 
 	//-------------------------------------------------------------
 	/*
 	 *
 	 */
 	rollCommonCheck(pool, title, dialogConfig, options = {}) {
+		console.log("rollCommonCheck(pool="+pool+")");
 		let data = mergeObject(options, {
 			value: pool,
 			title: title,
 			dialogConfig: dialogConfig	
 		});
 		data.speaker = ChatMessage.getSpeaker({actor: this});
-		return doCommonCheck(data);
+		return doRoll(data);
 	}
 
 	getUsersFirstTargetId() {

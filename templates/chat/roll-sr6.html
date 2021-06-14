@@ -1,5 +1,17 @@
 <div>
   <!-- Fertigkeitswert: data.value; Schwierigkeit: data.threshold; Modifikation: data.modifier; Würfelergebnis: data.dieResult; Gesamt: data.total-->
+  <div class="chat-edge" style="display:block">
+    <div>Edge: {{data.edge_message}}</div>
+  <div class="chat-edge-collapsible">
+    <header class="part-header flexrow">
+      <div>{{ localize 'shadowrun6.derived.attack_rating'}}: <b>{{data.attack_rating}}</b></div>
+      <br/>
+      <div>{{ localize 'shadowrun6.derived.defense_rating'}}: <b>{{data.defense_rating}}</b></div>
+    </header>
+  </div>
+  </div>
+  <hr/>
+  
   <div class="dice-roll">
     <div class="dice-result">
       <header class="part-header flexrow">
@@ -18,11 +30,26 @@
         <span style="color: rgb(194, 76, 29)">{{localize 'shadowrun6.roll.glitch'}}</span><br/>
         {{/if}}
       </header>
-      <div>
-        {{#if data.weapon}}
-        <b>{{localize 'shadowrun6.roll.damage'}}</b> {{data.item.data.data.dmgDef}}
-        <button class="rollable" data-roll-type="defense" data-targetid="{{data.targetId}}">VTD</button>
-      </div>
-      {{/if}}
+    </div>
+   </div>
+   
+   <!-- Usage Details -->
+  	{{#if data.weapon}}
+   <hr/>
+  <div>
+   <b>{{localize 'shadowrun6.roll.damage'}}</b> {{data.item.data.data.dmgDef}}
+  </div>
+   {{/if}}        
+   
+   <!-- Drain -->
+   <hr/>
+  <div>
+  	This is the drain section
+  </div>
+   
+   <!-- Defense -->
+   <hr/>
+  <div>
+  	<button class="rollable" data-roll-type="defense" data-targetid="{{data.targetId}}">Roll Defense</button>
   </div>
 </div>

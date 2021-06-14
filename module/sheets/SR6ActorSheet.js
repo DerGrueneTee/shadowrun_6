@@ -11,11 +11,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		return data;
 	}
 
-	async _test() {
-		console.log("Bla");
-		return 4;
-	}
-
 	/**
 	 * Activate event listeners using the prepared sheet HTML
 	 * @param html {HTML}   The prepared HTML object ready to be rendered into the DOM
@@ -204,6 +199,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	}
 
 	_onCommonCheck(event, html) {
+		console.log("onCommonCheck");
 		event.preventDefault();
 		const pool = event.currentTarget.dataset.pool;
 		let classList = event.currentTarget.classList;

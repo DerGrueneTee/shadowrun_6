@@ -6,7 +6,7 @@ import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
-import { doRoll } from "./dice/ChatDiceRoller.js";
+import { doRoll } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 
 const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';

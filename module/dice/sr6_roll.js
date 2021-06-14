@@ -256,3 +256,10 @@ export default class SR6Roll extends Roll {
   }
 }
 
+export class SR6RollData {
+	constructor() {
+		this.isOpposed = false;
+	}
+	
+}
+
