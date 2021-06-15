@@ -14,7 +14,7 @@ export default class SR6Roll extends Roll {
   /** @override */
   evaluate() {
     let data = this.data;
-    let noOfDice = parseInt(data.value);
+    let noOfDice = parseInt(data.pool);
     let die;
     noOfDice += data.modifier;
 
@@ -124,10 +124,11 @@ export default class SR6Roll extends Roll {
   * Hier wird die Ausgabe zusammengeschustert
   */
   async render(chatOptions = {}) {
+	console.log("ENTER render");
     chatOptions = mergeObject(
       {
         user: game.user.id,
-        flavor: this.flavorText,
+        flavor: this.actionText,
         template: this.constructor.CHAT_TEMPLATE,
       },
       chatOptions
@@ -151,12 +152,13 @@ export default class SR6Roll extends Roll {
     };
 
     let html = await renderTemplate(chatOptions.template, chatData);
+	console.log("LEAVE render");
     return html;
   }
 
   /* -------------------------------------------- */
   async toMessage(chatOptions, { rollMode = null, create = true } = {}) {
-
+	console.log("ENTER toMessage");
     const rMode = rollMode || chatOptions.rollMode || game.settings.get("core", "rollMode");
 
     let template = CONST.CHAT_MESSAGE_TYPES.OTHER;
@@ -180,6 +182,7 @@ export default class SR6Roll extends Roll {
     chatOptions.roll = this;
     chatOptions.content = await this.render(chatOptions);
     ChatMessage.create(chatOptions);
+	console.log("LEAVE toMessage");
   }
 
   /** @override */
@@ -256,8 +259,29 @@ export default class SR6Roll extends Roll {
   }
 }
 
-export class SR6RollData {
+
+//-------------------------------------------------------------
+/**
+ * Roll a spell test. Some spells are opposed, some are simple tests.
+ * @member {String} actionText Describe what is happening - e.g. "Cast Manabolt at Big Bad Guy"
+ * @member {String} checkText  The check that is made in the CRB notation - e.g. "Sorcery/Spellcasting + Magic (3)"
+ * // What is tested
+ * @member {String} skillId    The identifier name of the skill
+ * @member {String} spec       The identifier name of the skill specialization
+ * @member {int}    threshold  The threshold from which the test is considered a success
+ * // Type of test
+ * @member {boolean} isOpposed  Whether or not this is an opposed test
+ * @member {boolean} useThreshold  Whether or not a threshold is needed
+ * // For opposed tests
+ * @member {integer} attackRating The attack rating of the actor
+ * @member {integer} attackRatingMod (TEMP) A user configurable modifier for the AR
+ * @member {integer} defenseRating The (highest) defense rating of the defending actor(s). Can be adjusted in the dialog
+
+ */
+export class SR6RollDialogData {
 	constructor() {
+		this.actionText = "";
+		this.checkText = "";
 		this.isOpposed = false;
 	}
 	

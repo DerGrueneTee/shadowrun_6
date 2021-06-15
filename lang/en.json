@@ -205,7 +205,10 @@
         },
         "roll": {
 				"actionText": {
-					"cast": "Casting {name}"
+					"cast": "Casting {name}",
+					"attack_target_none": "Attacking target with {name}",
+					"attack_target_one": "Attacking {target} with {name}",
+					"attack_target_multiple": "Attacking multiple targets with {name}"
 				},
             "ar_0": "Close",
             "ar_1": "Near",
@@ -254,6 +257,7 @@
 				},
 				"edge": {
 					"gain_player": "{name} gets {value} Edge",
+					"no_gain": "No one gets Edge",
 			   	"getting": "Getting Edge",
 			   	"spending": "Spending Edge",
 			   	"situational": "Situational Edge"

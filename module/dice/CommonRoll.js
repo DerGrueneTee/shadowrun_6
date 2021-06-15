@@ -1,57 +1,29 @@
 import SR6Roll from "./sr6_roll.js"
-export async function doRoll(data, messageData = {}) {
-  messageData.flavor = "<h2>" + data.title + "</h2>";
-  messageData.speaker = ChatMessage.getSpeaker();
-  messageData.targetId = data.targetId;
-	console.log("doRoll: data.speaker="+data.speaker.name+"  \n"+messageData.speaker.name);
 
-  // Define the inner roll function
-  const _roll = (type, form, data) => {
-    console.log("START: _roll(type="+type+", form="+form+", data="+data+")");
-    if (form) {
-      data.modifier = parseInt(form.modifier.value);
-      data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
-      data.explode = form.explode.checked;
-      data.useWildDie = form.wilddie.checked;
-      data.type = type;
-      messageData.rollMode = form.rollMode.value;
-      data.weapon = data.item ? true : false;
-      if (data.modifier > 0) {
-        data.formula = data.value + " + " + data.modifier + "d6";
-      } else {
-        data.formula = data.value + "d6";
-      }
-    }
-
-    // Execute the roll
-    let r = new SR6Roll("", data);
-    try {
-	   console.log("Call r.evaluate: "+r);
-      r.evaluate();
-    } catch (err) {
-      console.error("CommonRoll error: "+err);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-      return null;
-    }
-    return r;
-  }
+//-------------------------------------------------------------
+/**
+ * Called from Shadowrun6Actor.js
+ */
+export async function doRoll(data) {
+  console.log("ENTER doRoll");
 
   // Create the Roll instance
-  console.log("call _attackRollDialog");
-  const _r = await _attackRollDialog({ data, foo: _dialogClosed });
-  console.log("returned from _attackRollDialog with "+_r);
+  const _r = await _showRollDialog(data, _dialogClosed);
+  console.log("returned from _showRollDialog with "+_r);
   if (_r) {
-    _r.toMessage(messageData);
+    _r.toMessage(data);
   }
+  console.log("LEAVE doRoll");
   return _r;
 }
 
+//-------------------------------------------------------------
 /**
  * @return {Promise<Roll>}
  * @private
  */
-async function _attackRollDialog({ data, foo } = {}) {
-  console.log("in _attackRollDialog");
+async function _showRollDialog(data, onClose={}) {
+  console.log("ENTER _showRollDialog");
 
   if (isNaN(data.threshold)) {
     data.threshold = 0;
@@ -69,7 +41,7 @@ async function _attackRollDialog({ data, foo } = {}) {
 	/*
 	 * Fill dialog head
 	 */
-	if (data.attackType === "weapon") {
+	if (data.rollType === "weapon") {
 		if (data.targetId) {
     		data.actionText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
 		} else {
@@ -89,11 +61,11 @@ async function _attackRollDialog({ data, foo } = {}) {
     data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=data.edge);
 	 
 
-  if (data.targetId && data.attackType === "weapon") {
+  if (data.targetId && data.rollType === "weapon") {
     data.targetName = game.actors.get(data.targetId).name;
     data.extraText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
     data.defRating = game.actors.get(data.targetId).data.data.derived.defense_rating.pool;
-  } else if (data.targetId && data.attackType === "spell") {
+  } else if (data.targetId && data.rollType === "spell") {
     data.extraText = " Spell targeting not implemented yet ";
   }
   // Render modal dialog
@@ -116,12 +88,12 @@ async function _attackRollDialog({ data, foo } = {}) {
         bought: {
 	       icon: '<i class="fas fa-dollar-sign"></i>',
           label: game.i18n.localize("shadowrun6.rollType.bought"),
-          callback: html => resolve(foo(1, html[0].querySelector("form"), data))
+          callback: html => resolve(onClose(1, html[0].querySelector("form"), data))
         },
         normal: {
 	       icon: '<i class="fas fa-dice-six"></i>',
           label: game.i18n.localize("shadowrun6.rollType.normal"),
-          callback: html => resolve(foo(0, html[0].querySelector("form"), data))
+          callback: html => resolve(onClose(0, html[0].querySelector("form"), data))
         }
       };
     } else {
@@ -131,7 +103,7 @@ async function _attackRollDialog({ data, foo } = {}) {
           label: game.i18n.localize("shadowrun6.rollType.normal"),
           callback: html => {
 				console.log("in callback");
-				resolve(foo(0, html[0].querySelector("form"), data));
+				resolve(onClose(0, html[0].querySelector("form"), data));
 				console.log("end callback");
 			}
         }
@@ -154,22 +126,29 @@ async function _attackRollDialog({ data, foo } = {}) {
 }
 
 function _dialogClosed(type, form, data, messageData={}) {
-    console.log("START: _dialogClosed(type="+type+", form="+form+", data="+data+")");
+    console.log("ENTER _dialogClosed(type="+type+", form="+form+", data="+data+")");
+	 // Delete some fields that where only necessary for the roll dialog
+    delete data.canAmpUpSpell;
+	 delete data.canIncreaseArea;
+	 delete data.canModifySpell;
+    delete data.edgeBoosts;
+
     if (form) {
       data.modifier = parseInt(form.modifier.value);
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
       data.explode = form.explode.checked;
-      data.useWildDie = form.wilddie.checked;
+      data.useWildDie = form.useWildDie.checked;
       data.type = type;
       messageData.rollMode = form.rollMode.value;
       data.weapon = data.item ? true : false;
       if (data.modifier > 0) {
-        data.formula = data.value + " + " + data.modifier + "d6";
+        data.formula = data.pool + " + " + data.modifier + "d6";
       } else {
-        data.formula = data.value + "d6";
+        data.formula = data.pool + "d6";
       }
     }
 
+    
     // Execute the roll
     let r = new SR6Roll("", data);
     try {
@@ -177,9 +156,12 @@ function _dialogClosed(type, form, data, messageData={}) {
       r.evaluate();
     } catch (err) {
       console.error("CommonRoll error: "+err);
+      console.error("CommonRoll error: "+err.stack);
       ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
       return null;
     }
+    console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
     return r;
  }
 
@@ -223,7 +205,7 @@ export class RollDialog extends Dialog {
 			this.data.edgeTarget++;
 	 }
 
-    if (this.data.attackType === "weapon") {
+    if (this.data.data.rollType === "weapon") {
       const arElement = document.getElementById("ar");
       const drElement = document.getElementById("dr");
       const arModElem = document.getElementById("arMod");
@@ -254,16 +236,19 @@ export class RollDialog extends Dialog {
     }
 	 // Set new edge value
     this.data.edge = this.data.data.actor.data.data.edge.value + this.data.edgePlayer;
+	 this.data.data.edge = this.data.edge;
 
     // Prepare text for player
     let innerText = "";
     if (this.data.edgePlayer) {
 		innerText = game.i18n.format("shadowrun6.roll.edge.gain_player", {name:this.data.data.speaker.alias, value:this.data.edgePlayer});
-	 }
-    if (this.data.edgeTarget!=0) {
+	 } else if (this.data.edgeTarget!=0) {
       let targetName = this.targetName ? this.targetName : game.i18n.localize("shadowrun6.roll.target");
-		innerText += "\n"+game.i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:this.data.edgeTarget});
-	 }
+		innerText += game.i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:this.data.edgeTarget});
+	 } else {
+		innerText += game.i18n.localize("shadowrun6.roll.edge.no_gain");
+	}
+	this.data.data.edge_message = innerText;
 	
 	 let edgeLabel = document.getElementById("edgeLabel");
 	 if (edgeLabel) { 

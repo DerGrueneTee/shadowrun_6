@@ -490,13 +490,15 @@ export class Shadowrun6Actor extends Actor {
 
 		// Roll and return
 		let data = mergeObject(options, {
-			value: value,
+			pool: value,
 			actionText: actionText,
 			checkText  : checkText,
 			skill: skl,
 			spec: spec,
 			threshold: threshold,
 			isOpposed: false,
+			rollType: "skill",
+			isAllowDefense: false,
 			useThreshold: true,
 			buyHits: true
 		});
@@ -532,21 +534,21 @@ export class Shadowrun6Actor extends Actor {
 		// Get pool
 		let pool = item.data.data.pool;
 
-		const parts = [];
 		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
 
 		let data = mergeObject(options, {
-			parts: parts,
-			value: pool,
+			pool: pool,
 			actionText: actionText,
 			checkText  : checkText,
+			rollType: "weapon",
 			skill: this.data.data.skills[skillId],
 			spec: spec,
 			item: item,
 			defRating : highestDefenseRating,
 			targets: game.user.targets.forEach( val => val.actor),
 			isOpposed: true,
-			attackType: "weapon",
+			isAllowDefense: true,
+			defendWith: "physical",
 			hasDamageResist: true,
 			buyHits: false
 		});
@@ -596,7 +598,7 @@ export class Shadowrun6Actor extends Actor {
 
 		let data = mergeObject(options, {
 			isSpell : true,
-			value: pool,
+			pool: pool,
 			actionText: actionText,
 			checkText  : rollName,
 			skill: this.data.data.skills[skillId],
@@ -609,6 +611,8 @@ export class Shadowrun6Actor extends Actor {
 			defRating : highestDefenseRating,
 			targets: game.user.targets.forEach( val => val.actor),
 			isOpposed: isOpposed,
+			rollType: "skill",
+			isAllowDefense: true,
 			hasDamageResist: hasDamageResist,
 			buyHits: !isOpposed
 		});
@@ -627,7 +631,7 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {boolean} ritual      TRUE if ritual spellcasting is used
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
-	rollDefense(itemId, ritual=false, options={}) {
+	rollDefense(itemId, options={}) {
 		console.log("rollDefense("+itemId+")");
 		const skillId = "sorcery";
 		const spec    = (ritual)?"spellcasting":"ritual_spellcasting";
@@ -636,47 +640,16 @@ export class Shadowrun6Actor extends Actor {
 		let actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec);
-		let rollName = this._getSkillCheckText(skillId, spec);		
-
-		// Determine whether or not the spell is an opposed test
-		// and what defense eventually applies
-		let isOpposed = false;
-		let hasDamageResist = true;
-		let attackRating = this.data.data.derived.attack_rating_astral.pool;
-		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
-		let threshold = 0;
-		let canAmpUpSpell = item.data.data.category === "combat";
-		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
-		if (item.data.data.category === "combat") {
-			isOpposed = true;
-			if (item.data.data.features.direct) {
-				hasDamageResist = false;
-			}
-		} else if (item.data.data.category === "manipulation") {
-			isOpposed = true;
-		} else if (item.data.data.category === "heal") {
-			if (item.data.data.withEssence) {
-				threshold = 5 - Math.ceil(this.data.data.essence);
-			}
-		}
+		let rollName = "Defense";
 
 		let data = mergeObject(options, {
-			isSpell : true,
-			value: pool,
+			rollType: "defense",
+			pool: pool,
 			actionText: actionText,
 			checkText  : rollName,
-			skill: this.data.data.skills[skillId],
-			spec: spec,
-			spell: item,
-			canModifySpell: canAmpUpSpell || canIncreaseArea,
-			canAmpUpSpell : canAmpUpSpell,
-			canIncreaseArea : canIncreaseArea,
-			attackRating: attackRating,
-			defRating : highestDefenseRating,
-			targets: game.user.targets.forEach( val => val.actor),
-			isOpposed: isOpposed,
-			hasDamageResist: hasDamageResist,
-			buyHits: !isOpposed
+			isOpposed: false,
+			hasDamageResist: false,
+			buyHits: false
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		if (isOpposed) {

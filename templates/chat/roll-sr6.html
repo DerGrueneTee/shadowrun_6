@@ -1,12 +1,13 @@
 <div>
   <!-- Fertigkeitswert: data.value; Schwierigkeit: data.threshold; Modifikation: data.modifier; Würfelergebnis: data.dieResult; Gesamt: data.total-->
+   
   <div class="chat-edge" style="display:block">
     <div>Edge: {{data.edge_message}}</div>
   <div class="chat-edge-collapsible">
     <header class="part-header flexrow">
-      <div>{{ localize 'shadowrun6.derived.attack_rating'}}: <b>{{data.attack_rating}}</b></div>
+      <div>{{ localize 'shadowrun6.derived.attack_rating'}}: <b>{{data.attackRating}}</b></div>
       <br/>
-      <div>{{ localize 'shadowrun6.derived.defense_rating'}}: <b>{{data.defense_rating}}</b></div>
+      <div>{{ localize 'shadowrun6.derived.defense_rating'}}: <b>{{data.defRating}}</b></div>
     </header>
   </div>
   </div>
@@ -19,9 +20,9 @@
         <div>{{formula}}</div>
         <br/>
         {{#if success}}
-        <div>{{ localize 'shadowrun6.roll.success'}}: {{total}} {{localize 'shadowrun6.roll.successes'}}</div>
+        <div>{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
         {{else}}
-        <div>{{ localize 'shadowrun6.roll.failure'}}: {{total}} {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
+        <div>{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
         {{/if}} 
         <br/>
         {{#if criticalGlitch}}
@@ -42,14 +43,18 @@
    {{/if}}        
    
    <!-- Drain -->
+   {{#if (eq data.rollType "spell")}}
    <hr/>
   <div>
   	This is the drain section
   </div>
+   {{/if}}        
    
    <!-- Defense -->
+   {{#if data.isAllowDefense}}
    <hr/>
   <div>
-  	<button class="rollable" data-roll-type="defense" data-targetid="{{data.targetId}}">Roll Defense</button>
+  	<button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}">Roll Defense</button>
   </div>
+   {{/if}}        
 </div>
