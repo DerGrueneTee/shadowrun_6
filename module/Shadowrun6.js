@@ -87,8 +87,7 @@ Hooks.once("init", async function () {
       ev.preventDefault();
       // Roll and return
       let data = {
-        value: 0,
-        title: "",
+        pool: 0,
       };
       data.speaker = ChatMessage.getSpeaker({ actor: this });
       return doRoll(data);
@@ -202,16 +201,11 @@ Hooks.once("init", async function () {
     html.on("click", ".chat-edge", event => {
 		 console.log("chat-edge");
 		 event.preventDefault();
-	    let roll = $(event.currentTarget), 
-		    tip = roll.find(".chat-edge-collapsible");
-		 console.log("tip = "+tip+"  // "+tip.is(":visible"));
+	    let roll = $(event.currentTarget); 
+	    let tip = roll.find(".chat-edge-collapsible");
 	    if (!tip.is(":visible")) {
-		    console.log("Call slideDown");
-			 tip.style["display"] = "block";
 		    tip.slideDown(200);	
 	    } else {
-		    console.log("Call slideup");
-			 tip.style["display"] = "none";
 		    tip.slideUp(200);
 	    }
 		});

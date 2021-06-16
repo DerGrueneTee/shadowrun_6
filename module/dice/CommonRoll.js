@@ -5,16 +5,16 @@ import SR6Roll from "./sr6_roll.js"
  * Called from Shadowrun6Actor.js
  */
 export async function doRoll(data) {
-  console.log("ENTER doRoll");
+	console.log("ENTER doRoll");
 
-  // Create the Roll instance
-  const _r = await _showRollDialog(data, _dialogClosed);
-  console.log("returned from _showRollDialog with "+_r);
-  if (_r) {
-    _r.toMessage(data);
-  }
-  console.log("LEAVE doRoll");
-  return _r;
+	// Create the Roll instance
+	const _r = await _showRollDialog(data, _dialogClosed);
+	console.log("returned from _showRollDialog with "+_r);
+	if (_r) {
+   	_r.toMessage(data);
+  	}
+  	console.log("LEAVE doRoll");
+  	return _r;
 }
 
 //-------------------------------------------------------------
@@ -123,6 +123,7 @@ async function _showRollDialog(data, onClose={}) {
       close: () => resolve(null)
     }).render(true);
   });
+  console.log("LEAVE _showRollDialog");
 }
 
 function _dialogClosed(type, form, data, messageData={}) {
@@ -132,6 +133,14 @@ function _dialogClosed(type, form, data, messageData={}) {
 	 delete data.canIncreaseArea;
 	 delete data.canModifySpell;
     delete data.edgeBoosts;
+	// For simple tests use the text describing the test
+	// as action text
+	 if (!data.actionText) {
+		data.actionText = data.checkText;
+	}
+
+    data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
+
 
     if (form) {
       data.modifier = parseInt(form.modifier.value);
@@ -205,11 +214,11 @@ export class RollDialog extends Dialog {
 			this.data.edgeTarget++;
 	 }
 
-    if (this.data.data.rollType === "weapon") {
-      const arElement = document.getElementById("ar");
-      const drElement = document.getElementById("dr");
+	const drElement = document.getElementById("dr");
+   const dr = drElement.value;
       const arModElem = document.getElementById("arMod");
-      const dr = drElement.value;
+   if (this.data.data.rollType === "weapon") {
+      const arElement = document.getElementById("ar");
       let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
       if (arModElem.value && parseInt(arModElem.value)!=0) {
 			ar += parseInt(arModElem.value);
@@ -220,7 +229,18 @@ export class RollDialog extends Dialog {
       } else if (result <= -4) {
 			this.data.edgeTarget++;
 		}
-	 }
+	 } else {
+ 		let ar = this.data.data.attackRating;
+      if (arModElem.value && parseInt(arModElem.value)!=0) {
+			ar += parseInt(arModElem.value);
+      }
+      let result = ar - dr;
+      if (result >= 4) {
+			this.data.edgePlayer++;
+      } else if (result <= -4) {
+			this.data.edgeTarget++;
+		}
+	}
 
     // Calculate effective edge
     let effective = this.data.edgePlayer - this.data.edgeTarget;

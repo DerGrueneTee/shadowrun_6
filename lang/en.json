@@ -36,6 +36,7 @@
 				"edge_action": "Edge Action - (1-5)",
 				"reroll_one": "Reroll one die",
 				"plus_3_ini": "Add 3 to your Initiative Score",
+				"plus_1_roll": "+1 to a single die",
 				"negate_1_edge": "Negate 1 Edge of a foe",
 				"buy_auto_hit": "Buy one automatic hit",
 				"heal_1_stun": "Heal one box of Stun damage",

@@ -611,7 +611,7 @@ export class Shadowrun6Actor extends Actor {
 			defRating : highestDefenseRating,
 			targets: game.user.targets.forEach( val => val.actor),
 			isOpposed: isOpposed,
-			rollType: "skill",
+			rollType: "spell",
 			isAllowDefense: true,
 			hasDamageResist: hasDamageResist,
 			buyHits: !isOpposed
@@ -667,7 +667,7 @@ export class Shadowrun6Actor extends Actor {
 	rollCommonCheck(pool, title, dialogConfig, options = {}) {
 		console.log("rollCommonCheck(pool="+pool+")");
 		let data = mergeObject(options, {
-			value: pool,
+			pool: pool,
 			title: title,
 			dialogConfig: dialogConfig	
 		});
