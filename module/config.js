@@ -61,6 +61,24 @@ SR6.EDGE_BOOSTS = [
 	new EdgeBoost(5, "count_2_glitch", "PRE"),
 	new EdgeBoost(5, "create_special", "ANYTIME"),
 ];
+class EdgeAction {
+	constructor(cost, id, cat, skill) {
+		this.cost = cost;
+		this.id = id;
+		this.cat = cat;
+		this.skill = skill;
+	}
+}
+SR6.EDGE_ACTIONS = [
+	new EdgeAction(4, "anticipation", "COMBAT"),
+	new EdgeAction(4, "big_speech", "SOCIAL", "influence"),
+	new EdgeAction(2, "bring_the_drama", "SOCIAL", "con"),
+	new EdgeAction(5, "called_shot_disarm", "COMBAT"),
+	new EdgeAction(5, "called_shot_vitals", "COMBAT"),
+	new EdgeAction(2, "fire_from_cover", "COMBAT"),
+	new EdgeAction(2, "knockout_blow", "COMBAT"),
+	new EdgeAction(1, "shank", "COMBAT"),
+];
 
 SR6.icons = {
 	adeptpower: {

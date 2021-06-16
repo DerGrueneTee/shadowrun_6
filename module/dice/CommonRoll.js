@@ -4,13 +4,18 @@ import SR6Roll from "./sr6_roll.js"
 /**
  * Called from Shadowrun6Actor.js
  */
-export async function doRoll(data) {
+export async function doRoll(data, messageData = {}) {
 	console.log("ENTER doRoll");
+	
+  //messageData.flavor = "<h2>" + data.title + "</h2>";
+  //messageData.speaker = ChatMessage.getSpeaker();
+  //messageData.targetId = data.targetId;
 
 	// Create the Roll instance
 	const _r = await _showRollDialog(data, _dialogClosed);
 	console.log("returned from _showRollDialog with "+_r);
 	if (_r) {
+  		delete data.type;
    	_r.toMessage(data);
   	}
   	console.log("LEAVE doRoll");
@@ -139,6 +144,20 @@ function _dialogClosed(type, form, data, messageData={}) {
 		data.actionText = data.checkText;
 	}
 
+	// Pay eventuallly selected edge boost
+	if (data.edgeBoost && data.edgeBoost!="none") {
+		console.log("Edge Boost selected: "+data.edgeBoost);
+		if (data.edgeBoost === "edge_action") {
+			console.log("ToDo: handle edge action");
+		} else {
+			let boost = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.id===data.edgeBoost);
+			console.log("Pay "+boost.cost+" egde for Edge Boost: "+game.i18n.localize("shadowrun6.edge_boost."+data.edgeBoost));
+			data.actor.data.data.edge.value -= boost.cost;
+			// ToDo Anja: Roll cost dice coins here
+		}
+	}
+	
+
     data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
 
 
@@ -147,7 +166,8 @@ function _dialogClosed(type, form, data, messageData={}) {
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
-      data.type = type;
+      data.buttonType = type;
+      data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
       data.weapon = data.item ? true : false;
       if (data.modifier > 0) {
@@ -179,6 +199,7 @@ export class RollDialog extends Dialog {
 
   activateListeners(html) {
     super.activateListeners(html);
+	 // React to attack/defense rating changes
     html.find('.calc-edge').show(this._onCalcEdge.bind(this));
     if (!this.data.target) {
       html.find('.calc-edge').show(this._onNoTarget.bind(this));
@@ -186,6 +207,13 @@ export class RollDialog extends Dialog {
     html.find('.calc-edge-edit').change(this._onCalcEdge.bind(this));
     html.find('.calc-edge-edit').keyup(this._onCalcEdge.bind(this));
 	 html.show(this._onCalcEdge.bind(this));
+
+	 // React to changed edge boosts and actions
+    html.find('.edgeBoosts').change(this._onEdgeBoostActionChange.bind(this));
+    html.find('.edgeBoosts').keyup(this._onEdgeBoostActionChange.bind(this));
+    html.find('.edgeActions').change(this._onEdgeBoostActionChange.bind(this));
+    html.find('.edgeActions').keyup(this._onEdgeBoostActionChange.bind(this));
+	 html.show(this._onEdgeBoostActionChange.bind(this));
   }
 
 	//-------------------------------------------------------------
@@ -242,21 +270,29 @@ export class RollDialog extends Dialog {
 		}
 	}
 
-    // Calculate effective edge
-    let effective = this.data.edgePlayer - this.data.edgeTarget;
-    if (effective>0) {
+	// Calculate effective edge
+   let effective = this.data.edgePlayer - this.data.edgeTarget;
+   if (effective>0) {
 	   this.data.edgePlayer = this.data.edgePlayer - this.data.edgeTarget;
       this.data.edgeTarget = 0;
-    } else if (effective<0) {
+   } else if (effective<0) {
 	   this.data.edgePlayer = this.data.edgeTarget - this.data.edgePlayer;
       this.data.edgePlayer = 0;
-    } else {
+   } else {
       this.data.edgePlayer = 0;
       this.data.edgeTarget = 0;
-    }
-	 // Set new edge value
-    this.data.edge = this.data.data.actor.data.data.edge.value + this.data.edgePlayer;
-	 this.data.data.edge = this.data.edge;
+   }
+	// Set new edge value
+   this.data.edge = this.data.data.actor.data.data.edge.value + this.data.edgePlayer;
+	this.data.data.edge = this.data.edge;
+   // Update in dialog
+	let edgeValue = this._element[0].getElementsByClassName("edge-value")[0];
+	if (edgeValue) { 
+	  	edgeValue.innerText = this.data.edge;
+	}
+	// Update selection of edge boosts
+	this._updateEdgeBoosts(this._element[0].getElementsByClassName("edgeBoosts")[0], this.data.edge);
+	let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=this.data.edge);
 
     // Prepare text for player
     let innerText = "";
@@ -279,6 +315,43 @@ export class RollDialog extends Dialog {
 	}
   }
 
+	//-------------------------------------------------------------
+	_updateEdgeBoosts(elem, available) {
+		let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=available);
+		console.log("updateEdgeBoosts for "+available+" = "+newEdgeBoosts);
+	}
+	
+	//-------------------------------------------------------------
+	/*
+	 * Called when a change happens in the Edge Boost or Edge Action
+	 * selection.
+	 */
+	_onEdgeBoostActionChange(event) {
+		console.log("_onEdgeBoostActionChange");
+		// Ignore this, if there is no actor
+		if (!this.data.data.actor) {
+			return;
+		}
+		if (!event || !event.currentTarget) {
+			return;
+		}
+		
+		if (event.currentTarget.name === "edgeBoost") {
+			const boostsSelect = event.currentTarget;
+			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;
+			console.log(" boostId = "+boostId);
+			this.data.data.edgeBoost = boostId;
+	      let edgeActions = CONFIG.SR6.EDGE_ACTIONS.filter(act => act.cost<=this.data.edge);
+		} else if (event.currentTarget.name === "edgeAction") {
+			const actionSelect = event.currentTarget;
+			let actionId = actionSelect.children[actionSelect.selectedIndex].dataset.itemActionid;
+			console.log(" actionId = "+actionId);
+			this.data.data.edgeAction = actionId;
+		}
+      
+		
+	}
+	
   _onNoTarget() {
     document.getElementById("noTargetLabel").innerText = game.i18n.localize("shadowrun6.roll.notarget");
   }

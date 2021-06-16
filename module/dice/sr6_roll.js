@@ -22,7 +22,7 @@ export default class SR6Roll extends Roll {
       noOfDice = 0;
     }
     let formula = "";
-    if (data.type == 0) {
+    if (data.buttonType == 0) {
       if (this.data.useWildDie) {
         formula = this.createFormula(1, -1, data.explode);
         if (noOfDice - 1 > 0) {

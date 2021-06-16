@@ -57,18 +57,20 @@
 	       </div>
 	     </td>
 	     <td>Boost</td>
-	     <td><select name="edgeBoost" id="edgeBoosts">
+	     <td><select name="edgeBoost" class="edgeBoosts">
             <option value="none" data-item-boostid="none"> - </option>
+            {{#select edgeBoost}}
             {{#each data.edgeBoosts as |boost id|}}
             <option value="{{boost.id}}" data-item-boostid="{{boost.id}}">{{localize (concat "shadowrun6.edge_boost."
                 boost.id)}} - ({{boost.cost}})</option>
             {{/each}}
             <option value="edge_action" data-item-boostid="edge_action">{{localize "shadowrun6.edge_boost.edge_action"}}</option>
+            {{/select}}
         </select></td>
     	</tr>
     	<tr>
     		<td>Action</td>
-    		<td><select name="edgeAction" id="edgeActions">
+    		<td><select name="edgeAction" class="edgeActions">
              <option value="none" data-item-actionid="none"> - </option>
         </select></td>
     	</tr>
