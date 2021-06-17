@@ -47,10 +47,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
-			html.find('.ritual-create').click(ev => {
+			html.find('.metamagic-create').click(ev => {
+				console.log("new metamagic");
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.ritual"),
-					type: "ritual",
+					name: game.i18n.localize("shadowrun6.newitem.metamagic"),
+					type: "metamagic",
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
@@ -58,6 +59,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.spell"),
 					type: "spell",
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.ritual-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.ritual"),
+					type: "ritual",
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});

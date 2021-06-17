@@ -392,6 +392,7 @@
 			"gear",
 			"martialartstyle",
 			"martialarttech",
+			"metamagic",
 			"quality",
 			"skill",
 			"adeptpower",
@@ -517,15 +518,10 @@
 			"range": "self",
 			"damage": "",
 			"alchemic": false,
-			"features": {
-				"area": false,
-				"direct": false,
-				"indirect": false,
-				"sense_single": false,
-				"sense_multi": false
-			},
+			"multiSense": false,
 			"isOpposed": true,
-			"withEssence": false
+			"withEssence": false,
+			"wildDie": false
 		}
 	}
 }
