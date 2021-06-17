@@ -515,6 +515,7 @@
 			"drain": 1,
 			"type": "physical",
 			"range": "self",
+			"damage": "",
 			"alchemic": false,
 			"features": {
 				"area": false,

@@ -1,17 +1,24 @@
 <div class="section" style="display: inline-block; width: 48%; margin: 5px;">
-<div class="attributes" style="margin-bottom: 10px">
-    <div class="attribute" augmented-ui="b-clip-x exe">
-        <p>{{localize "attrib.mag" }}</p>
+  	<div class="attributes" style="margin-bottom: 10px">
+   	<div class="attribute" augmented-ui="b-clip-x exe">
+      	<p>{{localize "attrib.mag" }}</p>
          <span>{{data.data.attributes.mag.pool}}</span>
          <input type="hidden" data-dtype="Number" name="data.data.attributes.mag.pool" value="8" />
          <div class="field {{id}}Changed">
             <label>{{localize 'shadowrun6.numerical.base'}}</label>
-            <input type="number" data-dtype="Number" name="data.data.attributes.mag.base" value="{{data.data.attributes.mag.base}}" placeholder="base" title="{{localize 'shadowrun6.numerical.baseString'}}" min="1" max="6" />
+            <input type="number" data-dtype="Number" name="data.attributes.mag.base" value="{{data.data.attributes.mag.base}}" placeholder="base" title="{{localize 'shadowrun6.numerical.baseString'}}" min="1" max="6" />
          </div>
          <div class="field {{id}}Changed">
             <label>{{localize 'shadowrun6.numerical.mod'}}</label>
-            <input type="number" data-dtype="Number" name="data.data.attributes.mag.mod" value="{{data.data.attributes.mag.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
+            <input type="number" data-dtype="Number" name="data.attributes.mag.mod" value="{{data.data.attributes.mag.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
          </div>
-      </div>
+		</div>
+   	{{localize "shadowrun6.tradition.attribute"}}
+   	<select name="tradition">
+            <option value="log" data-item-tradattr="log">{{localize "attrib.log"}}</option>
+            <option value="cha" data-item-tradattr="cha">{{localize "attrib.cha"}}</option>
+        </select>
+        <br/>
    </div>
+   <span style="color:red">Work in Progress</span>
 </div>

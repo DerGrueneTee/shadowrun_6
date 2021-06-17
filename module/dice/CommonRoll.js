@@ -244,31 +244,33 @@ export class RollDialog extends Dialog {
 	 }
 
 	const drElement = document.getElementById("dr");
-   const dr = drElement.value;
+	if (drElement) {
+   	const dr = drElement.value;
       const arModElem = document.getElementById("arMod");
-   if (this.data.data.rollType === "weapon") {
-      const arElement = document.getElementById("ar");
-      let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
-      if (arModElem.value && parseInt(arModElem.value)!=0) {
-			ar += parseInt(arModElem.value);
-      }
-		this.data.data.attackRating = ar;
-      let result = ar - dr;
-      if (result >= 4) {
-			this.data.edgePlayer++;
-      } else if (result <= -4) {
-			this.data.edgeTarget++;
-		}
-	 } else {
- 		let ar = this.data.data.attackRating;
-      if (arModElem.value && parseInt(arModElem.value)!=0) {
-			ar += parseInt(arModElem.value);
-      }
-      let result = ar - dr;
-      if (result >= 4) {
-			this.data.edgePlayer++;
-      } else if (result <= -4) {
-			this.data.edgeTarget++;
+   	if (this.data.data.rollType === "weapon") {
+      	const arElement = document.getElementById("ar");
+      	let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
+      	if (arModElem.value && parseInt(arModElem.value)!=0) {
+				ar += parseInt(arModElem.value);
+      	}
+			this.data.data.attackRating = ar;
+      	let result = ar - dr;
+      	if (result >= 4) {
+				this.data.edgePlayer++;
+   	   } else if (result <= -4) {
+				this.data.edgeTarget++;
+			}
+	 	} else {
+ 			let ar = this.data.data.attackRating;
+      	if (arModElem.value && parseInt(arModElem.value)!=0) {
+				ar += parseInt(arModElem.value);
+      	}
+      	let result = ar - dr;
+      	if (result >= 4) {
+				this.data.edgePlayer++;
+      	} else if (result <= -4) {
+				this.data.edgeTarget++;
+			}
 		}
 	}
 

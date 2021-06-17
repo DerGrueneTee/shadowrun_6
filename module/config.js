@@ -127,6 +127,12 @@ SR6.spell_duration = {
 	"limited": "shadowrun6.spell.duration_limited",
 	"special" :  "shadowrun6.spell.duration_special"
 };
+SR6.spell_damage = {
+	"physical" : "shadowrun6.spell.damage_physical",
+	"stun"     : "shadowrun6.spell.damage_stun",
+	"physical_special" : "shadowrun6.spell.damage_physical_special",
+	"stun_special"     : "shadowrun6.spell.damage_stun_special",
+};
 
 SR6.adeptpower_activation = {
 	"passive" : "shadowrun6.adeptpower.activation_passive",

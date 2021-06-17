@@ -668,7 +668,7 @@ export class Shadowrun6Actor extends Actor {
 		console.log("rollCommonCheck(pool="+pool+")");
 		let data = mergeObject(options, {
 			pool: pool,
-			title: title,
+			checkText: title,
 			dialogConfig: dialogConfig	
 		});
 		data.speaker = ChatMessage.getSpeaker({actor: this});
