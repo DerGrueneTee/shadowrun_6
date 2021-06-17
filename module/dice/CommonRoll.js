@@ -4,12 +4,8 @@ import SR6Roll from "./sr6_roll.js"
 /**
  * Called from Shadowrun6Actor.js
  */
-export async function doRoll(data, messageData = {}) {
+export async function doRoll(data) {
 	console.log("ENTER doRoll");
-	
-  //messageData.flavor = "<h2>" + data.title + "</h2>";
-  //messageData.speaker = ChatMessage.getSpeaker();
-  //messageData.targetId = data.targetId;
 
 	// Create the Roll instance
 	const _r = await _showRollDialog(data, _dialogClosed);
@@ -150,10 +146,15 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.edgeBoost === "edge_action") {
 			console.log("ToDo: handle edge action");
 		} else {
-			let boost = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.id===data.edgeBoost);
+			let boost = CONFIG.SR6.EDGE_BOOSTS.find(boost => boost.id==data.edgeBoost);
 			console.log("Pay "+boost.cost+" egde for Edge Boost: "+game.i18n.localize("shadowrun6.edge_boost."+data.edgeBoost));
-			data.actor.data.data.edge.value -= boost.cost;
+			data.actor.data.data.edge.value = data.edge - boost.cost;
 			// ToDo Anja: Roll cost dice coins here
+			data.actor.update({ ["data.edge.value"]: data.actor.data.data.edge.value });
+		}
+	} else {
+		if (data.edge>0) {
+			data.actor.update({ ["data.edge.value"]: data.edge });
 		}
 	}
 	
@@ -251,6 +252,7 @@ export class RollDialog extends Dialog {
       if (arModElem.value && parseInt(arModElem.value)!=0) {
 			ar += parseInt(arModElem.value);
       }
+		this.data.data.attackRating = ar;
       let result = ar - dr;
       if (result >= 4) {
 			this.data.edgePlayer++;
@@ -283,7 +285,7 @@ export class RollDialog extends Dialog {
       this.data.edgeTarget = 0;
    }
 	// Set new edge value
-   this.data.edge = this.data.data.actor.data.data.edge.value + this.data.edgePlayer;
+   this.data.edge = Math.min(7,this.data.data.actor.data.data.edge.value + this.data.edgePlayer);
 	this.data.data.edge = this.data.edge;
    // Update in dialog
 	let edgeValue = this._element[0].getElementsByClassName("edge-value")[0];
@@ -318,12 +320,57 @@ export class RollDialog extends Dialog {
 	//-------------------------------------------------------------
 	_updateEdgeBoosts(elem, available) {
 		let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=available);
-		console.log("updateEdgeBoosts for "+available+" = "+newEdgeBoosts);
+
+		// Node for inserting new data before		
+		let insertBeforeElem = {};
+		// Remove previous data
+		var array = Array.from(elem.children);
+		array.forEach( child => {
+			if (child.value!="none" && child.value!="edge_action") {
+				elem.removeChild(child)
+			}
+			if (child.value=="edge_action") {
+				insertBeforeElem = child;
+			}
+		});
+		
+		// Add new data
+		newEdgeBoosts.forEach( boost => {
+			let opt = document.createElement("option");
+			opt.setAttribute("value", boost.id);
+			opt.setAttribute("data-item-boostid", boost.id);
+			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_boost."+boost.id)+" - ("+boost.cost+")");
+			opt.appendChild(cont);
+			elem.insertBefore(opt, insertBeforeElem);
+		});
+	}
+
+	//-------------------------------------------------------------
+	_updateEdgeActions(elem, available) {
+		let newEdgeActions = CONFIG.SR6.EDGE_ACTIONS.filter(action => action.cost<=available);
+
+		// Remove previous data
+		var array = Array.from(elem.children);
+		array.forEach( child => {
+			if (child.value!="none") {
+				elem.removeChild(child)
+			}
+		});
+		
+		// Add new data
+		newEdgeActions.forEach( action => {
+			let opt = document.createElement("option");
+			opt.setAttribute("value", action.id);
+			opt.setAttribute("data-item-actionid", action.id);
+			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_action."+action.id)+" - ("+action.cost+")");
+			opt.appendChild(cont);
+			elem.appendChild(opt);
+		});
 	}
 	
 	//-------------------------------------------------------------
 	/*
-	 * Called when a change happens in the Edge Boost or Edge Action
+	 * Called when a change happens in the Edge Action or Edge Action
 	 * selection.
 	 */
 	_onEdgeBoostActionChange(event) {
@@ -341,14 +388,53 @@ export class RollDialog extends Dialog {
 			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;
 			console.log(" boostId = "+boostId);
 			this.data.data.edgeBoost = boostId;
-	      let edgeActions = CONFIG.SR6.EDGE_ACTIONS.filter(act => act.cost<=this.data.edge);
+		   if (boostId==="edge_action") {
+				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , this.data.edge);
+			} else {
+				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , 0);
+			}
+			if (boostId!="none") {
+				this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_boost."+boostId)
+			} else {
+				this.data.data.edge_use="";
+			}
+			this._performEdgeBoostOrAction(this.data.data, boostId);
 		} else if (event.currentTarget.name === "edgeAction") {
 			const actionSelect = event.currentTarget;
 			let actionId = actionSelect.children[actionSelect.selectedIndex].dataset.itemActionid;
 			console.log(" actionId = "+actionId);
 			this.data.data.edgeAction = actionId;
+			this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_action."+actionId)
+			this._performEdgeBoostOrAction(this.data.data, actionId);
 		}
-      
+	}
+
+	//-------------------------------------------------------------
+	_updateDicePool(data) {
+		$("label[name='dicePool']")[0].innerText = parseInt(data.pool) + parseInt(data.modifier);
+	}
+	
+	//-------------------------------------------------------------
+	_performEdgeBoostOrAction(data, boostOrActionId) {
+		console.log("ToDo: performEgdeBoostOrAction "+boostOrActionId);
+		if (boostOrActionId=="edge_action") {
+			return;
+		}
+		
+		data.explode = false;
+		data.modifier = 0;
+		switch (boostOrActionId) {
+		case "add_edge_pool":
+			data.explode = true;
+			data.modifier = this.data.data.actor.data.data.edge.max;
+			break;
+		}	
+
+		// Update content on dialog	
+		$("input[name='modifier']")[0].value = data.modifier;
+		$("input[name='explode' ]")[0].value = data.explode;
+		$("input[name='explode' ]")[0].checked = data.explode;
+		this._updateDicePool(data);
 		
 	}
 	

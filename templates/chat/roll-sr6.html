@@ -2,11 +2,15 @@
   <!-- Fertigkeitswert: data.value; Schwierigkeit: data.threshold; Modifikation: data.modifier; Würfelergebnis: data.dieResult; Gesamt: data.total-->
   
   <h3>{{data.actionText}}</h3> 
-  	{{#if data.isOpposed}}
+  {{#if data.isOpposed}}
   <div class="chat-edge" style="display:block">
     <div>{{data.edge_message}}</div>
+    {{#if data.edge_use}}
+    <div style="color: var(--highlight-color)">{{data.edge_use}}</div>
+    {{/if}}
   <div class="chat-edge-collapsible" style="display:none">
     <header class="part-header flexrow">
+    {{log data}}
       <div>{{ localize 'shadowrun6.derived.attack_rating'}}: <b>{{data.attackRating}}</b></div>
       <br/>
       <div>{{ localize 'shadowrun6.derived.defense_rating'}}: <b>{{data.defRating}}</b></div>

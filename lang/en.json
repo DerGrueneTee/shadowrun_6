@@ -30,7 +30,14 @@
             "lift_carry": "Lift / Carry"
         },
 		  "edge_action": {
-				
+				"anticipation": "Anticipation",
+				"big_speech": "Big Speech",
+				"bring_the_drama": "Bring the Drama",
+				"called_shot_disarm": "Called Shot - Disarm",
+				"called_shot_vitals": "Called Shot - Vitals",
+				"fire_from_cover": "Fire from Cover",
+				"knockout_blow": "Knowout Blow",
+				"shank": "Shank"
 			},
 		  "edge_boost": {
 				"edge_action": "Edge Action - (1-5)",
