@@ -29,6 +29,15 @@
                                                         style="vertical-align: middle;" type="checkbox" {{checked
                                                         item.data.data.feature.spotter}} name="data.feature.spotter" />
                                         </td>
+                                </tr>
+                                <tr>
+                                        <td>
+                                                <span style="vertical-align: middle;">{{localize
+                                                        'shadowrun6.label.threshold'}}</span>
+                                                <input style="vertical-align: middle;" type="number"
+                                                        name="data.threshold" value="{{item.data.data.threshold}}" />
+                                        </td>
+                                </tr>
                         </table>
                         <h3>{{localize 'shadowrun6.item.description'}}</h3>
                         <textarea class="box" type="text" name="data.description" cols="20"
