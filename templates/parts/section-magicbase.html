@@ -1,5 +1,6 @@
-<div style="display: inline-block; width:100%">
-  	<div class="attributes" style="margin-bottom: 10px">
+<div style="display: flex; width:100%">
+   {{#if showMagic}}
+  	<div class="attributes" style="margin-bottom: 10px; margin-top:0.4rem">
    	<div class="attribute" augmented-ui="b-clip-x exe">
       	<p>{{localize "attrib.mag" }}</p>
          <span>{{data.data.attributes.mag.pool}}</span>
@@ -13,6 +14,9 @@
             <input type="number" data-dtype="Number" name="data.attributes.mag.mod" value="{{data.data.attributes.mag.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
          </div>
 		</div>
+   </div>
+   {{/if}}
+		<div class="section" style="width:inherit">
 		<table>
 			<tr>
 				<td><b>{{localize "shadowrun6.tradition.attribute"}}</b></td>
@@ -44,5 +48,5 @@
 				<td class="centered" title="{{data.data.defenserating.astral.modString}}">{{data.data.defenserating.astral.pool}}</td>
 			</tr>
 		</table>
-   </div>
+		</div>
 </div>

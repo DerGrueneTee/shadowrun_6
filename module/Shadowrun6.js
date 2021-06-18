@@ -241,6 +241,18 @@ Hooks.once("init", async function () {
     }
   });
 
+  Hooks.on('preUpdateCombatant', (combatant, createData, options, userId) => {
+    console.log("Combatant with initiative "+createData.initiative);
+  });
+
+  Hooks.on('preUpdateCombat', (combat, createData, options, userId) => {
+    console.log("Combat with turn "+createData.turn+" in round "+combat.data.round);
+  });
+
+  Hooks.on('deleteCombat', (combat, createData, userId) => {
+    console.log("End Combat");
+  });
+
   //  Hooks.on("modifyTokenAttribute", (attribute,value,isDelta,isBar,updates={}) => {
   //	console.log("Token modified "+attribute+" with "+value);
   //	const hp = getProperty(this.data.data, attribute);

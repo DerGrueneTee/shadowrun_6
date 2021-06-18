@@ -42,10 +42,12 @@
 			<div class="attributes" style="margin-bottom: 10px">
 				{{> "systems/shadowrun6-eden/templates/parts/attributes-augmented.html" attributes=data.data.attributes}}
 			</div>
+		  <div style="column-count: 2; margin-right: 5px;">
 			{{> "systems/shadowrun6-eden/templates/parts/pc-derived.html" attributes=data.data.attributes}}
 		   {{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
 			{{> "systems/shadowrun6-eden/templates/parts/initiatives.html" initiative=data.data.initiative}}
 		   {{> "systems/shadowrun6-eden/templates/parts/section-bodyware.html"}}
+			</div>
 		</div>
 
 		{{!-- Skills Tab --}}
@@ -62,22 +64,12 @@
 
 		{{!-- Combat Tab --}}
 		<div class="tab combat" data-group="primary" data-tab="combat">
-			{{> "systems/shadowrun6-eden/templates/parts/pc-combat.html" }}
-			
+			{{> "systems/shadowrun6-eden/templates/parts/tab-combat.html" }}
 		</div>
 
 		{{!-- Magic Tab --}}
 		<div class="tab magic" data-group="primary" data-tab="magic">
-		  <section>
-		  <div style="column-count: 2; column-rule: solid black 2px; margin-right: 5px;">
-			{{> "systems/shadowrun6-eden/templates/parts/section-magicbase.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-spells.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-adeptpowers.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-rituals.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-metamagics.html"}}
-			</div>
-		  </section>
-		  
+			{{> "systems/shadowrun6-eden/templates/parts/tab-magic.html" }}
 		</div>
 
 		{{!-- Biography Tab --}}

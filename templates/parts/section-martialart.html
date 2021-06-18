@@ -8,6 +8,7 @@
 <table>
   {{#each actor.items as |item id|}} 
     {{#iff item.type '==' 'martialartstyle'}}
+		{{log "Style "  item}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
 			<td style="width: 85%" colspan="2"> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
 			<td style="width: 15%"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
@@ -16,7 +17,8 @@
 	   </tr>
 		{{#each actor.items as |subitem idx|}} 
 		{{#iff subitem.type '==' 'martialarttech'}}
-		{{#iff subitem.data.data.style '==' item.data.data.genesisId}}
+		{{log "Tech " subitem}}
+		{{#iff subitem.data.data.style '==' item.data.data.genesisID}}
 		<tr class="item list-item" data-item-id="{{subitem.id}}">
 			<td style="width: 60%"><input style="font-weight: normal; padding-left: 10px" type="text" value="{{subitem.name}}" data-field="name" title="{{subitem.data.data.description}}"/></td>
 			<td style="width: 25%"><input type="text" value="{{subitem.data.data.explain}}" data-field="data.explain" class="secondary" placeholder="?"/></td>

@@ -162,6 +162,10 @@ export class Shadowrun6Actor extends Actor {
 		} 
 
 		// Mana Attack Rating - used for unarmed astral combat or spells
+		if (!data.tradition) {
+			data.tradition = { attribute: "log"};
+		}
+		
 		let traditionAttr = data.attributes[data.tradition.attribute];
 		data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
 		data.attackrating.astral.modString  = game.i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
@@ -222,7 +226,7 @@ export class Shadowrun6Actor extends Actor {
 				data.defenserating = {};
 			}
 			if (!data.defenserating.physical)  data.defenserating.physical = { mod: 0};
-			if (!data.defenserating.mana    )  data.defenserating.mana     = { mod: 0};
+			if (!data.defenserating.astral  )  data.defenserating.astral   = { mod: 0};
 			if (!data.defenserating.vehicle )  data.defenserating.vehicle  = { mod: 0};
 			if (!data.defenserating.matrix  )  data.defenserating.matrix   = { mod: 0};
 			if (!data.defenserating.social  )  data.defenserating.social   = { mod: 0};

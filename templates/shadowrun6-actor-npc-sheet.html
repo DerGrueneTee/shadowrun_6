@@ -51,13 +51,14 @@
 
 		{{!-- Magic Tab --}}
 		<div class="tab magic" data-group="primary" data-tab="magic">
-		  <section>
+  <section>
+	  <div style="column-count: 2; margin-right: 5px;">
+			{{> "systems/shadowrun6-eden/templates/parts/section-magicbase.html" showMagic=false}}
 			{{> "systems/shadowrun6-eden/templates/parts/section-spells.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-adeptpowers.html"}}
 			{{> "systems/shadowrun6-eden/templates/parts/section-rituals.html"}}
+			{{> "systems/shadowrun6-eden/templates/parts/section-adeptpowers.html"}}
 			{{> "systems/shadowrun6-eden/templates/parts/section-metamagics.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-magicbase.html"}}
-		  </section>
 		</div>
+  </section>		</div>
     </section>
 </form>
