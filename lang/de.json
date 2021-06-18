@@ -69,7 +69,8 @@
                     "striking": "Striking",
                     "weapon": "weapon"
                 }
-            }
+            },
+            "feature": "Merkmale"
         },
         "spell": {
             "range": "Reichweite",
@@ -153,7 +154,11 @@
 				"none": "-",
             "specialization": "Spezialisierung",
             "value": "Wert",
-            "wilddie": "Schicksalswürfel"
+            "wilddie": "Schicksalswürfel",
+            "level": "Hat Stufen",
+            "mages": "Magier",
+            "adepts": "Adepten",
+            "threshold": "Schwellenwert"
         },
         "monitor": {
             "physical": "Körperlich",
@@ -481,12 +486,16 @@
     "ACTOR.TypePlayer": "Spieler-Charakter",
     "ACTOR.TypeNpc": "NSC",
     "ACTOR.TypeCritter": "Kreatur",
+    "ITEM.TypeGear": "Ausrüstung",
+    "ITEM.TypeAdeptpower":"Adeptenkraft",
     "ITEM.TypeQuality": "Vor-/Nachteil",
-    "ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
     "ITEM.TypeSpell": "Zauber",
+    "ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
     "ITEM.TypeWeapon": "Waffe",
+    "ITEM.TypeRitual": "Ritual",
+    "ITEM.TypeMetamagic": "Metamagie",
     "ITEM.TypeMartialartstyle": "Kampfkunststil",
-    "ITEM.TypeMartialarttechn": "Kampfkunstechnik",
+    "ITEM.TypeMartialarttech": "Kampfkunstechnik",
     "QUALITY_CATEGORIES.ADVANTAGE": "Vorteil",
     "QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil"
 }

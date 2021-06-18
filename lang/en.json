@@ -94,7 +94,8 @@
                     "striking": "Striking",
                     "weapon": "Weapon"
                 }
-            }
+            },
+            "feature": "Features"
         },
         "adeptpower": {
             "cost": "Cost",
@@ -153,7 +154,11 @@
             "poolmod": "Pool modifier",
             "specialization": "Specialization",
             "value": "Value",
-            "wilddie": "Wild Die"
+            "wilddie": "Wild Die",
+            "level": "Has levels",
+            "mages": "Mages",
+            "adepts": "Adepts",
+            "threshold": "Threshold"
         },
         "monitor": {
             "physical": "Physical",
@@ -557,13 +562,16 @@
     "ACTOR.TypePlayer": "Player Character",
     "ACTOR.TypeNpc": "NPC",
     "ACTOR.TypeCritter": "Critter",
-    "ITEM.TypeAdeptpower": "Adept Power (NOT READY YET)",
+    "ITEM.TypeGear": "Gear",
+    "ITEM.TypeAdeptpower": "Adept Power",
     "ITEM.TypeQuality": "Quality",
     "ITEM.TypeSkill": "Language/Knowledge Skill",
     "ITEM.TypeSpell": "Spell",
-    "ITEM.TypeGear": "Gear",
+    "ITEM.TypeWeapon": "Weapon",
+    "ITEM.TypeRitual": "Ritual",
     "ITEM.TypeMartialartstyle": "Martial Art Style",
     "ITEM.TypeMartialarttech": "Martial Art Technique",
+    "ITEM.TypeMetamagic" : "Metamagic",
     "QUALITY_CATEGORIES.ADVANTAGE": "Advantage",
     "QUALITY_CATEGORIES.DISADVANTAGE": "Disadvantage"
 }
