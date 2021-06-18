@@ -21,10 +21,22 @@
             "skills": "Skills",
 				"spells": "Spells"
         },
+		"attack_rating": {
+			"physical": "Physical Att. Rtg",
+			"astral"  : "Mana Att. Rtg",
+			"social"  : "Social Att. Rtg.",
+			"matrix"  : "Matrix Att. Rtg.",
+			"vehicle" : "Vehicle Att. Rtg."
+		},
+		"defense_rating": {
+			"physical": "Physical Def. Rtg",
+			"astral"  : "Mana Def. Rtg",
+			"social"  : "Social Def. Rtg.",
+			"matrix"  : "Matrix Def. Rtg.",
+			"vehicle" : "Vehicle Def. Rtg."
+		},
         "derived": {
-            "attack_rating": "Attack Rating",
-            "attack_rating_astral": "Spell/Astral Att.Rtg",
-            "defense_rating": "Defense Rating",
+             "defense_rating": "Defense Rating",
             "composure": "Composure",
             "judge_intentions": "Judge Intentions",
             "memory": "Memory",
@@ -54,12 +66,15 @@
 				"count_2_glitch": "Count 2s as glitches for the target",
 				"create_special": "Create special effect"
 		  },
-        "resist": {
-            "attacks": "Defense: Attacks",
-            "astral_direct": "Defense: Direct Spells",
-            "astral_indirect": "Defense: Ind. Spells",
-            "damage": "Soak",
-            "toxin": "Resist Toxin"
+        "defense": {
+            "physical"       : "Defense: Attacks",
+            "astral"         : "Defense: Astral Combat",
+            "spells_direct"  : "Defense: Direct Spells",
+            "spells_indirect": "Defense: Ind. Spells",
+            "spells_other"   : "Defense: Ind. Spells",
+            "damage_physical": "Resist Physical Dmg",
+            "damage_astral"  : "Resist Astral Dmg",
+            "toxin"          : "Resist Toxin"
         },
         "initiative": {
             "physical": "Initiative",

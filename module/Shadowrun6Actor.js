@@ -18,7 +18,7 @@ export class Shadowrun6Actor extends Actor {
 		this._prepareAttackRatings();
 		this._prepareDefenseRatings();
 		this._prepareSkills();
-		this._prepareResistPools();
+		this._prepareDefensePools();
 		this._prepareItemPools();
 		this._calculateEssense();
 		
@@ -145,24 +145,23 @@ export class Shadowrun6Actor extends Actor {
 		if (!data.attackrating) {
 			data.attackrating = {};
 		}
-		/* (Unarmed) Attack Rating */
-		if (!data.attackrating.unarmed) {
-			data.attackrating.unarmed = { mod: 0};
-		}
-		data.attackrating.unarmed.base = data.attributes["rea"].pool + data.attributes["str"].pool;
-		data.attackrating.unarmed.modString  = game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool+"\n";
-		data.attackrating.unarmed.modString += game.i18n.localize("attrib.str_short") + " " + data.attributes["str"].pool;
-		data.attackrating.unarmed.pool = data.attackrating.unarmed.base + data.attackrating.unarmed.mod;
-		if (data.attackrating.unarmed.mod) {
-			data.attackrating.unarmed.pool += data.attackrating.unarmed.mod;
-			data.attackrating.unarmed.modString += "\n+" + data.attackrating.unarmed.mod;
+		if (!data.attackrating.physical )  data.attackrating.physical = { mod: 0};
+		if (!data.attackrating.astral   )  data.attackrating.astral   = { mod: 0};
+		if (!data.attackrating.vehicle  )  data.attackrating.vehicle  = { mod: 0};
+		if (!data.attackrating.matrix   )  data.attackrating.matrix   = { mod: 0};
+		if (!data.attackrating.social   )  data.attackrating.social   = { mod: 0};
+
+		/* Physical Attack Rating - used for unarmed combat */
+		data.attackrating.physical.base = data.attributes["rea"].pool + data.attributes["str"].pool;
+		data.attackrating.physical.modString  = game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool+"\n";
+		data.attackrating.physical.modString += game.i18n.localize("attrib.str_short") + " " + data.attributes["str"].pool;
+		data.attackrating.physical.pool = data.attackrating.physical.base + data.attackrating.physical.mod;
+		if (data.attackrating.physical.mod) {
+			data.attackrating.physical.pool += data.attackrating.physical.mod;
+			data.attackrating.physical.modString += "\n+" + data.attackrating.physical.mod;
 		} 
 
-		// Astral Attack Rating
-		if (!data.attackrating.astral) {
-			data.attackrating.astral = { mod: 0};
-		}
-		console.log("TODO: tradition "+data.tradition.attribute);
+		// Mana Attack Rating - used for unarmed astral combat or spells
 		let traditionAttr = data.attributes[data.tradition.attribute];
 		data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
 		data.attackrating.astral.modString  = game.i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
@@ -174,9 +173,6 @@ export class Shadowrun6Actor extends Actor {
 		} 
 		
 		// Matrix attack rating (Angriff + Schleicher)
-		if (!data.attackrating.matrix) {
-			data.attackrating.matrix = { mod: 0};
-		}
 		data.attackrating.matrix.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
 		data.attackrating.matrix.pool = data.attackrating.matrix.base;
 		if (data.attackrating.matrix.mod) {
@@ -185,20 +181,14 @@ export class Shadowrun6Actor extends Actor {
 		} 
 		
 		// Vehicle combat attack rating (Pilot + Sensor)
-		if (!data.attackrating.rigged) {
-			data.attackrating.rigged = { mod: 0};
-		}
-		data.attackrating.rigged.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
-		data.attackrating.rigged.pool = data.attackrating.rigged.base;
-		if (data.attackrating.rigged.mod) {
-			data.attackrating.rigged.pool += data.attackrating.rigged.mod;
-			data.attackrating.rigged.modString += "\n+" + data.attackrating.rigged.mod;
+		data.attackrating.vehicle.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
+		data.attackrating.vehicle.pool = data.attackrating.vehicle.base;
+		if (data.attackrating.vehicle.mod) {
+			data.attackrating.vehicle.pool += data.attackrating.vehicle.mod;
+			data.attackrating.vehicle.modString += "\n+" + data.attackrating.vehicle.mod;
 		} 
 		
 		// Social value
-		if (!data.attackrating.social) {
-			data.attackrating.social = { mod: 0};
-		}
 		data.attackrating.social.base = data.attributes["cha"].pool;
 		data.attackrating.social.modString = game.i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
 		data.attackrating.social.pool = data.attackrating.social.base;
@@ -230,16 +220,12 @@ export class Shadowrun6Actor extends Actor {
 		if (actorData.type === "Player" || actorData.type === "NPC") {
 			if (!data.defenserating) {
 				data.defenserating = {};
-				data.defenserating.physical = {};
-				data.defenserating.astral = {};
-				data.defenserating.social = {};
 			}
-			if (!data.defenserating.physical       )  data.defenserating.physical        = { mod: 0};
-			if (!data.defenserating.directcombat   )  data.defenserating.directcombat    = { mod: 0};
-			if (!data.defenserating.indirectcombat )  data.defenserating.indirectcombat  = { mod: 0};
-			if (!data.defenserating.noncombatspells)  data.defenserating.noncombatspells = { mod: 0};
-			if (!data.defenserating.astralcombat   )  data.defenserating.astralcombat    = { mod: 0};
-			if (!data.defenserating.social         )  data.defenserating.social          = { mod: 0};
+			if (!data.defenserating.physical)  data.defenserating.physical = { mod: 0};
+			if (!data.defenserating.mana    )  data.defenserating.mana     = { mod: 0};
+			if (!data.defenserating.vehicle )  data.defenserating.vehicle  = { mod: 0};
+			if (!data.defenserating.matrix  )  data.defenserating.matrix   = { mod: 0};
+			if (!data.defenserating.social  )  data.defenserating.social   = { mod: 0};
 			
 			
 			// Physical Defense Rating
@@ -260,22 +246,22 @@ export class Shadowrun6Actor extends Actor {
 			});
 			
 			// Astral Defense Rating
-			data.defenserating.astralcombat.base = data.attributes["int"].pool;
-			data.defenserating.astralcombat.modString = game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
-			data.defenserating.astralcombat.pool = data.defenserating.astralcombat.base;
-			if (data.defenserating.astralcombat.mod) {
-				data.defenserating.astralcombat.pool += data.defenserating.astralcombat.mod;
-				data.defenserating.astralcombat.modString += "\n+" + data.defenserating.astralcombat.mod;
+			data.defenserating.astral.base = data.attributes["int"].pool;
+			data.defenserating.astral.modString = game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.astral.pool = data.defenserating.astral.base;
+			if (data.defenserating.astral.mod) {
+				data.defenserating.astral.pool += data.defenserating.astral.mod;
+				data.defenserating.astral.modString += "\n+" + data.defenserating.astral.mod;
 			} 
 			
-			// Non Combat Spells Defense Rating
-			data.defenserating.noncombatspells.base = data.attributes["wil"].pool + data.attributes["int"].pool;
-			data.defenserating.noncombatspells.modString  = game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
-			data.defenserating.noncombatspells.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
-			data.defenserating.noncombatspells.pool = data.defenserating.noncombatspells.base;
-			if (data.defenserating.noncombatspells.mod) {
-				data.defenserating.noncombatspells.pool += data.defenserating.noncombatspells.mod;
-				data.defenserating.noncombatspells.modString += "\n+" + data.defenserating.noncombatspells.mod;
+			// Vehicles Defense Rating (Pilot + Armor)
+			data.defenserating.vehicle.base = data.skills["piloting"].pool;
+			data.defenserating.vehicle.modString  = game.i18n.localize("skill.piloting") + " " + data.skills["piloting"].pool;
+			//data.defenserating.vehicle.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.vehicle.pool = data.defenserating.vehicle.base;
+			if (data.defenserating.vehicle.mod) {
+				data.defenserating.vehicle.pool += data.defenserating.vehicle.mod;
+				data.defenserating.vehicle.modString += "\n+" + data.defenserating.vehicle.mod;
 			} 
 			
 			// Social Defense Rating
@@ -330,77 +316,114 @@ export class Shadowrun6Actor extends Actor {
 	/*
 	 * Calculate the attributes like Initiative
 	 */
-	_prepareResistPools() {
+	_prepareDefensePools() {
 		const actorData = this.data;
 		const data = this.data.data;
 
 		// Store volatile
 
-		if (actorData.type === "Player" || actorData.type === "NPC") {
-			if (!data.resist) {
-				data.resist = {};
-				data.resist.attacks = {};
-				data.resist.damage = {};
-				data.resist.astral_direct = {};
-				data.resist.astral_indirect = {};
-				data.resist.toxin = {};
+			if (!data.defensepool) {
+				data.defensepool = {};
 			}
-			if (!data.resist.attacks)  data.resist.attacks = {};
-			if (!data.resist.damage)  data.resist.damage = {};
-			if (!data.resist.astral_direct)  data.resist.astral_direct = {};
-			if (!data.resist.astral_indirect)  data.resist.astral_indirect = {};
-			if (!data.resist.toxin)  data.resist.toxin = {};
+			if (!data.defensepool.physical       )  data.defensepool.physical = {};
+			if (!data.defensepool.astral         )  data.defensepool.astral = {};
+			if (!data.defensepool.spells_direct  )  data.defensepool.spells_direct = {};
+			if (!data.defensepool.spells_indirect)  data.defensepool.spells_indirect = {};
+			if (!data.defensepool.spells_other   )  data.defensepool.spells_other = {};
+			if (!data.defensepool.toxin          )  data.defensepool.toxin = {};
+			if (!data.defensepool.damage_physical)  data.defensepool.damage_physical = {};
+			if (!data.defensepool.damage_astral  )  data.defensepool.damage_astral = {};
+			if (!data.defensepool.vehicle        )  data.defensepool.vehicle = {};
 			
 			// Physical Defense Test
-			data.resist.attacks.base = data.attributes["rea"].pool+ data.attributes["int"].pool;
- 			data.resist.attacks.modString = "\n"+game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
- 			data.resist.attacks.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
-			data.resist.attacks.pool = data.resist.attacks.base;
-			if (data.resist.attacks.mod) {
-				data.resist.attacks.pool += data.resist.attacks.mod;
-				data.resist.attacks.modString += "\n+" + data.resist.attacks.mod;
+			data.defensepool.physical.base = data.attributes["rea"].pool+ data.attributes["int"].pool;
+ 			data.defensepool.physical.modString = "\n"+game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
+ 			data.defensepool.physical.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defensepool.physical.pool = data.defensepool.physical.base;
+			if (data.defensepool.physical.mod) {
+				data.defensepool.physical.pool += data.defensepool.physical.mod;
+				data.defensepool.physical.modString += "\n+" + data.defensepool.physical.mod;
 			} 
 			
-			// Resist damage
-			data.resist.damage.base = data.attributes["bod"].pool;
- 			data.resist.damage.modString = "\n"+game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
-			data.resist.damage.pool = data.resist.damage.base;
-			if (data.resist.damage.mod) {
-				data.resist.damage.pool += data.resist.damage.mod;
-				data.resist.damage.modString += "\n+" + data.resist.damage.mod;
+			// Astral(Combat) Defense Test
+			data.defensepool.astral.base = data.attributes["log"].pool+ data.attributes["int"].pool;
+ 			data.defensepool.astral.modString = "\n"+game.i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
+ 			data.defensepool.astral.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defensepool.astral.pool = data.defensepool.astral.base;
+			if (data.defensepool.astral.mod) {
+				data.defensepool.astral.pool += data.defensepool.astral.mod;
+				data.defensepool.astral.modString += "\n+" + data.defensepool.astral.mod;
 			} 
 			
-			// Direct compat spell defense test
-			data.resist.astral_direct.base = data.attributes["wil"].pool+ data.attributes["int"].pool;
- 			data.resist.astral_direct.modString = "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
- 			data.resist.astral_direct.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
-			data.resist.astral_direct.pool = data.resist.astral_direct.base;
-			if (data.resist.astral_direct.mod) {
-				data.resist.astral_direct.pool += data.resist.astral_direct.mod;
-				data.resist.astral_direct.modString += "\n+" + data.resist.astral_direct.mod;
+			// Direct combat spell defense test
+			data.defensepool.spells_direct.base = data.attributes["wil"].pool+ data.attributes["int"].pool;
+ 			data.defensepool.spells_direct.modString = "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.spells_direct.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defensepool.spells_direct.pool = data.defensepool.spells_direct.base;
+			if (data.defensepool.spells_direct.mod) {
+				data.defensepool.spells_direct.pool += data.defensepool.spells_direct.mod;
+				data.defensepool.spells_direct.modString += "\n+" + data.defensepool.spells_direct.mod;
 			} 
 			
-			// Indirect compat spell defense test
-			data.resist.astral_indirect.base = data.attributes["rea"].pool+ data.attributes["wil"].pool;
- 			data.resist.astral_indirect.modString = "\n"+game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
- 			data.resist.astral_indirect.modString += "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
-			data.resist.astral_indirect.pool = data.resist.astral_indirect.base;
-			if (data.resist.astral_indirect.mod) {
-				data.resist.astral_indirect.pool += data.resist.astral_indirect.mod;
-				data.resist.astral_indirect.modString += "\n+" + data.resist.astral_indirect.mod;
+			// Indirect combat spell defense test
+			data.defensepool.spells_indirect.base = data.attributes["rea"].pool+ data.attributes["wil"].pool;
+ 			data.defensepool.spells_indirect.modString = "\n"+game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
+ 			data.defensepool.spells_indirect.modString += "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+			data.defensepool.spells_indirect.pool = data.defensepool.spells_indirect.base;
+			if (data.defensepool.spells_indirect.mod) {
+				data.defensepool.spells_indirect.pool += data.defensepool.spells_indirect.mod;
+				data.defensepool.spells_indirect.modString += "\n+" + data.defensepool.spells_indirect.mod;
+			} 
+			
+			// Other spell defense test
+			data.defensepool.spells_other.base = data.attributes["log"].pool+ data.attributes["wil"].pool;
+ 			data.defensepool.spells_other.modString = "\n"+game.i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
+ 			data.defensepool.spells_other.modString += "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+			data.defensepool.spells_other.pool = data.defensepool.spells_other.base;
+			if (data.defensepool.spells_other.mod) {
+				data.defensepool.spells_other.pool += data.defensepool.spells_other.mod;
+				data.defensepool.spells_other.modString += "\n+" + data.defensepool.spells_other.mod;
+			} 
+			
+			// Vehicle combat defense
+			data.defensepool.vehicle.base = data.skills["piloting"].pool+ data.attributes["rea"].pool;
+ 			data.defensepool.vehicle.modString = "\n"+game.i18n.localize("skill.piloting") + " " + data.skills["piloting"].pool;
+ 			data.defensepool.vehicle.modString += "\n"+game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
+			data.defensepool.vehicle.pool = data.defensepool.vehicle.base;
+			if (data.defensepool.vehicle.mod) {
+				data.defensepool.vehicle.pool += data.defensepool.vehicle.mod;
+				data.defensepool.vehicle.modString += "\n+" + data.defensepool.vehicle.mod;
 			} 
 			
 			// Resist toxin
-			data.resist.toxin.base = data.attributes["bod"].pool+ data.attributes["wil"].pool;
- 			data.resist.toxin.modString = "\n"+game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
- 			data.resist.toxin.modString += "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
-			data.resist.toxin.pool = data.resist.toxin.base;
-			if (data.resist.toxin.mod) {
-				data.resist.toxin.pool += data.resist.astral_indirect.mod;
-				data.resist.toxin.modString += "\n+" + data.resist.toxin.mod;
+			data.defensepool.toxin.base = data.attributes["bod"].pool+ data.attributes["wil"].pool;
+ 			data.defensepool.toxin.modString = "\n"+game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
+ 			data.defensepool.toxin.modString += "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+			data.defensepool.toxin.pool = data.defensepool.toxin.base;
+			if (data.defensepool.toxin.mod) {
+				data.defensepool.toxin.pool += data.defensepool.toxin.mod;
+				data.defensepool.toxin.modString += "\n+" + data.defensepool.toxin.mod;
 			} 
-		}
+			
+			// Resist physical damage
+			data.defensepool.damage_physical.base = data.attributes["bod"].pool;
+ 			data.defensepool.damage_physical.modString = "\n"+game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
+			data.defensepool.damage_physical.pool = data.defensepool.damage_physical.base;
+			if (data.defensepool.damage_physical.mod) {
+				data.defensepool.damage_physical.pool += data.defensepool.damage_physical.mod;
+				data.defensepool.damage_physical.modString += "\n+" + data.defensepool.damage_physical.mod;
+			} 
+			
+			// Resist astral damage
+			data.defensepool.damage_astral.base = data.attributes["wil"].pool;
+ 			data.defensepool.damage_astral.modString = "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+			data.defensepool.damage_astral.pool = data.defensepool.damage_astral.base;
+			if (data.defensepool.damage_astral.mod) {
+				data.defensepool.damage_astral.pool += data.defensepool.damage_astral.mod;
+				data.defensepool.damage_astral.modString += "\n+" + data.defensepool.damage_astral.mod;
+			} 
 	}
+	
 	//---------------------------------------------------------
 	/*
 	 * Calculate the pool when using items with assigned skills

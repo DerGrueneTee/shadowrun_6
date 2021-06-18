@@ -110,38 +110,10 @@
 				  "physical": {
 					"mod": 0
 				  },
-				  "directcombatspells": {
-					"mod": 0
-				  },
-				  "indirectcombatspells": {
-					"mod": 0
-				  },
-				  "noncombatspells": {
-					"mod": 0
-				  },
-				  "astralcombat": {
-					"mod": 0
-				  },
 				  "matrix": {
 					"mod": 0
 				  },
-				  "rigged": {
-					"mod": 0
-				  },
-				  "social": {
-					"mod": 0
-				  }
-				}
-			},
-			"attackrating-template": {
-				"attackrating": {
-				  "unarmed": {
-					"mod": 0
-				  },
-				  "matrix": {
-					"mod": 0
-				  },
-				  "rigged": {
+				  "vehicle": {
 					"mod": 0
 				  },
 				  "astral": {
@@ -152,21 +124,52 @@
 				  }
 				}
 			},
+			"attackrating-template": {
+				"attackrating": {
+				  "physical": {
+					"mod": 0
+				  },
+				  "astral": {
+					"mod": 0
+				  },
+				  "matrix": {
+					"mod": 0
+				  },
+				  "vehicle": {
+					"mod": 0
+				  },
+				  "social": {
+					"mod": 0
+				  }
+				}
+			},
 			"resist-template": {
-				"resist": {
-				  "attacks": {
+				"defensepool": {
+				  "physical": {
 					 "mod": 0
 				  },
-				  "damage": {
+				  "astral": {
 					 "mod": 0
 				  },
-				  "astral_direct": {
+				  "spells_direct": {
 					 "mod": 0
 				  },
-				  "astral_indirect": {
+				  "spells_indirect": {
+					 "mod": 0
+				  },
+				  "spells_other": {
+					 "mod": 0
+				  },
+				  "vehicle": {
 					 "mod": 0
 				  },
 				  "toxin": {
+					 "mod": 0
+				  },
+				  "damage_physical": {
+					 "mod": 0
+				  },
+				  "damage_astral": {
 					 "mod": 0
 				  }
 		      }

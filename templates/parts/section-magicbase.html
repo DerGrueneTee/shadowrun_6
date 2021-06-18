@@ -30,11 +30,18 @@
 				<th style="padding: 0 5px 0 5px;"> </th>
 			</tr>
 			<tr>
-				<td ><b>{{ localize 'shadowrun6.derived.attack_rating_astral' }}</b></td>
+				<td ><b>{{ localize 'shadowrun6.attack_rating.astral' }}</b></td>
 				<td class="centered">{{data.data.attackrating.astral.base}}</td>
-				<td><input class="centered health-phys calcPHY" name="data.attackrating.astral.mod" type="text" value="{{data.data.attackrating.astral.mod}}" data-dtype="Number"
-				id="dataPhyMod" style="width: 2em" title="{{data.data.attackrating.astral.modString}}"></td>
-				<td class="centered">{{data.data.attackrating.astral.pool}}</td>
+				<td><input class="centered" name="data.attackrating.astral.mod" type="text" value="{{data.data.attackrating.astral.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.attackrating.astral.modString}}">{{data.data.attackrating.astral.pool}}</td>
+			</tr>
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.defense_rating.astral' }}</b></td>
+				<td class="centered">{{data.data.defenserating.astral.base}}</td>
+				<td><input class="centered" name="data.defenserating.astral.mod" type="text" value="{{data.data.defenserating.astral.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.defenserating.astral.modString}}">{{data.data.defenserating.astral.pool}}</td>
 			</tr>
 		</table>
    </div>
