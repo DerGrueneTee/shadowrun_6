@@ -154,7 +154,11 @@
             "poolmod": "Pool modifier",
             "specialization": "Specialization",
             "value": "Value",
-            "wilddie": "Wild Die"
+            "wilddie": "Wild Die",
+            "level": "Has levels",
+            "mages": "Mages",
+            "adepts": "Adepts",
+            "threshold": "Threshold"
         },
         "monitor": {
             "physical": "Physical",
