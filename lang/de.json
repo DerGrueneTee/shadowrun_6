@@ -154,7 +154,11 @@
 				"none": "-",
             "specialization": "Spezialisierung",
             "value": "Wert",
-            "wilddie": "Schicksalswürfel"
+            "wilddie": "Schicksalswürfel",
+            "level": "Hat Stufen",
+            "mages": "Magier",
+            "adepts": "Adepten",
+            "threshold": "Schwellenwert"
         },
         "monitor": {
             "physical": "Körperlich",
