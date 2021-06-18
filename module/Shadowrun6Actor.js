@@ -234,9 +234,12 @@ export class Shadowrun6Actor extends Actor {
 				data.defenserating.astral = {};
 				data.defenserating.social = {};
 			}
-			if (!data.defenserating.physical)  data.defenserating.physical = {};
-			if (!data.defenserating.astral)  data.defenserating.astral = {};
-			if (!data.defenserating.social)  data.defenserating.social = {};
+			if (!data.defenserating.physical       )  data.defenserating.physical        = { mod: 0};
+			if (!data.defenserating.directcombat   )  data.defenserating.directcombat    = { mod: 0};
+			if (!data.defenserating.indirectcombat )  data.defenserating.indirectcombat  = { mod: 0};
+			if (!data.defenserating.noncombatspells)  data.defenserating.noncombatspells = { mod: 0};
+			if (!data.defenserating.astralcombat   )  data.defenserating.astralcombat    = { mod: 0};
+			if (!data.defenserating.social         )  data.defenserating.social          = { mod: 0};
 			
 			
 			// Physical Defense Rating
@@ -257,12 +260,22 @@ export class Shadowrun6Actor extends Actor {
 			});
 			
 			// Astral Defense Rating
-			data.defenserating.astral.base = data.attributes["int"].pool;
-			data.defenserating.astral.modString = game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
-			data.defenserating.astral.pool = data.defenserating.physical.base;
-			if (data.defenserating.astral.mod) {
-				data.defenserating.astral.pool += data.defenserating.astral.mod;
-				data.defenserating.astral.modString += "\n+" + data.defenserating.astral.mod;
+			data.defenserating.astralcombat.base = data.attributes["int"].pool;
+			data.defenserating.astralcombat.modString = game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.astralcombat.pool = data.defenserating.astralcombat.base;
+			if (data.defenserating.astralcombat.mod) {
+				data.defenserating.astralcombat.pool += data.defenserating.astralcombat.mod;
+				data.defenserating.astralcombat.modString += "\n+" + data.defenserating.astralcombat.mod;
+			} 
+			
+			// Non Combat Spells Defense Rating
+			data.defenserating.noncombatspells.base = data.attributes["wil"].pool + data.attributes["int"].pool;
+			data.defenserating.noncombatspells.modString  = game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+			data.defenserating.noncombatspells.modString += "\n"+game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.noncombatspells.pool = data.defenserating.noncombatspells.base;
+			if (data.defenserating.noncombatspells.mod) {
+				data.defenserating.noncombatspells.pool += data.defenserating.noncombatspells.mod;
+				data.defenserating.noncombatspells.modString += "\n+" + data.defenserating.noncombatspells.mod;
 			} 
 			
 			// Social Defense Rating

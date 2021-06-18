@@ -110,7 +110,16 @@
 				  "physical": {
 					"mod": 0
 				  },
-				  "astral": {
+				  "directcombatspells": {
+					"mod": 0
+				  },
+				  "indirectcombatspells": {
+					"mod": 0
+				  },
+				  "noncombatspells": {
+					"mod": 0
+				  },
+				  "astralcombat": {
 					"mod": 0
 				  },
 				  "matrix": {
