@@ -519,7 +519,8 @@
 				"minion": false,
 				"spell": false,
 				"spotter": false
-			}
+			},
+			"description" : ""
 		},
 		"skill": {
 			"genesisID": "",
