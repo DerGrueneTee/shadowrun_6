@@ -23,6 +23,7 @@
         },
         "derived": {
             "attack_rating": "Attack Rating",
+            "attack_rating_astral": "Spell/Astral Att.Rtg",
             "defense_rating": "Defense Rating",
             "composure": "Composure",
             "judge_intentions": "Judge Intentions",

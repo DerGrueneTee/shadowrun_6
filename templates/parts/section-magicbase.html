@@ -13,12 +13,29 @@
             <input type="number" data-dtype="Number" name="data.attributes.mag.mod" value="{{data.data.attributes.mag.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
          </div>
 		</div>
-   	{{localize "shadowrun6.tradition.attribute"}}
-   	<select name="tradition">
-            <option value="log" data-item-tradattr="log">{{localize "attrib.log"}}</option>
-            <option value="cha" data-item-tradattr="cha">{{localize "attrib.cha"}}</option>
-        </select>
-        <br/>
+		<table>
+			<tr>
+				<td><b>{{localize "shadowrun6.tradition.attribute"}}</b></td>
+				<td colspan="3">
+					<select name="data.tradition.attribute">
+					{{selectOptions config.tradition_attributes localize="true" selected=data.data.tradition.attribute}}        
+      			</select>
+				</td>
+			</tr>
+			<tr>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.attribute' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.base' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.modifier' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.value' }}</th>
+				<th style="padding: 0 5px 0 5px;"> </th>
+			</tr>
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.derived.attack_rating_astral' }}</b></td>
+				<td class="centered">{{data.data.attackrating.astral.base}}</td>
+				<td><input class="centered health-phys calcPHY" name="data.attackrating.astral.mod" type="text" value="{{data.data.attackrating.astral.mod}}" data-dtype="Number"
+				id="dataPhyMod" style="width: 2em" title="{{data.data.attackrating.astral.modString}}"></td>
+				<td class="centered">{{data.data.attackrating.astral.pool}}</td>
+			</tr>
+		</table>
    </div>
-   <span style="color:red">Work in Progress</span>
 </div>

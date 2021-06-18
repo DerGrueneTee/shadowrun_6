@@ -67,6 +67,14 @@ Hooks.once("init", async function () {
     }
     return options.inverse(this);
   });
+	Handlebars.registerHelper('description', function (itemData, type) {
+   	let key = type+"."+itemData.genesisID+".desc";
+		let name= game.i18n.localize(key);
+		if (name==key) {
+			return "";
+		}
+		return name;
+  });
 
   function onCreateItem(item, options, userId) {
     console.log("onCreateItem");
@@ -203,6 +211,17 @@ Hooks.once("init", async function () {
 		 event.preventDefault();
 	    let roll = $(event.currentTarget); 
 	    let tip = roll.find(".chat-edge-collapsible");
+	    if (!tip.is(":visible")) {
+		    tip.slideDown(200);	
+	    } else {
+		    tip.slideUp(200);
+	    }
+		});
+    html.on("click", ".chat-spell", event => {
+		 console.log("chat-spell");
+		 event.preventDefault();
+	    let roll = $(event.currentTarget); 
+	    let tip = roll.find(".chat-spell-collapsible");
 	    if (!tip.is(":visible")) {
 		    tip.slideDown(200);	
 	    } else {

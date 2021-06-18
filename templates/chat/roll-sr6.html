@@ -52,7 +52,7 @@
    {{#if (eq data.rollType "spell")}}
    <hr/>
     {{log data.spell}}
-   <div>
+   <div class="chat-spell">
    	<table class="spell-table">
    	    <tr>
    	    	<th>{{localize 'shadowrun6.spell.range'}}</th>
@@ -70,6 +70,9 @@
    	  	</tr>
    	</table>
   	  <span style="color:red">Work in progress</span>
+		<div class="chat-spell-collapsible" style="display:none">
+   		{{data.spellDesc}}
+		</div>
    </div>
    {{/if}}        
    

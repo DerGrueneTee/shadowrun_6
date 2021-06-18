@@ -133,6 +133,10 @@ SR6.spell_damage = {
 	"physical_special" : "shadowrun6.spell.damage_physical_special",
 	"stun_special"     : "shadowrun6.spell.damage_stun_special",
 };
+SR6.tradition_attributes = {
+	"log" : "attrib.log",
+	"cha" : "attrib.cha",
+};
 
 SR6.adeptpower_activation = {
 	"passive" : "shadowrun6.adeptpower.activation_passive",

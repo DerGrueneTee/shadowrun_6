@@ -15,11 +15,19 @@ export class Shadowrun6Actor extends Actor {
 		const data = this.data.data;
 		this._prepareAttributes();
 		this._prepareDerivedAttributes();
-		this._prepareDefensesRatings();
+		this._prepareAttackRatings();
+		this._prepareDefenseRatings();
 		this._prepareSkills();
 		this._prepareResistPools();
 		this._prepareItemPools();
 		this._calculateEssense();
+		
+		if (!data.tradition) {
+			data.tradition = {
+				"name": "",
+				"attribute": "log"
+			};
+		}
 	}
 
 	//---------------------------------------------------------
@@ -92,44 +100,6 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 		}
 
-		const items = this.data.items;
-		if (!data.derived) {
-			data.derived = {};
-		}
-		/* (Unarmed) Attack and Defense Rating */
-			// Attack Rating
-			data.derived.attack_rating.base = data.attributes["rea"].pool + data.attributes["str"].pool;
-			data.derived.attack_rating.pool = data.derived.attack_rating.base + data.derived.attack_rating.mod;
-			// Astral Attack Rating
-		// Astral Attack Rating
-		if (!data.derived.attack_rating_astral)
-			data.derived.attack_rating_astral = {};
-		console.log("TODO: tradition");
-		let traditionAttr = data.attributes["cha"];
-		data.derived.attack_rating_astral.base = data.attributes["mag"].pool + traditionAttr.pool;
-		data.derived.attack_rating_astral.pool = data.derived.attack_rating_astral.base
-		if (data.derived.attack_rating_astral.mod)
-			data.derived.attack_rating_astral.pool += data.derived.attack_rating_astral.mod;
-
-			// Defense Rating
-			if (data.derived.defense_rating) {
-				data.derived.defense_rating.base = data.attributes["bod"].pool;
-				data.derived.defense_rating.modString = game.i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
-				if (data.derived.defense_rating.mod) {
-					data.derived.defense_rating.pool = data.derived.defense_rating.base + data.derived.defense_rating.mod;
-					data.derived.defense_rating.modString += "\n+" + data.derived.defense_rating.mod;
-				} else {
-					data.derived.defense_rating.pool = data.attributes["bod"].pool;
-				}
-				items.forEach(function (item, key) {
-					if (item.type == "gear" && item.data.data.type == "ARMOR") {
-						if (item.data.data.usedForPool) {
-							data.derived.defense_rating.pool += item.data.data.defense;
-							data.derived.defense_rating.modString += "\n+" + item.data.data.defense + " " + item.name;
-						}
-					}
-				});
-			}
 			// Composure
 			if (data.derived.composure) {
 				data.derived.composure.base = data.attributes["wil"].pool + data.attributes["cha"].pool;
@@ -165,9 +135,92 @@ export class Shadowrun6Actor extends Actor {
 
 	//---------------------------------------------------------
 	/*
+	 * Calculate the attack ratings
+	 */
+	_prepareAttackRatings() {
+		const actorData = this.data;
+		const data = this.data.data;
+		const items = this.data.items;
+
+		if (!data.attackrating) {
+			data.attackrating = {};
+		}
+		/* (Unarmed) Attack Rating */
+		if (!data.attackrating.unarmed) {
+			data.attackrating.unarmed = { mod: 0};
+		}
+		data.attackrating.unarmed.base = data.attributes["rea"].pool + data.attributes["str"].pool;
+		data.attackrating.unarmed.modString  = game.i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool+"\n";
+		data.attackrating.unarmed.modString += game.i18n.localize("attrib.str_short") + " " + data.attributes["str"].pool;
+		data.attackrating.unarmed.pool = data.attackrating.unarmed.base + data.attackrating.unarmed.mod;
+		if (data.attackrating.unarmed.mod) {
+			data.attackrating.unarmed.pool += data.attackrating.unarmed.mod;
+			data.attackrating.unarmed.modString += "\n+" + data.attackrating.unarmed.mod;
+		} 
+
+		// Astral Attack Rating
+		if (!data.attackrating.astral) {
+			data.attackrating.astral = { mod: 0};
+		}
+		console.log("TODO: tradition "+data.tradition.attribute);
+		let traditionAttr = data.attributes[data.tradition.attribute];
+		data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
+		data.attackrating.astral.modString  = game.i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
+		data.attackrating.astral.modString += game.i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + data.attributes[data.tradition.attribute].pool;
+		data.attackrating.astral.pool = data.attackrating.astral.base
+		if (data.attackrating.astral.mod) {
+			data.attackrating.astral.pool += data.attackrating.astral.mod;
+			data.attackrating.astral.modString += "\n+" + data.attackrating.astral.mod;
+		} 
+		
+		// Matrix attack rating (Angriff + Schleicher)
+		if (!data.attackrating.matrix) {
+			data.attackrating.matrix = { mod: 0};
+		}
+		data.attackrating.matrix.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
+		data.attackrating.matrix.pool = data.attackrating.matrix.base;
+		if (data.attackrating.matrix.mod) {
+			data.attackrating.matrix.pool += data.attackrating.matrix.mod;
+			data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
+		} 
+		
+		// Vehicle combat attack rating (Pilot + Sensor)
+		if (!data.attackrating.rigged) {
+			data.attackrating.rigged = { mod: 0};
+		}
+		data.attackrating.rigged.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
+		data.attackrating.rigged.pool = data.attackrating.rigged.base;
+		if (data.attackrating.rigged.mod) {
+			data.attackrating.rigged.pool += data.attackrating.rigged.mod;
+			data.attackrating.rigged.modString += "\n+" + data.attackrating.rigged.mod;
+		} 
+		
+		// Social value
+		if (!data.attackrating.social) {
+			data.attackrating.social = { mod: 0};
+		}
+		data.attackrating.social.base = data.attributes["cha"].pool;
+		data.attackrating.social.modString = game.i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
+		data.attackrating.social.pool = data.attackrating.social.base;
+		if (data.attackrating.social.mod) {
+			data.attackrating.social.pool += data.attackrating.social.mod;
+			data.attackrating.social.modString += "\n+" + data.attackrating.social.mod;
+		} 
+		items.forEach(function (item, key) {
+			if (item.type == "gear" && item.data.data.type == "ARMOR") {
+				if (item.data.data.usedForPool) {
+					data.attackrating.social.pool += item.data.data.social;
+					data.attackrating.social.modString += "\n+" + item.data.data.social + " " + item.name;
+				}
+			}
+		});
+	}
+
+	//---------------------------------------------------------
+	/*
 	 * Calculate the attributes like Initiative
 	 */
-	_prepareDefensesRatings() {
+	_prepareDefenseRatings() {
 		const actorData = this.data;
 		const data = this.data.data;
 		const items = this.data.items;
@@ -578,7 +631,7 @@ export class Shadowrun6Actor extends Actor {
 		// and what defense eventually applies
 		let isOpposed = false;
 		let hasDamageResist = true;
-		let attackRating = this.data.data.derived.attack_rating_astral.pool;
+		let attackRating = this.data.data.attackrating.astral.pool;
 		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
 		let threshold = 0;
 		let canAmpUpSpell = item.data.data.category === "combat";
@@ -595,6 +648,23 @@ export class Shadowrun6Actor extends Actor {
 				threshold = 5 - Math.ceil(this.data.data.essence);
 			}
 		}
+		
+		// If present, replace spell name, description and source references from compendium
+		let spellName = item.name;
+		let spellDesc = "";
+		let spellSrc  = "";
+		if (item.data.data.description) {
+			spellDesc = item.data.data.description;
+		}
+		if (item.data.data.genesisID) {
+			let key = "spell."+item.data.data.genesisID+".";
+			if (!game.i18n.localize(key+"name").startsWith(key)) {
+				// A translation exists
+				spellName = game.i18n.localize(key+"name");
+				spellDesc = game.i18n.localize(key+"desc");
+				spellSrc = game.i18n.localize(key+"src");
+			}
+		}
 
 		let data = mergeObject(options, {
 			isSpell : true,
@@ -604,6 +674,9 @@ export class Shadowrun6Actor extends Actor {
 			skill: this.data.data.skills[skillId],
 			spec: spec,
 			spell: item,
+			spellName: spellName,
+			spellDesc: spellDesc,
+			spellSrc : spellSrc,
 			canModifySpell: canAmpUpSpell || canIncreaseArea,
 			canAmpUpSpell : canAmpUpSpell,
 			canIncreaseArea : canIncreaseArea,
