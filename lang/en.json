@@ -230,6 +230,7 @@
             "attack": "Attack",
             "attackRating": "Attack Rating",
 				"configure": "Configure your roll",
+				"defense_button": "Roll Defense",
             "edge_perform": "Do it",
             "edgegain": "Edge-Gain (max): ",
             "edgegain_player": " (Player)",
@@ -351,6 +352,12 @@
                 "add": "Add new weapon"
             }
         },
+		  "settings": {
+				"maxEdgePerRound": {
+					"name": "Max. Edge per turn",
+					"hint": "Defines the maximum egde a player or NPC can gain per turn."
+				}
+		  },
         "special": {
             "astral": {
                 "astral_combat": "Astral Combat",

@@ -90,7 +90,7 @@
 	     </td>
 	     {{#if data.canAmpUpSpell}}
 	     <td>{{localize "shadowrun6.roll.spell.ampUp.title"}}</td>
-	     <td><select name="ampUp" id="ampUp">
+	     <td><select name="ampUp" class="ampUp">
             <option value="0" data-item-ampid="amp0"> - </option>
             <option value="1" data-item-ampid="amp1">{{localize "shadowrun6.roll.spell.ampUp.1"}}</option>
             <option value="2" data-item-ampid="amp2">{{localize "shadowrun6.roll.spell.ampUp.2"}}</option>
@@ -100,10 +100,10 @@
     	<tr>
 	     {{#if data.canIncreaseArea}}
 	     <td>{{localize "shadowrun6.roll.spell.incArea.title"}}</td>
-	     <td><select name="incArea" id="incArea">
-            <option value="0" data-item-ampid="inc0"> - </option>
-            <option value="1" data-item-ampid="inc1">{{localize "shadowrun6.roll.spell.incArea.1"}}</option>
-            <option value="2" data-item-ampid="inc2">{{localize "shadowrun6.roll.spell.incArea.2"}}</option>
+	     <td><select name="incArea" class="incArea">
+            <option value="0" data-item-incid="inc0"> - </option>
+            <option value="1" data-item-incid="inc1">{{localize "shadowrun6.roll.spell.incArea.1"}}</option>
+            <option value="2" data-item-incid="inc2">{{localize "shadowrun6.roll.spell.incArea.2"}}</option>
         </select></td>
         {{/if}}
     	</tr>

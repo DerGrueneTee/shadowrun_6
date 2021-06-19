@@ -65,7 +65,8 @@
    	  		<td>{{localize (concat (concat 'shadowrun6.spell.range_' data.spell.data.data.range) "_short")}}</td>
    	  		<td>{{localize (concat (concat 'shadowrun6.spell.type_' data.spell.data.data.type) "_short")}}</td>
    	  		<td>{{localize (concat (concat 'shadowrun6.spell.duration_' data.spell.data.data.duration) "_short")}}</td>
-    	  		<td>{{data.spell.data.data.drain}}</td>
+    	  		<td>{{data.drain}}</td>
+    	  		<td>{{data.damage}}</td>
    	  		<td></td>
    	  	</tr>
    	</table>
@@ -80,7 +81,7 @@
    {{#if data.isAllowDefense}}
    <hr/>
   <div>
-  	<button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}">Roll Defense</button>
+  	<button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
   </div>
    {{/if}}        
 </div>
