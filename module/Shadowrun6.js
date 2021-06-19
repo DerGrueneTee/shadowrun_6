@@ -9,6 +9,8 @@ import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { doRoll } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
+import { registerSystemSettings } from "./settings.js";
+import Shadowrun6Combat from "./combat.js";
 
 const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 
@@ -28,14 +30,17 @@ Hooks.once("init", async function () {
 
   // Define custom Entity classes (changed for Foundry 0.8.x
   CONFIG.Actor.documentClass = Shadowrun6Actor;
+  CONFIG.Combat.documentClass = Shadowrun6Combat;
   // Define custom Roll class
   CONFIG.Dice.rolls.push(SR6Roll);
 
   // Create a namespace within the game global
   game.shadowrun6 = {
-    itemCheck: Macros.itemCheck
+    itemCheck: Macros.itemCheck,
+	 maxEdgePerRound: 2
   }
   game.system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
+  registerSystemSettings();
 
   // Register sheet application classes
   Actors.unregisterSheet("core", ActorSheet);
@@ -199,7 +204,9 @@ Hooks.once("init", async function () {
   });
 
   Hooks.on('renderChatMessage', function (app, html, data) {
-	 html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
+	 if (html.find("#chat-message")) {
+	 	html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
+	 }
     html.find(".rollable").click(event => {
       const type = $(event.currentTarget).closestData("roll-type");
 		console.log("Clicked on rollable");
@@ -359,7 +366,7 @@ function _onChatMessageAppear(event, chatMsg, html, data) {
 
 	// chatMsg.roll is a SR6Roll
 	let btnPerform = html.find('.edgePerform');
-	console.log("Button = ",btnPerform);
-	btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data));
-	//btnPerform.click(ev => console.log("CLICK"));
+	if (btnPerform && chatMsg.roll.peformPostEdgeBoost) {
+		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data));
+	}
 }

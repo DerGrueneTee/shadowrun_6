@@ -164,7 +164,7 @@ function _dialogClosed(type, form, data, messageData={}) {
 
     if (form) {
       data.modifier = parseInt(form.modifier.value);
-      data.defRating = parseInt(form.defRating.value);
+      data.defRating = (form.defRating)?parseInt(form.defRating.value):0;
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
@@ -179,12 +179,38 @@ function _dialogClosed(type, form, data, messageData={}) {
       }
     }
 
+	if (data.rollType=="spell") {
+		if (data.spell) {
+			data.drain  = parseInt(data.spell.data.data.drain);	
+			data.radius = (data.spell.data.data.range == "line_of_sight_area" || data.spell.data.data.range == "self_area") ? 2 : 0;
+			if (data.spell.data.data.category == "combat") {
+				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : data.actor.data.data.attributes.mag.pool/2;
+				data.drain  = parseInt(data.spell.data.data.drain);	
+				// Amp up
+				if (data.damageMod) {
+					data.damage+= parseInt(data.damageMod);
+				}
+			}
+				// Increase area
+				if (data.radiusMod) {
+					data.radius+= data.radiusMod;
+				}
+				
+			if (data.drainMod) {
+				data.drain+= parseInt(data.drainMod);
+			}
+		}
+	}
+
     
     // Execute the roll
     let r = new SR6Roll("", data);
     try {
 	   console.log("Call r.evaluate: "+r);
       r.evaluate();
+		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
+			data.damage += r._total;
+		}
     } catch (err) {
       console.error("CommonRoll error: "+err);
       console.error("CommonRoll error: "+err.stack);
@@ -216,6 +242,12 @@ export class RollDialog extends Dialog {
     html.find('.edgeActions').change(this._onEdgeBoostActionChange.bind(this));
     html.find('.edgeActions').keyup(this._onEdgeBoostActionChange.bind(this));
 	 html.show(this._onEdgeBoostActionChange.bind(this));
+
+	// React to changed amp up
+    html.find('.ampUp').change(this._onSpellAmpUpChange.bind(this));
+
+	// React to changed amp up
+    html.find('.incArea').change(this._onSpellIncreaseAreaChange.bind(this));
   }
 
 	//-------------------------------------------------------------
@@ -439,6 +471,42 @@ export class RollDialog extends Dialog {
 		$("input[name='explode' ]")[0].checked = data.explode;
 		this._updateDicePool(data);
 		
+	}
+	
+	//-------------------------------------------------------------
+	_onSpellAmpUpChange(event) {
+		// Ignore this, if there is no actor
+		if (!this.data.data.actor) {
+			return;
+		}
+		if (!event || !event.currentTarget) {
+			return;
+		}
+		
+		if (event.currentTarget.name === "ampUp") {
+			const ampUpSelect = Number.isNumeric(event.currentTarget.value) ? event.currentTarget.value : 0;
+			this.data.data.damageMod = ampUpSelect*1;
+			this.data.data.drainMod = ampUpSelect*2;
+			console.log("Increase damage by "+this.data.data.damageMod+" and drain by "+this.data.data.drainMod);
+		}
+	}
+	
+	//-------------------------------------------------------------
+	_onSpellIncreaseAreaChange(event) {
+		// Ignore this, if there is no actor
+		if (!this.data.data.actor) {
+			return;
+		}
+		if (!event || !event.currentTarget) {
+			return;
+		}
+		
+		if (event.currentTarget.name === "incArea") {
+			const incAreaSelect = Number.isNumeric(event.currentTarget.value) ? event.currentTarget.value : 0;
+			this.data.data.radius = incAreaSelect*2;
+			this.data.data.drainMod = incAreaSelect*1;
+			console.log("Increase radius by "+this.data.data.radius+"m and drain by "+this.data.data.drainMod);
+		}
 	}
 	
   _onNoTarget() {
