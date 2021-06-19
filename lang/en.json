@@ -125,14 +125,14 @@
         "itemtype": {
             "ACCESSORY": "Accessory",
             "ARMOR": "Armor",
-            "ARMOR_ADDITION": "ARMOR_ADDITION",
+            "ARMOR_ADDITION": "Armor additions",
             "BIOWARE": "BIOWARE",
             "CYBERWARE": "CYBERWARE",
             "TOOLS": "TOOLS",
             "ELECTRONICS": "ELECTRONICS",
             "NANOWARE": "NANOWARE",
             "GENETICS": "GENETICS",
-            "AMMUNITION": "AMMUNITION",
+            "AMMUNITION": "Ammunition",
             "CHEMICALS": "CHEMICALS",
             "SURVIVAL": "SURVIVAL",
             "BIOLOGY": "BIOLOGY",
@@ -192,7 +192,8 @@
             "spell": "Abracadabra",
             "weapon": "Named weapons are much cooler",
             "weaponclose": "Something heavy",
-            "armor": "Something trendy"
+            "armor": "Something trendy",
+            "ammunition": "Hot stuff ammo"
         },
         "numerical": {
             "base": "base",
@@ -279,6 +280,7 @@
 					 "column.points": "PP"
             },
             "ammo": "Ammunition",
+            "ammo_add": "Add ammunition",
            "armor": { 
                "title": "Armor",
                 "column": {

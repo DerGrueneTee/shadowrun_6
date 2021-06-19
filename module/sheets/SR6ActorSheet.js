@@ -89,6 +89,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
+			html.find('.ammunition-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.ammunition"),
+					type: "gear",
+					data: {
+						type: "AMMUNITION"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.close-weapon-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.weaponclose"),
