@@ -70,7 +70,9 @@
                     "weapon": "weapon"
                 }
             },
-            "feature": "Merkmale"
+            "feature": "Merkmale",
+            "social" : "Sozial",
+            "natural" : "Nat. Panzerung"
         },
         "spell": {
             "range": "Reichweite",
@@ -172,7 +174,10 @@
                 "knowledge": "Worin bist Du Nerd?",
                 "language": "Unverständliches Gemurmel"
             },
-            "spell": "Abrakadabra"
+            "spell": "Abrakadabra",
+            "weapon": "Was mit viel Wumms",
+            "weaponclose": "Etwas fürs Grobe",
+            "armor": "Das kleine Schwarze"
         },
         "numerical": {
             "base": "Basis",
@@ -231,12 +236,15 @@
 					 "column.points": "KP"
             },
             "ammo": "Munition",
-            "armor.title": "Panzerung",
-            "armor.column": {
+            "armor": {
+                "title": "Panzerung",
+                "column": {
                 "action": "Aktion",
                 "name": "Name",
                 "defense": "Panz",
                 "social": "Sozial"
+                },
+                "add": "Panzerung hinzufügen"
             },
             "biology": "Biologie",
             "bodyware": {
@@ -285,7 +293,8 @@
             },
             "weapon": {
                 "ranged": "Fernkampf",
-                "close": "Nahkampf"
+                "close": "Nahkampf",
+                "add": "Neue Waffe hinzufügen"
             }
         },
         "special": {

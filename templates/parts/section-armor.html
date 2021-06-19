@@ -1,6 +1,10 @@
 	<!-- Armor -->
    <div class="section" style="width: 58%; margin: 5px;">
-     <h2 class="section-title">{{ localize 'shadowrun6.section.armor.title' }}</h2>
+   
+	 <div class="section-head">
+		<h2 class="section-title">{{ localize 'shadowrun6.section.armor.title' }}</h2>
+		<a class="item-control armor-create" title="{{localize 'shadowrun6.section.armor.add' }}"><h2 class="fas fa-plus"></h2></a>
+	   </div>
 	  <table>
 	    <thead>
 	      <tr>
@@ -14,7 +18,7 @@
  		{{#each actor.items as |item id|}} 
 		{{#iff item.type '==' 'gear'}}
 		{{#iff item.data.data.type '==' "ARMOR"}}
-       <tr class="draggable" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
        	<td><label class="switch">
        	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
@@ -23,7 +27,9 @@
          <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.defense" value="{{item.data.data.defense}}" data-dtype="Number" style="width: 1.5em" /></td>
          <td class="centered"><input type="text" data-item-id="{{this.id}}" data-field="data.social"  value="{{item.data.data.social}}" data-dtype="Number" style="width: 1.5em" /></td>
 			<td class="item-controls">
-         	<a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+				<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
+					class="fas fa-edit"></i></a> <a class="item-control item-delete"
+				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
          </td>
        </tr>
        <tr>

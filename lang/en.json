@@ -110,7 +110,9 @@
                     "weapon": "Weapon"
                 }
             },
-            "feature": "Features"
+            "feature": "Features",
+            "social" : "Social",
+            "natural" : "Nat. armor"
         },
         "adeptpower": {
             "cost": "Cost",
@@ -189,7 +191,10 @@
                 "knowledge": "What is your nerd topic?",
                 "language": "Gibberish"
             },
-            "spell": "Abracadabra"
+            "spell": "Abracadabra",
+            "weapon": "Named weapons are much cooler",
+            "weaponclose": "Something heavy",
+            "armor": "Something trendy"
         },
         "numerical": {
             "base": "base",
@@ -276,12 +281,15 @@
 					 "column.points": "PP"
             },
             "ammo": "Ammunition",
-           "armor.title": "Armor",
-            "armor.column": {
+           "armor": { 
+               "title": "Armor",
+                "column": {
                 "action": "Action",
                 "name": "Name",
                 "defense": "DR",
                 "social": "Social"
+                },
+                "add": "Add new armor"
             },
             "biology": "Biology",
             "bodyware": {
@@ -330,7 +338,8 @@
             },
             "weapon": {
                 "ranged": "Ranged Weapons",
-                "close": "Melee Weapons"
+                "close": "Melee Weapons",
+                "add": "Add new weapon"
             }
         },
         "special": {
