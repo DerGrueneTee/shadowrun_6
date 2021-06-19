@@ -198,7 +198,9 @@
             "ammunition": "Hot stuff ammo",
             "biology": "Biohazard",
             "chemicals": "The good stuff",
-            "electronics":"Nerd toy"
+            "electronics":"Nerd toy",
+            "martialarttech": "Technique, which technique?",
+            "martialartstyle": "What's your style?"
         },
         "numerical": {
             "base": "base",
@@ -311,7 +313,8 @@
             "initiative": "Initiative",
             "martialarts": {
                 "add": "Add new style",
-                "title": "Martial Arts"
+                "title": "Martial Arts",
+                "tech_add": "Add new technique"
             },
             "metamagic": {
                 "add": "Add new metamagic",

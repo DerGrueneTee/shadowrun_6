@@ -505,7 +505,8 @@
 		"martialarttech": {
 			"genesisID": "",
 			"description": "",
-			"style": ""
+			"style": "",
+			"choice": ""
 		},
 		"metamagic": {
 			"genesisID": "",

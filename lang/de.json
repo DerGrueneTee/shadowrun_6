@@ -181,7 +181,9 @@
             "ammunition": "Coole Munition",
             "biology": "Biozeugs",
             "chemicals": "Das gute Zeug",
-            "electronics":"Technikspielzeug"
+            "electronics":"Technikspielzeug",
+            "martialart_tech": "Was für eine Technik hast du drauf?",
+            "martialart_style": "Was ist dein Stil?"
         },
         "numerical": {
             "base": "Basis",
@@ -265,7 +267,8 @@
             "initiative": "Initiative",
             "martialarts": {
                 "add": "Neuen Kampfstil hinzufügen",
-                "title": "Kampfkünste"
+                "title": "Kampfkünste",
+                "tech_add": "Neue Technik hinzufügen"
             },
             "metamagic": {
                 "add": "Metamagie hinzufügen",

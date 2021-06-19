@@ -139,6 +139,30 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
+			html.find('.martialart-style-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.martialart_style"),
+					type: "martialartstyle",
+					data: {
+						genesisID: this._create_UUID()
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.martialart-tech-create').click(ev => {
+				const element = ev.currentTarget.closest(".item");
+				const styleId = element.dataset.styleId;
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.martialart_tech"),
+					type: "martialarttech",
+					data: {
+						description: "bla",
+						genesisID: "foo",
+						style: styleId,
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.skill-knowledge-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.skill.knowledge"),
@@ -368,6 +392,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			}
 
 		}
+	}
+
+	_create_UUID(){
+		var dt = new Date().getTime();
+		var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+			var r = (dt + Math.random()*16)%16 | 0;
+			dt = Math.floor(dt/16);
+			return (c=='x' ? r :(r&0x3|0x8)).toString(16);
+		});
+		return uuid;
 	}
 
 	//-----------------------------------------------------
