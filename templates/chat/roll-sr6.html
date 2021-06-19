@@ -10,19 +10,18 @@
     {{/if}}
   <div class="chat-edge-collapsible" style="display:none">
     <header class="part-header flexrow">
-      <div>{{ localize 'shadowrun6.derived.attack_rating'}}: <b>{{data.attackRating}}</b></div>
+      <div>{{ localize 'shadowrun6.label.attack_rating'}}: <b>{{data.attackRating}}</b></div>
       <br/>
-      <div>{{ localize 'shadowrun6.derived.defense_rating'}}: <b>{{data.defRating}}</b></div>
+      <div>{{ localize 'shadowrun6.label.defense_rating'}}: <b>{{data.defRating}}</b></div>
     </header>
   </div>
   </div>
   <hr/>
    {{/if}}        
   
-  <div class="dice-roll">
+  <div>
     <div class="dice-result">
-      <header class="part-header flexrow">
-        {{{tooltip}}}
+      <header class="part-header flexrow chat-edge-post">
         <div>{{formula}}</div>
         <br/>
         {{#if success}}
@@ -37,6 +36,7 @@
         <span style="color: rgb(194, 76, 29)">{{localize 'shadowrun6.roll.glitch'}}</span><br/>
         {{/if}}
       </header>
+        {{{tooltip}}}
     </div>
    </div>
    

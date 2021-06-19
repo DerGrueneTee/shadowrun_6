@@ -198,6 +198,7 @@ Hooks.once("init", async function () {
   });
 
   Hooks.on('renderChatMessage', function (app, html, data) {
+	 html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
     html.find(".rollable").click(event => {
       const type = $(event.currentTarget).closestData("roll-type");
 
@@ -207,10 +208,19 @@ Hooks.once("init", async function () {
       }
     });
     html.on("click", ".chat-edge", event => {
-		 console.log("chat-edge");
 		 event.preventDefault();
 	    let roll = $(event.currentTarget); 
 	    let tip = roll.find(".chat-edge-collapsible");
+	    if (!tip.is(":visible")) {
+		    tip.slideDown(200);	
+	    } else {
+		    tip.slideUp(200);
+	    }
+		});
+    html.on("click", ".chat-edge-post", event => {
+		 event.preventDefault();
+	    let roll = $(event.currentTarget.parentElement); 
+ 	    let tip = roll.find(".chat-edge-post-collapsible");
 	    if (!tip.is(":visible")) {
 		    tip.slideDown(200);	
 	    } else {
@@ -229,7 +239,6 @@ Hooks.once("init", async function () {
 	    }
 		});
   });
-
 
   /**
    * If a player actor is created, change default token settings
@@ -333,3 +342,8 @@ $.fn.closestData = function (dataName, defaultValue = "") {
   return (value) ? value : defaultValue;
 }
 
+/* -------------------------------------------- */
+function _onChatMessageAppear(event, chatMsg, html, data) {
+	console.log("Chat message appear "+event);
+   html.find('.edgeBoosts').change(event => console.log("Change "+event));
+}

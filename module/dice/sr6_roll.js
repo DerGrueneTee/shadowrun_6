@@ -258,93 +258,124 @@ export default class SR6Roll extends Roll {
     }
   }
 
-  /* -------------------------------------------- */
-  /*  Interface Helpers                           */
-  /* -------------------------------------------- */
+	//-------------------------------------------------------------
+	_updateEdgeBoosts(elem, available) {
+		let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=available);
 
-  static async expandEdge(event) {
-	    let roll = $(event.currentTarget); 
-	    let tip = roll.find(".chat-edge-collapsible");
-		 console.log("tip = "+tip+"  // "+tip.is(":visible"));
-	    if (!tip.is(":visible")) {
-		    console.log("Call slideDown");
-		    tip.slideDown(200);	
-			 tip[0].style["display"] = "block";
-	    } else {
-		    console.log("Call slideup");
-		    tip.slideUp(200);
-			 tip[0].style["display"] = "none";
-	    }
-  }
+		// Node for inserting new data before		
+		let insertBeforeElem = {};
+		// Remove previous data
+		var array = Array.from(elem.children);
+		array.forEach( child => {
+			if (child.value!="none" && child.value!="edge_action") {
+				elem.removeChild(child)
+			}
+			if (child.value=="edge_action") {
+				insertBeforeElem = child;
+			}
+		});
+		
+		// Add new data
+		newEdgeBoosts.forEach( boost => {
+			let opt = document.createElement("option");
+			opt.setAttribute("value", boost.id);
+			opt.setAttribute("data-item-boostid", boost.id);
+			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_boost."+boost.id)+" - ("+boost.cost+")");
+			opt.appendChild(cont);
+			elem.insertBefore(opt, insertBeforeElem);
+		});
+	}
 
-  /**
-   * Expand an inline roll element to display it's contained dice result as a tooltip
-   * @param {HTMLAnchorElement} a     The inline-roll button
-   * @return {Promise<void>}
-   */
-  static async expand2Edge(a) {
-    if ( !a.classList.contains("inline-roll") ) return;
-    if ( a.classList.contains("expanded") ) return;
+	//-------------------------------------------------------------
+	_updateEdgeActions(elem, available) {
+		let newEdgeActions = CONFIG.SR6.EDGE_ACTIONS.filter(action => action.cost<=available);
 
-    // Create a new tooltip
-    const roll = Roll.fromJSON(unescape(a.dataset.roll));
-    const tip = document.createElement("div");
-    tip.innerHTML = await roll.getTooltip();
-
-    // Add the tooltip
-    const tooltip = tip.children[0];
-    a.appendChild(tooltip);
-    a.classList.add("expanded");
-
-    // Set the position
-    const pa = a.getBoundingClientRect();
-    const pt = tooltip.getBoundingClientRect();
-    tooltip.style.left = `${Math.min(pa.x, window.innerWidth - (pt.width + 3))}px`;
-    tooltip.style.top = `${Math.min(pa.y + pa.height + 3, window.innerHeight - (pt.height + 3))}px`;
-    const zi = getComputedStyle(a).zIndex;
-    tooltip.style.zIndex = Number.isNumeric(zi) ? zi + 1 : 100;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Collapse an expanded inline roll to conceal it's tooltip
-   * @param {HTMLAnchorElement} a     The inline-roll button
-   */
-  static collapseInlineResult(a) {
-    if ( !a.classList.contains("inline-roll") ) return;
-    if ( !a.classList.contains("expanded") ) return;
-    const tooltip = a.querySelector(".dice-tooltip");
-    if ( tooltip ) tooltip.remove();
-    return a.classList.remove("expanded");
-  }
-}
-
-
-//-------------------------------------------------------------
-/**
- * Roll a spell test. Some spells are opposed, some are simple tests.
- * @member {String} actionText Describe what is happening - e.g. "Cast Manabolt at Big Bad Guy"
- * @member {String} checkText  The check that is made in the CRB notation - e.g. "Sorcery/Spellcasting + Magic (3)"
- * // What is tested
- * @member {String} skillId    The identifier name of the skill
- * @member {String} spec       The identifier name of the skill specialization
- * @member {int}    threshold  The threshold from which the test is considered a success
- * // Type of test
- * @member {boolean} isOpposed  Whether or not this is an opposed test
- * @member {boolean} useThreshold  Whether or not a threshold is needed
- * // For opposed tests
- * @member {integer} attackRating The attack rating of the actor
- * @member {integer} attackRatingMod (TEMP) A user configurable modifier for the AR
- * @member {integer} defenseRating The (highest) defense rating of the defending actor(s). Can be adjusted in the dialog
-
- */
-export class SR6RollDialogData {
-	constructor() {
-		this.actionText = "";
-		this.checkText = "";
-		this.isOpposed = false;
+		// Remove previous data
+		var array = Array.from(elem.children);
+		array.forEach( child => {
+			if (child.value!="none") {
+				elem.removeChild(child)
+			}
+		});
+		
+		// Add new data
+		newEdgeActions.forEach( action => {
+			let opt = document.createElement("option");
+			opt.setAttribute("value", action.id);
+			opt.setAttribute("data-item-actionid", action.id);
+			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_action."+action.id)+" - ("+action.cost+")");
+			opt.appendChild(cont);
+			elem.appendChild(opt);
+		});
 	}
 	
-}
+	//-------------------------------------------------------------
+	/*
+	 * Called when a change happens in the Edge Action or Edge Action
+	 * selection.
+	 */
+	_onEdgeBoostActionChange(event) {
+		console.log("_onEdgeBoostActionChange");
+		// Ignore this, if there is no actor
+		if (!this.data.data.actor) {
+			return;
+		}
+		if (!event || !event.currentTarget) {
+			return;
+		}
+		
+		if (event.currentTarget.name === "edgeBoost") {
+			const boostsSelect = event.currentTarget;
+			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;
+			console.log(" boostId = "+boostId);
+			this.data.data.edgeBoost = boostId;
+		   if (boostId==="edge_action") {
+				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , this.data.edge);
+			} else {
+				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , 0);
+			}
+			if (boostId!="none") {
+				this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_boost."+boostId)
+			} else {
+				this.data.data.edge_use="";
+			}
+			this._performEdgeBoostOrAction(this.data.data, boostId);
+		} else if (event.currentTarget.name === "edgeAction") {
+			const actionSelect = event.currentTarget;
+			let actionId = actionSelect.children[actionSelect.selectedIndex].dataset.itemActionid;
+			console.log(" actionId = "+actionId);
+			this.data.data.edgeAction = actionId;
+			this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_action."+actionId)
+			this._performEdgeBoostOrAction(this.data.data, actionId);
+		}
+	}
 
+	//-------------------------------------------------------------
+	_updateDicePool(data) {
+		$("label[name='dicePool']")[0].innerText = parseInt(data.pool) + parseInt(data.modifier);
+	}
+	
+	//-------------------------------------------------------------
+	_performEdgeBoostOrAction(data, boostOrActionId) {
+		console.log("ToDo: performEgdeBoostOrAction "+boostOrActionId);
+		if (boostOrActionId=="edge_action") {
+			return;
+		}
+		
+		data.explode = false;
+		data.modifier = 0;
+		switch (boostOrActionId) {
+		case "add_edge_pool":
+			data.explode = true;
+			data.modifier = this.data.data.actor.data.data.edge.max;
+			break;
+		}	
+
+		// Update content on dialog	
+		$("input[name='modifier']")[0].value = data.modifier;
+		$("input[name='explode' ]")[0].value = data.explode;
+		$("input[name='explode' ]")[0].checked = data.explode;
+		this._updateDicePool(data);
+		
+	}
+}

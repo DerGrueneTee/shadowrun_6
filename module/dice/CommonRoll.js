@@ -164,6 +164,7 @@ function _dialogClosed(type, form, data, messageData={}) {
 
     if (form) {
       data.modifier = parseInt(form.modifier.value);
+      data.defRating = parseInt(form.defRating.value);
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
