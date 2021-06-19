@@ -110,17 +110,17 @@
         "itemtype": {
             "ACCESSORY": "Zubehör",
             "ARMOR": "Rüstung",
-            "ARMOR_ADDITION": "Rüstungszubehor",
+            "ARMOR_ADDITION": "Rüstungszubehör",
             "BIOWARE": "BIOWARE",
             "CYBERWARE": "CYBERWARE",
             "TOOLS": "TOOLS",
-            "ELECTRONICS": "ELECTRONICS",
+            "ELECTRONICS": "Elektronik",
             "NANOWARE": "NANOWARE",
             "GENETICS": "GENETICS",
-            "AMMUNITION": "AMMUNITION",
-            "CHEMICALS": "CHEMICALS",
+            "AMMUNITION": "Monition",
+            "CHEMICALS": "Drogen",
             "SURVIVAL": "SURVIVAL",
-            "BIOLOGY": "BIOLOGY",
+            "BIOLOGY": "Biologie",
             "VEHICLES": "VEHICLES",
             "DRONES": "DRONES",
             "MAGICAL": "MAGICAL",
@@ -177,7 +177,11 @@
             "spell": "Abrakadabra",
             "weapon": "Was mit viel Wumms",
             "weaponclose": "Etwas fürs Grobe",
-            "armor": "Das kleine Schwarze"
+            "armor": "Das kleine Schwarze",
+            "ammunition": "Coole Munition",
+            "biology": "Biozeugs",
+            "chemicals": "Das gute Zeug",
+            "electronics":"Technikspielzeug"
         },
         "numerical": {
             "base": "Basis",
@@ -236,6 +240,7 @@
 					 "column.points": "KP"
             },
             "ammo": "Munition",
+            "ammo_add": "Munition hinzufügen",
             "armor": {
                 "title": "Panzerung",
                 "column": {
