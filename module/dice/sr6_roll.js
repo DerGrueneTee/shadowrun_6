@@ -378,4 +378,9 @@ export default class SR6Roll extends Roll {
 		this._updateDicePool(data);
 		
 	}
+	
+	//-------------------------------------------------------------
+	peformPostEdgeBoost(event, chatMsg, html, data) {
+		console.log("ToDo performPostEdgeBoost");
+	}
 }

@@ -6,6 +6,7 @@ import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
+import EdgeUtil from "./util/EdgeUtil.js";
 import { doRoll } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 
@@ -201,7 +202,7 @@ Hooks.once("init", async function () {
 	 html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
     html.find(".rollable").click(event => {
       const type = $(event.currentTarget).closestData("roll-type");
-
+		console.log("Clicked on rollable");
       if (type === "defense") {
         const targetId = $(event.currentTarget).closestData("targetid");
         console.log("Target "+targetId);
@@ -344,6 +345,21 @@ $.fn.closestData = function (dataName, defaultValue = "") {
 
 /* -------------------------------------------- */
 function _onChatMessageAppear(event, chatMsg, html, data) {
-	console.log("Chat message appear "+event);
-   html.find('.edgeBoosts').change(event => console.log("Change "+event));
+	console.log("Chat message appear - owner = "+chatMsg.isOwner);
+	if (!chatMsg.isOwner) {
+		console.log("I am not owner of that chat message from "+data.alias);		
+		return;
+	}
+	 // React to changed edge boosts and actions
+	 let boostSelect = html.find('.edgeBoosts');
+    boostSelect.change(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
+    boostSelect.keyup(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
+    boostSelect.change(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
+    boostSelect.keyup(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
+
+	// chatMsg.roll is a SR6Roll
+	let btnPerform = html.find('.edgePerform');
+	console.log("Button = ",btnPerform);
+	btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data));
+	//btnPerform.click(ev => console.log("CLICK"));
 }

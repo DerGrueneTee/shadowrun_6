@@ -224,6 +224,10 @@
             "attack": "Attack",
             "attackRating": "Attack Rating",
 				"configure": "Configure your roll",
+            "edge_perform": "Do it",
+            "edgegain": "Edge-Gain (max): ",
+            "edgegain_player": " (Player)",
+            "exp": "Expertise",
             "subject": "Chatmessage",
             "pool": "Pool",
             "threshold": "Threshold",
@@ -242,11 +246,8 @@
             "with": "with",
             "defRating": "Defense: ",
             "notarget": "No target selected",
-            "edgegain": "Edge-Gain (max): ",
-            "edgegain_player": " (Player)",
             "noedgegain": "No edge gain",
             "hits_bought": "Hits bought",
-            "exp": "Expertise",
             "spec": "Specialization",
 				"spell": {
 					"ampUp": {

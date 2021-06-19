@@ -678,7 +678,7 @@ export class Shadowrun6Actor extends Actor {
 		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
 		if (item.data.data.category === "combat") {
 			isOpposed = true;
-			if (item.data.data.features.direct) {
+			if (item.data.data.type=="mana") {
 				hasDamageResist = false;
 			}
 		} else if (item.data.data.category === "manipulation") {
