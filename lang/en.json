@@ -129,13 +129,13 @@
             "BIOWARE": "BIOWARE",
             "CYBERWARE": "CYBERWARE",
             "TOOLS": "TOOLS",
-            "ELECTRONICS": "ELECTRONICS",
+            "ELECTRONICS": "Electronics",
             "NANOWARE": "NANOWARE",
             "GENETICS": "GENETICS",
             "AMMUNITION": "Ammunition",
-            "CHEMICALS": "CHEMICALS",
+            "CHEMICALS": "Chemicals",
             "SURVIVAL": "SURVIVAL",
-            "BIOLOGY": "BIOLOGY",
+            "BIOLOGY": "Biology",
             "VEHICLES": "VEHICLES",
             "DRONES": "DRONES",
             "MAGICAL": "MAGICAL",
@@ -193,7 +193,10 @@
             "weapon": "Named weapons are much cooler",
             "weaponclose": "Something heavy",
             "armor": "Something trendy",
-            "ammunition": "Hot stuff ammo"
+            "ammunition": "Hot stuff ammo",
+            "biology": "Biohazard",
+            "chemicals": "The good stuff",
+            "electronics":"Nerd toy"
         },
         "numerical": {
             "base": "base",

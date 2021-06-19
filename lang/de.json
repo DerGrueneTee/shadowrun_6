@@ -114,13 +114,13 @@
             "BIOWARE": "BIOWARE",
             "CYBERWARE": "CYBERWARE",
             "TOOLS": "TOOLS",
-            "ELECTRONICS": "ELECTRONICS",
+            "ELECTRONICS": "Elektronik",
             "NANOWARE": "NANOWARE",
             "GENETICS": "GENETICS",
             "AMMUNITION": "Monition",
-            "CHEMICALS": "CHEMICALS",
+            "CHEMICALS": "Drogen",
             "SURVIVAL": "SURVIVAL",
-            "BIOLOGY": "BIOLOGY",
+            "BIOLOGY": "Biologie",
             "VEHICLES": "VEHICLES",
             "DRONES": "DRONES",
             "MAGICAL": "MAGICAL",
@@ -178,7 +178,10 @@
             "weapon": "Was mit viel Wumms",
             "weaponclose": "Etwas fürs Grobe",
             "armor": "Das kleine Schwarze",
-            "ammunition": "Coole Munition"
+            "ammunition": "Coole Munition",
+            "biology": "Biozeugs",
+            "chemicals": "Das gute Zeug",
+            "electronics":"Technikspielzeug"
         },
         "numerical": {
             "base": "Basis",

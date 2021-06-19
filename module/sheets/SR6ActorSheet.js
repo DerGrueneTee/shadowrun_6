@@ -79,6 +79,36 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
+			html.find('.ELECTRONICS-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.electronics"),
+					type: "gear",
+					data: {
+						type: "ELECTRONICS"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.CHEMICALS-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.chemicals"),
+					type: "gear",
+					data: {
+						type: "CHEMICALS"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.BIOLOGY-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.biology"),
+					type: "gear",
+					data: {
+						type: "BIOLOGY"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.armor-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.armor"),
