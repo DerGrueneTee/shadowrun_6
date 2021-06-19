@@ -174,7 +174,8 @@
             },
             "spell": "Abrakadabra",
             "weapon": "Was mit viel Wumms",
-            "weaponclose": "Etwas fürs Grobe"
+            "weaponclose": "Etwas fürs Grobe",
+            "armor": "Das kleine Schwarze"
         },
         "numerical": {
             "base": "Basis",
@@ -233,12 +234,15 @@
 					 "column.points": "KP"
             },
             "ammo": "Munition",
-            "armor.title": "Panzerung",
-            "armor.column": {
+            "armor": {
+                "title": "Panzerung",
+                "column": {
                 "action": "Aktion",
                 "name": "Name",
                 "defense": "Panz",
                 "social": "Sozial"
+                },
+                "add": "Rüstung hinzufügen"
             },
             "biology": "Biologie",
             "bodyware": {

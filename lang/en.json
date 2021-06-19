@@ -189,7 +189,8 @@
             },
             "spell": "Abracadabra",
             "weapon": "Named weapons are much cooler",
-            "weaponclose": "Something heavy"
+            "weaponclose": "Something heavy",
+            "armor": "Something trendy"
         },
         "numerical": {
             "base": "base",
@@ -276,12 +277,15 @@
 					 "column.points": "PP"
             },
             "ammo": "Ammunition",
-           "armor.title": "Armor",
-            "armor.column": {
+           "armor": { 
+               "title": "Armor",
+                "column": {
                 "action": "Action",
                 "name": "Name",
                 "defense": "DR",
                 "social": "Social"
+                },
+                "add": "Add new armor"
             },
             "biology": "Biology",
             "bodyware": {
