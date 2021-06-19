@@ -172,7 +172,9 @@
                 "knowledge": "Worin bist Du Nerd?",
                 "language": "Unverständliches Gemurmel"
             },
-            "spell": "Abrakadabra"
+            "spell": "Abrakadabra",
+            "weapon": "Was mit viel Wumms",
+            "weaponclose": "Etwas fürs Grobe"
         },
         "numerical": {
             "base": "Basis",
@@ -285,7 +287,8 @@
             },
             "weapon": {
                 "ranged": "Fernkampf",
-                "close": "Nahkampf"
+                "close": "Nahkampf",
+                "add": "Neue Waffe hinzufügen"
             }
         },
         "special": {

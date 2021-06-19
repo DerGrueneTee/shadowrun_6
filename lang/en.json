@@ -187,7 +187,9 @@
                 "knowledge": "What is your nerd topic?",
                 "language": "Gibberish"
             },
-            "spell": "Abracadabra"
+            "spell": "Abracadabra",
+            "weapon": "Named weapons are much cooler",
+            "weaponclose": "Something heavy"
         },
         "numerical": {
             "base": "base",
@@ -328,7 +330,8 @@
             },
             "weapon": {
                 "ranged": "Ranged Weapons",
-                "close": "Melee Weapons"
+                "close": "Melee Weapons",
+                "add": "Add new weapon"
             }
         },
         "special": {
