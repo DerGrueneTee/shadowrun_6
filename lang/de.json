@@ -70,7 +70,9 @@
                     "weapon": "weapon"
                 }
             },
-            "feature": "Merkmale"
+            "feature": "Merkmale",
+            "social" : "Sozial",
+            "natural" : "Nat. Panzerung"
         },
         "spell": {
             "range": "Reichweite",
@@ -242,7 +244,7 @@
                 "defense": "Panz",
                 "social": "Sozial"
                 },
-                "add": "Rüstung hinzufügen"
+                "add": "Panzerung hinzufügen"
             },
             "biology": "Biologie",
             "bodyware": {

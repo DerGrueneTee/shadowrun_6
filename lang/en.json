@@ -110,7 +110,9 @@
                     "weapon": "Weapon"
                 }
             },
-            "feature": "Features"
+            "feature": "Features",
+            "social" : "Social",
+            "natural" : "Nat. armor"
         },
         "adeptpower": {
             "cost": "Cost",

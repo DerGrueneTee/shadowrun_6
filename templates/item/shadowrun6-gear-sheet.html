@@ -117,13 +117,21 @@
                 <tr>
                     <th>{{localize 'shadowrun6.item.defencerating'}}</th>
                     <th>{{localize 'shadowrun6.item.capacity'}}</th>
+                    <th>{{localize 'shadowrun6.item.social'}}</th>
+                    <th>{{localize 'shadowrun6.item.natural'}}</th>
                 </tr>
                 <tr>
-                    <td><input type="number" value="{{item.data.data.defencerating}}" name="data.defencerating"
+                    <td><input type="number" value="{{item.data.data.defense}}" name="data.defense"
                             class="box centered" />
                     </td>
                     <td><input type="number" value="{{item.data.data.capacity}}" name="data.capacity"
                             class="box centered" /></td>
+                    <td><input type="number" value="{{item.data.data.social}}" name="data.social"
+                            class="box centered" />
+                    </td>
+                    <td><input
+                        style="vertical-align: middle;" type="checkbox" {{checked item.data.data.natural}}
+                        name="data.natural" name="data.natural" /></td>
                 </tr>
             </table>
             {{/if}}
