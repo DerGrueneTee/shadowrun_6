@@ -592,7 +592,7 @@
       "type_mana_short": "Man",
       "type_physical": "Physical",
       "type_physical_short": "Phy",
-      "withEssence": "Respects Essence"
+      "withEssence": "Against Essence"
     },
     "spellfeatures": {
       "area": "Area",

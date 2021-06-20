@@ -87,11 +87,12 @@
     },
     "defense": {
       "astral": "Verteidigung: Astralkampf",
-      "astral_direct": "Vtd: Direkte K.Zauber",
-      "astral_indirect": "Vtd: Ind. K.Zauber",
       "damage_astral": "Schadenswiderstand Astral",
       "damage_physical": "Schadenswiderstand",
       "physical": "Verteidigung: Angriffe",
+      "spells_direct": "Vtd: Direkte K.Zauber",
+      "spells_indirect": "Vtd: Ind. K.Zauber",
+      "spells_other": "Vtd. sonstige Zauber",
       "toxin": "Toxinwiderstand"
     },
     "defense_rating": {
@@ -201,6 +202,7 @@
     "label": {
       "accessories": "Zubehör",
       "adepts": "Adepten",
+      "attack_rating": "Angriffswert",
       "attribute": "Attribut",
       "base": "Basis",
       "column": {
@@ -211,11 +213,13 @@
       },
       "d6": "W6",
       "damage": "Schaden",
+      "defense_rating": "Verteidigungswert",
       "delete": "Löschen",
       "dice": "Würfel",
       "edit": "Bearbeiten",
       "expertise": "Expertise",
       "features": "Merkmale",
+      "firemode_current": "Akt. Feuermodus",
       "firemodes": "Feuermodi",
       "level": "Hat Stufen",
       "mages": "Magier",
@@ -276,30 +280,59 @@
       "spotter": "Späher"
     },
     "roll": {
+      "actionText": {
+        "attack_target_multiple": "Greift mehre Ziele mit {name} an",
+        "attack_target_none": "Greift Ziel mit {name} an",
+        "attack_target_one": "Greift {target} mit {name} an",
+        "cast": "Zaubert {name}"
+      },
       "ar_0": "Sehr nah",
       "ar_1": "Nah",
       "ar_2": "Mittel",
       "ar_3": "Weit",
       "ar_4": "Sehr weit",
       "attack": "Angriff gegen ",
-      "attackRating": "Angr:",
+      "attackRating": "Angriffswert",
+      "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
       "defRating": "VTD",
-      "edge": "Edge",
-      "edgegain": "Edge-Gewinn (max): ",
-      "edgegain_player": " (Spieler)",
+      "defense_button": "Würfle Verteidigung",
+      "edge": {
+        "gain_player": "{name} erhält {value} Edge",
+        "getting": "Edge erhalten",
+        "no_gain": "Niemand bekommt Edge",
+        "situational": "Situatives Edge",
+        "spending": "Edge ausgeben"
+      },
+      "edge_perform": "Ausführen",
+      "edgegain": "Edge-Erhalt (max): ",
+      "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explodiert",
       "failure": "Fehlschlag",
       "glitch": "Patzer",
       "hits_bought": "Erfolge gekauft",
+      "mode": "Modus",
       "modifier": "Pool Modifikator",
       "noedgegain": "Kein Edge-Gewinn",
       "nosuccess": "Erfolge bei Schwellenwert ",
       "notarget": "Kein Ziel ausgewählt",
       "pool": "Würfel/Pool",
       "spec": "Spezialiszierung",
+      "spell": {
+        "ampUp": {
+          "1": "Schaden+1, Entzug+2",
+          "2": "Schaden+2, Entzug+4",
+          "title": "Hochdrehen"
+        },
+        "incArea": {
+          "1": "Radius +2m, Entzug+1",
+          "2": "Radius +4m, Entzuf+2",
+          "title": "Fläche vergrößern"
+        },
+        "title": "Den Zauber anpassen"
+      },
       "subject": "Chat-Nachricht",
       "success": "Erfolgreich",
       "successes": "Erfolge",
@@ -381,6 +414,12 @@
         "add": "Neue Waffe hinzufügen",
         "close": "Nahkampf",
         "ranged": "Fernkampf"
+      }
+    },
+    "settings": {
+      "maxEdgePerRound": {
+        "hint": "Definiert wieviel Edge jemand pro Kampfrunde maximal erhalten kann",
+        "name": "Max. Edge pro Runde"
       }
     },
     "special": {
@@ -512,23 +551,47 @@
       "category_health": "Heilung",
       "category_illusion": "Illusion",
       "category_manipulation": "Manipultaion",
+      "damage": "Schaden",
+      "damage_physical": "Körperlich",
+      "damage_physical_short": "K",
+      "damage_physical_special": "Körperl., Speziell",
+      "damage_physical_special_short": "K, Speziell",
+      "damage_short": "Sch",
+      "damage_stun": "Betäubt",
+      "damage_stun_short": "B",
+      "damage_stun_special": "Betäubt, Speziell",
+      "damage_stun_special_short": "B, Speziell",
       "direct": "Direkt",
       "drain": "Entzug",
+      "drain_short": "Entz",
       "duration": "Dauer",
       "duration_instantaneous": "Sofort",
+      "duration_instantaneous_short": "S",
       "duration_limited": "Begrenzt",
       "duration_permanent": "Permanent",
+      "duration_permanent_short": "P",
+      "duration_short": "Dauer",
       "duration_special": "Speziell",
+      "duration_special_short": "Spez",
       "duration_sustained": "Aufrechterhalten",
+      "duration_sustained_short": "A",
       "range": "Reichweite",
       "range_line_of_sight": "BLickfeld",
       "range_line_of_sight_area": "Blickfeld (Fläche)",
+      "range_line_of_sight_area_short": "BF(F)",
+      "range_line_of_sight_short": "BF",
       "range_self": "Selbst",
       "range_self_area": "Selbst (Fläche)",
+      "range_self_area_short": "S(F)",
+      "range_self_short": "S",
       "range_touch": "Berührung",
+      "range_touch_short": "B",
       "type": "Art",
       "type_mana": "Mana",
-      "type_physical": "Physisch"
+      "type_mana_short": "Man",
+      "type_physical": "Physisch",
+      "type_physical_short": "K",
+      "withEssence": "Gegen Essenz"
     },
     "spellfeatures": {
       "area": "Flächenwirkung",
@@ -536,6 +599,9 @@
       "indirect": "Indirekter Kampfzauber",
       "sense_multi": "Vollsensorisch",
       "sense_single": "Monosensorisch"
+    }
+    "tradition": {
+      "attribute": "Traditionsattribut"
     }
   },
   "skill.astral": "Astral",
@@ -551,7 +617,6 @@
   "skill.exotic_weapons": "Exotische Waffen",
   "skill.firearms": "Feuerwaffen",
   "skill.influence": "Einfluss",
-  "skill.name.pattern": "skull.${id}",
   "skill.outdoors": "Natur",
   "skill.perception": "Wahrnehmung",
   "skill.piloting": "Steuern",
