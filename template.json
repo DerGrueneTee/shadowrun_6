@@ -544,8 +544,8 @@
 			}
 		},
 		"skill": {
-			"genesisID": "",
 			"templates": [
+				"genesis",
 				"skill-value"
 			]
 		},
