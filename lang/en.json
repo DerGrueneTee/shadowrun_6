@@ -1,627 +1,627 @@
 {
-	"ACTOR.TypeCritter": "Critter",
-	"ACTOR.TypeNpc": "NPC",
-	"ACTOR.TypePlayer": "Player Character",
-	"ITEM.TypeAdeptpower": "Adept Power",
-	"ITEM.TypeGear": "Gear",
-	"ITEM.TypeMartialartstyle": "Martial Art Style",
-	"ITEM.TypeMartialarttech": "Martial Art Technique",
-	"ITEM.TypeMetamagic": "Metamagic",
-	"ITEM.TypeQuality": "Quality",
-	"ITEM.TypeRitual": "Ritual",
-	"ITEM.TypeSkill": "Language/Knowledge Skill",
-	"ITEM.TypeSpell": "Spell",
-	"ITEM.TypeWeapon": "Weapon",
-	"QUALITY_CATEGORIES.ADVANTAGE": "Advantage",
-	"QUALITY_CATEGORIES.DISADVANTAGE": "Disadvantage",
-	"attrib.agi": "Agility",
-	"attrib.agi_short": "AGI",
-	"attrib.bod": "Body",
-	"attrib.bod_short": "BOD",
-	"attrib.cha": "Charisma",
-	"attrib.cha_short": "CHA",
-	"attrib.dr": "Defense Rating",
-	"attrib.dr_short": "DR",
-	"attrib.edg": "Edge",
-	"attrib.edg_short": "EDG",
-	"attrib.ess": "Essence",
-	"attrib.ess_short": "ESS",
-	"attrib.ini": "Initiative",
-	"attrib.ini_short": "INI",
-	"attrib.inia": "Astral Initiative",
-	"attrib.inia_short": "A.INI",
-	"attrib.inim": "Matrix Initiative",
-	"attrib.inim_short": "M.INI",
-	"attrib.int": "Intuition",
-	"attrib.int_short": "INT",
-	"attrib.log": "Logic",
-	"attrib.log_short": "LOG",
-	"attrib.mag": "Magic",
-	"attrib.mag_short": "MAG",
-	"attrib.rea": "Reaction",
-	"attrib.rea_short": "REA",
-	"attrib.res": "Resonance",
-	"attrib.res_short": "RES",
-	"attrib.str": "Strength",
-	"attrib.str_short": "STR",
-	"attrib.wil": "Willpower",
-	"attrib.wil_short": "WIL",
-	"label.skill": "Skill",
-	"section.attributes": "Attributes",
-	"shadowrun6": {
-		"actor": {
-			"actions": "Actions",
-			"actions_major": "Major",
-			"actions_minor": "Minor",
-			"initiative": "Initiative",
-			"initiative_astral": "Astral Initiative",
-			"name": "Name",
-			"nav": {
-				"basics": "Basics",
-				"combat": "Combat",
-				"description": "Description",
-				"equip": "Equipment",
-				"magic": "Magic",
-				"input": "Input",
-				"skills": "Skills",
-				"overview": "Overview"
-			},
-			"metatype": "Metatype",
-			"skills": "Skills",
-			"spells": "Spells"
-		},
-		"attack_rating": {
-			"physical": "Physical Att. Rtg",
-			"astral": "Mana Att. Rtg",
-			"social": "Social Att. Rtg.",
-			"matrix": "Matrix Att. Rtg.",
-			"vehicle": "Vehicle Att. Rtg."
-		},
-		"defense_rating": {
-			"physical": "Physical Def. Rtg",
-			"astral": "Mana Def. Rtg",
-			"social": "Social Def. Rtg.",
-			"matrix": "Matrix Def. Rtg.",
-			"vehicle": "Vehicle Def. Rtg."
-		},
-		"derived": {
-			"defense_rating": "Defense Rating",
-			"composure": "Composure",
-			"judge_intentions": "Judge Intentions",
-			"memory": "Memory",
-			"lift_carry": "Lift / Carry"
-		},
-		"edge_action": {
-			"anticipation": "Anticipation",
-			"big_speech": "Big Speech",
-			"bring_the_drama": "Bring the Drama",
-			"called_shot_disarm": "Called Shot - Disarm",
-			"called_shot_vitals": "Called Shot - Vitals",
-			"fire_from_cover": "Fire from Cover",
-			"knockout_blow": "Knockout Blow",
-			"shank": "Shank"
-		},
-		"edge_boost": {
-			"edge_action": "Edge Action - (1-5)",
-			"reroll_one": "Reroll one die",
-			"plus_3_ini": "Add 3 to your Initiative Score",
-			"plus_1_roll": "+1 to a single die",
-			"negate_1_edge": "Negate 1 Edge of a foe",
-			"buy_auto_hit": "Buy one automatic hit",
-			"heal_1_stun": "Heal one box of Stun damage",
-			"add_edge_pool": "Add Edge to your dice pool",
-			"heal_1_physic": "Heal 1 point of Physical damage",
-			"reroll_failed": "Reroll all failed dice",
-			"count_2_glitch": "Count 2s as glitches for the target",
-			"create_special": "Create special effect"
-		},
-		"defense": {
-			"physical": "Defense: Attacks",
-			"astral": "Defense: Astral Combat",
-			"spells_direct": "Defense: Direct Spells",
-			"spells_indirect": "Defense: Ind. Spells",
-			"spells_other": "Defense: Ind. Spells",
-			"damage_physical": "Resist Physical Dmg",
-			"damage_astral": "Resist Astral Dmg",
-			"toxin": "Resist Toxin"
-		},
-		"initiative": {
-			"physical": "Initiative",
-			"matrix": "Matrix-Initiative",
-			"astral": "Astral Initiative"
-		},
-		"item": {
-			"type": "Type",
-			"subtype": "Subtype",
-			"availability": "Avail.",
-			"price": "Price",
-			"skill": "Skill",
-			"damage": "Damage",
-			"mode": "Modes",
-			"attackvalues": "Attack rtg.",
-			"ammunition": "Ammo",
-			"description": "Description",
-			"defencerating": "Defence rtg",
-			"capacity": "Capacity",
-			"skillspec": "Specialisation",
-			"mode_bf": "BF",
-			"mode_fa": "FA",
-			"mode_sa": "SA",
-			"mode_ss": "SS",
-			"accessories": "Accessories",
-			"essence": "Essence",
-			"category": "Category",
-			"mastyle": {
-				"category": {
-					"grappling": "Grappling",
-					"mobility": "Mobility",
-					"striking": "Striking",
-					"weapon": "Weapon"
-				}
-			},
-			"feature": "Features",
-			"social": "Social",
-			"natural": "Nat. armor",
-			"firemode": {
-				"BF": "Burst Fire",
-				"FA": "Full Auto",
-				"SA": "Semi Automatic",
-				"SS": "Single Shot"
-			}
-		},
-		"adeptpower": {
-			"cost": "Cost",
-			"activation": "Activation",
-			"haslevel": "Has level",
-			"activation_passive": "Passive",
-			"activation_minor": "Minor Action",
-			"activation_major": "Major Action"
-		},
-		"itemtype": {
-			"ACCESSORY": "Accessory",
-			"ARMOR": "Armor",
-			"ARMOR_ADDITION": "Armor additions",
-			"BIOWARE": "Bioware",
-			"CYBERWARE": "Cyberware",
-			"TOOLS": "TOOLS",
-			"ELECTRONICS": "Electronics",
-			"NANOWARE": "NANOWARE",
-			"GENETICS": "GENETICS",
-			"AMMUNITION": "Ammunition",
-			"CHEMICALS": "Chemicals",
-			"SURVIVAL": "SURVIVAL",
-			"BIOLOGY": "Biology",
-			"VEHICLES": "VEHICLES",
-			"DRONES": "DRONES",
-			"MAGICAL": "MAGICAL",
-			"WEAPON_CLOSE_COMBAT": "Weapon, Close Combat",
-			"WEAPON_FIREARMS": "Weapon, Firearms",
-			"WEAPON_RANGED": "Weapon, Projectiles",
-			"WEAPON_SPECIAL": "Weapon, Special"
-		},
-		"label": {
-			"accessories": "Accessories",
-			"attack_rating": "Attack Rating",
-			"attribute": "Attribute",
-			"base": "Base",
-			"column": {
-				"action": "Action",
-				"count": "Cnt",
-				"name": "Name",
-				"rating": "Rtg."
-			},
-			"damage": "Damage",
-			"defense_rating": "Defense Rating",
-			"dice": "Dice",
-			"d6": "D6",
-			"delete": "Delete",
-			"edit": "Edit",
-			"expertise": "Expertise",
-			"features": "Features",
-			"firemode_current": "Current Firemode",
-			"firemodes": "Firemodes",
-			"max": "Maximum",
-			"modifier": "Adj.",
-			"modifications": "Modifications",
-			"none": "-",
-			"points": "Points",
-			"pool": "Pool",
-			"poolmod": "Pool modifier",
-			"specialization": "Specialization",
-			"value": "Value",
-			"wilddie": "Wild Die",
-			"level": "Has levels",
-			"mages": "Mages",
-			"adepts": "Adepts",
-			"threshold": "Threshold"
-		},
-		"monitor": {
-			"physical": "Physical",
-			"stun": "Stun"
-		},
-		"newitem": {
-			"adeptpower": "Name your power",
-			"quality": "What is your feat?",
-			"ritual": "Singing Hallelujah",
-			"skill": {
-				"knowledge": "What is your nerd topic?",
-				"language": "Gibberish"
-			},
-			"spell": "Abracadabra",
-			"weapon": "Named weapons are much cooler",
-			"weaponclose": "Something heavy",
-			"armor": "Something trendy",
-			"ammunition": "Hot stuff ammo",
-			"biology": "Biohazard",
-			"chemicals": "The good stuff",
-			"electronics": "Nerd toy",
-			"martialarttech": "Technique, which technique?",
-			"martialartstyle": "What's your style?",
-			"bodyware": "Some cool enhancement"
-		},
-		"numerical": {
-			"base": "base",
-			"baseString": "Base Value",
-			"max": "Max",
-			"mod": "adj"
-		},
-		"ritualfeatures": {
-			"anchored": "Anchored",
-			"material_link": "Material Link",
-			"minion": "Minion",
-			"spell": "Spell",
-			"spotter": "Spotter"
-		},
-		"roll": {
-			"actionText": {
-				"cast": "Casting {name}",
-				"attack_target_none": "Attacking target with {name}",
-				"attack_target_one": "Attacking {target} with {name}",
-				"attack_target_multiple": "Attacking multiple targets with {name}"
-			},
-			"ar_0": "Close",
-			"ar_1": "Near",
-			"ar_2": "Medium",
-			"ar_3": "Far",
-			"ar_4": "Extreme",
-			"attack": "Attack",
-			"attackRating": "Attack Rating",
-			"configure": "Configure your roll",
-			"defense_button": "Roll Defense",
-			"edge_perform": "Do it",
-			"edgegain": "Edge-Gain (max): ",
-			"edgegain_player": " (Player)",
-			"exp": "Expertise",
-			"subject": "Chatmessage",
-			"pool": "Pool",
-			"threshold": "Threshold",
-			"explode": "Explode",
-			"failure": "Failure",
-			"wilddie": "Use wild die",
-			"modifier": "Pool modifier",
-			"success": "Success",
-			"successes": "hits",
-			"mode": "Mode",
-			"glitch": "Glitch",
-			"criticalglitch": "Critical glitch",
-			"nosuccess": "hits, threshold: ",
-			"damage": "Damage: ",
-			"target": "Target",
-			"with": "with",
-			"defRating": "Defense: ",
-			"notarget": "No target selected",
-			"noedgegain": "No edge gain",
-			"hits_bought": "Hits bought",
-			"spec": "Specialization",
-			"spell": {
-				"ampUp": {
-					"1": "Damage+1, Drain+2",
-					"2": "Damage+2, Drain+4",
-					"title": "Amp up"
-				},
-				"incArea": {
-					"1": "Radius +2m, Drain+1",
-					"2": "Radius +4m, Drain+2",
-					"title": "Increase Area"
-				},
-				"title": "Adjust the spell"
-			},
-			"edge": {
-				"gain_player": "{name} gets {value} Edge",
-				"no_gain": "No one gets Edge",
-				"getting": "Getting Edge",
-				"spending": "Spending Edge",
-				"situational": "Situational Edge"
-			}
-		},
-		"rollType": {
-			"normal": "Roll dice",
-			"bought": "Buy hits"
-		},
-		"section": {
-			"adeptpowers": {
-				"add": "Add new power",
-				"title": "Adept Powers",
-				"column.points": "PP"
-			},
-			"ammo": "Ammunition",
-			"ammo_add": "Add ammunition",
-			"armor": {
-				"title": "Armor",
-				"column": {
-					"action": "Action",
-					"name": "Name",
-					"defense": "DR",
-					"social": "Social"
-				},
-				"add": "Add new armor"
-			},
-			"biology": "Biology",
-			"bodyware": {
-				"title": "Bodyware",
-				"column.essence": "Ess.",
-				"column.capacity": "Cap.",
-				"footer.total_essence": "Remaining Essence",
-				"add": "Add new bioware or cyberware"
-			},
-			"chemicals": "Chemicals",
-			"defense": "Defenses & Resistances",
-			"derived": "Derived Values",
-			"electronics": "Electronics",
-			"initiative": "Initiative",
-			"martialarts": {
-				"add": "Add new style",
-				"title": "Martial Arts",
-				"tech_add": "Add new technique"
-			},
-			"metamagic": {
-				"add": "Add new metamagic",
-				"title": "Metamagics"
-			},
-			"rituals": {
-				"add": "Add new ritual",
-				"column.threshold": "Thresh.",
-				"title": "Rituals"
-			},
-			"skills.action": "Skills",
-			"skills.language": "Language Skills",
-			"skills.language_add": "Add new language skill",
-			"skills.language-level": {
-				"normal": "Normal",
-				"special": "Specialist",
-				"expert": "Expert",
-				"native": "Native"
-			},
-			"skills.knowledge": "Knowledge Skills",
-			"skills.knowledge_add": "Add new knowledge",
-			"qualities": "Qualities",
-			"qualities_add": "Add",
-			"spells": {
-				"add": "Add new spell",
-				"title": "Spells",
-				"column.drain": "Drain",
-				"column.alchemic": "Alch.",
-				"column.range": "Range"
-			},
-			"weapon": {
-				"ranged": "Ranged Weapons",
-				"close": "Melee Weapons",
-				"add": "Add new weapon"
-			}
-		},
-		"settings": {
-			"maxEdgePerRound": {
-				"name": "Max. Edge per turn",
-				"hint": "Defines the maximum egde a player or NPC can gain per turn."
-			}
-		},
-		"special": {
-			"astral": {
-				"astral_combat": "Astral Combat",
-				"astral_signatures": "Astral Signatures",
-				"emotional_stress": "Emotional Stress",
-				"spirit_types": "Spirit Types"
-			},
-			"athletics": {
-				"climbing": "Climbing",
-				"flying": "Flying",
-				"gymnastics": "Gymnastics",
-				"sprinting": "Sprinting",
-				"swimming": "Swimming",
-				"throwing": "Throwing",
-				"archery": "Archery"
-			},
-			"biotech": {
-				"biotechnology": "Biotechnology",
-				"cybertechnology": "Cybertechnology",
-				"first_aid": "First Aid",
-				"medicine": "Medicine"
-			},
-			"close_combat": {
-				"blades": "Blades",
-				"clubs": "Clubs",
-				"unarmed": "Unarmed Combat"
-			},
-			"con": {
-				"acting": "Acting",
-				"disguise": "Disguise",
-				"impersonation": "Impersonation",
-				"performance": "Performance"
-			},
-			"conjuring": {
-				"banishing": "Banishing",
-				"summoning": "Summoning"
-			},
-			"cracking": {
-				"cybercombat": "Cybercombat",
-				"electronic_warfare": "Electronic Warface",
-				"hacking": "Hacking"
-			},
-			"electronics": {
-				"computer": "Computer",
-				"hardware": "Hardware",
-				"software": "Software"
-			},
-			"enchanting": {
-				"alchemy": "Alchemy",
-				"artificing": "Artificing",
-				"disenchanting": "Disenchanting"
-			},
-			"engineering": {
-				"aeronautics_mechanic": "Aeronautics Mechanic",
-				"armorer": "Armorer",
-				"automotive_mechanic": "Automotive Mechanic",
-				"demolitions": "Demolitions",
-				"gunnery": "Gunnery",
-				"industrial_mechanic": "Industrial Mechanic",
-				"lockpicking": "Lockpicking",
-				"nautical_mechanic": "Nautical Mechanic"
-			},
-			"exotic_weapons": {},
-			"firearms": {
-				"tasers": "Taser",
-				"holdouts": "Holdouts",
-				"pistols_light": "Light Pistols",
-				"pistols_heavy": "Heavy Pistols",
-				"machine_pistols": "Machine Pistols",
-				"submachine_guns": "Submachine Guns",
-				"rifles": "Rifles",
-				"shotguns": "Shotguns",
-				"assault_cannons": "Assault Cannons"
-			},
-			"influence": {
-				"etiquette": "Etiquette",
-				"instruction": "Instruction",
-				"intimidation": "Intimidation",
-				"leadership": "Leadership",
-				"negotiation": "Negotiation"
-			},
-			"outdoors": {
-				"navigation": "Navigation",
-				"survival": "Survival",
-				"tracking_woods": "Environment Woods",
-				"tracking_desert": "Environment Desert",
-				"tracking_urban": "Environment Urban",
-				"tracking_other": "Environment Other"
-			},
-			"perception": {
-				"visual": "Visual",
-				"aural": "Aural",
-				"tactile": "Tactile",
-				"scent": "Scent",
-				"taste": "Taste",
-				"perception_woods": "Environment Woods",
-				"perception_desert": "Environment Desert",
-				"perception_urban": "Environment Urban",
-				"perception_other": "Environment Other"
-			},
-			"piloting": {
-				"ground_craft": "Ground Craft",
-				"aircraft": "Aircraft",
-				"watercraft": "Watercraft"
-			},
-			"sorcery": {
-				"counterspelling": "Counterspelling",
-				"ritual_spellcasting": "Ritual Spellcasting",
-				"spellcasting": "Spellcasting"
-			},
-			"stealth": {
-				"disguise": "Disguise",
-				"palming": "Palming",
-				"sneaking": "Sneaking",
-				"camouflage": "Camouflage"
-			},
-			"tasking": {
-				"compiling": "Compiling",
-				"decompiling": "Decompiling",
-				"registering": "Registering"
-			}
-		},
-		"spell": {
-			"isOpposed": "Is Opposed",
-			"withEssence": "Respects Essence",
-			"range": "Range",
-			"category": "Category",
-			"category_combat": "Combat",
-			"category_health": "Health",
-			"category_manipulation": "Manipultaion",
-			"category_illusion": "Illusion",
-			"category_detection": "Detection",
-			"range_line_of_sight": "Line of sight",
-			"range_line_of_sight_short": "LOS",
-			"range_line_of_sight_area": "Line of sight (area)",
-			"range_line_of_sight_area_short": "LOS(A)",
-			"range_touch": "Touch",
-			"range_touch_short": "T",
-			"range_self": "Self",
-			"range_self_short": "Self",
-			"range_self_area": "Self (Area)",
-			"range_self_area_short": "S(A)",
-			"duration": "Duration",
-			"duration_short": "Dur.",
-			"damage_physical": "Physical",
-			"damage_physical_short": "P",
-			"damage_stun": "Stun",
-			"damage_stun_short": "S",
-			"damage_physical_special": "Physical, Special",
-			"damage_physical_special_short": "P, Special",
-			"damage_stun_special": "Stun, Special",
-			"damage_stun_special_short": "S, Special",
-			"duration_instantaneous": "Instantaneous",
-			"duration_instantaneous_short": "I",
-			"duration_sustained": "Sustained",
-			"duration_sustained_short": "S",
-			"duration_permanent": "Permanent",
-			"duration_permanent_short": "P",
-			"duration_limited": "Limited",
-			"duration_special": "Special",
-			"duration_special_short": "Spec",
-			"type_physical": "Physical",
-			"type_physical_short": "Phy",
-			"type_mana": "Mana",
-			"type_mana_short": "Man",
-			"drain": "Drain",
-			"drain_short": "DV",
-			"damage": "Damage",
-			"damage_short": "Dmg",
-			"type": "Type",
-			"direct": "Direct"
-		},
-		"spellfeatures": {
-			"area": "Area",
-			"indirect": "Indirect Combat",
-			"direct": "Direct Combat",
-			"sense_single": "Single-Sense",
-			"sense_multi": "Multi-Sense"
-		},
-		"tradition": {
-			"attribute": "Tradition Attribute"
-		},
-		"qualityedit": {
-			"new": "New",
-			"name": "Name",
-			"description": "Description",
-			"explain": "Explanation",
-			"category": "Category"
-		}
-	},
-	"skill.astral": "Astral",
-	"skill.athletics": "Athletics",
-	"skill.biotech": "Biotech",
-	"skill.close_combat": "Close Combat",
-	"skill.con": "Con",
-	"skill.conjuring": "Conjuring",
-	"skill.cracking": "Cracking",
-	"skill.electronics": "Electronics",
-	"skill.enchanting": "Enchanting",
-	"skill.engineering": "Engineering",
-	"skill.exotic_weapons": "Exotic Weapons",
-	"skill.firearms": "Firearms",
-	"skill.influence": "Influence",
-	"skill.outdoors": "Outdoors",
-	"skill.perception": "Perception",
-	"skill.piloting": "Piloting",
-	"skill.sorcery": "Sorcery",
-	"skill.stealth": "Stealth",
-	"skill.tasking": "Tasking"
+  "ACTOR.TypeCritter": "Critter",
+  "ACTOR.TypeNpc": "NPC",
+  "ACTOR.TypePlayer": "Player Character",
+  "ITEM.TypeAdeptpower": "Adept Power",
+  "ITEM.TypeGear": "Gear",
+  "ITEM.TypeMartialartstyle": "Martial Art Style",
+  "ITEM.TypeMartialarttech": "Martial Art Technique",
+  "ITEM.TypeMetamagic": "Metamagic",
+  "ITEM.TypeQuality": "Quality",
+  "ITEM.TypeRitual": "Ritual",
+  "ITEM.TypeSkill": "Language/Knowledge Skill",
+  "ITEM.TypeSpell": "Spell",
+  "ITEM.TypeWeapon": "Weapon",
+  "QUALITY_CATEGORIES.ADVANTAGE": "Advantage",
+  "QUALITY_CATEGORIES.DISADVANTAGE": "Disadvantage",
+  "attrib.agi": "Agility",
+  "attrib.agi_short": "AGI",
+  "attrib.bod": "Body",
+  "attrib.bod_short": "BOD",
+  "attrib.cha": "Charisma",
+  "attrib.cha_short": "CHA",
+  "attrib.dr": "Defense Rating",
+  "attrib.dr_short": "DR",
+  "attrib.edg": "Edge",
+  "attrib.edg_short": "EDG",
+  "attrib.ess": "Essence",
+  "attrib.ess_short": "ESS",
+  "attrib.ini": "Initiative",
+  "attrib.ini_short": "INI",
+  "attrib.inia": "Astral Initiative",
+  "attrib.inia_short": "A.INI",
+  "attrib.inim": "Matrix Initiative",
+  "attrib.inim_short": "M.INI",
+  "attrib.int": "Intuition",
+  "attrib.int_short": "INT",
+  "attrib.log": "Logic",
+  "attrib.log_short": "LOG",
+  "attrib.mag": "Magic",
+  "attrib.mag_short": "MAG",
+  "attrib.rea": "Reaction",
+  "attrib.rea_short": "REA",
+  "attrib.res": "Resonance",
+  "attrib.res_short": "RES",
+  "attrib.str": "Strength",
+  "attrib.str_short": "STR",
+  "attrib.wil": "Willpower",
+  "attrib.wil_short": "WIL",
+  "label.skill": "Skill",
+  "section.attributes": "Attributes",
+  "shadowrun6": {
+    "actor": {
+      "actions": "Actions",
+      "actions_major": "Major",
+      "actions_minor": "Minor",
+      "initiative": "Initiative",
+      "initiative_astral": "Astral Initiative",
+      "metatype": "Metatype",
+      "name": "Name",
+      "nav": {
+        "basics": "Basics",
+        "combat": "Combat",
+        "description": "Description",
+        "equip": "Equipment",
+        "input": "Input",
+        "magic": "Magic",
+        "overview": "Overview",
+        "skills": "Skills"
+      },
+      "skills": "Skills",
+      "spells": "Spells"
+    },
+    "adeptpower": {
+      "activation": "Activation",
+      "activation_major": "Major Action",
+      "activation_minor": "Minor Action",
+      "activation_passive": "Passive",
+      "cost": "Cost",
+      "haslevel": "Has level"
+    },
+    "attack_rating": {
+      "astral": "Mana Att. Rtg",
+      "matrix": "Matrix Att. Rtg.",
+      "physical": "Physical Att. Rtg",
+      "social": "Social Att. Rtg.",
+      "vehicle": "Vehicle Att. Rtg."
+    },
+    "defense": {
+      "astral": "Defense: Astral Combat",
+      "damage_astral": "Resist Astral Dmg",
+      "damage_physical": "Resist Physical Dmg",
+      "physical": "Defense: Attacks",
+      "spells_direct": "Defense: Direct Spells",
+      "spells_indirect": "Defense: Ind. Spells",
+      "spells_other": "Defense: Ind. Spells",
+      "toxin": "Resist Toxin"
+    },
+    "defense_rating": {
+      "astral": "Mana Def. Rtg",
+      "matrix": "Matrix Def. Rtg.",
+      "physical": "Physical Def. Rtg",
+      "social": "Social Def. Rtg.",
+      "vehicle": "Vehicle Def. Rtg."
+    },
+    "derived": {
+      "composure": "Composure",
+      "defense_rating": "Defense Rating",
+      "judge_intentions": "Judge Intentions",
+      "lift_carry": "Lift / Carry",
+      "memory": "Memory"
+    },
+    "edge_action": {
+      "anticipation": "Anticipation",
+      "big_speech": "Big Speech",
+      "bring_the_drama": "Bring the Drama",
+      "called_shot_disarm": "Called Shot - Disarm",
+      "called_shot_vitals": "Called Shot - Vitals",
+      "fire_from_cover": "Fire from Cover",
+      "knockout_blow": "Knockout Blow",
+      "shank": "Shank"
+    },
+    "edge_boost": {
+      "add_edge_pool": "Add Edge to your dice pool",
+      "buy_auto_hit": "Buy one automatic hit",
+      "count_2_glitch": "Count 2s as glitches for the target",
+      "create_special": "Create special effect",
+      "edge_action": "Edge Action - (1-5)",
+      "heal_1_physic": "Heal 1 point of Physical damage",
+      "heal_1_stun": "Heal one box of Stun damage",
+      "negate_1_edge": "Negate 1 Edge of a foe",
+      "plus_1_roll": "+1 to a single die",
+      "plus_3_ini": "Add 3 to your Initiative Score",
+      "reroll_failed": "Reroll all failed dice",
+      "reroll_one": "Reroll one die"
+    },
+    "initiative": {
+      "astral": "Astral Initiative",
+      "matrix": "Matrix-Initiative",
+      "physical": "Initiative"
+    },
+    "item": {
+      "accessories": "Accessories",
+      "ammunition": "Ammo",
+      "attackvalues": "Attack rtg.",
+      "availability": "Avail.",
+      "capacity": "Capacity",
+      "category": "Category",
+      "damage": "Damage",
+      "defencerating": "Defence rtg",
+      "description": "Description",
+      "essence": "Essence",
+      "feature": "Features",
+      "firemode": {
+        "BF": "Burst Fire",
+        "FA": "Full Auto",
+        "SA": "Semi Automatic",
+        "SS": "Single Shot"
+      },
+      "mastyle": {
+        "category": {
+          "grappling": "Grappling",
+          "mobility": "Mobility",
+          "striking": "Striking",
+          "weapon": "Weapon"
+        }
+      },
+      "mode": "Modes",
+      "mode_bf": "BF",
+      "mode_fa": "FA",
+      "mode_sa": "SA",
+      "mode_ss": "SS",
+      "natural": "Nat. armor",
+      "price": "Price",
+      "skill": "Skill",
+      "skillspec": "Specialisation",
+      "social": "Social",
+      "subtype": "Subtype",
+      "type": "Type"
+    },
+    "itemtype": {
+      "ACCESSORY": "Accessory",
+      "AMMUNITION": "Ammunition",
+      "ARMOR": "Armor",
+      "ARMOR_ADDITION": "Armor additions",
+      "BIOLOGY": "Biology",
+      "BIOWARE": "Bioware",
+      "CHEMICALS": "Chemicals",
+      "CYBERWARE": "Cyberware",
+      "DRONES": "DRONES",
+      "ELECTRONICS": "Electronics",
+      "GENETICS": "GENETICS",
+      "MAGICAL": "MAGICAL",
+      "NANOWARE": "NANOWARE",
+      "SURVIVAL": "SURVIVAL",
+      "TOOLS": "TOOLS",
+      "VEHICLES": "VEHICLES",
+      "WEAPON_CLOSE_COMBAT": "Weapon, Close Combat",
+      "WEAPON_FIREARMS": "Weapon, Firearms",
+      "WEAPON_RANGED": "Weapon, Projectiles",
+      "WEAPON_SPECIAL": "Weapon, Special"
+    },
+    "label": {
+      "accessories": "Accessories",
+      "adepts": "Adepts",
+      "attack_rating": "Attack Rating",
+      "attribute": "Attribute",
+      "base": "Base",
+      "column": {
+        "action": "Action",
+        "count": "Cnt",
+        "name": "Name",
+        "rating": "Rtg."
+      },
+      "d6": "D6",
+      "damage": "Damage",
+      "defense_rating": "Defense Rating",
+      "delete": "Delete",
+      "dice": "Dice",
+      "edit": "Edit",
+      "expertise": "Expertise",
+      "features": "Features",
+      "firemode_current": "Current Firemode",
+      "firemodes": "Firemodes",
+      "level": "Has levels",
+      "mages": "Mages",
+      "max": "Maximum",
+      "modifications": "Modifications",
+      "modifier": "Adj.",
+      "none": "-",
+      "points": "Points",
+      "pool": "Pool",
+      "poolmod": "Pool modifier",
+      "specialization": "Specialization",
+      "threshold": "Threshold",
+      "value": "Value",
+      "wilddie": "Wild Die"
+    },
+    "monitor": {
+      "physical": "Physical",
+      "stun": "Stun"
+    },
+    "newitem": {
+      "adeptpower": "Name your power",
+      "ammunition": "Hot stuff ammo",
+      "armor": "Something trendy",
+      "biology": "Biohazard",
+      "bodyware": "Some cool enhancement",
+      "chemicals": "The good stuff",
+      "electronics": "Nerd toy",
+      "martialartstyle": "What's your style?",
+      "martialarttech": "Technique, which technique?",
+      "quality": "What is your feat?",
+      "ritual": "Singing Hallelujah",
+      "skill": {
+        "knowledge": "What is your nerd topic?",
+        "language": "Gibberish"
+      },
+      "spell": "Abracadabra",
+      "weapon": "Named weapons are much cooler",
+      "weaponclose": "Something heavy"
+    },
+    "numerical": {
+      "base": "base",
+      "baseString": "Base Value",
+      "max": "Max",
+      "mod": "adj"
+    },
+    "qualityedit": {
+      "category": "Category",
+      "description": "Description",
+      "explain": "Explanation",
+      "name": "Name",
+      "new": "New"
+    },
+    "ritualfeatures": {
+      "anchored": "Anchored",
+      "material_link": "Material Link",
+      "minion": "Minion",
+      "spell": "Spell",
+      "spotter": "Spotter"
+    },
+    "roll": {
+      "actionText": {
+        "attack_target_multiple": "Attacking multiple targets with {name}",
+        "attack_target_none": "Attacking target with {name}",
+        "attack_target_one": "Attacking {target} with {name}",
+        "cast": "Casting {name}"
+      },
+      "ar_0": "Close",
+      "ar_1": "Near",
+      "ar_2": "Medium",
+      "ar_3": "Far",
+      "ar_4": "Extreme",
+      "attack": "Attack",
+      "attackRating": "Attack Rating",
+      "configure": "Configure your roll",
+      "criticalglitch": "Critical glitch",
+      "damage": "Damage: ",
+      "defRating": "Defense: ",
+      "defense_button": "Roll Defense",
+      "edge": {
+        "gain_player": "{name} gets {value} Edge",
+        "getting": "Getting Edge",
+        "no_gain": "No one gets Edge",
+        "situational": "Situational Edge",
+        "spending": "Spending Edge"
+      },
+      "edge_perform": "Do it",
+      "edgegain": "Edge-Gain (max): ",
+      "edgegain_player": " (Player)",
+      "exp": "Expertise",
+      "explode": "Explode",
+      "failure": "Failure",
+      "glitch": "Glitch",
+      "hits_bought": "Hits bought",
+      "mode": "Mode",
+      "modifier": "Pool modifier",
+      "noedgegain": "No edge gain",
+      "nosuccess": "hits, threshold: ",
+      "notarget": "No target selected",
+      "pool": "Pool",
+      "spec": "Specialization",
+      "spell": {
+        "ampUp": {
+          "1": "Damage+1, Drain+2",
+          "2": "Damage+2, Drain+4",
+          "title": "Amp up"
+        },
+        "incArea": {
+          "1": "Radius +2m, Drain+1",
+          "2": "Radius +4m, Drain+2",
+          "title": "Increase Area"
+        },
+        "title": "Adjust the spell"
+      },
+      "subject": "Chatmessage",
+      "success": "Success",
+      "successes": "hits",
+      "target": "Target",
+      "threshold": "Threshold",
+      "wilddie": "Use wild die",
+      "with": "with"
+    },
+    "rollType": {
+      "bought": "Buy hits",
+      "normal": "Roll dice"
+    },
+    "section": {
+      "adeptpowers": {
+        "add": "Add new power",
+        "column.points": "PP",
+        "title": "Adept Powers"
+      },
+      "ammo": "Ammunition",
+      "ammo_add": "Add ammunition",
+      "armor": {
+        "add": "Add new armor",
+        "column": {
+          "action": "Action",
+          "defense": "DR",
+          "name": "Name",
+          "social": "Social"
+        },
+        "title": "Armor"
+      },
+      "biology": "Biology",
+      "bodyware": {
+        "add": "Add new bioware or cyberware",
+        "column.capacity": "Cap.",
+        "column.essence": "Ess.",
+        "footer.total_essence": "Remaining Essence",
+        "title": "Bodyware"
+      },
+      "chemicals": "Chemicals",
+      "defense": "Defenses & Resistances",
+      "derived": "Derived Values",
+      "electronics": "Electronics",
+      "initiative": "Initiative",
+      "martialarts": {
+        "add": "Add new style",
+        "tech_add": "Add new technique",
+        "title": "Martial Arts"
+      },
+      "metamagic": {
+        "add": "Add new metamagic",
+        "title": "Metamagics"
+      },
+      "qualities": "Qualities",
+      "qualities_add": "Add",
+      "rituals": {
+        "add": "Add new ritual",
+        "column.threshold": "Thresh.",
+        "title": "Rituals"
+      },
+      "skills.action": "Skills",
+      "skills.knowledge": "Knowledge Skills",
+      "skills.knowledge_add": "Add new knowledge",
+      "skills.language": "Language Skills",
+      "skills.language-level": {
+        "expert": "Expert",
+        "native": "Native",
+        "normal": "Normal",
+        "special": "Specialist"
+      },
+      "skills.language_add": "Add new language skill",
+      "spells": {
+        "add": "Add new spell",
+        "column.alchemic": "Alch.",
+        "column.drain": "Drain",
+        "column.range": "Range",
+        "title": "Spells"
+      },
+      "weapon": {
+        "add": "Add new weapon",
+        "close": "Melee Weapons",
+        "ranged": "Ranged Weapons"
+      }
+    },
+    "settings": {
+      "maxEdgePerRound": {
+        "hint": "Defines the maximum egde a player or NPC can gain per turn.",
+        "name": "Max. Edge per turn"
+      }
+    },
+    "special": {
+      "astral": {
+        "astral_combat": "Astral Combat",
+        "astral_signatures": "Astral Signatures",
+        "emotional_stress": "Emotional Stress",
+        "spirit_types": "Spirit Types"
+      },
+      "athletics": {
+        "archery": "Archery",
+        "climbing": "Climbing",
+        "flying": "Flying",
+        "gymnastics": "Gymnastics",
+        "sprinting": "Sprinting",
+        "swimming": "Swimming",
+        "throwing": "Throwing"
+      },
+      "biotech": {
+        "biotechnology": "Biotechnology",
+        "cybertechnology": "Cybertechnology",
+        "first_aid": "First Aid",
+        "medicine": "Medicine"
+      },
+      "close_combat": {
+        "blades": "Blades",
+        "clubs": "Clubs",
+        "unarmed": "Unarmed Combat"
+      },
+      "con": {
+        "acting": "Acting",
+        "disguise": "Disguise",
+        "impersonation": "Impersonation",
+        "performance": "Performance"
+      },
+      "conjuring": {
+        "banishing": "Banishing",
+        "summoning": "Summoning"
+      },
+      "cracking": {
+        "cybercombat": "Cybercombat",
+        "electronic_warfare": "Electronic Warface",
+        "hacking": "Hacking"
+      },
+      "electronics": {
+        "computer": "Computer",
+        "hardware": "Hardware",
+        "software": "Software"
+      },
+      "enchanting": {
+        "alchemy": "Alchemy",
+        "artificing": "Artificing",
+        "disenchanting": "Disenchanting"
+      },
+      "engineering": {
+        "aeronautics_mechanic": "Aeronautics Mechanic",
+        "armorer": "Armorer",
+        "automotive_mechanic": "Automotive Mechanic",
+        "demolitions": "Demolitions",
+        "gunnery": "Gunnery",
+        "industrial_mechanic": "Industrial Mechanic",
+        "lockpicking": "Lockpicking",
+        "nautical_mechanic": "Nautical Mechanic"
+      },
+      "exotic_weapons": {},
+      "firearms": {
+        "assault_cannons": "Assault Cannons",
+        "holdouts": "Holdouts",
+        "machine_pistols": "Machine Pistols",
+        "pistols_heavy": "Heavy Pistols",
+        "pistols_light": "Light Pistols",
+        "rifles": "Rifles",
+        "shotguns": "Shotguns",
+        "submachine_guns": "Submachine Guns",
+        "tasers": "Taser"
+      },
+      "influence": {
+        "etiquette": "Etiquette",
+        "instruction": "Instruction",
+        "intimidation": "Intimidation",
+        "leadership": "Leadership",
+        "negotiation": "Negotiation"
+      },
+      "outdoors": {
+        "navigation": "Navigation",
+        "survival": "Survival",
+        "tracking_desert": "Environment Desert",
+        "tracking_other": "Environment Other",
+        "tracking_urban": "Environment Urban",
+        "tracking_woods": "Environment Woods"
+      },
+      "perception": {
+        "aural": "Aural",
+        "perception_desert": "Environment Desert",
+        "perception_other": "Environment Other",
+        "perception_urban": "Environment Urban",
+        "perception_woods": "Environment Woods",
+        "scent": "Scent",
+        "tactile": "Tactile",
+        "taste": "Taste",
+        "visual": "Visual"
+      },
+      "piloting": {
+        "aircraft": "Aircraft",
+        "ground_craft": "Ground Craft",
+        "watercraft": "Watercraft"
+      },
+      "sorcery": {
+        "counterspelling": "Counterspelling",
+        "ritual_spellcasting": "Ritual Spellcasting",
+        "spellcasting": "Spellcasting"
+      },
+      "stealth": {
+        "camouflage": "Camouflage",
+        "disguise": "Disguise",
+        "palming": "Palming",
+        "sneaking": "Sneaking"
+      },
+      "tasking": {
+        "compiling": "Compiling",
+        "decompiling": "Decompiling",
+        "registering": "Registering"
+      }
+    },
+    "spell": {
+      "category": "Category",
+      "category_combat": "Combat",
+      "category_detection": "Detection",
+      "category_health": "Health",
+      "category_illusion": "Illusion",
+      "category_manipulation": "Manipultaion",
+      "damage": "Damage",
+      "damage_physical": "Physical",
+      "damage_physical_short": "P",
+      "damage_physical_special": "Physical, Special",
+      "damage_physical_special_short": "P, Special",
+      "damage_short": "Dmg",
+      "damage_stun": "Stun",
+      "damage_stun_short": "S",
+      "damage_stun_special": "Stun, Special",
+      "damage_stun_special_short": "S, Special",
+      "direct": "Direct",
+      "drain": "Drain",
+      "drain_short": "DV",
+      "duration": "Duration",
+      "duration_instantaneous": "Instantaneous",
+      "duration_instantaneous_short": "I",
+      "duration_limited": "Limited",
+      "duration_permanent": "Permanent",
+      "duration_permanent_short": "P",
+      "duration_short": "Dur.",
+      "duration_special": "Special",
+      "duration_special_short": "Spec",
+      "duration_sustained": "Sustained",
+      "duration_sustained_short": "S",
+      "isOpposed": "Is Opposed",
+      "range": "Range",
+      "range_line_of_sight": "Line of sight",
+      "range_line_of_sight_area": "Line of sight (area)",
+      "range_line_of_sight_area_short": "LOS(A)",
+      "range_line_of_sight_short": "LOS",
+      "range_self": "Self",
+      "range_self_area": "Self (Area)",
+      "range_self_area_short": "S(A)",
+      "range_self_short": "Self",
+      "range_touch": "Touch",
+      "range_touch_short": "T",
+      "type": "Type",
+      "type_mana": "Mana",
+      "type_mana_short": "Man",
+      "type_physical": "Physical",
+      "type_physical_short": "Phy",
+      "withEssence": "Respects Essence"
+    },
+    "spellfeatures": {
+      "area": "Area",
+      "direct": "Direct Combat",
+      "indirect": "Indirect Combat",
+      "sense_multi": "Multi-Sense",
+      "sense_single": "Single-Sense"
+    },
+    "tradition": {
+      "attribute": "Tradition Attribute"
+    }
+  },
+  "skill.astral": "Astral",
+  "skill.athletics": "Athletics",
+  "skill.biotech": "Biotech",
+  "skill.close_combat": "Close Combat",
+  "skill.con": "Con",
+  "skill.conjuring": "Conjuring",
+  "skill.cracking": "Cracking",
+  "skill.electronics": "Electronics",
+  "skill.enchanting": "Enchanting",
+  "skill.engineering": "Engineering",
+  "skill.exotic_weapons": "Exotic Weapons",
+  "skill.firearms": "Firearms",
+  "skill.influence": "Influence",
+  "skill.outdoors": "Outdoors",
+  "skill.perception": "Perception",
+  "skill.piloting": "Piloting",
+  "skill.sorcery": "Sorcery",
+  "skill.stealth": "Stealth",
+  "skill.tasking": "Tasking"
 }

@@ -1,561 +1,561 @@
 {
-	"ACTOR.TypeCritter": "Kreatur",
-	"ACTOR.TypeNpc": "NSC",
-	"ACTOR.TypePlayer": "Spieler-Charakter",
-	"ITEM.TypeAdeptpower": "Adeptenkraft",
-	"ITEM.TypeGear": "Ausrüstung",
-	"ITEM.TypeMartialartstyle": "Kampfkunststil",
-	"ITEM.TypeMartialarttech": "Kampfkunstechnik",
-	"ITEM.TypeMetamagic": "Metamagie",
-	"ITEM.TypeQuality": "Vor-/Nachteil",
-	"ITEM.TypeRitual": "Ritual",
-	"ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
-	"ITEM.TypeSpell": "Zauber",
-	"ITEM.TypeWeapon": "Waffe",
-	"QUALITY_CATEGORIES.ADVANTAGE": "Vorteil",
-	"QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil",
-	"attrib.agi": "Geschicklichkeit",
-	"attrib.agi_short": "GES",
-	"attrib.bod": "Konstitution",
-	"attrib.bod_short": "KON",
-	"attrib.cha": "Charisma",
-	"attrib.cha_short": "CHA",
-	"attrib.dr": "Verteidigung",
-	"attrib.dr_short": "DR",
-	"attrib.edg": "Edge",
-	"attrib.edg_short": "EDG",
-	"attrib.ess": "Essenz",
-	"attrib.ess_short": "ESS",
-	"attrib.ini": "Initiative",
-	"attrib.ini_short": "INI",
-	"attrib.inia": "Astrale Initiative",
-	"attrib.inia_short": "A.INI",
-	"attrib.inim": "Matrix Initiative",
-	"attrib.inim_short": "M.INI",
-	"attrib.int": "Intuition",
-	"attrib.int_short": "INT",
-	"attrib.log": "Logik",
-	"attrib.log_short": "LOG",
-	"attrib.mag": "Magie",
-	"attrib.mag_short": "MAG",
-	"attrib.rea": "Reaktion",
-	"attrib.rea_short": "REA",
-	"attrib.res": "Resonanz",
-	"attrib.res_short": "RES",
-	"attrib.str": "Stärke",
-	"attrib.str_short": "STÄ",
-	"attrib.wil": "Willenskraft",
-	"attrib.wil_short": "WIL",
-	"label.skill": "Fertigkeit",
-	"section.attributes": "Attribute",
-	"shadowrun6": {
-		"actor": {
-			"actions": "Handlungen",
-			"actions_major": "Haupt",
-			"actions_minor": "Neben",
-			"initiative": "Initiative",
-			"initiative_astral": "Astrale Initiative",
-			"name": "Name",
-			"nav": {
-				"basics": "Allgemein",
-				"combat": "Kampf",
-				"description": "Beschreibung",
-				"equip": "Ausrüstung",
-				"magic": "Magie",
-				"input": "Eingabe",
-				"skills": "Fertigkeiten",
-				"overview": "Übersicht"
-			},
-			"metatype": "Metatyp",
-			"skills": "Fertigkeiten",
-			"spells": "Zauber"
-		},
-		"attack_rating": {
-			"physical": "Physisch Angr.W",
-			"astral": "Mana Angr.W",
-			"social": "Sozial Ang.W.",
-			"matrix": "Matrix Angr.W",
-			"vehicle": "Fahrzeug Angr.W"
-		},
-		"defense_rating": {
-			"physical": "Physisch Vtd.W",
-			"astral": "Mana Vtd.W",
-			"social": "Sozial Vtd.W",
-			"matrix": "Matrix Vtd.W",
-			"vehicle": "Fahrzeug Vtd.W"
-		},
-		"derived": {
-			"defense_rating": "Verteidigungswert",
-			"composure": "Sebstbeherrschung",
-			"judge_intentions": "Menschenkenntnis",
-			"memory": "Erinnerungsvermögen",
-			"lift_carry": "Heben / Tragen"
-		},
-		"edge_action": {
-			"anticipation": "Vorausschau",
-			"big_speech": "Große Rede",
-			"bring_the_drama": "Dramaqueen",
-			"called_shot_disarm": "Anges. Ziel - Entwaffnen",
-			"called_shot_vitals": "Anges. Ziel - Lebensw. Organe",
-			"fire_from_cover": "Aus Deckung feuern",
-			"knockout_blow": "K.o.-Schlag",
-			"shank": "Umwerfen"
-		},
-		"edge_boost": {
-			"edge_action": "Edge Handlung - (1-5)",
-			"reroll_one": "Würfel 1 Würfel neu",
-			"plus_3_ini": "Add 3 zu deinem Initiativeergebnis",
-			"plus_1_roll": "+1 zu einem einzelnen Würfelwurf",
-			"negate_1_edge": "Negiere 1 Edge eines Gegners",
-			"buy_auto_hit": "Kaufe einen automatischen Erfolg",
-			"heal_1_stun": "Heile 1 Betäubungsschaden",
-			"add_edge_pool": "Füge dein Edge-Attribut zum Pool dazu",
-			"heal_1_physic": "Heile 1 körperlichen Schaden",
-			"reroll_failed": "Würfle alle Nicht-Erfolge neu",
-			"count_2_glitch": "2en zählen als Patzer für den Gegner",
-			"create_special": "Rufe spez. Effekt hervor"
-		},
-		"defense": {
-			"physical": "Verteidigung: Angriffe",
-			"astral": "Verteidigung: Astralkampf",
-			"astral_direct": "Vtd: Direkte K.Zauber",
-			"astral_indirect": "Vtd: Ind. K.Zauber",
-			"damage_physical": "Schadenswiderstand",
-			"damage_astral": "Schadenswiderstand Astral",
-			"toxin": "Toxinwiderstand"
-		},
-		"initiative": {
-			"physical": "Initiative",
-			"matrix": "Matrix-Initiative",
-			"astral": "Astrale Initiative"
-		},
-		"item": {
-			"type": "Art",
-			"subtype": "Unterart",
-			"availability": "Verfügbarkeit",
-			"price": "Preis",
-			"skill": "Fertigkeit",
-			"damage": "Schaden",
-			"mode": "Modus",
-			"attackvalues": "Angriffswerte",
-			"ammunition": "Munition",
-			"description": "Beschreibung",
-			"defencerating": "Verteidigungswert",
-			"capacity": "Kapazität",
-			"skillspec": "Spezialisierung",
-			"mode_bf": "SM",
-			"mode_fa": "VM",
-			"mode_sa": "HM",
-			"mode_ss": "EM",
-			"accessories": "Einbauten",
-			"essence": "Essenz",
-			"category": "Kategorie",
-			"mastyle": {
-				"category": {
-					"grappling": "Grappling",
-					"mobility": "Mobility",
-					"striking": "Striking",
-					"weapon": "weapon"
-				}
-			},
-			"feature": "Merkmale",
-			"social": "Sozial",
-			"natural": "Nat. Panzerung",
-			"firemode": {
-				"BF": "Salvenmodus",
-				"FA": "Vollautomatisch",
-				"SA": "Halbautomatisch",
-				"SS": "Einzelschuss"
-			}
-		},
-		"spell": {
-			"range": "Reichweite",
-			"category": "Kategorie",
-			"category_combat": "Kampf",
-			"category_health": "Heilung",
-			"category_manipulation": "Manipultaion",
-			"category_illusion": "Illusion",
-			"category_detection": "Wahrnehmung",
-			"range_line_of_sight": "BLickfeld",
-			"range_line_of_sight_area": "Blickfeld (Fläche)",
-			"range_touch": "Berührung",
-			"range_self": "Selbst",
-			"range_self_area": "Selbst (Fläche)",
-			"duration_instantaneous": "Sofort",
-			"duration_sustained": "Aufrechterhalten",
-			"duration_permanent": "Permanent",
-			"duration_limited": "Begrenzt",
-			"duration_special": "Speziell",
-			"type_physical": "Physisch",
-			"type_mana": "Mana",
-			"drain": "Entzug",
-			"type": "Art",
-			"duration": "Dauer",
-			"direct": "Direkt"
-		},
-		"adeptpower": {
-			"cost": "Kosten",
-			"activation": "Aktivierung",
-			"haslevel": "Hat Stufe",
-			"activation_passive": "Passiv",
-			"activation_minor": "Nebenhandlung",
-			"activation_major": "Haupthandlung"
-		},
-		"itemtype": {
-			"ACCESSORY": "Zubehör",
-			"ARMOR": "Rüstung",
-			"ARMOR_ADDITION": "Rüstungszubehör",
-			"BIOWARE": "Bodyware",
-			"CYBERWARE": "Cyberware",
-			"TOOLS": "TOOLS",
-			"ELECTRONICS": "Elektronik",
-			"NANOWARE": "NANOWARE",
-			"GENETICS": "GENETICS",
-			"AMMUNITION": "Monition",
-			"CHEMICALS": "Drogen",
-			"SURVIVAL": "SURVIVAL",
-			"BIOLOGY": "Biologie",
-			"VEHICLES": "VEHICLES",
-			"DRONES": "DRONES",
-			"MAGICAL": "MAGICAL",
-			"WEAPON_CLOSE_COMBAT": "Nahkampfwaffen",
-			"WEAPON_FIREARMS": "Feuerwaffen",
-			"WEAPON_RANGED": "Projektilwaffen",
-			"WEAPON_SPECIAL": "Spezialwaffen"
-		},
-		"label": {
-			"accessories": "Zubehör",
-			"attribute": "Attribut",
-			"base": "Basis",
-			"column": {
-				"action": "Aktion",
-				"count": "Anz.",
-				"rating": "St.",
-				"name": "Name"
-			},
-			"damage": "Schaden",
-			"dice": "Würfel",
-			"d6": "W6",
-			"delete": "Löschen",
-			"edit": "Bearbeiten",
-			"expertise": "Expertise",
-			"features": "Merkmale",
-			"firemodes": "Feuermodi",
-			"points": "Punkte",
-			"pool": "Pool",
-			"poolmod": "Pool-Modifikator",
-			"max": "Maximum",
-			"modifications": "Modifikationen",
-			"modifier": "Mod.",
-			"none": "-",
-			"specialization": "Spezialisierung",
-			"value": "Wert",
-			"wilddie": "Schicksalswürfel",
-			"level": "Hat Stufen",
-			"mages": "Magier",
-			"adepts": "Adepten",
-			"threshold": "Schwellenwert"
-		},
-		"monitor": {
-			"physical": "Körperlich",
-			"stun": "Geistig"
-		},
-		"newitem": {
-			"adeptpower": "Wie heisst die Kraft",
-			"quality": "Was macht dich besonders?",
-			"ritual": "Ringelpiez mit Anfassen",
-			"skill": {
-				"knowledge": "Worin bist Du Nerd?",
-				"language": "Unverständliches Gemurmel"
-			},
-			"spell": "Abrakadabra",
-			"weapon": "Was mit viel Wumms",
-			"weaponclose": "Etwas fürs Grobe",
-			"armor": "Das kleine Schwarze",
-			"ammunition": "Coole Munition",
-			"biology": "Biozeugs",
-			"chemicals": "Das gute Zeug",
-			"electronics": "Technikspielzeug",
-			"martialart_tech": "Was für eine Technik hast du drauf?",
-			"martialart_style": "Was ist dein Stil?",
-			"bodyware": "Was cooles zum Einbauen"
-		},
-		"numerical": {
-			"base": "Basis",
-			"baseString": "Grundwert",
-			"mod": "Mod",
-			"max": "Max"
-		},
-		"ritualfeatures": {
-			"anchored": "Verankert",
-			"material_link": "Materielle Verbindung",
-			"minion": "Diener",
-			"spell": "Zauber",
-			"spotter": "Späher"
-		},
-		"roll": {
-			"subject": "Chat-Nachricht",
-			"pool": "Würfel/Pool",
-			"threshold": "Schwellenwert",
-			"explode": "Explodiert",
-			"failure": "Fehlschlag",
-			"wilddie": "Schicksalswürfel verwenden",
-			"modifier": "Pool Modifikator",
-			"success": "Erfolgreich",
-			"successes": "Erfolge",
-			"glitch": "Patzer",
-			"criticalglitch": "Kritischer Patzer",
-			"nosuccess": "Erfolge bei Schwellenwert ",
-			"damage": "Schaden: ",
-			"target": "Ziel",
-			"attack": "Angriff gegen ",
-			"with": "mit ",
-			"ar_0": "Sehr nah",
-			"ar_1": "Nah",
-			"ar_2": "Mittel",
-			"ar_3": "Weit",
-			"ar_4": "Sehr weit",
-			"defRating": "VTD",
-			"edge": "Edge",
-			"attackRating": "Angr:",
-			"notarget": "Kein Ziel ausgewählt",
-			"edgegain": "Edge-Gewinn (max): ",
-			"edgegain_player": " (Spieler)",
-			"noedgegain": "Kein Edge-Gewinn",
-			"hits_bought": "Erfolge gekauft",
-			"exp": "Expertise",
-			"spec": "Spezialiszierung"
-		},
-		"rollType": {
-			"normal": "Würfeln",
-			"bought": "Erfolge kaufen"
-		},
-		"section": {
-			"adeptpowers": {
-				"add": "Adeptenkraft hinzufügen",
-				"title": "Adeptenkräfte",
-				"column.points": "KP"
-			},
-			"ammo": "Munition",
-			"ammo_add": "Munition hinzufügen",
-			"armor": {
-				"title": "Panzerung",
-				"column": {
-					"action": "Aktion",
-					"name": "Name",
-					"defense": "Panz",
-					"social": "Sozial"
-				},
-				"add": "Panzerung hinzufügen"
-			},
-			"biology": "Biologie",
-			"bodyware": {
-				"title": "Bodyware",
-				"column.essence": "Ess.",
-				"column.capacity": "Kap.",
-				"footer.total_essence": "Verbleibende Essenz",
-				"add": "Body- oder Cyberware hinzufügen"
-			},
-			"chemicals": "Drogen",
-			"defense": "Verteidigung & Widerstände",
-			"derived": "Abgeleitete Werte",
-			"electronics": "Elektronik",
-			"initiative": "Initiative",
-			"martialarts": {
-				"add": "Neuen Kampfstil hinzufügen",
-				"title": "Kampfkünste",
-				"tech_add": "Neue Technik hinzufügen"
-			},
-			"metamagic": {
-				"add": "Metamagie hinzufügen",
-				"title": "Metamagie"
-			},
-			"rituals": {
-				"add": "Neues Ritual hinzufügen",
-				"column.threshold": "Schwell",
-				"title": "Rituale"
-			},
-			"skills.action": "Fertigkeiten",
-			"skills.language": "Sprachen",
-			"skills.language_add": "Neue Sprache hinzufügen",
-			"skills.language-level": {
-				"normal": "Normal",
-				"special": "Spezialist",
-				"expert": "Experte",
-				"native": "Muttersprache"
-			},
-			"skills.knowledge": "Wissensfertigkeiten",
-			"skills.knowledge_add": "Neue Wissensfertigket hinzufügen",
-			"qualities": "Vor/Nachteile",
-			"qualities_add": "Hinzufügen",
-			"spells": {
-				"add": "Zauber hinzufügen",
-				"title": "Zauber",
-				"column.drain": "Entzug",
-				"column.alchemic": "Alch.",
-				"column.range": "Reichw"
-			},
-			"weapon": {
-				"ranged": "Fernkampf",
-				"close": "Nahkampf",
-				"add": "Neue Waffe hinzufügen"
-			}
-		},
-		"special": {
-			"astral": {
-				"astral_combat": "Astralkampf",
-				"astral_signatures": "Astrale Signaturen",
-				"emotional_stress": "Gefühlszustände",
-				"spirit_types": "Geisterarten"
-			},
-			"athletics": {
-				"climbing": "Klettern",
-				"flying": "Fliegen",
-				"gymnastics": "Akrobatik",
-				"sprinting": "Sprinten",
-				"swimming": "Schwimmen",
-				"throwing": "Werfen",
-				"archery": "Projektilwaffen"
-			},
-			"biotech": {
-				"biotechnology": "Biotechnologie",
-				"cybertechnology": "Cybertechnologie",
-				"first_aid": "Erste Hilfe",
-				"medicine": "Medizin"
-			},
-			"close_combat": {
-				"blades": "Klingenwaffen",
-				"clubs": "Knüppel",
-				"unarmed": "Waffenloser Kampf"
-			},
-			"con": {
-				"acting": "Schauspielerei",
-				"disguise": "Verkleiden",
-				"impersonation": "Verkörpern",
-				"performance": "Vorführen"
-			},
-			"conjuring": {
-				"banishing": "Verbannen",
-				"summoning": "Herbeirufen"
-			},
-			"cracking": {
-				"cybercombat": "Matrixkampf",
-				"electronic_warfare": "Elektronische Kriegsführung",
-				"hacking": "Hacken"
-			},
-			"electronics": {
-				"computer": "Computer",
-				"hardware": "Hardware",
-				"software": "Software"
-			},
-			"enchanting": {
-				"alchemy": "Alchemie",
-				"artificing": "Fokusherstellung",
-				"disenchanting": "Entzaubern"
-			},
-			"engineering": {
-				"aeronautics_mechanic": "Luftfahrzeugmechanik",
-				"armorer": "Waffenbau",
-				"automotive_mechanic": "Fahrzeugmechanik",
-				"demolitions": "Sprengstoffe",
-				"gunnery": "Geschütze",
-				"industrial_mechanic": "Industriemechanik",
-				"lockpicking": "Schlösserknacken",
-				"nautical_mechanic": "Seefahrtmechanik"
-			},
-			"exotic_weapons": {},
-			"firearms": {
-				"tasers": "Taser",
-				"holdouts": "Holdouts",
-				"pistols_light": "Leichte Pistolen",
-				"pistols_heavy": "Schwere Pistolen",
-				"machine_pistols": "Maschinenpistolen",
-				"submachine_guns": "Maschinengewehre",
-				"assault_cannons": "Sturmgewehre",
-				"rifles": "Gewehre",
-				"shotguns": "Schrotflinten"
-			},
-			"influence": {
-				"etiquette": "Gebräuche",
-				"instruction": "Unterrichten",
-				"intimidation": "Einschüchtern",
-				"leadership": "Führen",
-				"negotiation": "Verhandeln"
-			},
-			"outdoors": {
-				"navigation": "Navigation",
-				"survival": "Survival",
-				"tracking_woods": "Umgebung Wald",
-				"tracking_desert": "Umgebung Wüste",
-				"tracking_urban": "Umgebung Stadt",
-				"tracking_other": "Umgebung Sonstige"
-			},
-			"perception": {
-				"visual": "Sehen",
-				"aural": "Hören",
-				"tactile": "Tasten",
-				"scent": "Riechen",
-				"taste": "Schmecken",
-				"perception_woods": "Umgebung Wald",
-				"perception_desert": "Umgebung Wüste",
-				"perception_urban": "Umgebung Stadt",
-				"perception_other": "Umgebung Sonstige"
-			},
-			"piloting": {
-				"ground_craft": "Bodenfahrzeuge",
-				"aircraft": "Luftfahrzeuge",
-				"watercraft": "Wasserfahrzeuge"
-			},
-			"sorcery": {
-				"counterspelling": "Antimagie",
-				"ritual_spellcasting": "Ritualzauberei",
-				"spellcasting": "Spruchzauberei"
-			},
-			"stealth": {
-				"disguise": "Verkleiden",
-				"palming": "Fingerfertigkeit",
-				"sneaking": "Schleichen",
-				"camouflage": "Tarnung"
-			},
-			"tasking": {
-				"compiling": "Kompilieren",
-				"decompiling": "Dekompilieren",
-				"registering": "Registrieren"
-			}
-		},
-		"spellfeatures": {
-			"area": "Flächenwirkung",
-			"indirect": "Indirekter Kampfzauber",
-			"direct": "Direkter Kampfzauber",
-			"sense_single": "Monosensorisch",
-			"sense_multi": "Vollsensorisch"
-		},
-		"qualityedit": {
-			"new": "Neu",
-			"name": "Name",
-			"explain": "Erklärung",
-			"description": "Beschreibung",
-			"category": "Art"
-		}
-	},
-	"skill.astral": "Astral",
-	"skill.athletics": "Athletik",
-	"skill.biotech": "Biotech",
-	"skill.close_combat": "Nahkampf",
-	"skill.con": "Überreden",
-	"skill.conjuring": "Beschwören",
-	"skill.cracking": "Cracken",
-	"skill.electronics": "Elektronik",
-	"skill.enchanting": "Verzaubern",
-	"skill.engineering": "Mechanik",
-	"skill.exotic_weapons": "Exotische Waffen",
-	"skill.firearms": "Feuerwaffen",
-	"skill.influence": "Einfluss",
-	"skill.name.pattern": "skull.${id}",
-	"skill.outdoors": "Natur",
-	"skill.perception": "Wahrnehmung",
-	"skill.piloting": "Steuern",
-	"skill.sorcery": "Hexerei",
-	"skill.stealth": "Heimlichkeit",
-	"skill.tasking": "Tasken"
+  "ACTOR.TypeCritter": "Kreatur",
+  "ACTOR.TypeNpc": "NSC",
+  "ACTOR.TypePlayer": "Spieler-Charakter",
+  "ITEM.TypeAdeptpower": "Adeptenkraft",
+  "ITEM.TypeGear": "Ausrüstung",
+  "ITEM.TypeMartialartstyle": "Kampfkunststil",
+  "ITEM.TypeMartialarttech": "Kampfkunstechnik",
+  "ITEM.TypeMetamagic": "Metamagie",
+  "ITEM.TypeQuality": "Vor-/Nachteil",
+  "ITEM.TypeRitual": "Ritual",
+  "ITEM.TypeSkill": "Sprach-/Wissensfertigkeit",
+  "ITEM.TypeSpell": "Zauber",
+  "ITEM.TypeWeapon": "Waffe",
+  "QUALITY_CATEGORIES.ADVANTAGE": "Vorteil",
+  "QUALITY_CATEGORIES.DISADVANTAGE": "Nachteil",
+  "attrib.agi": "Geschicklichkeit",
+  "attrib.agi_short": "GES",
+  "attrib.bod": "Konstitution",
+  "attrib.bod_short": "KON",
+  "attrib.cha": "Charisma",
+  "attrib.cha_short": "CHA",
+  "attrib.dr": "Verteidigung",
+  "attrib.dr_short": "DR",
+  "attrib.edg": "Edge",
+  "attrib.edg_short": "EDG",
+  "attrib.ess": "Essenz",
+  "attrib.ess_short": "ESS",
+  "attrib.ini": "Initiative",
+  "attrib.ini_short": "INI",
+  "attrib.inia": "Astrale Initiative",
+  "attrib.inia_short": "A.INI",
+  "attrib.inim": "Matrix Initiative",
+  "attrib.inim_short": "M.INI",
+  "attrib.int": "Intuition",
+  "attrib.int_short": "INT",
+  "attrib.log": "Logik",
+  "attrib.log_short": "LOG",
+  "attrib.mag": "Magie",
+  "attrib.mag_short": "MAG",
+  "attrib.rea": "Reaktion",
+  "attrib.rea_short": "REA",
+  "attrib.res": "Resonanz",
+  "attrib.res_short": "RES",
+  "attrib.str": "Stärke",
+  "attrib.str_short": "STÄ",
+  "attrib.wil": "Willenskraft",
+  "attrib.wil_short": "WIL",
+  "label.skill": "Fertigkeit",
+  "section.attributes": "Attribute",
+  "shadowrun6": {
+    "actor": {
+      "actions": "Handlungen",
+      "actions_major": "Haupt",
+      "actions_minor": "Neben",
+      "initiative": "Initiative",
+      "initiative_astral": "Astrale Initiative",
+      "metatype": "Metatyp",
+      "name": "Name",
+      "nav": {
+        "basics": "Allgemein",
+        "combat": "Kampf",
+        "description": "Beschreibung",
+        "equip": "Ausrüstung",
+        "input": "Eingabe",
+        "magic": "Magie",
+        "overview": "Übersicht",
+        "skills": "Fertigkeiten"
+      },
+      "skills": "Fertigkeiten",
+      "spells": "Zauber"
+    },
+    "adeptpower": {
+      "activation": "Aktivierung",
+      "activation_major": "Haupthandlung",
+      "activation_minor": "Nebenhandlung",
+      "activation_passive": "Passiv",
+      "cost": "Kosten",
+      "haslevel": "Hat Stufe"
+    },
+    "attack_rating": {
+      "astral": "Mana Angr.W",
+      "matrix": "Matrix Angr.W",
+      "physical": "Physisch Angr.W",
+      "social": "Sozial Ang.W.",
+      "vehicle": "Fahrzeug Angr.W"
+    },
+    "defense": {
+      "astral": "Verteidigung: Astralkampf",
+      "astral_direct": "Vtd: Direkte K.Zauber",
+      "astral_indirect": "Vtd: Ind. K.Zauber",
+      "damage_astral": "Schadenswiderstand Astral",
+      "damage_physical": "Schadenswiderstand",
+      "physical": "Verteidigung: Angriffe",
+      "toxin": "Toxinwiderstand"
+    },
+    "defense_rating": {
+      "astral": "Mana Vtd.W",
+      "matrix": "Matrix Vtd.W",
+      "physical": "Physisch Vtd.W",
+      "social": "Sozial Vtd.W",
+      "vehicle": "Fahrzeug Vtd.W"
+    },
+    "derived": {
+      "composure": "Sebstbeherrschung",
+      "defense_rating": "Verteidigungswert",
+      "judge_intentions": "Menschenkenntnis",
+      "lift_carry": "Heben / Tragen",
+      "memory": "Erinnerungsvermögen"
+    },
+    "edge_action": {
+      "anticipation": "Vorausschau",
+      "big_speech": "Große Rede",
+      "bring_the_drama": "Dramaqueen",
+      "called_shot_disarm": "Anges. Ziel - Entwaffnen",
+      "called_shot_vitals": "Anges. Ziel - Lebensw. Organe",
+      "fire_from_cover": "Aus Deckung feuern",
+      "knockout_blow": "K.o.-Schlag",
+      "shank": "Umwerfen"
+    },
+    "edge_boost": {
+      "add_edge_pool": "Füge dein Edge-Attribut zum Pool dazu",
+      "buy_auto_hit": "Kaufe einen automatischen Erfolg",
+      "count_2_glitch": "2en zählen als Patzer für den Gegner",
+      "create_special": "Rufe spez. Effekt hervor",
+      "edge_action": "Edge Handlung - (1-5)",
+      "heal_1_physic": "Heile 1 körperlichen Schaden",
+      "heal_1_stun": "Heile 1 Betäubungsschaden",
+      "negate_1_edge": "Negiere 1 Edge eines Gegners",
+      "plus_1_roll": "+1 zu einem einzelnen Würfelwurf",
+      "plus_3_ini": "Add 3 zu deinem Initiativeergebnis",
+      "reroll_failed": "Würfle alle Nicht-Erfolge neu",
+      "reroll_one": "Würfel 1 Würfel neu"
+    },
+    "initiative": {
+      "astral": "Astrale Initiative",
+      "matrix": "Matrix-Initiative",
+      "physical": "Initiative"
+    },
+    "item": {
+      "accessories": "Einbauten",
+      "ammunition": "Munition",
+      "attackvalues": "Angriffswerte",
+      "availability": "Verfügbarkeit",
+      "capacity": "Kapazität",
+      "category": "Kategorie",
+      "damage": "Schaden",
+      "defencerating": "Verteidigungswert",
+      "description": "Beschreibung",
+      "essence": "Essenz",
+      "feature": "Merkmale",
+      "firemode": {
+        "BF": "Salvenmodus",
+        "FA": "Vollautomatisch",
+        "SA": "Halbautomatisch",
+        "SS": "Einzelschuss"
+      },
+      "mastyle": {
+        "category": {
+          "grappling": "Grappling",
+          "mobility": "Mobility",
+          "striking": "Striking",
+          "weapon": "weapon"
+        }
+      },
+      "mode": "Modus",
+      "mode_bf": "SM",
+      "mode_fa": "VM",
+      "mode_sa": "HM",
+      "mode_ss": "EM",
+      "natural": "Nat. Panzerung",
+      "price": "Preis",
+      "skill": "Fertigkeit",
+      "skillspec": "Spezialisierung",
+      "social": "Sozial",
+      "subtype": "Unterart",
+      "type": "Art"
+    },
+    "itemtype": {
+      "ACCESSORY": "Zubehör",
+      "AMMUNITION": "Monition",
+      "ARMOR": "Rüstung",
+      "ARMOR_ADDITION": "Rüstungszubehör",
+      "BIOLOGY": "Biologie",
+      "BIOWARE": "Bodyware",
+      "CHEMICALS": "Drogen",
+      "CYBERWARE": "Cyberware",
+      "DRONES": "DRONES",
+      "ELECTRONICS": "Elektronik",
+      "GENETICS": "GENETICS",
+      "MAGICAL": "MAGICAL",
+      "NANOWARE": "NANOWARE",
+      "SURVIVAL": "SURVIVAL",
+      "TOOLS": "TOOLS",
+      "VEHICLES": "VEHICLES",
+      "WEAPON_CLOSE_COMBAT": "Nahkampfwaffen",
+      "WEAPON_FIREARMS": "Feuerwaffen",
+      "WEAPON_RANGED": "Projektilwaffen",
+      "WEAPON_SPECIAL": "Spezialwaffen"
+    },
+    "label": {
+      "accessories": "Zubehör",
+      "adepts": "Adepten",
+      "attribute": "Attribut",
+      "base": "Basis",
+      "column": {
+        "action": "Aktion",
+        "count": "Anz.",
+        "name": "Name",
+        "rating": "St."
+      },
+      "d6": "W6",
+      "damage": "Schaden",
+      "delete": "Löschen",
+      "dice": "Würfel",
+      "edit": "Bearbeiten",
+      "expertise": "Expertise",
+      "features": "Merkmale",
+      "firemodes": "Feuermodi",
+      "level": "Hat Stufen",
+      "mages": "Magier",
+      "max": "Maximum",
+      "modifications": "Modifikationen",
+      "modifier": "Mod.",
+      "none": "-",
+      "points": "Punkte",
+      "pool": "Pool",
+      "poolmod": "Pool-Modifikator",
+      "specialization": "Spezialisierung",
+      "threshold": "Schwellenwert",
+      "value": "Wert",
+      "wilddie": "Schicksalswürfel"
+    },
+    "monitor": {
+      "physical": "Körperlich",
+      "stun": "Geistig"
+    },
+    "newitem": {
+      "adeptpower": "Wie heisst die Kraft",
+      "ammunition": "Coole Munition",
+      "armor": "Das kleine Schwarze",
+      "biology": "Biozeugs",
+      "bodyware": "Was cooles zum Einbauen",
+      "chemicals": "Das gute Zeug",
+      "electronics": "Technikspielzeug",
+      "martialart_style": "Was ist dein Stil?",
+      "martialart_tech": "Was für eine Technik hast du drauf?",
+      "quality": "Was macht dich besonders?",
+      "ritual": "Ringelpiez mit Anfassen",
+      "skill": {
+        "knowledge": "Worin bist Du Nerd?",
+        "language": "Unverständliches Gemurmel"
+      },
+      "spell": "Abrakadabra",
+      "weapon": "Was mit viel Wumms",
+      "weaponclose": "Etwas fürs Grobe"
+    },
+    "numerical": {
+      "base": "Basis",
+      "baseString": "Grundwert",
+      "max": "Max",
+      "mod": "Mod"
+    },
+    "qualityedit": {
+      "category": "Art",
+      "description": "Beschreibung",
+      "explain": "Erklärung",
+      "name": "Name",
+      "new": "Neu"
+    },
+    "ritualfeatures": {
+      "anchored": "Verankert",
+      "material_link": "Materielle Verbindung",
+      "minion": "Diener",
+      "spell": "Zauber",
+      "spotter": "Späher"
+    },
+    "roll": {
+      "ar_0": "Sehr nah",
+      "ar_1": "Nah",
+      "ar_2": "Mittel",
+      "ar_3": "Weit",
+      "ar_4": "Sehr weit",
+      "attack": "Angriff gegen ",
+      "attackRating": "Angr:",
+      "criticalglitch": "Kritischer Patzer",
+      "damage": "Schaden: ",
+      "defRating": "VTD",
+      "edge": "Edge",
+      "edgegain": "Edge-Gewinn (max): ",
+      "edgegain_player": " (Spieler)",
+      "exp": "Expertise",
+      "explode": "Explodiert",
+      "failure": "Fehlschlag",
+      "glitch": "Patzer",
+      "hits_bought": "Erfolge gekauft",
+      "modifier": "Pool Modifikator",
+      "noedgegain": "Kein Edge-Gewinn",
+      "nosuccess": "Erfolge bei Schwellenwert ",
+      "notarget": "Kein Ziel ausgewählt",
+      "pool": "Würfel/Pool",
+      "spec": "Spezialiszierung",
+      "subject": "Chat-Nachricht",
+      "success": "Erfolgreich",
+      "successes": "Erfolge",
+      "target": "Ziel",
+      "threshold": "Schwellenwert",
+      "wilddie": "Schicksalswürfel verwenden",
+      "with": "mit "
+    },
+    "rollType": {
+      "bought": "Erfolge kaufen",
+      "normal": "Würfeln"
+    },
+    "section": {
+      "adeptpowers": {
+        "add": "Adeptenkraft hinzufügen",
+        "column.points": "KP",
+        "title": "Adeptenkräfte"
+      },
+      "ammo": "Munition",
+      "ammo_add": "Munition hinzufügen",
+      "armor": {
+        "add": "Panzerung hinzufügen",
+        "column": {
+          "action": "Aktion",
+          "defense": "Panz",
+          "name": "Name",
+          "social": "Sozial"
+        },
+        "title": "Panzerung"
+      },
+      "biology": "Biologie",
+      "bodyware": {
+        "add": "Body- oder Cyberware hinzufügen",
+        "column.capacity": "Kap.",
+        "column.essence": "Ess.",
+        "footer.total_essence": "Verbleibende Essenz",
+        "title": "Bodyware"
+      },
+      "chemicals": "Drogen",
+      "defense": "Verteidigung & Widerstände",
+      "derived": "Abgeleitete Werte",
+      "electronics": "Elektronik",
+      "initiative": "Initiative",
+      "martialarts": {
+        "add": "Neuen Kampfstil hinzufügen",
+        "tech_add": "Neue Technik hinzufügen",
+        "title": "Kampfkünste"
+      },
+      "metamagic": {
+        "add": "Metamagie hinzufügen",
+        "title": "Metamagie"
+      },
+      "qualities": "Vor/Nachteile",
+      "qualities_add": "Hinzufügen",
+      "rituals": {
+        "add": "Neues Ritual hinzufügen",
+        "column.threshold": "Schwell",
+        "title": "Rituale"
+      },
+      "skills.action": "Fertigkeiten",
+      "skills.knowledge": "Wissensfertigkeiten",
+      "skills.knowledge_add": "Neue Wissensfertigket hinzufügen",
+      "skills.language": "Sprachen",
+      "skills.language-level": {
+        "expert": "Experte",
+        "native": "Muttersprache",
+        "normal": "Normal",
+        "special": "Spezialist"
+      },
+      "skills.language_add": "Neue Sprache hinzufügen",
+      "spells": {
+        "add": "Zauber hinzufügen",
+        "column.alchemic": "Alch.",
+        "column.drain": "Entzug",
+        "column.range": "Reichw",
+        "title": "Zauber"
+      },
+      "weapon": {
+        "add": "Neue Waffe hinzufügen",
+        "close": "Nahkampf",
+        "ranged": "Fernkampf"
+      }
+    },
+    "special": {
+      "astral": {
+        "astral_combat": "Astralkampf",
+        "astral_signatures": "Astrale Signaturen",
+        "emotional_stress": "Gefühlszustände",
+        "spirit_types": "Geisterarten"
+      },
+      "athletics": {
+        "archery": "Projektilwaffen",
+        "climbing": "Klettern",
+        "flying": "Fliegen",
+        "gymnastics": "Akrobatik",
+        "sprinting": "Sprinten",
+        "swimming": "Schwimmen",
+        "throwing": "Werfen"
+      },
+      "biotech": {
+        "biotechnology": "Biotechnologie",
+        "cybertechnology": "Cybertechnologie",
+        "first_aid": "Erste Hilfe",
+        "medicine": "Medizin"
+      },
+      "close_combat": {
+        "blades": "Klingenwaffen",
+        "clubs": "Knüppel",
+        "unarmed": "Waffenloser Kampf"
+      },
+      "con": {
+        "acting": "Schauspielerei",
+        "disguise": "Verkleiden",
+        "impersonation": "Verkörpern",
+        "performance": "Vorführen"
+      },
+      "conjuring": {
+        "banishing": "Verbannen",
+        "summoning": "Herbeirufen"
+      },
+      "cracking": {
+        "cybercombat": "Matrixkampf",
+        "electronic_warfare": "Elektronische Kriegsführung",
+        "hacking": "Hacken"
+      },
+      "electronics": {
+        "computer": "Computer",
+        "hardware": "Hardware",
+        "software": "Software"
+      },
+      "enchanting": {
+        "alchemy": "Alchemie",
+        "artificing": "Fokusherstellung",
+        "disenchanting": "Entzaubern"
+      },
+      "engineering": {
+        "aeronautics_mechanic": "Luftfahrzeugmechanik",
+        "armorer": "Waffenbau",
+        "automotive_mechanic": "Fahrzeugmechanik",
+        "demolitions": "Sprengstoffe",
+        "gunnery": "Geschütze",
+        "industrial_mechanic": "Industriemechanik",
+        "lockpicking": "Schlösserknacken",
+        "nautical_mechanic": "Seefahrtmechanik"
+      },
+      "exotic_weapons": {},
+      "firearms": {
+        "assault_cannons": "Sturmgewehre",
+        "holdouts": "Holdouts",
+        "machine_pistols": "Maschinenpistolen",
+        "pistols_heavy": "Schwere Pistolen",
+        "pistols_light": "Leichte Pistolen",
+        "rifles": "Gewehre",
+        "shotguns": "Schrotflinten",
+        "submachine_guns": "Maschinengewehre",
+        "tasers": "Taser"
+      },
+      "influence": {
+        "etiquette": "Gebräuche",
+        "instruction": "Unterrichten",
+        "intimidation": "Einschüchtern",
+        "leadership": "Führen",
+        "negotiation": "Verhandeln"
+      },
+      "outdoors": {
+        "navigation": "Navigation",
+        "survival": "Survival",
+        "tracking_desert": "Umgebung Wüste",
+        "tracking_other": "Umgebung Sonstige",
+        "tracking_urban": "Umgebung Stadt",
+        "tracking_woods": "Umgebung Wald"
+      },
+      "perception": {
+        "aural": "Hören",
+        "perception_desert": "Umgebung Wüste",
+        "perception_other": "Umgebung Sonstige",
+        "perception_urban": "Umgebung Stadt",
+        "perception_woods": "Umgebung Wald",
+        "scent": "Riechen",
+        "tactile": "Tasten",
+        "taste": "Schmecken",
+        "visual": "Sehen"
+      },
+      "piloting": {
+        "aircraft": "Luftfahrzeuge",
+        "ground_craft": "Bodenfahrzeuge",
+        "watercraft": "Wasserfahrzeuge"
+      },
+      "sorcery": {
+        "counterspelling": "Antimagie",
+        "ritual_spellcasting": "Ritualzauberei",
+        "spellcasting": "Spruchzauberei"
+      },
+      "stealth": {
+        "camouflage": "Tarnung",
+        "disguise": "Verkleiden",
+        "palming": "Fingerfertigkeit",
+        "sneaking": "Schleichen"
+      },
+      "tasking": {
+        "compiling": "Kompilieren",
+        "decompiling": "Dekompilieren",
+        "registering": "Registrieren"
+      }
+    },
+    "spell": {
+      "category": "Kategorie",
+      "category_combat": "Kampf",
+      "category_detection": "Wahrnehmung",
+      "category_health": "Heilung",
+      "category_illusion": "Illusion",
+      "category_manipulation": "Manipultaion",
+      "direct": "Direkt",
+      "drain": "Entzug",
+      "duration": "Dauer",
+      "duration_instantaneous": "Sofort",
+      "duration_limited": "Begrenzt",
+      "duration_permanent": "Permanent",
+      "duration_special": "Speziell",
+      "duration_sustained": "Aufrechterhalten",
+      "range": "Reichweite",
+      "range_line_of_sight": "BLickfeld",
+      "range_line_of_sight_area": "Blickfeld (Fläche)",
+      "range_self": "Selbst",
+      "range_self_area": "Selbst (Fläche)",
+      "range_touch": "Berührung",
+      "type": "Art",
+      "type_mana": "Mana",
+      "type_physical": "Physisch"
+    },
+    "spellfeatures": {
+      "area": "Flächenwirkung",
+      "direct": "Direkter Kampfzauber",
+      "indirect": "Indirekter Kampfzauber",
+      "sense_multi": "Vollsensorisch",
+      "sense_single": "Monosensorisch"
+    }
+  },
+  "skill.astral": "Astral",
+  "skill.athletics": "Athletik",
+  "skill.biotech": "Biotech",
+  "skill.close_combat": "Nahkampf",
+  "skill.con": "Überreden",
+  "skill.conjuring": "Beschwören",
+  "skill.cracking": "Cracken",
+  "skill.electronics": "Elektronik",
+  "skill.enchanting": "Verzaubern",
+  "skill.engineering": "Mechanik",
+  "skill.exotic_weapons": "Exotische Waffen",
+  "skill.firearms": "Feuerwaffen",
+  "skill.influence": "Einfluss",
+  "skill.name.pattern": "skull.${id}",
+  "skill.outdoors": "Natur",
+  "skill.perception": "Wahrnehmung",
+  "skill.piloting": "Steuern",
+  "skill.sorcery": "Hexerei",
+  "skill.stealth": "Heimlichkeit",
+  "skill.tasking": "Tasken"
 }
