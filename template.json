@@ -430,6 +430,10 @@
 			"ritual"
 		],
 		"templates": {
+			"genesis": {
+				"genesisID": "",
+				"description": ""
+			},
 			"skill-value": {
 				"points": 0,
 				"modifier": 0
@@ -446,16 +450,16 @@
 			}
 		},
 		"adeptpower": {
-			"genesisID": "",
 			"hasLevel": false,
 			"level": 0,
-			"description": "",
 			"choice": "",
 			"cost": 0.0,
-			"activation": ""
+			"activation": "",
+			"templates": [
+				"genesis"
+			]
 		},
 		"gear": {
-			"genesisID": "",
 			"type": "WEAPON_FIREARMS",
 			"subtype": "",
 			"count":  0,
@@ -464,7 +468,6 @@
 			"avail": 0,
 			"priceDef": "",
 			"price": 0,
-			"description": "",
 			"customName": "",
 			"usedForPool": false,
 			"notes": "",
@@ -489,43 +492,48 @@
 			"capacity": 0,
 			"natural" : false,
 			"templates": [
+				"genesis",
 				"dice-pool"
 			]
 		},
 		"martialartstyle": {
-			"genesisID": "",
 			"category": {
 				"grappling": false,
 				"mobility": false,
 				"striking": false,
 				"weapon": false
 			},
-			"description": ""
+			"templates": [
+				"genesis"
+			]
 		},
 		"martialarttech": {
-			"genesisID": "",
-			"description": "",
+			"templates": [
+				"genesis"
+			],
 			"style": "",
 			"choice": ""
 		},
 		"metamagic": {
-			"genesisID": "",
-			"description": "",
+			"templates": [
+				"genesis"
+			],
 			"level": false,
 			"adepts": false,
 			"mages": false
 		},
 		"quality": {
-			"genesisID": "",
-			"category": "",
-			"level": false,
-			"description": "",
 			"templates": [
+				"genesis",
 				"quality-value"
-			]
+			],
+			"category": "",
+			"level": false
 		},
 		"ritual": {
-			"genesisID": "",
+			"templates": [
+				"genesis"
+			],
 			"threshold": 1,
 			"features": {
 				"anchored": false,
@@ -533,8 +541,7 @@
 				"minion": false,
 				"spell": false,
 				"spotter": false
-			},
-			"description" : ""
+			}
 		},
 		"skill": {
 			"genesisID": "",
@@ -543,8 +550,9 @@
 			]
 		},
 		"spell": {
-			"genesisID": "",
-			"description": "",
+			"templates": [
+				"genesis"
+			],
 			"category": "health",
 			"duration": "instantaneous",
 			"drain": 1,
