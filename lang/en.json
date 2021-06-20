@@ -132,8 +132,8 @@
             "ACCESSORY": "Accessory",
             "ARMOR": "Armor",
             "ARMOR_ADDITION": "Armor additions",
-            "BIOWARE": "BIOWARE",
-            "CYBERWARE": "CYBERWARE",
+            "BIOWARE": "Bioware",
+            "CYBERWARE": "Cyberware",
             "TOOLS": "TOOLS",
             "ELECTRONICS": "Electronics",
             "NANOWARE": "NANOWARE",
@@ -207,7 +207,8 @@
             "chemicals": "The good stuff",
             "electronics":"Nerd toy",
             "martialarttech": "Technique, which technique?",
-            "martialartstyle": "What's your style?"
+            "martialartstyle": "What's your style?",
+            "bodyware": "Some cool enhancement"
         },
         "numerical": {
             "base": "base",
@@ -312,7 +313,8 @@
                 "title": "Bodyware",
                 "column.essence": "Ess.",
                 "column.capacity": "Cap.",
-                "footer.total_essence": "Remaining Essence"
+                "footer.total_essence": "Remaining Essence",
+                "add": "Add new bioware or cyberware"
             },
             "chemicals": "Chemicals",
             "defense": "Defenses & Resistances",
