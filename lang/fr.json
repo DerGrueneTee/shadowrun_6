@@ -70,13 +70,68 @@
       "skills": "Compétences",
       "spells": "TRANSLATE"
     },
+    "adeptpower": {
+      "activation": "TRANSLATE",
+      "activation_major": "TRANSLATE",
+      "activation_minor": "TRANSLATE",
+      "activation_passive": "TRANSLATE",
+      "cost": "TRANSLATE",
+      "haslevel": "TRANSLATE"
+    },
+    "attack_rating": {
+      "astral": "TRANSLATE",
+      "matrix": "TRANSLATE",
+      "physical": "TRANSLATE",
+      "social": "TRANSLATE",
+      "vehicle": "TRANSLATE"
+    },
+    "defense": {
+      "astral": "TRANSLATE",
+      "damage_astral": "TRANSLATE",
+      "damage_physical": "TRANSLATE",
+      "physical": "TRANSLATE",
+      "spells_direct": "TRANSLATE",
+      "spells_indirect": "TRANSLATE",
+      "spells_other": "TRANSLATE",
+      "toxin": "TRANSLATE"
+    },
+    "defense_rating": {
+      "astral": "TRANSLATE",
+      "matrix": "TRANSLATE",
+      "physical": "TRANSLATE",
+      "social": "TRANSLATE",
+      "vehicle": "TRANSLATE"
+    },
     "derived": {
-      "attack_rating": "Valeur d'attaques",
       "composure": "Sang-froid",
       "defense_rating": "Valeur de défense",
       "judge_intentions": "Jauger les intentions",
       "lift_carry": "Soulev./Transport",
       "memory": "Mémoire"
+    },
+    "edge_action": {
+      "anticipation": "TRANSLATE",
+      "big_speech": "TRANSLATE",
+      "bring_the_drama": "TRANSLATE",
+      "called_shot_disarm": "TRANSLATE",
+      "called_shot_vitals": "TRANSLATE",
+      "fire_from_cover": "TRANSLATE",
+      "knockout_blow": "TRANSLATE",
+      "shank": "TRANSLATE"
+    },
+    "edge_boost": {
+      "add_edge_pool": "TRANSLATE",
+      "buy_auto_hit": "TRANSLATE",
+      "count_2_glitch": "TRANSLATE",
+      "create_special": "TRANSLATE",
+      "edge_action": "TRANSLATE",
+      "heal_1_physic": "TRANSLATE",
+      "heal_1_stun": "TRANSLATE",
+      "negate_1_edge": "TRANSLATE",
+      "plus_1_roll": "TRANSLATE",
+      "plus_3_ini": "TRANSLATE",
+      "reroll_failed": "TRANSLATE",
+      "reroll_one": "TRANSLATE"
     },
     "initiative": {
       "astral": "Initiative Astrale",
@@ -89,38 +144,56 @@
       "attackvalues": "Scores Off.",
       "availability": "Disp.",
       "capacity": "Capacité",
+      "category": "TRANSLATE",
       "damage": "Dégâts",
       "defencerating": "Score Déf",
       "description": "Description",
       "essence": "Essence",
+      "feature": "TRANSLATE Features",
+      "firemode": {
+        "BF": "TRANSLATE",
+        "FA": "TRANSLATE",
+        "SA": "TRANSLATE",
+        "SS": "TRANSLATE"
+      },
+      "mastyle": {
+        "category": {
+          "grappling": "TRANSLATE",
+          "mobility": "TRANSLATE",
+          "striking": "TRANSLATE",
+          "weapon": "TRANSLATE"
+        }
+      },
       "mode": "Modes",
       "mode_bf": "TR",
       "mode_fa": "TA",
       "mode_sa": "SA",
       "mode_ss": "CC",
+      "natural": "TRANSLATE",
       "price": "Prix",
       "skill": "Compétence",
       "skillspec": "Spécialisation",
+      "social": "TRANSLATE",
       "subtype": "Sous-type",
       "type": "Type"
     },
     "itemtype": {
       "ACCESSORY": "Accessoire",
-      "AMMUNITION": "MUNITIONS",
+      "AMMUNITION": "Munitions",
       "ARMOR": "Armure",
-      "ARMOR_ADDITION": "AJOUTER_ARMURE",
-      "BIOLOGY": "BIOLOGIE",
-      "BIOWARE": "BIOWARE",
-      "CHEMICALS": "CHIMIQUE",
-      "CYBERWARE": "CYBERWARE",
-      "DRONES": "DRONES",
-      "ELECTRONICS": "ÉLECTRONIQUE",
-      "GENETICS": "GÉNÉTIQUE",
-      "MAGICAL": "MAGIQUE",
-      "NANOWARE": "NANOWARE",
-      "SURVIVAL": "SURVIE",
-      "TOOLS": "OUTILS",
-      "VEHICLES": "VÉHICULES",
+      "ARMOR_ADDITION": "Ajouter_Armure",
+      "BIOLOGY": "Biologie",
+      "BIOWARE": "Bioware",
+      "CHEMICALS": "Chimique",
+      "CYBERWARE": "Cyberware",
+      "DRONES": "Drones",
+      "ELECTRONICS": "Électronique",
+      "GENETICS": "Génétique",
+      "MAGICAL": "Magique",
+      "NANOWARE": "Naoware",
+      "SURVIVAL": "Survie",
+      "TOOLS": "Outils",
+      "VEHICLES": "Véhicules",
       "WEAPON_CLOSE_COMBAT": "Arme, Contact",
       "WEAPON_FIREARMS": "Arme, Armes à Feu",
       "WEAPON_RANGED": "Arme, Projectiles",
@@ -128,6 +201,8 @@
     },
     "label": {
       "accessories": "Accessoires",
+      "adepts": "TRANSLATE",
+      "attack_rating": "TRANSLATE",
       "attribute": "Attributs",
       "base": "Base",
       "column": {
@@ -138,12 +213,16 @@
       },
       "d6": "D6",
       "damage": "Dégâts",
+      "defense_rating": "TRANSLATE",
       "delete": "Effacer",
       "dice": "Dé",
       "edit": "Éditer",
       "expertise": "TRANSLATE",
       "features": "TRANSLATE",
+      "firemode_current": "TRANSLATE",
       "firemodes": "Modes de tir",
+      "level": "TRANSLATE",
+      "mages": "TRANSLATE Mages",
       "max": "Maximum",
       "modifications": "Modifications",
       "modifier": "Mod.",
@@ -152,6 +231,7 @@
       "pool": "Réserve",
       "poolmod": "réserve de dés",
       "specialization": "TRANSLATE",
+      "threshold": "TRANSLATE",
       "value": "Score",
       "wilddie": "Dé Libre"
     },
@@ -161,13 +241,23 @@
     },
     "newitem": {
       "adeptpower": "TRANSLATE",
+      "ammunition": "TRANSLATE",
+      "armor": "TRANSLATE",
+      "biology": "TRANSLATE",
+      "bodyware": "TRANSLATE",
+      "chemicals": "TRANSLATE",
+      "electronics": "TRANSLATE",
+      "martialartstyle": "TRANSLATE",
+      "martialarttech": "TRANSLATE",
       "quality": "Ce qui vous rend spécial",
       "ritual": "TRANSLATE",
       "skill": {
         "knowledge": "T'es quoi toi ? un nerd ?",
         "language": "Charabia"
       },
-      "spell": "TRANSLATE"
+      "spell": "TRANSLATE",
+      "weapon": "TRANSLATE",
+      "weaponclose": "TRANSLATE"
     },
     "numerical": {
       "base": "base",
@@ -182,13 +272,6 @@
       "name": "Nom",
       "new": "Nouveau"
     },
-    "resist": {
-      "astral_direct": "TRANSLATE",
-      "astral_indirect": "TRANSLATE",
-      "attacks": "TRANSLATE",
-      "damage": "Résistance aux dommages",
-      "toxin": "Résistance aux Toxines"
-    },
     "ritualfeatures": {
       "anchored": "TRANSLATE",
       "material_link": "TRANSLATE",
@@ -197,6 +280,12 @@
       "spotter": "TRANSLATE"
     },
     "roll": {
+      "actionText": {
+        "attack_target_multiple": "TRANSLATE",
+        "attack_target_none": "TRANSLATE",
+        "attack_target_one": "TRANSLATE",
+        "cast": "TRANSLATE"
+      },
       "ar_0": "Proche",
       "ar_1": "Courte",
       "ar_2": "Moyenne",
@@ -204,20 +293,46 @@
       "ar_4": "Extrême",
       "attack": "Attaque",
       "attackRating": "Score Off.:",
+      "configure": "TRANSLATE",
       "criticalglitch": "Échec Critique",
       "damage": "Dégâts: ",
       "defRating": "Défense: ",
+      "defense_button": "TRANSLATE",
+      "edge": {
+        "gain_player": "TRANSLATE",
+        "getting": "TRANSLATE",
+        "no_gain": "TRANSLATE",
+        "situational": "TRANSLATE",
+        "spending": "TRANSLATE"
+      },
+      "edge_perform": "TRANSLATE",
       "edgegain": "Atout-Gain (max): ",
       "edgegain_player": " (Joueur)",
+      "exp": "TRANSLATE Expertise",
       "explode": "Explose",
       "failure": "Échec",
       "glitch": "Complication",
       "hits_bought": "Coups achetés",
+      "mode": "TRANSLATE",
       "modifier": "réserve de dés",
       "noedgegain": "Pas de gain d'atout",
       "nosuccess": "Succès, seuil: ",
       "notarget": "Aucune cible sélectionnée",
       "pool": "Nb. de Dé à lancer",
+      "spec": "TRANSLATE",
+      "spell": {
+        "ampUp": {
+          "1": "TRANSLATE Damage+1, Drain+2",
+          "2": "TRANSLATE Damage+2, Drain+4",
+          "title": "TRANSLATE Amp up"
+        },
+        "incArea": {
+          "1": "TRANSLATE Radius +2m, Drain+1",
+          "2": "TRANSLATE Radius +4m, Drain+2",
+          "title": "TRANSLATE Increase Area"
+        },
+        "title": "TRANSLATE Adjust the spell"
+      },
       "subject": "Message dans le Chat",
       "success": "Succès",
       "successes": "Succès",
@@ -237,15 +352,20 @@
         "title": "TRANSLATE"
       },
       "ammo": "Munitions",
-      "armor.column": {
-        "action": "Action",
-        "defense": "SD",
-        "name": "Nom",
-        "social": "Social"
+      "ammo_add": "TRANSLATE Add ammunition",
+      "armor": {
+        "add": "TRANSLATE Add new armor",
+		"column": {
+			"action": "Action",
+        	"defense": "SD",
+        	"name": "Nom",
+        	"social": "Social"
+		},
+		"title": "Armure"
       },
-      "armor.title": "Armure",
       "biology": "Biologie",
       "bodyware": {
+        "add": "TRANSLATE Add new bioware or cyberware",
         "column.capacity": "Cap.",
         "column.essence": "Ess.",
         "footer.total_essence": "Essence restante",
@@ -258,6 +378,7 @@
       "initiative": "Initiative",
       "martialarts": {
         "add": "TRANSLATE",
+        "tech_add": "TRANSLATE Add new technique",
         "title": "TRANSLATE"
       },
       "metamagic": {
@@ -290,9 +411,188 @@
         "title": "TRANSLATE"
       },
       "weapon": {
+        "add": "TRANSLATE Add new weapon",
         "close": "Armes de Mélée",
         "ranged": "Armes à Distance"
       }
+    },
+    "settings": {
+      "maxEdgePerRound": {
+        "hint": "Defines the maximum egde a player or NPC can gain per turn.",
+        "name": "Max. Edge per turn"
+      }
+    },
+    "special": {
+      "astral": {
+        "astral_combat": "Astral Combat",
+        "astral_signatures": "Astral Signatures",
+        "emotional_stress": "Emotional Stress",
+        "spirit_types": "Spirit Types"
+      },
+      "athletics": {
+        "archery": "Archery",
+        "climbing": "Climbing",
+        "flying": "Flying",
+        "gymnastics": "Gymnastics",
+        "sprinting": "Sprinting",
+        "swimming": "Swimming",
+        "throwing": "Throwing"
+      },
+      "biotech": {
+        "biotechnology": "Biotechnology",
+        "cybertechnology": "Cybertechnology",
+        "first_aid": "First Aid",
+        "medicine": "Medicine"
+      },
+      "close_combat": {
+        "blades": "Blades",
+        "clubs": "Clubs",
+        "unarmed": "Unarmed Combat"
+      },
+      "con": {
+        "acting": "Acting",
+        "disguise": "Disguise",
+        "impersonation": "Impersonation",
+        "performance": "Performance"
+      },
+      "conjuring": {
+        "banishing": "Banishing",
+        "summoning": "Summoning"
+      },
+      "cracking": {
+        "cybercombat": "Cybercombat",
+        "electronic_warfare": "Electronic Warface",
+        "hacking": "Hacking"
+      },
+      "electronics": {
+        "computer": "Computer",
+        "hardware": "Hardware",
+        "software": "Software"
+      },
+      "enchanting": {
+        "alchemy": "Alchemy",
+        "artificing": "Artificing",
+        "disenchanting": "Disenchanting"
+      },
+      "engineering": {
+        "aeronautics_mechanic": "Aeronautics Mechanic",
+        "armorer": "Armorer",
+        "automotive_mechanic": "Automotive Mechanic",
+        "demolitions": "Demolitions",
+        "gunnery": "Gunnery",
+        "industrial_mechanic": "Industrial Mechanic",
+        "lockpicking": "Lockpicking",
+        "nautical_mechanic": "Nautical Mechanic"
+      },
+      "exotic_weapons": {},
+      "firearms": {
+        "assault_cannons": "Assault Cannons",
+        "holdouts": "Holdouts",
+        "machine_pistols": "Machine Pistols",
+        "pistols_heavy": "Heavy Pistols",
+        "pistols_light": "Light Pistols",
+        "rifles": "Rifles",
+        "shotguns": "Shotguns",
+        "submachine_guns": "Submachine Guns",
+        "tasers": "Taser"
+      },
+      "influence": {
+        "etiquette": "Etiquette",
+        "instruction": "Instruction",
+        "intimidation": "Intimidation",
+        "leadership": "Leadership",
+        "negotiation": "Negotiation"
+      },
+      "outdoors": {
+        "navigation": "Navigation",
+        "survival": "Survival",
+        "tracking_desert": "Environment Desert",
+        "tracking_other": "Environment Other",
+        "tracking_urban": "Environment Urban",
+        "tracking_woods": "Environment Woods"
+      },
+      "perception": {
+        "aural": "Aural",
+        "perception_desert": "Environment Desert",
+        "perception_other": "Environment Other",
+        "perception_urban": "Environment Urban",
+        "perception_woods": "Environment Woods",
+        "scent": "Scent",
+        "tactile": "Tactile",
+        "taste": "Taste",
+        "visual": "Visual"
+      },
+      "piloting": {
+        "aircraft": "Aircraft",
+        "ground_craft": "Ground Craft",
+        "watercraft": "Watercraft"
+      },
+      "sorcery": {
+        "counterspelling": "Counterspelling",
+        "ritual_spellcasting": "Ritual Spellcasting",
+        "spellcasting": "Spellcasting"
+      },
+      "stealth": {
+        "camouflage": "Camouflage",
+        "disguise": "Disguise",
+        "palming": "Palming",
+        "sneaking": "Sneaking"
+      },
+      "tasking": {
+        "compiling": "Compiling",
+        "decompiling": "Decompiling",
+        "registering": "Registering"
+      }
+    },
+    "spell": {
+      "category": "Category",
+      "category_combat": "Combat",
+      "category_detection": "Detection",
+      "category_health": "Health",
+      "category_illusion": "Illusion",
+      "category_manipulation": "Manipultaion",
+      "damage": "Damage",
+      "damage_physical": "Physical",
+      "damage_physical_short": "P",
+      "damage_physical_special": "Physical, Special",
+      "damage_physical_special_short": "P, Special",
+      "damage_short": "Dmg",
+      "damage_stun": "Stun",
+      "damage_stun_short": "S",
+      "damage_stun_special": "Stun, Special",
+      "damage_stun_special_short": "S, Special",
+      "direct": "Direct",
+      "drain": "Drain",
+      "drain_short": "DV",
+      "duration": "Duration",
+      "duration_instantaneous": "Instantaneous",
+      "duration_instantaneous_short": "I",
+      "duration_limited": "Limited",
+      "duration_permanent": "Permanent",
+      "duration_permanent_short": "P",
+      "duration_short": "Dur.",
+      "duration_special": "Special",
+      "duration_special_short": "Spec",
+      "duration_sustained": "Sustained",
+      "duration_sustained_short": "S",
+      "isOpposed": "Is Opposed",
+      "range": "Range",
+      "range_line_of_sight": "Line of sight",
+      "range_line_of_sight_area": "Line of sight (area)",
+      "range_line_of_sight_area_short": "LOS(A)",
+      "range_line_of_sight_short": "LOS",
+      "range_self": "Self",
+      "range_self_area": "Self (Area)",
+      "range_self_area_short": "S(A)",
+      "range_self_short": "Self",
+      "range_touch": "Touch",
+      "range_touch_short": "T",
+      "type": "Type",
+      "type_mana": "Mana",
+      "type_mana_short": "Man",
+      "type_physical": "Physical",
+      "type_physical_short": "Phy",
+      "withEssence": "Against Essence"
     },
     "spellfeatures": {
       "area": "TRANSLATE",
@@ -300,6 +600,9 @@
       "indirect": "TRANSLATE",
       "sense_multi": "TRANSLATE",
       "sense_single": "TRANSLATE"
+    },
+    "tradition": {
+      "attribute": "TRANSLATE Tradition Attribute"
     }
   },
   "skill.astral": "Astral",
