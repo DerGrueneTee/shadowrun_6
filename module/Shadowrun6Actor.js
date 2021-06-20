@@ -627,7 +627,25 @@ export class Shadowrun6Actor extends Actor {
 		// Get pool
 		let pool = item.data.data.pool;
 
-		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
+		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
+		console.log("Highest defense rating of targets: "+highestDefenseRating);
+		
+		// If present, replace spell name, description and source references from compendium
+		let spellName = item.name;
+		let spellDesc = "";
+		let spellSrc  = "";
+		if (item.data.data.description) {
+			spellDesc = item.data.data.description;
+		}
+		if (item.data.data.genesisID) {
+			let key = "item."+item.data.data.genesisID+".";
+			if (!game.i18n.localize(key+"name").startsWith(key)) {
+				// A translation exists
+				spellName = game.i18n.localize(key+"name");
+				spellDesc = game.i18n.localize(key+"desc");
+				spellSrc = game.i18n.localize(key+"src");
+			}
+		}
 
 		let data = mergeObject(options, {
 			pool: pool,
@@ -637,6 +655,9 @@ export class Shadowrun6Actor extends Actor {
 			skill: this.data.data.skills[skillId],
 			spec: spec,
 			item: item,
+			itemName: spellName,
+			itemDesc: spellDesc,
+			itemSrc : spellSrc,
 			defRating : highestDefenseRating,
 			targets: game.user.targets.forEach( val => val.actor),
 			isOpposed: true,
@@ -673,7 +694,8 @@ export class Shadowrun6Actor extends Actor {
 		let isOpposed = false;
 		let hasDamageResist = true;
 		let attackRating = this.data.data.attackrating.astral.pool;
-		let highestDefenseRating = this._getHighestDefenseRating( (a) => { a.data.data.defenserating.physical.pool});
+		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
+		console.log("Highest defense rating of targets: "+highestDefenseRating);
 		let threshold = 0;
 		let canAmpUpSpell = item.data.data.category === "combat";
 		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";

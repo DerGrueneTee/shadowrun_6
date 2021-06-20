@@ -37,7 +37,9 @@ async function _showRollDialog(data, onClose={}) {
     data.modifier = 0;
   }
 
-  data.defRating = 0;
+	if (!data.defRating) {
+		data.defRating = 0;
+	}
 
 	/*
 	 * Fill dialog head
@@ -199,6 +201,11 @@ function _dialogClosed(type, form, data, messageData={}) {
 			if (data.drainMod) {
 				data.drain+= parseInt(data.drainMod);
 			}
+		}
+	} else if (data.rollType=="weapon") {
+		if (data.item) {
+			// TODO: Evaluate fire modes
+			console.log("ToDo: evaluate fire modes, called shots, etc.")
 		}
 	}
 

@@ -98,6 +98,7 @@ Hooks.once("init", async function () {
   Hooks.on('ready', () => {
     // Render a modal on click.
     $(document).on('click', diceIconSelector, ev => {
+    console.log("diceIconSelector clicked");
       ev.preventDefault();
       // Roll and return
       let data = {

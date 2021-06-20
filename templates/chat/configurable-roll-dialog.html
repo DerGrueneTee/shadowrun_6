@@ -136,13 +136,12 @@
         {{/select}}
         </select></td>     		
     		<td>{{localize "shadowrun6.roll.wilddie"}}</td>
-    		{{log "wild" data.useWildDie}}
     		<td><input type="checkbox" name="useWildDie" {{checked data.useWildDie}} /></td>
     	</tr>
     	<tr>
         {{#if data.useThreshold}}
     		<td>{{localize "shadowrun6.roll.threshold"}}</td>
-    		<td colspan="2"><input type="text" name="threshold" {{checked data.threshold}} style="width: 3em"/></td>
+    		<td colspan="2"><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
     {{/if}}
     	</tr>
     </table>

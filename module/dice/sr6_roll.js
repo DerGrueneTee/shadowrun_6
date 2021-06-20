@@ -44,7 +44,7 @@ export default class SR6Roll extends Roll {
       if (this.data.useWildDie) {
         this._dice[0].options.colorset = "SR6_light";
       }
-    } else  if (data.type == 1) {
+    } else  if (data.buttonType == 1) {
       noOfDice = Math.floor(noOfDice / 4);
       formula = this.createFormula(noOfDice, -1, false);
       die = new Roll(formula).evaluate({ async: false });
