@@ -643,6 +643,7 @@ export class Shadowrun6Actor extends Actor {
 			isAllowDefense: true,
 			defendWith: "physical",
 			hasDamageResist: true,
+			useWildDie: item.data.data.wild,
 			buyHits: false
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });

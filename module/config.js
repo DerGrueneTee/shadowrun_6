@@ -80,6 +80,13 @@ SR6.EDGE_ACTIONS = [
 	new EdgeAction(1, "shank", "COMBAT"),
 ];
 
+SR6.FIRING_OPTIONS = new Map([
+	["SS", ["single_shot"]],
+	["SA", ["single_shot","double_shot"]],
+	["BF", ["narrow_burst","wide_burst"]],
+	["FA", ["multi_shot"]],
+]);
+
 SR6.icons = {
 	adeptpower: {
 		default: "systems/shadowrun6-eden/icons/van-damme-split.svg"

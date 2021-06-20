@@ -112,7 +112,13 @@
             },
             "feature": "Features",
             "social" : "Social",
-            "natural" : "Nat. armor"
+            "natural" : "Nat. armor",
+			   "firemode": {
+					"BF": "Burst Fire",
+					"FA": "Full Auto",
+					"SA": "Semi Automatic",
+					"SS": "Single Shot"
+				}
         },
         "adeptpower": {
             "cost": "Cost",
@@ -163,6 +169,7 @@
             "edit": "Edit",
             "expertise": "Expertise",
 			   "features": "Features",
+            "firemode_current": "Current Firemode",
             "firemodes": "Firemodes",
             "max": "Maximum",
             "modifier": "Adj.",

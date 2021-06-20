@@ -25,18 +25,16 @@
          <td colspan="6">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
-         	{{ localize 'shadowrun6.label.firemodes' }} <input type="checkbox" {{checked item.data.data.modes.BF}} name="data.modes.BF" data-check="data.modes.BF"  data-item-id="{{this.id}}"id="mode_bf"/>
-				<label for="mode_bf">{{localize 'shadowrun6.item.mode_bf'}}</label>
-		
-			<input type="checkbox" {{checked item.data.data.modes.FA}} name="data.modes.FA"  data-check="data.modes.FA" data-item-id="{{this.id}}" id="mode_fa"/>
-				<label for="mode_fa">{{localize 'shadowrun6.item.mode_fa'}}</label>
-			
-			<input type="checkbox" {{checked item.data.data.modes.SA}} name="data.modes.SA" data-check="data.modes.SA" data-item-id="{{this.id}}" id="mode_sa"/>
-				<label for="mode_sa">{{localize 'shadowrun6.item.mode_sa'}}</label>
-			
-			<input type="checkbox" {{checked item.data.data.modes.SS}} name="data.modes.SS" data-check="data.modes.SS" data-item-id="{{this.id}}" id="mode_ss"/>
-				<label for="mode_ss">{{localize 'shadowrun6.item.mode_ss'}}</label>
-			<br/>
+         	{{ localize 'shadowrun6.label.firemode_current' }} 
+         	<select name="firemodeUsed" class="firemodeUsed">
+            {{#each item.data.data.modes as |available id|}}
+            {{#if available}}
+             <option value="{{id}}" data-item-firemode="{{id}}">{{localize (concat "shadowrun6.item.firemode." id)}}</option>
+            {{/if}}
+            {{/each}}
+         		
+         	</select>
+			   <br/>
          	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" {{checked item.data.data.wild}} data-check="data.wild"     type="checkbox" data-dtype="Boolean"/><br/>
          	{{ localize 'shadowrun6.label.poolmod' }} <input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.modifier" type="text"     value="{{item.data.data.modifier}}" data-dtype="Number" style="width: 1.5em"/>
          	</div>
