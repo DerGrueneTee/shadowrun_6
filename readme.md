@@ -32,10 +32,12 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.2.x) Improve NPC sheet: Have skills on "Overview"-Tab, calculate initiative and actions, allow dice rolls
  * (since 0.3.x) Gear (Bodyware, Chemicals ...)
  * (since 0.3.x) Roll on derived attributes
+ * (since 0.4.x) Magic: spells, adept powers, rituals, metamagic
+ * (since 0.4.x) Attack and defense rating comparison, gaining edge, spending pre-roll edge
  
 ### Not working yet ###
  * Auto-calculating modifiers from condition monitors
- * Everything else character related (Powers, Spells ...)
+ * Everything else character related (Matrix, Rigger stuff ...)
  * Critters, better NPC support
 
 ## The future ##
