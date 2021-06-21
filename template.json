@@ -427,7 +427,8 @@
 			"skill",
 			"adeptpower",
 			"spell",
-			"ritual"
+			"ritual",
+			"focus"
 		],
 		"templates": {
 			"genesis": {
@@ -458,6 +459,12 @@
 			"templates": [
 				"genesis"
 			]
+		},
+		"focus": {
+			"templates": [
+				"genesis"
+			],
+			"rating": 1
 		},
 		"gear": {
 			"type": "WEAPON_FIREARMS",
