@@ -40,35 +40,10 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
-			html.find('.quality-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.quality"),
-					type: "quality",
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.metamagic-create').click(ev => {
-				console.log("new metamagic");
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.metamagic"),
-					type: "metamagic",
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.spell-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.spell"),
-					type: "spell",
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.ritual-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.ritual"),
-					type: "ritual",
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
+			html.find('.quality-create').click(ev => this._onCreateNewEmbeddedItem("gear","quality"));
+			html.find('.metamagic-create').click(ev => this._onCreateNewEmbeddedItem("gear","metamagic"));
+			html.find('.spell-create').click(ev => this._onCreateNewEmbeddedItem("gear","spell"));
+			html.find('.ritual-create').click(ev => this._onCreateNewEmbeddedItem("gear","ritual"));
 			html.find('.weapon-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.weapon"),
@@ -79,66 +54,12 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
-			html.find('.ELECTRONICS-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.electronics"),
-					type: "gear",
-					data: {
-						type: "ELECTRONICS"
-					}
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.CHEMICALS-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.chemicals"),
-					type: "gear",
-					data: {
-						type: "CHEMICALS"
-					}
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.BIOLOGY-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.biology"),
-					type: "gear",
-					data: {
-						type: "BIOLOGY"
-					}
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.armor-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.armor"),
-					type: "gear",
-					data: {
-						type: "ARMOR"
-					}
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.ammunition-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.ammunition"),
-					type: "gear",
-					data: {
-						type: "AMMUNITION"
-					}
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
-			html.find('.bodyware-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.bodyware"),
-					type: "gear",
-					data: {
-						type: "CYBERWARE"
-					}
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
+			html.find('.ELECTRONICS-create').click(ev => this._onCreateNewEmbeddedItem("gear","ELECTRONICS"));
+			html.find('.CHEMICALS-create').click(ev => this._onCreateNewEmbeddedItem("gear","CHEMICALS"));
+			html.find('.BIOLOGY-create').click(ev => this._onCreateNewEmbeddedItem("gear","BIOLOGY"));
+			html.find('.armor-create').click(ev => this._onCreateNewEmbeddedItem("gear","ARMOR"));
+			html.find('.ammunition-create').click(ev => this._onCreateNewEmbeddedItem("gear","AMMUNITION"));
+			html.find('.bodyware-create').click(ev => this._onCreateNewEmbeddedItem("gear","CYBERWARE"));
 			html.find('.close-weapon-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.weaponclose"),
@@ -283,6 +204,17 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 		// Handle default listeners last so system listeners are triggered first
 		super.activateListeners(html);
+	}
+
+	_onCreateNewEmbeddedItem(type, itemtype) {
+		const itemData = {
+			name: game.i18n.localize("shadowrun6.newitem."+itemtype.toLowerCase()),
+			type: type,
+			data: {
+				type: itemtype
+			}
+		};
+		return this.actor.createEmbeddedDocuments("Item", [itemData]);
 	}
 
 	//-----------------------------------------------------
