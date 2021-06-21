@@ -296,7 +296,7 @@
       "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
-      "defRating": "VTD",
+      "defRating": "Verteidigungswert",
       "defense_button": "Würfle Verteidigung",
       "edge": {
         "gain_player": "{name} erhält {value} Edge",
