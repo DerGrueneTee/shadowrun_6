@@ -246,9 +246,12 @@
       "biology": "Biohazard",
       "bodyware": "Some cool enhancement",
       "chemicals": "The good stuff",
+      "cyberware": "Some cool cyber enhancement",
       "electronics": "Nerd toy",
+      "focus": "Something to stay focussed",
       "martialartstyle": "What's your style?",
       "martialarttech": "Technique, which technique?",
+      "metamagic": "What have you learned?",
       "quality": "What is your feat?",
       "ritual": "Singing Hallelujah",
       "skill": {
@@ -380,6 +383,11 @@
         "add": "Add new style",
         "tech_add": "Add new technique",
         "title": "Martial Arts"
+      },
+      "focus" : {
+        "add": "Add new focus",
+        "column.rating": "Lv",
+        "title": "Foci"
       },
       "metamagic": {
         "add": "Add new metamagic",

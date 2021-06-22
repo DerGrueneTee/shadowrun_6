@@ -246,9 +246,12 @@
       "biology": "Biozeugs",
       "bodyware": "Was cooles zum Einbauen",
       "chemicals": "Das gute Zeug",
+      "cyberware": "Was cooles zum Einbauen",
       "electronics": "Technikspielzeug",
+      "focus": "Jeder sollte einen Focus haben",
       "martialart_style": "Was ist dein Stil?",
       "martialart_tech": "Was für eine Technik hast du drauf?",
+      "metamagic": "Was hast du gelernt?",
       "quality": "Was macht dich besonders?",
       "ritual": "Ringelpiez mit Anfassen",
       "skill": {
@@ -380,6 +383,11 @@
         "add": "Neuen Kampfstil hinzufügen",
         "tech_add": "Neue Technik hinzufügen",
         "title": "Kampfkünste"
+      },
+      "focus" : {
+        "add": "Focus hinzufügen",
+        "column.rating": "St.",
+        "title": "Foci"
       },
       "metamagic": {
         "add": "Metamagie hinzufügen",

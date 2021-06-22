@@ -40,10 +40,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
-			html.find('.quality-create').click(ev => this._onCreateNewEmbeddedItem("gear","quality"));
-			html.find('.metamagic-create').click(ev => this._onCreateNewEmbeddedItem("gear","metamagic"));
-			html.find('.spell-create').click(ev => this._onCreateNewEmbeddedItem("gear","spell"));
-			html.find('.ritual-create').click(ev => this._onCreateNewEmbeddedItem("gear","ritual"));
+			html.find('.quality-create').click(ev => this._onCreateNewEmbeddedItem("quality"));
+			html.find('.metamagic-create').click(ev => this._onCreateNewEmbeddedItem("metamagic"));
+			html.find('.spell-create').click(ev => this._onCreateNewEmbeddedItem("spell"));
+			html.find('.ritual-create').click(ev => this._onCreateNewEmbeddedItem("ritual"));
+			html.find('.focus-create').click(ev => this._onCreateNewEmbeddedItem("focus"));
 			html.find('.weapon-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.weapon"),
@@ -87,8 +88,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 					name: game.i18n.localize("shadowrun6.newitem.martialart_tech"),
 					type: "martialarttech",
 					data: {
-						description: "bla",
-						genesisID: "foo",
 						style: styleId,
 					}
 				};
@@ -207,15 +206,21 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	}
 
 	_onCreateNewEmbeddedItem(type, itemtype) {
-		const itemData = {
-			name: game.i18n.localize("shadowrun6.newitem."+itemtype.toLowerCase()),
+		let itemData = {
+			name: itemtype ? game.i18n.localize("shadowrun6.newitem."+itemtype.toLowerCase()) : game.i18n.localize("shadowrun6.newitem."+type.toLowerCase()) ,
 			type: type,
-			data: {
-				type: itemtype
-			}
+			
 		};
+		if (itemtype) {
+			itemData = mergeObject(itemData, {
+				data: {
+					type: itemtype
+				}
+			});
+		}
 		return this.actor.createEmbeddedDocuments("Item", [itemData]);
 	}
+	
 
 	//-----------------------------------------------------
 	/**
