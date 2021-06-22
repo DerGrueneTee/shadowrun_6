@@ -8,6 +8,7 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { doRoll } from "./dice/CommonRoll.js";
+import { rollDefense } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./combat.js";
@@ -85,7 +86,7 @@ Hooks.once("init", async function () {
   function onCreateItem(item, options, userId) {
     console.log("onCreateItem");
     let createData = item.data;
-    if (createData.img == "icons/svg/item-bag.svg") {
+    if (createData.img == "icons/svg/item-bag.svg" && CONFIG.SR6.icons[createData.type]) {
       createData.img = CONFIG.SR6.icons[createData.type].default;
       item.update({ ["img"]: createData.img });
     }
@@ -209,11 +210,16 @@ Hooks.once("init", async function () {
 	 	html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
 	 }
     html.find(".rollable").click(event => {
-      const type = $(event.currentTarget).closestData("roll-type");
+//      const type =  $(event.currentTarget).closestData("roll-type");
+		const dataset = event.currentTarget.dataset;
+      const rollType =  dataset.rollType;
 		console.log("Clicked on rollable");
-      if (type === "defense") {
+      if (rollType === "defense") {
         const targetId = $(event.currentTarget).closestData("targetid");
         console.log("Target "+targetId);
+			const actor = game.actors.get(targetId);
+		  const defendWith = dataset.defendWith;
+			rollDefense(actor, defendWith);
       }
     });
     html.on("click", ".chat-edge", event => {

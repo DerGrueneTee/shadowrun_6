@@ -42,21 +42,6 @@ async function _showRollDialog(data, onClose={}) {
 	}
 
 	/*
-	 * Fill dialog head
-	 */
-	if (data.rollType === "weapon") {
-		if (data.targetId) {
-    		data.actionText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
-		} else {
-    		data.actionText = game.i18n.localize("shadowrun6.roll.attack") + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
-		}
-		data.checkText = 
-			game.i18n.localize("skill."+data.item.data.data.skill) +"/" + 
-			game.i18n.localize("shadowrun6.special."+data.item.data.data.skill+"."+data.item.data.data.skillSpec) + " + " +
-			game.i18n.localize("attrib."+CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib);
-	}
-
-	/*
 	 * Edge, Edge Boosts and Edge Actions
 	 */
     data.actor = game.actors.get(data.speaker.actor);
@@ -72,7 +57,6 @@ async function _showRollDialog(data, onClose={}) {
     data.extraText = " Spell targeting not implemented yet ";
   }
   // Render modal dialog
-//  let template = "systems/shadowrun6-eden/templates/chat/roll-attack-dialog.html";
   let template = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
   let dialogData = {
 	 checkText: data.extraText,
@@ -229,6 +213,21 @@ function _dialogClosed(type, form, data, messageData={}) {
     return r;
  }
 
+export function rollDefense(actor, defendWith) {
+	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+")");
+	let actionText = "";
+	let checkText  = "";
+	let defense = {};
+	switch (defendWith) {
+	case "physical":
+		defense = actor.data.data.defensepool.physical;
+		actionText = game.i18n.format("shadowrun6.roll.defense.physical");
+		checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.int");
+		break;
+	}
+	console.log("LEAVE rollDefense");
+	
+}
 
 export class RollDialog extends Dialog {
 

@@ -51,7 +51,6 @@
    <!-- Drain -->
    {{#if (eq data.rollType "spell")}}
    <hr/>
-    {{log data.spell}}
    <div class="chat-spell">
    	<table class="spell-table">
    	    <tr>
@@ -78,10 +77,20 @@
    {{/if}}        
    
    <!-- Defense -->
-   {{#if data.isAllowDefenseD}}
+    {{log "Defense" data}}
+   {{#if data.isAllowDefense}}
    <hr/>
+   {{#if data.targets}}
+     {{#each data.targets as |token id|}}
+     <div>
+      {{log "Token" id " = " token.data }} 
+     	<button class="rollable" data-roll-type="defense" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}">Token {{id}}: {{token.data.name}}</button>
+     </div>
+     {{/each}}
+   {{else}} 
   <div>
   	<button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
   </div>
+   {{/if}}
    {{/if}}        
 </div>

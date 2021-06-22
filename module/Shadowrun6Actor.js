@@ -659,7 +659,7 @@ export class Shadowrun6Actor extends Actor {
 			itemDesc: spellDesc,
 			itemSrc : spellSrc,
 			defRating : highestDefenseRating,
-			targets: game.user.targets.forEach( val => val.actor),
+			targets: game.user.targets,
 			isOpposed: true,
 			isAllowDefense: true,
 			defendWith: "physical",
