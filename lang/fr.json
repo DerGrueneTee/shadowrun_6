@@ -284,7 +284,10 @@
         "attack_target_multiple": "TRANSLATE",
         "attack_target_none": "TRANSLATE",
         "attack_target_one": "TRANSLATE",
-        "cast": "TRANSLATE"
+        "cast": "TRANSLATE",
+		  "defense": {
+				"physical": "TRANSLATE Defend against physical attack"
+			}
       },
       "ar_0": "Proche",
       "ar_1": "Courte",

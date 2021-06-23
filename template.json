@@ -541,7 +541,7 @@
 			"templates": [
 				"genesis"
 			],
-			"threshold": 1,
+			"threshold": 5,
 			"features": {
 				"anchored": false,
 				"material_link": false,

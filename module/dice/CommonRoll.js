@@ -152,6 +152,9 @@ function _dialogClosed(type, form, data, messageData={}) {
       data.modifier = parseInt(form.modifier.value);
       data.defRating = (form.defRating)?parseInt(form.defRating.value):0;
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
+	   if (data.spell.type=="ritual") {
+			data.threshold = data.spell.data.data.threshold;
+		}
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
       data.buttonType = type;
@@ -215,16 +218,51 @@ function _dialogClosed(type, form, data, messageData={}) {
 
 export function rollDefense(actor, defendWith) {
 	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+")");
-	let actionText = "";
-	let checkText  = "";
-	let defense = {};
+	let data = {
+		actionText: "",
+		checkText : "X",
+		defense   : {},
+		speaker   : ChatMessage.getSpeaker({ actor: this }),
+	}
 	switch (defendWith) {
 	case "physical":
-		defense = actor.data.data.defensepool.physical;
-		actionText = game.i18n.format("shadowrun6.roll.defense.physical");
-		checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.int");
+		data.defense = actor.data.data.defensepool.physical;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.physical");
+		data.checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.int");
+		break;
+	case "spells_direct":
+		data.defense    = actor.data.data.defensepool.spells_direct;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_direct");
+		data.checkText  = game.i18n.localize("attrib.wil")+" + "+game.i18n.localize("attrib.int");
+		break;
+	case "spells_indirect":
+		data.defense = actor.data.data.defensepool.spells_indirect;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_indirect");
+		data.checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.wil");
+		break;
+	case "spells_other":
+		data.defense = actor.data.data.defensepool.spells_other;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_other");
+		data.checkText  = game.i18n.localize("attrib.wil")+" + "+game.i18n.localize("attrib.int");
 		break;
 	}
+	
+	// Prepare new roll
+	data.pool = data.defense.pool;
+	data.modifier = 0;
+	data.buttonType = 0; // Simulate Roll button clicked
+   let r = new SR6Roll("", data);
+    try {
+	   console.log("Call r.evaluate: "+r);
+      r.evaluate();
+		r.toMessage(data);
+    } catch (err) {
+      console.error("CommonRoll error: "+err);
+      console.error("CommonRoll error: "+err.stack);
+      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    }
+	
+	
 	console.log("LEAVE rollDefense");
 	
 }

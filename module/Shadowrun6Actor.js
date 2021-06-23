@@ -679,33 +679,38 @@ export class Shadowrun6Actor extends Actor {
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
 	rollSpell(itemId, ritual=false, options={}) {
-		console.log("rollSpell("+itemId+")");
+		console.log("rollSpell("+itemId+", ritual="+ritual+")");
 		const skillId = "sorcery";
-		const spec    = (ritual)?"spellcasting":"ritual_spellcasting";
+		const spec    = (ritual)?"ritual_spellcasting":"spellcasting";
 		const item = this.items.get(itemId);
+		let threshold = ritual? (item.data.data.threshold):0;
 		// Prepare action text
 		let actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec);
-		let rollName = this._getSkillCheckText(skillId, spec);		
+		let rollName = this._getSkillCheckText(skillId, spec, threshold);		
 
 		// Determine whether or not the spell is an opposed test
 		// and what defense eventually applies
 		let isOpposed = false;
-		let hasDamageResist = true;
+		let hasDamageResist = !ritual;
+		let defendWith = "physical";
 		let attackRating = this.data.data.attackrating.astral.pool;
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
-		let threshold = 0;
 		let canAmpUpSpell = item.data.data.category === "combat";
 		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
 		if (item.data.data.category === "combat") {
 			isOpposed = true;
 			if (item.data.data.type=="mana") {
+				defendWith = "spells_direct";
 				hasDamageResist = false;
+			} else {
+				defendWith = "spells_indirect";
 			}
 		} else if (item.data.data.category === "manipulation") {
 			isOpposed = true;
+				defendWith = "spells_other";
 		} else if (item.data.data.category === "heal") {
 			if (item.data.data.withEssence) {
 				threshold = 5 - Math.ceil(this.data.data.essence);
@@ -720,7 +725,7 @@ export class Shadowrun6Actor extends Actor {
 			spellDesc = item.data.data.description;
 		}
 		if (item.data.data.genesisID) {
-			let key = "spell."+item.data.data.genesisID+".";
+			let key = (ritual?"ritual.":"spell.")+item.data.data.genesisID+".";
 			if (!game.i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
 				spellName = game.i18n.localize(key+"name");
@@ -747,8 +752,10 @@ export class Shadowrun6Actor extends Actor {
 			defRating : highestDefenseRating,
 			targets: game.user.targets.forEach( val => val.actor),
 			isOpposed: isOpposed,
-			rollType: "spell",
+			threshold: threshold,
+			rollType: ritual?"ritual":"spell",
 			isAllowDefense: true,
+			defendWith: defendWith,
 			hasDamageResist: hasDamageResist,
 			buyHits: !isOpposed
 		});

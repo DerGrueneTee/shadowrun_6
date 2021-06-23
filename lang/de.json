@@ -287,7 +287,10 @@
         "attack_target_multiple": "Greift mehre Ziele mit {name} an",
         "attack_target_none": "Greift Ziel mit {name} an",
         "attack_target_one": "Greift {target} mit {name} an",
-        "cast": "Zaubert {name}"
+        "cast": "Zaubert {name}",
+		  "defense": {
+				"physical": "Verteidigung g. physischen Angriff"
+			}
       },
       "ar_0": "Sehr nah",
       "ar_1": "Nah",
