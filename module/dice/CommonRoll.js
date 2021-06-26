@@ -115,6 +115,7 @@ async function _showRollDialog(data, onClose={}) {
 
 function _dialogClosed(type, form, data, messageData={}) {
     console.log("ENTER _dialogClosed(type="+type+", form="+form+", data="+data+")");
+
 	 // Delete some fields that where only necessary for the roll dialog
     delete data.canAmpUpSpell;
 	 delete data.canIncreaseArea;
@@ -148,11 +149,11 @@ function _dialogClosed(type, form, data, messageData={}) {
     data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
 
 
-    if (form) {
+    if (form) {	   
       data.modifier = parseInt(form.modifier.value);
       data.defRating = (form.defRating)?parseInt(form.defRating.value):0;
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
-	   if (data.spell.type=="ritual") {
+	   if (data.spell && data.spell.type=="ritual") {
 			data.threshold = data.spell.data.data.threshold;
 		}
       data.explode = form.explode.checked;
@@ -209,7 +210,7 @@ function _dialogClosed(type, form, data, messageData={}) {
       console.error("CommonRoll error: "+err);
       console.error("CommonRoll error: "+err.stack);
       ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-    console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
+      console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
       return null;
     }
     console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");

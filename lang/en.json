@@ -64,6 +64,7 @@
         "equip": "Equipment",
         "input": "Input",
         "magic": "Magic",
+        "matrix": "Matrix",
         "overview": "Overview",
         "skills": "Skills"
       },
@@ -391,6 +392,15 @@
         "add": "Add new focus",
         "column.rating": "Lv",
         "title": "Foci"
+      },
+      "matrix_devices": {
+        "add": "Add new matrix device",
+        "column": {
+          "action": "Action",
+          "devRating": "Dev.R.",
+          "name": "Name"
+        },
+        "title": "Matrix Devices"
       },
       "metamagic": {
         "add": "Add new metamagic",

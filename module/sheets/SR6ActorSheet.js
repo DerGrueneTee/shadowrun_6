@@ -261,7 +261,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		let classList = event.currentTarget.classList;
 		let title;
 		if (classList.contains("defense-roll") || classList.contains("attributeonly-roll")) {
-			title = game.i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
+			title = game.i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
 		} else {
 			title = game.i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
 		}
