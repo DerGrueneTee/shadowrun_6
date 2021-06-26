@@ -1,0 +1,44 @@
+<div style="display: flex; width:100%">
+   {{#if showResonance}}
+  	<div class="attributes" style="margin-bottom: 10px; margin-top:0.4rem">
+   	<div class="attribute" augmented-ui="b-clip-x exe">
+      	<p>{{localize "attrib.res" }}</p>
+         <span>{{data.data.attributes.res.pool}}</span>
+         <input type="hidden" data-dtype="Number" name="data.data.attributes.res.pool" value="8" />
+         <div class="field {{id}}Changed">
+            <label>{{localize 'shadowrun6.numerical.base'}}</label>
+            <input type="number" data-dtype="Number" name="data.attributes.res.base" value="{{data.data.attributes.res.base}}" placeholder="base" title="{{localize 'shadowrun6.numerical.baseString'}}" min="1" max="6" />
+         </div>
+         <div class="field {{id}}Changed">
+            <label>{{localize 'shadowrun6.numerical.mod'}}</label>
+            <input type="number" data-dtype="Number" name="data.attributes.res.mod" value="{{data.data.attributes.res.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
+         </div>
+		</div>
+   </div>
+   {{/if}}
+		<div class="section" style="width:inherit">
+		<table>
+			<tr>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.attribute' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.base' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.modifier' }}</th>
+				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.value' }}</th>
+				<th style="padding: 0 5px 0 5px;"> </th>
+			</tr>
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.attack_rating.matrix' }}</b></td>
+				<td class="centered">{{data.data.attackrating.matrix.base}}</td>
+				<td><input class="centered" name="data.attackrating.matrix.mod" type="text" value="{{data.data.attackrating.matrix.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.attackrating.matrix.modString}}">{{data.data.attackrating.matrix.pool}}</td>
+			</tr>
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.defense_rating.matrix' }}</b></td>
+				<td class="centered">{{data.data.defenserating.matrix.base}}</td>
+				<td><input class="centered" name="data.defenserating.astral.mod" type="text" value="{{data.data.defenserating.matrix.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.defenserating.matrix.modString}}">{{data.data.defenserating.matrix.pool}}</td>
+			</tr>
+		</table>
+		</div>
+</div>
