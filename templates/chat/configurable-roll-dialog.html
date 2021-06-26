@@ -124,20 +124,20 @@
 	     </td>
 	     <td colspan="2">{{localize "shadowrun6.roll.modifier"}}</td>
 	     <td><input type="text" name="modifier" value="{{data.modifier}}" style="width: 3em"/></td>
-    		<td>{{localize "shadowrun6.roll.explode"}}</td>
-    		<td><input type="checkbox" name="explode" value="{{data.explode}}" /></td>
+    		<td colspan="2" style="text-align:right">{{localize "shadowrun6.roll.wilddie"}}</td>
+    		<td><input type="checkbox" name="useWildDie" {{checked data.useWildDie}} /></td>
     	</tr>
     	<tr>
      		<td>{{localize "shadowrun6.roll.mode"}}</td>
-     		<td colspan="2"><select name="rollMode">
+     		<td colspan="3"><select name="rollMode">
         {{#select rollMode}}
         {{#each rollModes as |label mode|}}
             <option value="{{mode}}">{{localize label}}</option>
         {{/each}}
         {{/select}}
         </select></td>     		
-    		<td>{{localize "shadowrun6.roll.wilddie"}}</td>
-    		<td><input type="checkbox" name="useWildDie" {{checked data.useWildDie}} /></td>
+    		<td style="text-align:right">{{localize "shadowrun6.roll.explode"}}</td>
+    		<td><input type="checkbox" name="explode" value="{{data.explode}}" /></td>
     	</tr>
     	<tr>
         {{#if data.useThreshold}}
