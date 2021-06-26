@@ -498,6 +498,12 @@
 			"essence": 0,
 			"capacity": 0,
 			"natural" : false,
+			"devRating": 0,
+			"a": 0,
+			"s": 0,
+			"d": 0,
+			"f": 0,
+			"progslots": 0,
 			"templates": [
 				"genesis",
 				"dice-pool"
@@ -520,17 +526,6 @@
 			],
 			"style": "",
 			"choice": ""
-		},
-		"matrixdev": {
-			"templates": [
-				"genesis"
-			],
-			"devRating": 0,
-			"a": 0,
-			"s": 0,
-			"d": 0,
-			"f": 0,
-			"slots": 0
 		},
 		"metamagic": {
 			"templates": [
