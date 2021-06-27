@@ -131,6 +131,9 @@ export class Shadowrun6Actor extends Actor {
 				data.derived.resist_toxin.base = data.attributes["bod"].pool + data.attributes["wil"].pool;
 				data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
 			}
+			// Matrix perception
+			data.derived.matrix_perception.base = data.skills["electronics"].points + data.skills["electronics"].modifier + data.attributes["int"].pool;
+			data.derived.matrix_perception.pool = data.derived.matrix_perception.base + data.derived.matrix_perception.mod;
 	}
 
 	//---------------------------------------------------------
