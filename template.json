@@ -102,6 +102,9 @@
 				  },
 				  "lift_carry": {
 					"mod": 0
+				  },
+				  "matrix_perception": {
+					"mod": 0
 				  }
 				}
 			},
@@ -389,7 +392,8 @@
 				"magic-template"
 			],
 			"metatype": "",
-			"gender": ""
+			"gender": "",
+			"overwatch": 0
 		},
 		"NPC": {
 			"name": "",
@@ -419,6 +423,8 @@
 	},
 	"Item": {
 		"types": [
+			"complexform",
+			"echo",
 			"gear",
 			"martialartstyle",
 			"martialarttech",
@@ -456,6 +462,18 @@
 			"choice": "",
 			"cost": 0.0,
 			"activation": "",
+			"templates": [
+				"genesis"
+			]
+		},
+		"complexform": {
+			"templates": [
+				"genesis"
+			],
+			"duration": "sustained",
+			"fade": 3
+		},
+		"echo": {
 			"templates": [
 				"genesis"
 			]
