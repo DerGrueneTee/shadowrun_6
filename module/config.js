@@ -31,6 +31,11 @@ SR6.GEAR_SUBTYPES = new Map([
 	["DRONES",  []],
 	["MAGICAL", []]
 	]);
+
+   SR6.GEAR_SUBTYPES2 = {
+      "ELECTRONICS": ["COMMLINK","CYBERDECK","ELECTRONIC_ACCESSORIES","RIGGER_CONSOLE","RFID","COMMUNICATION","ID_CREDIT","IMAGING","OPTICAL","AUDIO","SENSOR_HOUSING","SECURITY","BREAKING","TAC_NET"],
+   };
+
 SR6.SKILLS_WEAPON = ["firearms", "close_combat", "exotic_weapons", "athletics"];
 
 class SkillDefinition {

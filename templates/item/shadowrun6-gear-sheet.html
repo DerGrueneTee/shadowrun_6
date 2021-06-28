@@ -26,10 +26,9 @@
                     </td>
                     <td><select name="data.subtype" data-field="data.subtype">
                             {{#select item.data.data.subtype}}
-                            <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
-                            <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
-                            <option value="n.a.">n.a</option>
-                            <!-- {{/each}} -->
+                            {{#each (gearSubtype data.data.type) as |subtype id|}}>
+                            <option value="{{@subtype}}">{{localize (concat "gear.subtype." subtype)}} </option>
+                            {{/each}}
                             {{/select}}
                         </select></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.countable}}
