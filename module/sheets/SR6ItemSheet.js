@@ -59,29 +59,25 @@ export class SR6ItemSheet extends ItemSheet {
         }
       });
     }
-      html.find('[data-array-field]').change(event => {
-        const element = event.currentTarget
-        const idx = parseInt($(event.currentTarget).closestData('index', "0"));
-        const array = $(event.currentTarget).closestData('array');
-        const field = $(event.currentTarget).closestData('array-field');
-        let newValue = [];
-        if (!(idx >= 0 && array !== "")) return;
-        if (field) {
-          newValue = duplicate(array.split('.').reduce(function (prev, curr) {
-            return prev ? prev[curr] : null
-          }, this.object.data));
-          newValue[idx][field] = element.value;
-        } else {
-          newValue = duplicate(array.split('.').reduce(function (prev, curr) {
-            return prev ? prev[curr] : null
-          }, this.object.data));
-          newValue[idx] = element.value;
-        }
-        this.object.update({ [array]: newValue });
-      });
-    //}
-
+    html.find('[data-array-field]').change(event => {
+      const element = event.currentTarget
+      const idx = parseInt($(event.currentTarget).closestData('index', "0"));
+      const array = $(event.currentTarget).closestData('array');
+      const field = $(event.currentTarget).closestData('array-field');
+      let newValue = [];
+      if (!(idx >= 0 && array !== "")) return;
+      if (field) {
+        newValue = duplicate(array.split('.').reduce(function (prev, curr) {
+          return prev ? prev[curr] : null
+        }, this.object.data));
+        newValue[idx][field] = element.value;
+      } else {
+        newValue = duplicate(array.split('.').reduce(function (prev, curr) {
+          return prev ? prev[curr] : null
+        }, this.object.data));
+        newValue[idx] = element.value;
+      }
+      this.object.update({ [array]: newValue });
+    });
   }
-
-
 }
