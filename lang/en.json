@@ -108,7 +108,8 @@
       "defense_rating": "Defense Rating",
       "judge_intentions": "Judge Intentions",
       "lift_carry": "Lift / Carry",
-      "memory": "Memory"
+      "memory": "Memory",
+		"matrix_perception": "Matrix Perception"
     },
     "edge_action": {
       "anticipation": "Anticipation",
@@ -212,6 +213,10 @@
         "name": "Name",
         "rating": "Rtg."
       },
+		"attack.short": "A",
+		"stealth.short": "S",
+		"dataproc.short": "D",
+		"firewall.short": "F",
       "d6": "D6",
       "damage": "Damage",
       "defense_rating": "Defense Rating",
@@ -227,6 +232,7 @@
       "max": "Maximum",
       "modifications": "Modifications",
       "modifier": "Adj.",
+		"name": "Name",
       "none": "-",
       "points": "Points",
       "pool": "Pool",
@@ -379,9 +385,19 @@
         "title": "Bodyware"
       },
       "chemicals": "Chemicals",
+      "complexforms": {
+        "add": "Add new complex form",
+        "column.duration": "Dur",
+        "column.fade": "Fade",
+        "title": "Complex Forms"
+      },
       "defense": "Defenses & Resistances",
       "derived": "Derived Values",
       "electronics": "Electronics",
+      "echo": {
+        "add": "Add new echo",
+        "title": "Echoes"
+      },
       "initiative": "Initiative",
       "martialarts": {
         "add": "Add new style",
@@ -393,6 +409,9 @@
         "column.rating": "Lv",
         "title": "Foci"
       },
+      "matrix_base": {
+			"overwatch": "Overwatch"
+		},
       "matrix_devices": {
         "add": "Add new matrix device",
         "column": {

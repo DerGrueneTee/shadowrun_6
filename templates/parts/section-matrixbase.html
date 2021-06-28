@@ -1,4 +1,5 @@
 <div style="display: flex; width:100%">
+	<div>
    {{#if showResonance}}
   	<div class="attributes" style="margin-bottom: 10px; margin-top:0.4rem">
    	<div class="attribute" augmented-ui="b-clip-x exe">
@@ -13,14 +14,15 @@
             <label>{{localize 'shadowrun6.numerical.mod'}}</label>
             <input type="number" data-dtype="Number" name="data.attributes.res.mod" value="{{data.data.attributes.res.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
          </div>
-		</div><br/>
-    	    <div class="edge-roll" style="">
-	         <img src="systems/shadowrun6-eden/images/all-seeing-eye.png" style="border: 0px; height: auto; width: 96px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
-		      <label class="edge-value" >{{data.edge}}</label>
-	       </div>
-		
+		</div>		
    </div>
    {{/if}}
+   {{ localize 'shadowrun6.section.matrix_base.overwatch' }}
+    <div class="edge" style="width: 80px; height:80px">
+		<img src="systems/shadowrun6-eden/images/all-seeing-eye.png" style="border: 0px; height: auto; width: 80px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
+		<input class="edge-value" type="text" data-dtype="Number" name="data.overwatch" value="{{data.data.overwatch}}" />
+    </div>
+   </div>
 		<div class="section" style="width:inherit">
 		<table>
 			<tr>
@@ -40,9 +42,16 @@
 			<tr>
 				<td ><b>{{ localize 'shadowrun6.defense_rating.matrix' }}</b></td>
 				<td class="centered">{{data.data.defenserating.matrix.base}}</td>
-				<td><input class="centered" name="data.defenserating.astral.mod" type="text" value="{{data.data.defenserating.matrix.mod}}" data-dtype="Number"
+				<td><input class="centered" name="data.defenserating.matrix.mod" type="text" value="{{data.data.defenserating.matrix.mod}}" data-dtype="Number"
 				style="width: 2em"></td>
 				<td class="centered" title="{{data.data.defenserating.matrix.modString}}">{{data.data.defenserating.matrix.pool}}</td>
+			</tr>
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.derived.matrix_perception' }}</b></td>
+				<td class="centered">{{data.data.derived.matrix_perception.base}}</td>
+				<td><input class="centered" name="data.derived.matrix_perception.mod" type="text" value="{{data.data.derived.matrix_perception.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.derived.matrix_perception.modString}}">{{data.data.derived.matrix_perception.pool}}</td>
 			</tr>
 		</table>
 		</div>
