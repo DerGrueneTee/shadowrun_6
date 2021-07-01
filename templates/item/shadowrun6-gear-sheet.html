@@ -2,7 +2,8 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
         <h2><input type="text" value="{{item.name}}" name="name" /></h2>
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92" style="background-color: var(--highlight-color)"/>
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92"
+            style="background-color: var(--highlight-color)" />
         <div class="section">
             <table>
                 <tr>
@@ -16,30 +17,32 @@
                 </tr>
                 <tr>
                     <td>
-                        <select name="data.type" data-field="data.type">
+                        <select name="data.type" data-field="data.type" class="typeselect">
                             {{#select item.data.data.type}}
                             {{#each config.GEAR_TYPES as |type id|}}
-                            <option value="{{@type}}" name=data.type>{{localize (concat "shadowrun6.itemtype." type)}}</option>
+                            <option value="{{@type}}" name=data.type>{{localize (concat "shadowrun6.itemtype." type)}}
+                            </option>
                             {{/each}}
                             {{/select}}
                         </select>
                     </td>
-                    <td><select name="data.subtype" data-field="data.subtype">
+                    <td><select name="data.subtype" data-field="data.subtype" class="subtypeselect">
                             {{#select item.data.data.subtype}}
-                            <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
-                            <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
-                            <option value="n.a.">n.a</option>
-                            <!-- {{/each}} -->
+                            <option value=""></option>
+                            {{#each (gearSubtype data.data.type) as |subtype id|}}>
+                            <option value="{{@subtype}}">{{localize (concat "shadowrun6.gear.subtype." subtype)}}
+                            </option>
+                            {{/each}}
                             {{/select}}
                         </select></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.countable}}
                             name="data.countable" name="data.countable" /></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.needsRating}}
                             name="data.needsRating" name="data.needsRating" /></td>
-                    <td><input type="text" value="{{item.data.data.availDef}}" name="data.availDef"
-                            class="box centered" style="width: 2em" /></td>
-                    <td><input type="text" value="{{item.data.data.priceDef}}" name="data.priceDef"
-                            class="box centered" style="width: 3em" /></td>
+                    <td><input type="text" value="{{item.data.data.availDef}}" name="data.availDef" class="box centered"
+                            style="width: 2em" /></td>
+                    <td><input type="text" value="{{item.data.data.priceDef}}" name="data.priceDef" class="box centered"
+                            style="width: 3em" /></td>
                 </tr>
             </table>
             <!-- ********** WAFFEN ********** -->
@@ -129,9 +132,8 @@
                     <td><input type="number" value="{{item.data.data.social}}" name="data.social"
                             class="box centered" />
                     </td>
-                    <td><input
-                        style="vertical-align: middle;" type="checkbox" {{checked item.data.data.natural}}
-                        name="data.natural" name="data.natural" /></td>
+                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.natural}}
+                            name="data.natural" name="data.natural" /></td>
                 </tr>
             </table>
             {{/if}}
@@ -150,20 +152,60 @@
                     <th>{{localize 'shadowrun6.item.capacity'}}</th>
                 </tr>
                 <tr>
-                    <td> <input type="number" value="{{item.data.data.essence}}" name="data.essence"
-                            id="ware_essence" class="box centered" /></td>
-                    <td> <input type="number" value="{{item.data.data.capacity}}" name="data.capacity"
-                            id="ware_cap" class="box centered" /></td>
+                    <td> <input type="number" value="{{item.data.data.essence}}" name="data.essence" id="ware_essence"
+                            class="box centered" /></td>
+                    <td> <input type="number" value="{{item.data.data.capacity}}" name="data.capacity" id="ware_cap"
+                            class="box centered" /></td>
+                </tr>
+            </table>
+            {{/if}}
+            {{#if (eq item.data.data.subtype "COMMLINK")}}
+            <table>
+                <tr>
+                    <th>{{localize 'shadowrun6.label.devRating'}}</th>
+                    <th>{{localize 'shadowrun6.label.progSlots'}}</th>
+                    <th>{{localize 'shadowrun6.label.dataproc.short'}}</th>
+                    <th>{{localize 'shadowrun6.label.firewall.short'}}</th>
+                </tr>
+                <tr>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.devRating}}" name="data.devRating"
+                            class="box centered" style="width:2em"/></td>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.progSlots}}" name="data.progSlots"
+                            class="box centered" style="width:2em"/></td>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.d}}" name="data.d"
+                            class="box centered" style="width:2em"/></td>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.f}}" name="data.f"
+                            class="box centered" style="width:2em"/></td>
+                </tr>
+            </table>
+            {{/if}}
+            {{#if (eq item.data.data.subtype "CYBERDECK")}}
+            <table>
+                <tr>
+                    <th>{{localize 'shadowrun6.label.devRating'}}</th>
+                    <th>{{localize 'shadowrun6.label.progSlots'}}</th>
+                    <th>{{localize 'shadowrun6.label.attack.short'}}</th>
+                    <th>{{localize 'shadowrun6.label.stealth.short'}}</th>
+                </tr>
+                <tr>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.devRating}}" name="data.devRating"
+                            class="box centered" style="width:2em"/></td>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.progSlots}}" name="data.progSlots"
+                            class="box centered" style="width:2em"/></td>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.a}}" name="data.a"
+                            class="box centered" style="width:2em"/></td>
+                    <td class="box centered"> <input type="number" value="{{item.data.data.s}}" name="data.s"
+                            class="box centered" style="width:2em"/></td>
                 </tr>
             </table>
             {{/if}}
             <h3>{{localize 'shadowrun6.item.accessories'}}</h3>
-            <textarea class="box" type="text" name="data.accessories"
-                cols="20" rows="4">{{item.data.data.accessories}}</textarea>
+            <textarea class="box" type="text" name="data.accessories" cols="20"
+                rows="4">{{item.data.data.accessories}}</textarea>
             <!-- ********** Beschreibung ********** -->
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
-            <textarea class="box" type="text"  name="data.description"
-                cols="20" rows="6">{{item.data.data.description}}</textarea>
+            <textarea class="box" type="text" name="data.description" cols="20"
+                rows="6">{{item.data.data.description}}</textarea>
         </div>
     </section>
 </form>

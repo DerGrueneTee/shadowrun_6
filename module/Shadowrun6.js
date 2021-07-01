@@ -66,6 +66,7 @@ Hooks.once("init", async function () {
     return op1 + op2 + op3;
   });
   Handlebars.registerHelper('skillAttr', getSkillAttribute);
+  Handlebars.registerHelper('gearSubtype', getSubtypes);
   Handlebars.registerHelper('ritualFeat', getRitualFeatures);
   Handlebars.registerHelper('spellFeat', getSpellFeatures);
   Handlebars.registerHelper('ifIn', function (elem, list, options) {
@@ -331,6 +332,16 @@ function getSkillAttribute(key) {
     return "??";
   }
 };
+
+function getSubtypes(key) {
+  if (CONFIG.SR6.GEAR_SUBTYPES.get(key)) {
+    const myElem = CONFIG.SR6.GEAR_SUBTYPES.get(key);
+    return myElem;
+  } else {
+    return [];
+  }
+};
+
 function getRitualFeatures(ritual) {
   let ret = [];
   if (ritual.features.material_link) ret.push(game.i18n.localize("shadowrun6.ritualfeatures.material_link"));
