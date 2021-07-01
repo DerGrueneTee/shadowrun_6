@@ -6,15 +6,20 @@
 		<div class="header-fields">
 			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
 			{{!-- Character Summary --}}
-			<div class="description">
+			<div class="description" style="width: 80%">
 				<input class="autoexpand" name="data.metatype" type="text" value="{{data.data.metatype}}"
 					placeholder="{{localize 'shadowrun6.metatype'}}" />
 				&nbsp;&middot;&nbsp;
 				<input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
 					placeholder="{{localize 'shadowrun6.gender'}}" />
 				&nbsp;&middot;&nbsp;
-				<input class="autoexpand" name="data.mortype" type="text" value="{{data.data.mortype}}"
-					placeholder="{{localize 'shadowrun6.mortype'}}" />
+            <select name="data.mortype" data-field="data.data.mortype" style="background: rgba(255,255,255,0.25); border: 0px">
+            {{#select data.data.mortype}}
+            {{#each config.MOR_TYPES as |type id|}}
+            	<option value="{{@type}}" name=data.mortype>{{localize (concat "shadowrun6.mortype." type)}}</option>
+            {{/each}}
+            {{/select}}
+            </select>
 			</div>
 			<div style="display:flex; flex-direction:row; align-items:center;">
 			{{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
