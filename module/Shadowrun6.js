@@ -85,7 +85,7 @@ Hooks.once("init", async function () {
   });
 
   function onCreateItem(item, options, userId) {
-    console.log("onCreateItem");
+    console.log("onCreateItem  "+item.data.type);
     let createData = item.data;
     if (createData.img == "icons/svg/item-bag.svg" && CONFIG.SR6.icons[createData.type]) {
       createData.img = CONFIG.SR6.icons[createData.type].default;

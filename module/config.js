@@ -38,6 +38,24 @@ SR6.GEAR_SUBTYPES = new Map([
 
 SR6.SKILLS_WEAPON = ["firearms", "close_combat", "exotic_weapons", "athletics"];
 
+class MagicOrResonanceDefinition {
+	constructor(magic=false, resonance=false, useSpells=false,usePowers=false) {
+		this.magic = magic;
+		this.resonance = resonance;
+		this.useSpells = useSpells;
+		this.usePowers = usePowers;
+	}
+}
+SR6.MOR_TYPES = ["mundane","magician","mysticadept","technomancer","adept","aspectedmagician"];
+SR6.MOR_DEFINITIONS = {
+	"mundane"     : new MagicOrResonanceDefinition(),
+	"magician"    : new MagicOrResonanceDefinition(true,false,true,false),
+	"mysticadept" : new MagicOrResonanceDefinition(true,false,true,true),
+	"technomancer": new MagicOrResonanceDefinition(false,true,false,false),
+	"adept"       : new MagicOrResonanceDefinition(true,false,false,true),
+	"aspectedmagician": new MagicOrResonanceDefinition(true,false,true,false)
+};
+
 class SkillDefinition {
 	constructor(attribute, useUntrained) {
 		this.attrib = attribute;

@@ -433,6 +433,14 @@
       "physical": "Physical",
       "stun": "Stun"
     },
+	"mortype": {
+		"adept": "Adept",
+		"aspectedmagician": "Aspected Magician",
+		"magician": "Magician",
+		"mundane": "Mundane",
+		"mysticadept": "Mystic Adept",
+		"technomancer": "Technomancer"
+	},
     "newitem": {
       "adeptpower": "Name your power",
       "ammunition": "Hot stuff ammo",
@@ -445,6 +453,7 @@
       "focus": "Something to stay focussed",
       "martialartstyle": "What's your style?",
       "martialarttech": "Technique, which technique?",
+		"matrix": "Check out my deck!",
       "metamagic": "What have you learned?",
       "quality": "What is your feat?",
       "ritual": "Singing Hallelujah",

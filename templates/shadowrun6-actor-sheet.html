@@ -13,7 +13,7 @@
 				<input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
 					placeholder="{{localize 'shadowrun6.gender'}}" />
 				&nbsp;&middot;&nbsp;
-            <select name="data.mortype" data-field="data.data.mortype" style="background: rgba(255,255,255,0.25); border: 0px">
+            <select name="data.mortype" data-field="data.mortype" style="background: rgba(255,255,255,0.25); border: 0px">
             {{#select data.data.mortype}}
             {{#each config.MOR_TYPES as |type id|}}
             	<option value="{{@type}}" name=data.mortype>{{localize (concat "shadowrun6.mortype." type)}}</option>
@@ -33,7 +33,11 @@
 		<a class="item" data-tab="basics">{{ localize 'shadowrun6.actor.nav.basics' }}</a>
 		<a class="item" data-tab="skills">{{ localize 'shadowrun6.actor.nav.skills' }}</a>
 		<a class="item" data-tab="combat">{{ localize 'shadowrun6.actor.nav.combat' }}</a>
+		{{#with (lookup config.MOR_DEFINITIONS data.data.mortype)}}
+		{{#if magic}}
 		<a class="item" data-tab="magic" >{{ localize 'shadowrun6.actor.nav.magic'  }}</a>
+		{{/if}}
+		{{/with}}
 		<a class="item" data-tab="matrix">{{ localize 'shadowrun6.actor.nav.matrix' }}</a>
 		<a class="item" data-tab="equip" >{{ localize 'shadowrun6.actor.nav.equip'  }}</a>
 		<!--a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>

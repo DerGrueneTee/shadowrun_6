@@ -28,6 +28,10 @@ export class Shadowrun6Actor extends Actor {
 				"attribute": "log"
 			};
 		}
+		
+		if (data.mortype) {
+			data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+		}
 	}
 
 	//---------------------------------------------------------
