@@ -115,6 +115,18 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
+			html.find('.matrix-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.matrix"),
+					type: "gear",
+					data: {
+						genesisID: this._create_UUID(),
+						type: "ELECTRONICS",
+						subtype: "COMMLINK"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.item-edit').click(ev => {
 				const element = ev.currentTarget.closest(".item");
 				const item = this.actor.items.get(element.dataset.itemId);
@@ -130,8 +142,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				let value = element.value;
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const field = element.dataset.field;
-				console.log("Update field " + field + " with " + value);
-				this.actor.items.get(itemId).update({ [field]: value });
+				if (itemId) {
+//					console.log("Update item field " + field + " with " + value);
+					this.actor.items.get(itemId).update({ [field]: value });
+				} else {
+//					console.log("Update actor field " + field + " with " + value);
+					this.actor.update({ [field]: value });
+				} 
 			});
 			html.find('[data-check]').click(event => {
 				const element = event.currentTarget;
@@ -260,8 +277,10 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const pool = event.currentTarget.dataset.pool;
 		let classList = event.currentTarget.classList;
 		let title;
-		if (classList.contains("defense-roll") || classList.contains("attributeonly-roll")) {
+		if (classList.contains("defense-roll") ) {
 			title = game.i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
+		} else if (classList.contains("attributeonly-roll")) {
+			title = game.i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
 		} else {
 			title = game.i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
 		}
