@@ -43,5 +43,5 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 ## The future ##
 Progess is rather slow, since Genesis and other projects keeps me busy. But I intend to keep adding functionality, until you can at least completely see everything you have in your Genesis character. 
 
-![Screenshot](screenshots/Screen_2021-05-04.jpg)
-
+![Screenshot](screenshots/Screen_2021-06a.jpg)
+![Screenshot](screenshots/Screen_2021-06b.jpg)
