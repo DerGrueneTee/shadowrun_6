@@ -1,0 +1,25 @@
+<div class="section" style="display: inline-block; width:100%">
+	<div class="section-head">
+		<h2 class="section-title">{{ localize 'shadowrun6.section.matrix_combat.title' }}</h2>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th style="padding: 0 0px 0 5px; width: 1em">{{ localize 'shadowrun6.label.action' }}</th>
+				<th style="padding: 0 0px 0 5px; width: 1em">{{ localize 'shadowrun6.label.damage_short' }}</th>
+				<th style="padding: 0 0px 0 0px; width: 1em">{{ localize 'shadowrun6.label.attack_rating_short' }}</th>
+				<th style="padding: 0 0px 0 0px; "></th>
+				<th style="padding: 0 5px 0 0px; width: 3.5rem"></th>
+			</tr>
+		</thead>
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       	<td><label class="item-name" data-matrix-action="dataspike">{{localize 'shadowrun6.matrixaction.dataspike'}}</label></td>
+         <td><label class="middle-column important-column">{{data.data.persona.damage}}</label></td>
+         <td><label class="middle-column important-column">{{data.data.attackrating.matrix.pool}}</label></td>
+         <td class="skill-pool" style="width: 3em">
+         	<label class="item-pool" data-skill="{{data.data.persona.attackPool}}">{{data.data.persona.attackPool}}</label>
+         	<a class="item-control matrix-roll" data-item-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         </td>
+       </tr>
+	</table>
+</div>

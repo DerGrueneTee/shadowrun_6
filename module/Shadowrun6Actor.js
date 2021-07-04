@@ -15,12 +15,13 @@ export class Shadowrun6Actor extends Actor {
 		const data = this.data.data;
 		this._prepareAttributes();
 		this._prepareDerivedAttributes();
+		this._preparePersona();
 		this._prepareAttackRatings();
 		this._prepareDefenseRatings();
 		this._prepareSkills();
 		this._prepareDefensePools();
 		this._prepareItemPools();
-		this._calculateEssense();
+		this._calculateEssence();
 		
 		if (!data.tradition) {
 			data.tradition = {
@@ -184,7 +185,7 @@ export class Shadowrun6Actor extends Actor {
 		} 
 		
 		// Matrix attack rating (Angriff + Schleicher)
-		data.attackrating.matrix.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
+		data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
 		data.attackrating.matrix.pool = data.attackrating.matrix.base;
 		if (data.attackrating.matrix.mod) {
 			data.attackrating.matrix.pool += data.attackrating.matrix.mod;
@@ -263,6 +264,15 @@ export class Shadowrun6Actor extends Actor {
 			if (data.defenserating.astral.mod) {
 				data.defenserating.astral.pool += data.defenserating.astral.mod;
 				data.defenserating.astral.modString += "\n+" + data.defenserating.astral.mod;
+			} 
+			
+			// Matrix defense
+			data.defenserating.matrix.base = data.persona.used.d + data.persona.used.f;
+			data.defenserating.matrix.modString = ""; //game.i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.matrix.pool = data.defenserating.matrix.base;
+			if (data.defenserating.matrix.mod) {
+				data.defenserating.matrix.pool += data.defenserating.matrix.mod;
+				data.defenserating.matrix.modString += "\n+" + data.defenserating.matrix.mod;
 			} 
 			
 			// Vehicles Defense Rating (Pilot + Armor)
@@ -451,12 +461,84 @@ export class Shadowrun6Actor extends Actor {
 			};
 		});
 	}
+	
+	//---------------------------------------------------------
+	/*
+	 * 
+	 */
+	_preparePersona() {
+		const actorData = this.data.data;
+
+		if (!actorData.persona            ) actorData.persona = {};
+		if (!actorData.persona.device     ) actorData.persona.device = {};
+		if (!actorData.persona.device.base) actorData.persona.device.base = { "a":0, "s":0, "d":0, "f":0};
+		if (!actorData.persona.device.mod ) actorData.persona.device.mod  = { "a":0, "s":0, "d":0, "f":0};
+		if (!actorData.persona.device.monitor) actorData.persona.device.monitor = {};
+		delete actorData.persona.device.monitor.max;
+		
+		this.data.items.forEach(tmpItem => {
+			let item = tmpItem.data.data;
+			if (tmpItem.type == "gear" && item.type=="ELECTRONICS") {
+				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK") {
+					if (item.usedForPool) {
+						actorData.persona.device.base.d = item.d;
+						actorData.persona.device.base.f = item.f;
+						if (! actorData.persona.device.monitor.max) {
+							actorData.persona.device.monitor.max = ((item.subtype == "COMMLINK")?item.devRating:item.rating)/2 +8;							
+						}
+					}
+				};
+				if (item.subtype == "CYBERDECK") {
+					if (item.usedForPool) {
+						actorData.persona.device.base.a = item.a;
+						actorData.persona.device.base.s = item.s;
+						actorData.persona.device.monitor.max =item.devRating/2 +8;		
+					}
+				};
+			}			
+		});
+		
+		if (!actorData.persona.used     ) actorData.persona.used = {};
+		actorData.persona.used.a = actorData.persona.device.mod.a;
+		actorData.persona.used.s = actorData.persona.device.mod.s;
+		actorData.persona.used.d = actorData.persona.device.mod.d;
+		actorData.persona.used.f = actorData.persona.device.mod.f;
+		
+		
+		// Living persona
+		if (actorData.mortype=="technomancer") {
+			if (!actorData.persona.living     ) actorData.persona.living = {};
+			if (!actorData.persona.living.base) actorData.persona.living.base = {};
+			actorData.persona.living.base.a = actorData.attributes["cha"].pool;
+			actorData.persona.living.base.s = actorData.attributes["int"].pool;
+			actorData.persona.living.base.d = actorData.attributes["log"].pool;
+			actorData.persona.living.base.f = actorData.attributes["wil"].pool;
+			actorData.persona.living.devRating = actorData.attributes["res"].pool;
+			// Initiative: Data processing + Intuition
+			actorData.persona.initative = {};
+			actorData.persona.initative.base = actorData.persona.living.base.d + actorData.attributes["int"].pool
+
+			actorData.persona.used.a = actorData.persona.living.base.a + actorData.persona.living.mod.a;
+			actorData.persona.used.s = actorData.persona.living.base.s + actorData.persona.living.mod.s;
+			actorData.persona.used.d = actorData.persona.living.base.d + actorData.persona.living.mod.d;
+			actorData.persona.used.f = actorData.persona.living.base.f + actorData.persona.living.mod.f;
+		}
+		
+		// Attack pool
+		actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
+		if (actorData.skills.expertise=="cybercombat") { actorData.persona.attackPool+=3} else
+		if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
+		actorData.persona.attackPool += actorData.attributes["log"].pool;
+		
+		// Damage
+		actorData.persona.damage = Math.ceil(actorData.persona.used.a/2);
+	}
 
 	//---------------------------------------------------------
 	/*
 	 * Calculate the attributes like Initiative
 	 */
-	_calculateEssense() {
+	_calculateEssence() {
 		const actorData = this.data;
 		const data = this.data.data;
 		

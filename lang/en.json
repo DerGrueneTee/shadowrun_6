@@ -321,9 +321,12 @@
       }
     },
     "initiative": {
-      "astral": "Astral Initiative",
+      "astral": "Astral",
       "matrix": "Matrix-Initiative",
-      "physical": "Initiative"
+      "physical": "Regular",
+      "matrix_ar": "Matrix AR",
+      "matrix_cold": "Matrix VR",
+      "matrix_hot": "Matrix VR (hot)"
     },
     "item": {
       "accessories": "Accessories",
@@ -389,7 +392,9 @@
     "label": {
       "accessories": "Accessories",
       "adepts": "Adepts",
+		"action": "Action",
       "attack_rating": "Attack Rating",
+      "attack_rating_short": "AR",
       "attribute": "Attribute",
       "base": "Base",
       "column": {
@@ -402,8 +407,10 @@
       "stealth.short": "S",
       "dataproc.short": "D",
       "firewall.short": "F",
+      "devicerating.short": "DR",
       "d6": "D6",
       "damage": "Damage",
+      "damage_short": "Dmg",
       "defense_rating": "Defense Rating",
       "delete": "Delete",
       "devRating" : "Device rtg.",
@@ -429,6 +436,9 @@
       "value": "Value",
       "wilddie": "Wild Die"
     },
+	"matrixaction": {
+		"dataspike": "Dataspike"
+	},
     "monitor": {
       "physical": "Physical",
       "stun": "Stun"
@@ -608,6 +618,9 @@
       "matrix_base": {
         "overwatch": "Overwatch"
       },
+      "matrix_combat": {
+        "title": "Matrixcombat"
+      },
       "matrix_devices": {
         "add": "Add new matrix device",
         "column": {
@@ -620,6 +633,10 @@
       "metamagic": {
         "add": "Add new metamagic",
         "title": "Metamagics"
+      },
+      "persona": {
+			"distribute": "Distribute",
+        "title": "Persona"
       },
       "qualities": "Qualities",
       "qualities_add": "Add",

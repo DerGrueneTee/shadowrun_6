@@ -25,7 +25,44 @@
 		<input class="edge-value" type="text" data-dtype="Number" name="data.overwatch" value="{{data.data.overwatch}}" />
     </div>
    </div>
-		<div class="section" style="width:inherit">
+		<div class="section" style="width:inherit; margin-right: -5px">
+	<table>
+		<thead>
+			<tr>
+				<th style="padding: 0 0px 0 5px; width: 1em">{{ localize 'shadowrun6.section.persona.distribute' }}</th>
+				<th style="padding: 0 0px 0 5px; width: 1em">{{ localize 'shadowrun6.label.attack.short' }}</th>
+				<th style="padding: 0 0px 0 0px; width: 1em">{{ localize 'shadowrun6.label.stealth.short' }}</th>
+				<th style="padding: 0 0px 0 0px; width: 1em">{{ localize 'shadowrun6.label.dataproc.short' }}</th>
+				<th style="padding: 0 5px 0 0px; width: 1em">{{ localize 'shadowrun6.label.firewall.short' }}</th>
+			</tr>
+		</thead>
+		<tbody>
+     <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+		   {{#if data.data.morDef.resonance}}   
+          <td class="centered">{{data.data.persona.living.devRating}} ==&gt;</td>
+         <td class="centered">{{data.data.persona.living.base.a}}+<input class="box" name="data.persona.living.mod.a" type="text" value="{{data.data.persona.living.mod.a}}" data-dtype="Number"
+				style="width: 1.5em" ></td>
+         <td class="centered">{{data.data.persona.living.base.s}}+<input class="box" name="data.persona.living.mod.s" type="text" value="{{data.data.persona.living.mod.s}}" data-dtype="Number"
+				style="width: 1.5em" ></td>
+         <td class="centered">{{data.data.persona.living.base.d}}+<input class="box" name="data.persona.living.mod.d" type="text" value="{{data.data.persona.living.mod.d}}" data-dtype="Number"
+				style="width: 1.5em" ></td>
+         <td class="centered">{{data.data.persona.living.base.f}}+<input class="box" name="data.persona.living.mod.f" type="text" value="{{data.data.persona.living.mod.f}}" data-dtype="Number"
+				style="width: 1.5em" ></td>
+        {{else}}
+         <td class="centered">{{data.data.persona.device.base.a}},{{data.data.persona.device.base.s}},{{data.data.persona.device.base.d}},{{data.data.persona.device.base.f}} ==&gt;</td>
+         <td class="centered"><input class="box" name="data.persona.device.mod.a" type="text" value="{{data.data.persona.device.mod.a}}" data-dtype="Number"
+				style="width: 2em" ></td>
+         <td class="centered"><input class="box" name="data.persona.device.mod.s" type="text" value="{{data.data.persona.device.mod.s}}" data-dtype="Number"
+				style="width: 2em" ></td>
+         <td class="centered"><input class="box" name="data.persona.device.mod.d" type="text" value="{{data.data.persona.device.mod.d}}" data-dtype="Number"
+				style="width: 2em" ></td>
+         <td class="centered"><input class="box" name="data.persona.device.mod.f" type="text" value="{{data.data.persona.device.mod.f}}" data-dtype="Number"
+				style="width: 2em" ></td>
+    {{/if}}
+      </tr>
+		
+		</tbody>
+	</table>
 		<table>
 			<tr>
 				<th style="padding: 0 5px 0 5px;">{{ localize 'shadowrun6.label.attribute' }}</th>
