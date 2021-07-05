@@ -347,10 +347,12 @@
       "mode_sa": "HM",
       "mode_ss": "EM",
       "natural": "Nat. Panzerung",
+      "physical_damage" : "K",
       "price": "Preis",
       "skill": "Fertigkeit",
       "skillspec": "Spezialisierung",
       "social": "Sozial",
+      "stun_damage" : "B",
       "subtype": "Unterart",
       "type": "Art"
     },

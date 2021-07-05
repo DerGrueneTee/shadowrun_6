@@ -360,10 +360,12 @@
       "mode_sa": "SA",
       "mode_ss": "SS",
       "natural": "Nat. armor",
+      "physical_damage" : "P",
       "price": "Price",
       "skill": "Skill",
       "skillspec": "Specialisation",
       "social": "Social",
+      "stun_damage": "S",
       "subtype": "Subtype",
       "type": "Type"
     },
