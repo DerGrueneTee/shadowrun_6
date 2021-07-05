@@ -393,6 +393,10 @@
       "accessories": "Accessories",
       "adepts": "Adepts",
 		"action": "Action",
+		"actionduration": {
+			"minor.short": "Mi",
+			"major.short": "Ma"
+		},
       "attack_rating": "Attack Rating",
       "attack_rating_short": "AR",
       "attribute": "Attribute",
@@ -420,6 +424,8 @@
       "features": "Features",
       "firemode_current": "Current Firemode",
       "firemodes": "Firemodes",
+		"legality.illegal.short": "I",
+		"legality.legal.short": "L",
       "level": "Has levels",
       "mages": "Mages",
       "max": "Maximum",
@@ -437,7 +443,38 @@
       "wilddie": "Wild Die"
     },
 	"matrixaction": {
-		"dataspike": "Dataspike"
+		"backdoor_entry": "Backdoor Entry",
+		"brute_force": "Brute Force",
+		"change_icon": "Change Icon",
+		"check_os": "Check OS",
+		"control_device": "Control Device",
+		"crack_file": "Crack File",
+		"crash_program": "Crash Program",
+		"data_spike": "Dataspike",
+		"disarm_data_bomb": "Disarm Data Bomb",
+		"edit_file": "Edit File",
+		"encrypt_file": "Encrypt File",
+		"enter_host": "Enter Host",
+		"erase_matrix_signature": "Erase Matrix Signature",
+		"format_device": "Format Device",
+		"full_matrix_defense": "Full Matrix Defense",
+		"hash_check": "Hash Check",
+		"hide": "Hide",
+		"jack_out": "Jack Out",
+		"jam_signals": "Jam Signals",
+		"jump_rigged": "Jump Into Rigged Device",
+		"matrix_perception": "Matrix Perception",
+		"matrix_search": "Matrix Search",
+		"probe": "Probe",
+		"reboot_device": "Reboot Device",
+		"reconfigure": "Reconfigure Matrix Attribute",
+		"send_message": "Send Message",
+		"set_data_bomb": "Set Data Bomb",
+		"snoop": "Snoop",
+		"spoof_command": "Spoof Command",
+		"switch_ifmode": "Switch Interface Mode",
+		"tarpit": "Tarpit",
+		"trace_icon": "Trace Icon"
 	},
     "monitor": {
       "physical": "Physical",
@@ -617,6 +654,9 @@
       },
       "matrix_base": {
         "overwatch": "Overwatch"
+      },
+      "matrix_actions": {
+        "title": "Matrix Actions"
       },
       "matrix_combat": {
         "title": "Matrixcombat"

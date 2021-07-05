@@ -69,6 +69,7 @@ Hooks.once("init", async function () {
   Handlebars.registerHelper('gearSubtype', getSubtypes);
   Handlebars.registerHelper('ritualFeat', getRitualFeatures);
   Handlebars.registerHelper('spellFeat', getSpellFeatures);
+  Handlebars.registerHelper('matrixPool', getMatrixActionPool);
   Handlebars.registerHelper('ifIn', function (elem, list, options) {
     if (list.indexOf(elem) > -1) {
       return options.fn(this);
@@ -361,6 +362,25 @@ function getSpellFeatures(spell) {
     if (spell.features.sense_multi) ret.push(game.i18n.localize("shadowrun6.spellfeatures.sense_multi"));
   }
   return ret.join(", ");
+};
+
+function getMatrixActionPool(key, actor) {
+	const action = CONFIG.SR6.MATRIX_ACTIONS[key];
+	const skill  = actor.data.data.skills[action.skill];
+	let pool = 0;
+	if (skill) {
+		pool = skill.pool;	
+		if (skill.expertise==action.specialization) {
+			pool+=3;
+		} else if (skill.specialization==action.specialization) {
+			pool+=2;
+		}
+	}
+	if (action.attrib) {
+		const attrib = actor.data.data.attributes[action.attrib];
+		pool += attrib.pool;
+	}
+	return pool;
 };
 
 $.fn.closestData = function (dataName, defaultValue = "") {

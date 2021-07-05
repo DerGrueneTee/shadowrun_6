@@ -320,27 +320,53 @@ SR6.skill_special = {
 };
 
 class MatrixAction {
-	constructor(id, skill, spec, illegal,major, outsider,user,admin, attr1, attr2, threshold=0) {
+	constructor(id, skill,spec,attrib, illegal,major, outsider,user,admin, attr1, attr2, threshold=0) {
 		this.id = id;
+		this.skill   = skill;
+		this.spec    = spec;
+		this.attrib  = attrib;
 		this.illegal = illegal;
 		this.major   = major;
 		this.outsider= outsider;
 		this.user    = user;
 		this.admin   = admin;
-		this.opposed = false;
+		this.opposedAttr1 = attr1;
+		this.opposedAttr2 = attr2;
 		this.threshold = threshold;
 	}
 }
 SR6.MATRIX_ACTIONS = {
-	"backdoor_entry": new MatrixAction("backdoor_entry", "cracking","hacking"    , true, true,   true, false, false, "wil", "f"),
-	"brute_force"   : new MatrixAction("brute_force"   , "cracking","cybercombat", true, true,   true, true , true , "wil", "f"),
-	"change_icon"   : new MatrixAction("change_icon"   , null      , null        , false,false,  false, true, true , null,null, -1),
-	"check_os"      : new MatrixAction("check_os"      , "cracking", "electronic_warfare", true , true,  false, false, true, null,null,4),
-	"control_device": new MatrixAction("control_device", "cracking", "electronic_warfare", false, true,  false, true, true , "wil", "f"),
-	"crack_file"    : new MatrixAction("crack_file"    , "cracking","hacking"    , false, true,  false, true, true , null,null,99),
-	"crash_program" : new MatrixAction("crash_program" , "cracking","cybercombat", false, true,  false, false, true, "d", "dr"),
-	"data_spike"    : new MatrixAction("data_spike"    , "cracking","cybercombat", false, true,  false, true, true , "d", "f"),
-	"disarm_data_bomb": new MatrixAction("disarm_data_bomb", "electronics","software", false, true,  false, true, true , "dr", "dr"),
-	"edit_file"     : new MatrixAction("edit_file"     , "electronics","computer", false, true,  false, true, true , "int", "f"),
+	"backdoor_entry": new MatrixAction("backdoor_entry"  , "cracking"   ,"hacking"    , "log", true, true,   true, false, false, "wil", "f"),
+	"brute_force"   : new MatrixAction("brute_force"     , "cracking"   ,"cybercombat", "log", true, true,   true, true , true , "wil", "f"),
+	"change_icon"   : new MatrixAction("change_icon"     , null         , null        , null, false,false,  false, true, true , null,null, -1),
+	"check_os"      : new MatrixAction("check_os"        , "cracking"   , "electronic_warfare", "log", true , true,  false, false, true, null,null,4),
+	"control_device": new MatrixAction("control_device"  , "electronics", "software"  , "log", false, true,  false, true, true , "wil", "f"),
+	"crack_file"    : new MatrixAction("crack_file"      , "cracking"   ,"hacking"    , "log", true , true,  false, true, true , null,null,99),
+	"crash_program" : new MatrixAction("crash_program"   , "cracking"   ,"cybercombat", "log", true , true,  false, false, true, "d", "dr"),
+	"data_spike"    : new MatrixAction("data_spike"      , "cracking"   ,"cybercombat", "log", true , true,  false, true, true , "d", "f"),
+ "disarm_data_bomb": new MatrixAction("disarm_data_bomb", "electronics","software"   , "log", false, true,  false, true, true , "dr", "dr"),
+	"edit_file"     : new MatrixAction("edit_file"       , "electronics","computer"   , "log", false, true,  false, true, true , "int", "f"),
+	"encrypt_file"  : new MatrixAction("encrypt_file"    , "electronics","computer"   , "log", false, true,  false, true, true , null, null),
+	"enter_host"    : new MatrixAction("enter_host"      , null         ,null         , "log", false, true,  true , true, true , null, null),
+ "erase_matrix_signature": new MatrixAction("erase_matrix_signature", "electronics","computer", "log", true, true,  false, true, true , "wil", "f"),
+	"format_device" : new MatrixAction("format_device"   , "electronics","computer"   , "log", true , true,  false, false, true , "wil", "f"),
+	"full_matrix_defense": new MatrixAction("full_matrix_defense", null ,null         , "log", false, true,  true , true, true , null, null),
+	"hash_check"    : new MatrixAction("hash_check"      , "cracking"   ,"hacking"    , "log", true , true,  false, true, false ,null, null),
+	"hide"          : new MatrixAction("hide"            , "cracking","electronic_warfare","int", true , true,  true, true, false ,"int", "d"),
+	"jack_out"      : new MatrixAction("jack_out"        , "electronics","software"   , "wil", false, true,  true , true, true , "cha", "d"),
+	"jam_signals"   : new MatrixAction("jam_signals"     , "cracking"   ,"electronic_warfare"  , "log", true , true,  false, false, true , null,null),
+	"jump_rigged"   : new MatrixAction("jump_rigged"     , "electronics","software"   , "log", false , true,  false, true , true , "wil","f"),
+"matrix_perception": new MatrixAction("matrix_perception","electronics","computer"   , "int", false , true,  false, true , true , "wil","s"),
+	"matrix_search" : new MatrixAction("matrix_search"   , "electronics","computer"   , "int", false , true,  true , true , true , null,null),
+	"probe"         : new MatrixAction("probe"           , "cracking"   ,"hacking"    , "log", true  , true,  true , true, false ,"wil", "f"),
+	"reboot_device" : new MatrixAction("reboot_device"   , "electronics","software"   , "log", false , true,  false, false, true , "log","wil"),
+	"reconfigure"   : new MatrixAction("reconfigure"     , null         ,null         , null , false , false, false, false, true , null,null),
+	"send_message"  : new MatrixAction("send_message"    , null         ,null         , null , false , false, false, false, true , null,null),
+	"set_data_bomb" : new MatrixAction("set_data_bomb"   , "electronics","software"   , "log", true  , true,  false, false, true ,"dr", "dr"),
+	"snoop"         : new MatrixAction("snoop"           , "cracking"   ,"electronic_warfare", "log", true, true,  true , true, true ,"d", "f"),
+	"spoof_command" : new MatrixAction("spoof_command"   , "cracking"   ,"hacking"    , "log", true, true,  true , true, true ,"d", "f"),
+	"switch_ifmode" : new MatrixAction("switch_ifmode"   , null         ,null         , null , false , false, false, false, true , null,null),
+	"tarpit"        : new MatrixAction("tarpit"          , "cracking"   ,"cybercombat", "log", true , true,  false, true, true , "d", "f"),
+	"trace_icon"    : new MatrixAction("trace_icon"      , "electronics","software"   , "int", true , true,  false , false , true , "wil","s"),
 };
 

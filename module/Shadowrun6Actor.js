@@ -891,6 +891,37 @@ export class Shadowrun6Actor extends Actor {
 		}
 	}
 
+	//---------------------------------------------------------
+	/**
+	 */
+	performMatrixAction(action, actionId, options={}) {
+		console.log("performMatrixAction("+action+")");
+		// Prepare action text
+		let actionText = game.i18n.localize("shadowrun6.matrixaction."+actionId);
+		// Prepare check text
+		let checkText = this._getSkillCheckText(action.skill,action.spec,action.threshold);
+		// Calculate pool
+		let value = this._getSkillPool(action.skill, action.spec);
+		value += this.data.data.attributes[action.attrib].pool;
+
+		// Roll and return
+		let data = mergeObject(options, {
+			pool: value,
+			actionText: actionText,
+			checkText  : checkText,
+			skill: action.skill,
+			spec: action.spec,
+			threshold: action.threshold,
+			isOpposed: false,
+			rollType: "skill",
+			isAllowDefense: false,
+			useThreshold: action.threshold!=0,
+			buyHits: true
+		});
+		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(data);
+	}
+
 
 	//-------------------------------------------------------------
 	/*
