@@ -2,33 +2,16 @@
 	<div class="section-head">
 		<h2 class="section-title">{{ localize 'shadowrun6.section.matrix_actions.title' }}</h2>
 	</div>
-	<table>
-		<!--thead>
-			<tr>
-				<th style="padding: 0 0px 0 5px; width: 1em">{{ localize 'shadowrun6.label.action' }}</th>
-				<th style="padding: 0 0px 0 5px; width: 1em">{{ localize 'shadowrun6.label.damage_short' }}</th>
-				<th style="padding: 0 0px 0 0px; width: 1em">{{ localize 'shadowrun6.label.attack_rating_short' }}</th>
-				<th style="padding: 0 0px 0 0px; "></th>
-				<th style="padding: 0 5px 0 0px; width: 3.5rem"></th>
-			</tr>
-		</thead-->
+	<div style="column-count: 2; margin-right: 5px;">
  		{{#each config.MATRIX_ACTIONS as |action idx|}} 
-       <tr class="draggable item" data-matrix-action-id="{{this.id}}">
-       	<td>{{localize (concat 'shadowrun6.matrixaction.' this.id)}}</td>
-         <td>{{#if illegal}}{{localize "shadowrun6.label.legality.illegal.short"}}
-         	{{else}}{{localize "shadowrun6.label.legality.legal.short"}}{{/if}}
-          </td>
-         <td>{{#if major}}
-         	{{localize "shadowrun6.label.actionduration.major.short"}}
-         	{{else}}{{localize "shadowrun6.label.actionduration.minor.short"}}{{/if}}
-          </td>
-         <td><label class="important-column">{{data.data.persona.damage}}</label></td>
-         <td><label class="important-column">{{data.data.attackrating.matrix.pool}}</label></td>
-         <td class="skill-pool" style="width: 3em">
+       <div class="draggable item" data-matrix-action-id="{{this.id}}" style="display: flex; font-size:small; align-items:center;">
+       	<label style="flex-grow:6">{{localize (concat 'shadowrun6.matrixaction.' this.id)}}</label>
+         <div class="skill-pool" style="flex-grow:0.9; text-align:right">
          	<label class="item-pool">{{matrixPool this.id ../actor}}</label>
          	<a class="item-control matrix-roll" data-matrix-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
-         </td>
-       </tr>
+         </div>
+       </div>
        {{/each}}
+	</div>
 	</table>
 </div>

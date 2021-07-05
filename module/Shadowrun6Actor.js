@@ -929,7 +929,7 @@ export class Shadowrun6Actor extends Actor {
 			spec: action.spec,
 			threshold: action.threshold,
 			isOpposed: action.opposedAttr1!=null,
-			rollType: "skill",
+			rollType: "matrixaction",
 			isAllowDefense: action.opposedAttr1!=null,
 			useThreshold: action.threshold!=0,
 			buyHits: true

@@ -338,10 +338,10 @@ class MatrixAction {
 SR6.MATRIX_ACTIONS = {
 	"backdoor_entry": new MatrixAction("backdoor_entry"  , "cracking"   ,"hacking"    , "log", true, true,   true, false, false, "wil", "f"),
 	"brute_force"   : new MatrixAction("brute_force"     , "cracking"   ,"cybercombat", "log", true, true,   true, true , true , "wil", "f"),
-	"change_icon"   : new MatrixAction("change_icon"     , null         , null        , null, false,false,  false, true, true , null,null, -1),
+	"change_icon"   : new MatrixAction("change_icon"     , null         , null        , null, false,false,  false, true, true , undefined,null, -1),
 	"check_os"      : new MatrixAction("check_os"        , "cracking"   , "electronic_warfare", "log", true , true,  false, false, true, null,null,4),
 	"control_device": new MatrixAction("control_device"  , "electronics", "software"  , "log", false, true,  false, true, true , "wil", "f"),
-	"crack_file"    : new MatrixAction("crack_file"      , "cracking"   ,"hacking"    , "log", true , true,  false, true, true , null,null,99),
+	"crack_file"    : new MatrixAction("crack_file"      , "cracking"   ,"hacking"    , "log", true , true,  false, true, true , undefined,null,99),
 	"crash_program" : new MatrixAction("crash_program"   , "cracking"   ,"cybercombat", "log", true , true,  false, false, true, "d", "dr"),
 	"data_spike"    : new MatrixAction("data_spike"      , "cracking"   ,"cybercombat", "log", true , true,  false, true, true , "d", "f"),
  "disarm_data_bomb": new MatrixAction("disarm_data_bomb", "electronics","software"   , "log", false, true,  false, true, true , "dr", "dr"),

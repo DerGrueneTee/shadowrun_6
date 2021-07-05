@@ -1,11 +1,16 @@
   <section>
 	  <div style="column-count: 2; margin-right: 5px;">
 			{{> "systems/shadowrun6-eden/templates/parts/section-matrixbase.html" showResonance=true}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-matrixdevices.html"}}
-			{{> "systems/shadowrun6-eden/templates/parts/section-matrixactions.html"}}
 	   	{{#if data.data.morDef.resonance}}   
+			  {{> "systems/shadowrun6-eden/templates/parts/section-matrixactions.html"}}
+			  <div/>
+			  {{> "systems/shadowrun6-eden/templates/parts/section-matrixdevices.html"}}
 			  {{> "systems/shadowrun6-eden/templates/parts/section-complexforms.html"}}
 			  {{> "systems/shadowrun6-eden/templates/parts/section-echoes.html"}}
+	   	{{else}}
+			  {{> "systems/shadowrun6-eden/templates/parts/section-matrixdevices.html"}}
+			  <div/>
+			  {{> "systems/shadowrun6-eden/templates/parts/section-matrixactions.html"}}
 			{{/if}}
 		</div>
   </section>
