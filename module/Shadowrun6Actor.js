@@ -459,6 +459,14 @@ export class Shadowrun6Actor extends Actor {
 				// TODO: Check if actor has specialization or mastery
 				item.data.pool = item.data.pool + eval(item.data.modifier);
 			};
+			if (item.type == "gear" && item.data.dmg>0) {
+				if (item.data.stun) {
+					if (item.data.stun==='false') {item.data.stun = false;}
+					else if (item.data.stun==='true') { item.data.stun = true;}
+				}
+				let suffix = item.data.stun?game.i18n.localize("shadowrun6.item.stun_damage"):game.i18n.localize("shadowrun6.item.physical_damage");
+				item.data.dmgDef = item.data.dmg+suffix;
+			}
 		});
 	}
 	
@@ -509,6 +517,7 @@ export class Shadowrun6Actor extends Actor {
 		if (actorData.mortype=="technomancer") {
 			if (!actorData.persona.living     ) actorData.persona.living = {};
 			if (!actorData.persona.living.base) actorData.persona.living.base = {};
+			if (!actorData.persona.living.mod ) actorData.persona.living.mod  = {};
 			actorData.persona.living.base.a = actorData.attributes["cha"].pool;
 			actorData.persona.living.base.s = actorData.attributes["int"].pool;
 			actorData.persona.living.base.d = actorData.attributes["log"].pool;
@@ -561,7 +570,7 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {int}    threshold    Optional threshold
 	 * @return Roll name
 	 */
-	_getSkillCheckText(skillId, spec, threshold) {
+	_getSkillCheckText(skillId, spec, threshold, attrib) {
 		const skl = this.data.data.skills[skillId];
 		// Build test name
 		let rollName = game.i18n.localize("skill." + skillId);
@@ -570,7 +579,8 @@ export class Shadowrun6Actor extends Actor {
 		}
 		rollName += " + ";
 		// Attribute
-		let attrName = game.i18n.localize("attrib."+CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId).attrib);
+		let useAttrib = (attrib)?attrib:CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId).attrib;
+		let attrName = game.i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
 		if (threshold) {
@@ -899,7 +909,11 @@ export class Shadowrun6Actor extends Actor {
 		// Prepare action text
 		let actionText = game.i18n.localize("shadowrun6.matrixaction."+actionId);
 		// Prepare check text
-		let checkText = this._getSkillCheckText(action.skill,action.spec,action.threshold);
+		if (!action.skill) {
+			console.log("ToDo: matrix actions without a test");
+			return;
+		}
+		let checkText = this._getSkillCheckText(action.skill,action.spec,action.threshold,action.attrib);
 		// Calculate pool
 		let value = this._getSkillPool(action.skill, action.spec);
 		value += this.data.data.attributes[action.attrib].pool;
@@ -909,12 +923,14 @@ export class Shadowrun6Actor extends Actor {
 			pool: value,
 			actionText: actionText,
 			checkText  : checkText,
+			attackRating : this.data.data.attackrating.matrix.pool,
+			matrixAction: action,
 			skill: action.skill,
 			spec: action.spec,
 			threshold: action.threshold,
-			isOpposed: false,
+			isOpposed: action.opposedAttr1!=null,
 			rollType: "skill",
-			isAllowDefense: false,
+			isAllowDefense: action.opposedAttr1!=null,
 			useThreshold: action.threshold!=0,
 			buyHits: true
 		});
