@@ -3,6 +3,8 @@
   "ACTOR.TypeNpc": "NSC",
   "ACTOR.TypePlayer": "Spieler-Charakter",
   "ITEM.TypeAdeptpower": "Adeptenkraft",
+  "ITEM.TypeComplexform" : "Komplexe Form",
+  "ITEM.TypeEcho" : "Echo",
   "ITEM.TypeGear": "Ausrüstung",
   "ITEM.TypeMartialartstyle": "Kampfkunststil",
   "ITEM.TypeMartialarttech": "Kampfkunstechnik",
@@ -85,6 +87,10 @@
       "physical": "Physisch Angr.W",
       "social": "Sozial Ang.W.",
       "vehicle": "Fahrzeug Angr.W"
+    },
+    "complexform": {
+      "fade": "Schwund",
+      "duration": "Dauer"
     },
     "defense": {
       "astral": "Verteidigung: Astralkampf",
@@ -347,10 +353,12 @@
       "mode_sa": "HM",
       "mode_ss": "EM",
       "natural": "Nat. Panzerung",
+      "physical_damage" : "K",
       "price": "Preis",
       "skill": "Fertigkeit",
       "skillspec": "Spezialisierung",
       "social": "Sozial",
+      "stun_damage" : "B",
       "subtype": "Unterart",
       "type": "Art"
     },

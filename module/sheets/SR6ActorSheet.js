@@ -43,6 +43,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
 			html.find('.quality-create').click(ev => this._onCreateNewEmbeddedItem("quality"));
+			html.find('.echo-create').click(ev => this._onCreateNewEmbeddedItem("echo"));
+			html.find('.complexform-create').click(ev => this._onCreateNewEmbeddedItem("complexform"));
 			html.find('.metamagic-create').click(ev => this._onCreateNewEmbeddedItem("metamagic"));
 			html.find('.spell-create').click(ev => this._onCreateNewEmbeddedItem("spell"));
 			html.find('.ritual-create').click(ev => this._onCreateNewEmbeddedItem("ritual"));

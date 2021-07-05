@@ -6,6 +6,8 @@
 	},
 	"ITEM": {
   		"TypeAdeptpower": "Adept Power",
+      "TypeComplexform" : "Complex Form",
+      "TypeEcho" : "Echo",
   		"TypeGear": "Gear",
 		"TypeMartialartstyle": "Martial Art Style",
 		"TypeMartialarttech": "Martial Art Technique",
@@ -93,6 +95,10 @@
       "physical": "Physical Att. Rtg",
       "social": "Social Att. Rtg.",
       "vehicle": "Vehicle Att. Rtg."
+    },
+    "complexform": {
+      "fade": "Fade",
+      "duration": "Duration"
     },
     "defense": {
       "astral": "Defense: Astral Combat",
@@ -360,10 +366,12 @@
       "mode_sa": "SA",
       "mode_ss": "SS",
       "natural": "Nat. armor",
+      "physical_damage" : "P",
       "price": "Price",
       "skill": "Skill",
       "skillspec": "Specialisation",
       "social": "Social",
+      "stun_damage": "S",
       "subtype": "Subtype",
       "type": "Type"
     },
