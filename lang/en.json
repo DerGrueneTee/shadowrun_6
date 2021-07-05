@@ -6,6 +6,8 @@
 	},
 	"ITEM": {
   		"TypeAdeptpower": "Adept Power",
+      "TypeComplexform" : "Complex Form",
+      "TypeEcho" : "Echo",
   		"TypeGear": "Gear",
 		"TypeMartialartstyle": "Martial Art Style",
 		"TypeMartialarttech": "Martial Art Technique",
@@ -93,6 +95,10 @@
       "physical": "Physical Att. Rtg",
       "social": "Social Att. Rtg.",
       "vehicle": "Vehicle Att. Rtg."
+    },
+    "complexform": {
+      "fade": "Fade",
+      "duration": "Duration"
     },
     "defense": {
       "astral": "Defense: Astral Combat",
