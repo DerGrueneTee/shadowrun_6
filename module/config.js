@@ -320,7 +320,7 @@ SR6.skill_special = {
 };
 
 class MatrixAction {
-	constructor(id, skill, spec, illegal,major, outsider,user,admin, threshold) {
+	constructor(id, skill, spec, illegal,major, outsider,user,admin, attr1, attr2, threshold=0) {
 		this.id = id;
 		this.illegal = illegal;
 		this.major   = major;
@@ -330,25 +330,14 @@ class MatrixAction {
 		this.opposed = false;
 		this.threshold = threshold;
 	}
-	constructor(id, skill, spec, illegal,major, outsider,user,admin, attr1, attr2) {
-		this.id = id;
-		this.illegal = illegal;
-		this.major   = major;
-		this.outsider= outsider;
-		this.user    = user;
-		this.admin   = admin;
-		this.opposed = true;
-		this.attr1   = attr1;
-		this.attr2   = attr2;
-	}
 }
 SR6.MATRIX_ACTIONS = {
 	"backdoor_entry": new MatrixAction("backdoor_entry", "cracking","hacking"    , true, true,   true, false, false, "wil", "f"),
 	"brute_force"   : new MatrixAction("brute_force"   , "cracking","cybercombat", true, true,   true, true , true , "wil", "f"),
-	"change_icon"   : new MatrixAction("change_icon"   , null      , null        , false,false,  false, true, true , -1),
-	"check_os"      : new MatrixAction("check_os"      , "cracking", "electronic_warfare", true , true,  false, false, true, 4),
+	"change_icon"   : new MatrixAction("change_icon"   , null      , null        , false,false,  false, true, true , null,null, -1),
+	"check_os"      : new MatrixAction("check_os"      , "cracking", "electronic_warfare", true , true,  false, false, true, null,null,4),
 	"control_device": new MatrixAction("control_device", "cracking", "electronic_warfare", false, true,  false, true, true , "wil", "f"),
-	"crack_file"    : new MatrixAction("crack_file"    , "cracking","hacking"    , false, true,  false, true, true , 99),
+	"crack_file"    : new MatrixAction("crack_file"    , "cracking","hacking"    , false, true,  false, true, true , null,null,99),
 	"crash_program" : new MatrixAction("crash_program" , "cracking","cybercombat", false, true,  false, false, true, "d", "dr"),
 	"data_spike"    : new MatrixAction("data_spike"    , "cracking","cybercombat", false, true,  false, true, true , "d", "f"),
 	"disarm_data_bomb": new MatrixAction("disarm_data_bomb", "electronics","software", false, true,  false, true, true , "dr", "dr"),
