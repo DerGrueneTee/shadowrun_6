@@ -25,6 +25,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.item-roll').click(this._onRollItemCheck.bind(this));
 			html.find(".defense-roll").click(this._onCommonCheck.bind(this));
 			html.find(".matrix-roll").click(this._onMatrixAction.bind(this));
+			html.find('.complexform-roll').click(this._onRollComplexFormCheck.bind(this));
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
@@ -318,6 +319,12 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const matrixId = event.currentTarget.dataset.matrixId;
 		const matrixAction = CONFIG.SR6.MATRIX_ACTIONS[matrixId];
 		this.actor.performMatrixAction(matrixAction, matrixId, { event: event });
+	}
+
+	_onRollComplexFormCheck(event, html) {
+		event.preventDefault();
+		const item = event.currentTarget.dataset.itemId;
+		this.actor.rollComplexForm(item, { event: event });
 	}
 
 	//-----------------------------------------------------

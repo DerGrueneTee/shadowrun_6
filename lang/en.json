@@ -98,7 +98,16 @@
     },
     "complexform": {
       "fade": "Fade",
-      "duration": "Duration"
+      "duration": "Duration",
+      "duration_instantaneous": "Instantaneous",
+      "duration_instantaneous_short": "I",
+      "duration_short": "Dur.",
+      "duration_permanent": "Permanent",
+      "duration_permanent_short": "P",
+      "duration_special": "Special",
+      "duration_special_short": "Spec",
+      "duration_sustained": "Sustained",
+      "duration_sustained_short": "S"
     },
     "defense": {
       "astral": "Defense: Astral Combat",
@@ -546,6 +555,7 @@
         "attack_target_none": "Attacking target with {name}",
         "attack_target_one": "Attacking {target} with {name}",
         "cast": "Casting {name}",
+		  "weave": "Weaving {name}",
         "defense": {
           "physical": "Defend against physical attack"
         }

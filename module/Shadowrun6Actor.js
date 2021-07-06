@@ -137,6 +137,9 @@ export class Shadowrun6Actor extends Actor {
 				data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
 			}
 			// Matrix perception
+			if (!data.derived.matrix_perception) {
+				data.derived.matrix_perception={};
+			}
 			data.derived.matrix_perception.base = data.skills["electronics"].points + data.skills["electronics"].modifier + data.attributes["int"].pool;
 			data.derived.matrix_perception.pool = data.derived.matrix_perception.base + data.derived.matrix_perception.mod;
 	}
@@ -158,6 +161,7 @@ export class Shadowrun6Actor extends Actor {
 		if (!data.attackrating.vehicle  )  data.attackrating.vehicle  = { mod: 0};
 		if (!data.attackrating.matrix   )  data.attackrating.matrix   = { mod: 0};
 		if (!data.attackrating.social   )  data.attackrating.social   = { mod: 0};
+		if (!data.attackrating.resonance)  data.attackrating.resonance= { mod: 0};
 
 		/* Physical Attack Rating - used for unarmed combat */
 		data.attackrating.physical.base = data.attributes["rea"].pool + data.attributes["str"].pool;
@@ -190,6 +194,16 @@ export class Shadowrun6Actor extends Actor {
 		if (data.attackrating.matrix.mod) {
 			data.attackrating.matrix.pool += data.attackrating.matrix.mod;
 			data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
+		} 
+		
+		// Resonance attack rating (Electronics + Resonance)
+		data.attackrating.resonance.base = data.persona.used.a + data.attributes["res"].pool;
+		data.attackrating.resonance.modString  = game.i18n.localize("skill.electronics") + " + ";
+		data.attackrating.resonance.modString += game.i18n.localize("attrib.res_short");
+		data.attackrating.resonance.pool = data.attackrating.resonance.base;
+		if (data.attackrating.resonance.mod) {
+			data.attackrating.resonance.pool += data.attackrating.resonance.mod;
+			data.attackrating.resonance.modString += "\n+" + data.attackrating.resonance.mod;
 		} 
 		
 		// Vehicle combat attack rating (Pilot + Sensor)
@@ -597,18 +611,56 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {string} spec         Optional: The skill specialization
 	 * @return Roll name
 	 */
-	_getSkillPool(skillId, spec) {
+	_getSkillPool(skillId, spec, attrib) {
+		if (!skillId)
+			throw "Skill ID may not be undefined";
 		const skl = this.data.data.skills[skillId];
+		if (!skillId) {
+			throw "Unknown skill '"+skillId+"'";
+		}
+			
+		let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId);
+		if (!attrib) {
+			attrib = skillDef.attrib;
+		}
+			
 		// Calculate pool
-		let value = skl.pool;
+		let value = skl.points + skl.modifier;
+		if (skl.base==0) {
+			if (skillDef.useUntrained) {value-=1;}
+			else
+				return 0;
+		}
+		
 		if (spec) {
 			if (spec==skl.expertise) {
-				value=skl.poolE;
+				value+=3;
 			} else if (spec==skl.specialization) {
-				value=skl.poolS;
+				value+=2;
 			}
 		}
+		
+		// Add attribute
+		value += this.data.data.attributes[attrib].pool;
+		
 		return value;		
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * Return a translated complex form name
+	 * @param {Object} spell      The spell to cast
+	 * @return Roll name
+	 */
+	_getComplexFormName(complex) {
+		if (complex.genesisId) {
+			const key = "shadowrun6.compendium.complexform." + complex.genesisId;
+			let name = game.i18n.localize(key);
+			if (key!=name)
+				return name;
+		}
+		
+		return complex.name;
 	}
 
 	//---------------------------------------------------------
@@ -936,6 +988,80 @@ export class Shadowrun6Actor extends Actor {
 		});
 		data.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(data);
+	}
+
+	//-------------------------------------------------------------
+	/**
+	 * Roll a complex form test. Some complex forms are opposed, some are simple tests.
+	 * @param {string} itemId       The item id of the spell
+	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
+	 */
+	rollComplexForm(itemId, options={}) {
+		console.log("rollComplexForm("+itemId+")");
+		const complex = this.items.get(itemId);
+		let skillId = complex.skill;
+		if (!skillId)
+			skillId = "electronics";
+		const spec    = null;
+		let threshold = complex.threshold;
+		// Prepare action text
+		let actionText = game.i18n.format("shadowrun6.roll.actionText.weave", {name:this._getComplexFormName(complex)});
+		// Get pool
+		let pool = this._getSkillPool(skillId, spec, "res");
+		let rollName = this._getSkillCheckText(skillId, spec, threshold, "res");		
+
+		// Determine whether or not the spell is an opposed test
+		// and what defense eventually applies
+		let isOpposed = (complex.oppAttr1!=undefined);
+		let defendWith = "matrix";
+		let attackRating = this.data.data.attackrating.resonance.pool;
+		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.resonance.pool);
+		console.log("Highest defense rating of targets: "+highestDefenseRating);
+		
+		// If present, replace spell name, description and source references from compendium
+		let spellName = complex.name;
+		let spellDesc = "";
+		let spellSrc  = "";
+		if (complex.data.data.description) {
+			spellDesc = item.data.data.description;
+		}
+		if (complex.data.data.genesisID) {
+			let key = "complexform."+complex.data.data.genesisID+".";
+			if (!game.i18n.localize(key+"name").startsWith(key)) {
+				// A translation exists
+				spellName = game.i18n.localize(key+"name");
+				spellDesc = game.i18n.localize(key+"desc");
+				spellSrc = game.i18n.localize(key+"src");
+			}
+		}
+
+		let data = mergeObject(options, {
+			isSpell : true,
+			pool: pool,
+			actionText: actionText,
+			checkText  : rollName,
+			skill: this.data.data.skills[skillId],
+			spec: spec,
+			complexform: complex,
+			spellName: spellName,
+			spellDesc: spellDesc,
+			spellSrc : spellSrc,
+			attackRating: attackRating,
+			defRating : highestDefenseRating,
+			targets: game.user.targets.forEach( val => val.actor),
+			isOpposed: isOpposed,
+			threshold: threshold,
+			rollType: "complexform",
+			isAllowDefense: complex.oppAttr1!="",
+			defendWith: defendWith,
+			buyHits: !isOpposed
+		});
+		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		if (isOpposed) {
+			return doRoll(data);
+		} else {
+			return doRoll(data);
+		}
 	}
 
 

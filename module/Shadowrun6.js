@@ -369,7 +369,7 @@ function getMatrixActionPool(key, actor) {
 	const skill  = actor.data.data.skills[action.skill];
 	let pool = 0;
 	if (skill) {
-		pool = skill.pool;	
+		pool = skill.points + skill.modifier;	
 		if (skill.expertise==action.specialization) {
 			pool+=3;
 		} else if (skill.specialization==action.specialization) {
