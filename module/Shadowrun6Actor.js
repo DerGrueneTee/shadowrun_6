@@ -1005,7 +1005,7 @@ export class Shadowrun6Actor extends Actor {
 		const spec    = null;
 		let threshold = complex.threshold;
 		// Prepare action text
-		let actionText = game.i18n.format("shadowrun6.roll.actionText.weave", {name:this._getComplexFormName(complex)});
+		let actionText = game.i18n.format("shadowrun6.roll.actionText.thread", {name:this._getComplexFormName(complex)});
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec, "res");
 		let rollName = this._getSkillCheckText(skillId, spec, threshold, "res");		

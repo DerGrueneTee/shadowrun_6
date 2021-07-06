@@ -97,7 +97,7 @@
       "vehicle": "Vehicle Att. Rtg."
     },
     "complexform": {
-      "fade": "Fade",
+      "fading": "Fading",
       "duration": "Duration",
       "duration_instantaneous": "Instantaneous",
       "duration_instantaneous_short": "I",
@@ -555,7 +555,7 @@
         "attack_target_none": "Attacking target with {name}",
         "attack_target_one": "Attacking {target} with {name}",
         "cast": "Casting {name}",
-		  "weave": "Weaving {name}",
+		  "thread": "Threading {name}",
         "defense": {
           "physical": "Defend against physical attack"
         }
