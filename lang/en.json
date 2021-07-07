@@ -111,6 +111,7 @@
     },
     "defense": {
       "astral": "Defense: Astral Combat",
+      "fading": "Resist Fading",
       "damage_astral": "Resist Astral Dmg",
       "damage_physical": "Resist Physical Dmg",
       "physical": "Defense: Attacks",

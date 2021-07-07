@@ -13,6 +13,14 @@ export class Shadowrun6Actor extends Actor {
 		console.log("Shadowrun6Actor.prepareData() " + this.data.name);
 
 		const data = this.data.data;
+		
+		if (!data.tradition) {
+			data.tradition = {
+				"name": "",
+				"attribute": "log"
+			};
+		}
+
 		this._prepareAttributes();
 		this._prepareDerivedAttributes();
 		this._preparePersona();
@@ -22,13 +30,6 @@ export class Shadowrun6Actor extends Actor {
 		this._prepareDefensePools();
 		this._prepareItemPools();
 		this._calculateEssence();
-		
-		if (!data.tradition) {
-			data.tradition = {
-				"name": "",
-				"attribute": "log"
-			};
-		}
 		
 		if (data.mortype) {
 			data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
@@ -369,6 +370,8 @@ export class Shadowrun6Actor extends Actor {
 			if (!data.defensepool.damage_physical)  data.defensepool.damage_physical = {};
 			if (!data.defensepool.damage_astral  )  data.defensepool.damage_astral = {};
 			if (!data.defensepool.vehicle        )  data.defensepool.vehicle = {};
+			if (!data.defensepool.drain          )  data.defensepool.drain = {};
+			if (!data.defensepool.fading         )  data.defensepool.fading = {};
 			
 			// Physical Defense Test
 			data.defensepool.physical.base = data.attributes["rea"].pool+ data.attributes["int"].pool;
@@ -456,6 +459,27 @@ export class Shadowrun6Actor extends Actor {
 			if (data.defensepool.damage_astral.mod) {
 				data.defensepool.damage_astral.pool += data.defensepool.damage_astral.mod;
 				data.defensepool.damage_astral.modString += "\n+" + data.defensepool.damage_astral.mod;
+			} 
+			
+			// Resist drain
+			let traditionAttr = data.attributes[data.tradition.attribute];
+			data.defensepool.drain.base = traditionAttr.pool + data.attributes["wil"].pool;
+ 			data.defensepool.drain.modString = "\n"+game.i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + traditionAttr.pool;
+ 			data.defensepool.drain.modString += "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+			data.defensepool.drain.pool = data.defensepool.drain.base;
+			if (data.defensepool.drain.mod) {
+				data.defensepool.drain.pool += data.defensepool.drain.mod;
+				data.defensepool.drain.modString += "\n+" + data.defensepool.drain.mod;
+			} 
+			
+			// Resist fading
+			data.defensepool.fading.base = data.attributes["wil"].pool + data.attributes["log"].pool;
+ 			data.defensepool.fading.modString = "\n"+game.i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.fading.modString += "\n"+game.i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
+			data.defensepool.fading.pool = data.defensepool.fading.base;
+			if (data.defensepool.fading.mod) {
+				data.defensepool.fading.pool += data.defensepool.fading.mod;
+				data.defensepool.fading.modString += "\n+" + data.defensepool.fading.mod;
 			} 
 	}
 	

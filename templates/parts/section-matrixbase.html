@@ -92,6 +92,16 @@
 				style="width: 2em"></td>
 				<td class="centered" title="{{data.data.derived.matrix_perception.modString}}">{{data.data.derived.matrix_perception.pool}}</td>
 			</tr>
+			{{#if data.data.morDef.resonance}}   
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.defense.fading' }}</b></td>
+				<td class="centered">{{data.data.defensepool.fading.base}}</td>
+				<td><input class="centered" name="data.defensepool.fading.mod" type="text" value="{{data.data.defensepool.fading.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.defensepool.fading.modString}}">{{data.data.defensepool.fading.pool}}</td>
+				<td><a class="item-control defense-roll skill-pool" data-pool="{{data.data.defensepool.fading.pool}}" data-item-id="fading"><i class="fas fa-dice-six"></i></a></td>
+			</tr>
+			{{/if}}
 		</table>
 		</div>
 </div>
