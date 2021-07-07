@@ -440,6 +440,7 @@
       "features": "Features",
       "firemode_current": "Current Firemode",
       "firemodes": "Firemodes",
+		"gender": "Gender",
 		"legality.illegal.short": "I",
 		"legality.legal.short": "L",
       "level": "Has levels",
