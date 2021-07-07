@@ -371,3 +371,29 @@ SR6.MATRIX_ACTIONS = {
 	"trace_icon"    : new MatrixAction("trace_icon"      , "electronics","software"   , "int", true , true,  false , false , true , "wil","s"),
 };
 
+class ComplexForm {
+	constructor(skill,attr1, attr2, threshold=0) {
+		this.skill   = skill;
+		this.opposedAttr1 = attr1;
+		this.opposedAttr2 = attr2;
+		this.threshold = threshold;
+	}
+}
+SR6.COMPLEX_FORMS = {
+	"cleaner"  : new ComplexForm("electronics", null,null),
+	"diffusion": new ComplexForm("electronics", "wil","f"),
+	"editor"   : new ComplexForm(null, null,null),
+	"emulate"  : new ComplexForm(null, null,null),
+	"infusion" : new ComplexForm("electronics", null,null, 4),
+	"mirrored_persona" : new ComplexForm("electronics", null,null),
+	"pulse_storm"      : new ComplexForm("electronics", "log","d"),
+	"puppeteer"        : new ComplexForm(null, null,null),
+	"resonance_channel": new ComplexForm("electronics", null,null),
+	"resonance_spike"  : new ComplexForm("cracking", "wil","f"),
+	"resonance_veil"   : new ComplexForm("electronics", "int","d"),
+	"static_bomb"      : new ComplexForm("electronics", "int","d"),
+	"static_veil"      : new ComplexForm("electronics", "f","f"),
+	"stitches"         : new ComplexForm("electronics", null,null),
+	"tattletale"       : new ComplexForm("electronics", null,null),
+};
+

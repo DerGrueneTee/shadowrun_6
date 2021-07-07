@@ -497,13 +497,25 @@ export class Shadowrun6Actor extends Actor {
 				// TODO: Check if actor has specialization or mastery
 				item.data.pool = item.data.pool + eval(item.data.modifier);
 			};
-			if (item.type == "gear" && item.data.dmg>0) {
+			if (tmpItem.type == "gear" && item.data.dmg>0) {
 				if (item.data.stun) {
 					if (item.data.stun==='false') {item.data.stun = false;}
 					else if (item.data.stun==='true') { item.data.stun = true;}
 				}
 				let suffix = item.data.stun?game.i18n.localize("shadowrun6.item.stun_damage"):game.i18n.localize("shadowrun6.item.physical_damage");
 				item.data.dmgDef = item.data.dmg+suffix;
+			}
+			
+			if (tmpItem.type == "complexform" && item.data.genesisID) {
+				if (!item.data.skill) {
+					let cform = CONFIG.SR6.COMPLEX_FORMS[item.data.genesisID];
+					if (cform && cform.skill) {
+						item.data.skill = cform.skill;
+						item.data.oppAttr1 = cform.opposedAttr1;
+						item.data.oppAttr2 = cform.opposedAttr2;
+						item.data.threshold = cform.threshold;
+					}
+				}
 			}
 		});
 	}

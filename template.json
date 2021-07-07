@@ -476,7 +476,7 @@
 			"duration": "sustained",
 			"fading": 3,
 			"skill": "",
-			"attrib": "log",
+			"attrib": "res",
 			"threshold": 0,
 			"oppAttr1": "",
 			"oppAttr2": ""

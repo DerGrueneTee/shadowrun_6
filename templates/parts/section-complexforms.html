@@ -8,7 +8,6 @@
 <table>
 	    <thead>
 	      <tr>
-	        <th></th>
 	        <th style="text-align:left">{{ localize 'shadowrun6.label.column.name' }}</th>
 	        <th>{{ localize 'shadowrun6.section.complexforms.column.duration' }}</th>
 	        <th>{{ localize 'shadowrun6.section.complexforms.column.fade' }}</th>
@@ -18,12 +17,13 @@
 		{{#each actor.items as |item id|}} 
 		{{#iff item.type '==' 'complexform'}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-      	<td style="width:1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button></td>
 			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
 			<td class="centered" style="width: 3em"> {{localize (concat "shadowrun6.spell.duration_" (concat  item.data.data.duration "_short"))}}</td>
 			<td class="centered"style="width: 3em"> <input type="text" value="{{item.data.data.fade}}" data-field="data.fade" data-type="Number"/></td>
 			<td class="centered">
+				{{#iff item.data.data.fade ">" 0}}
 				<a class="item-control complexform-roll"   data-item-id="{{item.id}}"  title="Roll"><i class="fas fa-dice-six"></i></a>
+				{{/iff}}
 				<a class="item-control item-edit"   title='{{localize 'shadowrun6.label.edit' }}'><i class="fas fa-edit"></i></a> 
 				<a class="item-control item-delete" title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
 	   </tr>
