@@ -47,6 +47,14 @@
 				style="width: 2em"></td>
 				<td class="centered" title="{{data.data.defenserating.astral.modString}}">{{data.data.defenserating.astral.pool}}</td>
 			</tr>
+			<tr>
+				<td ><b>{{ localize 'shadowrun6.defense.drain' }}</b></td>
+				<td class="centered">{{data.data.defensepool.drain.base}}</td>
+				<td><input class="centered" name="data.defensepool.drain.mod" type="text" value="{{data.data.defensepool.drain.mod}}" data-dtype="Number"
+				style="width: 2em"></td>
+				<td class="centered" title="{{data.data.defensepool.drain.modString}}">{{data.data.defensepool.drain.pool}}</td>
+				<td><a class="item-control defense-roll skill-pool" data-pool="{{data.data.defensepool.drain.pool}}" data-item-id="fading"><i class="fas fa-dice-six"></i></a></td>
+			</tr>
 		</table>
 		</div>
 </div>

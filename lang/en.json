@@ -6,8 +6,8 @@
 	},
 	"ITEM": {
   		"TypeAdeptpower": "Adept Power",
-      "TypeComplexform" : "Complex Form",
-      "TypeEcho" : "Echo",
+      	"TypeComplexform" : "Complex Form",
+      	"TypeEcho" : "Echo",
   		"TypeGear": "Gear",
 		"TypeMartialartstyle": "Martial Art Style",
 		"TypeMartialarttech": "Martial Art Technique",
@@ -98,19 +98,11 @@
     },
     "complexform": {
       "fading": "Fading",
-      "duration": "Duration",
-      "duration_instantaneous": "Instantaneous",
-      "duration_instantaneous_short": "I",
-      "duration_short": "Dur.",
-      "duration_permanent": "Permanent",
-      "duration_permanent_short": "P",
-      "duration_special": "Special",
-      "duration_special_short": "Spec",
-      "duration_sustained": "Sustained",
-      "duration_sustained_short": "S"
+      "duration": "Duration"
     },
     "defense": {
       "astral": "Defense: Astral Combat",
+      "drain": "Resist Drain",
       "fading": "Resist Fading",
       "damage_astral": "Resist Astral Dmg",
       "damage_physical": "Resist Physical Dmg",
@@ -168,7 +160,7 @@
         "ARMOR_CLOTHES": "Normal clothing",
         "ARMOR_HELMET": "Helmets",
         "ARMOR_SHIELD": "Shields",
-        "ASSAULT_CANNON": "Assault Cannon (min.strength5)",
+        "ASSAULT_CANNON": "Assault Cannon",
         "ATVS": "ATVs",
         "AUDIO": "Audiotory Devices",
         "AUDIO_ENHANCEMENT": "Audio Enhancements",
