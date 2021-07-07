@@ -188,6 +188,7 @@ SR6.spell_damage = {
 SR6.tradition_attributes = {
 	"log" : "attrib.log",
 	"cha" : "attrib.cha",
+	"int" : "attrib.int",
 };
 
 SR6.adeptpower_activation = {
