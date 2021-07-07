@@ -89,8 +89,14 @@
       "vehicle": "Fahrzeug Angr.W"
     },
     "complexform": {
-      "fade": "Schwund",
-      "duration": "Dauer"
+      "attribute": "Attribut",
+      "duration": "Dauer",
+      "fading": "Schwund",
+      "none": "Kein",
+      "oppAttr1" : "Widerstands-Attr. 1",
+      "oppAttr2" : "Widerstands-Attr. 2",
+      "skill": "Fertigkeit",
+      "threshold" : "Schwellenwert"
     },
     "defense": {
       "astral": "Verteidigung: Astralkampf",
@@ -397,7 +403,7 @@
         "rating": "St."
       },
       "attack.short": "A",
-      "stealth.short": "S",
+      "sleaze.short": "S",
       "dataproc.short": "D",
       "firewall.short": "F",
       "d6": "W6",
@@ -437,6 +443,7 @@
       "biology": "Biozeugs",
       "bodyware": "Was cooles zum Einbauen",
       "chemicals": "Das gute Zeug",
+      "complexform" : "Wie komplex ist es denn?",
       "cyberware": "Was cooles zum Einbauen",
       "electronics": "Technikspielzeug",
       "focus": "Jeder sollte einen Focus haben",
