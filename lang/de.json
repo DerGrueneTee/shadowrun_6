@@ -97,8 +97,14 @@
       "vehicle": "Fahrzeug Angr.W"
     },
     "complexform": {
-      "fade": "Schwund",
-      "duration": "Dauer"
+      "attribute": "Attribut",
+      "duration": "Dauer",
+      "fading": "Schwund",
+      "none": "Kein",
+      "oppAttr1" : "Widerstands-Attr. 1",
+      "oppAttr2" : "Widerstands-Attr. 2",
+      "skill": "Fertigkeit",
+      "threshold" : "Schwellenwert"
     },
     "defense": {
       "astral": "Verteidigung: Astralkampf",
@@ -418,7 +424,7 @@
         "rating": "St."
       },
       "attack.short": "A",
-      "stealth.short": "S",
+      "sleaze.short": "S",
       "dataproc.short": "D",
       "firewall.short": "F",
       "devicerating.short": "DR",
@@ -453,43 +459,51 @@
       "wilddie": "Schicksalswürfel"
     },
 	"matrixaction": {
-		"backdoor_entry": "Backdoor Entry",
+		"backdoor_entry": "Hintertür benutzen",
 		"brute_force": "Brute Force",
-		"change_icon": "Change Icon",
-		"check_os": "Check OS",
-		"control_device": "Control Device",
+		"change_icon": "Icon verändern",
+		"check_os": "Overwatch-Wert bestimmen",
+		"control_device": "Gerät steuern",
 		"crack_file": "Datei Cracken",
-		"crash_program": "Crash Program",
-		"data_spike": "Dataspike",
-		"disarm_data_bomb": "Disarm Data Bomb",
+		"crash_program": "Programm abst. lasseb",
+		"data_spike": "Datenspike",
+		"disarm_data_bomb": "Datenbombe entschärfen",
 		"edit_file": "Datei editieren",
-		"encrypt_file": "Encrypt File",
-		"enter_host": "Enter Host",
-		"erase_matrix_signature": "Erase Matrix Sign.",
-		"format_device": "Format Device",
-		"full_matrix_defense": "Full Matrix Defense",
-		"hash_check": "Hash Check",
-		"hide": "Hide",
+		"encrypt_file": "Datei verschlüsseln",
+		"enter_host": "Host betreten/verlassen",
+		"erase_matrix_signature": "Matrixsign. löschen",
+		"format_device": "Gerät formatieren",
+		"full_matrix_defense": "Volle Matrixabwehr",
+		"hash_check": "Püfsummensuche",
+		"hide": "Verstecken",
 		"jack_out": "Ausstöpseln",
-		"jam_signals": "Jam Signals",
-		"jump_rigged": "Jump Into Rigged D.",
-		"matrix_perception": "Matrix Perception",
-		"matrix_search": "Matrix Search",
-		"probe": "Probe",
-		"reboot_device": "Reboot Device",
-		"reconfigure": "Reconf. Matrix Attr.",
-		"send_message": "Send Message",
-		"set_data_bomb": "Set Data Bomb",
-		"snoop": "Snoop",
+		"jam_signals": "Signal stören",
+		"jump_rigged": "Hineinspringen",
+		"matrix_perception": "Matrixwahrnehmung",
+		"matrix_search": "Matrixsuche",
+		"probe": "Sondieren",
+		"reboot_device": "Gerät neu starten",
+		"reconfigure": "Matrixattr. austauschen",
+		"send_message": "Nachricht übermitteln",
+		"set_data_bomb": "Datenbombe legen",
+		"snoop": "Übertragung abfangen",
 		"spoof_command": "Befehl vortäuschen",
-		"switch_ifmode": "Switch Interface Mode",
-		"tarpit": "Tarpit",
-		"trace_icon": "Trace Icon"
+		"switch_ifmode": "Interfacemodus wechseln",
+		"tarpit": "Teergrube",
+		"trace_icon": "Icon aufspüren"
 	},
     "monitor": {
       "physical": "Körperlich",
       "stun": "Geistig"
     },
+	"mortype": {
+		"adept": "Adept",
+		"aspectedmagician": "Aspektmageier",
+		"magician": "Magier",
+		"mundane": "Mundan",
+		"mysticadept": "Magieradept",
+		"technomancer": "Technomancer"
+	},
     "newitem": {
       "adeptpower": "Wie heisst die Kraft",
       "ammunition": "Coole Munition",
@@ -497,11 +511,13 @@
       "biology": "Biozeugs",
       "bodyware": "Was cooles zum Einbauen",
       "chemicals": "Das gute Zeug",
+      "complexform" : "Wie komplex ist es denn?",
       "cyberware": "Was cooles zum Einbauen",
       "electronics": "Technikspielzeug",
       "focus": "Jeder sollte einen Focus haben",
       "martialart_style": "Was ist dein Stil?",
       "martialart_tech": "Was für eine Technik hast du drauf?",
+      "matrix": "Schau Dir mein Deck an!",
       "metamagic": "Was hast du gelernt?",
       "quality": "Was macht dich besonders?",
       "ritual": "Ringelpiez mit Anfassen",
@@ -539,6 +555,7 @@
         "attack_target_none": "Greift Ziel mit {name} an",
         "attack_target_one": "Greift {target} mit {name} an",
         "cast": "Zaubert {name}",
+        "thread": "Webe {name}",
         "defense": {
           "physical": "Verteidigung g. physischen Angriff"
         }
@@ -629,9 +646,19 @@
         "title": "Bodyware"
       },
       "chemicals": "Drogen",
+      "complexforms": {
+        "add": "Neue komplex Form hinzufügen",
+        "column.duration": "Dau",
+        "column.fade": "Schw",
+        "title": "Komplexe Formen"
+      },
       "defense": "Verteidigung & Widerstände",
       "derived": "Abgeleitete Werte",
       "electronics": "Elektronik",
+      "echo": {
+        "add": "Neues Echo hinzufügen",
+        "title": "Echos"
+      },
       "initiative": "Initiative",
       "martialarts": {
         "add": "Neuen Kampfstil hinzufügen",
@@ -643,9 +670,31 @@
         "column.rating": "St.",
         "title": "Foci"
       },
+      "matrix_base": {
+        "overwatch": "Overwatch"
+      },
+      "matrix_actions": {
+        "title": "Matrixhandlungen"
+      },
+      "matrix_combat": {
+        "title": "Matrixkampf"
+      },
+      "matrix_devices": {
+        "add": "Neues Matrixgerät",
+        "column": {
+          "action": "Aktion",
+          "devRating": "Ger.St.",
+          "name": "Name"
+        },
+        "title": "Matrixgeräte"
+      },
       "metamagic": {
         "add": "Metamagie hinzufügen",
         "title": "Metamagie"
+      },
+      "persona": {
+			"distribute": "Verteile",
+        "title": "Persona"
       },
       "qualities": "Vor/Nachteile",
       "qualities_add": "Hinzufügen",
@@ -837,6 +886,7 @@
       "duration_special_short": "Spez",
       "duration_sustained": "Aufrechterhalten",
       "duration_sustained_short": "A",
+      "isOpposed": "Vergleichend",
       "range": "Reichweite",
       "range_line_of_sight": "BLickfeld",
       "range_line_of_sight_area": "Blickfeld (Fläche)",
@@ -866,23 +916,25 @@
       "attribute": "Traditionsattribut"
     }
   },
-  "skill.astral": "Astral",
-  "skill.athletics": "Athletik",
-  "skill.biotech": "Biotech",
-  "skill.close_combat": "Nahkampf",
-  "skill.con": "Überreden",
-  "skill.conjuring": "Beschwören",
-  "skill.cracking": "Cracken",
-  "skill.electronics": "Elektronik",
-  "skill.enchanting": "Verzaubern",
-  "skill.engineering": "Mechanik",
-  "skill.exotic_weapons": "Exotische Waffen",
-  "skill.firearms": "Feuerwaffen",
-  "skill.influence": "Einfluss",
-  "skill.outdoors": "Natur",
-  "skill.perception": "Wahrnehmung",
-  "skill.piloting": "Steuern",
-  "skill.sorcery": "Hexerei",
-  "skill.stealth": "Heimlichkeit",
-  "skill.tasking": "Tasken"
+	"skill": {
+		"astral": "Astral",
+		"athletics": "Athletik",
+		"biotech": "Biotech",
+		"close_combat": "Nahkampf",
+		"con": "Überreden",
+		"conjuring": "Beschwören",
+		"cracking": "Cracken",
+		"electronics": "Elektronik",
+		"enchanting": "Verzaubern",
+		"engineering": "Mechanik",
+		"exotic_weapons": "Exotische Waffen",
+		"firearms": "Feuerwaffen",
+		"influence": "Einfluss",
+		"outdoors": "Natur",
+		"perception": "Wahrnehmung",
+		"piloting": "Steuern",
+		"sorcery": "Hexerei",
+		"stealth": "Heimlichkeit",
+		"tasking": "Tasken"
+	}
 }

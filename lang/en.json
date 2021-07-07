@@ -97,8 +97,14 @@
       "vehicle": "Vehicle Att. Rtg."
     },
     "complexform": {
+      "attribute": "Attribute",
+      "duration": "Duration",
       "fading": "Fading",
-      "duration": "Duration"
+      "none": "None",
+      "oppAttr1" : "Opposing Attr. 1",
+      "oppAttr2" : "Opposing Attr. 2",
+      "skill": "Skill",
+      "threshold" : "Threshold"
     },
     "defense": {
       "astral": "Defense: Astral Combat",
@@ -418,7 +424,7 @@
         "rating": "Rtg."
       },
       "attack.short": "A",
-      "stealth.short": "S",
+      "sleaze.short": "S",
       "dataproc.short": "D",
       "firewall.short": "F",
       "devicerating.short": "DR",
@@ -505,6 +511,7 @@
       "biology": "Biohazard",
       "bodyware": "Some cool enhancement",
       "chemicals": "The good stuff",
+      "complexform" : "How complex do you like it?",
       "cyberware": "Some cool cyber enhancement",
       "electronics": "Nerd toy",
       "focus": "Something to stay focussed",
@@ -910,25 +917,24 @@
     }
   },
 	"skill": {
-	  "astral": "Astral",
-  "athletics": "Athletics",
-  "biotech": "Biotech",
-  "close_combat": "Close Combat",
-  "con": "Con",
-  "conjuring": "Conjuring",
-  "cracking": "Cracking",
-  "electronics": "Electronics",
-  "enchanting": "Enchanting",
-  "engineering": "Engineering",
-  "exotic_weapons": "Exotic Weapons",
-  "firearms": "Firearms",
-  "influence": "Influence",
-  "outdoors": "Outdoors",
-  "perception": "Perception",
-  "piloting": "Piloting",
-  "sorcery": "Sorcery",
-  "stealth": "Stealth",
-  "tasking": "Tasking"
-	
+		"astral": "Astral",
+		"athletics": "Athletics",
+		"biotech": "Biotech",
+		"close_combat": "Close Combat",
+		"con": "Con",
+		"conjuring": "Conjuring",
+		"cracking": "Cracking",
+		"electronics": "Electronics",
+		"enchanting": "Enchanting",
+		"engineering": "Engineering",
+		"exotic_weapons": "Exotic Weapons",
+		"firearms": "Firearms",
+		"influence": "Influence",
+		"outdoors": "Outdoors",
+		"perception": "Perception",
+		"piloting": "Piloting",
+		"sorcery": "Sorcery",
+		"stealth": "Stealth",
+		"tasking": "Tasking"	
 	}
 }
