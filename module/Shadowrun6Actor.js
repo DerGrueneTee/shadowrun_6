@@ -621,7 +621,7 @@ export class Shadowrun6Actor extends Actor {
 		let attrName = game.i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
-		if (threshold) {
+		if (threshold && threshold>0) {
 			rollName += " ("+threshold+")";
 		}
 
@@ -1023,11 +1023,11 @@ export class Shadowrun6Actor extends Actor {
 	rollComplexForm(itemId, options={}) {
 		console.log("rollComplexForm("+itemId+")");
 		const complex = this.items.get(itemId);
-		let skillId = complex.skill;
+		let skillId = complex.data.data.skill;
 		if (!skillId)
 			skillId = "electronics";
 		const spec    = null;
-		let threshold = complex.threshold;
+		let threshold = complex.data.data.threshold;
 		// Prepare action text
 		let actionText = game.i18n.format("shadowrun6.roll.actionText.thread", {name:this._getComplexFormName(complex)});
 		// Get pool
@@ -1036,10 +1036,10 @@ export class Shadowrun6Actor extends Actor {
 
 		// Determine whether or not the spell is an opposed test
 		// and what defense eventually applies
-		let isOpposed = (complex.oppAttr1!=undefined);
+		let isOpposed = (complex.data.data.oppAttr1!=undefined);
 		let defendWith = "matrix";
 		let attackRating = this.data.data.attackrating.resonance.pool;
-		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.resonance.pool);
+		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.matrix.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
 		
 		// If present, replace spell name, description and source references from compendium
@@ -1047,7 +1047,7 @@ export class Shadowrun6Actor extends Actor {
 		let spellDesc = "";
 		let spellSrc  = "";
 		if (complex.data.data.description) {
-			spellDesc = item.data.data.description;
+			spellDesc = complex.data.data.description;
 		}
 		if (complex.data.data.genesisID) {
 			let key = "complexform."+complex.data.data.genesisID+".";

@@ -130,7 +130,7 @@
       "defense_rating": "Verteidigungswert",
       "judge_intentions": "Menschenkenntnis",
       "lift_carry": "Heben / Tragen",
-      "memory": "Erinnerungsvermögen"
+      "memory": "Erinnerungsvermögen",
       "matrix_perception": "Matrixwahrnehmung"
     },
     "edge_action": {
@@ -337,7 +337,7 @@
     "initiative": {
       "astral": "Astrale Initiative",
       "matrix": "Matrix-Initiative",
-      "physical": "Initiative"
+      "physical": "Initiative",
       "matrix_ar": "Matrix AR",
       "matrix_cold": "Matrix VR",
       "matrix_hot": "Matrix VR (heiß)"
