@@ -8,7 +8,6 @@
             <table>
                 <tr>
                     <th>{{localize 'shadowrun6.complexform.skill'}}</th>
-                    <th>{{localize 'shadowrun6.complexform.attribute'}}</th>
                     <th>{{localize 'shadowrun6.complexform.oppAttr1'}}</th>
                     <th>{{localize 'shadowrun6.complexform.oppAttr2'}}</th>
                 </tr>
@@ -20,16 +19,6 @@
                             <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
                             <option value="electronics">{{localize 'skill.electronics'}}</option>
                             <option value="cracking">{{localize 'skill.cracking'}}</option>
-                            {{/select}}
-                        </select>
-                    </td>
-                    <td class="box centered">
-                        <!-- //select leer, log, wil-->
-                        <select name="data.attrib">
-                            {{#select item.data.data.attrib}}
-                            <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
-                            <option value="log">{{localize 'attrib.log'}}</option>
-                            <option value="wil">{{localize 'attrib.wil'}}</option>
                             {{/select}}
                         </select>
                     </td>
