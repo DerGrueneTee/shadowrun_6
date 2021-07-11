@@ -97,7 +97,6 @@
       "vehicle": "Vehicle Att. Rtg."
     },
     "complexform": {
-      "attribute": "Attribute",
       "duration": "Duration",
       "fading": "Fading",
       "none": "None",
