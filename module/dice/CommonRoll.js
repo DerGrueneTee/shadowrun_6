@@ -199,10 +199,12 @@ function _dialogClosed(type, form, data, messageData={}) {
 
     
     // Execute the roll
+	data.from =  "dialogClosed.data";
     let r = new SR6Roll("", data);
     try {
 	   console.log("Call r.evaluate: "+r);
       r.evaluate();
+		data.results=r.results;
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
 			data.damage += r._total;
 		}

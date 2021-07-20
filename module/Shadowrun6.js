@@ -170,6 +170,13 @@ Hooks.once("init", async function () {
       colorset: "SR6_dark",
       system: "SR6"
     });
+    dice3d.addDicePreset({
+      type: "dc",
+      labels: ["systems/shadowrun6-eden/images/EdgeToken.png","systems/shadowrun6-eden/images/EdgeToken.png"],
+      bumpMaps: [,],
+      colorset: "SR6_dark",
+      system: "SR6"
+    });
     dice3d.addColorset({
       name: 'SR6_light',
       description: "SR 6 Pink",
@@ -403,8 +410,11 @@ function _onChatMessageAppear(event, chatMsg, html, data) {
     boostSelect.keyup(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
 
 	// chatMsg.roll is a SR6Roll
-	let btnPerform = html.find('.edgePerform');
+	let btnPerform  = html.find('.edgePerform');
+	let edgeBoosts  = html.find('.edgeBoosts');
+	let edgeActions = html.find('.edgeActions');
+	console.log("_onChatMessageAppear");
 	if (btnPerform && chatMsg.roll.peformPostEdgeBoost) {
-		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data));
+		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data, btnPerform, html.find('.edgeBoosts'),  html.find('.edgeActions')));
 	}
 }

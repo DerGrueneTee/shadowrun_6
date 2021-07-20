@@ -58,6 +58,19 @@ export default class EdgeUtil {
 	 */
 static onEdgeBoostActionChange(event, when="Post", chatMsg, html, data) {
 		console.log("_onEdgeBoostActionChange");
+		if (event.currentTarget.name === "edgeBoost") {
+			const boostsSelect = event.currentTarget;
+			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;
+			console.log(" boostId = "+boostId);
+			chatMsg.data.edgeBoost = boostId;
+		} else if (event.currentTarget.name === "edgeAction") {
+			const actionSelect = event.currentTarget;
+			let actionId = actionSelect.children[actionSelect.selectedIndex].dataset.itemActionid;
+			console.log(" actionId = "+actionId);
+			chatMsg.data.edgeAction = actionId;
+			data.edge_use = game.i18n.localize("shadowrun6.edge_action."+actionId)
+		}
+
 		// Ignore this, if there is no actor
 		if (!data.actor) {
 			return;
@@ -66,6 +79,7 @@ static onEdgeBoostActionChange(event, when="Post", chatMsg, html, data) {
 			return;
 		}
 		
+		console.log(" target is "+event.currentTarget.name);
 		if (event.currentTarget.name === "edgeBoost") {
 			const boostsSelect = event.currentTarget;
 			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;

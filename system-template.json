@@ -4,7 +4,7 @@
   "description": "RPGFramework Eden implementation for Shadowrun 6",
   "version": "$VERSION",
   "templateVersion": 1,
-  "author": "René Matis, Stefan & Anja Prelle",
+  "author": "Stefan (taranion#5388) & Anja Prelle",
   "authors": [
 	{
     "name": "Stefan Prelle",
