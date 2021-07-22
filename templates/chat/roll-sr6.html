@@ -25,15 +25,15 @@
         <div>{{formula}}</div>
         <br/>
         {{#if success}}
-        <div>{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
+        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
         {{else}}
-        <div>{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
+        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
         {{/if}} 
         <br/>
         {{#if criticalGlitch}}
-        <span style="color: rgb(215, 14, 233)">{{localize 'shadowrun6.roll.criticalglitch'}}</span><br/>
+        <span style="color: rgb(215, 14, 233); flex:2">{{localize 'shadowrun6.roll.criticalglitch'}}</span><br/>
         {{else glitch}}
-        <span style="color: rgb(194, 76, 29)">{{localize 'shadowrun6.roll.glitch'}}</span><br/>
+        <span style="color: rgb(194, 76, 29); flex:2">{{localize 'shadowrun6.roll.glitch'}}</span><br/>
         {{/if}}
       </header>
         {{{tooltip}}}

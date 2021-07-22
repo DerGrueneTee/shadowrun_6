@@ -422,7 +422,7 @@ export default class SR6Roll extends Roll {
 	}
 	
 	//-------------------------------------------------------------
-	_rerollIndices(roll, indices, diceHtml) {
+	_rerollIndices(roll, indices, html) {
 		console.log("_rerollIndices ",indices);
 		
 		let rollData = {};
@@ -430,14 +430,28 @@ export default class SR6Roll extends Roll {
 		rollData.formula = rollData.pool + "d6";
 		rollData.modifier= 0;
 		rollData.buttonType=0;
-		rollData.edge_use=false;
+		rollData.edge_use="reroll";
 		let r = new SR6Roll("", rollData);
+		let diceHtml = html.find(".dice-rolls");
 		try {
 	   	console.log("Call r.evaluate: "+r);
       	r.evaluate();
 			console.log(" toMessage  r    = ",r);
 			console.log(" Reroll = ",r.results);
+			console.log(" Old = ",roll.data.results);
 			r.toMessage(rollData);
+			
+			// Change previous results
+			for (var i=0; i<indices.length; i++) {
+				let index = indices[i];
+				console.log("Change index "+i+" from ",roll.data.results[index]," to ",r.results[i]);
+				roll.data.results[index] = r.results[i];
+			}
+			// Try to update html
+			diceHtml.children().each(function(i, obj) {
+				$(obj).attr("class", roll.data.results[i].classes);
+			});
+			html.find(".spend_edge").append('<h4 class="highlight" style="margin:0px">Rerolled</h4>');
 			
 	    	let chatOptions = mergeObject( {
 				from: "_rerollIndices.chatOptionsMerged",
@@ -468,13 +482,18 @@ export default class SR6Roll extends Roll {
 
 		let user  = game.users.get(data.message.user);
 		let actor = game.actors.get(chatMsg._roll.data.actor._id);
-		let diceHtml = html.find(".dice-rolls");
+		let diceHtml = html.find(".message-content");
 
 		let boostOrActionId = chatMsg.data.edgeBoost;
 		if (boostOrActionId==='edge_action') {
 			boostOrActionId = chatMsg.data.edgeAction;
 		}
 		console.log("to perform: "+boostOrActionId);
+		
+		// Remove "Spending Edge"
+		html.find(".spend_edge").empty();
+		
+		
 		switch (boostOrActionId) {
 		case "reroll_one":
 			console.debug("Reroll one die");
@@ -494,6 +513,7 @@ export default class SR6Roll extends Roll {
 		default:
 			console.log("ToDo: Support edge action "+boostOrActionId);
 		}	
+
 
 /*
 		let rollData = {};
