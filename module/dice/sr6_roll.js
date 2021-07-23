@@ -91,6 +91,7 @@ export default class SR6Roll extends Roll {
       }
       if (result.result == 5 && ignoreFives) {
         result.classes += "_ignored";
+		  result.success = false;
       }
       if (result.exploded) {
         expl = true;
@@ -201,6 +202,7 @@ export default class SR6Roll extends Roll {
   static fromData(data) {
     const roll = super.fromData(data);
     roll.data = data.data;
+	 roll.results = data.results;
     return roll;
   }
 
@@ -422,7 +424,7 @@ export default class SR6Roll extends Roll {
 	}
 	
 	//-------------------------------------------------------------
-	_rerollIndices(roll, indices, html) {
+	async _rerollIndices(chatMsg, roll, indices, html) {
 		console.log("_rerollIndices ",indices);
 		
 		let rollData = {};
@@ -431,20 +433,18 @@ export default class SR6Roll extends Roll {
 		rollData.modifier= 0;
 		rollData.buttonType=0;
 		rollData.edge_use="reroll";
+		rollData.actionText="Reroll";
 		let r = new SR6Roll("", rollData);
 		let diceHtml = html.find(".dice-rolls");
 		try {
-	   	console.log("Call r.evaluate: "+r);
       	r.evaluate();
-			console.log(" toMessage  r    = ",r);
-			console.log(" Reroll = ",r.results);
-			console.log(" Old = ",roll.data.results);
 			r.toMessage(rollData);
+			let newTotal = roll._total + r._total;
+			roll._total = newTotal;
 			
 			// Change previous results
 			for (var i=0; i<indices.length; i++) {
 				let index = indices[i];
-				console.log("Change index "+i+" from ",roll.data.results[index]," to ",r.results[i]);
 				roll.data.results[index] = r.results[i];
 			}
 			// Try to update html
@@ -452,18 +452,16 @@ export default class SR6Roll extends Roll {
 				$(obj).attr("class", roll.data.results[i].classes);
 			});
 			html.find(".spend_edge").append('<h4 class="highlight" style="margin:0px">Rerolled</h4>');
+			html.find(".resulttext").empty();
+			html.find(".resulttext").append(
+			game.i18n.localize('shadowrun6.roll.success')+": <b>"+newTotal+"</b> "+game.i18n.localize('shadowrun6.roll.successes'));
 			
-	    	let chatOptions = mergeObject( {
-				from: "_rerollIndices.chatOptionsMerged",
-				user: game.user.id,
-				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-				sound: CONFIG.sounds.dice,
-				roll: r
-      		},
-				rollData
-			);
-			//chatOptions.content = r.render(chatOptions);
-    		//ChatMessage.create(chatOptions);
+			// Update message
+			roll.results = roll.data.results;
+			chatMsg.update({
+				 [`roll`]: roll.toJSON(),
+				 ['content']: html[0].innerHTML 
+			});
 		} catch (err) {
       	console.error("sr6_roll error: "+err);
       	console.error("sr6_roll error: "+err.stack);
@@ -498,7 +496,7 @@ export default class SR6Roll extends Roll {
 		case "reroll_one":
 			console.debug("Reroll one die");
 			chatMsg._roll._payEdge(1, user, actor);
-			chatMsg._roll._rerollIndices(chatMsg._roll, chatMsg._roll._getFailedIndices(results,1), diceHtml);
+			chatMsg._roll._rerollIndices(chatMsg, chatMsg._roll, chatMsg._roll._getFailedIndices(results,1), diceHtml);
 			break;
 		case "plus_1_roll":
 			console.debug("+1 to single roll");
@@ -508,7 +506,7 @@ export default class SR6Roll extends Roll {
 		case "reroll_failed":
 			console.debug("Reroll all failed");
 			chatMsg._roll._payEdge(4, user, actor);
-			chatMsg._roll._rerollIndices(chatMsg._roll, chatMsg._roll._getFailedIndices(results,Number.MAX_VALUE), diceHtml);
+			chatMsg._roll._rerollIndices(chatMsg, chatMsg._roll, chatMsg._roll._getFailedIndices(results,Number.MAX_VALUE), diceHtml);
 			break;
 		default:
 			console.log("ToDo: Support edge action "+boostOrActionId);
