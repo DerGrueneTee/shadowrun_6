@@ -332,6 +332,37 @@ Hooks.once("init", async function () {
   });
 });
 
+Hooks.once("dragRuler.ready", (SpeedProvider) => {
+    class FictionalGameSystemSpeedProvider extends SpeedProvider {
+        get colors() {
+            return [
+                {id: "walk", default: 0x00FF00, name: "shadowrun6-eden.speeds.walk"},
+                {id: "dash", default: 0xFFFF00, name: "shadowrun6-eden.speeds.dash"},
+                {id: "run", default: 0xFF8000, name: "shadowrun6-eden.speeds.run"}
+            ]
+        }
+
+        getRanges(token) {
+            const baseSpeed = 5; //token.actor.data.speed
+
+			// A character can always walk it's base speed and dash twice it's base speed
+			const ranges = [
+				{range: 10, color: "walk"},
+				{range: 15, color: "dash"}
+			]
+
+			// Characters that aren't wearing armor are allowed to run with three times their speed
+			if (!token.actor.data.isWearingArmor) {
+				ranges.push({range: baseSpeed * 3, color: "dash"})
+			}
+
+            return ranges
+        }
+    }
+
+    dragRuler.registerSystem("shadowrun6-eden", FictionalGameSystemSpeedProvider)
+})
+
 function getSkillAttribute(key) {
   if (CONFIG.SR6.ATTRIB_BY_SKILL.get(key)) {
     const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
