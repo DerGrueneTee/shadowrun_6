@@ -344,6 +344,10 @@ export class Shadowrun6Actor extends Actor {
 					data.skills[id].poolS = data.skills[id].pool+2;
 				if (data.skills[id].expertise)
 					data.skills[id].poolE = data.skills[id].pool+3;
+					
+				if (data.skills[id].pool<0) { data.skills[id].pool=0;}
+				if (data.skills[id].poolS<0) { data.skills[id].poolS=0;}
+				if (data.skills[id].poolE<0) { data.skills[id].poolE=0;}
 			});
 		}
 	}
