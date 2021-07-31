@@ -535,6 +535,10 @@
       "max": "Max",
       "mod": "Mod"
     },
+	"programtype": {
+		"basic": "Standardprogramme",
+		"hacking": "Hackingprogramme"
+	},
 	"program": {
 		"baby_monitor": {
 			"name": "Babymonitor",
