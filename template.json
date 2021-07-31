@@ -540,6 +540,17 @@
 			"d": 0,
 			"f": 0,
 			"progSlots": 0,
+			"handlOn": 0,
+			"handlOff": 0,
+			"acc": 0,
+			"spdi": 0,
+			"tspd": 0,
+			"bod": 0,
+			"arm": 0,
+			"pil": 0,
+			"sen": 0,
+			"sea": 0,
+			"vtype": "",
 			"templates": [
 				"genesis",
 				"dice-pool"
@@ -602,7 +613,7 @@
 		},
 		"sin": {
 			"name": "Someone",
-			"quality": "REAL",
+			"quality": "REAL_SIN",
 			"description": ""
 		},
 		"skill": {
