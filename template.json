@@ -427,12 +427,15 @@
 	"Item": {
 		"types": [
 			"complexform",
+			"contact",
 			"echo",
 			"gear",
+			"lifestyle",
 			"martialartstyle",
 			"martialarttech",
 			"metamagic",
 			"quality",
+			"sin",
 			"skill",
 			"adeptpower",
 			"spell",
@@ -480,6 +483,13 @@
 			"threshold": 0,
 			"oppAttr1": "",
 			"oppAttr2": ""
+		},
+		"contact": {
+			"name": "Someone",
+			"rating": 1,
+			"loyalty": 1,
+			"type": "",
+			"description": ""
 		},
 		"echo": {
 			"templates": [
@@ -535,6 +545,14 @@
 				"dice-pool"
 			]
 		},
+		"lifestyle": {
+			"templates": [
+				"genesis"
+			],
+			"type": "low",
+			"paid": 1,
+			"sin": ""
+		},
 		"martialartstyle": {
 			"category": {
 				"grappling": false,
@@ -581,6 +599,11 @@
 				"spell": false,
 				"spotter": false
 			}
+		},
+		"sin": {
+			"name": "Someone",
+			"quality": "REAL",
+			"description": ""
 		},
 		"skill": {
 			"templates": [
