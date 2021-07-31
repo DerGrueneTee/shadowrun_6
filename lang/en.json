@@ -535,6 +535,88 @@
       "max": "Max",
       "mod": "adj"
     },
+	"program": {
+		"baby_monitor": {
+			"name": "Baby Monitor",
+			"desc": "Tells you your current Overwatch Score without needing an action."
+		},
+		"browse": {
+			"name": "Browse",
+			"desc": "When doing Matrix searches, gain 1 Edge that is either spent immediately on that action or disappears."
+		},
+		"configurator": {
+			"name": "Configurator",
+			"desc": "Store alternate deck configuration, swap to it instead of changing two attributes."
+		},
+		"edit": {
+			"name": "Edit",
+			"desc": "When doing Edit File action, gain 1 Edge that must be immediately spent or else it vanishes."
+		},
+		"encryption": {
+			"name": "Encryption",
+			"desc": "+2 dice when doing Encrypt File action"
+		},
+		"signal_scrubber": {
+			"name": "Signal Scrubber",
+			"desc": "Reduce noise level by 2"
+		},
+		"toolbox": {
+			"name": "Toolbox",
+			"desc": "+1 to Data Processing"
+		},
+		"virtual_machine": {
+			"name": "Virtual Machine",
+			"desc": "2 extra program slots; take 1 extra box of unresisted Matrix damage when attacked"
+		},
+		"armor": {
+			"name": "Armor",
+			"desc": "+2 to Defense Rating."
+		},
+		"biofeedback": {
+			"name": "Biofeedback",
+			"desc": "Causes Stun (if target is in cold-sim) or Physical (if target is in hot-sim) damage with Matrix attack. This program is linked to the Attack attribute."
+		},
+		"biofeedback_filter": {
+			"name": "Biofeedback Filter",
+			"desc": "Allow Device Rating or Body roll to soak Matrix damage."
+		},
+		"blackout": {
+			"name": "Blackout",
+			"desc": "Like Biofeedback, but Stun damage only. This program is linked to the Attack attribute."
+		},
+		"decryption": {
+			"name": "Decryption",
+			"desc": "+2 dice on Crack File action"
+		},
+		"defuse": {
+			"name": "Defuse",
+			"desc": "Allow Device Rating or Body roll to soak damage from Data Bomb."
+		},
+		"exploit": {
+			"name": "Exploit",
+			"desc": "Reduce Defense Rating of hacking target by 2."
+		},
+		"fork": {
+			"name": "Fork",
+			"desc": "Hit two targets with a single Matrix action without splitting dice pools."
+		},
+		"lockdown": {
+			"name": "Lockdown",
+			"desc": "Cause link-lock when you do Matrix damage."
+		},
+		"overclock": {
+			"name": "Overclock",
+			"desc": "Add two dice to a Matrix action. One of them must be the wild die."
+		},
+		"stealth": {
+			"name": "Stealth",
+			"desc": "When performing a Hide action, gain 1 Edge that must be spent as part of the action or vanish. This program is linked to the Sleaze attribute."
+		},
+		"trace": {
+			"name": "Trace",
+			"desc": "When performing a Trace Icon action, gain 1 Edge that must be spent as part of the action or vanish. This program is linked to the Sleaze attribute."
+		}		
+	},	
     "qualityedit": {
       "category": "Category",
       "description": "Description",

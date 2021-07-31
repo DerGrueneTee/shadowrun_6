@@ -397,3 +397,36 @@ SR6.COMPLEX_FORMS = {
 	"tattletale"       : new ComplexForm("electronics", null,null),
 };
 
+class Program {
+	constructor(id, type) {
+		this.id = id;
+		this.type = type;
+	}
+}
+
+SR6.PROGRAMS = [
+	// Legal
+ 	new Program("browse", 0),
+ 	new Program("baby_monitor", 0),
+ 	new Program("configurator", 0),
+ 	new Program("edit", 0),
+ 	new Program("encryption", 0),
+ 	new Program("signal_scrubber", 0),
+ 	new Program("toolbox", 0),
+ 	new Program("virtual_machine", 0),
+	// Hacking
+ 	new Program("armor", 1),
+ 	new Program("biofeedback", 1),
+ 	new Program("biofeedback_filter", 1),
+ 	new Program("blackout", 1),
+ 	new Program("decryption", 1),
+ 	new Program("disarm", 1),
+ 	new Program("defuse", 1),
+ 	new Program("exploit", 1),
+ 	new Program("fork", 1),
+ 	new Program("lockdown", 1),
+ 	new Program("overclock", 1),
+ 	new Program("stealth", 1),
+ 	new Program("trace", 1),
+	
+];

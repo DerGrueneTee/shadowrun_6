@@ -535,6 +535,88 @@
       "max": "Max",
       "mod": "Mod"
     },
+	"program": {
+		"baby_monitor": {
+			"name": "Babymonitor",
+			"desc": "Gibt dir deinen gegenwärtigen Overwatch-Wert an, ohne dass dafür eine Handlung nötig ist."
+		},
+		"browse": {
+			"name": "Schmöker",
+			"desc": "Wenn du eine Handlung Matrixsuche durchführst, erhältst du 1 Edge; dieser Punkt muss sofort für diese Handlung ausgegeben werden, sonst verfällt er."
+		},
+		"configurator": {
+			"name": "Konfigurator",
+			"desc": "Du kannst eine alternative Attributanordnung für dein PAN abspeichern und zu dieser wechseln, statt nur zwei Attribute auszutauschen."
+		},
+		"edit": {
+			"name": "Editieren",
+			"desc": "Wenn du eine Handlung <em>Datei editieren</em> durchführst, erhältst du 1 Edge; dieser Punkt muss sofort für diese Handlung ausgegeben werden, sonst verfällt er."
+		},
+		"encryption": {
+			"name": "Verschlüsselung",
+			"desc": "+2 Würfel für die Handlung <em>Datei verschlüsseln</em>."
+		},
+		"signal_scrubber": {
+			"name": "Signalreinigerr",
+			"desc": "Senkt den Rauschenwert um 2."
+		},
+		"toolbox": {
+			"name": "Toolbox",
+			"desc": "+1 auf Datenververbeitung"
+		},
+		"virtual_machine": {
+			"name": "Virtuelle Maschine",
+			"desc": "2 zusätzliche Programmslots; bei Angriffen erleidest du 1 zusätzliches Kästchen Matrixschaden, gegen das kein Widerstand geleistet werden kann."
+		},
+		"armor": {
+			"name": "Panzerung",
+			"desc": "+2 zum Verteidigungswert."
+		},
+		"biofeedback": {
+			"name": "Biofeedback",
+			"desc": "Verursacht bei einem Matrixangriff Betäubungsschaden (gegen ein Ziel in der VR mit kaltem Sim) bzw. Körperlichen Schaden (gegen ein Ziel in der VR mit heißem Sim) statt Matrixschaden."
+		},
+		"biofeedback_filter": {
+			"name": "Biofeedbackfilter",
+			"desc": "Du kannst Biofeedback-Schaden mit Gerätestufe oder Konstitution statt mit Willenskraft widerstehen."
+		},
+		"blackout": {
+			"name": "Blackout",
+			"desc": "Ähnlich wie das Programm Biofeedback, kann aber nur Betäubungsschaden verursachen."
+		},
+		"decryption": {
+			"name": "Entschüsselung",
+			"desc": "+2 Würfel für die Handlung <em>Datei cracken</em>."
+		},
+		"defuse": {
+			"name": "Splitterschutz",
+			"desc": "Du kannst Schaden durch eine Datenbombe mit Gerätestufe oder Konstitution statt mit Firewall widerstehen."
+		},
+		"exploit": {
+			"name": "Ausnutzen",
+			"desc": "Der Verteidigungswert der Gegenseite sinkt bei deinen Hacking-Versuchen um 2."
+		},
+		"fork": {
+			"name": "Gabel",
+			"desc": "Du kannst zwei Ziele mit einer einzelnen Matrixhandlung treffen, ohne den Würfelpool aufzuteilen. Jedes Ziel verteidigt sich mit einem eigenen Würfelpool; die Auswirkungen werden separat bestimmt."
+		},
+		"lockdown": {
+			"name": "Fessel",
+			"desc": "Wenn du einem Ziel Matrixschaden zufügst, belegst du es zusätzlich mit einer Linksperre."
+		},
+		"overclock": {
+			"name": "Übertakten",
+			"desc": "+2 Würfel für eine Matrixhandlung. Einer der Würfel muss der Schicksalswürfel sein."
+		},
+		"stealth": {
+			"name": "Tarnkappe",
+			"desc": "Wenn du die Handlung Verstecken durchführst, erhältst du 1 Edge; dieser Punkt muss sofort für diese Handlung ausgegeben werden, sonst verfällt er."
+		},
+		"trace": {
+			"name": "Aufspüren",
+			"desc": "Wenn du die Handlung Icon aufspüren durchführst, erhältst du 1 Edge; dieser Punkt muss sofort für diese Handlung ausgegeben werden, sonst verfällt er."
+		}		
+	},	
     "qualityedit": {
       "category": "Art",
       "description": "Beschreibung",
