@@ -454,7 +454,7 @@
     },
     {
       "name": "Alcohol",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "alcohol",
         "type": "CHEMICALS",
@@ -471,7 +471,7 @@
     },
     {
       "name": "Autopicker",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "autopicker",
         "type": "ELECTRONICS",
@@ -488,7 +488,7 @@
     },
     {
       "name": "Binoculars (Optical)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "binoculars_optical",
         "type": "ELECTRONICS",
@@ -505,7 +505,7 @@
     },
     {
       "name": "Biomonitor",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "biomonitor",
         "type": "BIOLOGY",
@@ -522,7 +522,7 @@
     },
     {
       "name": "Bliss",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "bliss",
         "type": "CHEMICALS",
@@ -539,7 +539,7 @@
     },
     {
       "name": "Bug Scanner",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "bug_scanner",
         "type": "ELECTRONICS",
@@ -556,7 +556,7 @@
     },
     {
       "name": "Clothing (Luxury)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "defense": 0,
         "social": 0,
@@ -575,7 +575,7 @@
     },
     {
       "name": "Colt Secret Agent",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "dmgDef": "2P",
         "dmg": 2,
@@ -610,7 +610,7 @@
     },
     {
       "name": "Contacts",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "contacts",
         "type": "ELECTRONICS",
@@ -628,7 +628,7 @@
     },
     {
       "name": "DMSO (10x) (Gel)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "ammo_dmso",
         "type": "AMMUNITION",
@@ -645,7 +645,7 @@
     },
     {
       "name": "DocWagon Platinum Contract (1 Year)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "docwagon_platinum_year",
         "type": "BIOLOGY",
@@ -662,7 +662,7 @@
     },
     {
       "name": "Earbuds",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "earbuds",
         "type": "ELECTRONICS",
@@ -680,7 +680,7 @@
     },
     {
       "name": "First Aid kit",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "first_aid_kit",
         "type": "BIOLOGY",
@@ -697,7 +697,7 @@
     },
     {
       "name": "Handheld sensor housing",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "handheld_housing",
         "type": "ELECTRONICS",
@@ -715,7 +715,7 @@
     },
     {
       "name": "Heavy Pistol/SMG (10x) (Explosive)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "ammo_heavy_smg",
         "type": "AMMUNITION",
@@ -732,7 +732,7 @@
     },
     {
       "name": "Heavy Pistol/SMG (10x) (Regular)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "ammo_heavy_smg",
         "type": "AMMUNITION",
@@ -749,7 +749,7 @@
     },
     {
       "name": "Hermes Ikon",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "hermes_ikon",
         "type": "ELECTRONICS",
@@ -757,7 +757,7 @@
         "availDef": "3",
         "avail": 3,
         "price": 6110,
-        "accessories": "Satellite link, Trid projector, Subvocal microphone, Edit, Mapsoft (Orient), Mapsoft (Balkan), Mapsoft (Europa)",
+        "accessories": "Edit, Mapsoft (Orient), Mapsoft (Balkan), Mapsoft (Europa), Satellite link, Trid projector, Subvocal microphone",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -767,7 +767,7 @@
     },
     {
       "name": "Mänade (Ares Pred. VI)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "dmgDef": "3P",
         "dmg": 3,
@@ -791,7 +791,7 @@
         "availDef": "2 (L)",
         "avail": 2,
         "price": 3135,
-        "accessories": "Flashlight, Low-Light, Vision magnification, Concealable Quick Draw Holster, Spare clip, Silencer",
+        "accessories": "Silencer, Concealable Quick Draw Holster, Spare clip, Flashlight, Low-Light, Vision magnification",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -804,7 +804,7 @@
     },
     {
       "name": "Medkit",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "medkit",
         "type": "BIOLOGY",
@@ -821,7 +821,7 @@
     },
     {
       "name": "Medkit supplies",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "medkit_supplies",
         "type": "BIOLOGY",
@@ -838,7 +838,7 @@
     },
     {
       "name": "Mercedes W-SR 290 \"Wesir“",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "handlOn": 3,
         "handlOff": 5,
@@ -866,7 +866,7 @@
     },
     {
       "name": "Mortimer o.L. Greatcoats",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "defense": 4,
         "social": 4,
@@ -885,7 +885,7 @@
     },
     {
       "name": "Mystic Armor",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "defense": 4,
         "social": 0,
@@ -904,7 +904,7 @@
     },
     {
       "name": "Plastic straps (10)",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "plastic_straps",
         "type": "ELECTRONICS",
@@ -921,7 +921,7 @@
     },
     {
       "name": "Respirator",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "respirator",
         "type": "SURVIVAL",
@@ -938,7 +938,7 @@
     },
     {
       "name": "Survival Knife",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "dmgDef": "3P",
         "dmg": 3,
@@ -973,7 +973,7 @@
     },
     {
       "name": "Synergist Business Suit",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "defense": 2,
         "social": 3,
@@ -993,7 +993,7 @@
     },
     {
       "name": "Synthleater Jacket",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "defense": 1,
         "social": -2,
@@ -1012,7 +1012,7 @@
     },
     {
       "name": "Transys Avalon",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "transys_avalon",
         "type": "ELECTRONICS",
@@ -1020,7 +1020,7 @@
         "availDef": "3",
         "avail": 3,
         "price": 9350,
-        "accessories": "AR gloves, Satellite link, SIM module, Subvocal microphone, Edit, Browse, Mapsoft (ADL), Shopsoft (Weine und Spirituosen), Signal Scrubber, Toolbox, Configurator",
+        "accessories": "Edit, Browse, Mapsoft (ADL), Shopsoft (Weine und Spirituosen), Signal Scrubber, Toolbox, Configurator, AR gloves, Satellite link, SIM module, Subvocal microphone",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -1030,7 +1030,7 @@
     },
     {
       "name": "Trodes",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "trodes",
         "type": "ELECTRONICS",
@@ -1047,7 +1047,7 @@
     },
     {
       "name": "Trollkleidung Mittelschicht",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "defense": 0,
         "social": 0,
@@ -1067,7 +1067,7 @@
     },
     {
       "name": "Unarmed",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "dmgDef": "2S",
         "dmg": 2,
@@ -1102,7 +1102,7 @@
     },
     {
       "name": "Walther Secura II",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "dmgDef": "3P",
         "dmg": 3,
@@ -1126,7 +1126,7 @@
         "availDef": "3 (L)",
         "avail": 3,
         "price": 2610,
-        "accessories": "Laser Sight (Low Power), Vision magnification, Concealable holster, Spare clip, Guncam, Flashlight",
+        "accessories": "Guncam, Concealable holster, Spare clip, Laser Sight (Low Power), Vision magnification, Flashlight",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -1138,7 +1138,7 @@
     },
     {
       "name": "Zen",
-      "type": "vehicle",
+      "type": "gear",
       "data": {
         "genesisID": "zen",
         "type": "CHEMICALS",

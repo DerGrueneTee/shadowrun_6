@@ -76,7 +76,8 @@
         "magic": "Magic",
         "matrix": "Matrix",
         "overview": "Overview",
-        "skills": "Skills"
+        "skills": "Skills",
+        "vehicles": "Vehicles"
       },
       "skills": "Skills",
       "spells": "Spells"
@@ -741,6 +742,10 @@
       },
       "defense": "Defenses & Resistances",
       "derived": "Derived Values",
+      "drones": {
+        "add": "Add new drone",
+        "title": "Drones"
+      },
       "electronics": "Electronics",
       "echo": {
         "add": "Add new echo",
@@ -807,6 +812,21 @@
         "column.drain": "Drain",
         "column.range": "Range",
         "title": "Spells"
+      },
+      "vehicles": {
+        "add": "Add new vehicle",
+		  "column": {
+				"handling": "Han",
+				"acc": "Acc",
+				"spdi": "S.Int",
+				"tspd": "Speed",
+				"bod": "B",
+				"arm": "A",
+				"pil": "P",
+				"sen": "S",
+				"sea": "Sea"
+			},
+        "title": "Vehicles"
       },
       "weapon": {
         "add": "Add new weapon",

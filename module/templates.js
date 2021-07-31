@@ -15,9 +15,6 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/npc-attributes.html",
 		"systems/shadowrun6-eden/templates/parts/npc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/npc-spells.html",
-		"systems/shadowrun6-eden/templates/parts/tab-combat.html",
-		"systems/shadowrun6-eden/templates/parts/tab-magic.html",
-		"systems/shadowrun6-eden/templates/parts/tab-matrix.html",
 		"systems/shadowrun6-eden/templates/parts/pc-derived.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skillvalues.html",
@@ -27,6 +24,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-armor.html",
 		"systems/shadowrun6-eden/templates/parts/section-bodyware.html",
 		"systems/shadowrun6-eden/templates/parts/section-complexforms.html",
+		"systems/shadowrun6-eden/templates/parts/section-drones.html",
 		"systems/shadowrun6-eden/templates/parts/section-echoes.html",
 		"systems/shadowrun6-eden/templates/parts/section-gear.html",
 		"systems/shadowrun6-eden/templates/parts/section-magicbase.html",
@@ -44,6 +42,11 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-soakresist.html",
 		"systems/shadowrun6-eden/templates/parts/section-spells.html",
 		"systems/shadowrun6-eden/templates/parts/section-weapons.html",
+		"systems/shadowrun6-eden/templates/parts/section-vehicles.html",
+		"systems/shadowrun6-eden/templates/parts/tab-combat.html",
+		"systems/shadowrun6-eden/templates/parts/tab-magic.html",
+		"systems/shadowrun6-eden/templates/parts/tab-matrix.html",
+		"systems/shadowrun6-eden/templates/parts/tab-vehicles.html",
 		];
 
 	console.log(`Load templates`);

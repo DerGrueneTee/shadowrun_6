@@ -76,7 +76,8 @@
         "magic": "Magie",
         "matrix": "Matrix",
         "overview": "Übersicht",
-        "skills": "Fertigkeiten"
+        "skills": "Fertigkeiten",
+        "vehicles": "Fahrzeuge"
       },
       "skills": "Fertigkeiten",
       "spells": "Zauber"
@@ -806,6 +807,10 @@
         "column.drain": "Entzug",
         "column.range": "Reichw",
         "title": "Zauber"
+      },
+      "vehicles": {
+        "add": "Fahrzeug hinzufügen",
+        "title": "Fahrzeuge"
       },
       "weapon": {
         "add": "Neue Waffe hinzufügen",
