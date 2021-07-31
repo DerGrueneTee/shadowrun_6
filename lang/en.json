@@ -453,6 +453,7 @@
       "pool": "Pool",
       "poolmod": "Pool modifier",
       "progSlots" : "Prog. slots",
+      "programs.short": "P",
       "specialization": "Specialization",
       "threshold": "Threshold",
       "value": "Value",
@@ -535,6 +536,10 @@
       "max": "Max",
       "mod": "adj"
     },
+	"programtype": {
+		"basic": "Basic Programs",
+		"hacking": "Hacking Programs"
+	},
 	"program": {
 		"baby_monitor": {
 			"name": "Baby Monitor",
