@@ -784,6 +784,10 @@
         "column.rating": "Lv",
         "title": "Foci"
       },
+      "lifestyle" : {
+        "add": "Add new lifestyle",
+        "title" : "Lifestyles"
+      },
       "matrix_base": {
         "overwatch": "Overwatch"
       },
