@@ -469,6 +469,7 @@
       "wilddie": "Wild Die"
     },
     "lifestyle": {
+      "cost" : "Cost",
       "paid": "Paid",
       "type": "Type",
       "sin": "Linked SIN",

@@ -469,6 +469,7 @@
       "wilddie": "Schicksalswürfel"
     },
     "lifestyle" : {
+      "cost" : "Kosten",
       "paid" : "Bezahlt",
       "type" : "Art",
       "sin" : "Verkn. SIN",
