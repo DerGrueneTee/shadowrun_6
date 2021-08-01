@@ -1,61 +1,64 @@
 {
-	"ACTOR": {
-		"TypeCritter": "Critter",
-		"TypeNpc": "NPC",
-		"TypePlayer": "Player Character"
-	},
-	"ITEM": {
-  		"TypeAdeptpower": "Adept Power",
-      	"TypeComplexform" : "Complex Form",
-      	"TypeEcho" : "Echo",
-  		"TypeGear": "Gear",
-		"TypeMartialartstyle": "Martial Art Style",
-		"TypeMartialarttech": "Martial Art Technique",
-  		"TypeMetamagic": "Metamagic",
-  		"TypeQuality": "Quality",
-  		"TypeRitual": "Ritual",
-  		"TypeSkill": "Language/Knowledge Skill",
-  		"TypeSpell": "Spell",
-  		"TypeWeapon": "Weapon"		
-	},
-	"QUALITY_CATEGORIES": {
-  		"ADVANTAGE": "Advantage",
-  		"DISADVANTAGE": "Disadvantage"		
-	},
-	"attrib": {
-  "agi": "Agility",
-  "agi_short": "AGI",
-  "bod": "Body",
-  "bod_short": "BOD",
-  "cha": "Charisma",
-  "cha_short": "CHA",
-  "dr": "Defense Rating",
-  "dr_short": "DR",
-  "edg": "Edge",
-  "edg_short": "EDG",
-  "ess": "Essence",
-  "ess_short": "ESS",
-  "ini": "Initiative",
-  "ini_short": "INI",
-  "inia": "Astral Initiative",
-  "inia_short": "A.INI",
-  "inim": "Matrix Initiative",
-  "inim_short": "M.INI",
-  "int": "Intuition",
-  "int_short": "INT",
-  "log": "Logic",
-  "log_short": "LOG",
-  "mag": "Magic",
-  "mag_short": "MAG",
-  "rea": "Reaction",
-  "rea_short": "REA",
-  "res": "Resonance",
-  "res_short": "RES",
-  "str": "Strength",
-  "str_short": "STR",
-  "wil": "Willpower",
-  "wil_short": "WIL"		
-	},
+  "ACTOR": {
+    "TypeCritter": "Critter",
+    "TypeNpc": "NPC",
+    "TypePlayer": "Player Character"
+  },
+  "ITEM": {
+    "TypeAdeptpower": "Adept Power",
+    "TypeComplexform": "Complex Form",
+    "TypeContact" : "Contact",
+    "TypeEcho": "Echo",
+    "TypeGear": "Gear",
+    "TypeLifestyle" : "Lifestyle",
+    "TypeMartialartstyle": "Martial Art Style",
+    "TypeMartialarttech": "Martial Art Technique",
+    "TypeMetamagic": "Metamagic",
+    "TypeQuality": "Quality",
+    "TypeRitual": "Ritual",
+    "TypeSin" : "SIN",
+    "TypeSkill": "Language/Knowledge Skill",
+    "TypeSpell": "Spell",
+    "TypeWeapon": "Weapon"
+  },
+  "QUALITY_CATEGORIES": {
+    "ADVANTAGE": "Advantage",
+    "DISADVANTAGE": "Disadvantage"
+  },
+  "attrib": {
+    "agi": "Agility",
+    "agi_short": "AGI",
+    "bod": "Body",
+    "bod_short": "BOD",
+    "cha": "Charisma",
+    "cha_short": "CHA",
+    "dr": "Defense Rating",
+    "dr_short": "DR",
+    "edg": "Edge",
+    "edg_short": "EDG",
+    "ess": "Essence",
+    "ess_short": "ESS",
+    "ini": "Initiative",
+    "ini_short": "INI",
+    "inia": "Astral Initiative",
+    "inia_short": "A.INI",
+    "inim": "Matrix Initiative",
+    "inim_short": "M.INI",
+    "int": "Intuition",
+    "int_short": "INT",
+    "log": "Logic",
+    "log_short": "LOG",
+    "mag": "Magic",
+    "mag_short": "MAG",
+    "rea": "Reaction",
+    "rea_short": "REA",
+    "res": "Resonance",
+    "res_short": "RES",
+    "str": "Strength",
+    "str_short": "STR",
+    "wil": "Willpower",
+    "wil_short": "WIL"
+  },
   "label.skill": "Skill",
   "section.attributes": "Attributes",
   "shadowrun6": {
@@ -69,6 +72,7 @@
       "name": "Name",
       "nav": {
         "basics": "Basics",
+        "biography": "Biography",
         "combat": "Combat",
         "description": "Description",
         "equip": "Equipment",
@@ -100,10 +104,15 @@
       "duration": "Duration",
       "fading": "Fading",
       "none": "None",
-      "oppAttr1" : "Opposing Attr. 1",
-      "oppAttr2" : "Opposing Attr. 2",
+      "oppAttr1": "Opposing Attr. 1",
+      "oppAttr2": "Opposing Attr. 2",
       "skill": "Skill",
-      "threshold" : "Threshold"
+      "threshold": "Threshold"
+    },
+    "contact": {
+      "rating": "Rating",
+      "loyalty": "Loyalty",
+      "type": "Type"
     },
     "defense": {
       "astral": "Defense: Astral Combat",
@@ -373,7 +382,7 @@
       "mode_sa": "SA",
       "mode_ss": "SS",
       "natural": "Nat. armor",
-      "physical_damage" : "P",
+      "physical_damage": "P",
       "price": "Price",
       "skill": "Skill",
       "skillspec": "Specialisation",
@@ -407,11 +416,11 @@
     "label": {
       "accessories": "Accessories",
       "adepts": "Adepts",
-		"action": "Action",
-		"actionduration": {
-			"minor.short": "Mi",
-			"major.short": "Ma"
-		},
+      "action": "Action",
+      "actionduration": {
+        "minor.short": "Mi",
+        "major.short": "Ma"
+      },
       "attack_rating": "Attack Rating",
       "attack_rating_short": "AR",
       "attribute": "Attribute",
@@ -432,16 +441,16 @@
       "damage_short": "Dmg",
       "defense_rating": "Defense Rating",
       "delete": "Delete",
-      "devRating" : "Device rtg.",
+      "devRating": "Device rtg.",
       "dice": "Dice",
       "edit": "Edit",
       "expertise": "Expertise",
       "features": "Features",
       "firemode_current": "Current Firemode",
       "firemodes": "Firemodes",
-		"gender": "Gender",
-		"legality.illegal.short": "I",
-		"legality.legal.short": "L",
+      "gender": "Gender",
+      "legality.illegal.short": "I",
+      "legality.legal.short": "L",
       "level": "Has levels",
       "mages": "Mages",
       "max": "Maximum",
@@ -452,58 +461,69 @@
       "points": "Points",
       "pool": "Pool",
       "poolmod": "Pool modifier",
-      "progSlots" : "Prog. slots",
+      "progSlots": "Prog. slots",
       "specialization": "Specialization",
       "threshold": "Threshold",
       "value": "Value",
       "wilddie": "Wild Die"
     },
-	"matrixaction": {
-		"backdoor_entry": "Backdoor Entry",
-		"brute_force": "Brute Force",
-		"change_icon": "Change Icon",
-		"check_os": "Check OS",
-		"control_device": "Control Device",
-		"crack_file": "Crack File",
-		"crash_program": "Crash Program",
-		"data_spike": "Dataspike",
-		"disarm_data_bomb": "Disarm Data Bomb",
-		"edit_file": "Edit File",
-		"encrypt_file": "Encrypt File",
-		"enter_host": "Enter Host",
-		"erase_matrix_signature": "Erase Matrix Sign.",
-		"format_device": "Format Device",
-		"full_matrix_defense": "Full Matrix Defense",
-		"hash_check": "Hash Check",
-		"hide": "Hide",
-		"jack_out": "Jack Out",
-		"jam_signals": "Jam Signals",
-		"jump_rigged": "Jump Into Rigged D.",
-		"matrix_perception": "Matrix Perception",
-		"matrix_search": "Matrix Search",
-		"probe": "Probe",
-		"reboot_device": "Reboot Device",
-		"reconfigure": "Reconf. Matrix Attr.",
-		"send_message": "Send Message",
-		"set_data_bomb": "Set Data Bomb",
-		"snoop": "Snoop",
-		"spoof_command": "Spoof Command",
-		"switch_ifmode": "Switch Interface Mode",
-		"tarpit": "Tarpit",
-		"trace_icon": "Trace Icon"
-	},
+    "lifestyle": {
+      "paid": "Paid",
+      "type": "Type",
+      "sin": "Linked SIN",
+      "street" : "Street",
+      "squatter" : "Squatter",
+      "low" : "Low",
+      "middle" : "Middle",
+      "high" : "High",
+      "luxury" : "Luxury"
+    },
+    "matrixaction": {
+      "backdoor_entry": "Backdoor Entry",
+      "brute_force": "Brute Force",
+      "change_icon": "Change Icon",
+      "check_os": "Check OS",
+      "control_device": "Control Device",
+      "crack_file": "Crack File",
+      "crash_program": "Crash Program",
+      "data_spike": "Dataspike",
+      "disarm_data_bomb": "Disarm Data Bomb",
+      "edit_file": "Edit File",
+      "encrypt_file": "Encrypt File",
+      "enter_host": "Enter Host",
+      "erase_matrix_signature": "Erase Matrix Sign.",
+      "format_device": "Format Device",
+      "full_matrix_defense": "Full Matrix Defense",
+      "hash_check": "Hash Check",
+      "hide": "Hide",
+      "jack_out": "Jack Out",
+      "jam_signals": "Jam Signals",
+      "jump_rigged": "Jump Into Rigged D.",
+      "matrix_perception": "Matrix Perception",
+      "matrix_search": "Matrix Search",
+      "probe": "Probe",
+      "reboot_device": "Reboot Device",
+      "reconfigure": "Reconf. Matrix Attr.",
+      "send_message": "Send Message",
+      "set_data_bomb": "Set Data Bomb",
+      "snoop": "Snoop",
+      "spoof_command": "Spoof Command",
+      "switch_ifmode": "Switch Interface Mode",
+      "tarpit": "Tarpit",
+      "trace_icon": "Trace Icon"
+    },
     "monitor": {
       "physical": "Physical",
       "stun": "Stun"
     },
-	"mortype": {
-		"adept": "Adept",
-		"aspectedmagician": "Aspected Magician",
-		"magician": "Magician",
-		"mundane": "Mundane",
-		"mysticadept": "Mystic Adept",
-		"technomancer": "Technomancer"
-	},
+    "mortype": {
+      "adept": "Adept",
+      "aspectedmagician": "Aspected Magician",
+      "magician": "Magician",
+      "mundane": "Mundane",
+      "mysticadept": "Mystic Adept",
+      "technomancer": "Technomancer"
+    },
     "newitem": {
       "adeptpower": "Name your power",
       "ammunition": "Hot stuff ammo",
@@ -511,16 +531,19 @@
       "biology": "Biohazard",
       "bodyware": "Some cool enhancement",
       "chemicals": "The good stuff",
-      "complexform" : "How complex do you like it?",
+      "complexform": "How complex do you like it?",
+      "contact": "Whom shall we contact?",
       "cyberware": "Some cool cyber enhancement",
       "electronics": "Nerd toy",
       "focus": "Something to stay focussed",
+      "lifestyle": "Card board box or suite?",
       "martialartstyle": "What's your style?",
       "martialarttech": "Technique, which technique?",
-		"matrix": "Check out my deck!",
+      "matrix": "Check out my deck!",
       "metamagic": "What have you learned?",
       "quality": "What is your feat?",
       "ritual": "Singing Hallelujah",
+      "sin": "Who are you? Who, who, who, who",
       "skill": {
         "knowledge": "What is your nerd topic?",
         "language": "Gibberish"
@@ -535,88 +558,88 @@
       "max": "Max",
       "mod": "adj"
     },
-	"program": {
-		"baby_monitor": {
-			"name": "Baby Monitor",
-			"desc": "Tells you your current Overwatch Score without needing an action."
-		},
-		"browse": {
-			"name": "Browse",
-			"desc": "When doing Matrix searches, gain 1 Edge that is either spent immediately on that action or disappears."
-		},
-		"configurator": {
-			"name": "Configurator",
-			"desc": "Store alternate deck configuration, swap to it instead of changing two attributes."
-		},
-		"edit": {
-			"name": "Edit",
-			"desc": "When doing Edit File action, gain 1 Edge that must be immediately spent or else it vanishes."
-		},
-		"encryption": {
-			"name": "Encryption",
-			"desc": "+2 dice when doing Encrypt File action"
-		},
-		"signal_scrubber": {
-			"name": "Signal Scrubber",
-			"desc": "Reduce noise level by 2"
-		},
-		"toolbox": {
-			"name": "Toolbox",
-			"desc": "+1 to Data Processing"
-		},
-		"virtual_machine": {
-			"name": "Virtual Machine",
-			"desc": "2 extra program slots; take 1 extra box of unresisted Matrix damage when attacked"
-		},
-		"armor": {
-			"name": "Armor",
-			"desc": "+2 to Defense Rating."
-		},
-		"biofeedback": {
-			"name": "Biofeedback",
-			"desc": "Causes Stun (if target is in cold-sim) or Physical (if target is in hot-sim) damage with Matrix attack. This program is linked to the Attack attribute."
-		},
-		"biofeedback_filter": {
-			"name": "Biofeedback Filter",
-			"desc": "Allow Device Rating or Body roll to soak Matrix damage."
-		},
-		"blackout": {
-			"name": "Blackout",
-			"desc": "Like Biofeedback, but Stun damage only. This program is linked to the Attack attribute."
-		},
-		"decryption": {
-			"name": "Decryption",
-			"desc": "+2 dice on Crack File action"
-		},
-		"defuse": {
-			"name": "Defuse",
-			"desc": "Allow Device Rating or Body roll to soak damage from Data Bomb."
-		},
-		"exploit": {
-			"name": "Exploit",
-			"desc": "Reduce Defense Rating of hacking target by 2."
-		},
-		"fork": {
-			"name": "Fork",
-			"desc": "Hit two targets with a single Matrix action without splitting dice pools."
-		},
-		"lockdown": {
-			"name": "Lockdown",
-			"desc": "Cause link-lock when you do Matrix damage."
-		},
-		"overclock": {
-			"name": "Overclock",
-			"desc": "Add two dice to a Matrix action. One of them must be the wild die."
-		},
-		"stealth": {
-			"name": "Stealth",
-			"desc": "When performing a Hide action, gain 1 Edge that must be spent as part of the action or vanish. This program is linked to the Sleaze attribute."
-		},
-		"trace": {
-			"name": "Trace",
-			"desc": "When performing a Trace Icon action, gain 1 Edge that must be spent as part of the action or vanish. This program is linked to the Sleaze attribute."
-		}		
-	},	
+    "program": {
+      "baby_monitor": {
+        "name": "Baby Monitor",
+        "desc": "Tells you your current Overwatch Score without needing an action."
+      },
+      "browse": {
+        "name": "Browse",
+        "desc": "When doing Matrix searches, gain 1 Edge that is either spent immediately on that action or disappears."
+      },
+      "configurator": {
+        "name": "Configurator",
+        "desc": "Store alternate deck configuration, swap to it instead of changing two attributes."
+      },
+      "edit": {
+        "name": "Edit",
+        "desc": "When doing Edit File action, gain 1 Edge that must be immediately spent or else it vanishes."
+      },
+      "encryption": {
+        "name": "Encryption",
+        "desc": "+2 dice when doing Encrypt File action"
+      },
+      "signal_scrubber": {
+        "name": "Signal Scrubber",
+        "desc": "Reduce noise level by 2"
+      },
+      "toolbox": {
+        "name": "Toolbox",
+        "desc": "+1 to Data Processing"
+      },
+      "virtual_machine": {
+        "name": "Virtual Machine",
+        "desc": "2 extra program slots; take 1 extra box of unresisted Matrix damage when attacked"
+      },
+      "armor": {
+        "name": "Armor",
+        "desc": "+2 to Defense Rating."
+      },
+      "biofeedback": {
+        "name": "Biofeedback",
+        "desc": "Causes Stun (if target is in cold-sim) or Physical (if target is in hot-sim) damage with Matrix attack. This program is linked to the Attack attribute."
+      },
+      "biofeedback_filter": {
+        "name": "Biofeedback Filter",
+        "desc": "Allow Device Rating or Body roll to soak Matrix damage."
+      },
+      "blackout": {
+        "name": "Blackout",
+        "desc": "Like Biofeedback, but Stun damage only. This program is linked to the Attack attribute."
+      },
+      "decryption": {
+        "name": "Decryption",
+        "desc": "+2 dice on Crack File action"
+      },
+      "defuse": {
+        "name": "Defuse",
+        "desc": "Allow Device Rating or Body roll to soak damage from Data Bomb."
+      },
+      "exploit": {
+        "name": "Exploit",
+        "desc": "Reduce Defense Rating of hacking target by 2."
+      },
+      "fork": {
+        "name": "Fork",
+        "desc": "Hit two targets with a single Matrix action without splitting dice pools."
+      },
+      "lockdown": {
+        "name": "Lockdown",
+        "desc": "Cause link-lock when you do Matrix damage."
+      },
+      "overclock": {
+        "name": "Overclock",
+        "desc": "Add two dice to a Matrix action. One of them must be the wild die."
+      },
+      "stealth": {
+        "name": "Stealth",
+        "desc": "When performing a Hide action, gain 1 Edge that must be spent as part of the action or vanish. This program is linked to the Sleaze attribute."
+      },
+      "trace": {
+        "name": "Trace",
+        "desc": "When performing a Trace Icon action, gain 1 Edge that must be spent as part of the action or vanish. This program is linked to the Sleaze attribute."
+      }
+    },
     "qualityedit": {
       "category": "Category",
       "description": "Description",
@@ -637,7 +660,7 @@
         "attack_target_none": "Attacking target with {name}",
         "attack_target_one": "Attacking {target} with {name}",
         "cast": "Casting {name}",
-		  "thread": "Threading {name}",
+        "thread": "Threading {name}",
         "defense": {
           "physical": "Defend against physical attack"
         }
@@ -734,6 +757,10 @@
         "column.fade": "Fade",
         "title": "Complex Forms"
       },
+      "contacts": {
+        "add": "Add new contact",
+        "title": "Contacts"
+      },
       "defense": "Defenses & Resistances",
       "derived": "Derived Values",
       "electronics": "Electronics",
@@ -775,7 +802,7 @@
         "title": "Metamagics"
       },
       "persona": {
-			"distribute": "Distribute",
+        "distribute": "Distribute",
         "title": "Persona"
       },
       "qualities": "Qualities",
@@ -998,25 +1025,25 @@
       "attribute": "Tradition Attribute"
     }
   },
-	"skill": {
-		"astral": "Astral",
-		"athletics": "Athletics",
-		"biotech": "Biotech",
-		"close_combat": "Close Combat",
-		"con": "Con",
-		"conjuring": "Conjuring",
-		"cracking": "Cracking",
-		"electronics": "Electronics",
-		"enchanting": "Enchanting",
-		"engineering": "Engineering",
-		"exotic_weapons": "Exotic Weapons",
-		"firearms": "Firearms",
-		"influence": "Influence",
-		"outdoors": "Outdoors",
-		"perception": "Perception",
-		"piloting": "Piloting",
-		"sorcery": "Sorcery",
-		"stealth": "Stealth",
-		"tasking": "Tasking"	
-	}
+  "skill": {
+    "astral": "Astral",
+    "athletics": "Athletics",
+    "biotech": "Biotech",
+    "close_combat": "Close Combat",
+    "con": "Con",
+    "conjuring": "Conjuring",
+    "cracking": "Cracking",
+    "electronics": "Electronics",
+    "enchanting": "Enchanting",
+    "engineering": "Engineering",
+    "exotic_weapons": "Exotic Weapons",
+    "firearms": "Firearms",
+    "influence": "Influence",
+    "outdoors": "Outdoors",
+    "perception": "Perception",
+    "piloting": "Piloting",
+    "sorcery": "Sorcery",
+    "stealth": "Stealth",
+    "tasking": "Tasking"
+  }
 }

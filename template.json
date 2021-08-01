@@ -551,6 +551,7 @@
 			],
 			"type": "low",
 			"paid": 1,
+			"cost" : 2000,
 			"sin": ""
 		},
 		"martialartstyle": {

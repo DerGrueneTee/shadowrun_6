@@ -18,6 +18,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/tab-combat.html",
 		"systems/shadowrun6-eden/templates/parts/tab-magic.html",
 		"systems/shadowrun6-eden/templates/parts/tab-matrix.html",
+		"systems/shadowrun6-eden/templates/parts/tab-biography.html",
 		"systems/shadowrun6-eden/templates/parts/pc-derived.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/pc-skillvalues.html",
@@ -43,6 +44,9 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-soakresist.html",
 		"systems/shadowrun6-eden/templates/parts/section-spells.html",
 		"systems/shadowrun6-eden/templates/parts/section-weapons.html",
+		"systems/shadowrun6-eden/templates/parts/section-sins.html",
+		"systems/shadowrun6-eden/templates/parts/section-contacts.html",
+		"systems/shadowrun6-eden/templates/parts/section-lifestyles.html",
 		];
 
 	console.log(`Load templates`);

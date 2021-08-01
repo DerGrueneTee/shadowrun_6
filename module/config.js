@@ -439,11 +439,20 @@ class SinQuality {
 }
 
 SR6.SIN_QUALITY = {
-	"REAL_SIN"        : new SinQuality("REAL_SIN", -1, "shadowrun6.sin.real_sin"),
-	"ANYONE"          : new SinQuality("ANYONE"  , 1, "shadowrun6.sin.anyone"),
-	"ROUGH_MATCH"     : new SinQuality("ROUGH_MATCH", 2, "shadowrun6.sin.rough_match"),
-	"GOOD_MATCH"      : new SinQuality("GOOD_MATCH", 3, "shadowrun6.sin.good_match"),
-	"SUPERFICIALLY_PLAUSIBLE": new SinQuality("SUPERFICIALLY_PLAUSIBLE", 4, "shadowrun6.sin.superficially_plausible"),
-	"HIGHLY_PLAUSIBLE": new SinQuality("HIGHLY_PLAUSIBLE", 5, "shadowrun6.sin.highly_plausible"),
-	"SECOND_LIFE"     : new SinQuality("SECOND_LIFE", 6, "shadowrun6.sin.second_life")
+    "REAL_SIN"        : "shadowrun6.sin.real_sin",
+    "ANYONE"          : "shadowrun6.sin.anyone",
+    "ROUGH_MATCH"     : "shadowrun6.sin.rough_match",
+    "GOOD_MATCH"      : "shadowrun6.sin.good_match",
+    "SUPERFICIALLY_PLAUSIBLE": "shadowrun6.sin.superficially_plausible",
+    "HIGHLY_PLAUSIBLE": "shadowrun6.sin.highly_plausible",
+    "SECOND_LIFE"     : "shadowrun6.sin.second_life"
+}
+
+SR6.LIFESTYLE_TYPE = {
+    "street"  : "shadowrun6.lifestyle.street",
+    "squatter": "shadowrun6.lifestyle.squatter",
+    "low"     : "shadowrun6.lifestyle.low",
+    "middle"  : "shadowrun6.lifestyle.middle",
+    "high"    : "shadowrun6.lifestyle.high",
+    "luxury"  : "shadowrun6.lifestyle.luxury"
 }
