@@ -80,7 +80,8 @@
         "magic": "Magie",
         "matrix": "Matrix",
         "overview": "Übersicht",
-        "skills": "Fertigkeiten"
+        "skills": "Fertigkeiten",
+        "vehicles": "Fahrzeuge"
       },
       "skills": "Fertigkeiten",
       "spells": "Zauber"
@@ -378,7 +379,7 @@
       },
       "mode": "Modus",
       "mode_bf": "SM",
-      "mode_fa": "VM",
+      "mode_fa": "AM",
       "mode_sa": "HM",
       "mode_ss": "EM",
       "natural": "Nat. Panzerung",
@@ -837,6 +838,10 @@
         "column.drain": "Entzug",
         "column.range": "Reichw",
         "title": "Zauber"
+      },
+      "vehicles": {
+        "add": "Fahrzeug hinzufügen",
+        "title": "Fahrzeuge"
       },
       "weapon": {
         "add": "Neue Waffe hinzufügen",

@@ -174,9 +174,11 @@ dd::after {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  visibility: hidden;
 }
 .collapsible-content.open {
-  max-height: 200px;
+  max-height: 500px;
+  visibility: visible;
 }
 .shadowrun6 button.collapsible-skill {
 	width: 1.5em;

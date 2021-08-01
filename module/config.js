@@ -430,23 +430,8 @@ SR6.PROGRAMS = [
 	
 ];
 
-class SinQuality {
-	constructor(id, rating, i18n) {
-		this.id = id;
-		this.rating = rating;
-		this.i18n = i18n;
-	}
-}
 
-SR6.SIN_QUALITY = {
-    "REAL_SIN"        : "shadowrun6.sin.real_sin",
-    "ANYONE"          : "shadowrun6.sin.anyone",
-    "ROUGH_MATCH"     : "shadowrun6.sin.rough_match",
-    "GOOD_MATCH"      : "shadowrun6.sin.good_match",
-    "SUPERFICIALLY_PLAUSIBLE": "shadowrun6.sin.superficially_plausible",
-    "HIGHLY_PLAUSIBLE": "shadowrun6.sin.highly_plausible",
-    "SECOND_LIFE"     : "shadowrun6.sin.second_life"
-}
+
 
 SR6.LIFESTYLE_TYPE = {
     "street"  : "shadowrun6.lifestyle.street",
@@ -455,4 +440,13 @@ SR6.LIFESTYLE_TYPE = {
     "middle"  : "shadowrun6.lifestyle.middle",
     "high"    : "shadowrun6.lifestyle.high",
     "luxury"  : "shadowrun6.lifestyle.luxury"
-}
+};
+	SR6.SIN_QUALITY = {
+	"REAL_SIN"        : "shadowrun6.sin.real_sin",
+	"ANYONE"          : "shadowrun6.sin.anyone",
+	"ROUGH_MATCH"     : "shadowrun6.sin.rough_match",
+	"GOOD_MATCH"      : "shadowrun6.sin.good_match",
+	"SUPERFICIALLY_PLAUSIBLE": "shadowrun6.sin.superficially_plausible",
+	"HIGHLY_PLAUSIBLE": "shadowrun6.sin.highly_plausible",
+	"SECOND_LIFE"     : "shadowrun6.sin.second_life"
+};

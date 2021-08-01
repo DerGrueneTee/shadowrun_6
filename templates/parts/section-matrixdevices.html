@@ -11,8 +11,9 @@
 				<th style="padding: 0 0px 0 0px; width: 1em">{{ localize 'shadowrun6.label.sleaze.short' }}</th>
 				<th style="padding: 0 0px 0 0px; width: 1em">{{ localize 'shadowrun6.label.dataproc.short' }}</th>
 				<th style="padding: 0 5px 0 0px; width: 1em">{{ localize 'shadowrun6.label.firewall.short' }}</th>
+				<th style="padding: 0 5px 0 0px; width: 1em">{{ localize 'shadowrun6.label.programs.short' }}</th>
 				<th style="padding: 0 5px 0 5px; width: 3em"> </th>
-				<th style="padding: 0 5px 0 5px; width: 3.5rem"> </th>
+				<th style="padding: 0 5px 0 5px; width: 4rem"> </th>
 			</tr>
  		{{#each actor.items as |item id|}} 
 		{{#if (eq item.type 'gear')}}
@@ -25,6 +26,7 @@
          <td><label class="middle-column" >-</label></td>
          <td><label class="middle-column" >{{item.data.data.d}}</label></td>
          <td><label class="middle-column" >{{item.data.data.f}}</label></td>
+         <td><label class="middle-column" >{{item.data.data.progSlots}}</label></td>
        	<td><label class="switch">
        	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
                         <span class="shadowrun6-slider round"></span>
@@ -36,9 +38,11 @@
          </td>
        </tr>
        <tr>
-         <td colspan="8">
+         <td colspan="9">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+				{{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config}}
+        	   </div> 
          </td>
        </tr>
 		{{/if}}
@@ -50,6 +54,7 @@
          <td><label class="middle-column" >-</label></td>
          <td><label class="middle-column" >{{item.data.data.d}}</label></td>
          <td><label class="middle-column" >{{item.data.data.f}}</label></td>
+         <td><label class="middle-column" >-</label></td>
        	<td><label class="switch">
        	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
                         <span class="shadowrun6-slider round"></span>
@@ -63,7 +68,8 @@
        <tr>
          <td colspan="8">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+        	   </div>
          </td>
        </tr>
 		{{/if}}
@@ -75,6 +81,7 @@
          <td><label class="middle-column" >{{item.data.data.s}}</label></td>
          <td><label class="middle-column" >-</label></td>
          <td><label class="middle-column" >-</label></td>
+         <td><label class="middle-column" >{{item.data.data.progSlots}}</label></td>
        	<td><label class="switch">
        	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
                         <span class="shadowrun6-slider round"></span>
@@ -86,9 +93,11 @@
          </td>
        </tr>
        <tr>
-         <td colspan="8">
+         <td colspan="9">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+				{{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config}}
+        	   </div>
          </td>
        </tr>
 		{{/if}}

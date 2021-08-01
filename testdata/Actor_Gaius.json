@@ -1,6 +1,7 @@
 {
   "name": "Gaius",
   "type": "Player",
+  "exportVersion": "0.6.0",
   "data": {
     "overflow": {
       "base": 0,
@@ -8,6 +9,8 @@
       "value": 0,
       "max": 0
     },
+    "nuyen": 64925,
+    "mortype": "mysticadept",
     "attributes": {
       "bod": {
         "base": 4,
@@ -19,7 +22,7 @@
         "base": 6,
         "mod": 1,
         "pool": 7,
-        "modString": "1 Kraft Verbessertes körperliches Attribut "
+        "modString": "1 Power Improved Physical Attribute "
       },
       "rea": {
         "base": 5,
@@ -61,13 +64,13 @@
         "base": 6,
         "mod": 0,
         "pool": 6,
-        "modString": "0 Essenz "
+        "modString": "0 Essence "
       },
       "res": {
         "base": 0,
         "mod": 0,
         "pool": 0,
-        "modString": "0 Essenz "
+        "modString": "0 Essence "
       }
     },
     "physical": {
@@ -161,13 +164,13 @@
       "astral": {
         "points": 1,
         "modifier": 0,
-        "modString": "1 Fertigkeit Astral \n5 Intuition ",
+        "modString": "1 Skill Astral \n5 Intuition ",
         "augment": 0
       },
       "athletics": {
         "points": 1,
         "modifier": 0,
-        "modString": "1 Fertigkeit Athletik \n6 Geschicklichkeit \n1 Kraft Verbessertes körperliches Attribut ",
+        "modString": "1 Skill Athletics \n6 Agility \n1 Power Improved Physical Attribute ",
         "augment": 0
       },
       "biotech": {
@@ -183,13 +186,13 @@
       "con": {
         "points": 5,
         "modifier": 0,
-        "modString": "5 Fertigkeit Überreden \n8 Charisma ",
+        "modString": "5 Skill Con \n8 Charisma ",
         "augment": 0
       },
       "conjuring": {
         "points": 0,
         "modifier": 2,
-        "modString": "0 Fertigkeit Beschwören \n2 Kraftfokus \n6 Magie \n0 Essenz ",
+        "modString": "0 Skill Conjuring \n2 Power focus \n6 Magic \n0 Essence ",
         "augment": 0
       },
       "cracking": {
@@ -220,14 +223,14 @@
       "firearms": {
         "points": 4,
         "modifier": 0,
-        "modString": "4 Fertigkeit Feuerwaffen \n6 Geschicklichkeit \n1 Kraft Verbessertes körperliches Attribut ",
+        "modString": "4 Skill Firearms \n6 Agility \n1 Power Improved Physical Attribute ",
         "augment": 0,
         "specialization": "pistols_heavy"
       },
       "influence": {
         "points": 2,
         "modifier": 0,
-        "modString": "2 Fertigkeit Einfluss \n8 Charisma ",
+        "modString": "2 Skill Influence \n8 Charisma ",
         "augment": 0
       },
       "outdoors": {
@@ -238,7 +241,7 @@
       "perception": {
         "points": 2,
         "modifier": 0,
-        "modString": "2 Fertigkeit Wahrnehmung \n5 Intuition ",
+        "modString": "2 Skill Perception \n5 Intuition ",
         "augment": 0
       },
       "piloting": {
@@ -249,14 +252,14 @@
       "sorcery": {
         "points": 5,
         "modifier": 2,
-        "modString": "5 Fertigkeit Hexerei \n2 Kraftfokus \n6 Magie \n0 Essenz ",
+        "modString": "5 Skill Sorcery \n2 Power focus \n6 Magic \n0 Essence ",
         "augment": 0,
         "specialization": "spellcasting"
       },
       "stealth": {
         "points": 1,
         "modifier": 0,
-        "modString": "1 Fertigkeit Heimlichkeit \n6 Geschicklichkeit \n1 Kraft Verbessertes körperliches Attribut ",
+        "modString": "1 Skill Stealth \n6 Agility \n1 Power Improved Physical Attribute ",
         "augment": 0
       },
       "tasking": {
@@ -266,27 +269,9 @@
       }
     },
     "metatype": "Elf",
-    "gender": "männlich"
+    "gender": "male"
   },
   "items": [
-    {
-      "name": "Deutsch",
-      "type": "skill",
-      "data": {
-        "genesisID": "language",
-        "points": 4,
-        "modifier": 0
-      }
-    },
-    {
-      "name": "Englisch",
-      "type": "skill",
-      "data": {
-        "genesisID": "language",
-        "points": 1,
-        "modifier": 0
-      }
-    },
     {
       "name": "Vorantike Kraftorte",
       "type": "skill",
@@ -360,7 +345,25 @@
       }
     },
     {
-      "name": "Restlichtverstärkung",
+      "name": "Deutsch",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 4,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Englisch",
+      "type": "skill",
+      "data": {
+        "genesisID": "language",
+        "points": 1,
+        "modifier": 0
+      }
+    },
+    {
+      "name": "Low-Light Vision",
       "type": "quality",
       "data": {
         "genesisID": "low-light_vision",
@@ -371,7 +374,7 @@
       }
     },
     {
-      "name": "Magieadept",
+      "name": "Mystic Adept",
       "type": "quality",
       "data": {
         "genesisID": "mysticadept",
@@ -382,7 +385,7 @@
       }
     },
     {
-      "name": "Sin-Mensch",
+      "name": "Sinner",
       "type": "quality",
       "data": {
         "genesisID": "sinner",
@@ -394,7 +397,7 @@
       }
     },
     {
-      "name": "Gezeichnet",
+      "name": "Scorched",
       "type": "quality",
       "data": {
         "genesisID": "scorched",
@@ -405,7 +408,7 @@
       }
     },
     {
-      "name": "Allergie (saisonal, leicht)",
+      "name": "Allergy (seasonal, mild)",
       "type": "quality",
       "data": {
         "genesisID": "allergy_seasonal_mild",
@@ -417,7 +420,7 @@
       }
     },
     {
-      "name": "Inkompetenz",
+      "name": "Incompetent",
       "type": "quality",
       "data": {
         "genesisID": "incompetent",
@@ -428,7 +431,7 @@
       }
     },
     {
-      "name": "Charismatische Verteidigung",
+      "name": "Charismatic Defense",
       "type": "quality",
       "data": {
         "genesisID": "charismatic_defense",
@@ -439,7 +442,7 @@
       }
     },
     {
-      "name": "Akademischer Zauberer",
+      "name": "Scholastic Mage",
       "type": "quality",
       "data": {
         "genesisID": "scholastic_mage",
@@ -450,7 +453,7 @@
       }
     },
     {
-      "name": "Alkohol",
+      "name": "Alcohol",
       "type": "gear",
       "data": {
         "genesisID": "alcohol",
@@ -467,30 +470,13 @@
       }
     },
     {
-      "name": "Atemschutzmaske",
-      "type": "gear",
-      "data": {
-        "genesisID": "respirator",
-        "type": "SURVIVAL",
-        "subtype": "SURVIVAL_GEAR",
-        "availDef": "1",
-        "avail": 1,
-        "price": 300,
-        "needsRating": true,
-        "rating": 6,
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Automatischer Dietrich",
+      "name": "Autopicker",
       "type": "gear",
       "data": {
         "genesisID": "autopicker",
         "type": "ELECTRONICS",
         "subtype": "BREAKING",
-        "availDef": "4 L",
+        "availDef": "4 (L)",
         "avail": 4,
         "price": 500,
         "needsRating": false,
@@ -501,13 +487,47 @@
       }
     },
     {
+      "name": "Binoculars (Optical)",
+      "type": "gear",
+      "data": {
+        "genesisID": "binoculars_optical",
+        "type": "ELECTRONICS",
+        "subtype": "OPTICAL",
+        "availDef": "1",
+        "avail": 1,
+        "price": 50,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Biomonitor",
+      "type": "gear",
+      "data": {
+        "genesisID": "biomonitor",
+        "type": "BIOLOGY",
+        "subtype": "BIOTECH",
+        "availDef": "2",
+        "avail": 2,
+        "price": 300,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": true,
+        "count": 1
+      }
+    },
+    {
       "name": "Bliss",
       "type": "gear",
       "data": {
         "genesisID": "bliss",
         "type": "CHEMICALS",
         "subtype": "DRUGS",
-        "availDef": "2 I",
+        "availDef": "2 (I)",
         "avail": 2,
         "price": 60,
         "needsRating": false,
@@ -518,10 +538,46 @@
       }
     },
     {
+      "name": "Bug Scanner",
+      "type": "gear",
+      "data": {
+        "genesisID": "bug_scanner",
+        "type": "ELECTRONICS",
+        "subtype": "COMMUNICATION",
+        "availDef": "3",
+        "avail": 3,
+        "price": 200,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "Clothing (Luxury)",
+      "type": "gear",
+      "data": {
+        "defense": 0,
+        "social": 0,
+        "genesisID": "clothing_luxury",
+        "type": "ARMOR",
+        "subtype": "ARMOR_CLOTHES",
+        "availDef": "1",
+        "avail": 1,
+        "price": 10000,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": false,
+        "count": 0
+      }
+    },
+    {
       "name": "Colt Secret Agent",
       "type": "gear",
       "data": {
-        "dmgDef": "2K",
+        "dmgDef": "2P",
         "dmg": 2,
         "stun": false,
         "attackRating": [
@@ -553,7 +609,25 @@
       }
     },
     {
-      "name": "DMSO-Gelpack (10x) (Gelmunition)",
+      "name": "Contacts",
+      "type": "gear",
+      "data": {
+        "genesisID": "contacts",
+        "type": "ELECTRONICS",
+        "subtype": "IMAGING",
+        "availDef": "2",
+        "avail": 2,
+        "price": 2850,
+        "accessories": "Smartlink, Flare compensation",
+        "needsRating": true,
+        "rating": 3,
+        "wild": false,
+        "countable": false,
+        "count": 0
+      }
+    },
+    {
+      "name": "DMSO (10x) (Gel)",
       "type": "gear",
       "data": {
         "genesisID": "ammo_dmso",
@@ -570,7 +644,7 @@
       }
     },
     {
-      "name": "DocWagon Platinvertrag (1 Jahr)",
+      "name": "DocWagon Platinum Contract (1 Year)",
       "type": "gear",
       "data": {
         "genesisID": "docwagon_platinum_year",
@@ -587,24 +661,25 @@
       }
     },
     {
-      "name": "Einweg-Plastikstreifen (10)",
+      "name": "Earbuds",
       "type": "gear",
       "data": {
-        "genesisID": "plastic_straps",
+        "genesisID": "earbuds",
         "type": "ELECTRONICS",
-        "subtype": "SECURITY",
+        "subtype": "AUDIO",
         "availDef": "1",
         "avail": 1,
-        "price": 5,
-        "needsRating": false,
-        "rating": 0,
+        "price": 1150,
+        "accessories": "Audio enhancement, Select sound filter, Rating 2",
+        "needsRating": true,
+        "rating": 3,
         "wild": false,
-        "countable": true,
-        "count": 1
+        "countable": false,
+        "count": 0
       }
     },
     {
-      "name": "Erste-Hilfe-Set",
+      "name": "First Aid kit",
       "type": "gear",
       "data": {
         "genesisID": "first_aid_kit",
@@ -621,20 +696,55 @@
       }
     },
     {
-      "name": "Fernglas (Optisch)",
+      "name": "Handheld sensor housing",
       "type": "gear",
       "data": {
-        "genesisID": "binoculars_optical",
+        "genesisID": "handheld_housing",
         "type": "ELECTRONICS",
-        "subtype": "OPTICAL",
+        "subtype": "SENSOR_HOUSING",
         "availDef": "1",
         "avail": 1,
-        "price": 50,
-        "needsRating": false,
-        "rating": 0,
+        "price": 3300,
+        "accessories": "Sensor array, Rating 3",
+        "needsRating": true,
+        "rating": 3,
         "wild": false,
         "countable": false,
         "count": 0
+      }
+    },
+    {
+      "name": "Heavy Pistol/SMG (10x) (Explosive)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_heavy_smg",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "1",
+        "avail": 1,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": true,
+        "count": 5
+      }
+    },
+    {
+      "name": "Heavy Pistol/SMG (10x) (Regular)",
+      "type": "gear",
+      "data": {
+        "genesisID": "ammo_heavy_smg",
+        "type": "AMMUNITION",
+        "subtype": "AMMUNITION",
+        "availDef": "1",
+        "avail": 1,
+        "price": 100,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": true,
+        "count": 10
       }
     },
     {
@@ -647,63 +757,7 @@
         "availDef": "3",
         "avail": 3,
         "price": 6110,
-        "accessories": "Editieren, Kartensofts (Orient), Kartensofts (Balkan), Kartensofts (Europa), Satellitenverbindung, Trideoprojektor, Subvokales Mikrofon",
-        "needsRating": false,
-        "rating": 0,
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Kleidung (Luxus)",
-      "type": "gear",
-      "data": {
-        "defense": 0,
-        "social": 0,
-        "genesisID": "clothing_luxury",
-        "type": "ARMOR",
-        "subtype": "ARMOR_CLOTHES",
-        "availDef": "1",
-        "avail": 1,
-        "price": 10000,
-        "needsRating": false,
-        "rating": 0,
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Kontaktlinsen",
-      "type": "gear",
-      "data": {
-        "genesisID": "contacts",
-        "type": "ELECTRONICS",
-        "subtype": "IMAGING",
-        "availDef": "2",
-        "avail": 2,
-        "price": 2850,
-        "accessories": "Smartlink, Blitzkompensation",
-        "needsRating": true,
-        "rating": 3,
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Kunstlederjacke",
-      "type": "gear",
-      "data": {
-        "defense": 1,
-        "social": -2,
-        "genesisID": "synthleather_jacket",
-        "type": "ARMOR",
-        "subtype": "ARMOR_BODY",
-        "availDef": "1",
-        "avail": 1,
-        "price": 300,
+        "accessories": "Edit, Mapsoft (Orient), Mapsoft (Balkan), Mapsoft (Europa), Satellite link, Trid projector, Subvocal microphone",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -715,7 +769,7 @@
       "name": "Mänade (Ares Pred. VI)",
       "type": "gear",
       "data": {
-        "dmgDef": "3K",
+        "dmgDef": "3P",
         "dmg": 3,
         "stun": false,
         "attackRating": [
@@ -734,10 +788,10 @@
         "genesisID": "ares_predator_vi",
         "type": "WEAPON_FIREARMS",
         "subtype": "PISTOLS_HEAVY",
-        "availDef": "2 L",
+        "availDef": "2 (L)",
         "avail": 2,
         "price": 3135,
-        "accessories": "Schalldämpfer, Sichtvergrößerung, Schnellzieh-Tarnholster, Ersatzmagazin, Taktische Lampe, Restlichverstärkung",
+        "accessories": "Silencer, Concealable Quick Draw Holster, Spare clip, Flashlight, Low-Light, Vision magnification",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
@@ -766,7 +820,7 @@
       }
     },
     {
-      "name": "Medkit-Nachfüllpack",
+      "name": "Medkit supplies",
       "type": "gear",
       "data": {
         "genesisID": "medkit_supplies",
@@ -786,6 +840,17 @@
       "name": "Mercedes W-SR 290 \"Wesir“",
       "type": "gear",
       "data": {
+        "handlOn": 3,
+        "handlOff": 5,
+        "acc": 15,
+        "spdi": 30,
+        "tspd": 180,
+        "bod": 10,
+        "arm": 6,
+        "pil": 2,
+        "sen": 2,
+        "sea": 4,
+        "vtype": "GROUND",
         "genesisID": "mercedes_w-SR290_wesir",
         "type": "VEHICLES",
         "subtype": "CARS",
@@ -800,7 +865,7 @@
       }
     },
     {
-      "name": "Mortimer o.L. Greatcoat",
+      "name": "Mortimer o.L. Greatcoats",
       "type": "gear",
       "data": {
         "defense": 4,
@@ -819,7 +884,7 @@
       }
     },
     {
-      "name": "Mystische Panzerung",
+      "name": "Mystic Armor",
       "type": "gear",
       "data": {
         "defense": 4,
@@ -838,70 +903,108 @@
       }
     },
     {
-      "name": "Ohrstöpsel",
+      "name": "Plastic straps (10)",
       "type": "gear",
       "data": {
-        "genesisID": "earbuds",
+        "genesisID": "plastic_straps",
         "type": "ELECTRONICS",
-        "subtype": "AUDIO",
+        "subtype": "SECURITY",
         "availDef": "1",
         "avail": 1,
-        "price": 1150,
-        "accessories": "Audioverbesserung, Selektiver Geräuschfilter, Stufe 2",
+        "price": 5,
+        "needsRating": false,
+        "rating": 0,
+        "wild": false,
+        "countable": true,
+        "count": 1
+      }
+    },
+    {
+      "name": "Respirator",
+      "type": "gear",
+      "data": {
+        "genesisID": "respirator",
+        "type": "SURVIVAL",
+        "subtype": "SURVIVAL_GEAR",
+        "availDef": "1",
+        "avail": 1,
+        "price": 300,
         "needsRating": true,
-        "rating": 3,
+        "rating": 6,
         "wild": false,
         "countable": false,
         "count": 0
       }
     },
     {
-      "name": "Schwere Pistole/M-Pistole (10x) (Explosivmunition)",
+      "name": "Survival Knife",
       "type": "gear",
       "data": {
-        "genesisID": "ammo_heavy_smg",
-        "type": "AMMUNITION",
-        "subtype": "AMMUNITION",
-        "availDef": "1",
-        "avail": 1,
-        "price": 100,
+        "dmgDef": "3P",
+        "dmg": 3,
+        "stun": false,
+        "attackRating": [
+          10,
+          4,
+          0,
+          0,
+          0
+        ],
+        "modes": {
+          "BF": false,
+          "FA": false,
+          "SA": false,
+          "SS": false
+        },
+        "genesisID": "survival_knife",
+        "type": "WEAPON_CLOSE_COMBAT",
+        "subtype": "BLADES",
+        "availDef": "2",
+        "avail": 2,
+        "price": 220,
         "needsRating": false,
         "rating": 0,
+        "skill": "close_combat",
+        "skillSpec": "blades",
         "wild": false,
-        "countable": true,
-        "count": 5
+        "countable": false,
+        "count": 0
       }
     },
     {
-      "name": "Schwere Pistole/M-Pistole (10x) (Standardmunition)",
+      "name": "Synergist Business Suit",
       "type": "gear",
       "data": {
-        "genesisID": "ammo_heavy_smg",
-        "type": "AMMUNITION",
-        "subtype": "AMMUNITION",
-        "availDef": "1",
-        "avail": 1,
-        "price": 100,
+        "defense": 2,
+        "social": 3,
+        "genesisID": "vi_synergist",
+        "type": "ARMOR",
+        "subtype": "ARMOR_SOCIAL",
+        "availDef": "4",
+        "avail": 4,
+        "price": 1900,
+        "accessories": "Concealable holster",
         "needsRating": false,
         "rating": 0,
         "wild": false,
-        "countable": true,
-        "count": 10
+        "countable": false,
+        "count": 0
       }
     },
     {
-      "name": "Tragbares Sensorgehäuse",
+      "name": "Synthleater Jacket",
       "type": "gear",
       "data": {
-        "genesisID": "handheld_housing",
-        "type": "ELECTRONICS",
-        "subtype": "SENSOR_HOUSING",
+        "defense": 1,
+        "social": -2,
+        "genesisID": "synthleather_jacket",
+        "type": "ARMOR",
+        "subtype": "ARMOR_BODY",
         "availDef": "1",
         "avail": 1,
-        "price": 3300,
-        "accessories": "Sensorarray, Stufe 3",
-        "needsRating": true,
-        "rating": 3,
+        "price": 300,
+        "needsRating": false,
+        "rating": 0,
         "wild": false,
         "countable": false,
         "count": 0
@@ -917,7 +1020,7 @@
         "availDef": "3",
         "avail": 3,
         "price": 9350,
-        "accessories": "Editieren, Schmöker, Kartensofts (ADL), Shopsofts (Weine und Spirituosen), Signalreiniger, Toolbox, Konfigurator, AR-Handschuhe, Satellitenverbindung, SIM-Modul, Subvokales Mikrofon",
+        "accessories": "Edit, Browse, Mapsoft (ADL), Shopsoft (Weine und Spirituosen), Signal Scrubber, Toolbox, Configurator, AR gloves, Satellite link, SIM module, Subvocal microphone",
         "needsRating": false,
         "rating": 0,
         "wild": false,
@@ -926,7 +1029,7 @@
       }
     },
     {
-      "name": "Troden",
+      "name": "Trodes",
       "type": "gear",
       "data": {
         "genesisID": "trodes",
@@ -963,82 +1066,10 @@
       }
     },
     {
-      "name": "Überlebensmesser",
+      "name": "Unarmed",
       "type": "gear",
       "data": {
-        "dmgDef": "3K",
-        "dmg": 3,
-        "stun": false,
-        "attackRating": [
-          10,
-          4,
-          0,
-          0,
-          0
-        ],
-        "modes": {
-          "BF": false,
-          "FA": false,
-          "SA": false,
-          "SS": false
-        },
-        "genesisID": "survival_knife",
-        "type": "WEAPON_CLOSE_COMBAT",
-        "subtype": "BLADES",
-        "availDef": "2",
-        "avail": 2,
-        "price": 220,
-        "needsRating": false,
-        "rating": 0,
-        "skill": "close_combat",
-        "skillSpec": "blades",
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "VI Synergist Business Suit",
-      "type": "gear",
-      "data": {
-        "defense": 2,
-        "social": 3,
-        "genesisID": "vi_synergist",
-        "type": "ARMOR",
-        "subtype": "ARMOR_SOCIAL",
-        "availDef": "4",
-        "avail": 4,
-        "price": 1900,
-        "accessories": "Tarnholster",
-        "needsRating": false,
-        "rating": 0,
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Vitalmonitor",
-      "type": "gear",
-      "data": {
-        "genesisID": "biomonitor",
-        "type": "BIOLOGY",
-        "subtype": "BIOTECH",
-        "availDef": "2",
-        "avail": 2,
-        "price": 300,
-        "needsRating": false,
-        "rating": 0,
-        "wild": false,
-        "countable": true,
-        "count": 1
-      }
-    },
-    {
-      "name": "Waffenlos",
-      "type": "gear",
-      "data": {
-        "dmgDef": "2G",
+        "dmgDef": "2S",
         "dmg": 2,
         "stun": true,
         "attackRating": [
@@ -1073,7 +1104,7 @@
       "name": "Walther Secura II",
       "type": "gear",
       "data": {
-        "dmgDef": "3K",
+        "dmgDef": "3P",
         "dmg": 3,
         "stun": false,
         "attackRating": [
@@ -1092,31 +1123,14 @@
         "genesisID": "walther_secura_II",
         "type": "WEAPON_FIREARMS",
         "subtype": "PISTOLS_HEAVY",
-        "availDef": "3 L",
+        "availDef": "3 (L)",
         "avail": 3,
         "price": 2610,
-        "accessories": "Waffenkamera, Sichtvergrößerung, Tarnholster, Ersatzmagazin, Lasermarkierer (Niedrigenergie), Taschenlampe",
+        "accessories": "Guncam, Concealable holster, Spare clip, Laser Sight (Low Power), Vision magnification, Flashlight",
         "needsRating": false,
         "rating": 0,
         "skill": "firearms",
         "skillSpec": "pistols_heavy",
-        "wild": false,
-        "countable": false,
-        "count": 0
-      }
-    },
-    {
-      "name": "Wanzenscanner",
-      "type": "gear",
-      "data": {
-        "genesisID": "bug_scanner",
-        "type": "ELECTRONICS",
-        "subtype": "COMMUNICATION",
-        "availDef": "3",
-        "avail": 3,
-        "price": 200,
-        "needsRating": false,
-        "rating": 0,
         "wild": false,
         "countable": false,
         "count": 0
@@ -1129,7 +1143,7 @@
         "genesisID": "zen",
         "type": "CHEMICALS",
         "subtype": "DRUGS",
-        "availDef": "3 L",
+        "availDef": "3 (L)",
         "avail": 3,
         "price": 15,
         "needsRating": false,
@@ -1140,12 +1154,13 @@
       }
     },
     {
-      "name": "Manablitz",
+      "name": "Manabolt",
       "type": "spell",
       "data": {
         "genesisID": "manabolt",
         "category": "combat",
         "drain": 4,
+        "duration": "instantaneous",
         "range": "line_of_sight",
         "type": "mana",
         "damage": "physical",
@@ -1157,12 +1172,13 @@
       }
     },
     {
-      "name": "Manafenster",
+      "name": "Mana Window",
       "type": "spell",
       "data": {
         "genesisID": "mana_window",
         "category": "detection",
         "drain": 3,
+        "duration": "sustained",
         "range": "line_of_sight",
         "type": "mana",
         "alchemic": false,
@@ -1173,12 +1189,13 @@
       }
     },
     {
-      "name": "Heilen",
+      "name": "Heal",
       "type": "spell",
       "data": {
         "genesisID": "heal",
         "category": "health",
         "drain": 3,
+        "duration": "permanent",
         "range": "touch",
         "type": "physical",
         "alchemic": false,
@@ -1189,12 +1206,13 @@
       }
     },
     {
-      "name": "Reflexe steigern",
+      "name": "Increase Reflexes",
       "type": "spell",
       "data": {
         "genesisID": "increase_reflexes",
         "category": "health",
         "drain": 5,
+        "duration": "sustained",
         "range": "touch",
         "type": "physical",
         "alchemic": false,
@@ -1205,12 +1223,30 @@
       }
     },
     {
-      "name": "Trideo-Trugbild",
+      "name": "Improved Invisibility",
+      "type": "spell",
+      "data": {
+        "genesisID": "improved_invisibility",
+        "category": "illusion",
+        "drain": 4,
+        "duration": "sustained",
+        "range": "touch",
+        "type": "physical",
+        "alchemic": false,
+        "wild": false,
+        "isOpposed": false,
+        "withEssence": false,
+        "multiSense": false
+      }
+    },
+    {
+      "name": "Trid Phantasm",
       "type": "spell",
       "data": {
         "genesisID": "trid_phantasm",
         "category": "illusion",
         "drain": 4,
+        "duration": "sustained",
         "range": "line_of_sight_area",
         "type": "physical",
         "alchemic": false,
@@ -1221,28 +1257,13 @@
       }
     },
     {
-      "name": "Verbesserte Unsichtbarkeit",
-      "type": "spell",
-      "data": {
-        "genesisID": "improved_invisibility",
-        "category": "illusion",
-        "drain": 4,
-        "range": "touch",
-        "type": "physical",
-        "alchemic": false,
-        "wild": false,
-        "isOpposed": false,
-        "withEssence": false,
-        "multiSense": false
-      }
-    },
-    {
-      "name": "Handlungen Beherrschen",
+      "name": "Control Actions",
       "type": "spell",
       "data": {
         "genesisID": "control_actions",
         "category": "manipulation",
         "drain": 4,
+        "duration": "limited",
         "range": "line_of_sight",
         "type": "mana",
         "alchemic": false,
@@ -1253,12 +1274,13 @@
       }
     },
     {
-      "name": "Levitieren",
+      "name": "Levitate",
       "type": "spell",
       "data": {
         "genesisID": "levitate",
         "category": "manipulation",
         "drain": 6,
+        "duration": "sustained",
         "range": "line_of_sight",
         "type": "physical",
         "alchemic": false,
@@ -1269,7 +1291,7 @@
       }
     },
     {
-      "name": "Astrale Wahrnehmung",
+      "name": "Astral Perception",
       "type": "adeptpower",
       "data": {
         "genesisID": "astral_perception",
@@ -1278,16 +1300,7 @@
       }
     },
     {
-      "name": "Erhöhte Präzision",
-      "type": "adeptpower",
-      "data": {
-        "genesisID": "enhanced_accuracy",
-        "activation": "passive",
-        "cost": 0.5
-      }
-    },
-    {
-      "name": "Kosmetische Kontrolle 2",
+      "name": "Cosmetic Control 2",
       "type": "adeptpower",
       "data": {
         "genesisID": "cosmetic_control",
@@ -1296,25 +1309,16 @@
       }
     },
     {
-      "name": "Mystische Panzerung 4",
+      "name": "Enhanced Accuracy",
       "type": "adeptpower",
       "data": {
-        "genesisID": "mystic_armor",
-        "activation": "passive",
-        "cost": 1.0
-      }
-    },
-    {
-      "name": "Stimmkontrolle 1",
-      "type": "adeptpower",
-      "data": {
-        "genesisID": "vocal_control",
+        "genesisID": "enhanced_accuracy",
         "activation": "passive",
         "cost": 0.5
       }
     },
     {
-      "name": "Verbessertes körperliches Attribut (Geschicklichkeit) 1",
+      "name": "Improved Physical Attribute (Agility) 1",
       "type": "adeptpower",
       "data": {
         "genesisID": "improved_physical_attribute",
@@ -1323,7 +1327,25 @@
       }
     },
     {
-      "name": "Einstimmung (Gegenstand) (Mänade (Ares Pred. VI))",
+      "name": "Mystic Armor 4",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "mystic_armor",
+        "activation": "passive",
+        "cost": 1.0
+      }
+    },
+    {
+      "name": "Vocal Control 1",
+      "type": "adeptpower",
+      "data": {
+        "genesisID": "vocal_control",
+        "activation": "passive",
+        "cost": 0.5
+      }
+    },
+    {
+      "name": "Item Attunement (Mänade (Ares Pred. VI))",
       "type": "metamagic",
       "data": {
         "genesisID": "item_attunement",
@@ -1333,13 +1355,158 @@
       }
     },
     {
-      "name": "Kraftpunkt",
+      "name": "Power Points",
       "type": "metamagic",
       "data": {
         "genesisID": "power_points",
         "level": true,
         "adepts": true,
         "mages": true
+      }
+    },
+    {
+      "name": "Power focus",
+      "type": "focus",
+      "data": {
+        "genesisID": "power_focus",
+        "choice": "",
+        "rating": 2
+      }
+    },
+    {
+      "name": "Qi focus",
+      "type": "focus",
+      "data": {
+        "genesisID": "qi_focus",
+        "choice": "Improved Physical Attribute",
+        "rating": 4
+      }
+    },
+    {
+      "name": "Item Attunement (Mänade (Ares Pred. VI))",
+      "type": "echo",
+      "data": {
+        "genesisID": "item_attunement",
+        "level": false,
+        "choice": "06bc5ff9-285b-4853-9cf6-8bc89b14b68f"
+      }
+    },
+    {
+      "name": "Power Points",
+      "type": "echo",
+      "data": {
+        "genesisID": "power_points",
+        "level": true
+      }
+    },
+    {
+      "name": "Sven Müller",
+      "type": "sin",
+      "data": {
+        "quality": "SECOND_LIFE"
+      }
+    },
+    {
+      "name": "Kevin Dromschneider",
+      "type": "sin",
+      "data": {
+        "quality": "HIGHLY_PLAUSIBLE"
+      }
+    },
+    {
+      "name": "Leuven Teerhaus",
+      "type": "sin",
+      "data": {
+        "quality": "REAL_SIN"
+      }
+    },
+    {
+      "name": "Kleines Haus am Rand von Heidelberg",
+      "type": "lifestyle",
+      "data": {
+        "genesisID": "middle",
+        "type": "middle",
+        "cost": 25000,
+        "paid": 5,
+        "sin": "9ceb3d28-32c6-4e3a-a451-d96ee37b962e"
+      }
+    },
+    {
+      "name": "Wohnung in Hamburg",
+      "type": "lifestyle",
+      "data": {
+        "genesisID": "low",
+        "type": "low",
+        "cost": 4000,
+        "paid": 2,
+        "sin": "cd4a35e8-21d6-45ec-a5f8-61321f6f1493"
+      }
+    },
+    {
+      "name": "Demeter",
+      "type": "contact",
+      "data": {
+        "rating": 3,
+        "loyalty": 3,
+        "type": "Taliskrämerin"
+      }
+    },
+    {
+      "name": "Lennart Sennhauser",
+      "type": "contact",
+      "data": {
+        "rating": 8,
+        "loyalty": 4,
+        "type": "Regierungsagent",
+        "description": "Hochrangiger Offizier der Bundeswehr\nZuständig für das Institut für Astrale Erkundung und Sicherheit (IAES) (Datapuls Karlsruhe S.31)"
+      }
+    },
+    {
+      "name": "Leo (Likedeeler)",
+      "type": "contact",
+      "data": {
+        "rating": 6,
+        "loyalty": 3,
+        "type": "Schieber",
+        "description": "Mitglied im Likedeeler Netzwerk"
+      }
+    },
+    {
+      "name": "Beebob",
+      "type": "contact",
+      "data": {
+        "rating": 4,
+        "loyalty": 4,
+        "type": "Decker"
+      }
+    },
+    {
+      "name": "Doc Pain",
+      "type": "contact",
+      "data": {
+        "rating": 4,
+        "loyalty": 1,
+        "type": "Straßendoc"
+      }
+    },
+    {
+      "name": "Christoph Janssen",
+      "type": "contact",
+      "data": {
+        "rating": 4,
+        "loyalty": 4,
+        "type": "Uni-Professor",
+        "description": "Hat den Lehrstuhl für Arkanarchäologie an der Uni Heidelberg inne"
+      }
+    },
+    {
+      "name": "Hardy Wagner",
+      "type": "contact",
+      "data": {
+        "rating": 6,
+        "loyalty": 3,
+        "type": "Info-Broker, Decker",
+        "description": "Aus Hamburg vor den Vory gerettet"
       }
     }
   ]

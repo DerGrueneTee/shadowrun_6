@@ -1,0 +1,43 @@
+<div class="section" style="display: inline-block; width:100%">
+	<div class="section-head">
+     <h2 class="section-title">{{ localize 'shadowrun6.section.drones.title' }}</h2>
+	 <a class="item-control vehicle-create" title="{{localize 'shadowrun6.section.drones.add' }}"><h2 class="fas fa-plus"></h2></a>
+	</div>
+	  <table>
+	  	<tr>
+	  		<th>{{ localize 'shadowrun6.label.column.name' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.handling' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.acc' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.spdi' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.tspd' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.bod' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.arm' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.pil' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.sen' }}</th>
+	  	</tr>
+ 		{{#each actor.items as |item id|}} 
+		{{#if (eq item.type 'gear')}}
+		{{#if (eq item.data.data.type "DRONES") }}
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><label class="small-column" >{{item.data.data.handlOn}}/{{item.data.data.handlOff}}</label></td>
+         <td><label class="small-column" >{{item.data.data.acc}}</label></td>
+         <td><label class="small-column" >{{item.data.data.spdi}}</label></td>
+         <td><label class="small-column" >{{item.data.data.tspd}}</label></td>
+         <td><label class="small-column" >{{item.data.data.bod}}</label></td>
+         <td><label class="small-column" >{{item.data.data.arm}}</label></td>
+         <td><label class="small-column" >{{item.data.data.pil}}</label></td>
+         <td><label class="small-column" >{{item.data.data.sen}}</label></td>
+       </tr>
+       <tr>
+         <td colspan="9">
+         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
+        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+         	</div>
+         </td>
+       </tr>
+		{{/if}}
+		{{/if}}
+       {{/each}}
+     </table> 
+   </div>

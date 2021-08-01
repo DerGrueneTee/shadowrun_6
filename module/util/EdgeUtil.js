@@ -73,9 +73,11 @@ static onEdgeBoostActionChange(event, when="Post", chatMsg, html, data) {
 
 		// Ignore this, if there is no actor
 		if (!data.actor) {
+			console.log("Ignore because no actor");
 			return;
 		}
 		if (!event || !event.currentTarget) {
+			console.log("Ignore because no current target");
 			return;
 		}
 		

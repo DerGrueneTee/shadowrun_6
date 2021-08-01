@@ -424,6 +424,17 @@ export default class SR6Roll extends Roll {
 	}
 	
 	//-------------------------------------------------------------
+	_getPlusOneIndex(results) {
+		let indices = [];
+		for (let i=0; i<results.length; i++) {
+			if (results[i].count==0 && results[i].result===4) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	//-------------------------------------------------------------
 	async _rerollIndices(chatMsg, roll, indices, html) {
 		console.log("_rerollIndices ",indices);
 		
@@ -452,6 +463,47 @@ export default class SR6Roll extends Roll {
 				$(obj).attr("class", roll.data.results[i].classes);
 			});
 			html.find(".spend_edge").append('<h4 class="highlight" style="margin:0px">Rerolled</h4>');
+			html.find(".resulttext").empty();
+			html.find(".resulttext").append(
+			game.i18n.localize('shadowrun6.roll.success')+": <b>"+newTotal+"</b> "+game.i18n.localize('shadowrun6.roll.successes'));
+			
+			// Update message
+			roll.results = roll.data.results;
+			chatMsg.update({
+				 [`roll`]: roll.toJSON(),
+				 ['content']: html[0].innerHTML 
+			});
+		} catch (err) {
+      	console.error("sr6_roll error: "+err);
+      	console.error("sr6_roll error: "+err.stack);
+			ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    	}
+	}
+	
+	//-------------------------------------------------------------
+	async _performPlusOne(chatMsg, roll, index, html) {
+		console.log("_performPlus1 ");
+		
+		let newResult = roll.data.results[index].result+1;
+		let newTotal = roll._total;
+		
+			// Change previous results
+		roll.data.results[index].result = newResult;
+		roll.data.results[index].classes = "die die_"+newResult;
+		if ( roll.data.results[index].result>=5) {
+			roll.data.results[index].success = true;
+			newTotal++;
+		} 
+
+		let diceHtml = html.find(".dice-rolls");
+		try {
+			roll._total = newTotal;
+			
+			// Try to update html
+			diceHtml.children().each(function(i, obj) {
+				$(obj).attr("class", roll.data.results[i].classes);
+			});
+			html.find(".spend_edge").append('<h4 class="highlight" style="margin:0px">+1 to one die</h4>');
 			html.find(".resulttext").empty();
 			html.find(".resulttext").append(
 			game.i18n.localize('shadowrun6.roll.success')+": <b>"+newTotal+"</b> "+game.i18n.localize('shadowrun6.roll.successes'));
@@ -502,6 +554,7 @@ export default class SR6Roll extends Roll {
 			console.debug("+1 to single roll");
 			chatMsg._roll._payEdge(2, user, actor);
 			// ToDo: Find a 4 or at least a 1
+			chatMsg._roll._performPlusOne(chatMsg, chatMsg._roll, chatMsg._roll._getPlusOneIndex(results), diceHtml);
 			break;
 		case "reroll_failed":
 			console.debug("Reroll all failed");
