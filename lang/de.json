@@ -112,7 +112,9 @@
     },
     "contact": {
       "rating": "Stufe",
+      "rating_short": "St",
       "loyalty": "Loyalität",
+      "loyalty_short": "Loy",
       "type": "Art"
     },
     "defense": {

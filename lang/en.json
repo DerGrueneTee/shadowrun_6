@@ -111,8 +111,10 @@
       "threshold": "Threshold"
     },
     "contact": {
+      "rating_short": "Rtg",
       "rating": "Rating",
       "loyalty": "Loyalty",
+      "loyalty_short": "Loy",
       "type": "Type"
     },
     "defense": {
