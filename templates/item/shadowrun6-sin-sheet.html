@@ -6,15 +6,12 @@
         <div class="section">
             <table>
                 <tr>
-                    <th>{{localize 'shadowrun6.contact.type'}}</th>
-                    <th>{{localize 'shadowrun6.contact.rating'}}</th>
-                    <th>{{localize 'shadowrun6.contact.loyalty'}}</th>
+                    <th>{{localize 'shadowrun6.sin.quality'}}</th>
                 </tr>
-                <tr>
-                    <td class="box" style="width:8em"> <input type="text" value="{{item.data.data.type}}" name="data.type"  /></td>
-                    <td class="box centered"> <input type="number" value="{{item.data.data.rating}}" name="data.rating" style="width:2em" /></td>
-                    <td class="box centered"> <input type="number" value="{{item.data.data.loyalty}}" name="data.loyalty"
-                            style="width:2em" /></td>
+                    <td>
+                        <select name="data.quality">
+                        {{selectOptions config.SIN_QUALITY selected=item.data.data.quality localize=true}}
+                    </select>
                 </tr>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>

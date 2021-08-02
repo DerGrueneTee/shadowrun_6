@@ -824,6 +824,10 @@
         "column.threshold": "Thresh.",
         "title": "Rituals"
       },
+      "sins": {
+        "add": "Add new SIN",
+        "title": "SINS"
+      },
       "skills.action": "Skills",
       "skills.knowledge": "Knowledge Skills",
       "skills.knowledge_add": "Add new knowledge",
@@ -868,6 +872,16 @@
         "hint": "Defines the maximum egde a player or NPC can gain per turn.",
         "name": "Max. Edge per turn"
       }
+    },
+    "sin" : {
+      "quality" : "Quality",
+      "real_sin" : "Real SIN",
+      "anyone" : "Anyone",
+      "rough_match" : "Rough match",
+      "good_match": "Good match",
+      "superficially_plausible": "Superficially plausible",
+      "highly_plausible" : "High plausible",
+      "second_life" : "Second life"
     },
     "special": {
       "astral": {

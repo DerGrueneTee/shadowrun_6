@@ -820,7 +820,7 @@
         "column.threshold": "Schwell",
         "title": "Rituale"
       },
-      "sin": {
+      "sins": {
         "add": "Neue SIN hinzufügen",
         "title": "SINS"
       },
@@ -857,6 +857,16 @@
         "hint": "Definiert wieviel Edge jemand pro Kampfrunde maximal erhalten kann",
         "name": "Max. Edge pro Runde"
       }
+    },
+    "sin" : {
+      "quality" : "Qualität",
+      "real_sin" : "Echte SIN",
+      "anyone" : "Irgendjemand",
+      "rough_match" : "Grobe Übereinstimmung",
+      "good_match": "Gute Übereinstimmung",
+      "superficially_plausible": "Oberflächlich Plausibel",
+      "highly_plausible" : "Hohe Plausibilität",
+      "second_life" : "Zweites Leben"
     },
     "special": {
       "astral": {
