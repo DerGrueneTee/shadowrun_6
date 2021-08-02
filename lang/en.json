@@ -392,7 +392,14 @@
       "social": "Social",
       "stun_damage": "S",
       "subtype": "Subtype",
-      "type": "Type"
+      "type": "Type",
+		"vehicle": {
+			"armor.long": "Armor",	
+			"armor.short": "A",
+			"rigRating.long": "Control Rig",
+			"sensor.long": "Sensor",	
+			"sensor.short": "S"	
+		}
     },
     "itemtype": {
       "ACCESSORY": "Accessory",
@@ -461,6 +468,8 @@
       "modifier": "Adj.",
       "name": "Name",
       "none": "-",
+		"offroad": "Off-Road",
+		"onroad": "On-Road",
       "points": "Points",
       "pool": "Pool",
       "poolmod": "Pool modifier",
@@ -536,7 +545,7 @@
       "bodyware": "Some cool enhancement",
       "chemicals": "The good stuff",
       "complexform": "How complex do you like it?",
-      "contact": "Whom shall we contact?",
+      "contact": "Who you gonna call? Ghostbusters!",
       "cyberware": "Some cool cyber enhancement",
       "electronics": "Nerd toy",
       "focus": "Something to stay focussed",
