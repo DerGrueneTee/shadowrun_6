@@ -1,0 +1,63 @@
+<div class="section" style="display: inline-block; width:100%">
+	<div class="section-head">
+     <h2 class="section-title">{{ localize 'shadowrun6.section.vehicles.title' }}</h2>
+	 <a class="item-control vehicle-create" title="{{localize 'shadowrun6.section.vehicles.add' }}"><h2 class="fas fa-plus"></h2></a>
+	</div>
+	  <table>
+	  	<tr>
+	  		<th>{{ localize 'shadowrun6.label.column.name' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.handling' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.acc' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.spdi' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.tspd' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.bod' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.arm' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.pil' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.sen' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.sea' }}</th>
+	  	</tr>
+ 		{{#each actor.items as |item id|}} 
+		{{#if (eq item.type 'gear')}}
+		{{#if (eq item.data.data.type "VEHICLES") }}
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><label class="small-column" >{{item.data.data.handlOn}}/{{item.data.data.handlOff}}</label></td>
+         <td><label class="small-column" >{{item.data.data.acc}}</label></td>
+         <td><label class="small-column" >{{item.data.data.spdi}}</label></td>
+         <td><label class="small-column" >{{item.data.data.tspd}}</label></td>
+         <td><label class="small-column" >{{item.data.data.bod}}</label></td>
+         <td><label class="small-column" >{{item.data.data.arm}}</label></td>
+         <td><label class="small-column" >{{item.data.data.pil}}</label></td>
+         <td><label class="small-column" >{{item.data.data.sen}}</label></td>
+         <td><label class="small-column" >{{item.data.data.sea}}</label></td>
+       </tr>
+       <tr>
+         <td colspan="10">
+         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
+        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+        	   <table>
+        	   	<tr>
+        	   		<td>Attack Rating:</td>
+        	   		<td title="{{item.data.data.vehicle.ar.modString}}">{{item.data.data.vehicle.ar.pool}}</td>
+        	   		<td>Defense Rating:</td>
+        	   		<td title="{{item.data.data.vehicle.dr.modString}}">{{item.data.data.vehicle.dr.pool}}</td>
+        	   	</tr>
+        	   	<tr>
+        	   		<td colspan=2">Handling (manual)</td>
+        	   		{{log "Handling" ../data/data/skills/piloting/pool}}
+         <td class="skill-pool" style="width: 6em" colspan="2">
+         	<label data-skill="piloting">{{../data.data.skills.piloting.pool}}</label>
+         	<a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOn}}" data-skill="piloting" title="{{localize "shadowrun6.label.onroad" }}"><i class="fas fa-dice-six"></i></a>
+         	/
+         	<a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOff}}" data-skill="piloting" title="{{localize "shadowrun6.label.offroad" }}"><i class="fas fa-dice-six"></i></a>
+         </td>
+        	   	</tr>
+        	   </table>
+         	</div>
+         </td>
+       </tr>
+		{{/if}}
+		{{/if}}
+       {{/each}}
+     </table> 
+   </div>

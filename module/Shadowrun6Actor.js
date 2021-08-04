@@ -29,6 +29,7 @@ export class Shadowrun6Actor extends Actor {
 		this._prepareSkills();
 		this._prepareDefensePools();
 		this._prepareItemPools();
+		this._prepareVehiclePools();
 		this._calculateEssence();
 		
 		if (data.mortype) {
@@ -344,6 +345,10 @@ export class Shadowrun6Actor extends Actor {
 					data.skills[id].poolS = data.skills[id].pool+2;
 				if (data.skills[id].expertise)
 					data.skills[id].poolE = data.skills[id].pool+3;
+					
+				if (data.skills[id].pool<0) { data.skills[id].pool=0;}
+				if (data.skills[id].poolS<0) { data.skills[id].poolS=0;}
+				if (data.skills[id].poolE<0) { data.skills[id].poolE=0;}
 			});
 		}
 	}
@@ -515,6 +520,53 @@ export class Shadowrun6Actor extends Actor {
 						item.data.oppAttr2 = cform.opposedAttr2;
 						item.data.threshold = cform.threshold;
 					}
+				}
+			}
+		});
+	}
+	
+	//---------------------------------------------------------
+	/*
+	 * Calculate the pool when using items with assigned skills
+	 */
+	_prepareVehiclePools() {
+		const actorData = this.data;
+
+		actorData.items.forEach(tmpItem => {
+			let item = tmpItem.data;
+			// Any kind of gear
+			if (item.type == "gear" && (item.data.type==="VEHICLES" || item.data.type==="DRONES")) {
+				console.log("ToDo: Process ",item);
+				if (!item.data.vehicle) { item.data.vehicle = {
+					opMode: "manual",
+					ar    : {},
+					dr    : {},
+					handling: {}
+				}};
+				let vehicle = item.data.vehicle;
+				let opMode = vehicle.opMode;
+				let rigRating = 0;
+				switch (opMode) {
+				case "manual":
+					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen;
+					vehicle.ar.modString = game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ game.i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")";
+					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm;
+					vehicle.dr.modString = game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")";
+					vehicle.handling.pool = actorData.data.skills.piloting.pool;
+					vehicle.handling.modString = actorData.data.skills.piloting.modString;
+					break;
+				case "riggedAR":
+					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
+					vehicle.ar.modString = 
+						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						game.i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+") + "+
+						game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
+					vehicle.dr.modString = game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+") + "+
+						game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+					vehicle.handling.pool = actorData.data.skills.piloting.pool + rigRating;
+					vehicle.handling.modString = actorData.data.skills.piloting.modString+" + "+game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+					break;
 				}
 			}
 		});

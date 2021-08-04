@@ -48,7 +48,7 @@ Hooks.once("init", async function () {
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetPC, { types: ["Player"], makeDefault: true });
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetNPC, { types: ["NPC"], makeDefault: true });
 
-  Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear", "martialarttech", "martialartstyle", "quality", "spell", "adeptpower", "ritual", "metamagic", "focus", "echo", "complexform"], makeDefault: true });
+  Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear", "martialarttech", "martialartstyle", "quality", "spell", "adeptpower", "ritual", "metamagic", "focus", "echo", "complexform", "sin", "contact", "lifestyle"], makeDefault: true });
 
   preloadHandlebarsTemplates();
 
@@ -167,6 +167,13 @@ Hooks.once("init", async function () {
         //        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
         //        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
       ],
+      colorset: "SR6_dark",
+      system: "SR6"
+    });
+    dice3d.addDicePreset({
+      type: "dc",
+      labels: ["systems/shadowrun6-eden/images/EdgeToken.png","systems/shadowrun6-eden/images/EdgeToken.png"],
+      bumpMaps: [,],
       colorset: "SR6_dark",
       system: "SR6"
     });
@@ -325,6 +332,37 @@ Hooks.once("init", async function () {
   });
 });
 
+Hooks.once("dragRuler.ready", (SpeedProvider) => {
+    class FictionalGameSystemSpeedProvider extends SpeedProvider {
+        get colors() {
+            return [
+                {id: "walk", default: 0x00FF00, name: "shadowrun6-eden.speeds.walk"},
+                {id: "dash", default: 0xFFFF00, name: "shadowrun6-eden.speeds.dash"},
+                {id: "run", default: 0xFF8000, name: "shadowrun6-eden.speeds.run"}
+            ]
+        }
+
+        getRanges(token) {
+            const baseSpeed = 5; //token.actor.data.speed
+
+			// A character can always walk it's base speed and dash twice it's base speed
+			const ranges = [
+				{range: 10, color: "walk"},
+				{range: 15, color: "dash"}
+			]
+
+			// Characters that aren't wearing armor are allowed to run with three times their speed
+			if (!token.actor.data.isWearingArmor) {
+				ranges.push({range: baseSpeed * 3, color: "dash"})
+			}
+
+            return ranges
+        }
+    }
+
+    dragRuler.registerSystem("shadowrun6-eden", FictionalGameSystemSpeedProvider)
+})
+
 function getSkillAttribute(key) {
   if (CONFIG.SR6.ATTRIB_BY_SKILL.get(key)) {
     const myElem = CONFIG.SR6.ATTRIB_BY_SKILL.get(key).attrib;
@@ -403,8 +441,11 @@ function _onChatMessageAppear(event, chatMsg, html, data) {
     boostSelect.keyup(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
 
 	// chatMsg.roll is a SR6Roll
-	let btnPerform = html.find('.edgePerform');
+	let btnPerform  = html.find('.edgePerform');
+	let edgeBoosts  = html.find('.edgeBoosts');
+	let edgeActions = html.find('.edgeActions');
+	console.log("_onChatMessageAppear");
 	if (btnPerform && chatMsg.roll.peformPostEdgeBoost) {
-		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data));
+		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data, btnPerform, html.find('.edgeBoosts'),  html.find('.edgeActions')));
 	}
 }

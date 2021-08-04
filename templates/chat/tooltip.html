@@ -13,8 +13,9 @@
         </div>
 	<!-- Edge Boosts and Actions -->
 	{{#unless data.edge_use}}
-	<div>
+	<div class="spend_edge">
     <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.edge.spending"}}</h4>
+    <form>
     <table style="background-color: transparent; border: 0px;">
     	<tr>
     	  <td rowspan="2"  style="width: 38px; vertical-align:top ">
@@ -41,11 +42,12 @@
     	</tr>
     	<tr>
     		<td colspan="3">
-    			<button name="edgePerform" class="edgePerform" data-roll-type="edgePerform" >{{localize "shadowrun6.roll.edge_perform"}}</button>
+     			<input type="button" name="edgePerform" class="edgePerform" data-roll-type="edgePerform" style="width: 4em" value="{{localize "shadowrun6.roll.edge_perform"}}" />
     		</td>
     	</tr>
-    	<tr><td style="color:red" colspan="3">Work in progress: This selection currently has no effect.</td></tr>
+    	<tr><td style="color:red" colspan="3">Work in progress: Edge Actions not working yet</td></tr>
     </table>
+    </form>
     </div>
     {{/unless}}
     </section>

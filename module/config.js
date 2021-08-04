@@ -397,3 +397,56 @@ SR6.COMPLEX_FORMS = {
 	"tattletale"       : new ComplexForm("electronics", null,null),
 };
 
+class Program {
+	constructor(id, type) {
+		this.id = id;
+		this.type = type;
+	}
+}
+
+SR6.PROGRAMS = [
+	// Legal
+ 	new Program("browse", 0),
+ 	new Program("baby_monitor", 0),
+ 	new Program("configurator", 0),
+ 	new Program("edit", 0),
+ 	new Program("encryption", 0),
+ 	new Program("signal_scrubber", 0),
+ 	new Program("toolbox", 0),
+ 	new Program("virtual_machine", 0),
+	// Hacking
+ 	new Program("armor", 1),
+ 	new Program("biofeedback", 1),
+ 	new Program("biofeedback_filter", 1),
+ 	new Program("blackout", 1),
+ 	new Program("decryption", 1),
+ 	new Program("defuse", 1),
+ 	new Program("exploit", 1),
+ 	new Program("fork", 1),
+ 	new Program("lockdown", 1),
+ 	new Program("overclock", 1),
+ 	new Program("stealth", 1),
+ 	new Program("trace", 1),
+	
+];
+
+
+
+
+SR6.LIFESTYLE_TYPE = {
+    "street"  : "shadowrun6.lifestyle.street",
+    "squatter": "shadowrun6.lifestyle.squatter",
+    "low"     : "shadowrun6.lifestyle.low",
+    "middle"  : "shadowrun6.lifestyle.middle",
+    "high"    : "shadowrun6.lifestyle.high",
+    "luxury"  : "shadowrun6.lifestyle.luxury"
+};
+	SR6.SIN_QUALITY = {
+	"REAL_SIN"        : "shadowrun6.sin.real_sin",
+	"ANYONE"          : "shadowrun6.sin.anyone",
+	"ROUGH_MATCH"     : "shadowrun6.sin.rough_match",
+	"GOOD_MATCH"      : "shadowrun6.sin.good_match",
+	"SUPERFICIALLY_PLAUSIBLE": "shadowrun6.sin.superficially_plausible",
+	"HIGHLY_PLAUSIBLE": "shadowrun6.sin.highly_plausible",
+	"SECOND_LIFE"     : "shadowrun6.sin.second_life"
+};

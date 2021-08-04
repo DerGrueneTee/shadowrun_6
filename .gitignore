@@ -50,3 +50,4 @@ Thumbs.db
 
 /.settings/
 /package/
+/package-lock.json

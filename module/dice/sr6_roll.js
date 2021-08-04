@@ -59,6 +59,7 @@ export default class SR6Roll extends Roll {
       this._evaluated = true;
       this._dice = die.terms;
     }
+	this.dummy = "aus evaluate()";
     return this;
   }
 
@@ -90,6 +91,7 @@ export default class SR6Roll extends Roll {
       }
       if (result.result == 5 && ignoreFives) {
         result.classes += "_ignored";
+		  result.success = false;
       }
       if (result.exploded) {
         expl = true;
@@ -127,6 +129,7 @@ export default class SR6Roll extends Roll {
 	console.log("ENTER render");
     chatOptions = mergeObject(
       {
+		  from: "render.chatOptions",
         user: game.user.id,
         flavor: this.actionText,
         template: this.constructor.CHAT_TEMPLATE,
@@ -138,6 +141,7 @@ export default class SR6Roll extends Roll {
     let isPrivate = chatOptions.isPrivate;
 
     const chatData = {
+		  from: "render.chatData",
       results: isPrivate ? "???" : this.results,
       formula: isPrivate ? "???" : this._formula,
       flavor: isPrivate ? null : chatOptions.flavor,
@@ -171,6 +175,7 @@ export default class SR6Roll extends Roll {
     // Prepare chat data
     chatOptions = mergeObject(
       {
+		  from: "toMessage.chatOptionsMerged",
         user: game.user.id,
         type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         content: this.total,
@@ -186,16 +191,18 @@ export default class SR6Roll extends Roll {
   }
 
   /** @override */
-  toJSON() {
-    const json = super.toJSON();
-    json.data = this.data;
-    return json;
-  }
+	toJSON() {
+		const json = super.toJSON();
+		json.data = this.data;
+		json.results = this.results;
+		return json;
+	}
 
   /** @override */
   static fromData(data) {
     const roll = super.fromData(data);
     roll.data = data.data;
+	 roll.results = data.results;
     return roll;
   }
 
@@ -369,6 +376,8 @@ export default class SR6Roll extends Roll {
 			data.explode = true;
 			data.modifier = this.data.data.actor.data.data.edge.max;
 			break;
+		default:
+			console.log("ToDo: Support edge action "+boostOrActionId);
 		}	
 
 		// Update content on dialog	
@@ -380,7 +389,216 @@ export default class SR6Roll extends Roll {
 	}
 	
 	//-------------------------------------------------------------
-	peformPostEdgeBoost(event, chatMsg, html, data) {
-		console.log("ToDo performPostEdgeBoost");
+	async _payEdge(cost, user, actor) {
+		console.log("ENTER: _payEdge("+cost+","+user+","+actor+")");
+		actor.data.data.edge.value -= cost;
+		if (actor.data.data.edge.value<0) {
+			actor.data.data.edge.value=0;
+		}
+		actor.update({ [`data.edge.value`]: actor.data.data.edge.value });
+			
+		
+		let er = new Roll(cost+"dc", {}, {
+			blind: true,
+			flavor: "Edge"
+		});
+		er.evaluate({async: false});
+		if (game.dice3d) {
+			game.dice3d.showForRoll(er);
+		}
+//		let edgeChat = await er.toMessage();
+//		console.log("edgeChat = ",edgeChat);
+		
+//		edgeChat.delete();
 	}
+	
+	//-------------------------------------------------------------
+	_getFailedIndices(results, max) {
+		let indices = [];
+		for (let i=0; i<results.length; i++) {
+			if (results[i].count==0 && indices.length<max) {
+				indices.push(i);
+			}
+		}
+		return indices;
+	}
+	
+	//-------------------------------------------------------------
+	_getPlusOneIndex(results) {
+		let indices = [];
+		for (let i=0; i<results.length; i++) {
+			if (results[i].count==0 && results[i].result===4) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	//-------------------------------------------------------------
+	async _rerollIndices(chatMsg, roll, indices, html) {
+		console.log("_rerollIndices ",indices);
+		
+		let rollData = {};
+		rollData.pool = indices.length;
+		rollData.formula = rollData.pool + "d6";
+		rollData.modifier= 0;
+		rollData.buttonType=0;
+		rollData.edge_use="reroll";
+		rollData.actionText="Reroll";
+		let r = new SR6Roll("", rollData);
+		let diceHtml = html.find(".dice-rolls");
+		try {
+      	r.evaluate();
+			r.toMessage(rollData);
+			let newTotal = roll._total + r._total;
+			roll._total = newTotal;
+			
+			// Change previous results
+			for (var i=0; i<indices.length; i++) {
+				let index = indices[i];
+				roll.data.results[index] = r.results[i];
+			}
+			// Try to update html
+			diceHtml.children().each(function(i, obj) {
+				$(obj).attr("class", roll.data.results[i].classes);
+			});
+			html.find(".spend_edge").append('<h4 class="highlight" style="margin:0px">Rerolled</h4>');
+			html.find(".resulttext").empty();
+			html.find(".resulttext").append(
+			game.i18n.localize('shadowrun6.roll.success')+": <b>"+newTotal+"</b> "+game.i18n.localize('shadowrun6.roll.successes'));
+			
+			// Update message
+			roll.results = roll.data.results;
+			chatMsg.update({
+				 [`roll`]: roll.toJSON(),
+				 ['content']: html[0].innerHTML 
+			});
+		} catch (err) {
+      	console.error("sr6_roll error: "+err);
+      	console.error("sr6_roll error: "+err.stack);
+			ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    	}
+	}
+	
+	//-------------------------------------------------------------
+	async _performPlusOne(chatMsg, roll, index, html) {
+		console.log("_performPlus1 ");
+		
+		let newResult = roll.data.results[index].result+1;
+		let newTotal = roll._total;
+		
+			// Change previous results
+		roll.data.results[index].result = newResult;
+		roll.data.results[index].classes = "die die_"+newResult;
+		if ( roll.data.results[index].result>=5) {
+			roll.data.results[index].success = true;
+			newTotal++;
+		} 
+
+		let diceHtml = html.find(".dice-rolls");
+		try {
+			roll._total = newTotal;
+			
+			// Try to update html
+			diceHtml.children().each(function(i, obj) {
+				$(obj).attr("class", roll.data.results[i].classes);
+			});
+			html.find(".spend_edge").append('<h4 class="highlight" style="margin:0px">+1 to one die</h4>');
+			html.find(".resulttext").empty();
+			html.find(".resulttext").append(
+			game.i18n.localize('shadowrun6.roll.success')+": <b>"+newTotal+"</b> "+game.i18n.localize('shadowrun6.roll.successes'));
+			
+			// Update message
+			roll.results = roll.data.results;
+			chatMsg.update({
+				 [`roll`]: roll.toJSON(),
+				 ['content']: html[0].innerHTML 
+			});
+		} catch (err) {
+      	console.error("sr6_roll error: "+err);
+      	console.error("sr6_roll error: "+err.stack);
+			ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    	}
+	}
+	
+	//-------------------------------------------------------------
+	peformPostEdgeBoost(chatMsg, html, data, btnPerform, edgeBoosts, edgeActions, event) {
+		console.log("ToDo performPostEdgeBoost");
+		console.log("chatMsg = ",chatMsg);
+		console.log("   data = ",data);
+		console.log("   html = ",html);
+		console.log("results = ",chatMsg._roll.data.results);
+		let results = chatMsg._roll.data.results;
+
+		let user  = game.users.get(data.message.user);
+		let actor = game.actors.get(chatMsg._roll.data.actor._id);
+		let diceHtml = html.find(".message-content");
+
+		let boostOrActionId = chatMsg.data.edgeBoost;
+		if (boostOrActionId==='edge_action') {
+			boostOrActionId = chatMsg.data.edgeAction;
+		}
+		console.log("to perform: "+boostOrActionId);
+		
+		// Remove "Spending Edge"
+		html.find(".spend_edge").empty();
+		
+		
+		switch (boostOrActionId) {
+		case "reroll_one":
+			console.debug("Reroll one die");
+			chatMsg._roll._payEdge(1, user, actor);
+			chatMsg._roll._rerollIndices(chatMsg, chatMsg._roll, chatMsg._roll._getFailedIndices(results,1), diceHtml);
+			break;
+		case "plus_1_roll":
+			console.debug("+1 to single roll");
+			chatMsg._roll._payEdge(2, user, actor);
+			// ToDo: Find a 4 or at least a 1
+			chatMsg._roll._performPlusOne(chatMsg, chatMsg._roll, chatMsg._roll._getPlusOneIndex(results), diceHtml);
+			break;
+		case "reroll_failed":
+			console.debug("Reroll all failed");
+			chatMsg._roll._payEdge(4, user, actor);
+			chatMsg._roll._rerollIndices(chatMsg, chatMsg._roll, chatMsg._roll._getFailedIndices(results,Number.MAX_VALUE), diceHtml);
+			break;
+		default:
+			console.log("ToDo: Support edge action "+boostOrActionId);
+		}	
+
+
+/*
+		let rollData = {};
+		rollData.pool = 2;
+		rollData.formula = rollData.pool + "d6";
+		rollData.modifier= 0;
+		rollData.buttonType=0;
+		rollData.edge_use=false;
+		let r = new SR6Roll("", rollData);
+		try {
+	   	console.log("Call r.evaluate: "+r);
+      	r.evaluate();
+			console.log(" toMessage  data = ",data);
+			console.log(" toMessage  r    = ",r);
+			console.log(" Reroll = ",r.results);
+			r.toMessage(rollData);
+			
+	    	let chatOptions = mergeObject( {
+				from: "peformPostEdgeBoost.chatOptionsMerged",
+				user: game.user.id,
+				type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+				sound: CONFIG.sounds.dice,
+				roll: r
+      		},
+				data
+			);
+			//chatOptions.content = r.render(chatOptions);
+    		//ChatMessage.create(chatOptions);
+		} catch (err) {
+      	console.error("sr6_roll error: "+err);
+      	console.error("sr6_roll error: "+err.stack);
+			ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    	}
+		*/
+	}
+	
 }

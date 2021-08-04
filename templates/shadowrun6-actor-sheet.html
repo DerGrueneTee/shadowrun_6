@@ -52,7 +52,9 @@
 		{{/if}}
 		{{/with}}
 		<a class="item" data-tab="matrix">{{ localize 'shadowrun6.actor.nav.matrix' }}</a>
+		<a class="item" data-tab="vehicles">{{ localize 'shadowrun6.actor.nav.vehicles' }}</a>
 		<a class="item" data-tab="equip" >{{ localize 'shadowrun6.actor.nav.equip'  }}</a>
+		<a class="item" data-tab="biography">{{ localize 'shadowrun6.actor.nav.biography' }}</a>
 		<!--a class="item" data-tab="description">{{ localize 'shadowrun6.actor.nav.description' }}</a>
 		<a class="item" data-tab="items">{{ localize 'shadowrun6.actor.nav.equip' }}</a-->
 	</nav>
@@ -96,13 +98,18 @@
 		</div>
 
 		{{!-- Matrix Tab --}}
-		<div class="tab magic" data-group="primary" data-tab="matrix">
+		<div class="tab matrix" data-group="primary" data-tab="matrix">
 			{{> "systems/shadowrun6-eden/templates/parts/tab-matrix.html" }}
 		</div>
 
+		{{!-- Vehicle Tab --}}
+		<div class="tab vehicles" data-group="primary" data-tab="vehicles">
+			{{> "systems/shadowrun6-eden/templates/parts/tab-vehicles.html" }}
+		</div>
+
 		{{!-- Biography Tab --}}
-		<div class="tab biography" data-group="primary" data-tab="description">
-			{{editor content=data.biography target="data.biography" button=true owner=owner editable=editable}}
+		<div class="tab biography" data-group="primary" data-tab="biography">
+			{{> "systems/shadowrun6-eden/templates/parts/tab-biography.html"}}
 		</div>
 
 		{{!-- Owned Items Tab --}}

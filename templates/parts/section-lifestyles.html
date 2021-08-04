@@ -1,0 +1,33 @@
+<div class="section" style="display: inline-block; width:100%">
+ <div class="section-head">
+	<h2 class="section-title">{{ localize 'shadowrun6.section.lifestyles.title' }}</h2>
+	<a class="item-control lifestyle-create" title="{{localize 'shadowrun6.section.lifestyles.add' }}">
+		<h2 class="fas fa-plus"></h2>
+	</a>
+</div>
+<table>
+	<thead>
+		<tr>
+		  <th style="text-align:left">{{ localize 'shadowrun6.label.column.name' }}</th>
+		  <th>{{ localize 'shadowrun6.lifestyle.type' }}</th>
+		  <th>{{ localize 'shadowrun6.lifestyle.paid' }}</th>
+		  <th colspan="2">{{ localize 'shadowrun6.label.column.action' }}</th>
+		</tr>
+	  </thead>
+		{{#each actor.items as |item id|}} 
+		{{#iff item.type '==' 'lifestyle'}}
+		<tr class="item list-item" data-item-id="{{item.id}}">
+			<td style="width: 10em;"> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
+			<td style="width: 4em">
+				<select name="item.type" disabled>
+				{{selectOptions ../config.LIFESTYLE_TYPE selected=item.data.data.type localize=true}}
+			</select>
+			<td style="width: 3em;" class="centered"> <input class="box" type="number" value="{{item.data.data.paid}}" data-field="data.paid" /></td>
+			<td style="width: 2em"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
+					class="fas fa-edit"></i></a> <a class="item-control item-delete"
+				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
+	   </tr>
+		{{/iff}} 
+		{{/each}}
+</table>
+</div>
