@@ -1,4 +1,4 @@
-<div class="section" style="display: inline-block; width:100%">
+<div class="section" style="display: inline-block; width:200%; column-span:2">
 	<div class="section-head">
      <h2 class="section-title">{{ localize 'shadowrun6.section.vehicles.title' }}</h2>
 	 <a class="item-control vehicle-create" title="{{localize 'shadowrun6.section.vehicles.add' }}"><h2 class="fas fa-plus"></h2></a>
@@ -6,30 +6,38 @@
 	  <table>
 	  	<tr>
 	  		<th>{{ localize 'shadowrun6.label.column.name' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.handling' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.acc' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.spdi' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.tspd' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.bod' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.arm' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.pil' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.sen' }}</th>
-	      <th>{{ localize 'shadowrun6.section.vehicles.column.sea' }}</th>
+	      <th style="align:center">{{ localize 'shadowrun6.section.vehicles.column.handling' }}</th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.acc' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.spdi' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.tspd' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.bod' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.arm' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.pil' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.sen' }} </th>
+	      <th>{{ localize 'shadowrun6.section.vehicles.column.sea' }} </th>
 	  	</tr>
  		{{#each actor.items as |item id|}} 
 		{{#if (eq item.type 'gear')}}
 		{{#if (eq item.data.data.type "VEHICLES") }}
        <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td><label class="small-column" >{{item.data.data.handlOn}}/{{item.data.data.handlOff}}</label></td>
-         <td><label class="small-column" >{{item.data.data.acc}}</label></td>
-         <td><label class="small-column" >{{item.data.data.spdi}}</label></td>
-         <td><label class="small-column" >{{item.data.data.tspd}}</label></td>
-         <td><label class="small-column" >{{item.data.data.bod}}</label></td>
-         <td><label class="small-column" >{{item.data.data.arm}}</label></td>
-         <td><label class="small-column" >{{item.data.data.pil}}</label></td>
-         <td><label class="small-column" >{{item.data.data.sen}}</label></td>
-         <td><label class="small-column" >{{item.data.data.sea}}</label></td>
+         <td class="centered"><label class="small-column" >{{item.data.data.handlOn}}/{{item.data.data.handlOff}}</label></td>
+         {{#if (eq item.data.data.accOn item.data.data.accOff)}}
+         <td class="centered"><label class="small-column" >{{item.data.data.accOn}}</label></td>
+         {{else}}
+         <td class="centered"><label class="small-column" >{{item.data.data.accOn}}/{{item.data.data.accOff}}</label></td>
+         {{/if}}
+         {{#if (eq item.data.data.spdiOn item.data.data.spdiOff)}}
+         <td class="centered"><label class="small-column" >{{item.data.data.spdiOn}}</label></td>
+         {{else}}
+         <td class="centered"><label class="small-column" >{{item.data.data.spdiOn}}/{{item.data.data.spdiOff}}</label></td>
+         {{/if}}
+         <td class="centered"><label class="small-column" >{{item.data.data.tspd}}</label></td>
+         <td class="centered"><label class="small-column" >{{item.data.data.bod}}</label></td>
+         <td class="centered"><label class="small-column" >{{item.data.data.arm}}</label></td>
+         <td class="centered"><label class="small-column" >{{item.data.data.pil}}</label></td>
+         <td class="centered"><label class="small-column" >{{item.data.data.sen}}</label></td>
+         <td class="centered"><label class="small-column" >{{item.data.data.sea}}</label></td>
        </tr>
        <tr>
          <td colspan="10">
