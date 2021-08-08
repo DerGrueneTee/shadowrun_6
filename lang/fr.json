@@ -109,7 +109,7 @@
       "oppAttr1" : "Attr. opposé 1",
       "oppAttr2" : "Attr. opposé 2",
       "skill": "Compétence",
-      "threshold" : "Seuil",
+      "threshold" : "Seuil"
     },
     "contact": {
       "rating_short": "Rés",
