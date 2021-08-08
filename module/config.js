@@ -320,6 +320,12 @@ SR6.skill_special = {
    },
 };
 
+SR6.VEHICLE_TYPE = {
+	"GROUND": "shadowrun6.vehicle.type.groundcraft",
+	"WATER": "shadowrun6.vehicle.type.watercraft",
+	"AIR": "shadowrun6.vehicle.type.aircraft",
+};
+
 class MatrixAction {
 	constructor(id, skill,spec,attrib, illegal,major, outsider,user,admin, attr1, attr2, threshold=0) {
 		this.id = id;

@@ -1070,6 +1070,13 @@
       "sorcery": "Hexerei",
       "stealth": "Heimlichkeit",
       "tasking": "Tasken"
+    },
+    "vehicle": {
+		"type": {
+			"groundcraft": "Bodenfahrzeuge",
+			"watercraft": "Wasserfahrzeuge",
+			"aircraft": "Luftfahrzeuge"
+		}      
     }
   }
 }

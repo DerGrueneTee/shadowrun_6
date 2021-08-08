@@ -1073,6 +1073,13 @@
     },
     "tradition": {
       "attribute": "Tradition Attribute"
+    },
+    "vehicle": {
+		"type": {
+			"groundcraft": "Groundcraft",
+			"watercraft": "Watercraft",
+			"aircraft": "Aircraft"
+		}      
     }
   },
   "skill": {
