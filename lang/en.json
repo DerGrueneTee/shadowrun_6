@@ -866,7 +866,8 @@
 				"arm": "A",
 				"pil": "P",
 				"sen": "S",
-				"sea": "Sea"
+				"sea": "Sea",
+        "vtype": "Type"
 			},
         "title": "Vehicles"
       },
