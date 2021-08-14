@@ -842,8 +842,10 @@
       "data": {
         "handlOn": 3,
         "handlOff": 5,
-        "acc": 15,
-        "spdi": 30,
+        "accOn": 15,
+        "accOff": 15,
+        "spdiOn": 30,
+        "spdiOff": 30,
         "tspd": 180,
         "bod": 10,
         "arm": 6,
