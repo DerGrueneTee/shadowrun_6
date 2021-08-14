@@ -36,9 +36,9 @@
                             {{/select}}
                         </select></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.countable}}
-                            name="data.countable" name="data.countable" /></td>
+                            name="data.countable" /></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.needsRating}}
-                            name="data.needsRating" name="data.needsRating" /></td>
+                            name="data.needsRating" /></td>
                     <td><input type="text" value="{{item.data.data.availDef}}" name="data.availDef" class="box centered"
                             style="width: 2em" /></td>
                     <td><input type="text" value="{{item.data.data.priceDef}}" name="data.priceDef" class="box centered"
@@ -86,9 +86,9 @@
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}}
                             name="data.modes.SS" " />
                     </td>
-                    {{#each item.data.data.attackRating as |rating id|}}
+                    {{#each item.data.data.attackRating as |arating id|}}
                     <td data-array=" data.attackRating">
-                        <input type="number" value="{{rating}}" data-array-field data-index="{{id}}" style="width:1em"
+                        <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1em"
                             class="centered box" />
                     </td>
                     {{/each}}
@@ -141,7 +141,7 @@
                             class="box centered" />
                     </td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.natural}}
-                            name="data.natural" name="data.natural" /></td>
+                            name="data.natural" /></td>
                 </tr>
             </table>
             {{/if}}
