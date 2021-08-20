@@ -1076,6 +1076,8 @@
       "attribute": "Tradition Attribute"
     },
     "vehicle": {
+	   "action_label": "Handling / Vehicle Attack or Defense",
+	   "mode_label": "Mode",
 		"mode": {
 			"manual": "Manual",
 			"riggedAR": "Jumped in (AR)",

@@ -150,7 +150,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const field = element.dataset.field;
 				if (itemId) {
-					console.log("Update item "+itemId+" field " + field + " with " + value);
+					//console.log("Update item "+itemId+" field " + field + " with " + value);
 					let item = this.actor.items.get(itemId);
 					item.update({ [field]: value });
 				} else {

@@ -550,29 +550,56 @@ export class Shadowrun6Actor extends Actor {
 				if (!item.data.vehicle.handling)  item.data.vehicle.handling={};
 				let vehicle = item.data.vehicle;
 				let opMode = vehicle.opMode;
-				let rigRating = 0;
-				console.log("Before update ",item.data.vehicle);
+				let rigRating = 1; // TODO real rating
+				let modRig = "";
+				if (rigRating>0) {
+					modRig = " + "+game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+				}
 				switch (opMode) {
 				case "manual":
-					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen;
-					vehicle.ar.modString = game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ game.i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")";
-					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm;
-					vehicle.dr.modString = game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")";
-					vehicle.handling.pool = actorData.data.skills.piloting.pool;
-					vehicle.handling.modString = actorData.data.skills.piloting.modString;
-					break;
+					rigRating = 0; 
+					modRig = "";
 				case "riggedAR":
 					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
 					vehicle.ar.modString = 
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						game.i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+") + "+
-						game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+						game.i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
+						modRig;
 					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
-					vehicle.dr.modString = game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+") + "+
-						game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+					vehicle.dr.modString = 
+						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
+						modRig;
 					vehicle.handling.pool = actorData.data.skills.piloting.pool + rigRating;
-					vehicle.handling.modString = actorData.data.skills.piloting.modString+" + "+game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+					vehicle.handling.modString = 
+						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						game.i18n.localize("attrib.rea_short")+"("+actorData.data.attributes.rea.pool+")"+
+						modRig;
 					break;
+				case "riggedVR":
+					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
+					vehicle.ar.modString = 
+						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						game.i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
+						modRig;
+					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
+					vehicle.dr.modString = 
+						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
+						modRig;
+				   console.log("---> ",actorData.data.attributes.int);
+					vehicle.handling.pool = 
+
+						actorData.data.skills.piloting.points +
+						actorData.data.attributes.int.pool + 
+						rigRating;
+					vehicle.handling.modString = 
+						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						game.i18n.localize("attrib.int_short")+"("+actorData.data.attributes.int.pool+")"+
+						modRig;
+					break;
+				default:
+					console.log("ERROR: Unsupported mode of operation: "+opMode);
 				}
 			}
 		});

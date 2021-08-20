@@ -15,6 +15,7 @@
 	      <th>{{ localize 'shadowrun6.section.vehicles.column.pil' }} </th>
 	      <th>{{ localize 'shadowrun6.section.vehicles.column.sen' }} </th>
 	      <th>{{ localize 'shadowrun6.section.vehicles.column.sea' }} </th>
+	      <th colspan="2">&nbsp;</th>
 	  	</tr>
  		{{#each actor.items as |item id|}} 
 		{{#if (eq item.type 'gear')}}
@@ -38,33 +39,37 @@
          <td class="centered"><label class="small-column" >{{item.data.data.pil}}</label></td>
          <td class="centered"><label class="small-column" >{{item.data.data.sen}}</label></td>
          <td class="centered"><label class="small-column" >{{item.data.data.sea}}</label></td>
+			<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
+					class="fas fa-edit"></i></a> <a class="item-control item-delete"
+				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a>
+			</td>
        </tr>
        <tr>
-         <td colspan="10">
+         <td colspan="12">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
         	   <table>
         	   	<tr>
-        	   		<td>Mode:</td>
+        	   		<td>{{ localize 'shadowrun6.vehicle.mode_label' }}:</td>
         	   		<td>
         	   			<select name="data.data.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
                      {{selectOptions ../config.VEHICLE_MODE selected=data.data.vehicle.opMode localize=true}}           			
          				</select>
         	   		</td>
-        	   		<td>Attack Rating:</td>
-        	   		<td title="{{item.data.data.vehicle.ar.modString}}">{{item.data.data.vehicle.ar.pool}}</td>
-        	   		<td>Defense Rating:</td>
-        	   		<td title="{{item.data.data.vehicle.dr.modString}}">{{item.data.data.vehicle.dr.pool}}</td>
+        	   		<td></td>
+        	   		<td>{{ localize 'shadowrun6.label.attack_rating' }}:</td>
+        	   		<td class="important-column" title="{{item.data.data.vehicle.ar.modString}}">{{item.data.data.vehicle.ar.pool}}</td>
         	   	</tr>
         	   	<tr>
-        	   		<td colspan=2">Handling (manual)</td>
-        	   		{{log "Handling" ../data/data/skills/piloting/pool}}
-         <td class="skill-pool" style="width: 6em" colspan="4">
-         	<label data-skill="piloting">{{../data.data.skills.piloting.pool}}</label>
-         	<a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOn}}" data-skill="piloting" title="{{localize "shadowrun6.label.onroad" }}"><i class="fas fa-dice-six"></i></a>
-         	/
-         	<a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOff}}" data-skill="piloting" title="{{localize "shadowrun6.label.offroad" }}"><i class="fas fa-dice-six"></i></a>
-         </td>
+        	   		<td colspan="2">{{ localize 'shadowrun6.vehicle.action_label' }}:</td>
+        				<td class="skill-pool" style="width: 5em">
+         			  <label data-skill="piloting" title="{{item.data.data.vehicle.handling.modString}}">{{item.data.data.vehicle.handling.pool}}</label>
+         			  <a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOn}}" data-skill="piloting" title="{{localize "shadowrun6.label.onroad" }}"><i class="fas fa-dice-six"></i></a>
+         				/
+         			  <a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOff}}" data-skill="piloting" title="{{localize "shadowrun6.label.offroad" }}"><i class="fas fa-dice-six"></i></a>
+                  </td>
+        	   		<td>{{ localize 'shadowrun6.label.defense_rating' }}:</td>
+        	   		<td class="important-column" title="{{item.data.data.vehicle.dr.modString}}">{{item.data.data.vehicle.dr.pool}}</td>
         	   	</tr>
         	   </table>
          	</div>
