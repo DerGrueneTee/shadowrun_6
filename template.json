@@ -553,6 +553,10 @@
 			"sen": 0,
 			"sea": 0,
 			"vtype": "",
+			"vehicleOpMode": "RCC",
+			"vehicle": {
+				"opMode": "manual"
+			},
 			"templates": [
 				"genesis",
 				"dice-pool"

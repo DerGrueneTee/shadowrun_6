@@ -325,6 +325,13 @@ SR6.VEHICLE_TYPE = {
 	"WATER": "shadowrun6.vehicle.type.watercraft",
 	"AIR": "shadowrun6.vehicle.type.aircraft",
 };
+SR6.VEHICLE_MODE = {
+	"manual"  : "shadowrun6.vehicle.mode.manual",
+	"riggedAR": "shadowrun6.vehicle.mode.riggedAR",
+	"riggedVR": "shadowrun6.vehicle.mode.riggedVR",
+	"rcc"     : "shadowrun6.vehicle.mode.rcc",
+	"autonomous": "shadowrun6.vehicle.mode.autonomous",
+};
 
 class MatrixAction {
 	constructor(id, skill,spec,attrib, illegal,major, outsider,user,admin, attr1, attr2, threshold=0) {

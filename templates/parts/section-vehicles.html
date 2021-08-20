@@ -45,6 +45,12 @@
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
         	   <table>
         	   	<tr>
+        	   		<td>Mode:</td>
+        	   		<td>
+        	   			<select name="data.data.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
+                     {{selectOptions ../config.VEHICLE_MODE selected=data.data.vehicle.opMode localize=true}}           			
+         				</select>
+        	   		</td>
         	   		<td>Attack Rating:</td>
         	   		<td title="{{item.data.data.vehicle.ar.modString}}">{{item.data.data.vehicle.ar.pool}}</td>
         	   		<td>Defense Rating:</td>
@@ -53,7 +59,7 @@
         	   	<tr>
         	   		<td colspan=2">Handling (manual)</td>
         	   		{{log "Handling" ../data/data/skills/piloting/pool}}
-         <td class="skill-pool" style="width: 6em" colspan="2">
+         <td class="skill-pool" style="width: 6em" colspan="4">
          	<label data-skill="piloting">{{../data.data.skills.piloting.pool}}</label>
          	<a class="item-control skill-roll" data-item-id="{{this.id}}" data-threshold="{{item.data.data.handlOn}}" data-skill="piloting" title="{{localize "shadowrun6.label.onroad" }}"><i class="fas fa-dice-six"></i></a>
          	/

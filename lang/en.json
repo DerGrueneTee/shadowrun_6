@@ -1076,6 +1076,13 @@
       "attribute": "Tradition Attribute"
     },
     "vehicle": {
+		"mode": {
+			"manual": "Manual",
+			"riggedAR": "Jumped in (AR)",
+			"riggedVR": "Jumped in (VR)",
+			"rcc": "via RCC",
+			"autonomous": "Autonomous"
+		},
 		"type": {
 			"groundcraft": "Groundcraft",
 			"watercraft": "Watercraft",

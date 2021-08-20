@@ -150,10 +150,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const field = element.dataset.field;
 				if (itemId) {
-//					console.log("Update item field " + field + " with " + value);
-					this.actor.items.get(itemId).update({ [field]: value });
+					console.log("Update item "+itemId+" field " + field + " with " + value);
+					let item = this.actor.items.get(itemId);
+					item.update({ [field]: value });
 				} else {
-//					console.log("Update actor field " + field + " with " + value);
+					//console.log("Update actor field " + field + " with " + value);
 					this.actor.update({ [field]: value });
 				} 
 			});
@@ -200,6 +201,18 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				}
 				let value = element.classList.contains("open") ? "open" : "closed";
 				this.actor.setFlag("shadowrun6-eden", "collapse-state-"+skillId, value);
+			});
+			//Collapsible
+			html.find('select.contdrolled').change(event => {
+				const element = event.currentTarget;
+				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+				console.log("SELECT ",element);
+				console.log("SELECT2",event);
+				console.log("SELECT3",event.target.value);
+				console.log("-> itemId ",itemId);
+				console.log("-> ds ",element.dataset);
+				
+				
 			});
 
 			/*

@@ -536,16 +536,22 @@ export class Shadowrun6Actor extends Actor {
 			let item = tmpItem.data;
 			// Any kind of gear
 			if (item.type == "gear" && (item.data.type==="VEHICLES" || item.data.type==="DRONES")) {
-				console.log("ToDo: Process ",item);
-				if (!item.data.vehicle) { item.data.vehicle = {
-					opMode: "manual",
-					ar    : {},
-					dr    : {},
-					handling: {}
-				}};
+				console.log("ToDo: Process ",item.data.vehicle);
+				if (!item.data.vehicle) { 
+					item.data.vehicle = {
+						opMode: "manual",
+						ar    : {},
+						dr    : {},
+						handling: {}
+					};
+				};
+				if (!item.data.vehicle.ar)  item.data.vehicle.ar={};
+				if (!item.data.vehicle.dr)  item.data.vehicle.dr={};
+				if (!item.data.vehicle.handling)  item.data.vehicle.handling={};
 				let vehicle = item.data.vehicle;
 				let opMode = vehicle.opMode;
 				let rigRating = 0;
+				console.log("Before update ",item.data.vehicle);
 				switch (opMode) {
 				case "manual":
 					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen;
