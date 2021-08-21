@@ -101,6 +101,7 @@
                 <tr>
                     <td>
                         <select name="data.skill" data-field="data.skill">
+                        <option value="">-</option>
                             {{#select item.data.data.skill}}
                             {{#each config.SKILLS_WEAPON as |skill id|}}
                             <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option>
@@ -110,7 +111,9 @@
                     </td>
                     <td>
         	   			<select name="data.skillSpec" data-field="data.data.skillSpec">
-                     {{selectOptions (lookup config.skill_special item.data.data.skill) selected=data.data.skillSpec localize=true}}           			
+        	   			{{#if item.data.data.skill}}
+                     {{selectOptions (lookup config.skill_special item.data.data.skill) selected=data.data.skillSpec localize=true}}
+                     {{/if}}           			
          				</select>
                     </td>
                 </tr>
