@@ -498,8 +498,7 @@ export class Shadowrun6Actor extends Actor {
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
 			if (item.type == "gear" && item.data && item.data.skill) {
-				item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
-				// TODO: Check if actor has specialization or mastery
+				item.data.pool = this._getSkillPool(item.data.skill, item.data.skillSpec, tmpItem.actor.data.data.skills[item.data.skill].attrib);
 				item.data.pool = item.data.pool + eval(item.data.modifier);
 			};
 			if (tmpItem.type == "gear" && item.data.dmg>0) {

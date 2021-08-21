@@ -66,6 +66,7 @@ Hooks.once("init", async function () {
     return op1 + op2 + op3;
   });
   Handlebars.registerHelper('skillAttr', getSkillAttribute);
+  Handlebars.registerHelper('skillPool', getSkillPool);
   Handlebars.registerHelper('gearSubtype', getSubtypes);
   Handlebars.registerHelper('ritualFeat', getRitualFeatures);
   Handlebars.registerHelper('spellFeat', getSpellFeatures);
@@ -370,6 +371,24 @@ function getSkillAttribute(key) {
   } else {
     return "??";
   }
+};
+
+function getSkillPool(skillId, skillSpec, actor) {
+	const skill  = actor.data.data.skills[skillId];
+	let pool = 0;
+	if (skill) {
+		pool = skill.points + skill.modifier;	
+		if (skill.expertise==skillSpec) {
+			pool+=3;
+		} else if (skill.specialization==skillSpec) {
+			pool+=2;
+		}
+	}
+	if (action.attrib) {
+		const attrib = actor.data.data.attributes[action.attrib];
+		pool += attrib.pool;
+	}
+	return pool;
 };
 
 function getSubtypes(key) {
