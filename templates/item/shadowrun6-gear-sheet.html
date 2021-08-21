@@ -170,7 +170,10 @@
             </table>
             {{/if}}
             <!-- ********** COMLINK ********** -->
-            {{#if (eq item.data.data.subtype "COMMLINK")}}
+            {{#if (or
+                (eq item.data.data.subtype "COMMLINK")
+                (eq item.data.data.subtype "RIGGER_CONSOLE")
+            )}}
             <table>
                 <tr>
                     <th>{{localize 'shadowrun6.label.devRating'}}</th>
