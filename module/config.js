@@ -332,6 +332,12 @@ SR6.VEHICLE_MODE = {
 	"rcc"     : "shadowrun6.vehicle.mode.rcc",
 	"autonomous": "shadowrun6.vehicle.mode.autonomous",
 };
+SR6.CONTROL_RIG_RATING = {
+	"0": "shadowrun6.label.not_present",
+	"1": "shadowrun6.label.rating1",
+	"2": "shadowrun6.label.rating2",
+	"3": "shadowrun6.label.rating3",
+};
 
 class MatrixAction {
 	constructor(id, skill,spec,attrib, illegal,major, outsider,user,admin, attr1, attr2, threshold=0) {

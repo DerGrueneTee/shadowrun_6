@@ -468,12 +468,17 @@
       "modifier": "Adj.",
       "name": "Name",
       "none": "-",
+      "not_present": "not present",
 		"offroad": "Off-Road",
 		"onroad": "On-Road",
       "points": "Points",
       "pool": "Pool",
       "poolmod": "Pool modifier",
+      "programs.short": "P",
       "progSlots": "Prog. slots",
+		"rating1": "Rating 1",
+		"rating2": "Rating 2",
+		"rating3": "Rating 3",
       "specialization": "Specialization",
       "threshold": "Threshold",
       "value": "Value",
@@ -571,6 +576,10 @@
       "max": "Max",
       "mod": "adj"
     },
+	"programtype": {
+		"basic": "Basic programs",
+		"hacking": "Hacking programs"	
+	},
     "program": {
       "baby_monitor": {
         "name": "Baby Monitor",

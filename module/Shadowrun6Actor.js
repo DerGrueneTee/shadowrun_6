@@ -532,6 +532,10 @@ export class Shadowrun6Actor extends Actor {
 	_prepareVehiclePools() {
 		const actorData = this.data;
 
+		if (!actorData.data.controlRig) {
+			actorData.data.controlRig=0;
+		}
+
 		actorData.items.forEach(tmpItem => {
 			let item = tmpItem.data;
 			// Any kind of gear
@@ -550,7 +554,7 @@ export class Shadowrun6Actor extends Actor {
 				if (!item.data.vehicle.handling)  item.data.vehicle.handling={};
 				let vehicle = item.data.vehicle;
 				let opMode = vehicle.opMode;
-				let rigRating = 1; // TODO real rating
+				let rigRating = parseInt(actorData.data.controlRig); 
 				let modRig = "";
 				if (rigRating>0) {
 					modRig = " + "+game.i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
