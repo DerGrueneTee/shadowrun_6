@@ -271,7 +271,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		event.preventDefault();
 		const skill     = event.currentTarget.dataset.skill;
 		const skillSpec = event.currentTarget.dataset.skillspec;
-		this.actor.rollSkill(skill, skillSpec);
+		const threshold = event.currentTarget.dataset.threshold;
+		const attrib    = event.currentTarget.dataset.attrib;
+		let options = {};
+		if (attrib)
+			options.attrib = attrib;
+		if (threshold) {
+			this.actor.rollSkill(skill, skillSpec, threshold, options);			
+		} else {
+			this.actor.rollSkill(skill, skillSpec, 3, options);
+		}
 	}
 
 	_onRollItemCheck(event, html) {

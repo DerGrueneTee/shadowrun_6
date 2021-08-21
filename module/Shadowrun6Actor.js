@@ -543,16 +543,27 @@ export class Shadowrun6Actor extends Actor {
 				console.log("ToDo: Process ",item.data.vehicle);
 				if (!item.data.vehicle) { 
 					item.data.vehicle = {
+						attrib: "rea",
 						opMode: "manual",
 						ar    : {},
 						dr    : {},
-						handling: {}
+						handling: {},
+						spec  : ""
 					};
 				};
+				if (!item.data.vehicle.attrib)  item.data.vehicle.attrib="rea";
 				if (!item.data.vehicle.ar)  item.data.vehicle.ar={};
 				if (!item.data.vehicle.dr)  item.data.vehicle.dr={};
 				if (!item.data.vehicle.handling)  item.data.vehicle.handling={};
+				
+				let specialization = item.data.vtype;
+				if ("GROUND" === specialization) { specialization = "ground_craft"; }
+				if ("WATER"  === specialization) { specialization = "watercraft"; }
+				if ("AIR"    === specialization) { specialization = "aircraft"; }
+				console.log("SPECIAL for "+item.name+" is "+specialization);
+				
 				let vehicle = item.data.vehicle;
+				item.data.vehicle.spec = specialization;
 				let opMode = vehicle.opMode;
 				let rigRating = parseInt(actorData.data.controlRig); 
 				let modRig = "";
@@ -574,13 +585,14 @@ export class Shadowrun6Actor extends Actor {
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
 						game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
 						modRig;
-					vehicle.handling.pool = actorData.data.skills.piloting.pool + rigRating;
+					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"rea") + rigRating;
 					vehicle.handling.modString = 
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
 						game.i18n.localize("attrib.rea_short")+"("+actorData.data.attributes.rea.pool+")"+
 						modRig;
 					break;
 				case "riggedVR":
+					item.data.vehicle.attrib="int";
 					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
 					vehicle.ar.modString = 
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
@@ -592,11 +604,7 @@ export class Shadowrun6Actor extends Actor {
 						game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
 						modRig;
 				   console.log("---> ",actorData.data.attributes.int);
-					vehicle.handling.pool = 
-
-						actorData.data.skills.piloting.points +
-						actorData.data.attributes.int.pool + 
-						rigRating;
+					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"int")+ rigRating;
 					vehicle.handling.modString = 
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
 						game.i18n.localize("attrib.int_short")+"("+actorData.data.attributes.int.pool+")"+
@@ -848,7 +856,7 @@ export class Shadowrun6Actor extends Actor {
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
 	rollSkill(skillId, spec, threshold=3, options={}) {
-		console.log("rollSkill("+skillId+", threshold=",threshold);
+		console.log("rollSkill("+skillId+", spec="+spec+", threshold=",threshold+", options=",options);
 		const skl = this.data.data.skills[skillId];
 		// Prepare action text
 		let actionText;
@@ -856,12 +864,18 @@ export class Shadowrun6Actor extends Actor {
 		let checkText = this._getSkillCheckText(skillId,spec,threshold);
 		// Calculate pool
 		let value = this._getSkillPool(skillId, spec);
+		// Optional: different attribute
+		if (options.attrib) {
+			value = this._getSkillPool(skillId, spec, options.attrib);
+			checkText = this._getSkillCheckText(skillId,spec,threshold, options.attrib);
+		}
 
 		// Roll and return
 		let data = mergeObject(options, {
 			pool: value,
 			actionText: actionText,
 			checkText  : checkText,
+			attrib: options.attrib,
 			skill: skl,
 			spec: spec,
 			threshold: threshold,
