@@ -373,10 +373,11 @@
       },
       "mastyle": {
         "category": {
-          "grappling": "Grappling",
-          "mobility": "Mobility",
-          "striking": "Striking",
-          "weapon": "weapon"
+          "grappling": "Ringen",
+          "mobility": "Mobilität",
+			 "ranged"  : "Fernkampf",
+          "striking": "Schlag",
+          "weapon": "Waffen"
         }
       },
       "mode": "Modus",

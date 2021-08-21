@@ -574,6 +574,7 @@
 			"category": {
 				"grappling": false,
 				"mobility": false,
+				"ranged"  : false,
 				"striking": false,
 				"weapon": false
 			},
