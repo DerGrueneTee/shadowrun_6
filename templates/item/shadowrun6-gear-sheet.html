@@ -10,7 +10,7 @@
                     <!--Typ, Subtyp, Verfügbarkeit, Preis-->
                     <th>{{localize 'shadowrun6.item.type'}}</th>
                     <th>{{localize 'shadowrun6.item.subtype'}}</th>
-                    <th>{{localize 'shadowrun6.label.column.count'}}</th>
+                    <!--th>{{localize 'shadowrun6.label.column.count'}}</th-->
                     <th>{{localize 'shadowrun6.label.column.rating'}}</th>
                     <th>{{localize 'shadowrun6.item.availability'}}</th>
                     <th>{{localize 'shadowrun6.item.price'}}</th>
@@ -35,14 +35,14 @@
                             {{/each}}
                             {{/select}}
                         </select></td>
-                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.countable}}
-                            name="data.countable" /></td>
+                    <!--td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.countable}}
+                            name="data.countable" /></td-->
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.needsRating}}
                             name="data.needsRating" /></td>
                     <td><input type="text" value="{{item.data.data.availDef}}" name="data.availDef" class="box centered"
                             style="width: 2em" /></td>
                     <td><input type="text" value="{{item.data.data.priceDef}}" name="data.priceDef" class="box centered"
-                            style="width: 3em" /></td>
+                            style="width: 3.4em" /></td>
                 </tr>
             </table>
             <!-- ********** WAFFEN ********** -->
@@ -87,8 +87,8 @@
                             name="data.modes.SS" " />
                     </td>
                     {{#each item.data.data.attackRating as |arating id|}}
-                    <td data-array=" data.attackRating">
-                        <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1em"
+                    <td data-array="data.attackRating">
+                        <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.2em"
                             class="centered box" />
                     </td>
                     {{/each}}
