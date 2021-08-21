@@ -601,7 +601,6 @@ export class Shadowrun6Actor extends Actor {
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
 						game.i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
 						modRig;
-				   console.log("---> ",actorData.data.attributes.int);
 					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"int")+ rigRating;
 					vehicle.handling.modString = 
 						game.i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
