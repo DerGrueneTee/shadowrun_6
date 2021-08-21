@@ -415,7 +415,7 @@
       "GENETICS": "GENETICS",
       "MAGICAL": "MAGICAL",
       "NANOWARE": "NANOWARE",
-      "SURVIVAL": "SURVIVAL",
+      "SURVIVAL": "Survival gear",
       "TOOLS": "TOOLS",
       "VEHICLES": "VEHICLES",
       "WEAPON_CLOSE_COMBAT": "Weapon, Close Combat",
@@ -567,6 +567,7 @@
         "language": "Gibberish"
       },
       "spell": "Abracadabra",
+      "survival": "Handy swiss army knife",
       "weapon": "Named weapons are much cooler",
       "weaponclose": "Something heavy"
     },
@@ -864,6 +865,7 @@
         "column.range": "Range",
         "title": "Spells"
       },
+		"survival": "Survival",
       "vehicles": {
         "add": "Add new vehicle",
 		  "column": {

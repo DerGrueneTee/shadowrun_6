@@ -66,6 +66,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.ELECTRONICS-create').click(ev => this._onCreateNewEmbeddedItem("gear","ELECTRONICS"));
 			html.find('.CHEMICALS-create').click(ev => this._onCreateNewEmbeddedItem("gear","CHEMICALS"));
 			html.find('.BIOLOGY-create').click(ev => this._onCreateNewEmbeddedItem("gear","BIOLOGY"));
+			html.find('.SURVIVAL-create').click(ev => this._onCreateNewEmbeddedItem("gear","SURVIVAL"));
 			html.find('.armor-create').click(ev => this._onCreateNewEmbeddedItem("gear","ARMOR"));
 			html.find('.ammunition-create').click(ev => this._onCreateNewEmbeddedItem("gear","AMMUNITION"));
 			html.find('.bodyware-create').click(ev => this._onCreateNewEmbeddedItem("gear","CYBERWARE"));
