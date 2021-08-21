@@ -392,7 +392,14 @@
       "social": "Sozial",
       "stun_damage": "B",
       "subtype": "Unterart",
-      "type": "Art"
+      "type": "Art",
+      "vehicle": {
+			"armor.long": "Panz",	
+			"armor.short": "P",
+			"rigRating.long": "Riggerkontrolle",
+			"sensor.long": "Sensor",	
+			"sensor.short": "S"	
+		}
     },
     "itemtype": {
       "ACCESSORY": "Zubehör",
@@ -461,10 +468,17 @@
       "modifier": "Mod.",
       "name": "Name",
       "none": "-",
+      "not_present": "nicht vorhandel",
+	  "offroad": "Off-Road",
+	  "onroad": "Straßen",
       "points": "Punkte",
       "pool": "Pool",
       "poolmod": "Pool-Modifikator",
+      "programs.short": "P",
       "progSlots": "Programm-Plätze",
+	  "rating1": "Stufe 1",
+	  "rating2": "Stufe 2",
+	  "rating3": "Stufe 3",
       "specialization": "Spezialisierung",
       "threshold": "Schwellenwert",
       "value": "Wert",
@@ -562,6 +576,10 @@
       "max": "Max",
       "mod": "Mod"
     },
+	"programtype": {
+		"basic": "Standardprogramme",
+		"hacking": "Hackingprogramme"	
+	},
     "program": {
       "baby_monitor": {
         "name": "Babymonitor",
@@ -767,6 +785,10 @@
       },
       "defense": "Verteidigung & Widerstände",
       "derived": "Abgeleitete Werte",
+      "drones": {
+        "add": "Neue Drohne hinzufügen",
+        "title": "Drohnen"
+      },
       "electronics": "Elektronik",
       "echo": {
         "add": "Neues Echo hinzufügen",
@@ -842,8 +864,21 @@
         "column.range": "Reichw",
         "title": "Zauber"
       },
+      "survival": "Überlebensausrüstung",
       "vehicles": {
         "add": "Fahrzeug hinzufügen",
+		"column": {
+				"handling": "Han",
+				"acc": "Bes",
+				"spdi": "G.Int",
+				"tspd": "Geschw",
+				"bod": "Rum",
+				"arm": "Pan",
+				"pil": "Pil",
+				"sen": "Sen",
+				"sea": "Sit",
+                "vtype": "Art"
+			},
         "title": "Fahrzeuge"
       },
       "weapon": {
@@ -1072,11 +1107,41 @@
       "tasking": "Tasken"
     },
     "vehicle": {
+	   "action_label": "Handling / Fahrzeug",
+	   "mode_label": "Mode",
+		"mode": {
+			"manual": "Manuell",
+			"riggedAR": "Reingesprungen (AR)",
+			"riggedVR": "Reingesprungen (VR)",
+			"rcc": "via RCC",
+			"autonomous": "Autonomous"
+		},
 		"type": {
 			"groundcraft": "Bodenfahrzeuge",
 			"watercraft": "Wasserfahrzeuge",
 			"aircraft": "Luftfahrzeuge"
 		}      
     }
-  }
+  },
+	"skill": {
+      "astral": "Astral",
+      "athletics": "Athletik",
+      "biotech": "Biotech",
+      "close_combat": "Nahkampf",
+      "con": "Überreden",
+      "conjuring": "Beschwören",
+      "cracking": "Cracken",
+      "electronics": "Elektronik",
+      "enchanting": "Verzaubern",
+      "engineering": "Mechanik",
+      "exotic_weapons": "Exotische Waffen",
+      "firearms": "Feuerwaffen",
+      "influence": "Einfluss",
+      "outdoors": "Natur",
+      "perception": "Wahrnehmung",
+      "piloting": "Steuern",
+      "sorcery": "Hexerei",
+      "stealth": "Heimlichkeit",
+      "tasking": "Tasken"
+    }
 }
