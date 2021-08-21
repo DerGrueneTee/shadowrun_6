@@ -540,7 +540,6 @@ export class Shadowrun6Actor extends Actor {
 			let item = tmpItem.data;
 			// Any kind of gear
 			if (item.type == "gear" && (item.data.type==="VEHICLES" || item.data.type==="DRONES")) {
-				console.log("ToDo: Process ",item.data.vehicle);
 				if (!item.data.vehicle) { 
 					item.data.vehicle = {
 						attrib: "rea",
@@ -611,7 +610,6 @@ export class Shadowrun6Actor extends Actor {
 						modRig;
 					break;
 				default:
-					console.log("ERROR: Unsupported mode of operation: "+opMode);
 				}
 			}
 		});
