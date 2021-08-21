@@ -109,14 +109,9 @@
                         </select>
                     </td>
                     <td>
-                        <select name="data.skillSpec">
-                            {{#select item.data.data.skillSpec}}
-                            <!-- {{#each config.SKILLS_WEAPON as |skill id|}} -->
-                            <!-- <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option> -->
-                            <option value="n.a.">n.a</option>
-                            <!-- {{/each}} -->
-                            {{/select}}
-                        </select>
+        	   			<select name="data.skillSpec" data-field="data.skillSpec">
+                     {{selectOptions (lookup config.skill_special item.data.data.skill) selected=data.skillSpec localize=true}}           			
+         				</select>
                     </td>
                 </tr>
             </table>

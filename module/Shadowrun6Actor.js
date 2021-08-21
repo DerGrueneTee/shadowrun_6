@@ -559,7 +559,6 @@ export class Shadowrun6Actor extends Actor {
 				if ("GROUND" === specialization) { specialization = "ground_craft"; }
 				if ("WATER"  === specialization) { specialization = "watercraft"; }
 				if ("AIR"    === specialization) { specialization = "aircraft"; }
-				console.log("SPECIAL for "+item.name+" is "+specialization);
 				
 				let vehicle = item.data.vehicle;
 				item.data.vehicle.spec = specialization;
