@@ -60,8 +60,7 @@
                     <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
                 </tr>
                 <tr>
-                    <td><input type="number" value="{{item.data.data.dmg}}" name="data.dmg" class="box centered"
-                            style="width: 3em" /></td>
+                    <td style="width: 2.5em"><input type="number" value="{{item.data.data.dmg}}" name="data.dmg" class="box centered" /></td>
                     <td>
                         <select name="data.stun">
                             {{#select item.data.data.stun}}
@@ -70,25 +69,25 @@
                             {{/select}}
                         </select>
                     </td>
-                    <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input
+                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.BF}}
                             name="data.modes.BF" />
                     </td>
-                    <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_fa'}}</span><input
+                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_fa'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.FA}}
                             name="data.modes.FA" />
                     </td>
-                    <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
+                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SA}}
                             name="data.modes.SA" />
                     </td>
-                    <td><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
+                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}}
                             name="data.modes.SS" " />
                     </td>
                     {{#each item.data.data.attackRating as |arating id|}}
                     <td data-array="data.attackRating">
-                        <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.2em"
+                        <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.6em"
                             class="centered box" />
                     </td>
                     {{/each}}
