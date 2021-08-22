@@ -36,10 +36,10 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.4.x) Attack and defense rating comparison, gaining edge, spending pre-roll edge
  * (since 0.5.x) Matrix devices, beginning support for edge based rerolls
  * (since 0.5.1) Added machine based translations for several languages 
+ * (since 0.6.0) Begin support drones & vehicles, Biography tab
  
 ### Not working yet ###
  * Auto-calculating modifiers from condition monitors
- * Everything else character related (Rigger stuff, SINs, Lifestyles ...)
  * Critters, better NPC support
 
 ## The future ##
