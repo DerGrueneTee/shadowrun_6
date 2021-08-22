@@ -395,7 +395,8 @@
 			"mortype": "mundane",
 			"gender": "",
 			"nuyen": 0,
-			"overwatch": 0
+			"overwatch": 0,
+			"notes": "Write something"
 		},
 		"NPC": {
 			"name": "",

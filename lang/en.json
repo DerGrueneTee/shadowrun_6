@@ -833,6 +833,9 @@
         "add": "Add new metamagic",
         "title": "Metamagics"
       },
+		"notes": {
+			"title": "Notes"
+		},
       "persona": {
         "distribute": "Distribute",
         "title": "Persona"

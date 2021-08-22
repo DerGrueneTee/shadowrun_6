@@ -38,6 +38,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-matrixbase.html",
 		"systems/shadowrun6-eden/templates/parts/section-matrixdevices.html",
 		"systems/shadowrun6-eden/templates/parts/section-metamagics.html",
+		"systems/shadowrun6-eden/templates/parts/section-notes.html",
 		"systems/shadowrun6-eden/templates/parts/section-rituals.html",
 		"systems/shadowrun6-eden/templates/parts/section-focus.html",
 		"systems/shadowrun6-eden/templates/parts/section-qualities.html",

@@ -832,6 +832,9 @@
         "add": "Metamagie hinzufügen",
         "title": "Metamagie"
       },
+		"notes": {
+			"title": "Notizen"
+		},
       "persona": {
         "distribute": "Verteile",
         "title": "Persona"
