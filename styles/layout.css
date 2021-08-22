@@ -275,3 +275,13 @@ dd::after {
 h3.highlight, h4.highlight {
 	color: var(--highlight-color)
 }
+
+
+.editor {
+    flex: 1;
+    justify-self: stretch;
+    align-self: stretch;
+    height: 100%;
+    min-height: 100px;
+}
+
