@@ -196,16 +196,16 @@ dd::after {
 	background-color: transparent;
 	visibility: hidden;
 }
-.shadowrun6 button:before {
+.shadowrun6 button.collapsible:before {
   content: '\025B6'; /* 02795 Unicode character for "plus" sign (+) */
   visibility: visible;
   font-size: 13px;
 }
-.shadowrun6 button.empty:before {
+.shadowrun6 button.collapsible.empty:before {
   content: '\025B7'; /* Unicode character for "plus" sign (+) */
   font-size: 13px;
 }
-.shadowrun6 button.open:before {
+.shadowrun6 button.collapsible.open:before {
 	content: "\25BC"; /* 2796 Unicode character for "minus" sign (-) */
 }
 
@@ -282,5 +282,5 @@ h3.highlight, h4.highlight {
     justify-self: stretch;
     align-self: stretch;
     height: 100%;
-    min-height: 100px;
+    min-height: 200px;
 }
