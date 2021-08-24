@@ -66,6 +66,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.ELECTRONICS-create').click(ev => this._onCreateNewEmbeddedItem("gear","ELECTRONICS"));
 			html.find('.CHEMICALS-create').click(ev => this._onCreateNewEmbeddedItem("gear","CHEMICALS"));
 			html.find('.BIOLOGY-create').click(ev => this._onCreateNewEmbeddedItem("gear","BIOLOGY"));
+			html.find('.SURVIVAL-create').click(ev => this._onCreateNewEmbeddedItem("gear","SURVIVAL"));
 			html.find('.armor-create').click(ev => this._onCreateNewEmbeddedItem("gear","ARMOR"));
 			html.find('.ammunition-create').click(ev => this._onCreateNewEmbeddedItem("gear","AMMUNITION"));
 			html.find('.bodyware-create').click(ev => this._onCreateNewEmbeddedItem("gear","CYBERWARE"));
@@ -150,10 +151,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const field = element.dataset.field;
 				if (itemId) {
-//					console.log("Update item field " + field + " with " + value);
-					this.actor.items.get(itemId).update({ [field]: value });
+					console.log("Update item "+itemId+" field " + field + " with " + value);
+					let item = this.actor.items.get(itemId);
+					item.update({ [field]: value });
 				} else {
-//					console.log("Update actor field " + field + " with " + value);
+					console.log("Update actor field " + field + " with " + value);
 					this.actor.update({ [field]: value });
 				} 
 			});
@@ -200,6 +202,18 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				}
 				let value = element.classList.contains("open") ? "open" : "closed";
 				this.actor.setFlag("shadowrun6-eden", "collapse-state-"+skillId, value);
+			});
+			//Collapsible
+			html.find('select.contdrolled').change(event => {
+				const element = event.currentTarget;
+				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
+				console.log("SELECT ",element);
+				console.log("SELECT2",event);
+				console.log("SELECT3",event.target.value);
+				console.log("-> itemId ",itemId);
+				console.log("-> ds ",element.dataset);
+				
+				
 			});
 
 			/*
@@ -257,7 +271,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		event.preventDefault();
 		const skill     = event.currentTarget.dataset.skill;
 		const skillSpec = event.currentTarget.dataset.skillspec;
-		this.actor.rollSkill(skill, skillSpec);
+		const threshold = event.currentTarget.dataset.threshold;
+		const attrib    = event.currentTarget.dataset.attrib;
+		let options = {};
+		if (attrib)
+			options.attrib = attrib;
+		if (threshold) {
+			this.actor.rollSkill(skill, skillSpec, threshold, options);			
+		} else {
+			this.actor.rollSkill(skill, skillSpec, 3, options);
+		}
 	}
 
 	_onRollItemCheck(event, html) {

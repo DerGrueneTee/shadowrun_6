@@ -167,7 +167,7 @@ dd::after {
 	font-weight: bold;
 }
 .shadowrun6 .sheet-tabs {
-	background-color: rgba(255,255,255,0.3);
+	background-color: rgba(255,255,255,0.5);
 }
 .collapsible-content {
   padding: 0 8px;
@@ -196,16 +196,16 @@ dd::after {
 	background-color: transparent;
 	visibility: hidden;
 }
-.shadowrun6 button:before {
+.shadowrun6 button.collapsible:before {
   content: '\025B6'; /* 02795 Unicode character for "plus" sign (+) */
   visibility: visible;
   font-size: 13px;
 }
-.shadowrun6 button.empty:before {
+.shadowrun6 button.collapsible.empty:before {
   content: '\025B7'; /* Unicode character for "plus" sign (+) */
   font-size: 13px;
 }
-.shadowrun6 button.open:before {
+.shadowrun6 button.collapsible.open:before {
 	content: "\25BC"; /* 2796 Unicode character for "minus" sign (-) */
 }
 
@@ -274,4 +274,13 @@ dd::after {
 
 h3.highlight, h4.highlight {
 	color: var(--highlight-color)
+}
+
+
+.editor {
+    flex: 1;
+    justify-self: stretch;
+    align-self: stretch;
+    height: 100%;
+    min-height: 200px;
 }

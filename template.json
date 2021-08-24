@@ -395,7 +395,8 @@
 			"mortype": "mundane",
 			"gender": "",
 			"nuyen": 0,
-			"overwatch": 0
+			"overwatch": 0,
+			"notes": "Write something"
 		},
 		"NPC": {
 			"name": "",
@@ -542,8 +543,10 @@
 			"progSlots": 0,
 			"handlOn": 0,
 			"handlOff": 0,
-			"acc": 0,
-			"spdi": 0,
+			"accOn": 0,
+			"accOff": 0,
+			"spdiOn": 0,
+			"spdiOff": 0,
 			"tspd": 0,
 			"bod": 0,
 			"arm": 0,
@@ -551,6 +554,9 @@
 			"sen": 0,
 			"sea": 0,
 			"vtype": "",
+			"vehicle": {
+				"opMode": "manual"
+			},
 			"templates": [
 				"genesis",
 				"dice-pool"
@@ -569,6 +575,7 @@
 			"category": {
 				"grappling": false,
 				"mobility": false,
+				"ranged"  : false,
 				"striking": false,
 				"weapon": false
 			},

@@ -4,16 +4,6 @@
 	<header class="sheet-header">
 		<div>
 		  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" /><br/><br/>
-		  <!--label>Initiative</label><br/>
-		  <select name="initiativeUsed" data-field="data.initiativeUsed">
-		  		{{#select data.data.initiativeUsed}}
-             <option value="physical"    name="data.initiativeUsed">{{localize "shadowrun6.initiative.physical"}}</option>
-             <option value="astral"      name="data.initiativeUsed">{{localize "shadowrun6.initiative.astral"}}</option>
-             <option value="matrix_ar"   name="data.initiativeUsed">{{localize "shadowrun6.initiative.matrix_ar"}}</option>
-             <option value="matrix_cold" name="data.initiativeUsed">{{localize "shadowrun6.initiative.matrix_cold"}}</option>
-             <option value="matrix_hot"  name="data.initiativeUsed">{{localize "shadowrun6.initiative.matrix_hot"}}</option>
-            {{/select}}
-        </select-->
 		</div>
 		<div class="header-fields">
 			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
@@ -85,6 +75,7 @@
 			{{> "systems/shadowrun6-eden/templates/parts/section-gear.html" geartype="ELECTRONICS" title=(localize 'shadowrun6.section.electronics')}}
 			{{> "systems/shadowrun6-eden/templates/parts/section-gear.html" geartype="CHEMICALS" title=(localize 'shadowrun6.section.chemicals')}}
 			{{> "systems/shadowrun6-eden/templates/parts/section-gear.html" geartype="BIOLOGY" title=(localize 'shadowrun6.section.biology')}}
+			{{> "systems/shadowrun6-eden/templates/parts/section-gear.html" geartype="SURVIVAL" title=(localize 'shadowrun6.section.survival')}}
 		</div>
 
 		{{!-- Combat Tab --}}
@@ -108,7 +99,7 @@
 		</div>
 
 		{{!-- Biography Tab --}}
-		<div class="tab biography" data-group="primary" data-tab="biography">
+		<div class="tab biography flexrow" data-group="primary" data-tab="biography">
 			{{> "systems/shadowrun6-eden/templates/parts/tab-biography.html"}}
 		</div>
 

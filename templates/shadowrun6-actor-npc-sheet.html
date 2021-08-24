@@ -1,14 +1,18 @@
 <form class="{{cssClass}}" autocomplete="off">
 
-    {{!-- Sheet Header --}}
-    <header class="sheet-header">
-        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
+	{{!-- Sheet Header --}}
+	<header class="sheet-header">
+		<div>
+		  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" /><br/><br/>
+		</div>
+		<div class="header-fields">
+			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
 			<div style="display:flex; flex-direction:row; align-items:center;">
 			{{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
 			{{> "systems/shadowrun6-eden/templates/parts/edge-token.html"}}
 			</div>
-        </div>
-    </header>
+		</div>
+	</header>
 
     {{!-- Sheet Tab Navigation --}}
     <nav class="sheet-tabs tabs" data-group="primary">

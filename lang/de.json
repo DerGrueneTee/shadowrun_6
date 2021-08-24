@@ -323,8 +323,8 @@
         "WEAPON_SECURITY": "Waffensicherheit Option",
         "WHIPS": "Peitschen",
         "LMG": "Leichte Maschinengewehre",
-        "MMG": "Mittlere Maschinengewehre (Mindeststärke 3)",
-        "HMG": "Schwere Maschinengewehre (Mindeststärke 5)",
+        "MMG": "Mittlere Maschinengewehre",
+        "HMG": "Schwere Maschinengewehre",
         "HACKING_PROGRAM": "Hacking-Programme",
         "BASIC_PROGRAM": "Standardprogramme",
         "RIGGER_PROGRAM": "Riggerprogramme",
@@ -357,7 +357,7 @@
       "accessories": "Einbauten",
       "ammunition": "Munition",
       "attackvalues": "Angriffswerte",
-      "availability": "Verfügbarkeit",
+      "availability": "Verfüg.",
       "capacity": "Kapazität",
       "category": "Kategorie",
       "damage": "Schaden",
@@ -373,10 +373,11 @@
       },
       "mastyle": {
         "category": {
-          "grappling": "Grappling",
-          "mobility": "Mobility",
-          "striking": "Striking",
-          "weapon": "weapon"
+          "grappling": "Ringen",
+          "mobility": "Mobilität",
+			 "ranged"  : "Fernkampf",
+          "striking": "Schlag",
+          "weapon": "Waffen"
         }
       },
       "mode": "Modus",
@@ -392,25 +393,32 @@
       "social": "Sozial",
       "stun_damage": "B",
       "subtype": "Unterart",
-      "type": "Art"
+      "type": "Art",
+      "vehicle": {
+			"armor.long": "Panz",	
+			"armor.short": "P",
+			"rigRating.long": "Riggerkontrolle",
+			"sensor.long": "Sensor",	
+			"sensor.short": "S"	
+		}
     },
     "itemtype": {
       "ACCESSORY": "Zubehör",
-      "AMMUNITION": "Monition",
+      "AMMUNITION": "Munition",
       "ARMOR": "Rüstung",
       "ARMOR_ADDITION": "Rüstungszubehör",
       "BIOLOGY": "Biologie",
       "BIOWARE": "Bodyware",
       "CHEMICALS": "Drogen",
       "CYBERWARE": "Cyberware",
-      "DRONES": "DRONES",
+      "DRONES": "Drohnen",
       "ELECTRONICS": "Elektronik",
-      "GENETICS": "GENETICS",
-      "MAGICAL": "MAGICAL",
-      "NANOWARE": "NANOWARE",
-      "SURVIVAL": "SURVIVAL",
-      "TOOLS": "TOOLS",
-      "VEHICLES": "VEHICLES",
+      "GENETICS": "GENETICS (fehlt noch)",
+      "MAGICAL": "MAGICAL (fehlt noch)",
+      "NANOWARE": "NANOWARE (fehlt noch)",
+      "SURVIVAL": "Überlebensausrüstung",
+      "TOOLS": "TOOLS (fehlt noch)",
+      "VEHICLES": "Fahrzeuge",
       "WEAPON_CLOSE_COMBAT": "Nahkampfwaffen",
       "WEAPON_FIREARMS": "Feuerwaffen",
       "WEAPON_RANGED": "Projektilwaffen",
@@ -461,10 +469,17 @@
       "modifier": "Mod.",
       "name": "Name",
       "none": "-",
+      "not_present": "nicht vorhandel",
+	  "offroad": "Off-Road",
+	  "onroad": "Straßen",
       "points": "Punkte",
       "pool": "Pool",
       "poolmod": "Pool-Modifikator",
+      "programs.short": "P",
       "progSlots": "Programm-Plätze",
+	  "rating1": "Stufe 1",
+	  "rating2": "Stufe 2",
+	  "rating3": "Stufe 3",
       "specialization": "Spezialisierung",
       "threshold": "Schwellenwert",
       "value": "Wert",
@@ -562,6 +577,10 @@
       "max": "Max",
       "mod": "Mod"
     },
+	"programtype": {
+		"basic": "Standardprogramme",
+		"hacking": "Hackingprogramme"	
+	},
     "program": {
       "baby_monitor": {
         "name": "Babymonitor",
@@ -767,6 +786,10 @@
       },
       "defense": "Verteidigung & Widerstände",
       "derived": "Abgeleitete Werte",
+      "drones": {
+        "add": "Neue Drohne hinzufügen",
+        "title": "Drohnen"
+      },
       "electronics": "Elektronik",
       "echo": {
         "add": "Neues Echo hinzufügen",
@@ -809,6 +832,9 @@
         "add": "Metamagie hinzufügen",
         "title": "Metamagie"
       },
+		"notes": {
+			"title": "Notizen"
+		},
       "persona": {
         "distribute": "Verteile",
         "title": "Persona"
@@ -842,8 +868,21 @@
         "column.range": "Reichw",
         "title": "Zauber"
       },
+      "survival": "Überlebensausrüstung",
       "vehicles": {
         "add": "Fahrzeug hinzufügen",
+		"column": {
+				"handling": "Han",
+				"acc": "Bes",
+				"spdi": "G.Int",
+				"tspd": "Geschw",
+				"bod": "Rum",
+				"arm": "Pan",
+				"pil": "Pil",
+				"sen": "Sen",
+				"sea": "Sit",
+                "vtype": "Art"
+			},
         "title": "Fahrzeuge"
       },
       "weapon": {
@@ -996,7 +1035,7 @@
       "category_detection": "Wahrnehmung",
       "category_health": "Heilung",
       "category_illusion": "Illusion",
-      "category_manipulation": "Manipultaion",
+      "category_manipulation": "Manipulation",
       "damage": "Schaden",
       "damage_physical": "Körperlich",
       "damage_physical_short": "K",
@@ -1023,7 +1062,7 @@
       "duration_sustained_short": "A",
       "isOpposed": "Vergleichend",
       "range": "Reichweite",
-      "range_line_of_sight": "BLickfeld",
+      "range_line_of_sight": "Blickfeld",
       "range_line_of_sight_area": "Blickfeld (Fläche)",
       "range_line_of_sight_area_short": "BF(F)",
       "range_line_of_sight_short": "BF",
@@ -1070,6 +1109,43 @@
       "sorcery": "Hexerei",
       "stealth": "Heimlichkeit",
       "tasking": "Tasken"
+    },
+    "vehicle": {
+	   "action_label": "Handling / Fahrzeug",
+	   "mode_label": "Mode",
+		"mode": {
+			"manual": "Manuell",
+			"riggedAR": "Reingesprungen (AR)",
+			"riggedVR": "Reingesprungen (VR)",
+			"rcc": "via RCC",
+			"autonomous": "Autonomous"
+		},
+		"type": {
+			"groundcraft": "Bodenfahrzeuge",
+			"watercraft": "Wasserfahrzeuge",
+			"aircraft": "Luftfahrzeuge"
+		}      
     }
-  }
+  },
+	"skill": {
+      "astral": "Astral",
+      "athletics": "Athletik",
+      "biotech": "Biotech",
+      "close_combat": "Nahkampf",
+      "con": "Überreden",
+      "conjuring": "Beschwören",
+      "cracking": "Cracken",
+      "electronics": "Elektronik",
+      "enchanting": "Verzaubern",
+      "engineering": "Mechanik",
+      "exotic_weapons": "Exotische Waffen",
+      "firearms": "Feuerwaffen",
+      "influence": "Einfluss",
+      "outdoors": "Natur",
+      "perception": "Wahrnehmung",
+      "piloting": "Steuern",
+      "sorcery": "Hexerei",
+      "stealth": "Heimlichkeit",
+      "tasking": "Tasken"
+    }
 }

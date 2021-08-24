@@ -27,14 +27,14 @@
 			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
 			<td style="width: 2em" class="centered">
 			{{#if item.data.data.needsRating}}
-			<input type="text" value="{{item.data.data.rating}}" data-field="name" title="{{item.data.data.rating}}"/>
+			<input type="text" value="{{item.data.data.rating}}" data-field="data.rating" title="{{item.data.data.rating}}"/>
 			{{else}}
 			-
 			{{/if}}
 			</td>
 			<td style="width: 2em" class="centered">
 			{{#if item.data.data.countable}}
-			<input type="text" value="{{item.data.data.count}}" data-field="name" title="{{item.data.data.count}}"/>
+			<input type="text" value="{{item.data.data.count}}" data-field="data.count" title="{{item.data.data.count}}"/>
 			{{else}}
 			-
 			{{/if}}

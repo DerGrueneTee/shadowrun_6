@@ -375,6 +375,7 @@
         "category": {
           "grappling": "Grappling",
           "mobility": "Mobility",
+          "ranged"  : "Ranged",
           "striking": "Striking",
           "weapon": "Weapon"
         }
@@ -410,14 +411,14 @@
       "BIOWARE": "Bioware",
       "CHEMICALS": "Chemicals",
       "CYBERWARE": "Cyberware",
-      "DRONES": "DRONES",
+      "DRONES": "Drones",
       "ELECTRONICS": "Electronics",
       "GENETICS": "GENETICS",
       "MAGICAL": "MAGICAL",
       "NANOWARE": "NANOWARE",
-      "SURVIVAL": "SURVIVAL",
+      "SURVIVAL": "Survival gear",
       "TOOLS": "TOOLS",
-      "VEHICLES": "VEHICLES",
+      "VEHICLES": "Vehicles",
       "WEAPON_CLOSE_COMBAT": "Weapon, Close Combat",
       "WEAPON_FIREARMS": "Weapon, Firearms",
       "WEAPON_RANGED": "Weapon, Projectiles",
@@ -468,12 +469,17 @@
       "modifier": "Adj.",
       "name": "Name",
       "none": "-",
-		"offroad": "Off-Road",
-		"onroad": "On-Road",
+      "not_present": "not present",
+	  "offroad": "Off-Road",
+	  "onroad": "On-Road",
       "points": "Points",
       "pool": "Pool",
       "poolmod": "Pool modifier",
+      "programs.short": "P",
       "progSlots": "Prog. slots",
+	  "rating1": "Rating 1",
+	  "rating2": "Rating 2",
+	  "rating3": "Rating 3",
       "specialization": "Specialization",
       "threshold": "Threshold",
       "value": "Value",
@@ -562,6 +568,7 @@
         "language": "Gibberish"
       },
       "spell": "Abracadabra",
+      "survival": "Handy swiss army knife",
       "weapon": "Named weapons are much cooler",
       "weaponclose": "Something heavy"
     },
@@ -571,6 +578,10 @@
       "max": "Max",
       "mod": "adj"
     },
+	"programtype": {
+		"basic": "Basic programs",
+		"hacking": "Hacking programs"	
+	},
     "program": {
       "baby_monitor": {
         "name": "Baby Monitor",
@@ -822,6 +833,9 @@
         "add": "Add new metamagic",
         "title": "Metamagics"
       },
+		"notes": {
+			"title": "Notes"
+		},
       "persona": {
         "distribute": "Distribute",
         "title": "Persona"
@@ -855,18 +869,20 @@
         "column.range": "Range",
         "title": "Spells"
       },
+		"survival": "Survival",
       "vehicles": {
         "add": "Add new vehicle",
-		  "column": {
+		"column": {
 				"handling": "Han",
 				"acc": "Acc",
 				"spdi": "S.Int",
 				"tspd": "Speed",
-				"bod": "B",
-				"arm": "A",
-				"pil": "P",
-				"sen": "S",
-				"sea": "Sea"
+				"bod": "Bod",
+				"arm": "Arm",
+				"pil": "Pil",
+				"sen": "Sen",
+				"sea": "Sea",
+                "vtype": "Type"
 			},
         "title": "Vehicles"
       },
@@ -1073,6 +1089,22 @@
     },
     "tradition": {
       "attribute": "Tradition Attribute"
+    },
+    "vehicle": {
+	   "action_label": "Handling / Vehicle Attack or Defense",
+	   "mode_label": "Mode",
+		"mode": {
+			"manual": "Manual",
+			"riggedAR": "Jumped in (AR)",
+			"riggedVR": "Jumped in (VR)",
+			"rcc": "via RCC",
+			"autonomous": "Autonomous"
+		},
+		"type": {
+			"groundcraft": "Groundcraft",
+			"watercraft": "Watercraft",
+			"aircraft": "Aircraft"
+		}      
     }
   },
   "skill": {

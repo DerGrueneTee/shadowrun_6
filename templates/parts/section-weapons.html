@@ -12,7 +12,7 @@
          <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
          <td><label class="middle-column" >{{attackrating item.data.data.attackRating}}</label></td>
          <td class="skill-pool" style="width: 3em">
-         	<label class="item-pool" data-skill="{{item.data.data.skill}}">{{item.data.data.pool}}</label>
+         	<label class="item-pool" data-skill="{{item.data.data.skill}}" data-skillspec="{{item.data.data.skillSpec}}">{{item.data.data.pool}}</label>
          	<a class="item-control item-roll" data-item-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
          </td>
 			<td class="item-controls">
@@ -26,13 +26,14 @@
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
          	{{ localize 'shadowrun6.label.firemode_current' }} 
-         	<select name="firemodeUsed" class="firemodeUsed">
+         	<select name="firemodeUsed" data-field="firemodeUsed" >
+         	{{#select firemodeUsed}}
             {{#each item.data.data.modes as |available id|}}
             {{#if available}}
              <option value="{{id}}" data-item-firemode="{{id}}">{{localize (concat "shadowrun6.item.firemode." id)}}</option>
             {{/if}}
             {{/each}}
-         		
+         		{{/select}}
          	</select>
 			   <br/>
          	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" {{checked item.data.data.wild}} data-check="data.wild"     type="checkbox" data-dtype="Boolean"/><br/>

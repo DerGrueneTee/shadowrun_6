@@ -25,7 +25,7 @@ SR6.GEAR_SUBTYPES = new Map([
 	["WEAPON_SPECIAL", ["LAUNCHERS","THROWERS","OTHER_SPECIAL"]],
 	["AMMUNITION",  ["AMMUNITION","ROCKETS","MISSILES","EXPLOSIVES","GRENADES"]],
 	["CHEMICALS",  ["INDUSTRIAL_CHEMICALS","TOXINS","DRUGS","BTL"]],
-	["SURVIVAL",  ["SURVIAL_GEAR","GRAPPLE_GUN"]],
+	["SURVIVAL",  ["SURVIVAL_GEAR","GRAPPLE_GUN"]],
 	["BIOLOGY",  ["BIOTECH","SLAP_PATCHES"]],
 	["VEHICLES",  ["BIKES","CARS","TRUCKS","BOATS","SUBMARINES","FIXED_WING","ROTORCRAFT","VTOL","WALKER"]],
 	["DRONES",  ["MICRODONES","MINIDRONES","SMALL_DRONES","MEDIUM_DRONES","LARGE_DRONES"]],
@@ -318,6 +318,25 @@ SR6.skill_special = {
       "decompiling": "shadowrun6.special.tasking.decompiling",
       "registering": "shadowrun6.special.tasking.registering",
    },
+};
+
+SR6.VEHICLE_TYPE = {
+	"GROUND": "shadowrun6.vehicle.type.groundcraft",
+	"WATER": "shadowrun6.vehicle.type.watercraft",
+	"AIR": "shadowrun6.vehicle.type.aircraft",
+};
+SR6.VEHICLE_MODE = {
+	"manual"  : "shadowrun6.vehicle.mode.manual",
+	"riggedAR": "shadowrun6.vehicle.mode.riggedAR",
+	"riggedVR": "shadowrun6.vehicle.mode.riggedVR",
+	"rcc"     : "shadowrun6.vehicle.mode.rcc",
+	"autonomous": "shadowrun6.vehicle.mode.autonomous",
+};
+SR6.CONTROL_RIG_RATING = {
+	"0": "shadowrun6.label.not_present",
+	"1": "shadowrun6.label.rating1",
+	"2": "shadowrun6.label.rating2",
+	"3": "shadowrun6.label.rating3",
 };
 
 class MatrixAction {

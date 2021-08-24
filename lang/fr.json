@@ -7,13 +7,16 @@
   "ITEM": {
     "TypeAdeptpower": "Pouvoir d'adepte",
     "TypeComplexform" : "Forme complexe",
-    "TypeEcho" : "Écho",
+    "TypeContact" : "Contact",
+    "TypeEcho": "Écho",
     "TypeGear": "Équipement",
+    "TypeLifestyle" : "Style de vie",
     "TypeMartialartstyle": "Style d'arts martiaux",
     "TypeMartialarttech": "Technique d'arts martiaux",
     "TypeMetamagic": "Métamagie",
     "TypeQuality": "Qualité",
     "TypeRitual": "Rituel",
+    "TypeSin" : "SIN",
     "TypeSkill": "Langue/Connaissance",
     "TypeSpell": "Sort",
     "TypeWeapon": "Arme"
@@ -69,6 +72,7 @@
       "name": "Nom",
       "nav": {
         "basics": "Bases",
+        "biography": "Biographie",
         "combat": "Combat",
         "description": "Description",
         "equip": "Équipement",
@@ -76,7 +80,8 @@
         "magic": "Magie",
         "matrix": "Matrice",
         "overview": "Aperçu",
-        "skills": "Compétences"
+        "skills": "Compétences",
+        "vehicles": "Véhicules"
       },
       "skills": "Compétences",
       "spells": "Sorts"
@@ -100,10 +105,18 @@
       "duration": "Durée",
       "fading": "Technodrain",
       "none": "Aucun",
+      "attribute": "Attribut",
       "oppAttr1" : "Attr. opposé 1",
       "oppAttr2" : "Attr. opposé 2",
       "skill": "Compétence",
       "threshold" : "Seuil"
+    },
+    "contact": {
+      "rating_short": "Rés",
+      "rating": "Réseau",
+      "loyalty": "Loyauté",
+      "loyalty_short": "Loi",
+      "type": "Type"
     },
     "defense": {
       "astral": "Artrale",
@@ -215,7 +228,7 @@
         "MICRO_ENVIRONADAPT": "Adaptation micro-environnementale",
         "COMPLEMENTAL_GENETICS":"Génétique complémentaire",
         "GRAPPLE_GUN": "Pistolet grappin",
-        "GRAV": "Gravitational Drive Vehicles",
+        "GRAV": "Véhicules à conduite grav.",
         "GRENADES": "Grenades",
         "GRENADES_MINI": "Grenades miniatures",
         "HOLDOUTS": "Pistolets de poche",
@@ -242,7 +255,7 @@
         "MOD_TIRES": "Pneus",
         "MOD_HANDLING": "Mods de maniabilité",
         "MOD_TRAILER": "Remorques et sidecars",
-        "MOD_INTERIOR": "Seating and Cargo Mods",
+        "MOD_INTERIOR": "Mods de cargo et de places",
         "MOD_CARGO": "Mods de cargo",
         "MOD_FORM": "Formes",
         "MOD_ARMOR": "Fondations",
@@ -250,7 +263,7 @@
         "MOD_ACC": "Mods d'accélération",
         "MOD_EFFICIENCY": "Mods d'efficacité",
         "MOD_SPEED": "Mods de vistesse",
-        "MOD_COAT": "Electronic Skin Coatings",
+        "MOD_COAT": "Couches électroniques",
         "MOD_MISC": "Mods électroniques divers",
         "MOD_PILOT": "Mods de pilotage",
         "MOD_MOUNT": "Montures d'armes",
@@ -354,10 +367,10 @@
       "essence": "Essence",
       "feature": "Fonctions",
       "firemode": {
-        "BF": "TR",
-        "FA": "TA",
-        "SA": "SA",
-        "SS": "CC"
+        "BF": "Tir  en  Rafale",
+        "FA": "Tir Automatique",
+        "SA": "Semi-Automatique",
+        "SS": "Coup par Coup"
       },
       "mastyle": {
         "category": {
@@ -380,7 +393,14 @@
       "social": "Social",
       "stun_damage": "E",
       "subtype": "Sous-type",
-      "type": "Type"
+      "type": "Type",
+      "vehicle": {
+        "armor.long": "Blindage",
+        "armor.short": "B",
+        "rigRating.long": "Câbl. de contr.",
+        "sensor.long": "Senseurs",
+        "sensor.short": "S"
+      }
     },
     "itemtype": {
       "ACCESSORY": "Accessoire",
@@ -407,11 +427,11 @@
     "label": {
       "accessories": "Accessoires",
       "adepts": "Adeptes",
-    "action": "Action",
-    "actionduration": {
-      "minor.short": "Mi",
-      "major.short": "Ma"
-    },
+      "action": "Action",
+      "actionduration": {
+        "minor.short": "Mi",
+        "major.short": "Ma"
+      },
       "attack_rating": "Score Offensif",
       "attack_rating_short": "SO",
       "attribute": "Attributs",
@@ -449,6 +469,8 @@
       "modifier": "Mod.",
       "name": "Nom",
       "none": "-",
+      "offroad": "Hors route",
+      "onroad": "Route",
       "points": "Points",
       "pool": "Réserve",
       "poolmod": "Réserve de dés",
@@ -457,6 +479,18 @@
       "threshold": "Seuil",
       "value": "Score",
       "wilddie": "Dé Libre"
+    },
+    "lifestyle": {
+      "cost" : "Coût",
+      "paid": "Payé",
+      "type": "Type",
+      "sin": "SIN lié",
+      "street": "La rue",
+      "squatter": "Squatter",
+      "low": "Bas",
+      "middle": "Moyen",
+      "high": "Élevé",
+      "luxury": "Luxueux"
     },
     "matrixaction": {
       "backdoor_entry": "Utiliser une backdoor",
@@ -479,8 +513,8 @@
       "jack_out": "Se débrancher",
       "jam_signals": "Brouiller des signaux",
       "jump_rigged": "Plonger dans un app.",
-      "matrix_perception": "Matrix Perception",
-      "matrix_search": "Percevoir la Matrice",
+      "matrix_perception": "Percevoir la Matrice",
+      "matrix_search": "Recherche matricielle",
       "probe": "Sonder l'accès",
       "reboot_device": "Rebooter un appareil",
       "reconfigure": "Reconf. les attributs mat.",
@@ -512,15 +546,18 @@
       "bodyware": "Une augmentation cool",
       "chemicals": "De la bonne",
       "complexform" : "C'est complexe à quel point ?",
+      "contact": "Il s'appelle Juste Leblanc.",
       "cyberware": "De l'amélioration cyber cool",
       "electronics": "Un jouet pour nerd",
       "focus": "Quelque chose pour se concentrer",
+      "lifestyle": "Un carton ou une suite ?",
       "martialartstyle": "Quel est votre style ?",
       "martialarttech": "Mais quelle technique ?",
       "matrix": "Mattez un peu mon deck !",
       "metamagic": "Et qu'avez vous appris ?",
       "quality": "Ce qui vous rend spécial",
       "ritual": "Chanter du gospel",
+      "sin": "Mais vous êtes qui ?",
       "skill": {
         "knowledge": "T'es quoi toi ? un nerd ?",
         "language": "Charabia"
@@ -534,6 +571,88 @@
       "baseString": "Valeur de base",
       "max": "Max",
       "mod": "aj."
+    },
+    "program": {
+      "baby_monitor": {
+        "name": "Surveillance",
+        "desc": "Indique le Score de Surveillance sans utiliser d'action."
+      },
+      "browse": {
+        "name": "Navigateur",
+        "desc": "Remise d'Atout de 1 pour les recherches matricielles."
+      },
+      "configurator": {
+        "name": "Configurateur",
+        "desc": "Garde une configuration complète en mémoire."
+      },
+      "edit": {
+        "name": "Éditeur",
+        "desc": "Remise d'Atout de 1 pour éditer un fichier."
+      },
+      "encryption": {
+        "name": "Cryptage",
+        "desc": "Ajoute 2 dés pour crypter un fichier."
+      },
+      "signal_scrubber": {
+        "name": "Nettoyeur de signal",
+        "desc": "Réduit de 2 le niveau de Bruit."
+      },
+      "toolbox": {
+        "name": "Toolbox",
+        "desc": "Donne 1 au Traitement de données"
+      },
+      "virtual_machine": {
+        "name": "Machine virtuelle",
+        "desc": "Ajoute 2 emplacements de programmes. Subit 1 case de dégâts en cas d'attaque."
+      },
+      "armor": {
+        "name": "Armure",
+        "desc": "Ajoute 2 au Score Défensif."
+      },
+      "biofeedback": {
+        "name": "Biofeedback",
+        "desc": "Inflige des dégâts à la cible dont le type dépend de son mode d'accès."
+      },
+      "biofeedback_filter": {
+        "name": "Filtre de biofeedback",
+        "desc": "Ajoute l'Indice d'Appareil ou la Constitution à la résistance aux dégâts de biofeedback."
+      },
+      "blackout": {
+        "name": "Blackout",
+        "desc": "Inflige des dégâts étourdissants à la cible."
+      },
+      "decryption": {
+        "name": "Décryptage",
+        "desc": "ajoute 2 dés pour décrypter un fichier."
+      },
+      "defuse": {
+        "name": "Désamorçage",
+        "desc": "Ajoute l'Indice d'Appareil ou la Constitution à la résistance aux dégâts d'une bombe matricielle."
+      },
+      "exploit": {
+        "name": "Exploitation",
+        "desc": "Ajoute 2 au Score Offensif pour pirater."
+      },
+      "fork": {
+        "name": "Fork",
+        "desc": "Atteint 2 cibles en une seule action matricielle sans répartir les dés."
+      },
+      "lockdown": {
+        "name": "Verrouillage",
+        "desc": "Verrouille la connection de la cible en lui infligeant des dégâts matriciels."
+      },
+      "overclock": {
+        "name": "Overclock",
+        "desc": "Ajoute 2 dés, dont un dé libre, à une action matricielle."
+      },
+      "stealth": {
+        "name": "Furtivité",
+        "desc": "Remise d'Atout de 1 pour l'action Se cacher."
+      },
+      "trace": {
+        "name": "Trace",
+        "desc": "Remise d'Atout de 1 pour traquer une icône."
+      }
     },
     "qualityedit": {
       "category": "Catégorie",
@@ -652,8 +771,16 @@
         "column.fade": "Drain",
         "title": "Formes complexes"
       },
-      "defense": "Defenses & Resistances",
-      "derived": "Scores Dérivés",
+      "contacts": {
+        "add": "Ajouter un contact",
+        "title": "Contacts"
+      },
+      "defense": "Défenses & résistances",
+      "derived": "Valeurs dérivées",
+      "drones": {
+        "add": "Add new drone",
+        "title": "Drones"
+      },
       "electronics": "Électroniques",
       "echo": {
         "add": "Ajouter un écho",
@@ -669,6 +796,10 @@
         "add": "Ajouter un focus",
         "column.rating": "Puiss.",
         "title": "Focus"
+      },
+      "lifestyles" : {
+        "add": "Ajouter un style de vie",
+        "title" : "Styles de vie"
       },
       "matrix_base": {
         "overwatch": "Score de Surveillance"
@@ -693,7 +824,7 @@
         "title": "Métamagie"
       },
       "persona": {
-      "distribute": "Distribuer",
+        "distribute": "Distribuer",
         "title": "Persona"
       },
       "qualities": "Qualités",
@@ -702,6 +833,10 @@
         "add": "Ajouter un rituel",
         "column.threshold": "Seuil",
         "title": "Rituels"
+      },
+      "sins": {
+        "add": "Ajouter un SIN",
+        "title": "SIN"
       },
       "skills.action": "Compétences",
       "skills.knowledge": "Connaissances",
@@ -721,6 +856,21 @@
         "column.range": "Portée",
         "title": "Sorts"
       },
+      "vehicles": {
+        "add": "Ajouter un véhicule",
+        "column": {
+          "handling": "Man",
+          "acc": "Acc",
+          "spdi": "I.Vit",
+          "tspd": "Vit.",
+          "bod": "R",
+          "arm": "B",
+          "pil": "A",
+          "sen": "S",
+          "sea": "Pl."
+        },
+        "title": "Véhicules"
+      },
       "weapon": {
         "add": "Ajouter une arme",
         "close": "Armes de Mélée",
@@ -732,6 +882,16 @@
         "hint": "Définit le maximum d'Atout qu'un personnage peut gagner en un tour.",
         "name": "Atout max par tour"
       }
+    },
+    "sin" : {
+      "quality" : "Qualité",
+      "real_sin" : "Vrai SIN",
+      "anyone" : "Au hasard",
+      "rough_match" : "Léger raccord",
+      "good_match": "Bonne corrélation",
+      "superficially_plausible": "Plutôt plausible",
+      "highly_plausible" : "Hautement plausible",
+      "second_life" : "Seconde vie"
     },
     "special": {
       "astral": {
