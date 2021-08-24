@@ -14,7 +14,7 @@
     "TypeMartialartstyle": "Style d'arts martiaux",
     "TypeMartialarttech": "Technique d'arts martiaux",
     "TypeMetamagic": "Métamagie",
-    "TypeQuality": "Qualité",
+    "TypeQuality": "Trait",
     "TypeRitual": "Rituel",
     "TypeSin" : "SIN",
     "TypeSkill": "Langue/Connaissance",
@@ -115,15 +115,15 @@
       "rating_short": "Rés",
       "rating": "Réseau",
       "loyalty": "Loyauté",
-      "loyalty_short": "Loi",
+      "loyalty_short": "Loy",
       "type": "Type"
     },
     "defense": {
-      "astral": "Artrale",
-      "drain": "Resist. au drain",
+      "astral": "Défense : Astrale",
+      "drain": "Résistance au drain",
       "fading": "Resist. au technodrain",
-      "damage_astral": "Resist. dég. astrals",
-      "damage_physical": "Resist. dég. physiques",
+      "damage_astral": "Résistance astrale",
+      "damage_physical": "Résistance physique",
       "physical": "Défense : Attaques",
       "spells_direct": "Défense : Sorts direct",
       "spells_indirect": "Défense : Sorts indirects",
@@ -139,9 +139,9 @@
     },
     "derived": {
       "composure": "Sang-froid",
-      "defense_rating": "Valeur de défense",
+      "defense_rating": "Score Défensif",
       "judge_intentions": "Jauger les intentions",
-      "lift_carry": "Soulev./Transport",
+      "lift_carry": "Soulever / Transporter",
       "memory": "Mémoire",
       "matrix_perception": "Percéption matricielle"
     },
@@ -158,12 +158,12 @@
     "edge_boost": {
       "add_edge_pool": "Ajouter l'Atout à la réserve",
       "buy_auto_hit": "Acheter 1 succès automatique",
-      "count_2_glitch": "Les 2 de la cible deviennent des 1",
+      "count_2_glitch": "Les 2 d'une cible deviennent 1",
       "create_special": "Provoquer des effets particuliers",
       "edge_action": "Actions d'Atout (1-5)",
       "heal_1_physic": "Récupérer une case de dommages physiques",
       "heal_1_stun": "Récupérer une case de dommages étourdissants",
-      "negate_1_edge": "Réduire de 1 l'Atout d'un adversaire ",
+      "negate_1_edge": "Réduire de 1 l'Atout d'une cible ",
       "plus_1_roll": "Ajouter 1 à un dé",
       "plus_3_ini": "Ajouter 3 points à son initiative",
       "reroll_failed": "Relancez les dés ratés",
@@ -173,7 +173,7 @@
       "subtype": {
         "ACCESSORY": "Accessoires",
         "AMMUNITION": "Munitions",
-        "ARMOR_BODY": "Armure",
+        "ARMOR_BODY": "Armures",
         "ARMOR_SOCIAL": "Vêtements pare-balles",
         "ARMOR_CLOTHES": "Vêtements normaux",
         "ARMOR_HELMET": "Casques",
@@ -191,7 +191,7 @@
         "BLADES": "Armes tranchantes",
         "BOATS": "Bateaux",
         "BOWS": "Arcs",
-        "BREAKING": "Effraction",
+        "BREAKING": "Intrusion et effraction",
         "BTL": "BTLs",
         "CANNONS_LAUNCHERS": "Canons & Lanceurs",
         "CARS": "Voitures",
@@ -281,7 +281,7 @@
         "PISTOLS_HEAVY": "Pistolets lourds",
         "PISTOLS_LIGHT": "Pistolets légers",
         "PROJECTILES": "Projectiles",
-        "RFID": "RFID",
+        "RFID": "Marqueurs RFID",
         "#RIFLES": "Fusils",
         "RIFLE_ASSAULT": "Fusils d'assault",
         "RIFLE_HUNTING": "Fusils de chasse",
@@ -305,7 +305,7 @@
         "SYMBIONTS": "Symbiotes",
         "TAC_NET": "Réseau tactique",
         "TASERS": "Tasers",
-        "THROWERS": "Lanceurs",
+        "THROWERS": "Lance-grenades",
         "THROWING": "Armes de jet",
         "TRANSGENETICS": "Transgénétique",
         "TACNET_PROGRAM": "Programme de TAC-Net",
@@ -330,10 +330,10 @@
         "BASIC_PROGRAM": "Programmes courants",
         "RIGGER_PROGRAM": "Programmes de rigging",
         "AUTOSOFT": "Autosofts",
-        "GROUND": "Drones terrestres ",
-        "ANTHRO": "Drones anthropomorphes ",
-        "AIR": "Drones aériens ",
-        "AQUATIC": "Drones aquatiques ",
+        "GROUND": "Drones terrestres",
+        "ANTHRO": "Drones anthropomorphes",
+        "AIR": "Drones aériens",
+        "AQUATIC": "Drones aquatiques",
         "AMMO_TASER": "Taser",
         "AMMO_LIGHT": "Pistolet de poche/léger/automatique",
         "AMMO_HEAVY": "Pistolet lourd/Mitraillette",
@@ -376,6 +376,7 @@
         "category": {
           "grappling": "Lutte",
           "mobility": "Mobilité",
+          "ranged"  : "À distance",
           "striking": "Frappe",
           "weapon": "Arme"
         }
@@ -446,7 +447,7 @@
       "sleaze.short": "C",
       "dataproc.short": "T",
       "firewall.short": "F",
-      "devicerating.short": "SD",
+      "devicerating.short": "I",
       "d6": "D6",
       "damage": "Dégâts",
       "damage_short": "Dég",
@@ -469,12 +470,17 @@
       "modifier": "Mod.",
       "name": "Nom",
       "none": "-",
+      "not_present": "Non présent",
       "offroad": "Hors route",
       "onroad": "Route",
       "points": "Points",
       "pool": "Réserve",
       "poolmod": "Réserve de dés",
-      "progSlots" : "Prog. slots",
+      "programs.short": "P",
+      "progSlots" : "Empl. prog.",
+      "rating1": "Indice 1",
+      "rating2": "Indice 2",
+      "rating3": "Indice 3",
       "specialization": "Spécialisation",
       "threshold": "Seuil",
       "value": "Score",
@@ -553,7 +559,7 @@
       "lifestyle": "Un carton ou une suite ?",
       "martialartstyle": "Quel est votre style ?",
       "martialarttech": "Mais quelle technique ?",
-      "matrix": "Mattez un peu mon deck !",
+      "matrix": "Mattez mon deck !",
       "metamagic": "Et qu'avez vous appris ?",
       "quality": "Ce qui vous rend spécial",
       "ritual": "Chanter du gospel",
@@ -563,6 +569,7 @@
         "language": "Charabia"
       },
       "spell": "Abracadabra",
+      "survival": "Un joli couteau suisse",
       "weapon": "Une arme avec un nom c'est plus cool",
       "weaponclose": "Quelque chose de lourd"
     },
@@ -571,6 +578,10 @@
       "baseString": "Valeur de base",
       "max": "Max",
       "mod": "aj."
+    },
+    "programtype": {
+      "basic": "Programmes courants",
+      "hacking": "Programmes de hacking"
     },
     "program": {
       "baby_monitor": {
@@ -657,7 +668,7 @@
     "qualityedit": {
       "category": "Catégorie",
       "description": "Description",
-      "explain": "Description",
+      "explain": "Explication",
       "name": "Nom",
       "new": "Nouveau"
     },
@@ -702,7 +713,7 @@
       "edgegain": "Atout-Gain (max): ",
       "edgegain_player": " (Joueur)",
       "exp": "Expertise",
-      "explode": "Explose",
+      "explode": "Explosif",
       "failure": "Échec",
       "glitch": "Complication",
       "hits_bought": "Coups achetés",
@@ -762,7 +773,7 @@
         "column.capacity": "Cap.",
         "column.essence": "Ess.",
         "footer.total_essence": "Essence restante",
-        "title": "Implants Corporels"
+        "title": "Augmentations"
       },
       "chemicals": "Produits chimiques",
       "complexforms": {
@@ -823,11 +834,14 @@
         "add": "Ajouter une métamagie",
         "title": "Métamagie"
       },
+      "notes": {
+        "title": "Notes"
+      },
       "persona": {
         "distribute": "Distribuer",
         "title": "Persona"
       },
-      "qualities": "Qualités",
+      "qualities": "Traits",
       "qualities_add": "Add",
       "rituals": {
         "add": "Ajouter un rituel",
@@ -856,18 +870,20 @@
         "column.range": "Portée",
         "title": "Sorts"
       },
+      "survival": "Survie",
       "vehicles": {
         "add": "Ajouter un véhicule",
         "column": {
-          "handling": "Man",
-          "acc": "Acc",
-          "spdi": "I.Vit",
+          "handling": "Man.",
+          "acc": "Acc.",
+          "spdi": "Int.Vit.",
           "tspd": "Vit.",
           "bod": "R",
           "arm": "B",
           "pil": "A",
           "sen": "S",
-          "sea": "Pl."
+          "sea": "Pl.",
+          "vtype": "Type"
         },
         "title": "Véhicules"
       },
@@ -1074,6 +1090,22 @@
     },
     "tradition": {
       "attribute": "Attribut de tradition"
+    },
+    "vehicle": {
+      "action_label": "Pilotage / Attaque ou défense de véhicule",
+      "mode_label": "Mode",
+      "mode": {
+        "manual": "Manuel",
+        "riggedAR": "Plongé (RA)",
+        "riggedVR": "Plongé (RV)",
+        "rcc": "Via CCR",
+        "autonomous": "Autonome"
+      },
+      "type": {
+        "groundcraft": "Aérien",
+        "watercraft": "Aquatique",
+        "aircraft": "Terrestre"
+      }      
     }
   },
   "skill": {
@@ -1096,5 +1128,17 @@
     "sorcery": "Sorcellerie",
     "stealth": "Furtivité",
     "tasking": "Technomancie"
-  }
+  },
+  "shadowrun6.metatype": "Métatype",
+  "shadowrun6.gender": "Genre",
+  "shadowrun6.gear.subtype.ARMOR_HELMED": "Casques",
+  "shadowrun6.gear.subtype.MICRODONES": "Microdrones",
+  "shadowrun6.gear.subtype.MINIDRONES": "Minidrones",
+  "shadowrun6.gear.subtype.SMALL_DRONES": "Drones de taille moyenne",
+  "shadowrun6.gear.subtype.MEDIUM_DRONES": "Drones de taille moyenne",
+  "shadowrun6.gear.subtype.LARGE_DRONES": "Drones de grande taille",
+  "shadowrun6.gear.subtype.MAGIC_SUPPLIES": "Équipements magiques",
+  "shadowrun6.gear.subtype.CYBERJACK": "Cyberjack",
+  "shadowrun6.newitem.martialart_style": "Quel est votre style ?",
+  "shadowrun6.newitem.martialart_tech": "Mais quelle technique ?"
 }
