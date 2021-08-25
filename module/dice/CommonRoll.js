@@ -164,6 +164,8 @@ function _dialogClosed(type, form, data, messageData={}) {
       data.weapon = data.item ? true : false;
       if (data.modifier > 0) {
         data.formula = data.pool + " + " + data.modifier + "d6";
+      } else if (data.modifier < 0){
+        data.formula = data.pool + " " + data.modifier + "d6";
       } else {
         data.formula = data.pool + "d6";
       }
