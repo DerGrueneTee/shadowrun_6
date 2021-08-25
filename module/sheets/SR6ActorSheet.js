@@ -135,6 +135,30 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
 			});
+			html.find('.vehicle-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.vehicles"),
+					type: "gear",
+					data: {
+						genesisID: this._create_UUID(),
+						type: "VEHICLES",
+						subtype: "CARS"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
+			html.find('.drone-create').click(ev => {
+				const itemData = {
+					name: game.i18n.localize("shadowrun6.newitem.drones"),
+					type: "gear",
+					data: {
+						genesisID: this._create_UUID(),
+						type: "DRONES",
+						subtype: "SMALL_DRONES"
+					}
+				};
+				return this.actor.createEmbeddedDocuments("Item", [itemData]);
+			});
 			html.find('.item-edit').click(ev => {
 				const element = ev.currentTarget.closest(".item");
 				const item = this.actor.items.get(element.dataset.itemId);
