@@ -82,7 +82,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.martialart-style-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.martialart_style"),
+					name: game.i18n.localize("shadowrun6.newitem.martialartstyle"),
 					type: "martialartstyle",
 					data: {
 						genesisID: this._create_UUID()
@@ -94,7 +94,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				const element = ev.currentTarget.closest(".item");
 				const styleId = element.dataset.styleId;
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.martialart_tech"),
+					name: game.i18n.localize("shadowrun6.newitem.martialarttech"),
 					type: "martialarttech",
 					data: {
 						style: styleId,
