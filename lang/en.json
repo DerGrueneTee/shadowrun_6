@@ -1103,8 +1103,8 @@
 			"manual": "Manual",
 			"riggedAR": "Jumped in (AR)",
 			"riggedVR": "Jumped in (VR)",
-			"rcc": "via RCC",
-			"autonomous": "Autonomous"
+			"rcc": "via RCC (To Do)",
+			"autonomous": "Autonomous (To Do)"
 		},
 		"type": {
 			"groundcraft": "Groundcraft",
