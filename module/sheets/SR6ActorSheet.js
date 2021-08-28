@@ -2,7 +2,7 @@
  * Extend the basic ActorSheet with some very simple modifications
  * @extends {ActorSheet}
  */
-export class Shadowrun6ActorSheet extends ActorSheet {
+ export class Shadowrun6ActorSheet extends ActorSheet {
 
 	/** @overrride */
 	getData() {
@@ -384,6 +384,30 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	}
 
 	//-----------------------------------------------------
+	_setDamage(html, i, monitorAttribute, id, event) {
+		switch (event.target.parentNode.getAttribute("id")) {
+			case "barPhyBoxes": 
+				console.log("setDamange (physical health to " + event.currentTarget.dataset.value + ")");
+				//Allow setting zero health by clicking again
+				if (this.actor.data.data.physical.dmg == monitorAttribute.max-1 == i) {
+					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max});
+				} else {
+					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max - i });
+				}
+				break; 
+			case "barStunBoxes": 
+				console.log("setDamange (stun health to " + event.currentTarget.dataset.value + ")");
+				//Allow setting zero health by clicking again
+				if (this.actor.data.data.stun.dmg == monitorAttribute.max-1 == i) {
+					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max});
+				} else {
+					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max - i });
+				}
+				break;
+		}
+	}
+
+	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
@@ -405,10 +429,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				var div = document.createElement("div");
 				var text = document.createTextNode("\u00A0");
 				if (i < monitorAttribute.max) {
-					div.setAttribute("style", "flex: 1; border-right: solid black 1px;")
+					div.setAttribute("style", "flex: 1; border-right: solid black 1px;");
 				} else {
-					div.setAttribute("style", "flex: 1")
+					div.setAttribute("style", "flex: 1");
 				}
+				div.addEventListener("click", this._setDamage.bind(this, html, i, monitorAttribute, id));
 				div.appendChild(text);
 				myNode.appendChild(div);
 			}
@@ -445,7 +470,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		});
 		return uuid;
 	}
-
+	
 	//-----------------------------------------------------
 	_onRecalculatePhysicalBar(html) {
 		console.log("LE editiert  " + html);
