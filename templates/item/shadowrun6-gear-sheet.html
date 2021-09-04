@@ -69,6 +69,14 @@
                             {{/select}}
                         </select>
                     </td>
+					<td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
+                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}}
+                            name="data.modes.SS" " />
+                    </td>
+                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
+                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SA}}
+                            name="data.modes.SA" />
+                    </td>
                     <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.BF}}
                             name="data.modes.BF" />
@@ -77,14 +85,8 @@
                             style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.FA}}
                             name="data.modes.FA" />
                     </td>
-                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
-                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SA}}
-                            name="data.modes.SA" />
-                    </td>
-                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
-                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}}
-                            name="data.modes.SS" " />
-                    </td>
+
+
                     {{#each item.data.data.attackRating as |arating id|}}
                     <td data-array="data.attackRating">
                         <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.6em"
