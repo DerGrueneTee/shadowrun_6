@@ -96,6 +96,9 @@ async function _showRollDialog(data, onClose={}) {
         }
       };
     }
+	const myDialogOptions = {
+		width: 480,
+	  };
   console.log("create RollDialog");
     let x =  new RollDialog({
       title: title,
@@ -108,7 +111,7 @@ async function _showRollDialog(data, onClose={}) {
       attackType: data.attackType,
       render: html => console.log("Register interactivity in the rendered dialog"),
       close: () => resolve(null)
-    }).render(true);
+    }, myDialogOptions).render(true);
   });
   console.log("LEAVE _showRollDialog");
 }
