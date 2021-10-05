@@ -1,4 +1,6 @@
 {
+	"Shadowrun6ActorSheetNPC": "Bla",
+	"shadowrun6-eden.Shadowrun6ActorSheetNPC": "Blubb",
   "ACTOR": {
     "TypeCritter": "Critter",
     "TypeNpc": "NPC",

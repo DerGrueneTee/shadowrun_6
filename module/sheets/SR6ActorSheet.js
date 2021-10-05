@@ -412,6 +412,9 @@
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
 		let perc = monitorAttribute.value / monitorAttribute.max * 100;
+		if ( html.find("#bar" + id + "Cur").length==0) {
+			return;
+		}
 		html.find("#bar" + id + "Cur")[0].style.width = perc + "%";
 
 		let myNode = html.find("#bar" + id + "Boxes")[0];
