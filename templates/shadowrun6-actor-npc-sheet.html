@@ -43,9 +43,15 @@
                         <dd>1 {{ localize 'shadowrun6.actor.actions_major' }}, {{data.data.initiative.actions}} {{localize 'shadowrun6.actor.actions_minor'}}</dd>
                         {{> "systems/shadowrun6-eden/templates/parts/npc-skills.html" skills=data.data.skills}}
                         {{> "systems/shadowrun6-eden/templates/parts/npc-spells.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-powers.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-metamagics.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-complex-forms.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-echoes.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-augmentations.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-gear.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-weapons.html" }}
                     </dl>
                 </div>
-			{{> "systems/shadowrun6-eden/templates/parts/section-qualities.html"}}
          </div>
 
 		{{!-- Input Tab --}}

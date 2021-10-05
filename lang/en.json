@@ -780,7 +780,7 @@
         "column.capacity": "Cap.",
         "column.essence": "Ess.",
         "footer.total_essence": "Remaining Essence",
-        "title": "Bodyware"
+        "title": "Augmentations"
       },
       "chemicals": "Chemicals",
       "complexforms": {
@@ -818,6 +818,9 @@
       "lifestyles" : {
         "add": "Add new lifestyle",
         "title" : "Lifestyles"
+      },
+      "gear" : {
+        "title" : "Gear"
       },
       "matrix_base": {
         "overwatch": "Overwatch"
@@ -897,7 +900,8 @@
       "weapon": {
         "add": "Add new weapon",
         "close": "Melee Weapons",
-        "ranged": "Ranged Weapons"
+        "ranged": "Ranged Weapons",
+		  "title" : "Weapons"
       }
     },
     "settings": {

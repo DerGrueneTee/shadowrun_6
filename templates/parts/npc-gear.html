@@ -1,0 +1,11 @@
+<dt>{{ localize 'shadowrun6.section.gear.title' }}</dt>
+<dd>
+	<!-- Spells skills -->
+	{{#each actor.items as |item id|}} 
+		{{#iff item.type '==' 'gear'}}
+		{{#if (eq item.data.data.type ../geartype) }}
+   <label class="skill-key rollable spell-roll" data-skill="{{id}}">{{item.name}}</label> ,
+   {{/if}}
+   {{/iff}}
+   {{/each}}
+</dd>

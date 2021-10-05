@@ -1,0 +1,15 @@
+<dt>{{ localize 'shadowrun6.section.bodyware.title' }}</dt>
+<dd>
+	<!-- Bioware -->
+	{{#each actor.items as |item id|}} 
+		{{#iff item.type '==' 'gear'}}
+		{{#iff item.data.data.type '==' "BIOWARE"}}
+   <label class="" data-gear="{{id}}">{{item.name}}</label>, 
+   {{/iff}}
+	<!-- Cyberware -->
+		{{#iff item.data.data.type '==' "CYBERWARE"}}
+   <label class="" data-gear="{{id}}">{{item.name}}</label>, 
+		{{/iff}} 
+		{{/iff}} 
+   {{/each}}
+</dd>

@@ -1,0 +1,14 @@
+<dt>{{ localize 'shadowrun6.section.weapon.title' }}</dt>
+<dd>
+	<!-- Weapons -->
+	{{#each actor.items as |item id|}} 
+		{{#if (eq item.type 'gear')}}
+		{{#if (eq item.data.data.type "WEAPON_FIREARMS") }}
+   <label class="" data-skill="{{id}}">{{item.name}}</label> ,<br/>
+		{{/if}}
+		{{#if (eq item.data.data.type "WEAPON_CLOSE_COMBAT") }}
+   <label class="" data-skill="{{id}}">{{item.name}}</label> ,<br/>
+		{{/if}}
+		{{/if}}
+   {{/each}}
+</dd>
