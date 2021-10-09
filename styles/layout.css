@@ -42,6 +42,10 @@ line {
 .section-title {
 	color: var(--highlight-color);
 }
+.vehicle-stats-table th {
+	padding-left: 2px;
+	padding-right: 3px;
+}
 table td {
 	padding: 1px;
 }
