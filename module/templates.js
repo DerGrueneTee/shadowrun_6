@@ -60,6 +60,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-contacts.html",
 		"systems/shadowrun6-eden/templates/parts/section-lifestyles.html",
 		"systems/shadowrun6-eden/templates/parts/section-vehicles.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-stats.html",
 		];
 
 	console.log(`Load templates`);
