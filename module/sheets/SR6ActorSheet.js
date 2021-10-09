@@ -409,6 +409,8 @@
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
+		if (!monitorAttribute.value)
+			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
 		let perc = monitorAttribute.value / monitorAttribute.max * 100;

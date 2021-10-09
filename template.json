@@ -3,7 +3,8 @@
 		"types": [
 			"Player",
 			"NPC",
-			"Critter"
+			"Critter",
+			"Vehicle"
 		],
 		"templates": {
 			"attribute-template": {

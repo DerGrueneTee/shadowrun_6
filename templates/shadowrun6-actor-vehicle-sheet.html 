@@ -1,0 +1,22 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+	{{!-- Sheet Header --}}
+	<header class="sheet-header">
+		<div>
+		  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="300" width="240" /><br/><br/>
+		</div>
+		<div class="header-fields">
+			Hallo
+			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
+		</div>
+	</header>
+
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+		
+        {{!-- Basics Tab --}}
+                 <div class="section" style="width: 68%; margin: 5px">
+                    {{> "systems/shadowrun6-eden/templates/parts/vehicle-stats.html" attributes=data.data.attributes}}
+                </div>
+    </section>
+</form>
