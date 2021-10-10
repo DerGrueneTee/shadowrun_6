@@ -11,7 +11,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 		return mergeObject(super.defaultOptions, {
 			classes: ["shadowrun6", "sheet", "actor"],
 			template: "systems/shadowrun6-eden/templates/shadowrun6-actor-vehicle-sheet.html",
-			width: 500,
+			width: 600,
 			height: 800,
 			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "overview" }],
 			scrollY: [".items", ".attributes"],

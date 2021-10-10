@@ -1,22 +1,23 @@
 <form class="{{cssClass}}" autocomplete="off">
 
-	{{!-- Sheet Header --}}
-	<header class="sheet-header">
-		<div>
-		  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="300" width="240" /><br/><br/>
-		</div>
-		<div class="header-fields">
-			Hallo
-			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
-		</div>
-	</header>
-
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-		
-        {{!-- Basics Tab --}}
-                 <div class="section">
-                    {{> "systems/shadowrun6-eden/templates/parts/vehicle-stats.html"}}
-                </div>
+	{{!-- Sheet Body --}}
+   <section class="sheet-body">
+		<div style="display:flex; flex-wrap: wrap;">		
+      	{{!-- Basics Tab --}}
+         <div class="section">
+         	<h2><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h2>
+            {{> "systems/shadowrun6-eden/templates/parts/vehicle-stats.html"}}
+            {{> "systems/shadowrun6-eden/templates/parts/vehicle-monitor.html"}}
+            {{> "systems/shadowrun6-eden/templates/parts/vehicle-speed.html"}}
+            {{> "systems/shadowrun6-eden/templates/parts/vehicle-accessories.html"}}
+            {{> "systems/shadowrun6-eden/templates/parts/vehicle-software.html"}}
+         </div>
+			<div style="margin: 5px">
+				<img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="360" height="240" /><br/><br/>
+			</div>
+			<div style="margin: 5px">
+				<textarea rows="6" cols="60">Test</textarea>
+				{{editor content=data.data.notes target="data.notes" button=true owner=owner editable=editable}}
+			</div>
     </section>
 </form>

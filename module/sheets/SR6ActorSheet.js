@@ -409,7 +409,7 @@
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
-		if (!monitorAttribute.value)
+		if (!monitorAttribute || !monitorAttribute.value)
 			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
