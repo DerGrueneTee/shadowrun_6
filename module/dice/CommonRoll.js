@@ -213,6 +213,10 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
 			data.damage += r._total;
 		}
+		else if(data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "physical")
+		{
+			data.damage += r._total;
+		}
     } catch (err) {
       console.error("CommonRoll error: "+err);
       console.error("CommonRoll error: "+err.stack);
