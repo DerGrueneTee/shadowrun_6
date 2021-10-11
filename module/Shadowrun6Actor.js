@@ -10,7 +10,7 @@ export class Shadowrun6Actor extends Actor {
 	/** @Override */
 	prepareData() {
 		super.prepareData();
-		console.log("Shadowrun6Actor.prepareData() " + this.data.name);
+		console.log("Shadowrun6Actor.prepareData() " + this.data.name+" = "+this.data.type);
 
 		const data = this.data.data;
 		
@@ -21,19 +21,21 @@ export class Shadowrun6Actor extends Actor {
 			};
 		}
 
-		this._prepareAttributes();
-		this._prepareDerivedAttributes();
-		this._preparePersona();
-		this._prepareAttackRatings();
-		this._prepareDefenseRatings();
-		this._prepareSkills();
-		this._prepareDefensePools();
-		this._prepareItemPools();
-		this._prepareVehiclePools();
-		this._calculateEssence();
+		if (this.data.type!="Vehicle") {
+			this._prepareAttributes();
+			this._prepareDerivedAttributes();
+			this._preparePersona();
+			this._prepareAttackRatings();
+			this._prepareDefenseRatings();
+			this._prepareSkills();
+			this._prepareDefensePools();
+			this._prepareItemPools();
+			this._prepareVehiclePools();
+			this._calculateEssence();
 		
-		if (data.mortype) {
-			data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+			if (data.mortype) {
+				data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+			}
 		}
 	}
 
@@ -106,6 +108,9 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 		}
+
+	  if (!data.derived)
+			return;
 
 			// Composure
 			if (data.derived.composure) {
@@ -676,12 +681,14 @@ export class Shadowrun6Actor extends Actor {
 			actorData.persona.used.f = actorData.persona.living.base.f + actorData.persona.living.mod.f;
 		}
 		
-		// Attack pool
-		actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
-		if (actorData.skills.expertise=="cybercombat") { actorData.persona.attackPool+=3} else
-		if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
-		actorData.persona.attackPool += actorData.attributes["log"].pool;
-		
+		if (actorData.skills) {
+			// Attack pool
+			actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
+			if (actorData.skills.expertise=="cybercombat") { actorData.persona.attackPool+=3} else
+			if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
+			actorData.persona.attackPool += actorData.attributes["log"].pool;
+		}
+			
 		// Damage
 		actorData.persona.damage = Math.ceil(actorData.persona.used.a/2);
 	}

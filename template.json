@@ -3,7 +3,8 @@
 		"types": [
 			"Player",
 			"NPC",
-			"Critter"
+			"Critter",
+			"Vehicle"
 		],
 		"templates": {
 			"attribute-template": {
@@ -423,6 +424,25 @@
 				"knowledge-template",
 				"magic-template"
 			]
+		},
+		"Vehicle": {
+			"handlOn": 1,
+			"handlOff": 2,
+			"accOn": 3,
+			"accOff": 4,
+			"spdiOn": 5,
+			"spdiOff": 0,
+			"tspd": 0,
+			"bod": 0,
+			"arm": 0,
+			"pil": 0,
+			"sen": 0,
+			"sea": 0,
+			"vtype": "",
+			"vehicle": {
+				"opMode": "manual"
+			},
+			"notes": ""
 		}
 	},
 	"Item": {

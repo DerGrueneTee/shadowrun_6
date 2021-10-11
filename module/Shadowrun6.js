@@ -2,6 +2,7 @@ import { SR6 } from "./config.js";
 import { Shadowrun6ActorSheet } from "./sheets/SR6ActorSheet.js";
 import { Shadowrun6ActorSheetPC } from "./sheets/ActorSheetPC.js";
 import { Shadowrun6ActorSheetNPC } from "./sheets/ActorSheetNPC.js";
+import { Shadowrun6ActorSheetVehicle } from "./sheets/ActorSheetVehicle.js";
 import { CompendiumActorSheetNPC } from "./sheets/CompendiumActorSheetNPC.js";
 import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
@@ -49,6 +50,7 @@ Hooks.once("init", async function () {
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetPC, { types: ["Player"], makeDefault: true });
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetNPC, { types: ["NPC"], makeDefault: true });
   Actors.registerSheet("shadowrun6-eden", CompendiumActorSheetNPC, { types: ["NPC"], makeDefault: false });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetVehicle, { types: ["Vehicle"], makeDefault: true });
 
   Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear", "martialarttech", "martialartstyle", "quality", "spell", "adeptpower", "ritual", "metamagic", "focus", "echo", "complexform", "sin", "contact", "lifestyle"], makeDefault: true });
 
@@ -88,6 +90,9 @@ Hooks.once("init", async function () {
 		return name;
   });
 
+	/*
+	 * Change default icon
+	 */
   function onCreateItem(item, options, userId) {
     console.log("onCreateItem  "+item.data.type);
     let createData = item.data;
