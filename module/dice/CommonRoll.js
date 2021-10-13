@@ -97,7 +97,7 @@ async function _showRollDialog(data, onClose={}) {
       };
     }
 	const myDialogOptions = {
-		width: 480,
+		width: 550,
 	  };
   console.log("create RollDialog");
     let x =  new RollDialog({
