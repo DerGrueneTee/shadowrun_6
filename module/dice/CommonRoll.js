@@ -139,7 +139,7 @@ function _dialogClosed(type, form, data, messageData={}) {
 			let boost = CONFIG.SR6.EDGE_BOOSTS.find(boost => boost.id==data.edgeBoost);
 			console.log("Pay "+boost.cost+" egde for Edge Boost: "+game.i18n.localize("shadowrun6.edge_boost."+data.edgeBoost));
 			data.actor.data.data.edge.value = data.edge - boost.cost;
-			// ToDo Anja: Roll cost dice coins here
+			// Pay Edge cost
 			data.actor.update({ ["data.edge.value"]: data.actor.data.data.edge.value });
 		}
 	} else {
@@ -365,7 +365,7 @@ export class RollDialog extends Dialog {
 	   this.data.edgePlayer = this.data.edgePlayer - this.data.edgeTarget;
       this.data.edgeTarget = 0;
    } else if (effective<0) {
-	   this.data.edgePlayer = this.data.edgeTarget - this.data.edgePlayer;
+	   this.data.edgeTarget = this.data.edgeTarget - this.data.edgePlayer;
       this.data.edgePlayer = 0;
    } else {
       this.data.edgePlayer = 0;
