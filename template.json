@@ -426,6 +426,9 @@
 			]
 		},
 		"Vehicle": {
+			"templates": [
+				"monitor-template"
+			],
 			"handlOn": 1,
 			"handlOff": 2,
 			"accOn": 3,

@@ -540,6 +540,7 @@
       "trace_icon": "Trace Icon"
     },
     "monitor": {
+		"matrix": "Matrix",
       "physical": "Physical",
       "stun": "Stun"
     },

@@ -539,6 +539,7 @@
       "trace_icon": "Traquer une icône"
     },
     "monitor": {
+      "matrix": "Matrice",
       "physical": "Physique",
       "stun": "Étourdissant"
     },

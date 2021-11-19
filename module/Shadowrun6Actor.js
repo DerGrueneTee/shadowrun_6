@@ -37,6 +37,9 @@ export class Shadowrun6Actor extends Actor {
 				data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
 			}
 		}
+		if (this.data.type==='Vehicle') {
+			this._prepareDerivedVehicleAttributes();
+		}
 	}
 
 	//---------------------------------------------------------
@@ -616,6 +619,35 @@ export class Shadowrun6Actor extends Actor {
 				}
 			}
 		});
+	}
+
+	//---------------------------------------------------------
+	/*
+	 * Calculate the attributes like Initiative
+	 */
+	_prepareDerivedVehicleAttributes() {
+		const actorData = this.data;
+		const data = this.data.data;
+
+		// Store volatile
+
+		if (actorData.type === "Vehicle") {
+			if (data.physical) {
+				if (!data.physical.mod) data.physical.mod=0;
+				
+				data.physical.base = 8 + Math.round(data.bod / 2);
+				data.physical.max = data.physical.base + data.physical.mod;
+				data.physical.value = data.physical.max - data.physical.dmg;
+			}
+			// Use "stun" as matrix condition
+			if (data.stun) {
+				if (!data.stun.mod) data.stun.mod=0;
+				// 8 + (Device Rating / 2) where Dev.Rat. is Sensor
+				data.stun.base = 8 + Math.round(data.sen / 2);
+				data.stun.max = data.stun.base + data.stun.mod;
+				data.stun.value = data.stun.max - data.stun.dmg;
+			}
+		}
 	}
 	
 	//---------------------------------------------------------
