@@ -371,6 +371,7 @@
 		this.actor.performMatrixAction(matrixAction, matrixId, { event: event });
 	}
 
+	//-----------------------------------------------------
 	_onRollComplexFormCheck(event, html) {
 		event.preventDefault();
 		const item = event.currentTarget.dataset.itemId;
