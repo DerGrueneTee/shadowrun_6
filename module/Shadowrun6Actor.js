@@ -1141,8 +1141,7 @@ export class Shadowrun6Actor extends Actor {
 		}
 		let checkText = this._getSkillCheckText(action.skill,action.spec,action.threshold,action.attrib);
 		// Calculate pool
-		let value = this._getSkillPool(action.skill, action.spec);
-		value += this.data.data.attributes[action.attrib].pool;
+		let value = this._getSkillPool(action.skill, action.spec, action.attrib);
 
 		// Roll and return
 		let data = mergeObject(options, {
