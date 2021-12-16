@@ -189,8 +189,13 @@
 				let value = element.checked;
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const field = element.dataset.check;
-				console.log("Update field " + field + " with " + value);
-				this.actor.items.get(itemId).update({ [field]: value });
+				if (itemId) {
+					console.log("Update field " + field + " with " + value);
+					this.actor.items.get(itemId).update({ [field]: value });
+				} else {
+					console.log("Update actor field " + field + " with " + value);
+					this.actor.update({ [field]: value });
+				}
 			});
 			//Collapsible
 			html.find('.collapsible').click(event => {

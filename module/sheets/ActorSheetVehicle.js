@@ -19,4 +19,33 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 		});
 	}
 
+	activateListeners(html) {
+		super.activateListeners(html);	
+		// Owner Only Listeners
+		if (this.actor.isOwner) {
+			console.log("activate");
+			html.find('.vehicle-slower').click(ev => this._onDecelerate(ev));
+			html.find('.vehicle-faster').click(ev => this._onAccelerate(ev));
+		}
+	}
+
+	_onDecelerate(event, html) {
+		console.log("_onDecelerate");
+		let actorData = this.actor.data.data;
+		let currentSpeed = actorData.vehicle.speed;
+		let newSpeed = currentSpeed - (( actorData.vehicle.offRoad)?actorData.accOff:actorData.accOn );
+		if (newSpeed<0) newSpeed = 0;
+		const field = "data.vehicle.speed";
+		this.actor.update({ [field]: newSpeed });
+	}
+
+	_onAccelerate(event, html) {
+		console.log("_onAccelerate");
+		let actorData = this.actor.data.data;
+		let currentSpeed = actorData.vehicle.speed;
+		let newSpeed = currentSpeed + (( actorData.vehicle.offRoad)?actorData.accOff:actorData.accOn );
+		if (newSpeed>actorData.tspd) newSpeed = actorData.tspd;
+		const field = "data.vehicle.speed";
+		this.actor.update({ [field]: newSpeed });
+	}
 }

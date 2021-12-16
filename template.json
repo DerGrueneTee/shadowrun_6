@@ -443,7 +443,9 @@
 			"sea": 0,
 			"vtype": "",
 			"vehicle": {
-				"opMode": "manual"
+				"opMode": "manual",
+				"offRoad": true,
+				"speed": 2
 			},
 			"notes": ""
 		}
