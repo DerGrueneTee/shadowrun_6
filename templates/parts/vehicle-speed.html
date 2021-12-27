@@ -1,4 +1,17 @@
 <p><b>ToDo:</b> Vehicle Speed Control</p>
+<label>Belongs To: </label> <select class="vehicleUser" data-field="data.vehicle.belongs">
+            {{#select data.data.vehicle.belongs}}
+            <option value="">-</option>
+            {{#each this.options.allVehicleUser as |owner id|}}
+            <option value="{{owner.id}}" data-item-owner="{{owner.id}}">{{owner.data.name}}</option>
+            {{/each}}
+            {{/select}}
+</select><br/>
+<label>Mode of Operation</label> <select name="data.data.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
+{{selectOptions config.VEHICLE_MODE selected=data.data.vehicle.opMode localize=true}}           			
+</select>
+
+
 <table>
 	<tr>
 		<td><img src="systems/shadowrun6-eden/images/road.svg" style="border: 0px; height: auto; width: 48px" /></td>
@@ -11,8 +24,7 @@
 		{{localize 'shadowrun6.label.onroad'}}
 		{{/if}}</td>
 		<td><img src="systems/shadowrun6-eden/images/hills.svg" style="border: 0px; height: auto; width: 48px" /></td>
-		<td style="width: 5em"/>
-		<td><img src="systems/shadowrun6-eden/images/rocket-thruster.svg" style="border: 0px; height: auto; width: 64px" /></td>
+		<td style="width: 4em"/>
 		<td><img src="systems/shadowrun6-eden/images/speedometer.svg" style="border: 0px; height: auto; width: 64px" /></td>
 		<td> <button type="button" class="vehicle-slower">{{localize 'shadowrun6.label.slower'}}</button> </td>
 		<td><input class="centered box" type="text" style="width: 4em"  value="{{data.data.vehicle.speed}}" data-dtype="Number"

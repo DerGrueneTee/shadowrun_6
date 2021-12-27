@@ -127,7 +127,13 @@ Hooks.once("init", async function () {
 		
 	});
 
-	Hooks.on('renderSR6ItemSheet', () => {
+	Hooks.on('renderShadowrun6ActorSheetVehicle', (app,html,data) => {
+    console.log("renderShadowrun6ActorSheetVehicle hook called");
+	 _onRenderVehicleSheet(app,html,data);
+		
+	});
+
+	Hooks.on('renderSR6ItemSheet', (app,html,data) => {
     console.log("renderSR6ItemSheet hook called");
 		
 	});
@@ -486,4 +492,9 @@ function _onChatMessageAppear(event, chatMsg, html, data) {
 	if (btnPerform && chatMsg.roll.peformPostEdgeBoost) {
 		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data, btnPerform, html.find('.edgeBoosts'),  html.find('.edgeActions')));
 	}
+}
+
+function _onRenderVehicleSheet(application, html, data) {
+	let actorData = data.actor.data.data;
+	console.log("_onRenderVehicleSheet for "+actorData);
 }

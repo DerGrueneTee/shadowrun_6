@@ -15,15 +15,26 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 			height: 800,
 			tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "overview" }],
 			scrollY: [".items", ".attributes"],
-			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]
+			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }],
+			allVehicleUser: game.actors.filter(actor => actor.type=="Player" || actor.type=="NPC")
 		});
 	}
 
+	//-------------------------------------------------
+  get template() {
+	 console.log("in template()");
+	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
+    const path = 'systems/shadowrun6-eden/templates/';
+//    return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
+   return `${path}shadowrun6-actor-vehicle-sheet.html`;
+  }
+
 	activateListeners(html) {
 		super.activateListeners(html);	
+	   if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
+
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
-			console.log("activate");
 			html.find('.vehicle-slower').click(ev => this._onDecelerate(ev));
 			html.find('.vehicle-faster').click(ev => this._onAccelerate(ev));
 		}

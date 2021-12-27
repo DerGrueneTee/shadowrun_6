@@ -21,6 +21,7 @@ export class Shadowrun6Actor extends Actor {
 			};
 		}
 
+	try {
 		if (this.data.type!="Vehicle") {
 			this._prepareAttributes();
 			this._prepareDerivedAttributes();
@@ -39,6 +40,9 @@ export class Shadowrun6Actor extends Actor {
 		}
 		if (this.data.type==='Vehicle') {
 			this._prepareDerivedVehicleAttributes();
+		}
+		} catch (err) {
+			console.log("Error "+err);
 		}
 	}
 
@@ -629,9 +633,7 @@ export class Shadowrun6Actor extends Actor {
 		const actorData = this.data;
 		const data = this.data.data;
 
-		// Store volatile
-
-		if (actorData.type === "Vehicle") {
+		// Monitors
 			if (data.physical) {
 				if (!data.physical.mod) data.physical.mod=0;
 				
@@ -647,7 +649,15 @@ export class Shadowrun6Actor extends Actor {
 				data.stun.max = data.stun.base + data.stun.mod;
 				data.stun.value = data.stun.max - data.stun.dmg;
 			}
-		}
+		
+		// Test modifier depending on speed
+		let interval = data.vehicle.offRoad?data.spdiOff:data.spdiOn;
+		if (interval<=1) interval=1;
+		let modifier = Math.floor(data.vehicle.speed / interval);
+		// Modify with physical monitor
+		modifier += Math.floor(data.physical.dmg / 3);		
+		data.vehicle.modifier = modifier;
+		data.vehicle.kmh = data.vehicle.speed *1.2;
 	}
 	
 	//---------------------------------------------------------

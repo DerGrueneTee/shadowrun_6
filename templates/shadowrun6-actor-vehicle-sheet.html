@@ -8,10 +8,12 @@
          	<h2><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h2>
             {{> "systems/shadowrun6-eden/templates/parts/vehicle-stats.html"}}
             {{> "systems/shadowrun6-eden/templates/parts/vehicle-monitor.html"}}
-            {{> "systems/shadowrun6-eden/templates/parts/vehicle-speed.html"}}
+            {{log "IM Sheet: " actor.isOwner}}
+             {{> "systems/shadowrun6-eden/templates/parts/vehicle-speed.html"}}
             {{> "systems/shadowrun6-eden/templates/parts/vehicle-accessories.html"}}
             {{> "systems/shadowrun6-eden/templates/parts/vehicle-software.html"}}
          </div>
+            {{> "systems/shadowrun6-eden/templates/parts/vehicle-weapons.html"}}
 			<div style="margin: 5px">
 				<img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" width="360" height="240" /><br/><br/>
 			</div>

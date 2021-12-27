@@ -10,6 +10,8 @@ export class SR6ItemSheet extends ItemSheet {
 
 
   get template() {
+	 console.log("in template()");
+	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
     const path = 'systems/shadowrun6-eden/templates/item/';
     return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
   }
@@ -27,6 +29,7 @@ export class SR6ItemSheet extends ItemSheet {
 */
   activateListeners(html) {
     super.activateListeners(html);
+	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
     // Owner Only Listeners
     if ((this.actor && this.actor.isOwner)) {
       html.find('[data-field]').change(event => {
