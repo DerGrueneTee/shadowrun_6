@@ -37,13 +37,16 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.5.x) Matrix devices, beginning support for edge based rerolls
  * (since 0.5.1) Added machine based translations for several languages 
  * (since 0.6.0) Begin support drones & vehicles, Biography tab
+ * (since 0.6.2) Work on a Vehicle Actor has begun
  
 ### Not working yet ###
  * Auto-calculating modifiers from condition monitors
  * Critters, better NPC support
-
+ * Vehicle Actor is unfinished
+ 
 ## The future ##
-Progess is rather slow, since Genesis and other projects keeps me busy. But I intend to keep adding functionality, until you can at least completely see everything you have in your Genesis character. 
+The project is currently not actively maintained. I have to admit, that though I have ideas what I want to implement, I simply don't have enough time to keep working on Genesis *and* do this as a side project. 
+If you are interested in continuing the work, let me know (taranion#5388). Of course, I also do accept pull requests.
 
 ![Screenshot](screenshots/Screen_2021-06a.jpg)
 ![Screenshot](screenshots/Screen_2021-06b.jpg)
