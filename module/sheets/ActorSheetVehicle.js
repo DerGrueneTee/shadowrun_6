@@ -22,8 +22,8 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	//-------------------------------------------------
   get template() {
-	 console.log("in template()");
-	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
+//	 console.log("in template()");
+//	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
     const path = 'systems/shadowrun6-eden/templates/';
 //    return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
    return `${path}shadowrun6-actor-vehicle-sheet.html`;
@@ -31,7 +31,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	activateListeners(html) {
 		super.activateListeners(html);	
-	   if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
+//	   if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
 
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
