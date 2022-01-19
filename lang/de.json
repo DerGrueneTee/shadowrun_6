@@ -538,6 +538,7 @@
       "trace_icon": "Icon aufspüren"
     },
     "monitor": {
+		"matrix": "Matrix",
       "physical": "Körperlich",
       "stun": "Geistig"
     },

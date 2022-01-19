@@ -2,7 +2,7 @@
   "name": "shadowrun6-eden",
   "title": "Shadowrun 6",
   "description": "RPGFramework Eden implementation for Shadowrun 6",
-  "author": "René Matis, Stefan u. Anja Prelle",
+  "author": "Stefan u. Anja Prelle",
   "authors": [
 	{
     "name": "Stefan Prelle",
@@ -20,7 +20,7 @@
   "flags": {},
   "version": "0.0.1",
   "minimumCoreVersion": "0.8.0",
-  "compatibleCoreVersion": "0.8.9",
+  "compatibleCoreVersion": "9.238",
   "scripts": [],
   "esmodules": [
     "module/Shadowrun6.js"

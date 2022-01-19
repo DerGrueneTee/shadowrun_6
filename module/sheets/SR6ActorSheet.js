@@ -189,8 +189,13 @@
 				let value = element.checked;
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
 				const field = element.dataset.check;
-				console.log("Update field " + field + " with " + value);
-				this.actor.items.get(itemId).update({ [field]: value });
+				if (itemId) {
+					console.log("Update field " + field + " with " + value);
+					this.actor.items.get(itemId).update({ [field]: value });
+				} else {
+					console.log("Update actor field " + field + " with " + value);
+					this.actor.update({ [field]: value });
+				}
 			});
 			//Collapsible
 			html.find('.collapsible').click(event => {
@@ -371,6 +376,7 @@
 		this.actor.performMatrixAction(matrixAction, matrixId, { event: event });
 	}
 
+	//-----------------------------------------------------
 	_onRollComplexFormCheck(event, html) {
 		event.preventDefault();
 		const item = event.currentTarget.dataset.itemId;
@@ -409,9 +415,14 @@
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
+		if (!monitorAttribute || !monitorAttribute.value)
+			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
 		let perc = monitorAttribute.value / monitorAttribute.max * 100;
+		if ( html.find("#bar" + id + "Cur").length==0) {
+			return;
+		}
 		html.find("#bar" + id + "Cur")[0].style.width = perc + "%";
 
 		let myNode = html.find("#bar" + id + "Boxes")[0];

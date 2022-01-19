@@ -10,7 +10,7 @@ export class Shadowrun6Actor extends Actor {
 	/** @Override */
 	prepareData() {
 		super.prepareData();
-		console.log("Shadowrun6Actor.prepareData() " + this.data.name);
+		console.log("Shadowrun6Actor.prepareData() " + this.data.name+" = "+this.data.type);
 
 		const data = this.data.data;
 		
@@ -21,19 +21,28 @@ export class Shadowrun6Actor extends Actor {
 			};
 		}
 
-		this._prepareAttributes();
-		this._prepareDerivedAttributes();
-		this._preparePersona();
-		this._prepareAttackRatings();
-		this._prepareDefenseRatings();
-		this._prepareSkills();
-		this._prepareDefensePools();
-		this._prepareItemPools();
-		this._prepareVehiclePools();
-		this._calculateEssence();
+	try {
+		if (this.data.type!="Vehicle") {
+			this._prepareAttributes();
+			this._prepareDerivedAttributes();
+			this._preparePersona();
+			this._prepareAttackRatings();
+			this._prepareDefenseRatings();
+			this._prepareSkills();
+			this._prepareDefensePools();
+			this._prepareItemPools();
+			this._prepareVehiclePools();
+			this._calculateEssence();
 		
-		if (data.mortype) {
-			data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+			if (data.mortype) {
+				data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+			}
+		}
+		if (this.data.type==='Vehicle') {
+			this._prepareDerivedVehicleAttributes();
+		}
+		} catch (err) {
+			console.log("Error "+err);
 		}
 	}
 
@@ -106,6 +115,9 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 		}
+
+	  if (!data.derived)
+			return;
 
 			// Composure
 			if (data.derived.composure) {
@@ -612,6 +624,41 @@ export class Shadowrun6Actor extends Actor {
 			}
 		});
 	}
+
+	//---------------------------------------------------------
+	/*
+	 * Calculate the attributes like Initiative
+	 */
+	_prepareDerivedVehicleAttributes() {
+		const actorData = this.data;
+		const data = this.data.data;
+
+		// Monitors
+			if (data.physical) {
+				if (!data.physical.mod) data.physical.mod=0;
+				
+				data.physical.base = 8 + Math.round(data.bod / 2);
+				data.physical.max = data.physical.base + data.physical.mod;
+				data.physical.value = data.physical.max - data.physical.dmg;
+			}
+			// Use "stun" as matrix condition
+			if (data.stun) {
+				if (!data.stun.mod) data.stun.mod=0;
+				// 8 + (Device Rating / 2) where Dev.Rat. is Sensor
+				data.stun.base = 8 + Math.round(data.sen / 2);
+				data.stun.max = data.stun.base + data.stun.mod;
+				data.stun.value = data.stun.max - data.stun.dmg;
+			}
+		
+		// Test modifier depending on speed
+		let interval = data.vehicle.offRoad?data.spdiOff:data.spdiOn;
+		if (interval<=1) interval=1;
+		let modifier = Math.floor(data.vehicle.speed / interval);
+		// Modify with physical monitor
+		modifier += Math.floor(data.physical.dmg / 3);		
+		data.vehicle.modifier = modifier;
+		data.vehicle.kmh = data.vehicle.speed *1.2;
+	}
 	
 	//---------------------------------------------------------
 	/*
@@ -676,12 +723,14 @@ export class Shadowrun6Actor extends Actor {
 			actorData.persona.used.f = actorData.persona.living.base.f + actorData.persona.living.mod.f;
 		}
 		
-		// Attack pool
-		actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
-		if (actorData.skills.expertise=="cybercombat") { actorData.persona.attackPool+=3} else
-		if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
-		actorData.persona.attackPool += actorData.attributes["log"].pool;
-		
+		if (actorData.skills) {
+			// Attack pool
+			actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
+			if (actorData.skills.expertise=="cybercombat") { actorData.persona.attackPool+=3} else
+			if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
+			actorData.persona.attackPool += actorData.attributes["log"].pool;
+		}
+			
 		// Damage
 		actorData.persona.damage = Math.ceil(actorData.persona.used.a/2);
 	}
@@ -1102,8 +1151,7 @@ export class Shadowrun6Actor extends Actor {
 		}
 		let checkText = this._getSkillCheckText(action.skill,action.spec,action.threshold,action.attrib);
 		// Calculate pool
-		let value = this._getSkillPool(action.skill, action.spec);
-		value += this.data.data.attributes[action.attrib].pool;
+		let value = this._getSkillPool(action.skill, action.spec, action.attrib);
 
 		// Roll and return
 		let data = mergeObject(options, {

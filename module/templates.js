@@ -13,8 +13,15 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/attributes-augmented.html",
 		"systems/shadowrun6-eden/templates/parts/monitors.html",
 		"systems/shadowrun6-eden/templates/parts/npc-attributes.html",
+		"systems/shadowrun6-eden/templates/parts/npc-augmentations.html",
+		"systems/shadowrun6-eden/templates/parts/npc-complex-forms.html",
+		"systems/shadowrun6-eden/templates/parts/npc-gear.html",
+		"systems/shadowrun6-eden/templates/parts/npc-metamagics.html",
+		"systems/shadowrun6-eden/templates/parts/npc-powers.html",
 		"systems/shadowrun6-eden/templates/parts/npc-skills.html",
 		"systems/shadowrun6-eden/templates/parts/npc-spells.html",
+		"systems/shadowrun6-eden/templates/parts/npc-echoes.html",
+		"systems/shadowrun6-eden/templates/parts/npc-weapons.html",
 		"systems/shadowrun6-eden/templates/parts/tab-combat.html",
 		"systems/shadowrun6-eden/templates/parts/tab-magic.html",
 		"systems/shadowrun6-eden/templates/parts/tab-matrix.html",
@@ -53,6 +60,12 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-contacts.html",
 		"systems/shadowrun6-eden/templates/parts/section-lifestyles.html",
 		"systems/shadowrun6-eden/templates/parts/section-vehicles.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-accessories.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-monitor.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-software.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-speed.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-stats.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-weapons.html",
 		];
 
 	console.log(`Load templates`);

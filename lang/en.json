@@ -1,4 +1,6 @@
 {
+	"Shadowrun6ActorSheetNPC": "Bla",
+	"shadowrun6-eden.Shadowrun6ActorSheetNPC": "Blubb",
   "ACTOR": {
     "TypeCritter": "Critter",
     "TypeNpc": "NPC",
@@ -462,6 +464,7 @@
       "dice": "Dice",
       "edit": "Edit",
       "expertise": "Expertise",
+	   "faster": "Accelerate",
       "features": "Features",
       "firemode_current": "Current Firemode",
       "firemodes": "Firemodes",
@@ -486,6 +489,7 @@
 	  "rating1": "Rating 1",
 	  "rating2": "Rating 2",
 	  "rating3": "Rating 3",
+	   "slower": "Decelerate",
       "specialization": "Specialization",
       "threshold": "Threshold",
       "value": "Value",
@@ -538,6 +542,7 @@
       "trace_icon": "Trace Icon"
     },
     "monitor": {
+		"matrix": "Matrix",
       "physical": "Physical",
       "stun": "Stun"
     },
@@ -780,7 +785,7 @@
         "column.capacity": "Cap.",
         "column.essence": "Ess.",
         "footer.total_essence": "Remaining Essence",
-        "title": "Bodyware"
+        "title": "Augmentations"
       },
       "chemicals": "Chemicals",
       "complexforms": {
@@ -818,6 +823,9 @@
       "lifestyles" : {
         "add": "Add new lifestyle",
         "title" : "Lifestyles"
+      },
+      "gear" : {
+        "title" : "Gear"
       },
       "matrix_base": {
         "overwatch": "Overwatch"
@@ -897,7 +905,8 @@
       "weapon": {
         "add": "Add new weapon",
         "close": "Melee Weapons",
-        "ranged": "Ranged Weapons"
+        "ranged": "Ranged Weapons",
+		  "title" : "Weapons"
       }
     },
     "settings": {
