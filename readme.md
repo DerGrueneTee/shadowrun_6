@@ -38,10 +38,11 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.5.1) Added machine based translations for several languages 
  * (since 0.6.0) Begin support drones & vehicles, Biography tab
  * (since 0.6.2) Work on a Vehicle Actor has begun
+ * (since 0.7.0) Work on a Critter Actor has begun, Added Critter Power Item, Attack rolls from NPC sheet
  
 ### Not working yet ###
  * Auto-calculating modifiers from condition monitors
- * Critters, better NPC support
+ * better Critter support, better NPC support
  * Vehicle Actor is unfinished
  
 ## The future ##
