@@ -42,14 +42,17 @@ export class Shadowrun6Actor extends Actor {
 		if (this.data.type==='Critter') {
 			this._prepareAttributes();
 			this._prepareDerivedAttributes();
+			this._prepareAttackRatings();
+			this._prepareDefenseRatings();
 			this._prepareSkills();
 			this._prepareDefensePools();
+			this._prepareItemPools();
 		}
 		if (this.data.type==='Vehicle') {
 			this._prepareDerivedVehicleAttributes();
 		}
 		} catch (err) {
-			console.log("Error "+err);
+			console.log("Error "+err.stack);
 		}
 	}
 
@@ -78,7 +81,7 @@ export class Shadowrun6Actor extends Actor {
 		const actorData = this.data;
 		const data = this.data.data;
 		// Only calculate for PCs - ignore for NPCs/Critter
-		if (actorData.type === "Player" || actorData.type === "NPC") {
+		if (actorData.type === "Player" || actorData.type === "NPC"|| actorData.type === "Critter") {
 			CONFIG.SR6.ATTRIBUTES.forEach(attr => {
 				data.attributes[attr].pool =
 					parseInt(data.attributes[attr].base || 0)
@@ -97,7 +100,7 @@ export class Shadowrun6Actor extends Actor {
 
 		// Store volatile
 
-		if (actorData.type === "Player" || actorData.type === "NPC") {
+		if (actorData.type === "Player" || actorData.type === "NPC" || actorData.type === "Critter") {
 			if (data.physical) {
 				data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
 				data.physical.max = data.physical.base + data.physical.mod;
@@ -210,6 +213,7 @@ export class Shadowrun6Actor extends Actor {
 		} 
 		
 		// Matrix attack rating (Angriff + Schleicher)
+		if (data.persona.used) {
 		data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
 		data.attackrating.matrix.pool = data.attackrating.matrix.base;
 		if (data.attackrating.matrix.mod) {
@@ -225,6 +229,7 @@ export class Shadowrun6Actor extends Actor {
 		if (data.attackrating.resonance.mod) {
 			data.attackrating.resonance.pool += data.attackrating.resonance.mod;
 			data.attackrating.resonance.modString += "\n+" + data.attackrating.resonance.mod;
+		}
 		} 
 		
 		// Vehicle combat attack rating (Pilot + Sensor)
