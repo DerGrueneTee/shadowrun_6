@@ -7,6 +7,7 @@
   "ITEM": {
     "TypeAdeptpower": "Adeptenkraft",
     "TypeComplexform": "Komplexe Form",
+    "TypeComplexform": "Critterkraft",
     "TypeContact" : "Connection",
     "TypeEcho": "Echo",
     "TypeGear": "Ausrüstung",
@@ -792,6 +793,10 @@
       "contacts": {
         "add": "Neue Connection hinzufügen",
         "title": "Connections"
+      },
+      "critterpowers": {
+        "add": "Critterkraft hinzufügen",
+        "title": "Critterkräfte"
       },
       "defense": "Verteidigung & Widerstände",
       "derived": "Abgeleitete Werte",

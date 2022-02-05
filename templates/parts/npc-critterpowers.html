@@ -1,0 +1,10 @@
+<dt>{{ localize 'shadowrun6.section.critterpowers.title' }}</dt>
+<dd>
+	<!-- Powers -->
+	{{#each actor.items as |item id|}} 
+	{{#iff item.type '==' 'critterpower'}}
+   <label class="" data-skill="{{id}}">{{item.name}}</label>
+    ,
+   {{/iff}}
+   {{/each}}
+</dd>

@@ -8,6 +8,7 @@
   },
   "ITEM": {
     "TypeAdeptpower": "Adept Power",
+    "TypeCritterpower": "Critter Power",
     "TypeComplexform": "Complex Form",
     "TypeContact" : "Contact",
     "TypeEcho": "Echo",
@@ -797,6 +798,10 @@
       "contacts": {
         "add": "Add new contact",
         "title": "Contacts"
+      },
+      "critterpowers": {
+        "add": "Add critter power",
+        "title": "Powers"
       },
       "defense": "Defenses & Resistances",
       "derived": "Derived Values",

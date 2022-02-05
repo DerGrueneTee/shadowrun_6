@@ -22,7 +22,7 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 	try {
-		if (this.data.type!="Vehicle") {
+		if (this.data.type!="Vehicle" && this.data.type!="Critter") {
 			this._prepareAttributes();
 			this._prepareDerivedAttributes();
 			this._preparePersona();
@@ -32,11 +32,18 @@ export class Shadowrun6Actor extends Actor {
 			this._prepareDefensePools();
 			this._prepareItemPools();
 			this._prepareVehiclePools();
+			
 			this._calculateEssence();
 		
 			if (data.mortype) {
 				data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
 			}
+		}
+		if (this.data.type==='Critter') {
+			this._prepareAttributes();
+			this._prepareDerivedAttributes();
+			this._prepareSkills();
+			this._prepareDefensePools();
 		}
 		if (this.data.type==='Vehicle') {
 			this._prepareDerivedVehicleAttributes();
