@@ -1032,7 +1032,20 @@ export class Shadowrun6Actor extends Actor {
 		const item = this.items.get(itemId);
 		let threshold = ritual? (item.data.data.threshold):0;
 		// Prepare action text
-		let actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+		let actionText;
+		switch (game.user.targets.size) {
+		case 0:
+			actionText = actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+			break;
+		case 1:
+		   let targetName = game.user.targets.values().next().value.name;
+			actionText = game.i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
+			break;
+		default:
+			actionText = game.i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
+		}
+		// Prepare check text
+		let checkText = this._getSkillCheckText(skillId,spec,0);
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec);
 		let rollName = this._getSkillCheckText(skillId, spec, threshold);		
@@ -1097,7 +1110,7 @@ export class Shadowrun6Actor extends Actor {
 			canIncreaseArea : canIncreaseArea,
 			attackRating: attackRating,
 			defRating : highestDefenseRating,
-			targets: game.user.targets.forEach( val => val.actor),
+			targets: game.user.targets,
 			isOpposed: isOpposed,
 			threshold: threshold,
 			rollType: ritual?"ritual":"spell",

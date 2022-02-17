@@ -224,9 +224,14 @@ function _dialogClosed(type, form, data, messageData={}) {
     return r;
  }
 
-export function rollDefense(actor, defendWith) {
-	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+")");
+export function rollDefense(actor, dataset) {
+	console.log("ENTER rollDefense");
+		  const defendWith = dataset.defendWith;
+		  const defendHits = dataset.defendHits;
+		  const targetId = dataset.targetid;
+	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+", defendHits="+defendHits+", targetId="+targetId+")");
 	let data = {
+		threshold : dataset.defendHits,
 		actionText: "",
 		checkText : "X",
 		defense   : {},
@@ -272,6 +277,7 @@ export function rollDefense(actor, defendWith) {
 	
 	
 	console.log("LEAVE rollDefense");
+	return r;
 	
 }
 

@@ -421,8 +421,7 @@
 				"monitor-template",
 				"initiative-template",
 				"skill-template",
-				"knowledge-template",
-				"magic-template"
+				"knowledge-template"
 			]
 		},
 		"Vehicle": {

@@ -692,10 +692,14 @@
         "attack_target_multiple": "Greift mehre Ziele mit {name} an",
         "attack_target_none": "Greift Ziel mit {name} an",
         "attack_target_one": "Greift {target} mit {name} an",
-        "cast": "Zaubert {name}",
+        "cast_target_multiple": "zaubert {name} auf mehrere Ziele",
+        "cast_target_none": "zaubert {name}",
+        "cast_target_one": "zaubert {name} auf {target}",
         "thread": "Webe {name}",
         "defense": {
-          "physical": "Verteidigung g. physischen Angriff"
+          "physical": "Verteidigung g. physischen Angriff",
+          "spells_direct": "Verteidigung g. dir. Kampfzauber",
+          "spells_indirect": "Verteidigung g. ind. Kampfzauber"
         }
       },
       "ar_0": "Sehr nah",

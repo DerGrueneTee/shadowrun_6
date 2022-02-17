@@ -243,6 +243,7 @@ Hooks.once("init", async function () {
   });
 
   Hooks.on('renderChatMessage', function (app, html, data) {
+	 console.log("ENTER renderChatMessage");
 	 if (html.find("#chat-message")) {
 	 	html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
 	 }
@@ -250,13 +251,13 @@ Hooks.once("init", async function () {
 //      const type =  $(event.currentTarget).closestData("roll-type");
 		const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
-		console.log("Clicked on rollable");
+		console.log("Clicked on rollable : "+rollType);
       if (rollType === "defense") {
         const targetId = $(event.currentTarget).closestData("targetid");
         console.log("Target "+targetId);
 			const actor = game.actors.get(targetId);
-		  const defendWith = dataset.defendWith;
-			rollDefense(actor, defendWith);
+       console.log("Target name ",actor);
+			rollDefense(actor, dataset);
       }
     });
     html.on("click", ".chat-edge", event => {
@@ -290,6 +291,7 @@ Hooks.once("init", async function () {
 		    tip.slideUp(200);
 	    }
 		});
+	 console.log("LEAVE renderChatMessage");
   });
 
   /**
@@ -474,7 +476,8 @@ $.fn.closestData = function (dataName, defaultValue = "") {
 
 /* -------------------------------------------- */
 function _onChatMessageAppear(event, chatMsg, html, data) {
-	console.log("Chat message appear - owner = "+chatMsg.isOwner);
+	console.log("Chat message appear - data  = ",data);
+	console.log("Chat message appear - owner = ",chatMsg);
 	if (!chatMsg.isOwner) {
 		console.log("I am not owner of that chat message from "+data.alias);		
 		return;
@@ -491,7 +494,7 @@ function _onChatMessageAppear(event, chatMsg, html, data) {
 	let edgeBoosts  = html.find('.edgeBoosts');
 	let edgeActions = html.find('.edgeActions');
 	console.log("_onChatMessageAppear");
-	if (btnPerform && chatMsg.roll.peformPostEdgeBoost) {
+	if (btnPerform && chatMsg.roll && chatMsg.roll.peformPostEdgeBoost) {
 		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data, btnPerform, html.find('.edgeBoosts'),  html.find('.edgeActions')));
 	}
 }

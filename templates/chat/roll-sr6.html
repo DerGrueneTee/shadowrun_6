@@ -84,18 +84,18 @@
    
    <!-- Defense -->
     {{log "Defense" data}}
-   {{#if data.isAllowDefensed}}
+   {{#if data.isAllowDefense}}
    <hr/>
    {{#if data.targets}}
      {{#each data.targets as |token id|}}
      <div>
       {{log "Token" id " = " token.data }} 
-     	<button class="rollable" data-roll-type="defense" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}">Token {{id}}: {{token.data.name}}</button>
+     	<button class="rollable" data-roll-type="defense" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
      </div>
      {{/each}}
    {{else}} 
      <div>
-  	   <button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
+  	   <button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}})</button>
      </div>
    {{/if}}
    {{/if}}        
