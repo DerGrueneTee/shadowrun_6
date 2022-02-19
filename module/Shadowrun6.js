@@ -249,14 +249,26 @@ Hooks.once("init", async function () {
 	 }
     html.find(".rollable").click(event => {
 //      const type =  $(event.currentTarget).closestData("roll-type");
+		console.log("ENTER renderChatMessage.rollable.click -> event = ",event.currentTarget);
+      var targetId = $(event.currentTarget).closestData("targetid");
+		/* 
+		 * If no target was memorized in the button, try to find one from the
+		 * actor associated with the player 
+		 */
+	   if (!targetId) {
+			game.actors.forEach(item => {
+	    		if (item.hasPlayerOwner)
+					targetId = item.data._id;
+		   });
+		}
+      console.log("TargetId "+targetId);
+
 		const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
 		console.log("Clicked on rollable : "+rollType);
       if (rollType === "defense") {
-        const targetId = $(event.currentTarget).closestData("targetid");
-        console.log("Target "+targetId);
-			const actor = game.actors.get(targetId);
-       console.log("Target name ",actor);
+ 			const actor = game.actors.get(targetId);
+       console.log("Target actor ",actor);
 			rollDefense(actor, dataset);
       }
     });
@@ -476,8 +488,8 @@ $.fn.closestData = function (dataName, defaultValue = "") {
 
 /* -------------------------------------------- */
 function _onChatMessageAppear(event, chatMsg, html, data) {
-	console.log("Chat message appear - data  = ",data);
-	console.log("Chat message appear - owner = ",chatMsg);
+	//console.log("Chat message appear - data  = ",data);
+	//console.log("Chat message appear - owner = ",chatMsg);
 	if (!chatMsg.isOwner) {
 		console.log("I am not owner of that chat message from "+data.alias);		
 		return;

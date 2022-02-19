@@ -13,6 +13,7 @@ export default class SR6Roll extends Roll {
 
   /** @override */
   evaluate() {
+	 console.log("ENTER evaluate()");
     let data = this.data;
     let noOfDice = parseInt(data.pool);
     let die;
@@ -60,6 +61,7 @@ export default class SR6Roll extends Roll {
       this._dice = die.terms;
     }
 	this.dummy = "aus evaluate()";
+	 console.log("LEAVE evaluate()");
     return this;
   }
 

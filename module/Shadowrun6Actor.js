@@ -213,13 +213,13 @@ export class Shadowrun6Actor extends Actor {
 		} 
 		
 		// Matrix attack rating (Angriff + Schleicher)
-		if (data.persona.used) {
-		data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
-		data.attackrating.matrix.pool = data.attackrating.matrix.base;
-		if (data.attackrating.matrix.mod) {
-			data.attackrating.matrix.pool += data.attackrating.matrix.mod;
-			data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
-		} 
+		if (data.persona && data.persona.used) {
+			data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
+			data.attackrating.matrix.pool = data.attackrating.matrix.base;
+			if (data.attackrating.matrix.mod) {
+				data.attackrating.matrix.pool += data.attackrating.matrix.mod;
+				data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
+			} 
 		
 		// Resonance attack rating (Electronics + Resonance)
 		data.attackrating.resonance.base = data.persona.used.a + data.attributes["res"].pool;

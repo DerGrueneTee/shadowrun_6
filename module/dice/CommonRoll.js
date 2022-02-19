@@ -199,6 +199,8 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.item) {
 			// TODO: Evaluate fire modes
 			console.log("ToDo: evaluate fire modes, called shots, etc.")
+			data.damage = data.item.data.data.dmg;
+			data.dmgDef = data.item.data.data.dmgDef;
 		}
 	}
 
@@ -207,11 +209,11 @@ function _dialogClosed(type, form, data, messageData={}) {
 	data.from =  "dialogClosed.data";
     let r = new SR6Roll("", data);
     try {
-	   console.log("Call r.evaluate: "+r);
+	   console.log("Call r.evaluate: ",r);
       r.evaluate();
 		data.results=r.results;
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
-			data.damage += r._total;
+			data.hits += r._total;
 		}
     } catch (err) {
       console.error("CommonRoll error: "+err);
@@ -220,16 +222,18 @@ function _dialogClosed(type, form, data, messageData={}) {
       console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
       return null;
     }
+    console.log("LEAVE _data = ", data);
     console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
     return r;
  }
 
 export function rollDefense(actor, dataset) {
 	console.log("ENTER rollDefense");
-		  const defendWith = dataset.defendWith;
-		  const defendHits = dataset.defendHits;
-		  const targetId = dataset.targetid;
-	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+", defendHits="+defendHits+", targetId="+targetId+")");
+	const defendWith = dataset.defendWith;
+	const defendHits = dataset.defendHits;
+	const damage     = dataset.damage;
+	const targetId = dataset.targetid;
+	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+", defendHits="+defendHits+", damage="+damage+", targetId="+targetId+")");
 	let data = {
 		threshold : dataset.defendHits,
 		actionText: "",
@@ -268,6 +272,10 @@ export function rollDefense(actor, dataset) {
     try {
 	   console.log("Call r.evaluate: "+r);
       r.evaluate();
+		r.nettohits=data.threshold - r._total;
+		
+		r.damage=(r.nettohits<0)?0:(damage + r.nettohits);
+	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);
     } catch (err) {
       console.error("CommonRoll error: "+err);
