@@ -1,9 +1,5 @@
 import SR6Roll from "./sr6_roll.js"
 
-//-------------------------------------------------------------
-/**
- * Called from Shadowrun6Actor.js
- */
 export async function doRoll(data) {
 	console.log("ENTER doRoll");
 
