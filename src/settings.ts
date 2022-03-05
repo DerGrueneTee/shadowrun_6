@@ -6,7 +6,7 @@ export const registerSystemSettings = () => {
   /**
    * Track the system version upon which point a migration was last applied
    */
-  game.settings.register(SYSTEM_NAME, "systemMigrationVersion", {
+  (game as any).settings.register(SYSTEM_NAME, "systemMigrationVersion", {
     name: "System Migration Version",
     scope: "world",
     config: false,
@@ -17,7 +17,7 @@ export const registerSystemSettings = () => {
   /**
    * Register resting variants
    */
-  game.settings.register(SYSTEM_NAME, "maxEdgePerRound", {
+  (game as any).settings.register(SYSTEM_NAME, "maxEdgePerRound", {
     name: "shadowrun6.settings.maxEdgePerRound.name",
     hint: "shadowrun6.settings.maxEdgePerRound.hint",
     scope: "world",

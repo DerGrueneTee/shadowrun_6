@@ -19,6 +19,39 @@ export class Attributes {
     res: Attribute = new Attribute();
 }
 
+export class Skill {
+	points: number;
+	specialization: string | undefined;
+	expertise: string | undefined;
+	modifier: number;
+	augment: number;
+	poolS:number;
+	poolE:number;
+	pool:number;
+}
+
+export class Skills {
+	astral    : Skill = new Skill();
+	athletics : Skill = new Skill();
+	biotech   : Skill = new Skill();
+	close_combat: Skill = new Skill();
+	con       : Skill = new Skill();
+	conjuring : Skill = new Skill();
+	cracking  : Skill = new Skill();
+	electronics: Skill = new Skill();
+	enchanting: Skill = new Skill();
+	engineering: Skill = new Skill();
+	exotic_weapons: Skill = new Skill();
+	firearms  : Skill = new Skill();
+	influence : Skill = new Skill();
+	outdoors  : Skill = new Skill();
+	perception: Skill = new Skill();
+	piloting  : Skill = new Skill();
+	sorcery   : Skill = new Skill();
+	stealth   : Skill = new Skill();
+	tasking   : Skill = new Skill();
+}
+
 export class Monitor {
     mod: number;
     modString: string;
@@ -60,6 +93,27 @@ class Ratings {
 		vehicle : Attribute = new Attribute();
 }
 
+class Pool {
+    base: number;
+    pool:number|undefined = 0;
+    mod: number = 0;
+    modString: string|undefined;
+}
+
+class DefensePool {
+	physical:Pool = new Pool();
+	astral  :Pool = new Pool();
+	spells_direct:Pool = new Pool();
+	spells_indirect:Pool = new Pool();
+	spells_other:Pool = new Pool();
+	vehicle:Pool = new Pool();
+	toxin:Pool = new Pool();
+	damage_physical:Pool = new Pool();
+	damage_astral:Pool = new Pool();
+	drain  :Pool = new Pool();
+	fading  :Pool = new Pool();
+}
+
 class Tradition {
 		genesisID: string;
 		name: string;
@@ -82,14 +136,24 @@ export class Lifeform extends SR6Actor {
     };
     stun: Monitor = new Monitor();
     overflow: Monitor = new Monitor();
+	defensepool :DefensePool = new DefensePool();
 	tradition : Tradition = new Tradition();
+	skills:Skills = new Skills();
+	essence : number = 6.0;
 }
 export interface ILifeform {
-    attributes:Attributes;
+   attributes:Attributes;
+	skills:Skills;
 }
 
-class Player extends Lifeform {
-	
+export class Player extends Lifeform {
+	persona : {
+		device : {
+			base : MatrixDevice,
+			mod  : MatrixDevice,
+			monitor : Monitor
+		}
+	} ;
 } 
 
 export class Vehicle {
