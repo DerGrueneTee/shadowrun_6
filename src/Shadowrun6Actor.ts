@@ -182,8 +182,8 @@ export class Shadowrun6Actor extends Actor {
 
 		/* Physical Attack Rating - used for unarmed combat */
 		data.attackrating.physical.base = data.attributes["rea"].pool + data.attributes["str"].pool;
-//		data.attackrating.physical.modString  = (game as any).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool+"\n";
-//		data.attackrating.physical.modString += (game as any).i18n.localize("attrib.str_short") + " " + data.attributes["str"].pool;
+		data.attackrating.physical.modString  = (game as Game).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool+"\n";
+		data.attackrating.physical.modString += (game as Game).i18n.localize("attrib.str_short") + " " + data.attributes["str"].pool;
 		data.attackrating.physical.pool = data.attackrating.physical.base + data.attackrating.physical.mod;
 		if (data.attackrating.physical.mod) {
 			data.attackrating.physical.pool += data.attackrating.physical.mod;
@@ -192,8 +192,8 @@ export class Shadowrun6Actor extends Actor {
 		
 		let traditionAttr = data.attributes[data.tradition.attribute];
 		data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
-//		data.attackrating.astral.modString  = (game as any).i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
-//		data.attackrating.astral.modString += (game as any).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + data.attributes[data.tradition.attribute].pool;
+		data.attackrating.astral.modString  = (game as Game).i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
+		data.attackrating.astral.modString += (game as Game).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + data.attributes[data.tradition.attribute].pool;
 		data.attackrating.astral.pool = data.attackrating.astral.base
 		if (data.attackrating.astral.mod) {
 			data.attackrating.astral.pool += data.attackrating.astral.mod;
@@ -212,8 +212,8 @@ export class Shadowrun6Actor extends Actor {
 		
 		// Resonance attack rating (Electronics + Resonance)
 		data.attackrating.resonance.base = data.persona.used.a + data.attributes["res"].pool;
-//		data.attackrating.resonance.modString  = (game as any).i18n.localize("skill.electronics") + " + ";
-//		data.attackrating.resonance.modString += (game as any).i18n.localize("attrib.res_short");
+		data.attackrating.resonance.modString  = (game as Game).i18n.localize("skill.electronics") + " + ";
+		data.attackrating.resonance.modString += (game as Game).i18n.localize("attrib.res_short");
 		data.attackrating.resonance.pool = data.attackrating.resonance.base;
 		if (data.attackrating.resonance.mod) {
 			data.attackrating.resonance.pool += data.attackrating.resonance.mod;
@@ -232,7 +232,7 @@ export class Shadowrun6Actor extends Actor {
 		
 		// Social value
 		data.attackrating.social.base = data.attributes["cha"].pool;
-//		data.attackrating.social.modString = (game as any).i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
+		data.attackrating.social.modString = (game as Game).i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
 		data.attackrating.social.pool = data.attackrating.social.base;
 		if (data.attackrating.social.mod) {
 			data.attackrating.social.pool += data.attackrating.social.mod;
@@ -277,7 +277,7 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Physical Defense Rating
 			data.defenserating.physical.base = data.attributes["bod"].pool;
-//			data.defenserating.physical.modString = (game as any).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
+			data.defenserating.physical.modString = (game as Game).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
 			data.defenserating.physical.pool = data.defenserating.physical.base;
 			if (data.defenserating.physical.mod) {
 				data.defenserating.physical.pool += data.defenserating.physical.mod;
@@ -296,7 +296,7 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Astral Defense Rating
 			data.defenserating.astral.base = data.attributes["int"].pool;
-//			data.defenserating.astral.modString = (game as any).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.astral.modString = (game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defenserating.astral.pool = data.defenserating.astral.base;
 			if (data.defenserating.astral.mod) {
 				data.defenserating.astral.pool += data.defenserating.astral.mod;
@@ -306,7 +306,7 @@ export class Shadowrun6Actor extends Actor {
 			/*
 			// Matrix defense
 			data.defenserating.matrix.base = data.persona.used.d + data.persona.used.f;
-			data.defenserating.matrix.modString = ""; //(game as any).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.matrix.modString = ""; //(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defenserating.matrix.pool = data.defenserating.matrix.base;
 			if (data.defenserating.matrix.mod) {
 				data.defenserating.matrix.pool += data.defenserating.matrix.mod;
@@ -315,8 +315,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Vehicles Defense Rating (Pilot + Armor)
 			data.defenserating.vehicle.base = data.skills["piloting"].pool;
-//			data.defenserating.vehicle.modString  = (game as any).i18n.localize("skill.piloting") + " " + data.skills["piloting"].pool;
-			//data.defenserating.vehicle.modString += "\n"+(game as any).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+			data.defenserating.vehicle.modString  = (game as Game).i18n.localize("skill.piloting") + " " + data.skills["piloting"].pool;
+			//data.defenserating.vehicle.modString += "\n"+(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defenserating.vehicle.pool = data.defenserating.vehicle.base;
 			if (data.defenserating.vehicle.mod) {
 				data.defenserating.vehicle.pool += data.defenserating.vehicle.mod;
@@ -326,7 +326,7 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Social Defense Rating
 			data.defenserating.social.base = data.attributes["cha"].pool;
-//			data.defenserating.social.modString = (game as any).i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
+			data.defenserating.social.modString = (game as Game).i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
 			data.defenserating.social.pool = data.defenserating.social.base;
 			if (data.defenserating.social.mod) {
 				data.defenserating.social.pool += data.defenserating.social.mod;
@@ -402,8 +402,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Physical Defense Test
 			data.defensepool.physical.base = data.attributes["rea"].pool+ data.attributes["int"].pool;
- 			data.defensepool.physical.modString = "\n"+(game as any).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
- 			data.defensepool.physical.modString += "\n"+(game as any).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+ 			data.defensepool.physical.modString = "\n"+(game as Game).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
+ 			data.defensepool.physical.modString += "\n"+(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defensepool.physical.pool = data.defensepool.physical.base;
 			if (data.defensepool.physical.mod) {
 				data.defensepool.physical.pool += data.defensepool.physical.mod;
@@ -412,8 +412,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Astral(Combat) Defense Test
 			data.defensepool.astral.base = data.attributes["log"].pool+ data.attributes["int"].pool;
- 			data.defensepool.astral.modString = "\n"+(game as any).i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
- 			data.defensepool.astral.modString += "\n"+(game as any).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+ 			data.defensepool.astral.modString = "\n"+(game as Game).i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
+ 			data.defensepool.astral.modString += "\n"+(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defensepool.astral.pool = data.defensepool.astral.base;
 			if (data.defensepool.astral.mod) {
 				data.defensepool.astral.pool += data.defensepool.astral.mod;
@@ -422,8 +422,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Direct combat spell defense test
 			data.defensepool.spells_direct.base = data.attributes["wil"].pool+ data.attributes["int"].pool;
- 			data.defensepool.spells_direct.modString = "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
- 			data.defensepool.spells_direct.modString += "\n"+(game as any).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
+ 			data.defensepool.spells_direct.modString = "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.spells_direct.modString += "\n"+(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defensepool.spells_direct.pool = data.defensepool.spells_direct.base;
 			if (data.defensepool.spells_direct.mod) {
 				data.defensepool.spells_direct.pool += data.defensepool.spells_direct.mod;
@@ -432,8 +432,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Indirect combat spell defense test
 			data.defensepool.spells_indirect.base = data.attributes["rea"].pool+ data.attributes["wil"].pool;
- 			data.defensepool.spells_indirect.modString = "\n"+(game as any).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
- 			data.defensepool.spells_indirect.modString += "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.spells_indirect.modString = "\n"+(game as Game).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
+ 			data.defensepool.spells_indirect.modString += "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
 			data.defensepool.spells_indirect.pool = data.defensepool.spells_indirect.base;
 			if (data.defensepool.spells_indirect.mod) {
 				data.defensepool.spells_indirect.pool += data.defensepool.spells_indirect.mod;
@@ -442,8 +442,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Other spell defense test
 			data.defensepool.spells_other.base = data.attributes["log"].pool+ data.attributes["wil"].pool;
- 			data.defensepool.spells_other.modString = "\n"+(game as any).i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
- 			data.defensepool.spells_other.modString += "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.spells_other.modString = "\n"+(game as Game).i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
+ 			data.defensepool.spells_other.modString += "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
 			data.defensepool.spells_other.pool = data.defensepool.spells_other.base;
 			if (data.defensepool.spells_other.mod) {
 				data.defensepool.spells_other.pool += data.defensepool.spells_other.mod;
@@ -452,8 +452,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Vehicle combat defense
 			data.defensepool.vehicle.base = data.skills["piloting"].pool+ data.attributes["rea"].pool;
- 			data.defensepool.vehicle.modString = "\n"+(game as any).i18n.localize("skill.piloting") + " " + data.skills["piloting"].pool;
- 			data.defensepool.vehicle.modString += "\n"+(game as any).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
+ 			data.defensepool.vehicle.modString = "\n"+(game as Game).i18n.localize("skill.piloting") + " " + data.skills["piloting"].pool;
+ 			data.defensepool.vehicle.modString += "\n"+(game as Game).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool;
 			data.defensepool.vehicle.pool = data.defensepool.vehicle.base;
 			if (data.defensepool.vehicle.mod) {
 				data.defensepool.vehicle.pool += data.defensepool.vehicle.mod;
@@ -462,8 +462,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Resist toxin
 			data.defensepool.toxin.base = data.attributes["bod"].pool+ data.attributes["wil"].pool;
- 			data.defensepool.toxin.modString = "\n"+(game as any).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
- 			data.defensepool.toxin.modString += "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.toxin.modString = "\n"+(game as Game).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
+ 			data.defensepool.toxin.modString += "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
 			data.defensepool.toxin.pool = data.defensepool.toxin.base;
 			if (data.defensepool.toxin.mod) {
 				data.defensepool.toxin.pool += data.defensepool.toxin.mod;
@@ -472,7 +472,7 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Resist physical damage
 			data.defensepool.damage_physical.base = data.attributes["bod"].pool;
- 			data.defensepool.damage_physical.modString = "\n"+(game as any).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
+ 			data.defensepool.damage_physical.modString = "\n"+(game as Game).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
 			data.defensepool.damage_physical.pool = data.defensepool.damage_physical.base;
 			if (data.defensepool.damage_physical.mod) {
 				data.defensepool.damage_physical.pool += data.defensepool.damage_physical.mod;
@@ -481,7 +481,7 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Resist astral damage
 			data.defensepool.damage_astral.base = data.attributes["wil"].pool;
- 			data.defensepool.damage_astral.modString = "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.damage_astral.modString = "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
 			data.defensepool.damage_astral.pool = data.defensepool.damage_astral.base;
 			if (data.defensepool.damage_astral.mod) {
 				data.defensepool.damage_astral.pool += data.defensepool.damage_astral.mod;
@@ -491,8 +491,8 @@ export class Shadowrun6Actor extends Actor {
 			// Resist drain
 			let traditionAttr = data.attributes[data.tradition.attribute];
 			data.defensepool.drain.base = traditionAttr.pool + data.attributes["wil"].pool;
- 			data.defensepool.drain.modString = "\n"+(game as any).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + traditionAttr.pool;
- 			data.defensepool.drain.modString += "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.drain.modString = "\n"+(game as Game).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + traditionAttr.pool;
+ 			data.defensepool.drain.modString += "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
 			data.defensepool.drain.pool = data.defensepool.drain.base;
 			if (data.defensepool.drain.mod) {
 				data.defensepool.drain.pool += data.defensepool.drain.mod;
@@ -501,8 +501,8 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Resist fading
 			data.defensepool.fading.base = data.attributes["wil"].pool + data.attributes["log"].pool;
- 			data.defensepool.fading.modString = "\n"+(game as any).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
- 			data.defensepool.fading.modString += "\n"+(game as any).i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
+ 			data.defensepool.fading.modString = "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+ 			data.defensepool.fading.modString += "\n"+(game as Game).i18n.localize("attrib.log_short") + " " + data.attributes["log"].pool;
 			data.defensepool.fading.pool = data.defensepool.fading.base;
 			if (data.defensepool.fading.mod) {
 				data.defensepool.fading.pool += data.defensepool.fading.mod;
@@ -534,7 +534,7 @@ export class Shadowrun6Actor extends Actor {
 					if (item.data.stun==='false') {item.data.stun = false;}
 					else if (item.data.stun==='true') { item.data.stun = true;}
 				}
-*/				let suffix = item.data.stun?(game as any).i18n.localize("shadowrun6.item.stun_damage"):(game as any).i18n.localize("shadowrun6.item.physical_damage");
+*/				let suffix = item.data.stun?(game as Game).i18n.localize("shadowrun6.item.stun_damage"):(game as Game).i18n.localize("shadowrun6.item.physical_damage");
 				item.data.dmgDef = item.data.dmg+suffix;
 			}
 			
@@ -593,7 +593,7 @@ export class Shadowrun6Actor extends Actor {
 				let rigRating = parseInt(actorData.data.controlRig); 
 				let modRig = "";
 				if (rigRating>0) {
-					modRig = " + "+(game as any).i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
+					modRig = " + "+(game as Game).i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
 				}
 				switch (opMode) {
 				case "manual":
@@ -602,36 +602,36 @@ export class Shadowrun6Actor extends Actor {
 				case "riggedAR":
 					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
 					vehicle.ar.modString = 
-						(game as any).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as any).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
 						modRig;
 					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
 					vehicle.dr.modString = 
-						(game as any).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as any).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
 						modRig;
 					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"rea") + rigRating;
 					vehicle.handling.modString = 
-						(game as any).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as any).i18n.localize("attrib.rea_short")+"("+actorData.data.attributes.rea.pool+")"+
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("attrib.rea_short")+"("+actorData.data.attributes.rea.pool+")"+
 						modRig;
 					break;
 				case "riggedVR":
 					item.data.vehicle.attrib="int";
 					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
 					vehicle.ar.modString = 
-						(game as any).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as any).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
 						modRig;
 					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
 					vehicle.dr.modString = 
-						(game as any).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as any).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
 						modRig;
 					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"int")+ rigRating;
 					vehicle.handling.modString = 
-						(game as any).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as any).i18n.localize("attrib.int_short")+"("+actorData.data.attributes.int.pool+")"+
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("attrib.int_short")+"("+actorData.data.attributes.int.pool+")"+
 						modRig;
 					break;
 				default:
@@ -784,14 +784,14 @@ export class Shadowrun6Actor extends Actor {
 		
 		const skl = this.data.data.skills[skillId];
 		// Build test name
-		let rollName = (game as any).i18n.localize("skill." + skillId);
+		let rollName = (game as Game).i18n.localize("skill." + skillId);
 		if (spec) {
-			rollName += "/"+(game as any).i18n.localize("shadowrun6.special." + skillId+"."+spec);
+			rollName += "/"+(game as Game).i18n.localize("shadowrun6.special." + skillId+"."+spec);
 		}
 		rollName += " + ";
 		// Attribute
 		let useAttrib = (attrib!=undefined)?attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!.attrib;
-		let attrName = (game as any).i18n.localize("attrib."+useAttrib);
+		let attrName = (game as Game).i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
 		if (threshold && threshold>0) {
@@ -852,7 +852,7 @@ export class Shadowrun6Actor extends Actor {
 	_getComplexFormName(complex) {
 		if (complex.genesisId) {
 			const key = "shadowrun6.compendium.complexform." + complex.genesisId;
-			let name = (game as any).i18n.localize(key);
+			let name = (game as Game).i18n.localize(key);
 			if (key!=name)
 				return name;
 		}
@@ -869,7 +869,7 @@ export class Shadowrun6Actor extends Actor {
 	_getSpellName(spell) {
 		if (spell.genesisId) {
 			const key = "shadowrun6.compendium.spell." + spell.genesisId;
-			let name = (game as any).i18n.localize(key);
+			let name = (game as Game).i18n.localize(key);
 			if (key!=name)
 				return name;
 		}
@@ -886,7 +886,7 @@ export class Shadowrun6Actor extends Actor {
 	_getGearName(item) {
 		if (item.genesisId) {
 			const key = "shadowrun6.compendium.gear." + item.genesisId;
-			let name = (game as any).i18n.localize(key);
+			let name = (game as Game).i18n.localize(key);
 			if (key!=name)
 				return name;
 		}
@@ -978,14 +978,14 @@ export class Shadowrun6Actor extends Actor {
 		/*
 		switch (game.user.targets.size) {
 		case 0:
-			actionText = (game as any).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
 			break;
 		case 1:
 		   let targetName = game.user.targets.values().next().value.name;
-			actionText = (game as any).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
-			actionText = (game as any).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:this._getGearName(item)});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:this._getGearName(item)});
 		}
 		// Prepare check text
 		let checkText = this._getSkillCheckText(skillId,spec,0);
@@ -1004,11 +1004,11 @@ export class Shadowrun6Actor extends Actor {
 		}
 		if (item.data.data.genesisID) {
 			let key = "item."+item.data.data.genesisID+".";
-			if (!(game as any).i18n.localize(key+"name").startsWith(key)) {
+			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
-				spellName = (game as any).i18n.localize(key+"name");
-				spellDesc = (game as any).i18n.localize(key+"desc");
-				spellSrc = (game as any).i18n.localize(key+"src");
+				spellName = (game as Game).i18n.localize(key+"name");
+				spellDesc = (game as Game).i18n.localize(key+"desc");
+				spellSrc = (game as Game).i18n.localize(key+"src");
 			}
 		}
 
@@ -1065,14 +1065,14 @@ export class Shadowrun6Actor extends Actor {
 		let actionText;
 		switch (game.user.targets.size) {
 		case 0:
-			actionText = actionText = (game as any).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+			actionText = actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
 			break;
 		case 1:
 		   let targetName = game.user.targets.values().next().value.name;
-			actionText = (game as any).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
-			actionText = (game as any).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
 		}
 		// Prepare check text
 		let checkText = this._getSkillCheckText(skillId,spec,0);
@@ -1116,11 +1116,11 @@ export class Shadowrun6Actor extends Actor {
 		}
 		if (item.data.data.genesisID) {
 			let key = (ritual?"ritual.":"spell.")+item.data.data.genesisID+".";
-			if (!(game as any).i18n.localize(key+"name").startsWith(key)) {
+			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
-				spellName = (game as any).i18n.localize(key+"name");
-				spellDesc = (game as any).i18n.localize(key+"desc");
-				spellSrc = (game as any).i18n.localize(key+"src");
+				spellName = (game as Game).i18n.localize(key+"name");
+				spellDesc = (game as Game).i18n.localize(key+"desc");
+				spellSrc = (game as Game).i18n.localize(key+"src");
 			}
 		}
 
@@ -1172,7 +1172,7 @@ export class Shadowrun6Actor extends Actor {
 		const spec    = (ritual)?"spellcasting":"ritual_spellcasting";
 		const item = this.items.get(itemId);
 		// Prepare action text
-		let actionText = (game as any).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+		let actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec);
 		let rollName = "Defense";
@@ -1201,7 +1201,7 @@ export class Shadowrun6Actor extends Actor {
 	performMatrixAction(action, actionId, options={}) {
 		console.log("ToDo performMatrixAction("+action+")");
 		// Prepare action text
-		let actionText = (game as any).i18n.localize("shadowrun6.matrixaction."+actionId);
+		let actionText = (game as Game).i18n.localize("shadowrun6.matrixaction."+actionId);
 		// Prepare check text
 		if (!action.skill) {
 			console.log("ToDo: matrix actions without a test");
@@ -1254,7 +1254,7 @@ export class Shadowrun6Actor extends Actor {
 		const spec    = null;
 		let threshold = complex.data.data.threshold;
 		// Prepare action text
-		let actionText = (game as any).i18n.format("shadowrun6.roll.actionText.thread", {name:this._getComplexFormName(complex)});
+		let actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.thread", {name:this._getComplexFormName(complex)});
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec, "res");
 		let rollName = this._getSkillCheckText(skillId, spec, threshold, "res");		
@@ -1276,11 +1276,11 @@ export class Shadowrun6Actor extends Actor {
 		}
 		if (complex.data.data.genesisID) {
 			let key = "complexform."+complex.data.data.genesisID+".";
-			if (!(game as any).i18n.localize(key+"name").startsWith(key)) {
+			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
-				spellName = (game as any).i18n.localize(key+"name");
-				spellDesc = (game as any).i18n.localize(key+"desc");
-				spellSrc = (game as any).i18n.localize(key+"src");
+				spellName = (game as Game).i18n.localize(key+"name");
+				spellDesc = (game as Game).i18n.localize(key+"desc");
+				spellSrc = (game as Game).i18n.localize(key+"src");
 			}
 		}
 
