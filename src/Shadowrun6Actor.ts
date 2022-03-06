@@ -1,5 +1,7 @@
-import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player } from "./ActorTypes.js";
+import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor } from "./ActorTypes.js";
 import { SR6, SR6Config } from "./config.js";
+import { SkillDefinition } from "./DefinitionTypes.js";
+import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -77,8 +79,7 @@ export class Shadowrun6Actor extends Actor {
         const data = this.data.data;
          // Only run on lifeforms
         if (isLifeform(data)) {
-            console.log("Lifeform");
-            SR6.PRIMARY_ATTRIBUTES.forEach(attr => {
+             SR6.PRIMARY_ATTRIBUTES.forEach(attr => {
                 data.attributes[attr].pool =
                     data.attributes[attr].base
                     + data.attributes[attr].mod;
@@ -92,10 +93,10 @@ export class Shadowrun6Actor extends Actor {
      */
     _prepareDerivedAttributes() {
         const actorData = this.data;
-        const data = this.data.data;
 
-        if (!isLifeform(data))
+        if (!isLifeform(this.data.data))
             return;
+        const data:Lifeform = this.data.data;
 
         // Store volatile
         if (data.physical) {
@@ -119,6 +120,10 @@ export class Shadowrun6Actor extends Actor {
             data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
             data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
         }
+
+		if (!data.derived) {
+			data.derived = new Derived;
+		}
 
         // Composure
         if (data.derived.composure) {
@@ -167,14 +172,14 @@ export class Shadowrun6Actor extends Actor {
 
         if (!isLifeform(data))
             return;
-/*
+		if (!data.attackrating) data.attackrating = new Ratings;
 		if (!data.attackrating.physical )  data.attackrating.physical = new Attribute();
 		if (!data.attackrating.astral   )  data.attackrating.astral   = new Attribute();
 		if (!data.attackrating.vehicle  )  data.attackrating.vehicle  = new Attribute();
 		if (!data.attackrating.matrix   )  data.attackrating.matrix   = new Attribute();
 		if (!data.attackrating.social   )  data.attackrating.social   = new Attribute();
 		if (!data.attackrating.resonance)  data.attackrating.resonance= new Attribute();
-*/
+
 		/* Physical Attack Rating - used for unarmed combat */
 		data.attackrating.physical.base = data.attributes["rea"].pool + data.attributes["str"].pool;
 //		data.attackrating.physical.modString  = (game as any).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool+"\n";
@@ -347,7 +352,6 @@ export class Shadowrun6Actor extends Actor {
 	_prepareSkills() {
 		const actorData = this.data;
 		const data:Lifeform = (this.data.data as Lifeform);
-		console.log("PrepareSkills " + this.name);
 		// Only calculate for PCs - ignore for NPCs/Critter
 		if (actorData.type === "Player" || actorData.type === "NPC") {
 			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function (skillDef, id) {
@@ -379,8 +383,22 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	_prepareDefensePools() {
 		const actorData = this.data;
-		const data:Lifeform = this.data.data as Lifeform;
+        if (!isLifeform(this.data.data))
+            return;
+        const data:Lifeform = this.data.data;
 
+		if (!data.defensepool) data.defensepool = new DefensePool;
+		if (!data.defensepool.physical) data.defensepool.physical = new Pool;
+		if (!data.defensepool.astral  ) data.defensepool.astral = new Pool;
+		if (!data.defensepool.spells_direct) data.defensepool.spells_direct = new Pool;
+		if (!data.defensepool.spells_indirect) data.defensepool.spells_indirect = new Pool;
+		if (!data.defensepool.spells_other) data.defensepool.spells_other = new Pool;
+		if (!data.defensepool.vehicle ) data.defensepool.vehicle = new Pool;
+		if (!data.defensepool.toxin   ) data.defensepool.toxin = new Pool;
+		if (!data.defensepool.damage_physical ) data.defensepool.damage_physical = new Pool;
+		if (!data.defensepool.damage_astral ) data.defensepool.damage_astral = new Pool;
+		if (!data.defensepool.drain   ) data.defensepool.drain = new Pool;
+		if (!data.defensepool.fading  ) data.defensepool.fading = new Pool;
 			
 			// Physical Defense Test
 			data.defensepool.physical.base = data.attributes["rea"].pool+ data.attributes["int"].pool;
@@ -498,15 +516,18 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	_prepareItemPools() {
 		const actorData = this.data;
+		const itemUser = this.data.data as Lifeform;
 
 		actorData.items.forEach(tmpItem => {
 
 			let item = tmpItem.data;
 			if (item.type == "gear" && item.data && isGear(item.data)) {
 				let gear:Gear = (item.data as Gear);
+				if (gear.skill && gear.skill!="") {
 				//item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
-				item.data.pool = this._getSkillPool(item.data.skill, item.data.skillSpec, (tmpItem.actor.data.data as Lifeform).skills[item.data.skill].attrib);
-				item.data.pool = item.data.pool + item.data.modifier;
+					gear.pool = this._getSkillPool(item.data.skill, gear.skillSpec, itemUser.skills[gear.skill].attrib);
+					gear.pool = gear.pool + gear.modifier;
+				}
 			};
 			if (tmpItem.type == "gear" && isWeapon(item.data)) {
 /*				if (item.data.stun) {
@@ -661,30 +682,28 @@ export class Shadowrun6Actor extends Actor {
 	_preparePersona() {
 		const actorData:Player = (this.data.data as Player);
 
-/*		if (!actorData.persona            ) actorData.persona = new Persona;
-		if (!actorData.persona.device     ) actorData.persona.device = {};
-		if (!actorData.persona.device.base) actorData.persona.device.base = { "a":0, "s":0, "d":0, "f":0};
-		if (!actorData.persona.device.mod ) actorData.persona.device.mod  = { "a":0, "s":0, "d":0, "f":0};
-		if (!actorData.persona.device.monitor) actorData.persona.device.monitor = {};
-		delete actorData.persona.device.monitor.max;
-*/		
+		if (!actorData.persona            ) actorData.persona = new Persona;
+		if (!actorData.persona.base       ) actorData.persona.base = new MatrixDevice;
+		if (!actorData.persona.used       ) actorData.persona.used = new MatrixDevice;
+		if (!actorData.persona.monitor    ) actorData.persona.monitor = new Monitor;
+		
 		this.data.items.forEach(tmpItem => {
 			if (tmpItem.type == "gear" && isMatrixDevice(tmpItem.data.data)) {
 				let item:MatrixDevice = tmpItem.data.data;
 				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK") {
 					if (item.usedForPool) {
-						actorData.persona.device.base.d = item.d;
-						actorData.persona.device.base.f = item.f;
-						if (! actorData.persona.device.monitor.max) {
-							actorData.persona.device.monitor.max = ((item.subtype == "COMMLINK")?item.devRating:item.devRating)/2 +8;							
+						actorData.persona.base.d = item.d;
+						actorData.persona.base.f = item.f;
+						if (! actorData.persona.monitor.max) {
+							actorData.persona.monitor.max = ((item.subtype == "COMMLINK")?item.devRating:item.devRating)/2 +8;							
 						}
 					}
 				};
 				if (item.subtype == "CYBERDECK") {
 					if (item.usedForPool) {
-						actorData.persona.device.base.a = item.a;
-						actorData.persona.device.base.s = item.s;
-						actorData.persona.device.monitor.max =item.devRating/2 +8;		
+						actorData.persona.base.a = item.a;
+						actorData.persona.base.s = item.s;
+						actorData.persona.monitor.max =item.devRating/2 +8;		
 					}
 				};
 			}			
@@ -771,7 +790,7 @@ export class Shadowrun6Actor extends Actor {
 		}
 		rollName += " + ";
 		// Attribute
-		let useAttrib = (attrib)?attrib:CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId).attrib;
+		let useAttrib = (attrib!=undefined)?attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!.attrib;
 		let attrName = (game as any).i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
@@ -797,7 +816,7 @@ export class Shadowrun6Actor extends Actor {
 			throw "Unknown skill '"+skillId+"'";
 		}
 			
-		let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId);
+		let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!;
 		if (!attrib) {
 			attrib = skillDef.attrib;
 		}
@@ -883,11 +902,12 @@ export class Shadowrun6Actor extends Actor {
 	_getHighestDefenseRating(map) {
 		let highest = 0;
 		for (var it = (game as any).user.targets.values(), val= null; val=it.next().value; ) {
-			let actor   = val.actor;
+			console.log("val = " , val);
+/*			let actor   = val.actor;
 			let here    = map(actor);
 			if (here>highest)
 				highest = here;
-      }
+*/      }
 		return highest;
 	}
 
@@ -944,6 +964,8 @@ export class Shadowrun6Actor extends Actor {
 	rollItem(itemId, options = {}) {
 		console.log("rollItem(item="+itemId+", options="+options+")");
 		const item = this.items.get(itemId);
+		if (!item) { return;}
+		
 		if (!isLifeform(this.data.data))
 			return;
 		if (!isGear(item.data.data))
@@ -1027,6 +1049,7 @@ export class Shadowrun6Actor extends Actor {
 		const skillId = "sorcery";
 		const spec    = (ritual)?"ritual_spellcasting":"spellcasting";
 		const item = this.items.get(itemId);
+		if (!item) { return;}
 		// Item must be a spell
 		if (!isSpell(item.data.data)) {
 			return;

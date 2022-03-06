@@ -7,7 +7,7 @@
 			"node"
 		], 
   		"moduleResolution": "node",
-  		"strictNullChecks": false,
+  		"strictNullChecks": true,
   		"outDir": "module"
 	},
 	"include": ["src/**/*"],

@@ -1,3 +1,4 @@
+import { Monitor } from "./ActorTypes.js";
 
 /**
  * Items
@@ -17,12 +18,12 @@ enum EffectRange {
 	los
 }
 
-class GenesisData {
+export class GenesisData {
     genesisID: string = "";
     description: string = "";
 }
 
-class AdeptPower extends GenesisData {
+export class AdeptPower extends GenesisData {
     hasLevel: boolean = false;
     activation: Activation = Activation.MAJOR_ACTION;
     cost: number = 0.0;
@@ -31,7 +32,7 @@ class AdeptPower extends GenesisData {
     level: number = 0;
 }
 
-class ComplexForm extends GenesisData {
+export class ComplexForm extends GenesisData {
 	duration: Duration = Duration.sustained;
 	fading: number = 3;
 	skill: string|null = "";
@@ -48,13 +49,13 @@ class ComplexForm extends GenesisData {
 	}
 }
 
-class CritterPower extends GenesisData {
+export class CritterPower extends GenesisData {
 	duration: Duration = Duration.instantaneous;
 	action: Activation = Activation.MINOR_ACTION;
 	range: EffectRange = EffectRange.self;
 }
 
-class Gear extends GenesisData {
+export class Gear extends GenesisData {
 	type : string = "";
 	subtype : string = "";
 	/** Identifier of skill associated with this item */
@@ -69,7 +70,7 @@ class Gear extends GenesisData {
 	pool : number = 0;
 }
 
-class Spell extends Gear {
+export class Spell extends Gear {
 	category : string = "health";
 	duration : string = "instantaneous";
 	drain    : number = 1;
@@ -84,7 +85,7 @@ class Spell extends Gear {
 	threshold  : number = 0;
 }
 
-class Weapon extends Gear {
+export class Weapon extends Gear {
 	/** Base weapon damage */
 	dmg : number;
 	/** Is stun damage */
@@ -101,7 +102,7 @@ class Weapon extends Gear {
 			};
 }
 
-class MatrixDevice extends Gear {
+export class MatrixDevice extends Gear {
 	a:number;
 	s:number;
 	d:number;
@@ -110,7 +111,8 @@ class MatrixDevice extends Gear {
 	usedForPool: boolean;
 }
 
-class Persona extends Gear {
+export class Persona extends Gear {
 	base: MatrixDevice = new MatrixDevice;
 	used: MatrixDevice = new MatrixDevice;
+	monitor: Monitor   = new Monitor;
 }

@@ -1,3 +1,5 @@
+import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
+
 export class Attribute {
     base: number;
     mod: number;
@@ -79,12 +81,12 @@ export class Initiative {
     dicePool: number;
 }
 
-class SkillValue {
+export class SkillValue {
     points: Number = 0;
     modifier: number = 0;
 }
 
-class Ratings {
+export class Ratings {
 		astral  : Attribute = new Attribute();
 		matrix  : Attribute = new Attribute();
 		physical: Attribute = new Attribute();
@@ -93,14 +95,14 @@ class Ratings {
 		vehicle : Attribute = new Attribute();
 }
 
-class Pool {
+export class Pool {
     base: number;
     pool:number|undefined = 0;
     mod: number = 0;
     modString: string|undefined;
 }
 
-class DefensePool {
+export class DefensePool {
 	physical:Pool = new Pool();
 	astral  :Pool = new Pool();
 	spells_direct:Pool = new Pool();
@@ -146,14 +148,11 @@ export interface ILifeform {
 	skills:Skills;
 }
 
-export class Player extends Lifeform {
-	persona : {
-		device : {
-			base : MatrixDevice,
-			mod  : MatrixDevice,
-			monitor : Monitor
-		}
-	} ;
+export class MatrixUser extends Lifeform {
+	persona:Persona = new Persona();
+}
+
+export class Player extends MatrixUser {
 } 
 
 export class Vehicle {

@@ -1,4 +1,5 @@
 import { EdgeAction, EdgeBoost, MagicOrResonanceDefinition, MatrixAction, Program, SkillDefinition } from "./DefinitionTypes.js"
+import { ComplexForm } from "./ItemTypes.js"
 
 export class SR6Config {
 	PRIMARY_ATTRIBUTES = ["bod", "agi", "rea", "str", "wil", "log", "int", "cha"];
