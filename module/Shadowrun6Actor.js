@@ -1,6 +1,7 @@
 import { Attribute, Derived, DefensePool, Pool, Ratings, Monitor } from "./ActorTypes.js";
 import { SR6 } from "./config.js";
 import { MatrixDevice, Persona } from "./ItemTypes.js";
+import { doRoll } from "./Rolls.js";
 function isLifeform(obj) {
     return obj.attributes != undefined;
 }
@@ -744,23 +745,19 @@ export class Shadowrun6Actor extends Actor {
      * @param {int}    threshold    Optional threshold
      * @return Roll name
      */
-    _getSkillCheckText(skillId, spec, threshold, attrib = undefined) {
-        if (!isLifeform(this.data.data)) {
-            return "Shadowrun6Actor: NoLifeform";
-        }
-        const skl = this.data.data.skills[skillId];
+    _getSkillCheckText(roll) {
         // Build test name
-        let rollName = game.i18n.localize("skill." + skillId);
-        if (spec) {
-            rollName += "/" + game.i18n.localize("shadowrun6.special." + skillId + "." + spec);
+        let rollName = game.i18n.localize("skill." + roll.skillId);
+        if (roll.skillSpec) {
+            rollName += "/" + game.i18n.localize("shadowrun6.special." + roll.skillId + "." + roll.skillSpec);
         }
         rollName += " + ";
         // Attribute
-        let useAttrib = (attrib != undefined) ? attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId).attrib;
+        let useAttrib = (roll.attrib != undefined) ? roll.attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(roll.skillId).attrib;
         let attrName = game.i18n.localize("attrib." + useAttrib);
         rollName += attrName;
-        if (threshold && threshold > 0) {
-            rollName += " (" + threshold + ")";
+        if (roll.threshold && roll.threshold > 0) {
+            rollName += " (" + roll.threshold + ")";
         }
         return rollName;
     }
@@ -873,41 +870,18 @@ export class Shadowrun6Actor extends Actor {
      * @param {int}    threshold    Optional threshold
      * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
      */
-    rollSkill(skillId, spec, threshold = 3, options = {}) {
-        console.log("rollSkill(" + skillId + ", spec=" + spec + ", threshold=", threshold + ", options=", options);
-        const skl = this.data.data.skills[skillId];
-        // Prepare action text
-        let actionText;
+    rollSkill(roll) {
+        console.log("rollSkill(", roll, ")");
+        roll.actor = this;
         // Prepare check text
-        let checkText = this._getSkillCheckText(skillId, spec, threshold);
+        roll.checkText = this._getSkillCheckText(roll);
         // Calculate pool
-        let value = this._getSkillPool(skillId, spec);
-        // Optional: different attribute
-        /*
-        if (options.attrib) {
-            value = this._getSkillPool(skillId, spec, options.attrib);
-            checkText = this._getSkillCheckText(skillId,spec,threshold, options.attrib);
-        }
-
-        // Roll and return
-        let data = mergeObject(options, {
-            pool: value,
-            actionText: actionText,
-            checkText  : checkText,
-            attrib: options.attrib,
-            skill: skl,
-            spec: spec,
-            threshold: threshold,
-            isOpposed: false,
-            rollType: "skill",
-            isAllowDefense: false,
-            useThreshold: true,
-            buyHits: true
-        });
-        data.speaker = ChatMessage.getSpeaker({ actor: this });
-        return doRoll(data);
-        
-        */
+        roll.pool = this._getSkillPool(roll.skillId, roll.skillSpec);
+        console.log("rollSkill(", roll, ")");
+        roll.isOpposed = false;
+        roll.allowBuyHits = true;
+        roll.speaker = ChatMessage.getSpeaker({ actor: this });
+        return doRoll(roll);
     }
     //-------------------------------------------------------------
     /*
@@ -1158,7 +1132,7 @@ export class Shadowrun6Actor extends Actor {
             console.log("ToDo: matrix actions without a test");
             return;
         }
-        let checkText = this._getSkillCheckText(action.skill, action.spec, action.threshold, action.attrib);
+        //let checkText = this._getSkillCheckText(action.skill, action.spec, action.threshold, action.attrib);
         // Calculate pool
         let value = this._getSkillPool(action.skill, action.spec, action.attrib);
         /*

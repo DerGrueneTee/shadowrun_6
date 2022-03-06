@@ -1,5 +1,10 @@
-import { Skill } from "../ActorTypes";
+import { Lifeform, Skill } from "../ActorTypes";
 import { SkillDefinition } from "../DefinitionTypes";
+import { Shadowrun6Actor } from "../Shadowrun6Actor";
+
+function isLifeform(obj: any): obj is Lifeform {
+    return obj.attributes != undefined;
+}
 
 export const defineHandlebarHelper = async function() {
 	
@@ -97,23 +102,8 @@ function getSkillAttribute(key) {
   }
 };
 
-function getSkillPool(skillId, skillSpec, actor) {
-	const skill:Skill  = actor.data.data.skills[skillId];
-	let pool = 0;
-	if (skill) {
-		pool = skill.points + skill.modifier;	
-		if (skill.expertise==skillSpec) {
-			pool+=3;
-		} else if (skill.specialization==skillSpec) {
-			pool+=2;
-		}
-	}
-	let skillAttr : string = getSkillAttribute(skillId);
-	if (skillAttr) {
-		const attrib = actor.data.data.attributes[skillAttr];
-		pool += attrib.pool;
-	}
-	return pool;
+function getSkillPool(skillId:string, skillSpec:string, actor:Shadowrun6Actor) : number{
+	return actor._getSkillPool(skillId, skillSpec);
 };
 
 function getSubtypes(key) {

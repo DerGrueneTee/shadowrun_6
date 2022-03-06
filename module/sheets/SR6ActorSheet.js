@@ -1,3 +1,4 @@
+import { SkillRoll } from "../Rolls.js";
 function isLifeform(obj) {
     return obj.attributes != undefined;
 }
@@ -24,6 +25,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
         if (this.actor.isOwner) {
             html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
             html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
+            html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
             // Roll Skill Checks
             /*
             html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
@@ -458,5 +460,29 @@ export class Shadowrun6ActorSheet extends ActorSheet {
                 myNode.insertBefore(div, myNode.childNodes[0]);
             }
         }
+    }
+    //-----------------------------------------------------
+    /**
+     * Handle rolling a Skill check
+     * @param {Event} event   The originating click event
+     * @private
+     */
+    _onRollSkillCheck(event, html) {
+        console.log("onRollSkillCheck");
+        event.preventDefault();
+        if (!event.currentTarget)
+            return;
+        if (!event.currentTarget.dataset)
+            return;
+        let dataset = event.currentTarget.dataset;
+        const skillId = dataset.skill;
+        const skill = this.actor.data.data.skills[skillId];
+        let roll = new SkillRoll(skill, skillId);
+        roll.skillSpec = dataset.skillspec;
+        if (dataset.threshold)
+            roll.threshold = dataset.threshold;
+        roll.attrib = dataset.attrib;
+        console.log("onRollSkillCheck before ", roll);
+        this.actor.rollSkill(roll);
     }
 }

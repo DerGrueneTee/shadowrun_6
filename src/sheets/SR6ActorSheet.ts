@@ -1,5 +1,6 @@
-import { Lifeform, Monitor } from "../ActorTypes.js";
+import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
+import { SkillRoll } from "../Rolls.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -36,6 +37,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", (this.actor.data.data as Lifeform).physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", (this.actor.data.data as Lifeform).stun));
 
+			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
 			// Roll Skill Checks
 			/*
 			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
@@ -483,4 +485,31 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 		}
 	}
+	
+	//-----------------------------------------------------
+	/**
+	 * Handle rolling a Skill check
+	 * @param {Event} event   The originating click event
+	 * @private
+	 */
+	_onRollSkillCheck(event: Event, html) {
+		console.log("onRollSkillCheck");
+		event.preventDefault();
+		if (!event.currentTarget)
+			return;
+		if (!(event.currentTarget as any).dataset)
+			return;
+		let dataset : any = (event.currentTarget as any).dataset;
+		const skillId   : string = dataset.skill;
+		const skill     : Skill = (this.actor.data.data as Lifeform).skills[skillId];
+		let roll : SkillRoll = new SkillRoll(skill, skillId);
+		roll.skillSpec = dataset.skillspec;
+		if (dataset.threshold)
+			roll.threshold = dataset.threshold;
+		roll.attrib    = dataset.attrib;
+		
+		console.log("onRollSkillCheck before ", roll);
+		(this.actor as Shadowrun6Actor).rollSkill(roll);
+	}
+
 }

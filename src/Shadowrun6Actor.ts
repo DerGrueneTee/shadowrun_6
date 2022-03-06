@@ -1,7 +1,8 @@
-import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor } from "./ActorTypes.js";
+import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill } from "./ActorTypes.js";
 import { SR6, SR6Config } from "./config.js";
 import { SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
+import { doRoll, SkillRoll, SpellRoll } from "./Rolls.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -777,25 +778,21 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {int}    threshold    Optional threshold
 	 * @return Roll name
 	 */
-	_getSkillCheckText(skillId, spec, threshold, attrib:string|undefined = undefined) : string {
-		if (! isLifeform(this.data.data)) {
-			return "Shadowrun6Actor: NoLifeform";
-		}
+	_getSkillCheckText(roll:SkillRoll) : string {
 		
-		const skl = this.data.data.skills[skillId];
 		// Build test name
-		let rollName = (game as Game).i18n.localize("skill." + skillId);
-		if (spec) {
-			rollName += "/"+(game as Game).i18n.localize("shadowrun6.special." + skillId+"."+spec);
+		let rollName = (game as Game).i18n.localize("skill." + roll.skillId);
+		if (roll.skillSpec) {
+			rollName += "/"+(game as Game).i18n.localize("shadowrun6.special." + roll.skillId+"."+roll.skillSpec);
 		}
 		rollName += " + ";
 		// Attribute
-		let useAttrib = (attrib!=undefined)?attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!.attrib;
+		let useAttrib = (roll.attrib!=undefined)?roll.attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(roll.skillId)!.attrib;
 		let attrName = (game as Game).i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
-		if (threshold && threshold>0) {
-			rollName += " ("+threshold+")";
+		if (roll.threshold && roll.threshold>0) {
+			rollName += " ("+roll.threshold+")";
 		}
 
 		return rollName;		
@@ -920,41 +917,20 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {int}    threshold    Optional threshold
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
-	rollSkill(skillId, spec, threshold=3, options={}) {
-		console.log("rollSkill("+skillId+", spec="+spec+", threshold=",threshold+", options=",options);
-		const skl = (this.data.data as Lifeform).skills[skillId];
-		// Prepare action text
-		let actionText;
+	rollSkill(roll : SkillRoll) : Promise<Roll> {
+		console.log("rollSkill(", roll, ")");
+		roll.actor     = this;
 		// Prepare check text
-		let checkText: string = this._getSkillCheckText(skillId,spec,threshold);
+		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
-		let value : string = this._getSkillPool(skillId, spec);
-		// Optional: different attribute
-		/*
-		if (options.attrib) {
-			value = this._getSkillPool(skillId, spec, options.attrib);
-			checkText = this._getSkillCheckText(skillId,spec,threshold, options.attrib);
-		}
+		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
+		console.log("rollSkill(", roll, ")");
 
-		// Roll and return
-		let data = mergeObject(options, {
-			pool: value,
-			actionText: actionText,
-			checkText  : checkText,
-			attrib: options.attrib,
-			skill: skl,
-			spec: spec,
-			threshold: threshold,
-			isOpposed: false,
-			rollType: "skill",
-			isAllowDefense: false,
-			useThreshold: true,
-			buyHits: true
-		});
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doRoll(data);
+		roll.isOpposed = false;
+		roll.allowBuyHits = true;
 		
-		*/
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(roll);
 	}
 
 	//-------------------------------------------------------------
@@ -1058,27 +1034,31 @@ export class Shadowrun6Actor extends Actor {
 		if (!isLifeform(this.data.data)) {
 			return;
 		}
-			
+		
+		const skill:Skill = this.data.data.skills[skillId];
 		let threshold = ritual? (item.data.data.threshold):0;
-	/*
+		let roll : SpellRoll = new SpellRoll(skill, skillId);
+		roll.skillSpec = spec;
+		roll.threshold = 0;
+	
 		// Prepare action text
 		let actionText;
-		switch (game.user.targets.size) {
+		switch ((game as Game).user!.targets.size) {
 		case 0:
 			actionText = actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
 			break;
 		case 1:
-		   let targetName = game.user.targets.values().next().value.name;
+		   let targetName = (game as Game).user!.targets.values().next().value.name;
 			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
 			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
 		}
 		// Prepare check text
-		let checkText = this._getSkillCheckText(skillId,spec,0);
+		let checkText = this._getSkillCheckText(roll);
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec);
-		let rollName = this._getSkillCheckText(skillId, spec, threshold);		
+		let rollName = this._getSkillCheckText(roll);		
 
 		// Determine whether or not the spell is an opposed test
 		// and what defense eventually applies
@@ -1088,8 +1068,8 @@ export class Shadowrun6Actor extends Actor {
 		let attackRating = this.data.data.attackrating.astral.pool;
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
-		let canAmpUpSpell = item.data.data.category === "combat";
-		let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
+		roll.canAmpUpSpell   = item.data.data.category === "combat";
+		roll.canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
 		if (item.data.data.category === "combat") {
 			isOpposed = true;
 			if (item.data.data.type=="mana") {
@@ -1207,7 +1187,7 @@ export class Shadowrun6Actor extends Actor {
 			console.log("ToDo: matrix actions without a test");
 			return;
 		}
-		let checkText = this._getSkillCheckText(action.skill,action.spec,action.threshold,action.attrib);
+		//let checkText = this._getSkillCheckText(action.skill, action.spec, action.threshold, action.attrib);
 		// Calculate pool
 		let value = this._getSkillPool(action.skill, action.spec, action.attrib);
 	

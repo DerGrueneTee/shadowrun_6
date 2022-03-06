@@ -124,15 +124,16 @@ export class SR6Actor {
 
 export class Lifeform extends SR6Actor {
 	attributes : Attributes = new Attributes();
-    physical: Monitor = new Monitor();
     derived : Derived = new Derived();
     initiative : {
         actions : number ;
 		physical : Initiative;
         astral : Initiative;
     };
-    stun: Monitor = new Monitor();
+    physical: Monitor = new Monitor();
+    stun    : Monitor = new Monitor();
     overflow: Monitor = new Monitor();
+    edge    : Monitor = new Monitor();
 	defensepool :DefensePool = new DefensePool();
 	tradition : Tradition = new Tradition();
 	skills:Skills = new Skills();
