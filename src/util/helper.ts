@@ -1,3 +1,6 @@
+import { Skill } from "../ActorTypes";
+import { SkillDefinition } from "../DefinitionTypes";
+
 export const defineHandlebarHelper = async function() {
 	
   Handlebars.registerHelper('attackrating', function (val) {
@@ -22,14 +25,14 @@ export const defineHandlebarHelper = async function() {
   });
 
 
-/*
+
   Handlebars.registerHelper('skillAttr', getSkillAttribute);
   Handlebars.registerHelper('skillPool', getSkillPool);
   Handlebars.registerHelper('gearSubtype', getSubtypes);
   Handlebars.registerHelper('ritualFeat', getRitualFeatures);
   Handlebars.registerHelper('spellFeat', getSpellFeatures);
   Handlebars.registerHelper('matrixPool', getMatrixActionPool);
-*/
+
 /*
 	Handlebars.registerHelper('description', function (itemData, type) {
    	let key = type+"."+itemData.genesisID+".desc";
@@ -81,4 +84,85 @@ export const defineHandlebarHelper = async function() {
     }
   });
 
+};
+
+
+function getSkillAttribute(key) {
+	let skillDef : SkillDefinition|undefined = CONFIG.SR6.ATTRIB_BY_SKILL.get(key);
+  if (skillDef) {
+    const myElem = skillDef.attrib;
+    return myElem;
+  } else {
+    return "??";
+  }
+};
+
+function getSkillPool(skillId, skillSpec, actor) {
+	const skill:Skill  = actor.data.data.skills[skillId];
+	let pool = 0;
+	if (skill) {
+		pool = skill.points + skill.modifier;	
+		if (skill.expertise==skillSpec) {
+			pool+=3;
+		} else if (skill.specialization==skillSpec) {
+			pool+=2;
+		}
+	}
+	let skillAttr : string = getSkillAttribute(skillId);
+	if (skillAttr) {
+		const attrib = actor.data.data.attributes[skillAttr];
+		pool += attrib.pool;
+	}
+	return pool;
+};
+
+function getSubtypes(key) {
+  if (CONFIG.SR6.GEAR_SUBTYPES.get(key)) {
+    const myElem = CONFIG.SR6.GEAR_SUBTYPES.get(key);
+    return myElem;
+  } else {
+    return [];
+  }
+};
+
+function getRitualFeatures(ritual) {
+  let ret:string[] = [];
+	let i18n = (game as Game).i18n;
+  if (ritual.features.material_link) ret.push( i18n.localize("shadowrun6.ritualfeatures.material_link"));
+  if (ritual.features.anchored) ret.push(i18n.localize("shadowrun6.ritualfeatures.anchored"));
+  if (ritual.features.minion) ret.push(i18n.localize("shadowrun6.ritualfeatures.minion"));
+  if (ritual.features.spell) ret.push(i18n.localize("shadowrun6.ritualfeatures.spell"));
+  if (ritual.features.spotter) ret.push(i18n.localize("shadowrun6.ritualfeatures.spotter"));
+  return ret.join(", ");
+};
+function getSpellFeatures(spell) {
+  let ret:string[] = [];
+	let i18n = (game as Game).i18n;
+  if (spell.features) {
+    if (spell.features.area) ret.push(i18n.localize("shadowrun6.spellfeatures.area"));
+    if (spell.features.direct) ret.push(i18n.localize("shadowrun6.spellfeatures.direct"));
+    if (spell.features.indirect) ret.push(i18n.localize("shadowrun6.spellfeatures.indirect"));
+    if (spell.features.sense_single) ret.push(i18n.localize("shadowrun6.spellfeatures.sense_single"));
+    if (spell.features.sense_multi) ret.push(i18n.localize("shadowrun6.spellfeatures.sense_multi"));
+  }
+  return ret.join(", ");
+};
+
+function getMatrixActionPool(key, actor) {
+	const action = CONFIG.SR6.MATRIX_ACTIONS[key];
+	const skill  = actor.data.data.skills[action.skill];
+	let pool = 0;
+	if (skill) {
+		pool = skill.points + skill.modifier;	
+		if (skill.expertise==action.specialization) {
+			pool+=3;
+		} else if (skill.specialization==action.specialization) {
+			pool+=2;
+		}
+	}
+	if (action.attrib) {
+		const attrib = actor.data.data.attributes[action.attrib];
+		pool += attrib.pool;
+	}
+	return pool;
 };

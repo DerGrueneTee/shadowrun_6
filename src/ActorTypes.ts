@@ -81,11 +81,6 @@ export class Initiative {
     dicePool: number;
 }
 
-export class SkillValue {
-    points: Number = 0;
-    modifier: number = 0;
-}
-
 export class Ratings {
 		astral  : Attribute = new Attribute();
 		matrix  : Attribute = new Attribute();
