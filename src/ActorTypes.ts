@@ -151,6 +151,30 @@ export class MatrixUser extends Lifeform {
 export class Player extends MatrixUser {
 } 
 
+export class CurrentVehicle {
+	belongs : string;
+	opMode  : string = "manual";
+	offRoad : false;
+	speed   : number;
+}
+
 export class Vehicle {
-    handleOn: number;
+   physical: Monitor = new Monitor();
+   stun    : Monitor = new Monitor();
+   edge    : Monitor = new Monitor();
+   handleOn: number;
+	handleOff: number;
+   accOn   : number;
+   accOff  : number;
+   spdiOn  : number;
+   spdiOff : number;
+   tspd    : number;
+	bod: number;
+	arm: number;
+	pil: number;
+	sen: number;
+	sea: number;
+	vtype: string;
+	vehicle: CurrentVehicle = new CurrentVehicle;
+	notes: string;
 }

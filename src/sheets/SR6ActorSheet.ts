@@ -1,6 +1,7 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
-import { SkillRoll } from "../Rolls.js";
+import { Spell } from "../ItemTypes.js";
+import { SkillRoll, SpellRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -37,9 +38,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", (this.actor.data.data as Lifeform).physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", (this.actor.data.data as Lifeform).stun));
 
-			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
 			// Roll Skill Checks
-			/*
 			html.find('.skill-roll').click(this._onRollSkillCheck.bind(this));
 			html.find('.spell-roll').click(this._onRollSpellCheck.bind(this));
 			html.find('.ritual-roll').click(this._onRollRitualCheck.bind(this));
@@ -48,7 +47,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".matrix-roll").click(this._onMatrixAction.bind(this));
 			html.find('.complexform-roll').click(this._onRollComplexFormCheck.bind(this));
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
-			*/
 			
 			//this.activateCreationListener(html);
 			
@@ -495,14 +493,11 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	_onRollSkillCheck(event: Event, html) {
 		console.log("onRollSkillCheck");
 		event.preventDefault();
-		if (!event.currentTarget)
-			return;
-		if (!(event.currentTarget as any).dataset)
-			return;
+		if (!event.currentTarget) return;
+		if (!(event.currentTarget as any).dataset) return;
 		let dataset : any = (event.currentTarget as any).dataset;
 		const skillId   : string = dataset.skill;
-		const skill     : Skill = (this.actor.data.data as Lifeform).skills[skillId];
-		let roll : SkillRoll = new SkillRoll(skill, skillId);
+		let roll : SkillRoll = new SkillRoll((this.actor.data.data as Lifeform), skillId);
 		roll.skillSpec = dataset.skillspec;
 		if (dataset.threshold)
 			roll.threshold = dataset.threshold;
@@ -510,6 +505,90 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		
 		console.log("onRollSkillCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollSkill(roll);
+	}
+
+	_onRollItemCheck(event, html) {
+		event.preventDefault();
+		const item = event.currentTarget.dataset.itemId;
+		(this.actor as Shadowrun6Actor).rollItem(item, { event: event });
+	}
+
+	_onRollSpellCheck(event: Event, html) {
+		console.log("_onRollSpellCheck");
+		event.preventDefault();
+		if (!event.currentTarget) return;
+		if (!(event.currentTarget as any).dataset) return;
+		const caster : Lifeform = (this.actor.data.data as Lifeform);
+		const itemId : string = (event.currentTarget as any).dataset.itemId;
+		const skill  : Skill  = caster.skills["sorcery"];
+		let spellRaw = this.actor.items.get(itemId);
+		if (!spellRaw) {
+			console.log("No such item: "+itemId);
+			return;
+		}
+		const spell  : Spell  = (spellRaw.data.data as Spell);
+		let roll : SpellRoll = new SpellRoll(caster, spell);
+		roll.skillSpec="spellcasting";
+		(this.actor as Shadowrun6Actor).rollSpell(roll, false);
+	}
+
+	_onRollRitualCheck(event, html) {
+		event.preventDefault();
+		const item = event.currentTarget.dataset.itemId;
+		(this.actor as Shadowrun6Actor).rollSpell(item, true);
+	}
+
+	_onCommonCheck(event, html) {
+		console.log("onCommonCheck");
+		event.preventDefault();
+		const pool = event.currentTarget.dataset.pool;
+		let classList = event.currentTarget.classList;
+		let title;
+		if (classList.contains("defense-roll") ) {
+			title = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
+		} else if (classList.contains("attributeonly-roll")) {
+			title = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
+		} else {
+			title = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
+		}
+		let dialogConfig;
+		if (classList.contains("defense-roll")) {
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: false,
+				buyHits: false
+			};
+		} else if (classList.contains("attributeonly-roll")) {
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: true,
+				buyHits: true
+			};
+		} else {
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: true,
+				buyHits: true,
+				useWilddie: true
+			};
+		}
+		(this.actor as Shadowrun6Actor).rollCommonCheck(pool, title, dialogConfig);
+	}
+
+	//-----------------------------------------------------
+	_onMatrixAction(event, html) {
+		event.preventDefault();
+		console.log("onMatrixAction ",event.currentTarget.dataset);
+		const matrixId = event.currentTarget.dataset.matrixId;
+		const matrixAction = CONFIG.SR6.MATRIX_ACTIONS[matrixId];
+		(this.actor as Shadowrun6Actor).performMatrixAction(matrixAction, matrixId, { event: event });
+	}
+
+	//-----------------------------------------------------
+	_onRollComplexFormCheck(event, html) {
+		event.preventDefault();
+		const item = event.currentTarget.dataset.itemId;
+		(this.actor as Shadowrun6Actor).rollComplexForm(item, { event: event });
 	}
 
 }

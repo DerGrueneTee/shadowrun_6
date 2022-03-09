@@ -1,0 +1,61 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92" style="background-color: var(--highlight-color)"/>
+        <div class="section">
+            <table>
+                <tr>
+                    <th colspan="1">{{localize 'shadowrun6.spell.category'}}</th>
+                    <th colspan="2">{{localize 'shadowrun6.spell.isOpposed'}}</th>
+                    <th colspan="2">{{localize 'shadowrun6.spell.withEssence'}}</th>
+                </tr>
+                <tr style="text-align:center">
+                    <td colspan="2">
+                        <select name="data.category">
+                            {{selectOptions config.spell_category selected=item.data.data.category localize=true}}
+                        </select>
+                    </td>
+                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.isOpposed}}
+                            name="data.isOpposed" /></td>
+                    <td colspan="2"><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.withEssence}}
+                            name="data.withEssence" /></td>
+                </tr>
+                <tr>
+                    <th>{{localize 'shadowrun6.spell.range'}}</th>
+                    <th>{{localize 'shadowrun6.spell.type'}}</th>
+                    <th>{{localize 'shadowrun6.spell.duration'}}</th>           
+                    <th>{{localize 'shadowrun6.spell.drain'}}</th>           
+                    <th>{{localize 'shadowrun6.spell.damage'}}</th>           
+                </tr>
+                <tr>
+                    <td>
+                        <select name="data.range">
+                            {{selectOptions config.spell_range selected=item.data.data.range localize=true}}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="data.type">
+                            {{selectOptions config.spell_type selected=item.data.data.type localize=true}}
+                        </select>
+                    </td>
+                    <td>
+                    <select name="data.duration">
+                        {{selectOptions config.spell_duration selected=item.data.data.duration localize=true}}
+                    </select>
+                </td>
+                <td>
+                    <input name="data.drain" value="{{item.data.data.drain}}" type="text" class="box centered" style="width:2em"/>
+                </td>
+                    <td>
+                        <select name="data.damage">
+                            {{selectOptions config.spell_damage selected=item.data.data.damage localize=true}}
+                        </select>
+                    </td>
+            </table>
+            <h3>{{localize 'shadowrun6.item.description'}}</h3>
+            <textarea class="box" type="text" name="data.description" cols="20"
+                rows="8">{{item.data.data.description}}</textarea>
+        </div>
+    </section>
+</form>

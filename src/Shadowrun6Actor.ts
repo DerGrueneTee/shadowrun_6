@@ -2,7 +2,8 @@ import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Deri
 import { SR6, SR6Config } from "./config.js";
 import { SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
-import { doRoll, SkillRoll, SpellRoll } from "./Rolls.js";
+import { doRoll } from "./Rolls.js";
+import { SkillRoll, SpellRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -863,15 +864,15 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {Object} spell      The spell to cast
 	 * @return Roll name
 	 */
-	_getSpellName(spell) {
-		if (spell.genesisId) {
-			const key = "shadowrun6.compendium.spell." + spell.genesisId;
+	_getSpellName(spell:Spell):string {
+		if (spell.genesisID) {
+			const key = "shadowrun6.compendium.spell." + spell.genesisID;
 			let name = (game as Game).i18n.localize(key);
 			if (key!=name)
 				return name;
 		}
 		
-		return spell.name;
+		return "Unnamed";
 	}
 
 	//---------------------------------------------------------
@@ -880,7 +881,7 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {Object} item   The gear to use
 	 * @return Display name
 	 */
-	_getGearName(item) {
+	_getGearName(item) : string {
 		if (item.genesisId) {
 			const key = "shadowrun6.compendium.gear." + item.genesisId;
 			let name = (game as Game).i18n.localize(key);
@@ -926,7 +927,6 @@ export class Shadowrun6Actor extends Actor {
 		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
 		console.log("rollSkill(", roll, ")");
 
-		roll.isOpposed = false;
 		roll.allowBuyHits = true;
 		
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
@@ -1020,44 +1020,30 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {boolean} ritual      TRUE if ritual spellcasting is used
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
-	rollSpell(itemId, ritual=false, options={}) {
-		console.log("rollSpell("+itemId+", ritual="+ritual+")");
-		const skillId = "sorcery";
-		const spec    = (ritual)?"ritual_spellcasting":"spellcasting";
-		const item = this.items.get(itemId);
-		if (!item) { return;}
-		// Item must be a spell
-		if (!isSpell(item.data.data)) {
-			return;
-		}
-		// Caster must be a lifeform
-		if (!isLifeform(this.data.data)) {
-			return;
-		}
+	rollSpell(roll : SpellRoll, ritual:boolean) : Promise<Roll> {
+		console.log("rollSpell( roll="+roll+", ritual="+ritual+")");
 		
-		const skill:Skill = this.data.data.skills[skillId];
-		let threshold = ritual? (item.data.data.threshold):0;
-		let roll : SpellRoll = new SpellRoll(skill, skillId);
-		roll.skillSpec = spec;
+		roll.skillSpec  = (ritual)?"ritual_spellcasting":"spellcasting";
 		roll.threshold = 0;
 	
 		// Prepare action text
 		let actionText;
 		switch ((game as Game).user!.targets.size) {
 		case 0:
-			actionText = actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+			actionText = actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(roll.spell)});
 			break;
 		case 1:
 		   let targetName = (game as Game).user!.targets.values().next().value.name;
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getSpellName(roll.spell), target:targetName});
 			break;
 		default:
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
+			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getSpellName(roll.spell)});
 		}
+		roll.actor     = this;
 		// Prepare check text
-		let checkText = this._getSkillCheckText(roll);
-		// Get pool
-		let pool = this._getSkillPool(skillId, spec);
+		roll.checkText = this._getSkillCheckText(roll);
+		// Calculate pool
+		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
 		let rollName = this._getSkillCheckText(roll);		
 
 		// Determine whether or not the spell is an opposed test
@@ -1065,10 +1051,10 @@ export class Shadowrun6Actor extends Actor {
 		let isOpposed = false;
 		let hasDamageResist = !ritual;
 		let defendWith = "physical";
-		let attackRating = this.data.data.attackrating.astral.pool;
+		let attackRating = roll.performer.attackrating.astral.pool;
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
-		roll.canAmpUpSpell   = item.data.data.category === "combat";
+/*		roll.canAmpUpSpell   = roll.spell.category === "combat";
 		roll.canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
 		if (item.data.data.category === "combat") {
 			isOpposed = true;
@@ -1086,16 +1072,16 @@ export class Shadowrun6Actor extends Actor {
 				threshold = 5 - Math.ceil(this.data.data.essence);
 			}
 		}
-		
+*/		
 		// If present, replace spell name, description and source references from compendium
-		let spellName = item.name;
+		let spellName:string = this._getSpellName(roll.spell);
 		let spellDesc = "";
 		let spellSrc  = "";
-		if (item.data.data.description) {
-			spellDesc = item.data.data.description;
+		if (roll.spell.description) {
+			spellDesc = roll.spell.description;
 		}
-		if (item.data.data.genesisID) {
-			let key = (ritual?"ritual.":"spell.")+item.data.data.genesisID+".";
+		if (roll.spell.genesisID) {
+			let key = (ritual?"ritual.":"spell.")+roll.spell.genesisID+".";
 			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
 				spellName = (game as Game).i18n.localize(key+"name");
@@ -1104,7 +1090,7 @@ export class Shadowrun6Actor extends Actor {
 			}
 		}
 
-		let data = mergeObject(options, {
+/*		let data = {
 			isSpell : true,
 			pool: pool,
 			actionText: actionText,
@@ -1129,13 +1115,13 @@ export class Shadowrun6Actor extends Actor {
 			hasDamageResist: hasDamageResist,
 			buyHits: !isOpposed
 		});
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
 		if (isOpposed) {
 			return doRoll(data);
 		} else {
 			return doRoll(data);
-		}
-		*/
+		}*/
+		return doRoll(roll);
 	}
 
 	//-------------------------------------------------------------

@@ -1,0 +1,25 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92" style="background-color: var(--highlight-color)"/>
+        <div class="section">
+        <dl>
+            <dt>{{localize 'shadowrun6.qualityedit.explain'}}</dt>
+            <dd><input type="text" value="{{item.data.data.explain}}" name="data.explain" /></dd>
+            <dt>{{localize 'shadowrun6.qualityedit.description'}}:</dt>
+            <dd>
+                <textarea type="text" name="data.description" class="secondary" placeholder="Details" cols="20" rows="6">{{item.data.data.description}}</textarea> 
+           </dd>
+            <dt>{{localize 'shadowrun6.qualityedit.category'}}</dt>
+            <dd>  
+                <select name="data.category">
+                {{#select item.data.data.category}}
+                {{#each config.QUALITY_CATEGORIES as |category id|}}
+                <option value="{{@category}}">{{localize (concat "QUALITY_CATEGORIES." category)}}</option>
+                {{/each}}
+                {{/select}}
+              </select></dd>
+        </dl>
+    </section>
+</form>

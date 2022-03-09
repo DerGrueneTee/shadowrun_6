@@ -1,6 +1,14 @@
 import { EdgeAction, EdgeBoost, MagicOrResonanceDefinition, MatrixAction, Program, SkillDefinition } from "./DefinitionTypes.js"
 import { ComplexForm } from "./ItemTypes.js"
 
+export enum Defense {
+	PHYSICAL = "physical",
+	SPELL_DIRECT   = "spells_direct",
+	SPELL_INDIRECT = "spells_indirect",
+	SPELL_OTHER    = "spells_other",
+	TOXIN    = "toxins"
+}
+
 export class SR6Config {
 	PRIMARY_ATTRIBUTES = ["bod", "agi", "rea", "str", "wil", "log", "int", "cha"];
 	SECONDARY_ATTRIBUTES = ["mag", "res", "edg", "ess", "ini", "inim", "inia", "dr"];
