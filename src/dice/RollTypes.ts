@@ -5,7 +5,7 @@ import { EdgeBoost, SkillDefinition } from "../DefinitionTypes.js";
 import { Spell } from "../ItemTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
-enum RollType {
+export enum RollType {
 	Common,
 	Weapon,
 	Spell,
@@ -42,7 +42,7 @@ class CommonRollData {
 	
 	threshold : number;
 	/* Use a wild die */
-	useWildDie : boolean;
+	useWildDie : number = 0;
 	
 	/* How many dice shall be rolled */
 	pool: number;
@@ -129,5 +129,6 @@ export class ConfiguredRoll extends PreparedRoll {
 	modifier : number = 0;
 	buttonType : ReallyRoll;
 	explode : boolean;
+	defRating : number;
 }
 

@@ -6,7 +6,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor";
 import { RollDialog } from "./RollDialog.js";
 import { Spell } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
-import { ConfiguredRoll, PreparedRoll, ReallyRoll } from "./dice/RollTypes.js";
+import { ConfiguredRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -132,6 +132,7 @@ function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData =
 		console.log("messageData = ", messageData);
 		
 		let configured :ConfiguredRoll = (data as ConfiguredRoll);
+		if (!configured.modifier) configured.modifier=0;
 		if (!isLifeform(data.actor.data.data))
 			throw new Error("Not a lifeform");
 
@@ -156,32 +157,37 @@ function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData =
 
     data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
 
-
+	let formula = "";
+	
     if (form) {	
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
-      data.useWildDie = form.useWildDie.checked;
+      configured.useWildDie = form.useWildDie.checked?1:0;
+      configured.explode = form.explode.checked;
 	   configured.buttonType = type;
-/*      data.modifier = parseInt(form.modifier.value);
-      data.defRating = (form.defRating)?parseInt(form.defRating.value):0;
+      configured.modifier = parseInt(form.modifier.value);
+      configured.defRating = (form.defRating)?parseInt(form.defRating.value):0;
+
+		/*
 	   if (data.spell && data.spell.type=="ritual") {
 			data.threshold = data.spell.data.data.threshold;
 		}
-      data.explode = form.explode.checked;
       
       data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
       data.weapon = data.item ? true : false;
-      if (data.modifier > 0) {
-        data.formula = data.pool + " + " + data.modifier + "d6";
-      } else if (data.modifier < 0){
-        data.formula = data.pool + " " + data.modifier + "d6";
+      if (configured.modifier > 0) {
+        data.formula = data.pool + " + " + configured.modifier + "d6";
+      } else if (configured.modifier < 0){
+        data.formula = data.pool + " " + configured.modifier + "d6";
       } else {
         data.formula = data.pool + "d6";
       }
-*/
+		*/
+		formula = createFormula(configured);
     }
 
-/*	if (data.rollType=="spell") {
+	if (data.rollType==RollType.Spell) {
+		/*
 		if (data.spell) {
 			data.drain  = parseInt(data.spell.data.data.drain);	
 			data.radius = (data.spell.data.data.range == "line_of_sight_area" || data.spell.data.data.range == "self_area") ? 2 : 0;
@@ -202,20 +208,51 @@ function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData =
 				data.drain+= parseInt(data.drainMod);
 			}
 		}
-	} else if (data.rollType=="weapon") {
+		*/
+	} else if (data.rollType==RollType.Weapon) {
+		/*
 		if (data.item) {
 			// TODO: Evaluate fire modes
 			console.log("ToDo: evaluate fire modes, called shots, etc.")
 			data.damage = data.item.data.data.dmg;
 			data.dmgDef = data.item.data.data.dmgDef;
 		}
+		*/
 	}
-*/
+
     
 		console.log("BEFORE");
     // Execute the roll
-		return new SR6Roll("3d6", configured);
+		return new SR6Roll(formula, configured);
 	} finally {
 		console.log("LEAVE _dialogClosed()");
 	}
+}
+
+/*
+ * Convert ConfiguredRoll into a Foundry roll formula
+ */
+function createFormula(roll:ConfiguredRoll) : string {
+	let regular : number = roll.pool + (roll.modifier?roll.modifier:0);
+	let wild    : number = 0;
+	if (roll.useWildDie>0) {
+		regular -= roll.useWildDie;
+		wild     = roll.useWildDie;
+	}
+	
+	let formula:string = `${regular}d6`;
+	if (roll.explode) {
+		 formula += 'x6';
+	}
+	formula += "cs>=5";
+	
+	if (wild>0) {
+		formula += " + "+wild+"d6";
+		if (roll.explode) {
+			formula += 'x6';
+		}
+		formula += "cs>=5";
+	}
+	
+	return formula;
 }
