@@ -13,6 +13,11 @@ enum RollType {
 	ComplexForm
 }
 
+export enum ReallyRoll {
+	ROLL,
+	AUTOHITS
+}
+
 class CommonRollData {
 	speaker: ChatSpeakerDataProperties;
 	actor: Shadowrun6Actor;
@@ -121,5 +126,8 @@ export class SpellRoll extends SkillRoll {
 
 export class ConfiguredRoll extends PreparedRoll {
 	edgeBoost:string;
+	modifier : number = 0;
+	buttonType : ReallyRoll;
+	explode : boolean;
 }
 

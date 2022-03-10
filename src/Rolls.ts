@@ -6,7 +6,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor";
 import { RollDialog } from "./RollDialog.js";
 import { Spell } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
-import { ConfiguredRoll, PreparedRoll } from "./dice/RollTypes";
+import { ConfiguredRoll, PreparedRoll, ReallyRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -37,7 +37,7 @@ export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
  * @private
  */
 async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
-	console.log("ENTER _showRollDialog", data);
+	console.log("ENTER _showRollDialog", this);
 	try {
 		if (!isLifeform(data.actor.data.data)) {
 			console.log("Actor is not a lifeform");
@@ -80,12 +80,12 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 					bought: {
 						icon: '<i class="fas fa-dollar-sign"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.bought"),
-						callback: html => resolve(_dialogClosed(1, html[0].querySelector("form"), data))
+						callback: html => resolve(_dialogClosed(ReallyRoll.AUTOHITS, html[0].querySelector("form"), data))
 					},
 					normal: {
 						icon: '<i class="fas fa-dice-six"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
-						callback: html => resolve(_dialogClosed(0, html[0].querySelector("form"), data))
+						callback: html => resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data))
 					}
 				};
 			} else {
@@ -95,7 +95,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
 						callback: html => {
 							console.log("in callback");
-							resolve(_dialogClosed(0, html[0].querySelector("form"), data));
+							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data));
 							console.log("end callback");
 						}
 					}
@@ -125,7 +125,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 }
 
 
-function _dialogClosed(type: number, form, data: PreparedRoll, messageData = {}): SR6Roll {
+function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData = {}): SR6Roll {
 	console.log("ENTER _dialogClosed(type=" + type + ", form=" + form + ", data=" + data + ")");
 	try {
 		console.log("data = ", data);
@@ -160,14 +160,14 @@ function _dialogClosed(type: number, form, data: PreparedRoll, messageData = {})
     if (form) {	
       data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
       data.useWildDie = form.useWildDie.checked;
-	   
+	   configured.buttonType = type;
 /*      data.modifier = parseInt(form.modifier.value);
       data.defRating = (form.defRating)?parseInt(form.defRating.value):0;
 	   if (data.spell && data.spell.type=="ritual") {
 			data.threshold = data.spell.data.data.threshold;
 		}
       data.explode = form.explode.checked;
-      data.buttonType = type;
+      
       data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
       data.weapon = data.item ? true : false;
@@ -213,11 +213,6 @@ function _dialogClosed(type: number, form, data: PreparedRoll, messageData = {})
 */
     
 		console.log("BEFORE");
-		let r = new Roll("2d6 + 4 + 1d4");
- 		console.log("1: ",r);
-    	r.evaluate();
- 		console.log("2: ",r);
-     	console.log(r.result); // 5 + 4 + 2
     // Execute the roll
 		return new SR6Roll("3d6", configured);
 	} finally {
