@@ -822,13 +822,13 @@ export class Shadowrun6Actor extends Actor {
      * @return Roll name
      */
     _getSpellName(spell) {
-        if (spell.genesisId) {
-            const key = "shadowrun6.compendium.spell." + spell.genesisId;
+        if (spell.genesisID) {
+            const key = "shadowrun6.compendium.spell." + spell.genesisID;
             let name = game.i18n.localize(key);
             if (key != name)
                 return name;
         }
-        return spell.name;
+        return "Unnamed";
     }
     //---------------------------------------------------------
     /**
@@ -878,7 +878,6 @@ export class Shadowrun6Actor extends Actor {
         // Calculate pool
         roll.pool = this._getSkillPool(roll.skillId, roll.skillSpec);
         console.log("rollSkill(", roll, ")");
-        roll.isOpposed = false;
         roll.allowBuyHits = true;
         roll.speaker = ChatMessage.getSpeaker({ actor: this });
         return doRoll(roll);
@@ -970,119 +969,104 @@ export class Shadowrun6Actor extends Actor {
      * @param {boolean} ritual      TRUE if ritual spellcasting is used
      * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
      */
-    rollSpell(itemId, ritual = false, options = {}) {
-        console.log("rollSpell(" + itemId + ", ritual=" + ritual + ")");
-        const skillId = "sorcery";
-        const spec = (ritual) ? "ritual_spellcasting" : "spellcasting";
-        const item = this.items.get(itemId);
-        if (!item) {
-            return;
-        }
-        // Item must be a spell
-        if (!isSpell(item.data.data)) {
-            return;
-        }
-        // Caster must be a lifeform
-        if (!isLifeform(this.data.data)) {
-            return;
-        }
-        let threshold = ritual ? (item.data.data.threshold) : 0;
-        /*
-            // Prepare action text
-            let actionText;
-            switch (game.user.targets.size) {
+    rollSpell(roll, ritual) {
+        console.log("rollSpell( roll=" + roll + ", ritual=" + ritual + ")");
+        roll.skillSpec = (ritual) ? "ritual_spellcasting" : "spellcasting";
+        roll.threshold = 0;
+        // Prepare action text
+        let actionText;
+        switch (game.user.targets.size) {
             case 0:
-                actionText = actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+                actionText = actionText = game.i18n.format("shadowrun6.roll.actionText.cast", { name: this._getSpellName(roll.spell) });
                 break;
             case 1:
-               let targetName = game.user.targets.values().next().value.name;
-                actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
+                let targetName = game.user.targets.values().next().value.name;
+                actionText = game.i18n.format("shadowrun6.roll.actionText.cast_target_one", { name: this._getSpellName(roll.spell), target: targetName });
                 break;
             default:
-                actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
+                actionText = game.i18n.format("shadowrun6.roll.actionText.cast_target_multiple", { name: this._getSpellName(roll.spell) });
+        }
+        roll.actor = this;
+        // Prepare check text
+        roll.checkText = this._getSkillCheckText(roll);
+        // Calculate pool
+        roll.pool = this._getSkillPool(roll.skillId, roll.skillSpec);
+        let rollName = this._getSkillCheckText(roll);
+        // Determine whether or not the spell is an opposed test
+        // and what defense eventually applies
+        let isOpposed = false;
+        let hasDamageResist = !ritual;
+        let defendWith = "physical";
+        let attackRating = roll.performer.attackrating.astral.pool;
+        let highestDefenseRating = this._getHighestDefenseRating(a => a.data.data.defenserating.physical.pool);
+        console.log("Highest defense rating of targets: " + highestDefenseRating);
+        /*		roll.canAmpUpSpell   = roll.spell.category === "combat";
+                roll.canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
+                if (item.data.data.category === "combat") {
+                    isOpposed = true;
+                    if (item.data.data.type=="mana") {
+                        defendWith = "spells_direct";
+                        hasDamageResist = false;
+                    } else {
+                        defendWith = "spells_indirect";
+                    }
+                } else if (item.data.data.category === "manipulation") {
+                    isOpposed = true;
+                        defendWith = "spells_other";
+                } else if (item.data.data.category === "heal") {
+                    if (item.data.data.withEssence) {
+                        threshold = 5 - Math.ceil(this.data.data.essence);
+                    }
+                }
+        */
+        // If present, replace spell name, description and source references from compendium
+        let spellName = this._getSpellName(roll.spell);
+        let spellDesc = "";
+        let spellSrc = "";
+        if (roll.spell.description) {
+            spellDesc = roll.spell.description;
+        }
+        if (roll.spell.genesisID) {
+            let key = (ritual ? "ritual." : "spell.") + roll.spell.genesisID + ".";
+            if (!game.i18n.localize(key + "name").startsWith(key)) {
+                // A translation exists
+                spellName = game.i18n.localize(key + "name");
+                spellDesc = game.i18n.localize(key + "desc");
+                spellSrc = game.i18n.localize(key + "src");
             }
-            // Prepare check text
-            let checkText = this._getSkillCheckText(skillId,spec,0);
-            // Get pool
-            let pool = this._getSkillPool(skillId, spec);
-            let rollName = this._getSkillCheckText(skillId, spec, threshold);
-    
-            // Determine whether or not the spell is an opposed test
-            // and what defense eventually applies
-            let isOpposed = false;
-            let hasDamageResist = !ritual;
-            let defendWith = "physical";
-            let attackRating = this.data.data.attackrating.astral.pool;
-            let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
-            console.log("Highest defense rating of targets: "+highestDefenseRating);
-            let canAmpUpSpell = item.data.data.category === "combat";
-            let canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
-            if (item.data.data.category === "combat") {
-                isOpposed = true;
-                if (item.data.data.type=="mana") {
-                    defendWith = "spells_direct";
-                    hasDamageResist = false;
+        }
+        /*		let data = {
+                    isSpell : true,
+                    pool: pool,
+                    actionText: actionText,
+                    checkText  : rollName,
+                    skill: this.data.data.skills[skillId],
+                    spec: spec,
+                    spell: item,
+                    spellName: spellName,
+                    spellDesc: spellDesc,
+                    spellSrc : spellSrc,
+                    canModifySpell: canAmpUpSpell || canIncreaseArea,
+                    canAmpUpSpell : canAmpUpSpell,
+                    canIncreaseArea : canIncreaseArea,
+                    attackRating: attackRating,
+                    defRating : highestDefenseRating,
+                    targets: game.user.targets,
+                    isOpposed: isOpposed,
+                    threshold: threshold,
+                    rollType: ritual?"ritual":"spell",
+                    isAllowDefense: true,
+                    defendWith: defendWith,
+                    hasDamageResist: hasDamageResist,
+                    buyHits: !isOpposed
+                });
+                roll.speaker = ChatMessage.getSpeaker({ actor: this });
+                if (isOpposed) {
+                    return doRoll(data);
                 } else {
-                    defendWith = "spells_indirect";
-                }
-            } else if (item.data.data.category === "manipulation") {
-                isOpposed = true;
-                    defendWith = "spells_other";
-            } else if (item.data.data.category === "heal") {
-                if (item.data.data.withEssence) {
-                    threshold = 5 - Math.ceil(this.data.data.essence);
-                }
-            }
-            
-            // If present, replace spell name, description and source references from compendium
-            let spellName = item.name;
-            let spellDesc = "";
-            let spellSrc  = "";
-            if (item.data.data.description) {
-                spellDesc = item.data.data.description;
-            }
-            if (item.data.data.genesisID) {
-                let key = (ritual?"ritual.":"spell.")+item.data.data.genesisID+".";
-                if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
-                    // A translation exists
-                    spellName = (game as Game).i18n.localize(key+"name");
-                    spellDesc = (game as Game).i18n.localize(key+"desc");
-                    spellSrc = (game as Game).i18n.localize(key+"src");
-                }
-            }
-    
-            let data = mergeObject(options, {
-                isSpell : true,
-                pool: pool,
-                actionText: actionText,
-                checkText  : rollName,
-                skill: this.data.data.skills[skillId],
-                spec: spec,
-                spell: item,
-                spellName: spellName,
-                spellDesc: spellDesc,
-                spellSrc : spellSrc,
-                canModifySpell: canAmpUpSpell || canIncreaseArea,
-                canAmpUpSpell : canAmpUpSpell,
-                canIncreaseArea : canIncreaseArea,
-                attackRating: attackRating,
-                defRating : highestDefenseRating,
-                targets: game.user.targets,
-                isOpposed: isOpposed,
-                threshold: threshold,
-                rollType: ritual?"ritual":"spell",
-                isAllowDefense: true,
-                defendWith: defendWith,
-                hasDamageResist: hasDamageResist,
-                buyHits: !isOpposed
-            });
-            data.speaker = ChatMessage.getSpeaker({ actor: this });
-            if (isOpposed) {
-                return doRoll(data);
-            } else {
-                return doRoll(data);
-            }
-            */
+                    return doRoll(data);
+                }*/
+        return doRoll(roll);
     }
     //-------------------------------------------------------------
     /**

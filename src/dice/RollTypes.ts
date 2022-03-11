@@ -132,3 +132,8 @@ export class ConfiguredRoll extends PreparedRoll {
 	defRating : number;
 }
 
+export class FinishedRoll extends ConfiguredRoll {
+	success : boolean;
+	glitch  : boolean;
+	criticalglitch : boolean;
+}

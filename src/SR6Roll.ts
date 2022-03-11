@@ -1,5 +1,6 @@
-import { Evaluated, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
-import { ConfiguredRoll, ReallyRoll } from "./dice/RollTypes.js";
+import { Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
+import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
+import { ConfiguredRoll, FinishedRoll, ReallyRoll } from "./dice/RollTypes.js";
 
 /**
  * 
@@ -40,6 +41,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 				(merged as any)._evaluated = true;
 				this.terms = [merged];
 				console.log(" result3 ",merged);
+				this.results = merged.results;
 			}
 				
 			console.log("AFTER  _dice   : " , this._dice);
@@ -50,6 +52,13 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			console.log("   this: " , this);
 		
             this._evaluated = true;
+				this._formula = (this.data as ConfiguredRoll).pool + "d6";
+				
+				let foo:any = {
+					test :  "irgendwie",
+					bla  :  "fasel"
+				};
+				(this as any).data =  foo;
             return (this as Evaluated<this>);
         } finally {
             console.log("LEAVE evaluate()");
@@ -165,6 +174,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     		let addedByExplosion = false;
 	    	term.results.forEach(die =>  total+= die.count!);
 		});
+		
+		(this.data as FinishedRoll).glitch = this.isGlitch();
+		(this.data as FinishedRoll).criticalglitch = this.isCriticalGlitch();
+		(this.data as FinishedRoll).success = this.isSuccess();
       return total;
 	}
 
@@ -187,7 +200,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	 ************************/
 	_markWildDie() : boolean {
 		let ignoreFives = false;
-		if (this._dice.length==1) {
+		if (this.dice.length==1) {
 			console.log("Not a wild die roll");
 			return ignoreFives;
 		}
@@ -251,4 +264,53 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 
         return `${formula}cs>=5`;
     }
+
+  /**
+   * The number of hits rolled.
+   */
+  getHits() {
+    if (!this._total) return NaN;
+    return this.total;
+  }
+
+  /**
+   * The number of glitches rolled.
+   */
+  getGlitches() {
+		console.log("getGlitches ", this);
+    if (!this._evaluated || !this.results) {
+      return NaN;
+    }
+    return this.results.filter(die => die.result === 1).length;
+  }
+
+  /**
+   * Is this roll a regular (non-critical) glitch?
+   */
+  isGlitch() {
+    if (!this._evaluated || !this.results) {
+      return false;
+    }
+    return this.getGlitches() > this.results.length / 2;
+  }
+
+  /**
+   * Is this roll a critical glitch?
+   */
+  isCriticalGlitch() {
+    return this.isGlitch() && this.getHits() === 0;
+  }
+
+  isSuccess() {
+    if (this.data.threshold > 0) {
+      return this._total! >= this.data.threshold;
+    } else {
+      return this._total! > 0;
+    }
+  }
+
+}
+
+export class SR6RollChatMessage extends ChatMessage {
+	
 }

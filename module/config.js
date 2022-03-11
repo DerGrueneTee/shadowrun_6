@@ -1,5 +1,13 @@
 import { EdgeAction, EdgeBoost, MagicOrResonanceDefinition, MatrixAction, Program, SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm } from "./ItemTypes.js";
+export var Defense;
+(function (Defense) {
+    Defense["PHYSICAL"] = "physical";
+    Defense["SPELL_DIRECT"] = "spells_direct";
+    Defense["SPELL_INDIRECT"] = "spells_indirect";
+    Defense["SPELL_OTHER"] = "spells_other";
+    Defense["TOXIN"] = "toxins";
+})(Defense || (Defense = {}));
 export class SR6Config {
     PRIMARY_ATTRIBUTES = ["bod", "agi", "rea", "str", "wil", "log", "int", "cha"];
     SECONDARY_ATTRIBUTES = ["mag", "res", "edg", "ess", "ini", "inim", "inia", "dr"];
