@@ -845,22 +845,27 @@ export class Shadowrun6Actor extends Actor {
         }
         return item.name;
     }
+
     //---------------------------------------------------------
     /**
      * @param {Function} func   function to return value from actor
      * @return Value
      */
-    _getHighestDefenseRating(map) {
-        let highest = 0;
-        for (var it = game.user.targets.values(), val = null; val = it.next().value;) {
-            console.log("val = ", val);
-            /*			let actor   = val.actor;
-                        let here    = map(actor);
-                        if (here>highest)
-                            highest = here;
-            */ }
-        return highest;
-    }
+	_getHighestDefenseRating(map) {
+		let highest = 0;
+		for (var it = game.user.targets.values(), val= null; val=it.next().value; ) {
+			let actor   = val.actor;
+			if (!actor) {
+				console.log("No actor assigned to target "+val);
+				continue;
+			}
+			let here    = map(actor);
+			if (here>highest)
+				highest = here;
+      }
+		return highest;
+	}
+	
     //---------------------------------------------------------
     /**
      * Roll a simple skill test
