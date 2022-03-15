@@ -2,8 +2,8 @@ import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Deri
 import { SR6, SR6Config } from "./config.js";
 import { SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
-import { doRoll } from "./Rolls.js";
-import { SkillRoll, SpellRoll } from "./dice/RollTypes.js";
+import { doRoll } from "./dice/CommonRoll.js";
+import { ItemRoll, SkillRoll, SpellRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -937,36 +937,36 @@ export class Shadowrun6Actor extends Actor {
 	/*
 	 *
 	 */
-	rollItem(itemId, options = {}) {
-		console.log("rollItem(item="+itemId+", options="+options+")");
-		const item = this.items.get(itemId);
-		if (!item) { return;}
-		
-		if (!isLifeform(this.data.data))
-			return;
-		if (!isGear(item.data.data))
-			return;
-		const skillId = item.data.data.skill;
-		const spec = item.data.data.skillSpec;
-		const skl = this.data.data.skills[skillId];
+	rollItem(roll : ItemRoll) {
+		console.log("rollItem(", roll, ")");
+		roll.actor     = this;
+		// Prepare check text
+		roll.checkText = this._getSkillCheckText(roll);
+		// Calculate pool
+		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
+		console.log("rollSkill(", roll, ")");
+		let item : Gear = roll.gear;
+
+		roll.allowBuyHits = true;
+
 		// Prepare action text
 		let actionText;
-		/*
-		switch (game.user.targets.size) {
+		
+		switch ((game as any).user.targets.size) {
 		case 0:
 			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
 			break;
 		case 1:
-		   let targetName = game.user.targets.values().next().value.name;
+		   let targetName = (game as any).user.targets.values().next().value.name;
 			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
 			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:this._getGearName(item)});
 		}
 		// Prepare check text
-		let checkText = this._getSkillCheckText(skillId,spec,0);
+		let checkText = this._getSkillCheckText(roll);
 		// Get pool
-		let pool = item.data.data.pool;
+		let pool = roll.pool;
 
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
@@ -1000,7 +1000,7 @@ export class Shadowrun6Actor extends Actor {
 			itemDesc: spellDesc,
 			itemSrc : spellSrc,
 			defRating : highestDefenseRating,
-			targets: game.user.targets,
+			targets: (game as any).user.targets,
 			isOpposed: true,
 			isAllowDefense: true,
 			defendWith: "physical",
@@ -1008,9 +1008,9 @@ export class Shadowrun6Actor extends Actor {
 			useWildDie: item.data.data.wild,
 			buyHits: false
 		});
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(data);
-		*/
+		
 	}
 
 	//-------------------------------------------------------------

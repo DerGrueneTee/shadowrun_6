@@ -2,7 +2,7 @@ import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry
 import { Lifeform, Skill } from "../ActorTypes.js";
 import { Defense } from "../config.js";
 import { EdgeBoost, SkillDefinition } from "../DefinitionTypes.js";
-import { Spell } from "../ItemTypes.js";
+import { Gear, Spell } from "../ItemTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 export enum RollType {
@@ -121,6 +121,19 @@ export class SpellRoll extends SkillRoll {
 				this.threshold = 5 - Math.ceil(actor.essence);
 			}
 		}
+	}
+}
+
+export class ItemRoll extends SkillRoll {
+	rollType = RollType.Weapon;
+	
+	itemId : string;
+	gear   : Gear;
+	
+	constructor(actor: Lifeform, item: Item) {
+		super(actor, (item.data.data as any).skill);
+		this.gear      = item.data.data as Gear;
+		this.skillSpec = this.gear.skillSpec;
 	}
 }
 
