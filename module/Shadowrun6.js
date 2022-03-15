@@ -12,7 +12,7 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { doRoll } from "./dice/CommonRoll.js";
-import { rollDefense } from "./dice/CommonRoll.js";
+import { rollDefense, rollSoak } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./combat.js";
@@ -268,8 +268,16 @@ Hooks.once("init", async function () {
 		console.log("Clicked on rollable : "+rollType);
       if (rollType === "defense") {
  			const actor = game.actors.get(targetId);
-       console.log("Target actor ",actor);
+         console.log("Target actor ",actor);
 			rollDefense(actor, dataset);
+      } else if (rollType === "soak") {
+ 			const actor = game.actors.get(targetId);
+         console.log("Target actor ",actor);
+			rollSoak(actor, dataset);
+      } else if (rollType === "damage") {
+ 			const actor = game.actors.get(targetId);
+         console.log("Target actor ",actor);
+			applyDamage(actor, dataset);
       }
     });
     html.on("click", ".chat-edge", event => {

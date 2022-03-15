@@ -101,4 +101,28 @@
      </div>
    {{/iff}}
    {{/if}}        
+   
+   <!-- Soak Roll -->
+    {{log "roll-sr6.html: soak data=" data}}
+   {{#if data.isAllowSoak}}
+   <b>Base damage:</b> {{data.baseDamage}}  <b>Net hits:</b> {{data.nettohits}}
+   <hr/>
+    {{log "soak damage = " data.soak}}
+   {{#iff data.soak ">" 0}}
+     <div>
+     	<button class="rollable" data-roll-type="soak" data-soak="{{data.soak}}" data-targetid="{{token.data.actorId}}" ">{{localize 'shadowrun6.roll.soak_physical'}} ({{data.soak}}): {{token.data.name}}</button>
+     </div>
+   {{/iff}}
+   {{/if}}        
+   
+   <!-- Bring the Pain -->
+   {{#if data.isBringPain}}
+   Soaked {{data.soaked}} of {{data.threshold}} damage
+   <hr/>
+   {{#iff data.damageToApply ">" 0}}
+     <div>
+     	<button class="rollable" data-roll-type="damage" data-damageToApply="{{data.damageToApply}}" data-targetid="{{token.data.actorId}}" ">{{localize 'shadowrun6.roll.damage_apply'}} ({{data.damageToApply}}): {{token.data.name}}</button>
+     </div>
+   {{/iff}}
+   {{/if}}        
 </div>

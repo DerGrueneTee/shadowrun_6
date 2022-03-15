@@ -717,6 +717,7 @@
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
       "damage": "Damage: ",
+		"damage_apply": "Apply damage",
       "defRating": "Defense: ",
       "defense_button": "Roll Defense",
       "edge": {
@@ -740,6 +741,7 @@
       "nosuccess": "hits, threshold: ",
       "notarget": "No target selected",
       "pool": "Pool",
+		"soak_physical": "Soak damage",
       "spec": "Specialization",
       "spell": {
         "ampUp": {
