@@ -1,3 +1,4 @@
+import { ChatMessageData           } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform, Skill } from "../ActorTypes.js";
 import { Defense } from "../config.js";
@@ -127,11 +128,14 @@ export class SpellRoll extends SkillRoll {
 export class ItemRoll extends SkillRoll {
 	rollType = RollType.Weapon;
 	
+	item   : Item;
 	itemId : string;
 	gear   : Gear;
 	
-	constructor(actor: Lifeform, item: Item) {
+	constructor(actor: Lifeform, item: Item, itemId:string) {
 		super(actor, (item.data.data as any).skill);
+		this.item      = item;
+		this.itemId    = itemId;
 		this.gear      = item.data.data as Gear;
 		this.skillSpec = this.gear.skillSpec;
 	}
@@ -145,8 +149,14 @@ export class ConfiguredRoll extends PreparedRoll {
 	defRating : number;
 }
 
-export class FinishedRoll extends ConfiguredRoll {
-	success : boolean;
+export class FinishedRoll extends PreparedRoll {
+	configured : ConfiguredRoll;
+	success    : boolean;
 	glitch  : boolean;
 	criticalglitch : boolean;
+	total   : number;
+   tooltip : string;
+    results: string | DiceTerm.Result[];
+    formula: string;
+	publicRoll : boolean;
 }

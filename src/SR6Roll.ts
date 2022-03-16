@@ -1,4 +1,5 @@
-import { Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
+import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
 import { ConfiguredRoll, FinishedRoll, ReallyRoll } from "./dice/RollTypes.js";
 
@@ -6,17 +7,20 @@ import { ConfiguredRoll, FinishedRoll, ReallyRoll } from "./dice/RollTypes.js";
  * 
  */
 export default class SR6Roll extends Roll<ConfiguredRoll> {
+	
+	finished   : FinishedRoll;
+	configured : ConfiguredRoll ;
 
-    //static CHAT_TEMPLATE = "systems/shadowrun6-eden/templates/chat/roll-sr6.html";
+    static CHAT_TEMPLATE = "systems/shadowrun6-eden/templates/chat/roll-sr6.html";
     //static TOOLTIP_TEMPLATE = "systems/shadowrun6-eden/templates/chat/tooltip.html";
 
     //_total: number;
     results: DiceTerm.Result[];
 
-    constructor(formula: string, data?: ConfiguredRoll, options?: SR6Roll['options']) {
-        super(formula, data, options);
-        let data2: ConfiguredRoll = this.data;
-         console.log("In SR6Roll<init>(" + formula + " , ", data);
+	constructor(formula: string, data: ConfiguredRoll, options?: SR6Roll['options']) {
+		super(formula, data, options);
+		this.configured = data;
+      console.log("In SR6Roll<init>(" + formula + " , ", data);
     }
 
     evaluate(options?: InexactPartial<Options & { async: false }>): Evaluated<this>;
@@ -27,9 +31,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		// IMPORTANT: Before merging arrays, have them calculated
 		super.evaluate(  { async:false });
 		try {
-			console.log("BEFORE _total  : " , this._total);
-			console.log("BEFORE total   : " , this.total);
-			console.log("BEFORE dice    : " , this.dice);
+			//console.log("BEFORE _total  : " , this._total);
+			//console.log("BEFORE total   : " , this.total);
+			//console.log("BEFORE dice    : " , this.dice);
 			this.modifyResults();
 			if (this.data.useWildDie) {
 				
@@ -44,18 +48,18 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 				this.results = merged.results;
 			}
 				
-			console.log("AFTER  _dice   : " , this._dice);
+/*			console.log("AFTER  _dice   : " , this._dice);
 			console.log("AFTER  dice    : " , this.dice);
 			console.log("AFTER  _total  : " + this._total);
 			console.log("AFTER  total   : " + this.total);
 			console.log("AFTER  _results: " + this.results);
 			console.log("   this: " , this);
-		
+*/		
             this._evaluated = true;
 				this._formula = (this.data as ConfiguredRoll).pool + "d6";
 				
 				let foo:any = {
-					test :  "irgendwie",
+					test :  "aus_evaluate",
 					bla  :  "fasel"
 				};
 				(this as any).data =  foo;
@@ -65,107 +69,19 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
         }
     }
 
-    /**
-     * Execute the Roll, replacing dice and evaluating the total result
-     * @param options - Options which inform how the Roll is evaluated
-     *                  (default: `{}`)
-     * @returns The evaluated Roll instance
-     *
-     * @example
-     * ```typescript
-     * let r = new Roll("2d6 + 5 + 1d4");
-     * r.evaluate();
-     * console.log(r.result); // 5 + 4 + 2
-     * console.log(r.total);  // 11
-     * ```
-     */
-    evagluate(options?: InexactPartial<Options & { async: false }>): Evaluated<this>;
-    evagluate(options: InexactPartial<Options> & { async: true }): Promise<Evaluated<this>>;
-    evagluate(options?: InexactPartial<Options>): Evaluated<this> | Promise<Evaluated<this>> {
-        console.log("ENTER evaluate()");
-        try {
-            console.log("data = ", this.data);
-            let data: ConfiguredRoll = this.data;
-            let noOfDice: number = data.pool;
-            let die: Roll;
-            if (data.modifier)
-                noOfDice += data.modifier;
-
-            if (noOfDice < 0) {
-                noOfDice = 0;
-            }
-            this._formula = noOfDice + "d6";
-            let formula = "";
-            console.log("noOfDice = ", noOfDice);
-            console.log("ButtonType = ", data.buttonType);
-            if (data.buttonType == ReallyRoll.ROLL) {
-                if (this.data.useWildDie) {
-                    formula = this.createFormula(1, -1, data.explode);
-                    if (noOfDice - 1 > 0) {
-                        formula += "+" + this.createFormula(noOfDice - 1, -1, data.explode);
-                    }
-                } else {
-                    formula = this.createFormula(noOfDice, -1, data.explode);
-                }
-                console.log("formula = ", formula);
-                die = new Roll(formula).evaluate({ async: false });
-                console.log("die = ", die);
-              console.log("die2 = ", die.terms[0]);
-
-                this.results = (die.terms[0] as any).results;
-                if (this.data.useWildDie) {
-                    this.results = this.results.concat((die.terms[2] as any).results);
-                }
-                this._total = this.calculateTotal(die.total);
-               console.log("Before modifyResults: ", this.results);
-                this.modifyResults();
-                this._evaluated = true;
-                this.terms = die.terms;
-
-                // this._dice = die.terms;
-                if (this.data.useWildDie) {
-                    (this._dice[0].options as any).colorset = "SR6_light";
-                }
-
-            } else if (data.buttonType == ReallyRoll.AUTOHITS) {
-                noOfDice = Math.floor(noOfDice / 4);
-                formula = this.createFormula(noOfDice, -1, false);
-                die = new Roll(formula).evaluate({ async: false });
-                console.log("die = ", die);
-               console.log("die2 = ", die.terms[0]);
-
-              // this.results = die.terms[0].results;
-                this.results.forEach(result => {
-                    result.result = 6;
-                    result.success = true;
-                    //result.classes = "die die_" + result.result;
-                });
-                this._total = noOfDice;
-                this._formula = (game as Game).i18n.localize("shadowrun6.roll.hits_bought");
-                // this._dice = die.terms;
-            } else {
-                console.log("How did I get here?");
-            }
-
-            console.log("total = " + this._total);
-            this._evaluated = true;
-            return (this as Evaluated<this>);
-        } finally {
-            console.log("LEAVE evaluate()");
-        }
-    }
-
-    calculateTotal(result):number {
+   private  calculateTotal():number {
  		console.log("-----calculateTotal");
      let total:number = 0;
 		this.dice.forEach(term => {
-    		let addedByExplosion = false;
 	    	term.results.forEach(die =>  total+= die.count!);
 		});
 		this._total;
       return total;
     }
 
+	/**
+	 * @override
+	 */
 	_evaluateTotal() : number {
 		console.log("-----evaluateTotal");
 		super._evaluateTotal();
@@ -175,9 +91,12 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	    	term.results.forEach(die =>  total+= die.count!);
 		});
 		
-		(this.data as FinishedRoll).glitch = this.isGlitch();
-		(this.data as FinishedRoll).criticalglitch = this.isCriticalGlitch();
-		(this.data as FinishedRoll).success = this.isSuccess();
+		/*
+		this.finished = new FinishedRoll();
+		this.finished.glitch = this.isGlitch();
+		this.finished.criticalglitch = this.isCriticalGlitch();
+		this.finished.success = this.isSuccess();
+		*/
       return total;
 	}
 
@@ -309,8 +228,112 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     }
   }
 
+    /**
+     * Represent the data of the Roll as an object suitable for JSON serialization.
+     * @returns Structured data which can be serialized into JSON
+	  * @override
+     */
+	toJSON() {
+		const json = super.toJSON();
+		(json as any).configured = this.configured;
+		(json as any).results = this.results;
+		return json;
+	}
+
+    /**
+     * Recreate a Roll instance using a provided data object
+     * @param data - Unpacked data representing the Roll
+     * @returns A reconstructed Roll instance
+	  * @override
+     */
+   static fromData<T extends Roll>(this: ConstructorOf<T>, data: Data): T {
+		const roll : Roll = super.fromData(data);
+		console.log("fromData ",roll);
+    	(roll as any).configured = (data as any).configured;
+    	(roll as any).results = (data as any).results;
+    	return roll as T;
+	}
+
+	/*****************************************
+	 * Render to Chat message
+	 * @returns HTML
+	 ******************************************/
+	async render(chatOptions = { flavor:"kein_geschmack"}) : Promise<string> {
+		console.log("ENTER render");
+		console.log("data = ",this);
+		try {
+    		if ( !this._evaluated ) await this.evaluate({async: true});
+			let isPrivate = false;
+/*			chatOptions = mergeObject({
+		  		from: "render.chatOptions",
+        		user: (game as Game).user!.id,
+        		flavor: this.configured.actionText,
+        		template: SR6Roll.CHAT_TEMPLATE,
+      		}, chatOptions
+    		);
+*/
+			let chatData = new FinishedRoll();
+			chatData.actionText = isPrivate ? "" : this.configured.actionText;
+			//chatData.user    = (game as Game).user!.id,
+			chatData.success = this.isSuccess();
+			chatData.glitch  = this.isGlitch();
+			chatData.criticalglitch = this.isCriticalGlitch();
+			chatData.total   = this._total!;
+			chatData.configured = this.configured;
+			chatData.results = isPrivate ? "???" : this.results,
+			chatData.formula = isPrivate ? "???" : this._formula,
+			chatData.publicRoll = !isPrivate;
+			chatData.tooltip = isPrivate ? "" : await this.getTooltip();
+
+			return renderTemplate(SR6Roll.CHAT_TEMPLATE, chatData);
+		} finally {
+			console.log("LEAVE render");
+		}
+  }
+
+/*
+		toMessadge(messageData={}, { create=true}={}) : Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> | MessageData<any> {
+   	console.log("ENTER toMessage");
+		try {
+        console.log("messageData ", messageData);
+		let chatOptions : FinishedRoll = (this as unknown as FinishedRoll);
+
+         // Prepare chat data
+        let chatOptions2:any = mergeObject({
+            from: "toMessage.chatOptionsMerged",
+            //user: game.user.id,
+            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            content: "Hier stand this.total",
+            sound: CONFIG.sounds.dice,
+            _roll: this,
+				finished : chatOptions
+        }, chatOptions);
+		//return super.toMessage(chatOptions2);
+        let xsg : Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> = ChatMessage.create(chatOptions2);
+
+        console.log("called create" , xsg);	
+		let msg : SR6RollChatMessage = new SR6RollChatMessage(chatOptions2, this);        
+		return msg;
+
+		} finally {
+			console.log("LEAVE toMessage");
+		}	
+}
+*/
+
 }
 
 export class SR6RollChatMessage extends ChatMessage {
 	
+	hello : number;
+	total : 3;
+	dice : 2;
+
+    constructor(
+      data?: ConstructorParameters<ConstructorOf<foundry.documents.BaseChatMessage>>[0],
+      context?: ConstructorParameters<ConstructorOf<foundry.documents.BaseChatMessage>>[1]
+    ) {
+        super(data, context);
+         console.log("In SR6RollChatMessage<init>(" + data + " , ", context);
+    }
 }

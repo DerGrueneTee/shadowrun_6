@@ -25,6 +25,7 @@ Hooks.once("init", async function () {
     // Record Configuration Values
     // Record Configuration Values
     CONFIG.SR6 = new SR6Config;
+    //CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
     CONFIG.Combat.documentClass = Shadowrun6Combat;
     CONFIG.Actor.documentClass = Shadowrun6Actor;
     CONFIG.Dice.rolls = [SR6Roll, Roll];

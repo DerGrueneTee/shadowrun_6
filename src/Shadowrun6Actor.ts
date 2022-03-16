@@ -2,7 +2,8 @@ import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Deri
 import { SR6, SR6Config } from "./config.js";
 import { SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
-import { doRoll } from "./dice/CommonRoll.js";
+//import { doRoll } from "./dice/CommonRoll.js";
+import { doRoll } from "./Rolls.js";
 import { ItemRoll, SkillRoll, SpellRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
@@ -944,24 +945,39 @@ export class Shadowrun6Actor extends Actor {
 		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
 		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
-		console.log("rollSkill(", roll, ")");
+		console.log("rollItem(", roll, ")");
 		let item : Gear = roll.gear;
 
 		roll.allowBuyHits = true;
-
-		// Prepare action text
-		let actionText;
+		
+		// If present, replace item name, description and source references from compendium
+		let itemName = roll.item.name;
+		let itemDesc = "";
+		let itemSrc  = "";
+		
+		if (roll.gear.description) {
+			itemDesc = roll.gear.description;
+		}
+		if (roll.gear.genesisID) {
+			let key = "item."+roll.gear.genesisID+".";
+			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
+				// A translation exists
+				itemName = (game as Game).i18n.localize(key+"name");
+				itemDesc = (game as Game).i18n.localize(key+"desc");
+				itemSrc  = (game as Game).i18n.localize(key+"src");
+			}
+		}
 		
 		switch ((game as any).user.targets.size) {
 		case 0:
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:itemName});
 			break;
 		case 1:
 		   let targetName = (game as any).user.targets.values().next().value.name;
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:itemName, target:targetName});
 			break;
 		default:
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:this._getGearName(item)});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:itemName});
 		}
 		// Prepare check text
 		let checkText = this._getSkillCheckText(roll);
@@ -970,46 +986,9 @@ export class Shadowrun6Actor extends Actor {
 
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
-		
-		// If present, replace spell name, description and source references from compendium
-		let spellName = item.name;
-		let spellDesc = "";
-		let spellSrc  = "";
-		if (item.data.data.description) {
-			spellDesc = item.data.data.description;
-		}
-		if (item.data.data.genesisID) {
-			let key = "item."+item.data.data.genesisID+".";
-			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
-				// A translation exists
-				spellName = (game as Game).i18n.localize(key+"name");
-				spellDesc = (game as Game).i18n.localize(key+"desc");
-				spellSrc = (game as Game).i18n.localize(key+"src");
-			}
-		}
 
-		let data = mergeObject(options, {
-			pool: pool,
-			actionText: actionText,
-			checkText  : checkText,
-			rollType: "weapon",
-			skill: this.data.data.skills[skillId],
-			spec: spec,
-			item: item,
-			itemName: spellName,
-			itemDesc: spellDesc,
-			itemSrc : spellSrc,
-			defRating : highestDefenseRating,
-			targets: (game as any).user.targets,
-			isOpposed: true,
-			isAllowDefense: true,
-			defendWith: "physical",
-			hasDamageResist: true,
-			useWildDie: item.data.data.wild,
-			buyHits: false
-		});
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doRoll(data);
+		return doRoll(roll);
 		
 	}
 

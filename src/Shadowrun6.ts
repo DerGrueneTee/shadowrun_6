@@ -3,7 +3,7 @@
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
-import SR6Roll  from "./SR6Roll.js";
+import SR6Roll, { SR6RollChatMessage }  from "./SR6Roll.js";
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./Shadowrun6Combat.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
@@ -33,6 +33,7 @@ Hooks.once("init", async function () {
   CONFIG.SR6 = new SR6Config;
 
 
+  //CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
   CONFIG.Combat.documentClass = Shadowrun6Combat;
   CONFIG.Actor.documentClass = Shadowrun6Actor;
   CONFIG.Dice.rolls = [SR6Roll, Roll];

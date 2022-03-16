@@ -521,7 +521,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (!(item.data.data as any).skill) {
 			throw new Error("onRollItemCheck: No skill for item");
 		}
-		let roll : ItemRoll = new ItemRoll((this.actor.data.data as Lifeform), item);
+		let roll : ItemRoll = new ItemRoll((this.actor.data.data as Lifeform), item, itemId);
 		console.log("_onRollItemCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollItem(roll);
 	}

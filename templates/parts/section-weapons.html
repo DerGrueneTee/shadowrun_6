@@ -13,7 +13,7 @@
          <td><label class="middle-column" >{{attackrating item.data.data.attackRating}}</label></td>
          <td class="skill-pool" style="width: 3em">
          	<label class="item-pool" data-skill="{{item.data.data.skill}}" data-skillspec="{{item.data.data.skillSpec}}">{{item.data.data.pool}}</label>
-         	<a class="item-control item-roll" data-item-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         	<a class="item-control item-roll" data-item-id="{{this.id}}" data-defend-with="physical" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
          </td>
 			<td class="item-controls">
 				<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
