@@ -136,6 +136,9 @@ SR6.icons = {
 	adeptpower: {
 		default: "systems/shadowrun6-eden/icons/van-damme-split.svg"
 	},
+	critterpower: {
+		default: "systems/shadowrun6-eden/icons/wolf-howl.svg"
+	},
 	gear: {
 		default: "systems/shadowrun6-eden/icons/pistol-gun.svg"
 	},

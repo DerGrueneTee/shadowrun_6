@@ -22,7 +22,7 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 	try {
-		if (this.data.type!="Vehicle") {
+		if (this.data.type!="Vehicle" && this.data.type!="Critter") {
 			this._prepareAttributes();
 			this._prepareDerivedAttributes();
 			this._preparePersona();
@@ -32,17 +32,27 @@ export class Shadowrun6Actor extends Actor {
 			this._prepareDefensePools();
 			this._prepareItemPools();
 			this._prepareVehiclePools();
+			
 			this._calculateEssence();
 		
 			if (data.mortype) {
 				data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
 			}
 		}
+		if (this.data.type==='Critter') {
+			this._prepareAttributes();
+			this._prepareDerivedAttributes();
+			this._prepareAttackRatings();
+			this._prepareDefenseRatings();
+			this._prepareSkills();
+			this._prepareDefensePools();
+			this._prepareItemPools();
+		}
 		if (this.data.type==='Vehicle') {
 			this._prepareDerivedVehicleAttributes();
 		}
 		} catch (err) {
-			console.log("Error "+err);
+			console.log("Error "+err.stack);
 		}
 	}
 
@@ -71,7 +81,7 @@ export class Shadowrun6Actor extends Actor {
 		const actorData = this.data;
 		const data = this.data.data;
 		// Only calculate for PCs - ignore for NPCs/Critter
-		if (actorData.type === "Player" || actorData.type === "NPC") {
+		if (actorData.type === "Player" || actorData.type === "NPC"|| actorData.type === "Critter") {
 			CONFIG.SR6.ATTRIBUTES.forEach(attr => {
 				data.attributes[attr].pool =
 					parseInt(data.attributes[attr].base || 0)
@@ -90,7 +100,7 @@ export class Shadowrun6Actor extends Actor {
 
 		// Store volatile
 
-		if (actorData.type === "Player" || actorData.type === "NPC") {
+		if (actorData.type === "Player" || actorData.type === "NPC" || actorData.type === "Critter") {
 			if (data.physical) {
 				data.physical.base = 8 + Math.round(data.attributes["bod"].pool / 2);
 				data.physical.max = data.physical.base + data.physical.mod;
@@ -203,12 +213,13 @@ export class Shadowrun6Actor extends Actor {
 		} 
 		
 		// Matrix attack rating (Angriff + Schleicher)
-		data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
-		data.attackrating.matrix.pool = data.attackrating.matrix.base;
-		if (data.attackrating.matrix.mod) {
-			data.attackrating.matrix.pool += data.attackrating.matrix.mod;
-			data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
-		} 
+		if (data.persona && data.persona.used) {
+			data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
+			data.attackrating.matrix.pool = data.attackrating.matrix.base;
+			if (data.attackrating.matrix.mod) {
+				data.attackrating.matrix.pool += data.attackrating.matrix.mod;
+				data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
+			} 
 		
 		// Resonance attack rating (Electronics + Resonance)
 		data.attackrating.resonance.base = data.persona.used.a + data.attributes["res"].pool;
@@ -218,6 +229,7 @@ export class Shadowrun6Actor extends Actor {
 		if (data.attackrating.resonance.mod) {
 			data.attackrating.resonance.pool += data.attackrating.resonance.mod;
 			data.attackrating.resonance.modString += "\n+" + data.attackrating.resonance.mod;
+		}
 		} 
 		
 		// Vehicle combat attack rating (Pilot + Sensor)
@@ -1020,7 +1032,20 @@ export class Shadowrun6Actor extends Actor {
 		const item = this.items.get(itemId);
 		let threshold = ritual? (item.data.data.threshold):0;
 		// Prepare action text
-		let actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+		let actionText;
+		switch (game.user.targets.size) {
+		case 0:
+			actionText = actionText = game.i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
+			break;
+		case 1:
+		   let targetName = game.user.targets.values().next().value.name;
+			actionText = game.i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getGearName(item), target:targetName});
+			break;
+		default:
+			actionText = game.i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getGearName(item)});
+		}
+		// Prepare check text
+		let checkText = this._getSkillCheckText(skillId,spec,0);
 		// Get pool
 		let pool = this._getSkillPool(skillId, spec);
 		let rollName = this._getSkillCheckText(skillId, spec, threshold);		
@@ -1085,7 +1110,7 @@ export class Shadowrun6Actor extends Actor {
 			canIncreaseArea : canIncreaseArea,
 			attackRating: attackRating,
 			defRating : highestDefenseRating,
-			targets: game.user.targets.forEach( val => val.actor),
+			targets: game.user.targets,
 			isOpposed: isOpposed,
 			threshold: threshold,
 			rollType: ritual?"ritual":"spell",
@@ -1282,4 +1307,10 @@ export class Shadowrun6Actor extends Actor {
 		console.log("NOT IMPLEMENTED YET");
 	}
 
+	applyDamage(physical, damage) {
+		console.log("applyDamage(physical=" + physical + ", damage=" + damage + ")");
+		if (physical) {
+			
+		}
+	}
 }

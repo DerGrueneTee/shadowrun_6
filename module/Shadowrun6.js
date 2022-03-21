@@ -3,6 +3,7 @@ import { Shadowrun6ActorSheet } from "./sheets/SR6ActorSheet.js";
 import { Shadowrun6ActorSheetPC } from "./sheets/ActorSheetPC.js";
 import { Shadowrun6ActorSheetNPC } from "./sheets/ActorSheetNPC.js";
 import { Shadowrun6ActorSheetVehicle } from "./sheets/ActorSheetVehicle.js";
+import { Shadowrun6ActorSheetCritter } from "./sheets/ActorSheetCritter.js";
 //import { Shadowrun6ActorSheetVehicleCompendium } from "./sheets/ActorSheetVehicleCompendium.js";
 import { CompendiumActorSheetNPC } from "./sheets/CompendiumActorSheetNPC.js";
 import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
@@ -11,7 +12,7 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { doRoll } from "./dice/CommonRoll.js";
-import { rollDefense } from "./dice/CommonRoll.js";
+import { rollDefense, rollSoak } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./combat.js";
@@ -52,9 +53,10 @@ Hooks.once("init", async function () {
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetNPC, { types: ["NPC"], makeDefault: true });
   Actors.registerSheet("shadowrun6-eden", CompendiumActorSheetNPC, { types: ["NPC"], makeDefault: false });
   Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetVehicle, { types: ["Vehicle"], makeDefault: true });
+  Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetCritter, { types: ["Critter"], makeDefault: true });
   //Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetVehicleCompendium, { types: ["Vehicle"], makeDefault: false });
 
-  Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear", "martialarttech", "martialartstyle", "quality", "spell", "adeptpower", "ritual", "metamagic", "focus", "echo", "complexform", "sin", "contact", "lifestyle"], makeDefault: true });
+  Items.registerSheet("shadowrun6-eden", SR6ItemSheet, { types: ["gear", "martialarttech", "martialartstyle", "quality", "spell", "adeptpower", "ritual", "metamagic", "focus", "echo", "complexform", "sin", "contact", "lifestyle","critterpower"], makeDefault: true });
 
   preloadHandlebarsTemplates();
 
@@ -241,20 +243,41 @@ Hooks.once("init", async function () {
   });
 
   Hooks.on('renderChatMessage', function (app, html, data) {
+	 console.log("ENTER renderChatMessage");
 	 if (html.find("#chat-message")) {
 	 	html.find("#chat-message").show(_onChatMessageAppear(this, app, html, data));
 	 }
     html.find(".rollable").click(event => {
 //      const type =  $(event.currentTarget).closestData("roll-type");
+		console.log("ENTER renderChatMessage.rollable.click -> event = ",event.currentTarget);
+      var targetId = $(event.currentTarget).closestData("targetid");
+		/* 
+		 * If no target was memorized in the button, try to find one from the
+		 * actor associated with the player 
+		 */
+	   if (!targetId) {
+			game.actors.forEach(item => {
+	    		if (item.hasPlayerOwner)
+					targetId = item.data._id;
+		   });
+		}
+      console.log("TargetId "+targetId);
+
 		const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
-		console.log("Clicked on rollable");
+		console.log("Clicked on rollable : "+rollType);
       if (rollType === "defense") {
-        const targetId = $(event.currentTarget).closestData("targetid");
-        console.log("Target "+targetId);
-			const actor = game.actors.get(targetId);
-		  const defendWith = dataset.defendWith;
-			rollDefense(actor, defendWith);
+ 			const actor = game.actors.get(targetId);
+         console.log("Target actor ",actor);
+			rollDefense(actor, dataset);
+      } else if (rollType === "soak") {
+ 			const actor = game.actors.get(targetId);
+         console.log("Target actor ",actor);
+			rollSoak(actor, dataset);
+      } else if (rollType === "damage") {
+ 			const actor = game.actors.get(targetId);
+         console.log("Target actor ",actor);
+			applyDamage(actor, dataset);
       }
     });
     html.on("click", ".chat-edge", event => {
@@ -288,6 +311,7 @@ Hooks.once("init", async function () {
 		    tip.slideUp(200);
 	    }
 		});
+	 console.log("LEAVE renderChatMessage");
   });
 
   /**
@@ -472,7 +496,8 @@ $.fn.closestData = function (dataName, defaultValue = "") {
 
 /* -------------------------------------------- */
 function _onChatMessageAppear(event, chatMsg, html, data) {
-	console.log("Chat message appear - owner = "+chatMsg.isOwner);
+	//console.log("Chat message appear - data  = ",data);
+	//console.log("Chat message appear - owner = ",chatMsg);
 	if (!chatMsg.isOwner) {
 		console.log("I am not owner of that chat message from "+data.alias);		
 		return;
@@ -489,7 +514,7 @@ function _onChatMessageAppear(event, chatMsg, html, data) {
 	let edgeBoosts  = html.find('.edgeBoosts');
 	let edgeActions = html.find('.edgeActions');
 	console.log("_onChatMessageAppear");
-	if (btnPerform && chatMsg.roll.peformPostEdgeBoost) {
+	if (btnPerform && chatMsg.roll && chatMsg.roll.peformPostEdgeBoost) {
 		btnPerform.click(chatMsg.roll.peformPostEdgeBoost.bind(this, chatMsg, html, data, btnPerform, html.find('.edgeBoosts'),  html.find('.edgeActions')));
 	}
 }

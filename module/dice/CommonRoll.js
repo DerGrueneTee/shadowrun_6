@@ -199,6 +199,8 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.item) {
 			// TODO: Evaluate fire modes
 			console.log("ToDo: evaluate fire modes, called shots, etc.")
+			data.damage = data.item.data.data.dmg;
+			data.dmgDef = data.item.data.data.dmgDef;
 		}
 	}
 
@@ -207,11 +209,11 @@ function _dialogClosed(type, form, data, messageData={}) {
 	data.from =  "dialogClosed.data";
     let r = new SR6Roll("", data);
     try {
-	   console.log("Call r.evaluate: "+r);
+	   console.log("Call r.evaluate: ",r);
       r.evaluate();
 		data.results=r.results;
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
-			data.damage += r._total;
+			data.hits += r._total;
 		}
     } catch (err) {
       console.error("CommonRoll error: "+err);
@@ -220,17 +222,25 @@ function _dialogClosed(type, form, data, messageData={}) {
       console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
       return null;
     }
+    console.log("LEAVE _data = ", data);
     console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
     return r;
  }
 
-export function rollDefense(actor, defendWith) {
-	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+")");
+export function rollDefense(actor, dataset) {
+	console.log("ENTER rollDefense");
+	const defendWith = dataset.defendWith;
+	const defendHits = dataset.defendHits;
+	const damage     = parseInt(dataset.damage);
+	const targetId = dataset.targetid;
+	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+", defendHits="+defendHits+", damage="+damage+", targetId="+targetId+")");
 	let data = {
+		threshold : dataset.defendHits,
 		actionText: "",
 		checkText : "X",
 		defense   : {},
 		speaker   : ChatMessage.getSpeaker({ actor: this }),
+		baseDamage: damage,
 	}
 	switch (defendWith) {
 	case "physical":
@@ -261,8 +271,15 @@ export function rollDefense(actor, defendWith) {
 	data.buttonType = 0; // Simulate Roll button clicked
    let r = new SR6Roll("", data);
     try {
-	   console.log("Call r.evaluate: "+r);
+	   console.log("rollDefense: Call r.evaluate: "+r);
       r.evaluate();
+		data.nettohits=parseInt( data.threshold - r._total );
+	   console.log("Netto Hits: "+r.nettohits);
+		
+		data.soak=(r.nettohits<0)?0:(damage + data.nettohits);
+		data.isAllowSoak = true;
+	   console.log("Damage to soak: "+data.soak);
+	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);
     } catch (err) {
       console.error("CommonRoll error: "+err);
@@ -272,6 +289,74 @@ export function rollDefense(actor, defendWith) {
 	
 	
 	console.log("LEAVE rollDefense");
+	return r;
+	
+}
+
+export function rollSoak(actor, dataset) {
+	console.log("ENTER rollSoak");
+	const soak     = parseInt(dataset.soak);
+	const targetId = dataset.targetid;
+	console.log("ENTER rollSoak(actor="+actor+", soak="+soak+", targetId="+targetId+")");
+	let data = {
+		threshold : soak,
+		actionText: "Soaked",
+		checkText : "X",
+		defense   : {},
+		speaker   : ChatMessage.getSpeaker({ actor: this }),
+		isBringPain: true
+	}
+	/*
+	switch (defendWith) {
+	case "physical":
+		data.defense = actor.data.data.defensepool.physical;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.physical");
+		data.checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.int");
+		break;
+	case "spells_direct":
+		data.defense    = actor.data.data.defensepool.spells_direct;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_direct");
+		data.checkText  = game.i18n.localize("attrib.wil")+" + "+game.i18n.localize("attrib.int");
+		break;
+	case "spells_indirect":
+		data.defense = actor.data.data.defensepool.spells_indirect;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_indirect");
+		data.checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.wil");
+		break;
+	case "spells_other":
+		data.defense = actor.data.data.defensepool.spells_other;
+		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_other");
+		data.checkText  = game.i18n.localize("attrib.wil")+" + "+game.i18n.localize("attrib.int");
+		break;
+	}
+	*/
+	
+	// Prepare new roll
+	data.pool = actor.data.data.defensepool.damage_physical.pool;
+	console.log("Pool for soak: "+data.pool)
+	data.modifier = 0;
+	data.buttonType = 0; // Simulate Roll button clicked
+
+   let r = new SR6Roll("", data);
+    try {
+	   console.log("rollSoak: Call r.evaluate: ",r);
+      r.evaluate();
+		data.soaked=parseInt( r._total );
+	   console.log("Soaked: "+data.soaked+" of "+data.threshold+" damage");
+		
+		data.soaked = r._total;
+		data.damageToApply = (data.r_total<soak)?0:(data.threshold - data.soaked);
+	   console.log("damageToApply: "+data.damageToApply);
+	   console.log("Call r.toMessage: ",r);
+		r.toMessage(data);
+    } catch (err) {
+      console.error("CommonRoll error: "+err);
+      console.error("CommonRoll error: "+err.stack);
+      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+    }
+
+	console.log("LEAVE rollSoak ");
+	return r;
 	
 }
 

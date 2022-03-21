@@ -13,6 +13,7 @@ export class SR6ItemSheet extends ItemSheet {
 	 console.log("in template()");
 	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
     const path = 'systems/shadowrun6-eden/templates/item/';
+	 console.log(`${path}shadowrun6-${this.item.data.type}-sheet.html`);
     return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
   }
 

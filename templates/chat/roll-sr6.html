@@ -84,19 +84,45 @@
    
    <!-- Defense -->
     {{log "Defense" data}}
-   {{#if data.isAllowDefensed}}
+   {{#if data.isAllowDefense}}
    <hr/>
-   {{#if data.targets}}
+    {{log "targets " data.targets}}
+    {{log "targets " data.targets.len}}
+   {{#iff data.targets.size ">" 0}}
      {{#each data.targets as |token id|}}
      <div>
       {{log "Token" id " = " token.data }} 
-     	<button class="rollable" data-roll-type="defense" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}">Token {{id}}: {{token.data.name}}</button>
+     	<button class="rollable" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
      </div>
      {{/each}}
    {{else}} 
      <div>
-  	   <button class="rollable" data-roll-type="defense" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
+  	   <button class="rollable" data-roll-type="defense" data-damage="{{data.damage}}" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
      </div>
-   {{/if}}
+   {{/iff}}
+   {{/if}}        
+   
+   <!-- Soak Roll -->
+    {{log "roll-sr6.html: soak data=" data}}
+   {{#if data.isAllowSoak}}
+   <b>Base damage:</b> {{data.baseDamage}}  <b>Net hits:</b> {{data.nettohits}}
+   <hr/>
+    {{log "soak damage = " data.soak}}
+   {{#iff data.soak ">" 0}}
+     <div>
+     	<button class="rollable" data-roll-type="soak" data-soak="{{data.soak}}" data-targetid="{{token.data.actorId}}" ">{{localize 'shadowrun6.roll.soak_physical'}} ({{data.soak}}): {{token.data.name}}</button>
+     </div>
+   {{/iff}}
+   {{/if}}        
+   
+   <!-- Bring the Pain -->
+   {{#if data.isBringPain}}
+   Soaked {{data.soaked}} of {{data.threshold}} damage
+   <hr/>
+   {{#iff data.damageToApply ">" 0}}
+     <div>
+     	<button class="rollable" data-roll-type="damage" data-damageToApply="{{data.damageToApply}}" data-targetid="{{token.data.actorId}}" ">{{localize 'shadowrun6.roll.damage_apply'}} ({{data.damageToApply}}): {{token.data.name}}</button>
+     </div>
+   {{/iff}}
    {{/if}}        
 </div>

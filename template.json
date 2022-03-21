@@ -421,8 +421,7 @@
 				"monitor-template",
 				"initiative-template",
 				"skill-template",
-				"knowledge-template",
-				"magic-template"
+				"knowledge-template"
 			]
 		},
 		"Vehicle": {
@@ -455,6 +454,7 @@
 		"types": [
 			"complexform",
 			"contact",
+			"critterpower",
 			"echo",
 			"gear",
 			"lifestyle",
@@ -517,6 +517,15 @@
 			"loyalty": 1,
 			"type": "",
 			"description": ""
+		},
+		"critterpower": {
+			"templates": [
+				"genesis"
+			],
+			"duration": "instantaneous",
+			"action": "",
+			"type": "physical",
+			"range": "self"
 		},
 		"echo": {
 			"templates": [

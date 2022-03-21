@@ -8,6 +8,7 @@
   },
   "ITEM": {
     "TypeAdeptpower": "Adept Power",
+    "TypeCritterpower": "Critter Power",
     "TypeComplexform": "Complex Form",
     "TypeContact" : "Contact",
     "TypeEcho": "Echo",
@@ -696,10 +697,14 @@
         "attack_target_multiple": "Attacking multiple targets with {name}",
         "attack_target_none": "Attacking target with {name}",
         "attack_target_one": "Attacking {target} with {name}",
-        "cast": "Casting {name}",
+        "cast_target_multiple": "Casting {name} on multiple targets",
+        "cast_target_none": "Casting {name}",
+        "cast_target_one": "Casting {name} on {target}",
         "thread": "Threading {name}",
         "defense": {
-          "physical": "Defend against physical attack"
+          "physical": "Defend against physical attack",
+          "spells_direct": "Defend direct combat spells",
+          "spells_indirect": "Defend indirect combat spells"
         }
       },
       "ar_0": "Close",
@@ -712,6 +717,7 @@
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
       "damage": "Damage: ",
+		"damage_apply": "Apply damage",
       "defRating": "Defense: ",
       "defense_button": "Roll Defense",
       "edge": {
@@ -735,6 +741,7 @@
       "nosuccess": "hits, threshold: ",
       "notarget": "No target selected",
       "pool": "Pool",
+		"soak_physical": "Soak damage",
       "spec": "Specialization",
       "spell": {
         "ampUp": {
@@ -797,6 +804,10 @@
       "contacts": {
         "add": "Add new contact",
         "title": "Contacts"
+      },
+      "critterpowers": {
+        "add": "Add critter power",
+        "title": "Powers"
       },
       "defense": "Defenses & Resistances",
       "derived": "Derived Values",
