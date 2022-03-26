@@ -420,6 +420,7 @@
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
 		let perc = Math.min(Math.max(monitorAttribute.value / monitorAttribute.max * 100, 0), 100);
+		console.log("=======================");
 		if ( html.find("#bar" + id + "Cur").length==0) {
 			return;
 		}
