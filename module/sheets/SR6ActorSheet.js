@@ -415,16 +415,16 @@
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
-		if (!monitorAttribute || !monitorAttribute.value)
+		if (!monitorAttribute)
 			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
-		let perc = monitorAttribute.value / monitorAttribute.max * 100;
+		let perc = Math.min(Math.max(monitorAttribute.value / monitorAttribute.max * 100, 0), 100);
+		console.log("=======================");
 		if ( html.find("#bar" + id + "Cur").length==0) {
 			return;
 		}
 		html.find("#bar" + id + "Cur")[0].style.width = perc + "%";
-
 		let myNode = html.find("#bar" + id + "Boxes")[0];
 		// Only change nodes when necessary
 		if (myNode.childElementCount != monitorAttribute.max) {
