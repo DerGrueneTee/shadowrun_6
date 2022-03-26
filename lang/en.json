@@ -714,6 +714,7 @@
       "ar_4": "Extreme",
       "attack": "Attack",
       "attackRating": "Attack Rating",
+      "attack_missed": "Missed the Attack",
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
       "damage": "Damage: ",

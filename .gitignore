@@ -51,4 +51,5 @@ Thumbs.db
 /.settings/
 /package/
 /package-lock.json
+
 install.zip

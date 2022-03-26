@@ -1307,10 +1307,10 @@ export class Shadowrun6Actor extends Actor {
 		console.log("NOT IMPLEMENTED YET");
 	}
 
-	applyDamage(physical, damage) {
-		console.log("applyDamage(physical=" + physical + ", damage=" + damage + ")");
-		if (physical) {
-			
-		}
+	applyDamage(type, damage) {
+		console.log("applyDamage(type=" + type + ", damage=" + damage + ")");
+		this.data.data[type].dmg += parseInt(damage);
+		this.data.data[type].value -= parseInt(damage);
+		this._sheet?.render();
 	}
 }

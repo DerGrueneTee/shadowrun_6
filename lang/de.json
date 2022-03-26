@@ -709,6 +709,7 @@
       "ar_4": "Sehr weit",
       "attack": "Angriff gegen ",
       "attackRating": "Angriffswert",
+      "attack_missed": "Angriff ging daneben",
       "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
