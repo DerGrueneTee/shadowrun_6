@@ -241,6 +241,7 @@ export function rollDefense(actor, dataset) {
 		defense   : {},
 		speaker   : ChatMessage.getSpeaker({ actor: this }),
 		baseDamage: damage,
+		defendWith: dataset.defendWith
 	}
 	switch (defendWith) {
 	case "physical":
@@ -270,6 +271,7 @@ export function rollDefense(actor, dataset) {
 	data.modifier = 0;
 	data.buttonType = 0; // Simulate Roll button clicked
    let r = new SR6Roll("", data);
+
     try {
 	   console.log("rollDefense: Call r.evaluate: "+r);
       r.evaluate();
@@ -278,6 +280,8 @@ export function rollDefense(actor, dataset) {
 		
 		data.soak=(r.nettohits<0)?0:(damage + data.nettohits);
 		data.isAllowSoak = true;
+		data.target = {id: targetId, name: game.actors.get(targetId).data.name};
+		data.damageType = dataset.damageType;
 	   console.log("Damage to soak: "+data.soak);
 	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);
@@ -287,13 +291,16 @@ export function rollDefense(actor, dataset) {
       ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
     }
 	
-	
 	console.log("LEAVE rollDefense");
 	return r;
 	
 }
 
-export function rollSoak(actor, dataset) {
+export function applyDamage(actor, dataset) {
+	actor.applyDamage(dataset.defendWith, dataset.damagetoapply)
+}
+
+export function rollSoak(actor, dataset) {	
 	console.log("ENTER rollSoak");
 	const soak     = parseInt(dataset.soak);
 	const targetId = dataset.targetid;
@@ -304,7 +311,8 @@ export function rollSoak(actor, dataset) {
 		checkText : "X",
 		defense   : {},
 		speaker   : ChatMessage.getSpeaker({ actor: this }),
-		isBringPain: true
+		isBringPain: true,
+		defendWith: dataset.defendWith
 	}
 	/*
 	switch (defendWith) {
@@ -346,6 +354,7 @@ export function rollSoak(actor, dataset) {
 		
 		data.soaked = r._total;
 		data.damageToApply = (data.r_total<soak)?0:(data.threshold - data.soaked);
+		data.target = {id: targetId, name: game.actors.get(targetId).data.name}
 	   console.log("damageToApply: "+data.damageToApply);
 	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);
