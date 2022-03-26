@@ -689,7 +689,7 @@ export class Shadowrun6Actor extends Actor {
 		this.data.items.forEach(tmpItem => {
 			let item = tmpItem.data.data;
 			if (tmpItem.type == "gear" && item.type=="ELECTRONICS") {
-				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK") {
+				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK" || item.subtype == "RIGGER_CONSOLE") {
 					if (item.usedForPool) {
 						actorData.persona.device.base.d = item.d;
 						actorData.persona.device.base.f = item.f;
