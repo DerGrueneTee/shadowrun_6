@@ -392,21 +392,23 @@
 	//-----------------------------------------------------
 	_setDamage(html, i, monitorAttribute, id, event) {
 		switch (event.target.parentNode.getAttribute("id")) {
-			case "barPhyBoxes": 
-				console.log("setDamange (physical health to " + event.currentTarget.dataset.value + ")");
+			case "barPhyBoxes":
 				//Allow setting zero health by clicking again
 				if (this.actor.data.data.physical.dmg == monitorAttribute.max-1 == i) {
-					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max});
+          			console.log(`setDamange (physical health to ${monitorAttribute.max}`);
+          			this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max});
 				} else {
+         			console.log(`setDamange (physical health to ${monitorAttribute.max -i}`);
 					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max - i });
 				}
-				break; 
-			case "barStunBoxes": 
-				console.log("setDamange (stun health to " + event.currentTarget.dataset.value + ")");
+				break;
+			case "barStunBoxes":
 				//Allow setting zero health by clicking again
 				if (this.actor.data.data.stun.dmg == monitorAttribute.max-1 == i) {
+          			console.log(`setDamange (stun health to ${monitorAttribute.max}`);
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max});
 				} else {
+          			console.log(`setDamange (stun health to ${monitorAttribute.max -i}`);
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max - i });
 				}
 				break;
@@ -415,7 +417,7 @@
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
-		if (!monitorAttribute || !monitorAttribute.value)
+    	if (!monitorAttribute || monitorAttribute.value === null)
 			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
