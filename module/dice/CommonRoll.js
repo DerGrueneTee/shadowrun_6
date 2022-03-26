@@ -97,7 +97,7 @@ async function _showRollDialog(data, onClose={}) {
       };
     }
 	const myDialogOptions = {
-		width: 480,
+		width: 550,
 	  };
   console.log("create RollDialog");
     let x =  new RollDialog({
@@ -109,10 +109,16 @@ async function _showRollDialog(data, onClose={}) {
       default: "normal",
       data: data,
       attackType: data.attackType,
-      render: html => console.log("Register interactivity in the rendered dialog"),
+      render: (html) => {
+		  console.log("Register interactivity in the rendered dialog")
+          let chatRollMode = $(".roll-type-select").val();
+          $("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
+	  },
       close: () => resolve(null)
     }, myDialogOptions).render(true);
+
   });
+ 
   console.log("LEAVE _showRollDialog");
 }
 
@@ -212,9 +218,34 @@ function _dialogClosed(type, form, data, messageData={}) {
 	   console.log("Call r.evaluate: ",r);
       r.evaluate();
 		data.results=r.results;
+		
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
 			data.hits += r._total;
 		}
+		else if(data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "physical")
+		{
+			data.damage += r._total;
+		}
+		
+		//If this is a weapon, add net hits to damage and determin if damage is stun or physical
+		if (data.item)
+		{
+			data.damage = data.item.data.data.dmg;
+			data.damage += r._total; //  data.item.data.data.dmg
+
+			if(data.item.data.data.stun)
+			{
+				data.damageType = "S";
+			}
+			else
+			{
+				data.damageType = "P";
+			}
+		}
+		//Add net hit damage to weapon and spell rolls
+		console.log("Weapon Info:");
+		console.log(data);
+
     } catch (err) {
       console.error("CommonRoll error: "+err);
       console.error("CommonRoll error: "+err.stack);

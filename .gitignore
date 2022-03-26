@@ -52,5 +52,4 @@ Thumbs.db
 /package/
 /package-lock.json
 
-system.json
-system-template.json
+install.zip

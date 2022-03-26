@@ -27,7 +27,6 @@
 			html.find(".matrix-roll").click(this._onMatrixAction.bind(this));
 			html.find('.complexform-roll').click(this._onRollComplexFormCheck.bind(this));
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
-			//html.find(".health-phys").on("change", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find('.adeptpower-create').click(ev => {
@@ -393,21 +392,23 @@
 	//-----------------------------------------------------
 	_setDamage(html, i, monitorAttribute, id, event) {
 		switch (event.target.parentNode.getAttribute("id")) {
-			case "barPhyBoxes": 
-				console.log("setDamange (physical health to " + event.currentTarget.dataset.value + ")");
+			case "barPhyBoxes":
 				//Allow setting zero health by clicking again
 				if (this.actor.data.data.physical.dmg == monitorAttribute.max-1 == i) {
-					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max});
+          			console.log(`setDamange (physical health to ${monitorAttribute.max}`);
+          			this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max});
 				} else {
+         			console.log(`setDamange (physical health to ${monitorAttribute.max -i}`);
 					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max - i });
 				}
-				break; 
-			case "barStunBoxes": 
-				console.log("setDamange (stun health to " + event.currentTarget.dataset.value + ")");
+				break;
+			case "barStunBoxes":
 				//Allow setting zero health by clicking again
 				if (this.actor.data.data.stun.dmg == monitorAttribute.max-1 == i) {
+          			console.log(`setDamange (stun health to ${monitorAttribute.max}`);
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max});
 				} else {
+          			console.log(`setDamange (stun health to ${monitorAttribute.max -i}`);
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max - i });
 				}
 				break;
@@ -416,20 +417,18 @@
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute) {
-		if (!monitorAttribute)
+    	if (!monitorAttribute || monitorAttribute.value === null)
 			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
-		console.log(monitorAttribute);
 		let perc = Math.min(Math.max(monitorAttribute.value / monitorAttribute.max * 100, 0), 100);
-		console.log(perc);
 		if ( html.find("#bar" + id + "Cur").length==0) {
 			return;
 		}
 		html.find("#bar" + id + "Cur")[0].style.width = perc + "%";
+
 		let myNode = html.find("#bar" + id + "Boxes")[0];
 		// Only change nodes when necessary
-		
 		if (myNode.childElementCount != monitorAttribute.max) {
 			// The energy bar
 			// Remove previous boxes
@@ -471,6 +470,7 @@
 				}
 				myNode.insertBefore(div, myNode.childNodes[0]);
 			}
+
 		}
 	}
 
