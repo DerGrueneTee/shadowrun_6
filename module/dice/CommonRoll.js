@@ -97,7 +97,7 @@ async function _showRollDialog(data, onClose={}) {
       };
     }
 	const myDialogOptions = {
-		width: 480,
+		width: 550,
 	  };
   console.log("create RollDialog");
     let x =  new RollDialog({
@@ -218,9 +218,34 @@ function _dialogClosed(type, form, data, messageData={}) {
 	   console.log("Call r.evaluate: ",r);
       r.evaluate();
 		data.results=r.results;
+		
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
 			data.hits += r._total;
 		}
+		else if(data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "physical")
+		{
+			data.damage += r._total;
+		}
+		
+		//If this is a weapon, add net hits to damage and determin if damage is stun or physical
+		if (data.item)
+		{
+			data.damage = data.item.data.data.dmg;
+			data.damage += r._total; //  data.item.data.data.dmg
+
+			if(data.item.data.data.stun)
+			{
+				data.damageType = "S";
+			}
+			else
+			{
+				data.damageType = "P";
+			}
+		}
+		//Add net hit damage to weapon and spell rolls
+		console.log("Weapon Info:");
+		console.log(data);
+
     } catch (err) {
       console.error("CommonRoll error: "+err);
       console.error("CommonRoll error: "+err.stack);
