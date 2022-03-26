@@ -8,8 +8,9 @@ export async function doRoll(data) {
 	console.log("ENTER doRoll");
 
 	// Create the Roll instance
+  console.log("DAAAATAAAA:", data);
 	const _r = await _showRollDialog(data, _dialogClosed);
-	console.log("returned from _showRollDialog with "+_r);
+	console.log("returned from _showRollDialog with ", _r);
 	if (_r) {
   		delete data.type;
    	_r.toMessage(data);
@@ -117,7 +118,7 @@ async function _showRollDialog(data, onClose={}) {
 }
 
 function _dialogClosed(type, form, data, messageData={}) {
-    console.log("ENTER _dialogClosed(type="+type+", form="+form+", data="+data+")");
+    console.log("ENTER _dialogClosed(type="+type+", form="+form+", data=",data+")");
 
 	 // Delete some fields that where only necessary for the roll dialog
     delete data.canAmpUpSpell;
@@ -178,8 +179,11 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.spell) {
 			data.drain  = parseInt(data.spell.data.data.drain);	
 			data.radius = (data.spell.data.data.range == "line_of_sight_area" || data.spell.data.data.range == "self_area") ? 2 : 0;
-			if (data.spell.data.data.category == "combat") {
-				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : data.actor.data.data.attributes.mag.pool/2;
+      
+      data.damageType = data.spell.data.data.damage.includes("physical") ? "P" : "S";
+      
+      if (data.spell.data.data.category == "combat") {
+				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : Math.ceil(data.actor.data.data.attributes.mag.pool/2);
 				data.drain  = parseInt(data.spell.data.data.drain);	
 				// Amp up
 				if (data.damageMod) {
@@ -199,6 +203,7 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.item) {
 			// TODO: Evaluate fire modes
 			console.log("ToDo: evaluate fire modes, called shots, etc.")
+      console.log(data);
 			data.damage = data.item.data.data.dmg;
 			data.dmgDef = data.item.data.data.dmgDef;
 		}
@@ -213,28 +218,12 @@ function _dialogClosed(type, form, data, messageData={}) {
       r.evaluate();
 		data.results=r.results;
 		
-		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
-			data.hits += r._total;
-		}
-		else if(data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "physical")
-		{
-			data.damage += r._total;
-		}
-		
 		//If this is a weapon, add net hits to damage and determin if damage is stun or physical
 		if (data.item)
 		{
 			data.damage = data.item.data.data.dmg;
 			data.damage += r._total; //  data.item.data.data.dmg
-
-			if(data.item.data.data.stun)
-			{
-				data.damageType = "S";
-			}
-			else
-			{
-				data.damageType = "P";
-			}
+      data.damageType = data.item.data.data.stun ? "S" : "P";
 		}
 		//Add net hit damage to weapon and spell rolls
 		console.log("Weapon Info:");
@@ -249,6 +238,7 @@ function _dialogClosed(type, form, data, messageData={}) {
     }
     console.log("LEAVE _data = ", data);
     console.log("LEAVE _dialogClosed(type="+type+", form="+form+", data="+data+")");
+
     return r;
  }
 
@@ -322,7 +312,7 @@ export function rollDefense(actor, dataset) {
 }
 
 export function applyDamage(actor, dataset) {
-	actor.applyDamage(dataset.defendWith, dataset.damagetoapply)
+	actor.applyDamage(dataset.damageType, dataset.damagetoapply)
 }
 
 export function rollSoak(actor, dataset) {	
@@ -337,7 +327,8 @@ export function rollSoak(actor, dataset) {
 		defense   : {},
 		speaker   : ChatMessage.getSpeaker({ actor: this }),
 		isBringPain: true,
-		defendWith: dataset.defendWith
+		defendWith: dataset.defendWith,
+    damageType: dataset.damageType
 	}
 	/*
 	switch (defendWith) {
