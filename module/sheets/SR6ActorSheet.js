@@ -423,8 +423,8 @@
 		if ( html.find("#bar" + id + "Cur").length==0) {
 			return;
 		}
-		html.find("#bar" + id + "Cur")[0].style.width = perc + "%";
-		
+		html.find("#bar" + id + "Cur")[0].style.width = perc + "%"
+
 		let myNode = html.find("#bar" + id + "Boxes")[0];
 		// Only change nodes when necessary
 		if (myNode.childElementCount != monitorAttribute.max) {
