@@ -109,10 +109,16 @@ async function _showRollDialog(data, onClose={}) {
       default: "normal",
       data: data,
       attackType: data.attackType,
-      render: html => console.log("Register interactivity in the rendered dialog"),
+      render: (html) => {
+		  console.log("Register interactivity in the rendered dialog")
+          let chatRollMode = $(".roll-type-select").val();
+          $("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
+	  },
       close: () => resolve(null)
     }, myDialogOptions).render(true);
+
   });
+ 
   console.log("LEAVE _showRollDialog");
 }
 
