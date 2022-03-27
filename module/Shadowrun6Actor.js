@@ -129,6 +129,11 @@ export class Shadowrun6Actor extends Actor {
 	  if (!data.derived)
 			return;
 
+            // Physical Heal Pool
+            data.derived.heal_pool = {
+                physical: data.attributes["bod"].pool * 2,
+                stun: data.attributes["bod"].pool + data.attributes["wil"].pool
+            }
 			// Composure
 			if (data.derived.composure) {
 				data.derived.composure.base = data.attributes["wil"].pool + data.attributes["cha"].pool;
@@ -1285,6 +1290,22 @@ export class Shadowrun6Actor extends Actor {
 		return doRoll(data);
 	}
 
+    rollHealCheck(dataset, options = {}) {
+        console.log("rollHealCheck(pool="+dataset.pool+", type="+dataset.itemId+")")
+        console.log(this);
+        let data = mergeObject(options, {
+            pool: dataset.pool,
+            title: game.i18n.localize("shadowrun6.derived."+dataset.itemId),
+            actionText: game.i18n.localize("shadowrun6.derived."+dataset.itemId),
+            healType: dataset.itemId,
+            isHeal: true,
+            target: this,
+            rollType: "heal"
+        });
+        data.speaker = ChatMessage.getSpeaker({actor: this});
+        return doRoll(data);
+    }
+
 	getUsersFirstTargetId() {
 		if (this.userHasTargets()) {
 			return game.user.targets.values().next().value.data.actorId;
@@ -1306,10 +1327,15 @@ export class Shadowrun6Actor extends Actor {
 
 	applyDamage(type, damage) {
 		console.log("applyDamage(type=" + type + ", damage=" + damage + ")");
-    
-    let damageType = type === 'S' ? "stun" : "physical";
-    this.data.data[damageType].dmg += parseInt(damage);
-    this.data.data[damageType].value -= parseInt(damage);
-    this._sheet?.render();
+        if (type.includes("heal.")) {
+            type = type.replace("heal.", "");
+        }
+		this.data.data[type].dmg += parseInt(damage);
+		this.data.data[type].value -= parseInt(damage);
+
+        // Clamping between 0 and maximum health
+        this.data.data[type].dmg = Math.min(Math.max(0, this.data.data[type].dmg), this.data.data[type].max)
+        this.data.data[type].value = Math.min(Math.max(0, this.data.data[type].value), this.data.data[type].max)
+		this._sheet?.render();
 	}
 }
