@@ -37,6 +37,10 @@ async function _showRollDialog(data, onClose={}) {
     data.modifier = 0;
   }
 
+  if (isNaN(data.extended)) {
+      data.extended = false;
+  }
+
 	if (!data.defRating) {
 		data.defRating = 0;
 	}
@@ -168,6 +172,11 @@ function _dialogClosed(type, form, data, messageData={}) {
 		}
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
+      data.extended = form.extended.checked;
+      if (data.extended) {
+        data.extendedPool = data.pool - 1;
+        data.extendedRoll = data.extendedRoll ? data.extendedRoll + 1 : 1;
+      }
       data.buttonType = type;
       data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
@@ -231,6 +240,17 @@ function _dialogClosed(type, form, data, messageData={}) {
 	   console.log("Call r.evaluate: ",r);
       r.evaluate();
 		data.results=r.results;
+		
+		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
+			data.hits += r._total;
+		}
+		else if(data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "physical")
+		{
+			data.damage += r._total;
+		}
+        if (data.extended) {
+            data.extendedAccumulate = data.extendedAccumulate ? data.extendedAccumulate + r._total : r._total;
+        }
 		
 		//If this is a weapon, add net hits to damage and determin if damage is stun or physical
 		if (data.item)
@@ -326,6 +346,43 @@ export function rollDefense(actor, dataset) {
 
 export function applyDamage(actor, dataset) {
 	actor.applyDamage(dataset.damageType, dataset.damagetoapply)
+}
+
+export function rollExtended(actor, dataset) {
+    console.log("ENTER rollExtended")
+
+    let data = {
+        threshold: dataset.threshold,
+        actionText: dataset.actionText,
+        pool: dataset.extendedPool,
+        rollType: "skill",
+        explode: false,
+        isAllowSoak: false,
+        buttonType: 0,
+        extended: true,
+        modifier: 0,
+        extendedRoll: parseInt(dataset.extendedRoll) + parseInt(1),
+        extendedPool: parseInt(dataset.extendedPool) - parseInt(1),
+        extendedAccumulate: parseInt(dataset.extendedAccumulate),
+        formula: dataset.extendedPool + "d6"
+    }
+
+    let r = new SR6Roll("", data);
+    try {
+      r.evaluate();
+	  data.results=r.results;
+      data.extendedAccumulate += r._total;
+    } catch(err) 
+    {
+      console.error("CommonRoll error: "+err);
+      console.error("CommonRoll error: "+err.stack);
+      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
+      return null;
+    }
+
+    r.toMessage(data);
+    console.log("LEAVE rollExtended")
+    return r;
 }
 
 export function applyHeal(actor, dataset) {

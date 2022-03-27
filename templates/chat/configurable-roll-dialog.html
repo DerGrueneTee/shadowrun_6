@@ -154,7 +154,9 @@
         {{#if data.useThreshold}}
         <td></td>
     		<td>{{localize "shadowrun6.roll.threshold"}}</td>
-    		<td colspan="2"><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
+    		<td colspan="3"><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
+    		<td style="text-align:right">{{localize "shadowrun6.roll.extended"}}</td>
+            <td><input type="checkbox" name="extended" {{checked data.extended}} /></td>
         {{/if}}
     	</tr>
     </table>

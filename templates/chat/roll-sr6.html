@@ -24,11 +24,15 @@
       <header class="part-header flexrow chat-edge-post">
         <div>{{formula}}</div>
         <br/>
-        {{#if success}}
-        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
+        {{#if data.extended}}
+            <div class="resulttext" style="flex:2;text-align: right;">{{ localize 'shadowrun6.roll.accumulated' }}: <b>{{data.extendedAccumulate}}</b> / {{data.threshold}}</div>
         {{else}}
-        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
-        {{/if}} 
+            {{#if success}}
+            <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
+            {{else}}
+            <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
+            {{/if}} 
+        {{/if}}
         <br/>
         {{#if criticalGlitch}}
         <span style="color: rgb(215, 14, 233); flex:2">{{localize 'shadowrun6.roll.criticalglitch'}}</span><br/>
@@ -115,6 +119,23 @@
      <span style="color: red;">{{localize 'shadowrun6.roll.attack_missed'}}</span>
    {{/iff}}
    {{/if}}        
+
+   <!-- Extended Roll -->
+   {{#if data.extended}} 
+    <b>Extended Test: </b> {{data.extendedRoll}}
+    <hr />
+    {{#if (ge data.extendedAccumulate data.threshold)}}
+      <span style="color: green;">{{localize 'shadowrun6.roll.extend_check_success'}}</span>
+    {{else}}
+      {{#iff data.pool ">" 0}}
+      <div>
+          <button class="rollable" data-roll-type="extended" data-extended-roll="{{data.extendedRoll}}" data-extended-pool="{{data.extendedPool}}" data-extended-accumulate="{{data.extendedAccumulate}}" data-threshold="{{data.threshold}}" data-action-text="{{data.actionText}}">{{localize 'shadowrun6.roll.extend'}} ({{data.extendedAccumulate}}/{{data.threshold}})</button>
+      </div>
+      {{else}}
+        <span style="color: red;">{{localize 'shadowrun6.roll.extend_check_failed'}}</span>
+      {{/iff}}
+    {{/if}}
+   {{/if}}
    
    <!-- Bring the Pain -->
    {{#if data.isBringPain}}
