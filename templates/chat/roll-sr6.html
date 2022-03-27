@@ -75,7 +75,6 @@
    	  		<td></td>
    	  	</tr>
    	</table>
-  	  <span style="color:red">Work in progress</span>
 		<div class="chat-spell-collapsible" style="display:none">
    		{{data.spellDesc}}
 		</div>
@@ -92,12 +91,12 @@
      {{#each data.targets as |token id|}}
      <div>
       {{log "Token" id " = " token.data }} 
-     	<button class="rollable" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
+     	<button class="rollable" data-damage-type="{{../data.damageType}}" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
      </div>
      {{/each}}
    {{else}} 
      <div>
-  	   <button class="rollable" data-roll-type="defense" data-damage="{{data.damage}}" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
+  	   <button class="rollable" data-damage-type="{{data.damageType}}" data-roll-type="defense" data-damage="{{data.damage}}" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
      </div>
    {{/iff}}
    {{/if}}        
@@ -110,7 +109,7 @@
     {{log "soak damage = " data.soak}}
    {{#iff data.nettohits ">" -1}}
      <div>
-     	<button class="rollable" data-roll-type="soak" data-defend-with="{{data.defendWith}}" data-soak="{{data.soak}}" data-targetid="{{data.target.id}}">{{localize 'shadowrun6.roll.soak_physical'}} ({{data.soak}}): {{data.target.name}}</button>
+     	<button class="rollable" data-damage-type="{{data.damageType}}" data-roll-type="soak" data-defend-with="{{data.defendWith}}" data-soak="{{data.soak}}" data-targetid="{{data.target.id}}">{{localize 'shadowrun6.roll.soak_physical'}} ({{data.soak}}): {{data.target.name}}</button>
      </div>
   {{else}}
      <span style="color: red;">{{localize 'shadowrun6.roll.attack_missed'}}</span>
@@ -123,7 +122,7 @@
    <hr/>
    {{#iff data.damageToApply ">" 0}}
      <div>
-     	<button class="rollable" data-roll-type="damage" data-defend-with="{{data.defendWith}}" data-damageToApply="{{data.damageToApply}}" data-targetid="{{data.target.id}}">{{localize 'shadowrun6.roll.damage_apply'}} ({{data.damageToApply}}): {{data.target.name}}</button>
+     	<button class="rollable" data-damage-type="{{data.damageType}}" data-roll-type="damage" data-defend-with="{{data.defendWith}}" data-damageToApply="{{data.damageToApply}}" data-targetid="{{data.target.id}}">{{localize 'shadowrun6.roll.damage_apply'}} ({{data.damageToApply}}): {{data.target.name}}</button>
      </div>
    {{/iff}}
    {{/if}}     

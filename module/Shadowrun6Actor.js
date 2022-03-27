@@ -363,7 +363,7 @@ export class Shadowrun6Actor extends Actor {
 				let attr = skillDef.attrib;
 				let attribVal = data.attributes[attr].pool;
 				data.skills[id].pool = attribVal + data.skills[id].points;
-				if (data.skills[id].points==0 && !skillDef.useUntrained) {
+				if (data.skills[id].points==0) {
 					data.skills[id].pool--;
 				}
 				
@@ -813,7 +813,6 @@ export class Shadowrun6Actor extends Actor {
 		if (!skillId) {
 			throw "Unknown skill '"+skillId+"'";
 		}
-			
 		let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId);
 		if (!attrib) {
 			attrib = skillDef.attrib;
@@ -821,10 +820,8 @@ export class Shadowrun6Actor extends Actor {
 			
 		// Calculate pool
 		let value = skl.points + skl.modifier;
-		if (skl.base==0) {
-			if (skillDef.useUntrained) {value-=1;}
-			else
-				return 0;
+		if (skl.points==0) {
+				value=-1;
 		}
 		
 		if (spec) {
@@ -837,7 +834,6 @@ export class Shadowrun6Actor extends Actor {
 		
 		// Add attribute
 		value += this.data.data.attributes[attrib].pool;
-		
 		return value;		
 	}
 
@@ -904,7 +900,7 @@ export class Shadowrun6Actor extends Actor {
 			let here    = map(actor);
 			if (here>highest)
 				highest = here;
-      }
+	  }
 		return highest;
 	}
 
