@@ -310,6 +310,11 @@ export function applyDamage(actor, dataset) {
 	actor.applyDamage(dataset.damageType, dataset.damagetoapply)
 }
 
+export function applyHeal(actor, dataset) {
+    // Healing is pretty much applying negative damage
+    actor.applyDamage(dataset.healtype, -dataset.healtoapply);
+}
+
 export function rollSoak(actor, dataset) {	
 	console.log("ENTER rollSoak");
 	const soak     = parseInt(dataset.soak);

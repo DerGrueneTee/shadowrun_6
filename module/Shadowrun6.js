@@ -11,7 +11,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
-import { doRoll } from "./dice/CommonRoll.js";
+import { applyHeal, doRoll } from "./dice/CommonRoll.js";
 import { rollDefense, rollSoak, applyDamage } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 import { registerSystemSettings } from "./settings.js";
@@ -261,25 +261,15 @@ Hooks.once("init", async function () {
 					targetId = item.data._id;
 		   });
 		}
-      console.log("TargetId "+targetId);
 
-		const dataset = event.currentTarget.dataset;
+	  const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
-		console.log("Clicked on rollable : "+rollType);
-      if (rollType === "defense") {
- 			const actor = game.actors.get(targetId);
-         console.log("Target actor ",actor);
-			rollDefense(actor, dataset);
-      } else if (rollType === "soak") {
- 			const actor = game.actors.get(targetId);
-         console.log("Target actor ",actor);
-         console.log("Target dataset ", dataset);
-			rollSoak(actor, dataset);
-      } else if (rollType === "damage") {
- 			const actor = game.actors.get(targetId);
-         console.log("Target actor ",actor);
-         console.log("Target dataset", dataset);
-			applyDamage(actor, dataset);
+      const actor = game.actors.get(targetId);	 
+      switch(rollType) {
+          case "defense": rollDefense(actor, dataset); break;
+          case "soak": rollSoak(actor, dataset); break;
+          case "damage": applyDamage(actor, dataset); break;
+          case "heal": applyHeal(actor, dataset); break;
       }
     });
     html.on("click", ".chat-edge", event => {
