@@ -263,6 +263,7 @@ export function rollDefense(actor, dataset) {
 	const defendHits = dataset.defendHits;
 	const damage     = parseInt(dataset.damage);
 	const targetId = dataset.targetid;
+	const actorId = dataset.actorId;
 	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+", defendHits="+defendHits+", damage="+damage+", targetId="+targetId+")");
 	let data = {
 		threshold : dataset.defendHits,
@@ -310,7 +311,8 @@ export function rollDefense(actor, dataset) {
 		
 		data.soak=(r.nettohits<0)?0:(damage + data.nettohits);
 		data.isAllowSoak = true;
-		data.target = {id: targetId, name: game.actors.get(targetId).data.name};
+		data.target = {id: targetId, name: game.actors.get(actorId).data.name};
+        data.actorId = actorId;
 		data.damageType = dataset.damageType;
 	   console.log("Damage to soak: "+data.soak);
 	   console.log("Call r.toMessage: ",r);
@@ -327,12 +329,18 @@ export function rollDefense(actor, dataset) {
 }
 
 export function applyDamage(actor, dataset) {
-	actor.applyDamage(dataset.damageType, dataset.damagetoapply)
+	actor.applyDamage(dataset)
 }
 
-export function rollExtended(actor, dataset) {
+export function applyHeal(actor, dataset) {
+    // Healing is pretty much applying negative damage
+    actor.applyDamage(dataset);
+}
+
+export function rollExtended(dataset) {
     console.log("ENTER rollExtended")
 
+    console.log(dataset);
     let data = {
         threshold: dataset.threshold,
         actionText: dataset.actionText,
@@ -348,6 +356,8 @@ export function rollExtended(actor, dataset) {
         extendedAccumulate: parseInt(dataset.extendedAccumulate),
         formula: dataset.extendedPool + "d6"
     }
+
+    console.log(data);
 
     let r = new SR6Roll("", data);
     try {
@@ -367,15 +377,11 @@ export function rollExtended(actor, dataset) {
     return r;
 }
 
-export function applyHeal(actor, dataset) {
-    // Healing is pretty much applying negative damage
-    actor.applyDamage(dataset.healtype, -dataset.healtoapply);
-}
-
 export function rollSoak(actor, dataset) {	
 	console.log("ENTER rollSoak");
 	const soak     = parseInt(dataset.soak);
 	const targetId = dataset.targetid;
+	const actorId = dataset.actorId;
 	console.log("ENTER rollSoak(actor="+actor+", soak="+soak+", targetId="+targetId+")");
 	let data = {
 		threshold : soak,
@@ -427,7 +433,7 @@ export function rollSoak(actor, dataset) {
 		
 		data.soaked = r._total;
 		data.damageToApply = (data.r_total<soak)?0:(data.threshold - data.soaked);
-		data.target = {id: targetId, name: game.actors.get(targetId).data.name}
+		data.target = {id: targetId, name: game.actors.get(actorId).data.name}
 	   console.log("damageToApply: "+data.damageToApply);
 	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);
