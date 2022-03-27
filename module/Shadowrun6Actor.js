@@ -933,6 +933,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText: actionText,
 			checkText  : checkText,
 			attrib: options.attrib,
+      skillId: skillId,
 			skill: skl,
 			spec: spec,
 			threshold: threshold,

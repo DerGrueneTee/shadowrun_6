@@ -58,10 +58,12 @@ async function _showRollDialog(data, onClose={}) {
   }
   // Render modal dialog
   let template = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
+  console.log(CONFIG.SR6.ATTRIBUTES)
   let dialogData = {
 	 checkText: data.extraText,
     data: data,
     rollModes: CONFIG.Dice.rollModes,
+    attributes: CONFIG.SR6.ATTRIBUTES
   };
   const html = await renderTemplate(template, dialogData);
   const title = data.title;
@@ -100,6 +102,7 @@ async function _showRollDialog(data, onClose={}) {
 		width: 550,
 	  };
   console.log("create RollDialog");
+  console.log(data);
     let x =  new RollDialog({
       title: title,
       content: html,
@@ -109,7 +112,13 @@ async function _showRollDialog(data, onClose={}) {
       default: "normal",
       data: data,
       attackType: data.attackType,
-      render: html => console.log("Register interactivity in the rendered dialog"),
+      render: html => {
+        console.log("Register interactivity in the rendered dialog");
+
+        let chatRollMode = $(".roll-type-select").val();
+        $("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
+        $("select[name='attrib']").val(CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib);
+      },
       close: () => resolve(null)
     }, myDialogOptions).render(true);
   });
@@ -118,6 +127,7 @@ async function _showRollDialog(data, onClose={}) {
 
 function _dialogClosed(type, form, data, messageData={}) {
     console.log("ENTER _dialogClosed(type="+type+", form="+form+", data="+data+")");
+    console.log(data);
 
 	 // Delete some fields that where only necessary for the roll dialog
     delete data.canAmpUpSpell;
@@ -164,7 +174,20 @@ function _dialogClosed(type, form, data, messageData={}) {
       data.buttonType = type;
       data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
+      data.attrib = form.attrib.value;
+      data.attribLong = form.attrib.innerHTML;
       data.weapon = data.item ? true : false;
+
+      const attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib;
+      if (attrBySkill != data.attrib) { // Optional attribute was chosen
+        console.log("optional attribute chosen => attribute="+data.attrib);
+        data.pool = data.skill.points + data.actor.data.data.attributes[data.attrib].pool;
+        console.log("new pool="+data.skillId+"+"+data.attrib+"="+data.pool);
+        console.log(attrBySkill);
+        data.actionText = data.actionText.replace(game.i18n.localize("attrib."+attrBySkill), game.i18n.localize("attrib."+data.attrib));
+        console.log(data.actionText);
+      }
+
       if (data.modifier > 0) {
         data.formula = data.pool + " + " + data.modifier + "d6";
       } else if (data.modifier < 0){
