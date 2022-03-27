@@ -165,7 +165,7 @@ function _dialogClosed(type, form, data, messageData={}) {
 		}
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
-      data.extended = form.extended.checked;
+      data.extended = form.extended && form.extended.checked;
       if (data.extended) {
         data.extendedPool = data.pool - 1;
         data.extendedRoll = data.extendedRoll ? data.extendedRoll + 1 : 1;
