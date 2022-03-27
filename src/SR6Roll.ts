@@ -273,7 +273,8 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     		);
 */
 			let chatData = new FinishedRoll();
-			chatData.actionText = isPrivate ? "" : this.configured.actionText;
+			if (this.configured)
+				chatData.actionText = isPrivate ? "" : this.configured.actionText;
 			//chatData.user    = (game as Game).user!.id,
 			chatData.success = this.isSuccess();
 			chatData.glitch  = this.isGlitch();
