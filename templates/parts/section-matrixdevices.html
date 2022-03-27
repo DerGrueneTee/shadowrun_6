@@ -17,11 +17,14 @@
 			</tr>
  		{{#each actor.items as |item id|}} 
 		{{#if (eq item.type 'gear')}}
-		{{#if (eq item.data.data.type "ELECTRONICS") }}
+		{{#if (or 
+            (eq item.data.data.type "ELECTRONICS") 
+            (eq item.data.data.type "CYBERWARE"))
+        }}
 		{{#if (or 
 		 (eq item.data.data.subtype "COMMLINK")
-		 (eq item.data.data.subtype "CYBERJACK") 
-		 (eq item.data.data.subtype "RIGGER_CONSOLE")) 
+		 (eq item.data.data.subtype "RIGGER_CONSOLE")
+         (eq item.data.data.subtype "CYBERJACK"))
 		}}
        <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
