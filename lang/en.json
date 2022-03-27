@@ -697,6 +697,7 @@
       "spotter": "Spotter"
     },
     "roll": {
+      "accumulated": "Accumulated",
       "actionText": {
         "attack_target_multiple": "Attacking multiple targets with {name}",
         "attack_target_none": "Attacking target with {name}",
@@ -739,6 +740,10 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explode",
+      "extend": "Extend",
+      "extended": "Extended",
+      "extend_check_failed": "Extended Check Failed",
+      "extend_check_success": "Extended Check Successful",
       "failure": "Failure",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",

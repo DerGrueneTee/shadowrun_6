@@ -692,6 +692,7 @@
       "spotter": "Späher"
     },
     "roll": {
+      "accumulated": "Gesamt",
       "actionText": {
         "attack_target_multiple": "Greift mehre Ziele mit {name} an",
         "attack_target_none": "Greift Ziel mit {name} an",
@@ -731,6 +732,10 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explodiert",
+      "extend": "Ausdehnen",
+      "extended": "Ausgedehnt",
+      "extend_check_failed": "Ausgedehnte Probe fehlgeschlagen",
+      "extend_check_success": "Ausgedehnte Probe erfolgreich",
       "failure": "Fehlschlag",
       "glitch": "Patzer",
       "hits_bought": "Erfolge gekauft",
