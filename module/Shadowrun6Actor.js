@@ -787,9 +787,11 @@ export class Shadowrun6Actor extends Actor {
 		let attrName = game.i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
+        /* This is somewhat not correct atm. It always shows "(3)". TODO: Fix this
 		if (threshold && threshold>0) {
 			rollName += " ("+threshold+")";
 		}
+        */
 
 		return rollName;		
 	}

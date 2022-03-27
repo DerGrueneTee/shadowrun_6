@@ -12,7 +12,7 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { doRoll } from "./dice/CommonRoll.js";
-import { rollDefense, rollSoak, applyDamage } from "./dice/CommonRoll.js";
+import { rollDefense, rollSoak, applyDamage, rollExtended } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./combat.js";
@@ -29,6 +29,10 @@ const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 Hooks.once("init", async function () {
 
   console.log(`Initializing Shadowrun 6 System`);
+
+  Handlebars.registerHelper('ge', function( a, b ){
+    return (a >= b) ? true : false;
+  });
   CONFIG.debug.hooks = false;
   // Record Configuration Values
   CONFIG.SR6 = SR6;
@@ -280,6 +284,9 @@ Hooks.once("init", async function () {
          console.log("Target actor ",actor);
          console.log("Target dataset", dataset);
 			applyDamage(actor, dataset);
+      } else if (rollType === "extended") {
+          const actor = game.actors.get(targetId);
+          rollExtended(actor, dataset);
       }
     });
     html.on("click", ".chat-edge", event => {

@@ -116,6 +116,23 @@
      <span style="color: red;">{{localize 'shadowrun6.roll.attack_missed'}}</span>
    {{/iff}}
    {{/if}}        
+
+   <!-- Extended Roll -->
+   {{#if data.extended}} 
+    <b>Extended Test: </b> {{data.extendedRoll}}
+    <hr />
+    {{#if (ge data.extendedAccumulate data.threshold)}}
+      <span style="color: green;">{{localize 'shadowrun6.roll.extend_check_success'}}</span>
+    {{else}}
+      {{#iff data.pool ">" 0}}
+      <div>
+          <button class="rollable" data-roll-type="extended" data-extended-roll="{{data.extendedRoll}}" data-extended-pool="{{data.extendedPool}}" data-extended-accumulate="{{data.extendedAccumulate}}" data-threshold="{{data.threshold}}" data-action-text="{{data.actionText}}">{{localize 'shadowrun6.roll.extend'}} ({{data.extendedAccumulate}}/{{data.threshold}})</button>
+      </div>
+      {{else}}
+        <span style="color: red;">{{localize 'shadowrun6.roll.extend_check_failed'}}</span>
+      {{/iff}}
+    {{/if}}
+   {{/if}}
    
    <!-- Bring the Pain -->
    {{#if data.isBringPain}}
