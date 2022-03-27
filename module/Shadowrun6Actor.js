@@ -1305,8 +1305,10 @@ export class Shadowrun6Actor extends Actor {
 
 	applyDamage(type, damage) {
 		console.log("applyDamage(type=" + type + ", damage=" + damage + ")");
-		this.data.data[type].dmg += parseInt(damage);
-		this.data.data[type].value -= parseInt(damage);
-		this._sheet?.render();
+    
+    let damageType = type === 'S' ? "stun" : "physical";
+    this.data.data[damageType].dmg += parseInt(damage);
+    this.data.data[damageType].value -= parseInt(damage);
+    this._sheet?.render();
 	}
 }
