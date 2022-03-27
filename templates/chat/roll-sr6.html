@@ -24,11 +24,15 @@
       <header class="part-header flexrow chat-edge-post">
         <div>{{formula}}</div>
         <br/>
-        {{#if success}}
-        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
+        {{#if data.extended}}
+            <div class="resulttext" style="flex:2;text-align: right;">{{ localize 'shadowrun6.roll.accumulated' }}: <b>{{data.extendedAccumulate}}</b> / {{data.threshold}}</div>
         {{else}}
-        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
-        {{/if}} 
+            {{#if success}}
+            <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
+            {{else}}
+            <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
+            {{/if}} 
+        {{/if}}
         <br/>
         {{#if criticalGlitch}}
         <span style="color: rgb(215, 14, 233); flex:2">{{localize 'shadowrun6.roll.criticalglitch'}}</span><br/>

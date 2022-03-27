@@ -693,6 +693,7 @@
       "spotter": "Spotter"
     },
     "roll": {
+      "accumulated": "Accumulated",
       "actionText": {
         "attack_target_multiple": "Attacking multiple targets with {name}",
         "attack_target_none": "Attacking target with {name}",
