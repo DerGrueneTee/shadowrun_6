@@ -106,8 +106,8 @@
    {{/if}}        
    
    <!-- Soak Roll -->
-    {{log "roll-sr6.html: soak data=" data}}
    {{#if data.isAllowSoak}}
+   {{log "roll-sr6.html: soak data=" data}}
    <b>Base damage:</b> {{data.baseDamage}}  <b>Net hits:</b> {{data.nettohits}}
    <hr/>
     {{log "soak damage = " data.soak}}
@@ -146,5 +146,17 @@
      	<button class="rollable" data-damage-type="{{data.damageType}}" data-roll-type="damage" data-defend-with="{{data.defendWith}}" data-damageToApply="{{data.damageToApply}}" data-targetid="{{data.target.id}}">{{localize 'shadowrun6.roll.damage_apply'}} ({{data.damageToApply}}): {{data.target.name}}</button>
      </div>
    {{/iff}}
-   {{/if}}        
+   {{/if}}     
+   
+   <!-- Heal -->
+   {{log "roll-sr6.html: heal data=" data}}
+   {{#if data.isHeal}}
+   <hr />
+   {{#iff total ">" 0}}
+    <div> 
+        <button class="rollable" data-roll-type="heal" data-healToApply="{{total}}" data-targetid="{{data.target.id}}" data-healType="{{data.healType}}">{{localize 'shadowrun6.roll.heal_apply'}} ({{total}}): {{data.target.name}}</button>
+    </div>
+   {{/iff}}
+   {{/if}}
+
 </div>

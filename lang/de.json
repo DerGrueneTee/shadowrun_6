@@ -143,7 +143,11 @@
       "judge_intentions": "Menschenkenntnis",
       "lift_carry": "Heben / Tragen",
       "memory": "Erinnerungsvermögen",
-      "matrix_perception": "Matrixwahrnehmung"
+      "matrix_perception": "Matrixwahrnehmung",
+      "heal": {
+        "physical": "Körperliches Heilen",
+        "stun": "Geistiges Heilen"
+    }
     },
     "edge_action": {
       "anticipation": "Vorausschau",
@@ -912,7 +916,8 @@
       "weapon": {
         "add": "Neue Waffe hinzufügen",
         "close": "Nahkampf",
-        "ranged": "Fernkampf"
+        "ranged": "Fernkampf",
+        "special": "Spezielle Waffen"
       }
     },
     "settings": {
