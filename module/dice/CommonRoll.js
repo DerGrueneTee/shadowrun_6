@@ -58,7 +58,6 @@ async function _showRollDialog(data, onClose={}) {
   }
   // Render modal dialog
   let template = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
-  console.log(CONFIG.SR6.ATTRIBUTES)
   let dialogData = {
 	 checkText: data.extraText,
     data: data,
@@ -102,7 +101,6 @@ async function _showRollDialog(data, onClose={}) {
 		width: 550,
 	  };
   console.log("create RollDialog");
-  console.log(data);
     let x =  new RollDialog({
       title: title,
       content: html,
@@ -127,7 +125,6 @@ async function _showRollDialog(data, onClose={}) {
 
 function _dialogClosed(type, form, data, messageData={}) {
     console.log("ENTER _dialogClosed(type="+type+", form="+form+", data="+data+")");
-    console.log(data);
 
 	 // Delete some fields that where only necessary for the roll dialog
     delete data.canAmpUpSpell;
@@ -183,9 +180,7 @@ function _dialogClosed(type, form, data, messageData={}) {
         console.log("optional attribute chosen => attribute="+data.attrib);
         data.pool = data.skill.points + data.actor.data.data.attributes[data.attrib].pool;
         console.log("new pool="+data.skillId+"+"+data.attrib+"="+data.pool);
-        console.log(attrBySkill);
         data.actionText = data.actionText.replace(game.i18n.localize("attrib."+attrBySkill), game.i18n.localize("attrib."+data.attrib));
-        console.log(data.actionText);
       }
 
       if (data.modifier > 0) {
