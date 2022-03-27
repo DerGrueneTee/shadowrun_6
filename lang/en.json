@@ -924,7 +924,8 @@
         "add": "Add new weapon",
         "close": "Melee Weapons",
         "ranged": "Ranged Weapons",
-		  "title" : "Weapons"
+        "special": "Special Weapons",
+		    "title" : "Weapons"
       }
     },
     "settings": {

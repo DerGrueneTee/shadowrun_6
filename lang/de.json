@@ -912,7 +912,8 @@
       "weapon": {
         "add": "Neue Waffe hinzufügen",
         "close": "Nahkampf",
-        "ranged": "Fernkampf"
+        "ranged": "Fernkampf",
+        "special": "Spezielle Waffen"
       }
     },
     "settings": {
