@@ -18,7 +18,11 @@
  		{{#each actor.items as |item id|}} 
 		{{#if (eq item.type 'gear')}}
 		{{#if (eq item.data.data.type "ELECTRONICS") }}
-		{{#if (eq item.data.data.subtype "COMMLINK") }}
+		{{#if (or 
+		 (eq item.data.data.subtype "COMMLINK")
+		 (eq item.data.data.subtype "CYBERJACK") 
+		 (eq item.data.data.subtype "RIGGER_CONSOLE")) 
+		}}
        <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column" >{{item.data.data.devRating}}</label></td>
@@ -41,62 +45,10 @@
          <td colspan="9">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
-				{{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config}}
+				{{# if (eq item.data.data.subtype "COMMLINK")}}	
+			   {{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config}}
+			   {{/if}}
         	   </div> 
-         </td>
-       </tr>
-		{{/if}}
-		{{#if (eq item.data.data.subtype "CYBERJACK") }}
-       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td><label class="middle-column" >{{item.data.data.rating}}</label></td>
-         <td><label class="middle-column" >-</label></td>
-         <td><label class="middle-column" >-</label></td>
-         <td><label class="middle-column" >{{item.data.data.d}}</label></td>
-         <td><label class="middle-column" >{{item.data.data.f}}</label></td>
-         <td><label class="middle-column" >-</label></td>
-       	<td><label class="switch">
-       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
-                        <span class="shadowrun6-slider round"></span>
-                    </label></td>
-			<td class="centered">
-				<a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
-					class="fas fa-edit"></i></a> <a class="item-control item-delete"
-				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a>
-         </td>
-       </tr>
-       <tr>
-         <td colspan="8">
-         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
-        	   </div>
-         </td>
-       </tr>
-		{{/if}}
-		{{#if (eq item.data.data.subtype "RIGGER_CONSOLE") }}
-       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td><label class="middle-column" >{{item.data.data.devRating}}</label></td>
-         <td><label class="middle-column" >-</label></td>
-         <td><label class="middle-column" >-</label></td>
-         <td><label class="middle-column" >{{item.data.data.d}}</label></td>
-         <td><label class="middle-column" >{{item.data.data.f}}</label></td>
-         <td><label class="middle-column" >{{item.data.data.progSlots}}</label></td>
-       	<td><label class="switch">
-       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>
-                        <span class="shadowrun6-slider round"></span>
-                    </label></td>
-			<td class="centered">
-				<a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
-					class="fas fa-edit"></i></a> <a class="item-control item-delete"
-				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a>
-         </td>
-       </tr>
-       <tr>
-         <td colspan="9">
-         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
-        	   </div>
          </td>
        </tr>
 		{{/if}}
