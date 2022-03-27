@@ -9,7 +9,7 @@ export async function doRoll(data) {
 
 	// Create the Roll instance
 	const _r = await _showRollDialog(data, _dialogClosed);
-	console.log("returned from _showRollDialog with "+_r);
+	console.log("returned from _showRollDialog with ", _r);
 	if (_r) {
   		delete data.type;
    	_r.toMessage(data);
@@ -187,8 +187,9 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.spell) {
 			data.drain  = parseInt(data.spell.data.data.drain);	
 			data.radius = (data.spell.data.data.range == "line_of_sight_area" || data.spell.data.data.range == "self_area") ? 2 : 0;
-			if (data.spell.data.data.category == "combat") {
-				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : data.actor.data.data.attributes.mag.pool/2;
+      data.damageType = data.spell.data.data.damage.includes("physical") ? "P" : "S";
+      if (data.spell.data.data.category == "combat") {
+				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : Math.ceil(data.actor.data.data.attributes.mag.pool/2);
 				data.drain  = parseInt(data.spell.data.data.drain);	
 				// Amp up
 				if (data.damageMod) {
@@ -238,15 +239,7 @@ function _dialogClosed(type, form, data, messageData={}) {
 		{
 			data.damage = data.item.data.data.dmg;
 			data.damage += r._total; //  data.item.data.data.dmg
-
-			if(data.item.data.data.stun)
-			{
-				data.damageType = "S";
-			}
-			else
-			{
-				data.damageType = "P";
-			}
+      data.damageType = data.item.data.data.stun ? "S" : "P";
 		}
 		//Add net hit damage to weapon and spell rolls
 		console.log("Weapon Info:");
@@ -334,7 +327,7 @@ export function rollDefense(actor, dataset) {
 }
 
 export function applyDamage(actor, dataset) {
-	actor.applyDamage(dataset.defendWith, dataset.damagetoapply)
+	actor.applyDamage(dataset.damageType, dataset.damagetoapply)
 }
 
 export function rollExtended(actor, dataset) {
@@ -386,7 +379,8 @@ export function rollSoak(actor, dataset) {
 		defense   : {},
 		speaker   : ChatMessage.getSpeaker({ actor: this }),
 		isBringPain: true,
-		defendWith: dataset.defendWith
+		defendWith: dataset.defendWith,
+    damageType: dataset.damageType
 	}
 	/*
 	switch (defendWith) {
