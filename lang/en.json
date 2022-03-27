@@ -145,7 +145,11 @@
       "judge_intentions": "Judge Intentions",
       "lift_carry": "Lift / Carry",
       "memory": "Memory",
-      "matrix_perception": "Matrix Perception"
+      "matrix_perception": "Matrix Perception",
+      "heal": {
+          "physical": "Physical Healing",
+          "stun": "Mental Healing"
+      }
     },
     "edge_action": {
       "anticipation": "Anticipation",
@@ -717,6 +721,7 @@
       "attack_missed": "Missed the Attack",
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
+      "heal_apply": "Heal",
       "damage": "Damage: ",
 		"damage_apply": "Apply damage",
       "defRating": "Defense: ",

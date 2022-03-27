@@ -27,6 +27,7 @@
 			html.find(".matrix-roll").click(this._onMatrixAction.bind(this));
 			html.find('.complexform-roll').click(this._onRollComplexFormCheck.bind(this));
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
+            html.find(".heal-roll").click(this._onHealCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
 			html.find('.adeptpower-create').click(ev => {
@@ -366,6 +367,13 @@
 		}
 		this.actor.rollCommonCheck(pool, title, dialogConfig);
 	}
+
+    _onHealCheck(event, html) {
+        console.log("onHealCheck");
+        event.preventDefault;
+        const dataset = event.currentTarget.dataset;
+        this.actor.rollHealCheck(dataset);
+    }
 
 	//-----------------------------------------------------
 	_onMatrixAction(event, html) {
