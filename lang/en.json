@@ -697,6 +697,7 @@
         "attack_target_multiple": "Attacking multiple targets with {name}",
         "attack_target_none": "Attacking target with {name}",
         "attack_target_one": "Attacking {target} with {name}",
+        "cast": "Casting {name}",
         "cast_target_multiple": "Casting {name} on multiple targets",
         "cast_target_none": "Casting {name}",
         "cast_target_one": "Casting {name} on {target}",
