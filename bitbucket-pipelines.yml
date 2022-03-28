@@ -9,6 +9,7 @@ pipelines:
     - step:
         name: 'Build and Test'
         deployment: test
+        trigger: 'manual'
         script:
           - echo "Your build and test goes here..."
 
