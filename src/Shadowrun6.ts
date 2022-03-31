@@ -53,4 +53,101 @@ Hooks.once("init", async function () {
 
   preloadHandlebarsTemplates();
   defineHandlebarHelper();
+
+  Hooks.once('diceSoNiceReady', (dice3d) => {
+    dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "default");
+    dice3d.addDicePreset({
+      type: "d6",
+      labels: [
+        "", "2", "3", "4", "5", "6"
+        //        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
+        //        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
+      ],
+      bumpMaps: [, , , , ,
+        //        "systems/shadowrun6-eden/icons/SR6_D6_5_o.png",
+        //        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
+      ],
+      colorset: "SR6_dark",
+      system: "SR6"
+    });
+    dice3d.addDicePreset({
+      type: "dc",
+      labels: ["systems/shadowrun6-eden/images/EdgeToken.png","systems/shadowrun6-eden/images/EdgeToken.png"],
+      bumpMaps: [,],
+      colorset: "SR6_dark",
+      system: "SR6"
+    });
+    dice3d.addColorset({
+      name: 'SR6_light',
+      description: "SR 6 Pink",
+      category: "SR6",
+      foreground: '#470146',
+      background: "#f7c8f6",
+      outline: '#2e2b2e',
+      texture: 'none',
+      edge: '#9F8003',
+      material: 'glass',
+      font: 'Arial Black',
+      fontScale: {
+        "d6": 1.1,
+        "df": 2.5
+      },
+      visibility: 'hidden'
+    }, "no");
+
+    dice3d.addColorset({
+      name: 'SR6_dark',
+      description: "SR 6 Pink Dark",
+      category: "SR6",
+      foreground: '#470146',
+      background: "#000000",
+      outline: '#2e2b2e',
+      texture: 'none',
+      edge: '#470146',
+      material: 'metal',
+      font: 'Arial Black',
+      fontScale: {
+        "d6": 1.1,
+        "df": 2.5
+      },
+      visibility: 'visible'
+    }, "default");
+  });
+
+  Hooks.on('renderChatMessage', function (app, html, data) {
+	 console.log("ENTER renderChatMessage");
+    html.on("click", ".chat-edge", event => {
+		 event.preventDefault();
+	    let roll = $(event.currentTarget); 
+	    let tip = roll.find(".chat-edge-collapsible");
+	    if (!tip.is(":visible")) {
+		    tip.slideDown(200);	
+	    } else {
+		    tip.slideUp(200);
+	    }
+		});
+    html.on("click", ".chat-edge-post", event => {
+		 event.preventDefault();
+	    let roll = $(event.currentTarget.parentElement); 
+ 	    let tip = roll.find(".chat-edge-post-collapsible");
+	    if (!tip.is(":visible")) {
+		    tip.slideDown(200);	
+	    } else {
+		    tip.slideUp(200);
+	    }
+		});
+    html.on("click", ".chat-spell", event => {
+		 console.log("chat-spell");
+		 event.preventDefault();
+	    let roll = $(event.currentTarget); 
+	    let tip = roll.find(".chat-spell-collapsible");
+	    if (!tip.is(":visible")) {
+		    tip.slideDown(200);	
+	    } else {
+		    tip.slideUp(200);
+	    }
+		});
+	 console.log("LEAVE renderChatMessage");
+  });
+
 });

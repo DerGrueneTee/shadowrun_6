@@ -2,12 +2,10 @@
     <section class="tooltip-part">
         <div class="dice">
             <ol class="dice-rolls">
+  {{log "tooltip.html 1" this}}
+  {{log "tooltip.html 2" results}}
                 {{#each results as |result id|}}
                 <li class="{{result.classes}}">&nbsp;</li>
-              <!--   <li class="roll ">{{result.success}}</li>
-                <li class="roll ">{{result.active}}</li>
-                <li class="roll ">{{result.exploded}}</li>
-                <li class="roll ">{{result.count}}</li> -->
                 {{/each}}
             </ol>
         </div>

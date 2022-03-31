@@ -12,7 +12,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	configured : ConfiguredRoll ;
 
     static CHAT_TEMPLATE = "systems/shadowrun6-eden/templates/chat/roll-sr6.html";
-    //static TOOLTIP_TEMPLATE = "systems/shadowrun6-eden/templates/chat/tooltip.html";
+    static TOOLTIP_TEMPLATE = "systems/shadowrun6-eden/templates/chat/tooltip.html";
 
     //_total: number;
     results: DiceTerm.Result[];
@@ -41,28 +41,27 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 				merged.faces = 6;
 				merged.isIntermediate = false;
 				merged.number = this.dice[0].number + this.dice[1].number;
-				merged.results = this.dice[0].results.concat(this.dice[1].results);
+				merged.results = this.dice[1].results.concat(this.dice[0].results);
 				(merged as any)._evaluated = true;
 				this.terms = [merged];
 				console.log(" result3 ",merged);
 				this.results = merged.results;
+			} else {
+				this.results = this.dice[0].results;
 			}
 				
-/*			console.log("AFTER  _dice   : " , this._dice);
+			console.log("AFTER  _dice   : " , this._dice);
 			console.log("AFTER  dice    : " , this.dice);
 			console.log("AFTER  _total  : " + this._total);
 			console.log("AFTER  total   : " + this.total);
 			console.log("AFTER  _results: " + this.results);
 			console.log("   this: " , this);
-*/		
+		
             this._evaluated = true;
 				this._formula = (this.data as ConfiguredRoll).pool + "d6";
 				
-				let foo:any = {
-					test :  "aus_evaluate",
-					bla  :  "fasel"
-				};
-				(this as any).data =  foo;
+				this.finished = new FinishedRoll(this.configured);
+				console.log("before leaving evalulate(): finished=",this.finished)
             return (this as Evaluated<this>);
         } finally {
             console.log("LEAVE evaluate()");
@@ -91,12 +90,12 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	    	term.results.forEach(die =>  total+= die.count!);
 		});
 		
-		/*
-		this.finished = new FinishedRoll();
+		
+		this.finished = new FinishedRoll(this.configured);
 		this.finished.glitch = this.isGlitch();
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
-		*/
+		
       return total;
 	}
 
@@ -139,8 +138,13 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		return ignoreFives;
 	}
 
+	/*****************************
+	 * @override
+	 */
 	modifyResults():void {
+		console.log("modifyResults",this);
 		this._assignBaseCSS();
+		console.log("modifyResults 2",this);
 		let ignoreFives = this._markWildDie();
 		console.log("IgnoreFives = "+ignoreFives);
 	
@@ -234,7 +238,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	  * @override
      */
 	toJSON() {
+		console.log("toJSON ",this);
 		const json = super.toJSON();
+		console.log("toJSON: json=",json);
 		(json as any).configured = this.configured;
 		(json as any).results = this.results;
 		return json;
@@ -251,7 +257,18 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		console.log("fromData ",roll);
     	(roll as any).configured = (data as any).configured;
     	(roll as any).results = (data as any).results;
+		console.log("fromData returning ",roll);
     	return roll as T;
+	}
+
+  /*****************************************
+   * @override 
+	****************************************/
+  	getTooltip(): Promise<string> {
+ 		console.log("getTooltip = ",this);
+  		let parts = {};
+
+    	return renderTemplate(SR6Roll.TOOLTIP_TEMPLATE, { parts,  finished: this.finished, data: this.data, results: this.results, total: this._total });
 	}
 
 	/*****************************************
@@ -272,7 +289,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
       		}, chatOptions
     		);
 */
-			let chatData = new FinishedRoll();
+			let chatData = new FinishedRoll(this.configured);
 			if (this.configured)
 				chatData.actionText = isPrivate ? "" : this.configured.actionText;
 			//chatData.user    = (game as Game).user!.id,

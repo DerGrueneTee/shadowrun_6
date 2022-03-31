@@ -109,7 +109,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 				default: "normal",
 			};
 			const myDialogOptions = {
-				width: 480,
+				width: 520,
 				jQuery: true,
 				prepared: data,
 			};

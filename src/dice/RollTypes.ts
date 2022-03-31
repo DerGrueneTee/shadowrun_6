@@ -48,6 +48,18 @@ class CommonRollData {
 	/* How many dice shall be rolled */
 	pool: number;
 	
+	copyFrom(copy : CommonRollData) {
+		this.speaker = copy.speaker;
+		this.actor   = copy.actor;
+		this.title   = copy.title;
+		this.actionText = copy.actionText;
+		this.checkText  = copy.checkText;
+		this.rollType   = copy.rollType;
+		this.defendWith = copy.defendWith;
+		this.threshold  = copy.threshold;
+		this.useWildDie = copy.useWildDie;
+		this.pool       = copy.pool;
+	}
 }
 
 /**
@@ -61,6 +73,14 @@ export class PreparedRoll extends CommonRollData {
 	/* Available edge */
 	edge: number;
 	edgeBoosts: EdgeBoost[];
+	
+	copyFrom(copy : PreparedRoll) {
+		super.copyFrom(copy);
+		this.allowBuyHits = copy.allowBuyHits;
+		this.freeEdge     = copy.freeEdge;
+		this.edge         = copy.edge;
+		this.edgeBoosts   = copy.edgeBoosts;
+	}
 }
 
 export class SkillRoll extends PreparedRoll {
@@ -81,6 +101,16 @@ export class SkillRoll extends PreparedRoll {
 		this.skillValue = actor.skills[skillId];
 		this.attrib = this.skillDef.attrib;
 		this.performer = actor;
+	}
+
+	
+	copyFrom(copy : SkillRoll) {
+		super.copyFrom(copy);
+		this.skillId  = copy.skillId;
+		this.skillDef = copy.skillDef;
+		this.skillValue = copy.skillValue;
+		this.attrib   = copy.attrib;
+		this.performer = copy.performer;
 	}
 
 	/**
@@ -159,4 +189,10 @@ export class FinishedRoll extends PreparedRoll {
     results: string | DiceTerm.Result[];
     formula: string;
 	publicRoll : boolean;
+	
+	
+	constructor(copy : PreparedRoll) {
+		super();
+		super.copyFrom(copy);
+	}
 }

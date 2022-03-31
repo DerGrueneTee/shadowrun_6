@@ -21,6 +21,7 @@
    {{/if}}        
   
   <div>
+    Dice Result 
     <div class="dice-result">
       <header class="part-header flexrow chat-edge-post">
         <div>{{formula}}</div>
@@ -43,7 +44,9 @@
    
    <!-- Usage Details -->
   	{{#if data.weapon}}
+  	{{log "data=" data}}
    <hr/>
+    Weapon 
    <div>
      <b>{{localize 'shadowrun6.roll.damage'}}</b> {{data.item.data.data.dmgDef}}
    </div>
