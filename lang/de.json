@@ -545,7 +545,8 @@
     "monitor": {
 		"matrix": "Matrix",
       "physical": "Körperlich",
-      "stun": "Geistig"
+      "stun": "Geistig",
+      "overflow": "Überzählig"
     },
     "mortype": {
       "adept": "Adept",

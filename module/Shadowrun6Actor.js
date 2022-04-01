@@ -112,6 +112,12 @@ export class Shadowrun6Actor extends Actor {
 				data.stun.max = data.stun.base + data.stun.mod;
 				data.stun.value = data.stun.max - data.stun.dmg;
 			}
+
+            if (data.overflow) {
+                data.overflow.base = data.attributes["bod"].pool * 2;
+                data.overflow.max = data.attributes["bod"].pool * 2;
+                data.overflow.value = data.overflow.dmg;
+            }
 		}
 
 		if (data.initiative) {
@@ -1345,8 +1351,11 @@ export class Shadowrun6Actor extends Actor {
         const damageObj = actor.data.data[type];
 
         let hp = damageObj.dmg + parseInt(damage);
+        let overflow = Math.max(0, hp - damageObj.max);
+        console.log(overflow)
         hp = Math.min(Math.max(0, hp), damageObj.max);
-
+        
+        token.document.actor.update({[`data.overflow.dmg`]: overflow});
         token.document.actor.update({[`data.`+type+`.dmg`]: hp });
 	}
 }

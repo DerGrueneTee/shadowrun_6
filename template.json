@@ -197,6 +197,7 @@
 					"mod": 0,
 					"modString": "",
 					"value": 0,
+                    "dmg": 0,
 					"max": 32
 				},
 				"edge": {
