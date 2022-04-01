@@ -95,7 +95,7 @@
      {{#each data.targets as |token id|}}
      <div>
       {{log "Token" id " = " token.data }} 
-     	<button class="rollable" data-damage-type="{{../data.damageType}}" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
+     	<button class="rollable" data-damage-type="{{../data.damageType}}" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data._id}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
      </div>
      {{/each}}
    {{else}} 
@@ -154,7 +154,7 @@
    <hr />
    {{#iff total ">" 0}}
     <div> 
-        <button class="rollable" data-roll-type="heal" data-healToApply="{{total}}" data-targetid="{{data.target.id}}" data-healType="{{data.healType}}">{{localize 'shadowrun6.roll.heal_apply'}} ({{total}}): {{data.target.name}}</button>
+        <button class="rollable" data-roll-type="heal" data-healToApply="{{total}}" data-targetid="{{data.speaker.token}}" data-healType="{{data.healType}}">{{localize 'shadowrun6.roll.heal_apply'}} ({{total}}): {{data.target.name}}</button>
     </div>
    {{/iff}}
    {{/if}}
