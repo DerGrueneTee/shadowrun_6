@@ -11,6 +11,7 @@
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center top;
+    pointer-events: none;
 }
 
 line {
