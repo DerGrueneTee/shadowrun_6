@@ -30,6 +30,7 @@
             html.find(".heal-roll").click(this._onHealCheck.bind(this));
 			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", this.actor.data.data.physical));
 			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", this.actor.data.data.stun));
+			html.find(".calcOverflowBar").on("input", this._redrawBar(html, "Overflow", this.actor.data.data.overflow));
 			html.find('.adeptpower-create').click(ev => {
 				const itemData = {
 					name: game.i18n.localize("shadowrun6.newitem.adeptpower"),
@@ -420,6 +421,15 @@
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max - i });
 				}
 				break;
+            case "barOverflowBoxes":
+				if (this.actor.data.data.overflow.dmg == monitorAttribute.max-1 == i) {
+          			console.log(`setDamange (overflow health to ${i}`);
+					this.actor.update({ [`data.overflow.dmg`]: i});
+				} else {
+          			console.log(`setDamange (overflow health to ${i}`);
+					this.actor.update({ [`data.overflow.dmg`]: i });
+				}
+                break;
 		}
 	}
 
@@ -429,7 +439,10 @@
 			return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
-		let perc = Math.min(Math.max(monitorAttribute.value / monitorAttribute.max * 100, 0), 100);
+        let perc = Math.min(Math.max(monitorAttribute.value / monitorAttribute.max * 100, 0), 100);
+        if (id === 'Overflow') {
+            perc = 100 - perc;
+        }
 		if ( html.find("#bar" + id + "Cur").length==0) {
 			return;
 		}
@@ -459,25 +472,27 @@
 				myNode.appendChild(div);
 			}
 
-			// The scale
+			// The scale (only for physical + stun)
 			myNode = html.find("#bar" + id + "Scale")[0];
-			while (myNode.firstChild) {
-				myNode.removeChild(myNode.lastChild);
-			}
-			// Add new
-			i = 0;
-			while (i < monitorAttribute.max) {
-				i++;
-				var div = document.createElement("div");
-				if (i % 3 == 0) {
-					div.setAttribute("style", "flex: 1; border-right: solid black 1px; text-align:right;");
-					div.appendChild(document.createTextNode(-(i / 3)));
-				} else {
-					div.setAttribute("style", "flex: 1")
-					div.appendChild(document.createTextNode("\u00A0"));
-				}
-				myNode.insertBefore(div, myNode.childNodes[0]);
-			}
+            if (myNode) {
+                while (myNode.firstChild) {
+                    myNode.removeChild(myNode.lastChild);
+                }
+                // Add new
+                i = 0;
+                while (i < monitorAttribute.max) {
+                    i++;
+                    var div = document.createElement("div");
+                    if (i % 3 == 0) {
+                        div.setAttribute("style", "flex: 1; border-right: solid black 1px; text-align:right;");
+                        div.appendChild(document.createTextNode(-(i / 3)));
+                    } else {
+                        div.setAttribute("style", "flex: 1")
+                        div.appendChild(document.createTextNode("\u00A0"));
+                    }
+                    myNode.insertBefore(div, myNode.childNodes[0]);
+                }
+            }
 
 		}
 	}

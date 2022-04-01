@@ -549,7 +549,8 @@
     "monitor": {
 		"matrix": "Matrix",
       "physical": "Physical",
-      "stun": "Stun"
+      "stun": "Stun",
+      "overflow": "Overflow"
     },
     "mortype": {
       "adept": "Adept",

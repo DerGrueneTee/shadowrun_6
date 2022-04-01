@@ -96,5 +96,30 @@
 				</div>
 			</td>
 		</tr>
+		<tr>
+			<td><i class="fas fa-skull"></td>
+			<td><label for="data.stun" title="{{localize 'shadowrun6.monitor.overflow'}}">{{localize 'shadowrun6.monitor.overflow'}}</label></td>
+			<td><input class="centered health-overflow" name="data.overflow.dmg" type="text" value="{{data.data.overflow.dmg}}" data-dtype="Number" id="dataOverflowCur"></td>
+			<td id="barOverflowMax">
+				<!--div id="barStunCur">{{data.stun.value}}/{{data.stun.max}}</div-->
+				<div style="width: 300px;">
+					<div style="position: relative; z-index: 1; border: solid black 1px;">
+						<div id="barOverflowCur"
+							style="background-color: #aaaaaa; width: 78%;">&nbsp</div>
+						<div id="barOverflowBoxes" style="display: flex; z-index: 2; position: absolute; top: 0em; width: 100%">
+							<!--div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1; border-right: solid black 1px;">&nbsp;</div>
+							<div style="flex: 1;">&nbsp;</div-->
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
 	</tbody>
 </table>

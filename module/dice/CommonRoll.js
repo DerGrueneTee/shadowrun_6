@@ -119,7 +119,11 @@ async function _showRollDialog(data, onClose={}) {
 
         let chatRollMode = $(".roll-type-select").val();
         $("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
-        $("select[name='attrib']").val(CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib);
+        if (data.skillId) {
+            $("select[name='attrib']").val(CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib);
+        } else if (data.item) {
+            $("select[name='attrib']").val(CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib);
+        }
       },
       close: () => resolve(null)
     }, myDialogOptions).render(true);
@@ -180,11 +184,19 @@ function _dialogClosed(type, form, data, messageData={}) {
       data.buttonType = type;
       data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
-      data.attrib = form.attrib.value;
-      data.attribLong = form.attrib.innerHTML;
+      console.log(form.attrib);
+      if (form.attrib) {
+        data.attrib = form.attrib.value;
+        data.attribLong = game.i18n.localize('attrib.' + data.attrib);
+      }
       data.weapon = data.item ? true : false;
 
-      const attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib;
+      let attrBySkill = {}
+      if (data.skillId) {
+        attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib;
+      } else if (data.item) {
+        attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib;
+      }
       if (attrBySkill != data.attrib) { // Optional attribute was chosen
         console.log("optional attribute chosen => attribute="+data.attrib);
         data.pool = data.skill.points + data.actor.data.data.attributes[data.attrib].pool;
