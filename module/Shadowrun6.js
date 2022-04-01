@@ -259,6 +259,7 @@ Hooks.once("init", async function () {
 		 * If no target was memorized in the button, try to find one from the
 		 * actor associated with the player 
 		 */
+
 	   if (!targetId) {
 			game.actors.forEach(item => {
 	    		if (item.hasPlayerOwner)
@@ -268,13 +269,16 @@ Hooks.once("init", async function () {
 
 	  const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
-      const actor = game.actors.get(targetId);	 
+      const token = TokenLayer.instance.objects.children.find((token) => token.data._id === targetId);
+      const actor = token ? game.actors.get(token.data.actorId) : game.actors.get(targetId);
+      dataset.actorId = token ? token.data.actorId : targetId;
       switch(rollType) {
           case "defense": rollDefense(actor, dataset); break;
           case "soak": rollSoak(actor, dataset); break;
-          case "damage": applyDamage(actor, dataset); break;
-          case "heal": applyHeal(actor, dataset); break;
-          case "extended": rollExtended(actor, dataset); break;
+          case "damage": 
+          case "heal": 
+            actor.applyDamage(dataset); break;
+          case "extended": rollExtended(dataset); break;
       }
     });
     html.on("click", ".chat-edge", event => {

@@ -936,6 +936,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText: actionText,
 			checkText  : checkText,
 			attrib: options.attrib,
+      skillId: skillId,
 			skill: skl,
 			spec: spec,
 			threshold: threshold,
@@ -1326,17 +1327,26 @@ export class Shadowrun6Actor extends Actor {
 		console.log("NOT IMPLEMENTED YET");
 	}
 
-	applyDamage(type, damage) {
-		console.log("applyDamage(type=" + type + ", damage=" + damage + ")");
-        if (type.includes("heal.")) {
-            type = type.replace("heal.", "");
-        }
-		this.data.data[type].dmg += parseInt(damage);
-		this.data.data[type].value -= parseInt(damage);
+	applyDamage(dataset) {
+        let type = dataset.damageType ?? dataset.healtype;
+        const damage = dataset.damagetoapply ?? -dataset.healtoapply;
 
-        // Clamping between 0 and maximum health
-        this.data.data[type].dmg = Math.min(Math.max(0, this.data.data[type].dmg), this.data.data[type].max)
-        this.data.data[type].value = Math.min(Math.max(0, this.data.data[type].value), this.data.data[type].max)
-		this._sheet?.render();
+        switch (type) {
+            case "S":
+            case "heal.stun":
+                type = "stun"; break;
+            case "P":
+            case "heal.physical":
+                type = "physical"; break;
+        }
+
+        const token = TokenLayer.instance.objects.children.find((token) => token.data._id === dataset.targetid);
+        const actor = token.document.actor;
+        const damageObj = actor.data.data[type];
+
+        let hp = damageObj.dmg + parseInt(damage);
+        hp = Math.min(Math.max(0, hp), damageObj.max);
+
+        token.document.actor.update({[`data.`+type+`.dmg`]: hp });
 	}
 }
