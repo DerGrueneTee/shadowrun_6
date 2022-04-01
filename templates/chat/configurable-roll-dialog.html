@@ -17,8 +17,11 @@
         <select name="attackRating" class="calc-edge-edit ar-value" id="ar">
             {{#select attackRating}}
             {{#each data.item.data.data.attackRating as |rating id|}}
-            <option value="{{data.attackRating}}" data-item-ar="{{rating}}">{{localize (concat "shadowrun6.roll.ar_"
-                id)}} - ({{rating}})</option>
+                {{#if (eq id ../data.distance)}} 
+                    <option selected value="{{data.attackRating}}" data-item-ar="{{rating}}">{{localize (concat "shadowrun6.roll.ar_"id)}} - ({{rating}})</option>
+                {{else}}
+                    <option value="{{data.attackRating}}" data-item-ar="{{rating}}">{{localize (concat "shadowrun6.roll.ar_"id)}} - ({{rating}})</option>
+                {{/if}}
             {{/each}}
             {{/select}}
         </select> + 

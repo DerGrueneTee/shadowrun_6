@@ -967,7 +967,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
 			break;
 		case 1:
-		   let targetName = game.user.targets.values().next().value.name;
+	        let targetName =  game.user.targets.values().next().value.name;
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
