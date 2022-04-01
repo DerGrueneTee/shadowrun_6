@@ -954,7 +954,7 @@ export class Shadowrun6Actor extends Actor {
 	 *
 	 */
 	rollItem(itemId, options = {}) {
-		console.log("rollItem(item="+itemId+", options="+options+")");
+		console.log("rollItem(item="+itemId+", options=",options,")");
 		const item = this.items.get(itemId);
 		const skillId = item.data.data.skill;
 		const spec = item.data.data.skillSpec;
@@ -966,7 +966,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
 			break;
 		case 1:
-		   let targetName = game.user.targets.values().next().value.name;
+	        let targetName =  game.user.targets.values().next().value.name;
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
@@ -979,6 +979,7 @@ export class Shadowrun6Actor extends Actor {
 
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
+        
 		
 		// If present, replace spell name, description and source references from compendium
 		let spellName = item.name;

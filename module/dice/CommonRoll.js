@@ -25,7 +25,6 @@ export async function doRoll(data) {
  */
 async function _showRollDialog(data, onClose={}) {
   console.log("ENTER _showRollDialog");
-
   if (isNaN(data.threshold)) {
     data.threshold = 0;
   }
@@ -43,7 +42,24 @@ async function _showRollDialog(data, onClose={}) {
 
 	if (!data.defRating) {
 		data.defRating = 0;
-	}
+	} else {
+        if (game.user.targets.size === 1) {
+            const source = TokenLayer.instance.objects.children.find(token => token.data._id === data.speaker.token); 
+            const target = game.user.targets.values().next().value;
+            const distance = canvas.grid.measureDistance(source.transform.position, target.transform.position, {gridSpaces: true});
+            if (distance <= 3) {
+                data.distance = 0;
+            } else if (distance > 3 && distance <= 50) {
+                data.distance = 1;
+            } else if (distance > 50 && distance <= 250) {
+                data.distance = 2;
+            } else if (distance > 250 && distance <= 500) {
+                data.distance = 3;
+            } else if (distance > 500) {
+                data.distance = 4;
+            }
+        }
+    }
 
 	/*
 	 * Edge, Edge Boosts and Edge Actions
@@ -52,7 +68,6 @@ async function _showRollDialog(data, onClose={}) {
     data.edge = (data.actor)?data.actor.data.data.edge.value:0;
     data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=data.edge);
 	 
-
   if (data.targetId && data.rollType === "weapon") {
     data.targetName = game.actors.get(data.targetId).name;
     data.extraText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
@@ -64,6 +79,7 @@ async function _showRollDialog(data, onClose={}) {
   let template = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
   let dialogData = {
 	 checkText: data.extraText,
+     distance: data.distance,
     data: data,
     rollModes: CONFIG.Dice.rollModes,
   };
@@ -110,6 +126,7 @@ async function _showRollDialog(data, onClose={}) {
       target: data.targetId ? true : false,
       targetName: data.targetName,
       buttons: buttons,
+      distance: data.distance,
       default: "normal",
       data: data,
       attackType: data.attackType,
