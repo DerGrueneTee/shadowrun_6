@@ -4,12 +4,18 @@ import { Lifeform, Skill, SR6Actor } from "./ActorTypes";
 import { EdgeBoost, SkillDefinition } from "./DefinitionTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 import { RollDialog } from "./RollDialog.js";
-import { Spell } from "./ItemTypes";
+import { Spell, Weapon } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
-import { ConfiguredRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
+import { ConfiguredRoll, ItemRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
+}
+function isWeapon(obj: any): obj is Weapon {
+    return obj.attackRating != undefined;
+}
+function isSpell(obj: any): obj is Spell {
+    return obj.drain != undefined;
 }
 
 export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
@@ -51,6 +57,11 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		data.edge = (data.actor) ? lifeform.edge.value : 0;
 		data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when == "PRE" && boost.cost <= data.edge);
 
+		if (data.rollType==RollType.Weapon) {
+			(data as ItemRoll).calcPool = data.pool;
+			(data as ItemRoll).calcAttackRating = [...(data as ItemRoll).weapon.attackRating];	
+			(data as ItemRoll).calcDmg = (data as ItemRoll).weapon.dmg;
+		}
 		/*
 	  if (data.targetId && data.rollType === "weapon") {
 		data.targetName = game.actors.get(data.targetId).name;
@@ -104,7 +115,12 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			const diagData: Dialog.Data = {
 				title: title,
 				content: html,
-				render: html => console.log("Register interactivity in the rendered dialog"),
+				render: html => {
+					console.log("Register interactivity in the rendered dialog");
+					// Set roll mode to default from chat window
+					let chatRollMode : string = ($(".roll-type-select").val() as string);
+					$("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
+					},
 				buttons: buttons,
 				default: "normal",
 			};

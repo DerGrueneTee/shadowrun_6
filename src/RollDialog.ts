@@ -1,10 +1,36 @@
+import { Lifeform } from "./ActorTypes";
+import { ItemRoll, PreparedRoll } from "./dice/RollTypes";
+import { Gear, Spell, Weapon } from "./ItemTypes";
+
+function isLifeform(obj: any): obj is Lifeform {
+    return obj.attributes != undefined;
+}
+function isGear(obj: any): obj is Gear {
+    return obj.skill != undefined;
+}
+function isWeapon(obj: any): obj is Weapon {
+    return obj.attackRating != undefined;
+}
+function isSpell(obj: any): obj is Spell {
+    return obj.drain != undefined;
+}
+function attackRatingToString(val : number[]) : string { 
+	return val[0] + "/" +
+      ((val[1] != 0) ? val[1] : "-") + "/" +
+      ((val[2] != 0) ? val[2] : "-") + "/" +
+      ((val[3] != 0) ? val[3] : "-") + "/" +
+      ((val[4] != 0) ? val[4] : "-");
+}
 /**
  * Special Shadowrun 6 instance of the RollDialog
  */
 export class RollDialog extends Dialog {
+	
+	html: JQuery;
 
-  activateListeners(html) {
-    super.activateListeners(html);
+	activateListeners(html: JQuery): void {
+   	super.activateListeners(html);
+		this.html = html;
 	 // React to attack/defense rating changes
     html.find('.calc-edge').show(this._onCalcEdge.bind(this));
 	/*
@@ -28,6 +54,9 @@ export class RollDialog extends Dialog {
 
 	// React to changed amp up
     html.find('.incArea').change(this._onSpellIncreaseAreaChange.bind(this));
+
+	// React to changed amp up
+    html.find('.fireMode').change(this._onFiringModeChange.bind(this));
   }
 
 	//-------------------------------------------------------------
@@ -35,61 +64,58 @@ export class RollDialog extends Dialog {
 	 * Called when something edge gain relevant changes on the
 	 * HTML form
 	 */
-  _onCalcEdge(event) {
-	 console.log("onCalcEdge ", this.data);
-	/*
-    try {
-		// Ignore this, if there is no actor
-		if (!this.data.data.actor) {
-			return;
-		}
+	_onCalcEdge(event) {
+		console.log("onCalcEdge ", this);
+
+		let prepared : PreparedRoll = (this.options as any).prepared;	
 	
-    this.data.edgePlayer = 0;
-    this.data.edgeTarget = 0;
+   	try {
+			let edgePlayer : number = 0;
+			let edgeTarget : number = 0;
+ 
+	   	// Check situational edge
+	   	const situationA : HTMLInputElement | null = (document.getElementById("situationalEdgeA") as HTMLInputElement);
+    		if (situationA && situationA.checked) {
+					edgePlayer++;
+	 		}
+   		const situationD : HTMLInputElement | null = (document.getElementById("situationalEdgeD") as HTMLInputElement);
+    		if (situationD && situationD.checked) {
+				edgeTarget++;
+	 		}
 
-    // Check situational edge
-    const situationA = document.getElementById("situationalEdgeA");
-    if (situationA && situationA.checked) {
-			this.data.edgePlayer++;
-	 }
-    const situationD = document.getElementById("situationalEdgeD");
-    if (situationD && situationD.checked) {
-			this.data.edgeTarget++;
-	 }
-
-	const drElement = document.getElementById("dr");
-	if (drElement) {
-   	const dr = drElement.value;
-      const arModElem = document.getElementById("arMod");
-   	if (this.data.data.rollType === "weapon") {
-      	const arElement = document.getElementById("ar");
-      	let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
-      	if (arModElem.value && parseInt(arModElem.value)!=0) {
-				ar += parseInt(arModElem.value);
-      	}
-			this.data.data.attackRating = ar;
-      	let result = ar - dr;
-      	if (result >= 4) {
-				this.data.edgePlayer++;
-   	   } else if (result <= -4) {
-				this.data.edgeTarget++;
-			}
-	 	} else {
- 			let ar = this.data.data.attackRating;
-      	if (arModElem.value && parseInt(arModElem.value)!=0) {
-				ar += parseInt(arModElem.value);
-      	}
-      	let result = ar - dr;
-      	if (result >= 4) {
-				this.data.edgePlayer++;
-      	} else if (result <= -4) {
-				this.data.edgeTarget++;
-			}
-		}
-	}
+			const drElement : HTMLInputElement | null = (document.getElementById("dr") as HTMLInputElement);
+			if (drElement) {
+   			const dr = drElement.value;
+      		const arModElem = document.getElementById("arMod");
+/*   			if (this.data.data.rollType === "weapon") {
+      			const arElement = document.getElementById("ar");
+      			let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
+      			if (arModElem.value && parseInt(arModElem.value)!=0) {
+						ar += parseInt(arModElem.value);
+      			}
+					this.data.data.attackRating = ar;
+      			let result = ar - dr;
+ 			     	if (result >= 4) {
+						this.data.edgePlayer++;
+		   	   } else if (result <= -4) {
+						this.data.edgeTarget++;
+					}
+			 	} else {
+		 			let ar = this.data.data.attackRating;
+		      	if (arModElem.value && parseInt(arModElem.value)!=0) {
+						ar += parseInt(arModElem.value);
+		      	}
+		      	let result = ar - dr;
+		      	if (result >= 4) {
+						this.data.edgePlayer++;
+		      	} else if (result <= -4) {
+						this.data.edgeTarget++;
+					}
+				}
+*/			}
 
 	// Calculate effective edge
-   let effective = this.data.edgePlayer - this.data.edgeTarget;
+/*   let effective = this.data.edgePlayer - this.data.edgeTarget;
    if (effective>0) {
 	   this.data.edgePlayer = this.data.edgePlayer - this.data.edgeTarget;
       this.data.edgeTarget = 0;
@@ -128,10 +154,10 @@ export class RollDialog extends Dialog {
 	 if (edgeLabel) { 
 	   edgeLabel.innerText = innerText;
 	 }
-	} catch (err) {
+*/	} catch (err) {
 		console.log("Oh NO! "+err.stack);
 	}
-		*/
+	
   }
 
 	//-------------------------------------------------------------
@@ -304,6 +330,75 @@ export class RollDialog extends Dialog {
 			console.log("Increase radius by "+this.data.data.radius+"m and drain by "+this.data.data.drainMod);
 		}
 		*/
+	}
+	
+	//-------------------------------------------------------------
+	_onFiringModeChange(event) {
+		console.log("_onFiringModeChange ",this);
+		let prepared : ItemRoll = (this.options as any).prepared;
+		
+		let newMode = event.currentTarget.value;
+		console.log(" newMode "+newMode);
+		let poolMod : number = 0;
+		let arMod   : number = 0;
+		let dmgMod  : number = 0;
+		let rounds  : number = 1;
+		switch (newMode) {
+		case "SS":
+			this.html.find('.onlyFA').css("display", "none");
+			this.html.find('.onlyBF').css("display", "none");
+			break;
+		case "SA":
+			console.log("Now BF");
+			this.html.find('.onlyFA').css("display", "none");
+			this.html.find('.onlyBF').css("display", "none");
+			rounds = 2;
+			arMod = -2;
+			dmgMod = 1;
+			break;
+		case "BF":
+			console.log("Now BF");
+			this.html.find('.onlyFA').css("display", "none");
+			this.html.find('.onlyBF').css("display", "table-cell");
+			rounds = 4;
+			arMod = -4;
+			dmgMod = 2;
+			break;			
+		case "FA":
+			console.log("Now GA");
+			rounds = 10;
+			arMod = -6;
+			this.html.find('.onlyFA').css("display", "table-cell");
+			this.html.find('.onlyBF').css("display", "none");
+			break;			
+		}
+		
+		// Calculate reduced attack rating
+		prepared.calcAttackRating = [...prepared.weapon.attackRating];
+		prepared.calcAttackRating.forEach( (element:number, index:number) => { 
+			prepared.calcAttackRating[index]=element+arMod; 
+			if (prepared.calcAttackRating[index]<=0) prepared.calcAttackRating[index]=0;
+		});
+		this.html.find("td[name='calcAR']").text( attackRatingToString(prepared.calcAttackRating) );
+		// Update the range selector for attack rating
+		this.html.find("select[name='attackRating']").children("option").each( function(){
+			console.log("Child ", this);
+			let idx = parseInt( this.getAttribute("name")! );
+			this.setAttribute("data-item-ar", prepared.calcAttackRating[idx].toString() );
+			this.setAttribute("value", prepared.calcAttackRating[idx].toString());
+			this.text =  (game as Game).i18n.localize("shadowrun6.roll.ar_" + idx)+" (" + prepared.calcAttackRating[idx].toString() +")" ;
+		});
+		this.html.find("select[name='attackRating']").change();
+		
+		// Calculate modified damage
+		prepared.calcDmg = prepared.weapon.dmg + dmgMod;
+		this.html.find("span[name='calcDmg']").text( prepared.calcDmg.toString() );
+		
+		// Calculate modified pool
+		prepared.calcPool = prepared.pool + poolMod;
+		
+		prepared.calcRounds = rounds;
+		this.html.find("td[name='calcRounds']").text( prepared.calcRounds.toString() );
 	}
 	
   _onNoTarget() {

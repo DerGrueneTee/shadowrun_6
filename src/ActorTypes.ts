@@ -1,3 +1,4 @@
+import { MagicOrResonanceDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 
 export class Attribute {
@@ -138,6 +139,8 @@ export class Lifeform extends SR6Actor {
 	tradition : Tradition = new Tradition();
 	skills:Skills = new Skills();
 	essence : number = 6.0;
+	mortype : string;
+	morDef  : MagicOrResonanceDefinition;
 }
 export interface ILifeform {
    attributes:Attributes;

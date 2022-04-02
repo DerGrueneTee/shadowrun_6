@@ -53,9 +53,9 @@ export class Shadowrun6Actor extends Actor {
                this._prepareItemPools();
                this._prepareVehiclePools();
                this._calculateEssence();
-//                     if ((data as any).mortype) {
-//                         data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
-//                     }
+               if (isLifeform(data) && data.mortype) {
+               	data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+               }
              }
              if (this.data.type === 'Critter') {
 					this._prepareAttackRatings();

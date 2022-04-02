@@ -1,6 +1,6 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
-import { Spell } from "../ItemTypes.js";
+import { Gear, Spell, Weapon } from "../ItemTypes.js";
 import { ItemRoll, SkillRoll, SpellRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
@@ -10,6 +10,15 @@ interface SR6ActorSheetData extends ActorSheet.Data {
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
+}
+function isGear(obj: any): obj is Gear {
+    return obj.skill != undefined;
+}
+function isWeapon(obj: any): obj is Weapon {
+    return obj.attackRating != undefined;
+}
+function isSpell(obj: any): obj is Spell {
+    return obj.drain != undefined;
 }
 
 /**
@@ -518,10 +527,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (!item) {
 			throw new Error("onRollItemCheck for non-existing item");
 		}
-		if (!(item.data.data as any).skill) {
+		if (!isGear(item.data.data)) {
 			throw new Error("onRollItemCheck: No skill for item");
 		}
-		let roll : ItemRoll = new ItemRoll((this.actor.data.data as Lifeform), item, itemId);
+		if (isWeapon(item.data.data)) { console.log("is weapon", item)}
+
+		
+		let roll : ItemRoll = new ItemRoll((this.actor.data.data as Lifeform), item, itemId, item.data.data);
 		console.log("_onRollItemCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollItem(roll);
 	}

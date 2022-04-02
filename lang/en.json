@@ -714,6 +714,11 @@
       "ar_4": "Extreme",
       "attack": "Attack",
       "attackRating": "Attack Rating",
+	   "bf_type": "Type",
+		"bf": {
+			"narrow_burst": "Narrow Burst",
+			"wide_burst": "Wide Burst"
+		},
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
       "damage": "Damage: ",
@@ -731,6 +736,8 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explode",
+	   "fa_area": "Area",
+		"firemode": "Firemode",
       "failure": "Failure",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",
@@ -759,6 +766,7 @@
       "successes": "hits",
       "target": "Target",
       "threshold": "Threshold",
+		"weapon":  "Define your attack",
       "wilddie": "Use wild die",
       "with": "with"
     },
@@ -1131,7 +1139,13 @@
 			"watercraft": "Watercraft",
 			"aircraft": "Aircraft"
 		}      
-    }
+    },
+	"weapon": {
+		"damage": "DV",
+		"attackRating":"Attack Rtg.",
+		"firemodes": "Modes",
+		"ammo": "Ammunition"
+	}
   },
   "skill": {
     "astral": "Astral",

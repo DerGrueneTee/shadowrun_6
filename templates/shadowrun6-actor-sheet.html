@@ -15,7 +15,6 @@
 				<input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
 					placeholder="{{localize 'shadowrun6.label.gender'}}" />
 				&nbsp;&middot;&nbsp;
-		{{log "shadowrun6-actor-sheet: data=" data}}
             <select name="data.mortype" data-field="data.mortype" style="background: rgba(255,255,255,0.25); border: 0px">
 				{{#select data.data.mortype}}
             {{#each config.MOR_TYPES as |type id|}}

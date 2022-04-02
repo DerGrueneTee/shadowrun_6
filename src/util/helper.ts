@@ -6,6 +6,14 @@ function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
 }
 
+export function attackRatingToString(val : number[]) : string { 
+	return val[0] + "/" +
+      ((val[1] != 0) ? val[1] : "-") + "/" +
+      ((val[2] != 0) ? val[2] : "-") + "/" +
+      ((val[3] != 0) ? val[3] : "-") + "/" +
+      ((val[4] != 0) ? val[4] : "-");
+}
+
 export const defineHandlebarHelper = async function() {
 	
   Handlebars.registerHelper('attackrating', function (val) {

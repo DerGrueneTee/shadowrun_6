@@ -3,15 +3,15 @@ import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry
 import { Lifeform, Skill } from "../ActorTypes.js";
 import { Defense } from "../config.js";
 import { EdgeBoost, SkillDefinition } from "../DefinitionTypes.js";
-import { Gear, Spell } from "../ItemTypes.js";
+import { Gear, Spell, Weapon } from "../ItemTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 export enum RollType {
-	Common,
-	Weapon,
-	Spell,
-	Ritual,
-	ComplexForm
+	Common = "common",
+	Weapon = "weapon",
+	Spell = "spell",
+	Ritual = "ritual",
+	ComplexForm = "complexform"
 }
 
 export enum ReallyRoll {
@@ -155,19 +155,37 @@ export class SpellRoll extends SkillRoll {
 	}
 }
 
+function isWeapon(obj: any): obj is Weapon {
+    return obj.attackRating != undefined;
+}
+
 export class ItemRoll extends SkillRoll {
 	rollType = RollType.Weapon;
 	
 	item   : Item;
 	itemId : string;
 	gear   : Gear;
+	weapon : Weapon;
+	/** Effective attack rating after applying firing mode */
+	calcAttackRating:Array<number> = [0,0,0,0,0];
+	/** Effective dice pool applying firing mode */
+	calcPool: number;
+	/** Effective damage */
+	calcDmg: number;
+	/** How many units of ammunition are required */
+	calcRounds : number;
 	
-	constructor(actor: Lifeform, item: Item, itemId:string) {
+	constructor(actor: Lifeform, item: Item, itemId:string, gear:Gear) {
 		super(actor, (item.data.data as any).skill);
 		this.item      = item;
 		this.itemId    = itemId;
-		this.gear      = item.data.data as Gear;
+		this.gear      = gear;
 		this.skillSpec = this.gear.skillSpec;
+		if (isWeapon(gear)) {
+			this.weapon = gear;
+			this.rollType = RollType.Weapon;
+			this.defendWith = Defense.PHYSICAL;
+		}
 	}
 }
 
