@@ -18,8 +18,8 @@
     "email": "anja@rpgframework.de"
    }
   ],
-  "compatibleCoreVersion": "0.8.9",
   "minimumCoreVersion":"0.8.0",
+  "compatibleCoreVersion": "9.255",
   "scripts": [
   ],
   "esmodules": [
