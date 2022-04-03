@@ -925,6 +925,10 @@
       "maxEdgePerRound": {
         "hint": "Definiert wieviel Edge jemand pro Kampfrunde maximal erhalten kann",
         "name": "Max. Edge pro Runde"
+      },
+      "defaultThreshold": {
+        "hint": "Definiert den Standard-Schwellenwert für Fertigkeitsproben",
+        "name": "Standard-Schwellenwert"
       }
     },
     "sin" : {
