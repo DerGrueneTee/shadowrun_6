@@ -1,6 +1,8 @@
+import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform } from "./ActorTypes";
-import { ItemRoll, PreparedRoll } from "./dice/RollTypes";
+import { ConfiguredRoll, ItemRoll, PreparedRoll } from "./dice/RollTypes";
 import { Gear, Spell, Weapon } from "./ItemTypes";
+import { Shadowrun6Actor } from "./Shadowrun6Actor";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -20,6 +22,15 @@ function attackRatingToString(val : number[]) : string {
       ((val[2] != 0) ? val[2] : "-") + "/" +
       ((val[3] != 0) ? val[3] : "-") + "/" +
       ((val[4] != 0) ? val[4] : "-");
+}
+function isItemRoll(obj: any): obj is ItemRoll {
+    return obj.rollType != undefined;
+}
+
+export class SR6RollDialogOptions {
+	actor   : Shadowrun6Actor;
+	prepared: PreparedRoll | null;
+	configured : ConfiguredRoll | null;
 }
 /**
  * Special Shadowrun 6 instance of the RollDialog
@@ -67,7 +78,9 @@ export class RollDialog extends Dialog {
 	_onCalcEdge(event) {
 		console.log("onCalcEdge ", this);
 
-		let prepared : PreparedRoll = (this.options as any).prepared;	
+		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
+		let prepared : PreparedRoll = options.prepared!;	
+		let configured : ConfiguredRoll = options.configured!;	
 	
    	try {
 			let edgePlayer : number = 0;
@@ -85,83 +98,98 @@ export class RollDialog extends Dialog {
 
 			const drElement : HTMLInputElement | null = (document.getElementById("dr") as HTMLInputElement);
 			if (drElement) {
-   			const dr = drElement.value;
-      		const arModElem = document.getElementById("arMod");
-/*   			if (this.data.data.rollType === "weapon") {
-      			const arElement = document.getElementById("ar");
-      			let ar = parseInt(arElement.children[arElement.selectedIndex].dataset.itemAr);
+   			const dr : number = parseInt(drElement.value);
+				console.log("DR = "+dr);
+      		const arModElem : HTMLInputElement = (document.getElementById("arMod") as HTMLInputElement);
+				configured.edgePlayer = 0;
+				configured.edgeTarget = 0;
+			
+				if (isItemRoll(prepared)) {
+      			const arElement: HTMLSelectElement = (document.getElementById("ar") as HTMLSelectElement);
+					let ar = parseInt( (arElement.children[arElement.selectedIndex] as HTMLOptionElement).value );
       			if (arModElem.value && parseInt(arModElem.value)!=0) {
 						ar += parseInt(arModElem.value);
       			}
-					this.data.data.attackRating = ar;
+					let finalAR : number = ar;
+					//this.data.data.attackRating = ar;
       			let result = ar - dr;
  			     	if (result >= 4) {
-						this.data.edgePlayer++;
+						configured.edgePlayer++;
 		   	   } else if (result <= -4) {
-						this.data.edgeTarget++;
+						configured.edgeTarget++;
 					}
 			 	} else {
-		 			let ar = this.data.data.attackRating;
+		 			let ar : number = (prepared as ItemRoll).calcAttackRating[0];
 		      	if (arModElem.value && parseInt(arModElem.value)!=0) {
 						ar += parseInt(arModElem.value);
 		      	}
 		      	let result = ar - dr;
 		      	if (result >= 4) {
-						this.data.edgePlayer++;
+						configured.edgePlayer++;
 		      	} else if (result <= -4) {
-						this.data.edgeTarget++;
+						configured.edgeTarget++;
 					}
+					
 				}
-*/			}
+				
+			}
 
-	// Calculate effective edge
-/*   let effective = this.data.edgePlayer - this.data.edgeTarget;
-   if (effective>0) {
-	   this.data.edgePlayer = this.data.edgePlayer - this.data.edgeTarget;
-      this.data.edgeTarget = 0;
-   } else if (effective<0) {
-	   this.data.edgeTarget = this.data.edgeTarget - this.data.edgePlayer;
-      this.data.edgePlayer = 0;
-   } else {
-      this.data.edgePlayer = 0;
-      this.data.edgeTarget = 0;
-   }
-	// Set new edge value
-   this.data.edge = Math.min(7,this.data.data.actor.data.data.edge.value + this.data.edgePlayer);
-	this.data.data.edge = this.data.edge;
-   // Update in dialog
-	let edgeValue = this._element[0].getElementsByClassName("edge-value")[0];
-	if (edgeValue) { 
-	  	edgeValue.innerText = this.data.edge;
-	}
-	// Update selection of edge boosts
-	this._updateEdgeBoosts(this._element[0].getElementsByClassName("edgeBoosts")[0], this.data.edge);
-	let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=this.data.edge);
+			// Calculate effective edge
+   		let effective = configured.edgePlayer - configured.edgeTarget;
+  			if (effective>0) {
+	   		configured.edgePlayer = configured.edgePlayer - configured.edgeTarget;
+      		configured.edgeTarget = 0;
+   		} else if (effective<0) {
+	   		configured.edgeTarget = configured.edgeTarget - configured.edgePlayer;
+      		configured.edgePlayer = 0;
+   		} else {
+      		configured.edgePlayer = 0;
+      		configured.edgeTarget = 0;
+   		}
+			console.log("actor = ", options.actor);
+		
+			// Set new edge value
+			let actor : Lifeform = configured.actor.data.data as Lifeform;
+   		actor.edge.value = Math.min(7,actor.edge.value + configured.edgePlayer);
+   		// Update in dialog
+			let edgeValue : HTMLLabelElement = (this._element![0].getElementsByClassName("edge-value")[0] as HTMLLabelElement);
+			if (edgeValue) { 
+	  			edgeValue.innerText = actor.edge.value.toString();
+			}
+			// Update selection of edge boosts
+			this._updateEdgeBoosts( (this._element![0].getElementsByClassName("edgeBoosts")[0] as HTMLSelectElement), actor.edge);
+			let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=actor.edge.value);
 
-    // Prepare text for player
-    let innerText = "";
-    if (this.data.edgePlayer) {
-		innerText = game.i18n.format("shadowrun6.roll.edge.gain_player", {name:this.data.data.speaker.alias, value:this.data.edgePlayer});
-	 } else if (this.data.edgeTarget!=0) {
-      let targetName = this.targetName ? this.targetName : game.i18n.localize("shadowrun6.roll.target");
-		innerText += game.i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:this.data.edgeTarget});
-	 } else {
-		innerText += game.i18n.localize("shadowrun6.roll.edge.no_gain");
-	}
-	this.data.data.edge_message = innerText;
+    		// Prepare text for player
+    		let innerText = "";
+			console.log("XXX this = ",this);
+			
+			let speaker : ChatSpeakerDataProperties = configured.speaker;
+    		if (configured.edgePlayer) {
+				innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:speaker.alias, value:configured.edgePlayer});
+			} else if (configured.edgeTarget!=0) {
+				//configured.targets
+     			let targetName = "To Do"; //this.targetName ? this.targetName : (game as Game).i18n.localize("shadowrun6.roll.target");
+				innerText += (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:configured.edgeTarget});
+	 		} else {
+				innerText += (game as Game).i18n.localize("shadowrun6.roll.edge.no_gain");
+			}
+			
+			configured.edge_message = innerText;
 	
 	 let edgeLabel = document.getElementById("edgeLabel");
 	 if (edgeLabel) { 
 	   edgeLabel.innerText = innerText;
 	 }
-*/	} catch (err) {
+
+	} catch (err) {
 		console.log("Oh NO! "+err.stack);
 	}
 	
   }
 
 	//-------------------------------------------------------------
-	_updateEdgeBoosts(elem, available) {
+	_updateEdgeBoosts(elem : HTMLSelectElement, available) {
 		let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=available);
 
 		// Node for inserting new data before		

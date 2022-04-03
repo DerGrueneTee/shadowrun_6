@@ -3,7 +3,7 @@ import { Options } from "@league-of-foundry-developers/foundry-vtt-types/src/fou
 import { Lifeform, Skill, SR6Actor } from "./ActorTypes";
 import { EdgeBoost, SkillDefinition } from "./DefinitionTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
-import { RollDialog } from "./RollDialog.js";
+import { RollDialog, SR6RollDialogOptions } from "./RollDialog.js";
 import { Spell, Weapon } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
 import { ConfiguredRoll, ItemRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
@@ -124,10 +124,18 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 				buttons: buttons,
 				default: "normal",
 			};
-			const myDialogOptions = {
+			
+			// Also prepare a ConfiguredRoll
+			let configured = new ConfiguredRoll();
+			configured.copyFrom(data);
+			
+			const myDialogOptions ={
 				width: 520,
 				jQuery: true,
+				resizeable : true,
+				actor   : data.actor,
 				prepared: data,
+				configured : configured
 			};
 			console.log("create RollDialog");
 			let dia2: RollDialog = new RollDialog(diagData, myDialogOptions);

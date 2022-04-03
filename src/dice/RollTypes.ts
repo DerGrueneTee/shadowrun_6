@@ -166,6 +166,8 @@ export class ItemRoll extends SkillRoll {
 	itemId : string;
 	gear   : Gear;
 	weapon : Weapon;
+	targets : IterableIterator<Token>;
+	defRating : number;
 	/** Effective attack rating after applying firing mode */
 	calcAttackRating:Array<number> = [0,0,0,0,0];
 	/** Effective dice pool applying firing mode */
@@ -195,6 +197,10 @@ export class ConfiguredRoll extends PreparedRoll {
 	buttonType : ReallyRoll;
 	explode : boolean;
 	defRating : number;
+   edgePlayer: number;
+	edgeTarget : number;
+	edge_message : string;
+	targets : IterableIterator<Token>;
 }
 
 export class FinishedRoll extends PreparedRoll {

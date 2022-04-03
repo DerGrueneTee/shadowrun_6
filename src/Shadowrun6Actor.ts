@@ -900,13 +900,14 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	_getHighestDefenseRating(map) {
 		let highest = 0;
-		for (var it = (game as any).user.targets.values(), val= null; val=it.next().value; ) {
-			console.log("val = " , val);
-/*			let actor   = val.actor;
-			let here    = map(actor);
+		for (var it = (game as Game).user!.targets.values(), val= null; val=it.next().value; ) {
+			console.log("_getHighestDefenseRating: Target Token: val = " , val);
+			let token : Token = val as Token;
+			let actor : Shadowrun6Actor  = token.actor as Shadowrun6Actor;
+			let here : number = map(actor);
 			if (here>highest)
 				highest = here;
-*/      }
+      }
 		return highest;
 	}
 
@@ -984,8 +985,9 @@ export class Shadowrun6Actor extends Actor {
 		// Get pool
 		let pool = roll.pool;
 
-		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
-		console.log("Highest defense rating of targets: "+highestDefenseRating);
+		roll.targets = (game as Game).user!.targets.values();
+		roll.defRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
+		console.log("Highest defense rating of targets: "+roll.defRating);
 
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(roll);
