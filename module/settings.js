@@ -33,7 +33,7 @@ export const registerSystemSettings = function () {
   });
 
   /**
-   * Adjustable default threshold settind
+   * Adjustable default threshold setting
    */
   game.settings.register("shadowrun6-eden", "defaultThreshold", {
       name: "shadowrun6.settings.defaultThreshold.name",
