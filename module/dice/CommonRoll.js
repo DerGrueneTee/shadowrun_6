@@ -208,13 +208,13 @@ function _dialogClosed(type, form, data, messageData={}) {
       }
       data.weapon = data.item ? true : false;
 
-      let attrBySkill = {}
+      let attrBySkill = ""
       if (data.skillId) {
         attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib;
       } else if (data.item) {
         attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib;
       }
-      if (attrBySkill != data.attrib) { // Optional attribute was chosen
+      if (attrBySkill && attrBySkill != data.attrib) { // Optional attribute was chosen
         console.log("optional attribute chosen => attribute="+data.attrib);
         data.pool = data.skill.points + data.actor.data.data.attributes[data.attrib].pool;
         console.log("new pool="+data.skillId+"+"+data.attrib+"="+data.pool);

@@ -310,7 +310,7 @@
 		if (threshold) {
 			this.actor.rollSkill(skill, skillSpec, threshold, options);			
 		} else {
-			this.actor.rollSkill(skill, skillSpec, 3, options);
+			this.actor.rollSkill(skill, skillSpec, game.shadowrun6.defaultThreshold, options);
 		}
 	}
 
