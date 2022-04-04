@@ -31,4 +31,20 @@ export const registerSystemSettings = function () {
 //      });
     }
   });
+
+  /**
+   * Adjustable default threshold setting
+   */
+  game.settings.register("shadowrun6-eden", "defaultThreshold", {
+      name: "shadowrun6.settings.defaultThreshold.name",
+      hint: "shadowrun6.settings.defaultThreshold.hint",
+      scope: "world",
+      config: true,
+      type: Number,
+      default: 3,
+      onChange: threshold => {
+        console.log("Default Threshold changed to: " + threshold);
+        game.shadowrun6.defaultThreshold = threshold;
+      }
+  });
 }

@@ -112,6 +112,12 @@ export class Shadowrun6Actor extends Actor {
 				data.stun.max = data.stun.base + data.stun.mod;
 				data.stun.value = data.stun.max - data.stun.dmg;
 			}
+
+            if (data.overflow) {
+                data.overflow.base = data.attributes["bod"].pool * 2;
+                data.overflow.max = data.attributes["bod"].pool * 2;
+                data.overflow.value = data.overflow.dmg;
+            }
 		}
 
 		if (data.initiative) {
@@ -129,6 +135,11 @@ export class Shadowrun6Actor extends Actor {
 	  if (!data.derived)
 			return;
 
+            // Physical Heal Pool
+            data.derived.heal_pool = {
+                physical: data.attributes["bod"].pool * 2,
+                stun: data.attributes["bod"].pool + data.attributes["wil"].pool
+            }
 			// Composure
 			if (data.derived.composure) {
 				data.derived.composure.base = data.attributes["wil"].pool + data.attributes["cha"].pool;
@@ -358,7 +369,7 @@ export class Shadowrun6Actor extends Actor {
 				let attr = skillDef.attrib;
 				let attribVal = data.attributes[attr].pool;
 				data.skills[id].pool = attribVal + data.skills[id].points;
-				if (data.skills[id].points==0 && !skillDef.useUntrained) {
+				if (data.skills[id].points==0) {
 					data.skills[id].pool--;
 				}
 				
@@ -689,7 +700,7 @@ export class Shadowrun6Actor extends Actor {
 		this.data.items.forEach(tmpItem => {
 			let item = tmpItem.data.data;
 			if (tmpItem.type == "gear" && item.type=="ELECTRONICS") {
-				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK") {
+				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK" || item.subtype == "RIGGER_CONSOLE") {
 					if (item.usedForPool) {
 						actorData.persona.device.base.d = item.d;
 						actorData.persona.device.base.f = item.f;
@@ -787,9 +798,11 @@ export class Shadowrun6Actor extends Actor {
 		let attrName = game.i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
 		
+        /* This is somewhat not correct atm. It always shows "(3)". TODO: Fix this
 		if (threshold && threshold>0) {
 			rollName += " ("+threshold+")";
 		}
+        */
 
 		return rollName;		
 	}
@@ -808,7 +821,6 @@ export class Shadowrun6Actor extends Actor {
 		if (!skillId) {
 			throw "Unknown skill '"+skillId+"'";
 		}
-			
 		let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId);
 		if (!attrib) {
 			attrib = skillDef.attrib;
@@ -816,10 +828,8 @@ export class Shadowrun6Actor extends Actor {
 			
 		// Calculate pool
 		let value = skl.points + skl.modifier;
-		if (skl.base==0) {
-			if (skillDef.useUntrained) {value-=1;}
-			else
-				return 0;
+		if (skl.points==0) {
+				value=-1;
 		}
 		
 		if (spec) {
@@ -832,7 +842,6 @@ export class Shadowrun6Actor extends Actor {
 		
 		// Add attribute
 		value += this.data.data.attributes[attrib].pool;
-		
 		return value;		
 	}
 
@@ -899,7 +908,7 @@ export class Shadowrun6Actor extends Actor {
 			let here    = map(actor);
 			if (here>highest)
 				highest = here;
-      }
+	  }
 		return highest;
 	}
 
@@ -933,6 +942,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText: actionText,
 			checkText  : checkText,
 			attrib: options.attrib,
+      skillId: skillId,
 			skill: skl,
 			spec: spec,
 			threshold: threshold,
@@ -963,7 +973,7 @@ export class Shadowrun6Actor extends Actor {
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:this._getGearName(item)});
 			break;
 		case 1:
-		   let targetName = game.user.targets.values().next().value.name;
+	        let targetName =  game.user.targets.values().next().value.name;
 			actionText = game.i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:this._getGearName(item), target:targetName});
 			break;
 		default:
@@ -1288,6 +1298,22 @@ export class Shadowrun6Actor extends Actor {
 		return doRoll(data);
 	}
 
+    rollHealCheck(dataset, options = {}) {
+        console.log("rollHealCheck(pool="+dataset.pool+", type="+dataset.itemId+")")
+        console.log(this);
+        let data = mergeObject(options, {
+            pool: dataset.pool,
+            title: game.i18n.localize("shadowrun6.derived."+dataset.itemId),
+            actionText: game.i18n.localize("shadowrun6.derived."+dataset.itemId),
+            healType: dataset.itemId,
+            isHeal: true,
+            target: this,
+            rollType: "heal"
+        });
+        data.speaker = ChatMessage.getSpeaker({actor: this});
+        return doRoll(data);
+    }
+
 	getUsersFirstTargetId() {
 		if (this.userHasTargets()) {
 			return game.user.targets.values().next().value.data.actorId;
@@ -1307,10 +1333,29 @@ export class Shadowrun6Actor extends Actor {
 		console.log("NOT IMPLEMENTED YET");
 	}
 
-	applyDamage(physical, damage) {
-		console.log("applyDamage(physical=" + physical + ", damage=" + damage + ")");
-		if (physical) {
-			
-		}
+	applyDamage(dataset) {
+        let type = dataset.damageType ?? dataset.healtype;
+        const damage = dataset.damagetoapply ?? -dataset.healtoapply;
+
+        switch (type) {
+            case "S":
+            case "heal.stun":
+                type = "stun"; break;
+            case "P":
+            case "heal.physical":
+                type = "physical"; break;
+        }
+
+        const token = TokenLayer.instance.objects.children.find((token) => token.data._id === dataset.targetid);
+        const actor = token.document.actor;
+        const damageObj = actor.data.data[type];
+
+        let hp = damageObj.dmg + parseInt(damage);
+        let overflow = Math.max(0, hp - damageObj.max);
+        console.log(overflow)
+        hp = Math.min(Math.max(0, hp), damageObj.max);
+        
+        token.document.actor.update({[`data.overflow.dmg`]: overflow});
+        token.document.actor.update({[`data.`+type+`.dmg`]: hp });
 	}
 }

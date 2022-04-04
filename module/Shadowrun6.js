@@ -11,8 +11,8 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import SR6Roll from "./dice/sr6_roll.js";
 import EdgeUtil from "./util/EdgeUtil.js";
-import { doRoll } from "./dice/CommonRoll.js";
-import { rollDefense, rollSoak } from "./dice/CommonRoll.js";
+import { rollDefense, rollSoak, applyDamage, rollExtended } from "./dice/CommonRoll.js";
+import { applyHeal, doRoll } from "./dice/CommonRoll.js";
 import * as Macros from "./util/macros.js"
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./combat.js";
@@ -29,6 +29,10 @@ const diceIconSelector = '#chat-controls .chat-control-icon .fa-dice-d20';
 Hooks.once("init", async function () {
 
   console.log(`Initializing Shadowrun 6 System`);
+
+  Handlebars.registerHelper('ge', function( a, b ){
+    return (a >= b) ? true : false;
+  });
   CONFIG.debug.hooks = false;
   // Record Configuration Values
   CONFIG.SR6 = SR6;
@@ -255,29 +259,26 @@ Hooks.once("init", async function () {
 		 * If no target was memorized in the button, try to find one from the
 		 * actor associated with the player 
 		 */
+
 	   if (!targetId) {
 			game.actors.forEach(item => {
 	    		if (item.hasPlayerOwner)
 					targetId = item.data._id;
 		   });
 		}
-      console.log("TargetId "+targetId);
 
-		const dataset = event.currentTarget.dataset;
+	  const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
-		console.log("Clicked on rollable : "+rollType);
-      if (rollType === "defense") {
- 			const actor = game.actors.get(targetId);
-         console.log("Target actor ",actor);
-			rollDefense(actor, dataset);
-      } else if (rollType === "soak") {
- 			const actor = game.actors.get(targetId);
-         console.log("Target actor ",actor);
-			rollSoak(actor, dataset);
-      } else if (rollType === "damage") {
- 			const actor = game.actors.get(targetId);
-         console.log("Target actor ",actor);
-			applyDamage(actor, dataset);
+      const token = TokenLayer.instance.objects.children.find((token) => token.data._id === targetId);
+      const actor = token ? game.actors.get(token.data.actorId) : game.actors.get(targetId);
+      dataset.actorId = token ? token.data.actorId : targetId;
+      switch(rollType) {
+          case "defense": rollDefense(actor, dataset); break;
+          case "soak": rollSoak(actor, dataset); break;
+          case "damage": 
+          case "heal": 
+            actor.applyDamage(dataset); break;
+          case "extended": rollExtended(dataset); break;
       }
     });
     html.on("click", ".chat-edge", event => {

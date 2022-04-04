@@ -35,6 +35,10 @@
         border: 1px solid var(--accent-color);
         background: white;
 }
+.shadowrun6 input.health-overflow {
+        border: 1px solid #aaaaaa;
+        background: white;
+}
 .shadowrun6 input.box {
         border: 1px solid var(--highlight-color);
         background: white;

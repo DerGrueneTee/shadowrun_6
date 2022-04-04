@@ -143,7 +143,11 @@
       "judge_intentions": "Menschenkenntnis",
       "lift_carry": "Heben / Tragen",
       "memory": "Erinnerungsvermögen",
-      "matrix_perception": "Matrixwahrnehmung"
+      "matrix_perception": "Matrixwahrnehmung",
+      "heal": {
+        "physical": "Körperliches Heilen",
+        "stun": "Geistiges Heilen"
+    }
     },
     "edge_action": {
       "anticipation": "Vorausschau",
@@ -541,7 +545,8 @@
     "monitor": {
 		"matrix": "Matrix",
       "physical": "Körperlich",
-      "stun": "Geistig"
+      "stun": "Geistig",
+      "overflow": "Überzählig"
     },
     "mortype": {
       "adept": "Adept",
@@ -688,6 +693,7 @@
       "spotter": "Späher"
     },
     "roll": {
+      "accumulated": "Gesamt",
       "actionText": {
         "attack_target_multiple": "Greift mehre Ziele mit {name} an",
         "attack_target_none": "Greift Ziel mit {name} an",
@@ -709,6 +715,7 @@
       "ar_4": "Sehr weit",
       "attack": "Angriff gegen ",
       "attackRating": "Angriffswert",
+      "attack_missed": "Angriff ging daneben",
       "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
@@ -726,6 +733,10 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explodiert",
+      "extend": "Ausdehnen",
+      "extended": "Ausgedehnt",
+      "extend_check_failed": "Ausgedehnte Probe fehlgeschlagen",
+      "extend_check_success": "Ausgedehnte Probe erfolgreich",
       "failure": "Fehlschlag",
       "glitch": "Patzer",
       "hits_bought": "Erfolge gekauft",
@@ -906,13 +917,18 @@
       "weapon": {
         "add": "Neue Waffe hinzufügen",
         "close": "Nahkampf",
-        "ranged": "Fernkampf"
+        "ranged": "Fernkampf",
+        "special": "Spezielle Waffen"
       }
     },
     "settings": {
       "maxEdgePerRound": {
         "hint": "Definiert wieviel Edge jemand pro Kampfrunde maximal erhalten kann",
         "name": "Max. Edge pro Runde"
+      },
+      "defaultThreshold": {
+        "hint": "Definiert den Standard-Schwellenwert für Fertigkeitsproben",
+        "name": "Standard-Schwellenwert"
       }
     },
     "sin" : {
