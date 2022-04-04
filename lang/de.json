@@ -709,6 +709,11 @@
       "ar_4": "Sehr weit",
       "attack": "Angriff gegen ",
       "attackRating": "Angriffswert",
+	   "bf_type": "Art",
+		"bf": {
+			"narrow_burst": "Enge Salve",
+			"wide_burst": "Weite Salve"
+		},
       "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
@@ -716,6 +721,7 @@
       "defense_button": "Würfle Verteidigung",
       "edge": {
         "gain_player": "{name} erhält {value} Edge",
+        "gain_player_capped": "{name} würde {value} Edge, can aber nicht mehr als {capped} bekommen.",
         "getting": "Edge erhalten",
         "no_gain": "Niemand bekommt Edge",
         "situational": "Situatives Edge",
@@ -726,6 +732,8 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explodiert",
+	   "fa_area": "Fläche",
+		"firemode": "Feuermodus",
       "failure": "Fehlschlag",
       "glitch": "Patzer",
       "hits_bought": "Erfolge gekauft",
@@ -735,6 +743,7 @@
       "nosuccess": "Erfolge bei Schwellenwert ",
       "notarget": "Kein Ziel ausgewählt",
       "pool": "Würfel/Pool",
+      "range": "Distanz",
       "spec": "Spezialiszierung",
       "spell": {
         "ampUp": {
@@ -754,6 +763,7 @@
       "successes": "Erfolge",
       "target": "Ziel",
       "threshold": "Schwellenwert",
+      "weapon":  "Wie greifst Du an?",
       "wilddie": "Schicksalswürfel verwenden",
       "with": "mit "
     },

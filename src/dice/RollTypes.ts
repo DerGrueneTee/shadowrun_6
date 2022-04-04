@@ -36,7 +36,7 @@ class CommonRollData {
 	rollType : RollType;
 	
 	/* Opposed rolls: How to oppose? */
-	defendWith: Defense |undefined;
+	defendWith: Defense;
 	isOpposed() : boolean {
 		return this.defendWith != undefined;
 	}
@@ -60,6 +60,42 @@ class CommonRollData {
 		this.useWildDie = copy.useWildDie;
 		this.pool       = copy.pool;
 	}
+}
+
+/************************************
+ * Returned after
+ ************************************/
+export interface OpposedRoll {
+	defendWith : Defense;
+	attackRating : number;
+	defenseRating: number;
+}
+
+enum PoolUsage {
+	OneForOne,
+	OneForAll,
+}
+
+export interface AttackRollData {
+	defendWith : Defense;
+
+	/** Which tokens are selected */
+	targets?    : IterableIterator<Token> | null;
+	
+	attackRating? : number;
+	weaponAttackRating? : number[];
+	
+	poolUsage     : PoolUsage;
+	/** when poolUsage is OneOnOne: How large is your pool per Token*/
+	perTargetPool : Map<Token, number>;
+}
+
+export interface WeaponRollData extends AttackRollData {
+	weapon   : Weapon;
+}
+
+export interface SpellRollData extends AttackRollData {
+	spell    : Spell;
 }
 
 /**
@@ -124,9 +160,15 @@ export class SkillRoll extends PreparedRoll {
 export class SpellRoll extends SkillRoll {
 	rollType = RollType.Spell;
 	
+	spellId : string;
+	spellName : string | null;
+	spellDesc : string | null;
+	spellSrc: string | null;
 	spell: Spell;
 	canAmpUpSpell: boolean;
 	canIncreaseArea: boolean;
+	defenseRating : number;
+	attackRating  : number;
 
 	/**
 	 * @param skill {Skill}   The skill to roll upon
@@ -159,15 +201,19 @@ function isWeapon(obj: any): obj is Weapon {
     return obj.attackRating != undefined;
 }
 
-export class ItemRoll extends SkillRoll {
+export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	rollType = RollType.Weapon;
 	
 	item   : Item;
 	itemId : string;
+	itemName : string | null;
+	itemDesc : string | null;
+	itemSrc: string | null;
 	gear   : Gear;
 	weapon : Weapon;
 	targets : IterableIterator<Token>;
-	defRating : number;
+	defenseRating : number;
+	attackRating  : number;
 	/** Effective attack rating after applying firing mode */
 	calcAttackRating:Array<number> = [0,0,0,0,0];
 	/** Effective dice pool applying firing mode */
@@ -176,6 +222,7 @@ export class ItemRoll extends SkillRoll {
 	calcDmg: number;
 	/** How many units of ammunition are required */
 	calcRounds : number;
+	
 	
 	constructor(actor: Lifeform, item: Item, itemId:string, gear:Gear) {
 		super(actor, (item.data.data as any).skill);
@@ -200,6 +247,7 @@ export class ConfiguredRoll extends PreparedRoll {
    edgePlayer: number;
 	edgeTarget : number;
 	edge_message : string;
+	edgeAdjusted : number;
 	targets : IterableIterator<Token>;
 }
 

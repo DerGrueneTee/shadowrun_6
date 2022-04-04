@@ -726,6 +726,7 @@
       "defense_button": "Roll Defense",
       "edge": {
         "gain_player": "{name} gets {value} Edge",
+        "gain_player_capped": "{name} would {value} Edge, but cannot get more than {capped}",
         "getting": "Getting Edge",
         "no_gain": "No one gets Edge",
         "situational": "Situational Edge",
@@ -747,6 +748,7 @@
       "nosuccess": "hits, threshold: ",
       "notarget": "No target selected",
       "pool": "Pool",
+		"range": "Distance",
       "spec": "Specialization",
       "spell": {
         "ampUp": {
@@ -1065,6 +1067,7 @@
       }
     },
     "spell": {
+		"area": "Area",
       "category": "Category",
       "category_combat": "Combat",
       "category_detection": "Detection",

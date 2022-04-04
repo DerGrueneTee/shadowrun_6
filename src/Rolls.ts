@@ -6,7 +6,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor";
 import { RollDialog, SR6RollDialogOptions } from "./RollDialog.js";
 import { Spell, Weapon } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
-import { ConfiguredRoll, ItemRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -21,7 +21,6 @@ function isSpell(obj: any): obj is Spell {
 export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
 	console.log("ENTER doRoll");
 	try {
-
 		// Create the Roll instance
 		const _r: SR6Roll = await _showRollDialog(data);
 		console.log("returned from _showRollDialog with ", _r);
@@ -58,9 +57,9 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when == "PRE" && boost.cost <= data.edge);
 
 		if (data.rollType==RollType.Weapon) {
-			(data as ItemRoll).calcPool = data.pool;
-			(data as ItemRoll).calcAttackRating = [...(data as ItemRoll).weapon.attackRating];	
-			(data as ItemRoll).calcDmg = (data as ItemRoll).weapon.dmg;
+			(data as WeaponRoll).calcPool = data.pool;
+			(data as WeaponRoll).calcAttackRating = [...(data as WeaponRoll).weapon.attackRating];	
+			(data as WeaponRoll).calcDmg = (data as WeaponRoll).weapon.dmg;
 		}
 		/*
 	  if (data.targetId && data.rollType === "weapon") {
@@ -76,6 +75,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		let dialogData = {
 			//checkText: data.extraText,
 			data: data,
+			CONFIG : CONFIG,
 			rollModes: CONFIG.Dice.rollModes,
 		};
 		const html: string = await renderTemplate(template, dialogData);

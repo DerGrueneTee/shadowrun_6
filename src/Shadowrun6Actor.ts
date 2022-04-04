@@ -1,10 +1,10 @@
 import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill } from "./ActorTypes.js";
-import { SR6, SR6Config } from "./config.js";
+import { Defense, SR6, SR6Config } from "./config.js";
 import { SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
-import { ItemRoll, SkillRoll, SpellRoll } from "./dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -939,7 +939,7 @@ export class Shadowrun6Actor extends Actor {
 	/*
 	 *
 	 */
-	rollItem(roll : ItemRoll) {
+	rollItem(roll : WeaponRoll) {
 		console.log("rollItem(", roll, ")");
 		roll.actor     = this;
 		// Prepare check text
@@ -952,42 +952,38 @@ export class Shadowrun6Actor extends Actor {
 		roll.allowBuyHits = true;
 		
 		// If present, replace item name, description and source references from compendium
-		let itemName = roll.item.name;
-		let itemDesc = "";
-		let itemSrc  = "";
+		roll.itemName = roll.item.name;
 		
 		if (roll.gear.description) {
-			itemDesc = roll.gear.description;
+			roll.itemDesc = roll.gear.description;
 		}
 		if (roll.gear.genesisID) {
 			let key = "item."+roll.gear.genesisID+".";
 			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
-				itemName = (game as Game).i18n.localize(key+"name");
-				itemDesc = (game as Game).i18n.localize(key+"desc");
-				itemSrc  = (game as Game).i18n.localize(key+"src");
+				roll.itemName = (game as Game).i18n.localize(key+"name");
+				roll.itemDesc = (game as Game).i18n.localize(key+"desc");
+				roll.itemSrc  = (game as Game).i18n.localize(key+"src");
 			}
 		}
 		
 		switch ((game as any).user.targets.size) {
 		case 0:
-			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:itemName});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_none", {name:roll.itemName});
 			break;
 		case 1:
 		   let targetName = (game as any).user.targets.values().next().value.name;
-			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:itemName, target:targetName});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_one", {name:roll.itemName, target:targetName});
 			break;
 		default:
-			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:itemName});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.attack_target_multiple", {name:roll.itemName});
 		}
 		// Prepare check text
 		let checkText = this._getSkillCheckText(roll);
-		// Get pool
-		let pool = roll.pool;
 
 		roll.targets = (game as Game).user!.targets.values();
-		roll.defRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
-		console.log("Highest defense rating of targets: "+roll.defRating);
+		roll.defenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
+		console.log("Highest defense rating of targets: "+roll.defenseRating);
 
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(roll);
@@ -1025,49 +1021,42 @@ export class Shadowrun6Actor extends Actor {
 		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
 		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
-		let rollName = this._getSkillCheckText(roll);		
 
 		// Determine whether or not the spell is an opposed test
 		// and what defense eventually applies
-		let isOpposed = false;
 		let hasDamageResist = !ritual;
-		let defendWith = "physical";
-		let attackRating = roll.performer.attackrating.astral.pool;
+		roll.attackRating = roll.performer.attackrating.astral.pool;
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
-/*		roll.canAmpUpSpell   = roll.spell.category === "combat";
-		roll.canIncreaseArea = item.data.data.range==="line_of_sight_area" || item.data.data.range==="self_area";
-		if (item.data.data.category === "combat") {
-			isOpposed = true;
-			if (item.data.data.type=="mana") {
-				defendWith = "spells_direct";
+		roll.canAmpUpSpell   = roll.spell.category === "combat";
+		roll.canIncreaseArea = roll.spell.range==="line_of_sight_area" || roll.spell.range==="self_area";
+		if (roll.spell.category === "combat") {
+			if (roll.spell.type=="mana") {
+				roll.defendWith = Defense.SPELL_DIRECT;
 				hasDamageResist = false;
 			} else {
-				defendWith = "spells_indirect";
+				roll.defendWith = Defense.SPELL_INDIRECT;
 			}
-		} else if (item.data.data.category === "manipulation") {
-			isOpposed = true;
-				defendWith = "spells_other";
-		} else if (item.data.data.category === "heal") {
-			if (item.data.data.withEssence) {
-				threshold = 5 - Math.ceil(this.data.data.essence);
+		} else if (roll.spell.category === "manipulation") {
+				roll.defendWith = Defense.SPELL_OTHER;
+		} else if (roll.spell.category === "heal") {
+			if (roll.spell.withEssence && isLifeform(this.data.data)) {
+				roll.threshold = 5 - Math.ceil(this.data.data.essence);
 			}
 		}
-*/		
+		
 		// If present, replace spell name, description and source references from compendium
-		let spellName:string = this._getSpellName(roll.spell);
-		let spellDesc = "";
-		let spellSrc  = "";
+		roll.spellName = this._getSpellName(roll.spell);
 		if (roll.spell.description) {
-			spellDesc = roll.spell.description;
+			roll.spellDesc = roll.spell.description;
 		}
 		if (roll.spell.genesisID) {
 			let key = (ritual?"ritual.":"spell.")+roll.spell.genesisID+".";
 			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
 				// A translation exists
-				spellName = (game as Game).i18n.localize(key+"name");
-				spellDesc = (game as Game).i18n.localize(key+"desc");
-				spellSrc = (game as Game).i18n.localize(key+"src");
+				roll.spellName = (game as Game).i18n.localize(key+"name");
+				roll.spellDesc = (game as Game).i18n.localize(key+"desc");
+				roll.spellSrc = (game as Game).i18n.localize(key+"src");
 			}
 		}
 
@@ -1302,5 +1291,12 @@ export class Shadowrun6Actor extends Actor {
 		console.log("rollAttack(" + attackId + ", options=" + options + ")");
 		console.log("NOT IMPLEMENTED YET");
 	}
+	
+	/***************************************
+	 *
+	 **************************************/
+   getMaxEdgeGainThisRound(): number {
+		return 2;
+   }
 
 }

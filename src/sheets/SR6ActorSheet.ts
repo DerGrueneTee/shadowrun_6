@@ -1,7 +1,7 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
-import { ItemRoll, SkillRoll, SpellRoll } from "../dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -533,7 +533,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (isWeapon(item.data.data)) { console.log("is weapon", item)}
 
 		
-		let roll : ItemRoll = new ItemRoll((this.actor.data.data as Lifeform), item, itemId, item.data.data);
+		let roll : WeaponRoll = new WeaponRoll((this.actor.data.data as Lifeform), item, itemId, item.data.data);
 		console.log("_onRollItemCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollItem(roll);
 	}

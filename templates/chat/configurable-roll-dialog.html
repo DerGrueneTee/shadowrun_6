@@ -13,163 +13,19 @@
    <!-- Spell modification -->
    {{log "configurable-roll-dialog.html  this=" this}}
    {{#if data.spell}}
-    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.spell.title"}}</h4>
-    <table style="background-color: transparent; border: 0px">
-    	<tr>
-    	  <td rowspan="2">
-    	  	 <div class="edge-roll" >
-    	      <img src="systems/shadowrun6-eden/images/magic-swirl.svg" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
-    	    </div>
-	     </td>
-	     {{#if data.canAmpUpSpell}}
-	     <td>{{localize "shadowrun6.roll.spell.ampUp.title"}}</td>
-	     <td><select name="ampUp" class="ampUp">
-            <option value="0" data-item-ampid="amp0"> - </option>
-            <option value="1" data-item-ampid="amp1">{{localize "shadowrun6.roll.spell.ampUp.1"}}</option>
-            <option value="2" data-item-ampid="amp2">{{localize "shadowrun6.roll.spell.ampUp.2"}}</option>
-        </select></td>
-        {{/if}}
-    	</tr>
-    	<tr>
-	     {{#if data.canIncreaseArea}}
-	     <td>{{localize "shadowrun6.roll.spell.incArea.title"}}</td>
-	     <td><select name="incArea" class="incArea">
-            <option value="0" data-item-incid="inc0"> - </option>
-            <option value="1" data-item-incid="inc1">{{localize "shadowrun6.roll.spell.incArea.1"}}</option>
-            <option value="2" data-item-incid="inc2">{{localize "shadowrun6.roll.spell.incArea.2"}}</option>
-        </select></td>
-        {{/if}}
-    	</tr>
-    </table>
-	<hr/>
+   {{> "systems/shadowrun6-eden/templates/dialog/partRollDialogSpell.html"}}
    {{/if}}
    
    <!--  Weapon stats -->
   {{#if (eq data.rollType "weapon")}}
-    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.weapon"}}</h4>
-    <table style="background-color: transparent; border: 1px">
-    	<tr>
-    	  <td rowspan="2">
-    	  	 <div class="edge-roll" >
-    	      <img src="systems/shadowrun6-eden/images/colt-m1911.svg" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
-    	    </div>
-    	  </td>
-    	  <td colspan="6">
-   	    <table class="spell-table">
-   	      <tr>
-   	    	  <th>{{localize 'shadowrun6.weapon.damage'}}</th>
-              <th>{{localize 'shadowrun6.weapon.firemodes'}}</th>
-              <th>{{localize 'shadowrun6.weapon.attackRating'}}</th>
-              <th>{{localize 'shadowrun6.weapon.ammo'}}</th>
-   	      </tr>
-   	  	   <tr>
-    	  		  <td><span name="calcDmg">{{data.calcDmg}}</span> {{#if data.gear.stun}}S{{else}}P{{/if}}</td>
-   	  		  <td>{{data.gear.modes}}</td>
-    	  		  <td name="calcAR">{{attackrating data.calcAttackRating}}</td>
-   	  		  <td name="calcRounds">{{data.calcRounds}}</td>
-   	  	   </tr>
-   	    </table>
-   	  </td>
-   	</tr>
-   	<tr>
-   		{{#if (eq data.skillId "firearms")}}
-   	 	<td>{{localize "shadowrun6.roll.firemode"}}</td>
-     		<td><select name="fireMode" class="fireMode">
-         {{#select fireMode}}
-         <option value="SS">{{localize "shadowrun6.item.firemode.SS"}}</option>
-        {{#each data.gear.modes as |allowed mode|}}
-          {{#if allowed}}
-            <option value="{{mode}}">{{localize (concat "shadowrun6.item.firemode." mode)}}</option>
-          {{/if}}
-        {{/each}}
-        {{/select}}
-        </select></td>     		
-    		<td class="onlyFA" style="text-align:right; display:none">{{localize "shadowrun6.roll.fa_area"}}</td>
-    		<td class="onlyFA" style="display:none"><select name="fullAutoArea">
-            <option value="1" data-item-incid="inc0"> 1m Radius</option>
-            <option value="2" data-item-incid="inc1"> 2m Radius</option>
-            <option value="3" data-item-incid="inc2"> 3m Radius</option>
-    		</select></td>   	
-    		<td class="onlyBF" style="text-align:right; display:none">{{localize "shadowrun6.roll.bf_type"}}</td>
-    		<td class="onlyBF" style="display:none"><select name="bfType">
-            <option value="narrow_burst">{{localize "shadowrun6.roll.bf.narrow_burst"}}</option>
-            <option value="wide_burst"  >{{localize "shadowrun6.roll.bf.wide_burst"}}</option>
-    		</select></td>   	
-      {{/if}}
-   	</tr>
-   </table>
+	{{> "systems/shadowrun6-eden/templates/dialog/partRollDialogWeapon.html"}}
   {{/if}}
     
     
     {{#if data.defendWith}}
-    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.edge.getting"}}</h4>
-    <table style="background-color: transparent; border: 0px">
-    	<tr>
-    	  <td>{{localize "shadowrun6.roll.attackRating"}}</td>
-    	  <td>
-    	  {{#if (eq data.rollType "weapon")}}
-        <select name="attackRating" class="calc-edge-edit ar-value" id="ar">
-            {{#select attackRating}}
-            {{#each data.calcAttackRating as |rating id|}}
-            <option value="{{rating}}" data-item-ar="{{rating}}" name="{{id}}">{{localize (concat "shadowrun6.roll.ar_"
-                id)}} - ({{rating}})</option>
-            {{/each}}
-            {{/select}}
-        </select> + 
-        {{else}}
-        <span>{{data.attackRating}} +</span>
-        {{/if}}
-    	  </td>
-    	  <td><input id="arMod" type="number" name="attackRatingMod" value="{{data.attackRatingMod}}" class="calc-edge-edit armod-value" style="width: 2em"/></td>
-    	  <td>vs</td>
-    	  <td>{{localize "shadowrun6.roll.defRating"}}</td>
-    	  <td><input id="dr" type="number" name="defRating" value="{{data.defRating}}" class="calc-edge-edit dr-value" style="width: 2em"/></td>
-    	</tr>
-    	<tr>
-    	  <td colspan="2">{{localize "shadowrun6.roll.edge.situational"}}<input type="checkbox" class="calc-edge-edit" name="situationalEdgeA" value="{{data.situationalEdgeA}}" id="situationalEdgeA" /></td>
-    	  <td colspan="2"></td>
-    	  <td colspan="2">{{localize "shadowrun6.roll.edge.situational"}}<input type="checkbox" class="calc-edge-edit" name="situationalEdgeD" value="{{data.situationalEdgeD}}" id="situationalEdgeD" /></td>
-    	</tr>
-    	<tr>
-    	  <td colspan="6" >
-    	    <label id="edgeLabel" style="font-style:italic"></label><br />
-          <label id="noTargetLabel"></label>
-    	  </td>
-    	</tr>
-    </table>
-    <hr/>
+	{{> "systems/shadowrun6-eden/templates/dialog/partRollDialogOpposed.html"}}
     {{/if}}
-
-	<!-- Edge Boosts and Actions -->
-    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.edge.spending"}}</h4>
-    <table style="background-color: transparent; border: 0px">
-    	<tr>
-    	  <td rowspan="2">
-    	    <div class="edge-roll" style="flex: 0.48; margin-right: 10px">
-	         <img src="systems/shadowrun6-eden/images/EdgeToken.png" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
-		      <label class="edge-value" >{{data.edge}}</label>
-	       </div>
-	     </td>
-	     <td>Boost</td>
-	     <td><select name="edgeBoost" class="edgeBoosts">
-            <option value="none" data-item-boostid="none"> - </option>
-            {{#select edgeBoost}}
-            {{#each data.edgeBoosts as |boost id|}}
-            <option value="{{boost.id}}" data-item-boostid="{{boost.id}}">{{localize (concat "shadowrun6.edge_boost."
-                boost.id)}} - ({{boost.cost}})</option>
-            {{/each}}
-            <option value="edge_action" data-item-boostid="edge_action">{{localize "shadowrun6.edge_boost.edge_action"}}</option>
-            {{/select}}
-        </select></td>
-    	</tr>
-    	<tr>
-    		<td>Action</td>
-    		<td><select name="edgeAction" class="edgeActions">
-             <option value="none" data-item-actionid="none"> - </option>
-        </select></td>
-    	</tr>
-    </table>
-	<hr/>
+	{{> "systems/shadowrun6-eden/templates/dialog/partRollDialogEdge.html"}}
 
 	<!-- Final calculations -->
     <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.configure"}}</h4>

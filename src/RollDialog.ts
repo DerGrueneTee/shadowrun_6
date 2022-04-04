@@ -1,6 +1,6 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform } from "./ActorTypes";
-import { ConfiguredRoll, ItemRoll, PreparedRoll } from "./dice/RollTypes";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll } from "./dice/RollTypes";
 import { Gear, Spell, Weapon } from "./ItemTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 
@@ -23,7 +23,7 @@ function attackRatingToString(val : number[]) : string {
       ((val[3] != 0) ? val[3] : "-") + "/" +
       ((val[4] != 0) ? val[4] : "-");
 }
-function isItemRoll(obj: any): obj is ItemRoll {
+function isItemRoll(obj: any): obj is WeaponRoll {
     return obj.rollType != undefined;
 }
 
@@ -42,8 +42,12 @@ export class RollDialog extends Dialog {
 	activateListeners(html: JQuery): void {
    	super.activateListeners(html);
 		this.html = html;
-	 // React to attack/defense rating changes
-    html.find('.calc-edge').show(this._onCalcEdge.bind(this));
+		
+		// React to attack/defense rating changes
+//    	html.find('.calc-edge').show(this._onCalcEdge.bind(this));
+
+		html.find("select[name='distance']").change(this._recalculateBaseAR.bind(this));
+		html.find("select[name='fireMode']").change(this._onFiringModeChange.bind(this));
 	/*
     if (!this.data.target) {
       html.find('.calc-edge').show(this._onNoTarget.bind(this));
@@ -58,7 +62,7 @@ export class RollDialog extends Dialog {
     html.find('.edgeBoosts').keyup(this._onEdgeBoostActionChange.bind(this));
     html.find('.edgeActions').change(this._onEdgeBoostActionChange.bind(this));
     html.find('.edgeActions').keyup(this._onEdgeBoostActionChange.bind(this));
-	 html.show(this._onEdgeBoostActionChange.bind(this));
+	 html.show(this._onFiringModeChange.bind(this));
 
 	// React to changed amp up
     html.find('.ampUp').change(this._onSpellAmpUpChange.bind(this));
@@ -66,9 +70,26 @@ export class RollDialog extends Dialog {
 	// React to changed amp up
     html.find('.incArea').change(this._onSpellIncreaseAreaChange.bind(this));
 
-	// React to changed amp up
-    html.find('.fireMode').change(this._onFiringModeChange.bind(this));
+	this._recalculateBaseAR();
   }
+	
+	//-------------------------------------------------------------
+	_recalculateBaseAR() {
+		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
+		let prepared : PreparedRoll = options.prepared!;	
+		
+    	const distanceElement: HTMLSelectElement = (document.getElementById("distance") as HTMLSelectElement);
+		if (!distanceElement)
+			return;
+			
+		let ar = parseInt(distanceElement.value );
+    	const arElement: HTMLLabelElement = (document.getElementById("baseAR") as HTMLLabelElement);
+		arElement.textContent = ar.toString();
+		
+		(prepared as any).baseAR = ar;
+		
+		this._onCalcEdge(event);
+	}		
 
 	//-------------------------------------------------------------
 	/*
@@ -99,17 +120,18 @@ export class RollDialog extends Dialog {
 			const drElement : HTMLInputElement | null = (document.getElementById("dr") as HTMLInputElement);
 			if (drElement) {
    			const dr : number = parseInt(drElement.value);
-				console.log("DR = "+dr);
       		const arModElem : HTMLInputElement = (document.getElementById("arMod") as HTMLInputElement);
 				configured.edgePlayer = 0;
 				configured.edgeTarget = 0;
 			
 				if (isItemRoll(prepared)) {
-      			const arElement: HTMLSelectElement = (document.getElementById("ar") as HTMLSelectElement);
-					let ar = parseInt( (arElement.children[arElement.selectedIndex] as HTMLOptionElement).value );
+      			const arElement: HTMLLabelElement = (document.getElementById("baseAR") as HTMLLabelElement);
+					let ar = arElement.textContent ? parseInt( arElement.textContent ): 0;
+//					let ar = parseInt( (arElement.children[arElement.selectedIndex] as HTMLOptionElement).value );
       			if (arModElem.value && parseInt(arModElem.value)!=0) {
 						ar += parseInt(arModElem.value);
       			}
+
 					let finalAR : number = ar;
 					//this.data.data.attackRating = ar;
       			let result = ar - dr;
@@ -119,7 +141,7 @@ export class RollDialog extends Dialog {
 						configured.edgeTarget++;
 					}
 			 	} else {
-		 			let ar : number = (prepared as ItemRoll).calcAttackRating[0];
+		 			let ar : number = (prepared as WeaponRoll).calcAttackRating[0];
 		      	if (arModElem.value && parseInt(arModElem.value)!=0) {
 						ar += parseInt(arModElem.value);
 		      	}
@@ -146,27 +168,31 @@ export class RollDialog extends Dialog {
       		configured.edgePlayer = 0;
       		configured.edgeTarget = 0;
    		}
-			console.log("actor = ", options.actor);
 		
 			// Set new edge value
 			let actor : Lifeform = configured.actor.data.data as Lifeform;
-   		actor.edge.value = Math.min(7,actor.edge.value + configured.edgePlayer);
+   		configured.edge = Math.min(7,actor.edge.value + configured.edgePlayer);
    		// Update in dialog
 			let edgeValue : HTMLLabelElement = (this._element![0].getElementsByClassName("edge-value")[0] as HTMLLabelElement);
 			if (edgeValue) { 
-	  			edgeValue.innerText = actor.edge.value.toString();
+	  			edgeValue.innerText = configured.edge.toString();
 			}
 			// Update selection of edge boosts
-			this._updateEdgeBoosts( (this._element![0].getElementsByClassName("edgeBoosts")[0] as HTMLSelectElement), actor.edge);
-			let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=actor.edge.value);
+			this._updateEdgeBoosts( (this._element![0].getElementsByClassName("edgeBoosts")[0] as HTMLSelectElement), configured.edge);
+			let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=configured.edge);
 
     		// Prepare text for player
     		let innerText = "";
-			console.log("XXX this = ",this);
 			
 			let speaker : ChatSpeakerDataProperties = configured.speaker;
     		if (configured.edgePlayer) {
-				innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:speaker.alias, value:configured.edgePlayer});
+				let max : number = options.actor.getMaxEdgeGainThisRound();
+				if (configured.edgePlayer>max) {
+					configured.edgePlayer = max;
+					innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player_capped", {name:speaker.alias, value:configured.edgePlayer, capped:max});
+				} else {
+					innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:speaker.alias, value:configured.edgePlayer});
+				}
 			} else if (configured.edgeTarget!=0) {
 				//configured.targets
      			let targetName = "To Do"; //this.targetName ? this.targetName : (game as Game).i18n.localize("shadowrun6.roll.target");
@@ -189,19 +215,19 @@ export class RollDialog extends Dialog {
   }
 
 	//-------------------------------------------------------------
-	_updateEdgeBoosts(elem : HTMLSelectElement, available) {
+	_updateEdgeBoosts(elem : HTMLSelectElement, available : number) {
 		let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=available);
 
 		// Node for inserting new data before		
-		let insertBeforeElem = {};
+		let insertBeforeElem : Node;
 		// Remove previous data
 		var array = Array.from(elem.children);
-		/*
+		
 		array.forEach( child => {
-			if (child.value!="none" && child.value!="edge_action") {
+			if ((child as any).value!="none" && (child as any).value!="edge_action") {
 				elem.removeChild(child)
 			}
-			if (child.value=="edge_action") {
+			if ((child as any).value=="edge_action") {
 				insertBeforeElem = child;
 			}
 		});
@@ -211,11 +237,11 @@ export class RollDialog extends Dialog {
 			let opt = document.createElement("option");
 			opt.setAttribute("value", boost.id);
 			opt.setAttribute("data-item-boostid", boost.id);
-			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_boost."+boost.id)+" - ("+boost.cost+")");
+			let cont = document.createTextNode((game as Game).i18n.localize("shadowrun6.edge_boost."+boost.id)+" - ("+boost.cost+")");
 			opt.appendChild(cont);
 			elem.insertBefore(opt, insertBeforeElem);
 		});
-		*/
+		
 	}
 
 	//-------------------------------------------------------------
@@ -361,12 +387,14 @@ export class RollDialog extends Dialog {
 	}
 	
 	//-------------------------------------------------------------
-	_onFiringModeChange(event) {
-		console.log("_onFiringModeChange ",this);
-		let prepared : ItemRoll = (this.options as any).prepared;
+	_onFiringModeChange(event : Event) {
+		let prepared : WeaponRoll = (this.options as any).prepared;
 		
-		let newMode = event.currentTarget.value;
-		console.log(" newMode "+newMode);
+		let fireModeElement : HTMLSelectElement = (document.getElementById("fireMode") as HTMLSelectElement);
+		if (!fireModeElement)
+			return;
+		
+		let newMode = fireModeElement.value;
 		let poolMod : number = 0;
 		let arMod   : number = 0;
 		let dmgMod  : number = 0;
@@ -377,7 +405,6 @@ export class RollDialog extends Dialog {
 			this.html.find('.onlyBF').css("display", "none");
 			break;
 		case "SA":
-			console.log("Now BF");
 			this.html.find('.onlyFA').css("display", "none");
 			this.html.find('.onlyBF').css("display", "none");
 			rounds = 2;
@@ -385,7 +412,6 @@ export class RollDialog extends Dialog {
 			dmgMod = 1;
 			break;
 		case "BF":
-			console.log("Now BF");
 			this.html.find('.onlyFA').css("display", "none");
 			this.html.find('.onlyBF').css("display", "table-cell");
 			rounds = 4;
@@ -393,7 +419,6 @@ export class RollDialog extends Dialog {
 			dmgMod = 2;
 			break;			
 		case "FA":
-			console.log("Now GA");
 			rounds = 10;
 			arMod = -6;
 			this.html.find('.onlyFA').css("display", "table-cell");
@@ -409,14 +434,13 @@ export class RollDialog extends Dialog {
 		});
 		this.html.find("td[name='calcAR']").text( attackRatingToString(prepared.calcAttackRating) );
 		// Update the range selector for attack rating
-		this.html.find("select[name='attackRating']").children("option").each( function(){
-			console.log("Child ", this);
+		this.html.find("select[name='distance']").children("option").each( function(){
 			let idx = parseInt( this.getAttribute("name")! );
 			this.setAttribute("data-item-ar", prepared.calcAttackRating[idx].toString() );
 			this.setAttribute("value", prepared.calcAttackRating[idx].toString());
 			this.text =  (game as Game).i18n.localize("shadowrun6.roll.ar_" + idx)+" (" + prepared.calcAttackRating[idx].toString() +")" ;
 		});
-		this.html.find("select[name='attackRating']").change();
+		this.html.find("select[name='distance']").change();
 		
 		// Calculate modified damage
 		prepared.calcDmg = prepared.weapon.dmg + dmgMod;
@@ -427,6 +451,8 @@ export class RollDialog extends Dialog {
 		
 		prepared.calcRounds = rounds;
 		this.html.find("td[name='calcRounds']").text( prepared.calcRounds.toString() );
+		
+		this._recalculateBaseAR();
 	}
 	
   _onNoTarget() {
