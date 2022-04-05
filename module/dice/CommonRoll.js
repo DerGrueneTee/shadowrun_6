@@ -353,13 +353,17 @@ export function rollDefense(actor, dataset) {
 	   console.log("rollDefense: Call r.evaluate: "+r);
       r.evaluate();
 		data.nettohits=parseInt( data.threshold - r._total );
-	   console.log("Netto Hits: "+r.nettohits);
-		
 		data.soak=(r.nettohits<0)?0:(damage + data.nettohits);
 		data.isAllowSoak = true;
 		data.target = {id: targetId, name: game.actors.get(actorId).data.name};
         data.actorId = actorId;
 		data.damageType = dataset.damageType;
+        if (defendWith === 'spells_direct') {
+            data.isBringPain = true;
+            data.isAllowSoak = false;
+            data.skippedSoak = true; 
+            data.damageToApply = damage + data.nettohits;
+        }
 	   console.log("Damage to soak: "+data.soak);
 	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);

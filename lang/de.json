@@ -466,6 +466,7 @@
       "devRating": "Geräte-Stufe",
       "dice": "Würfel",
       "edit": "Bearbeiten",
+      "extended_test": "Ausgedehnte Probe",
       "expertise": "Expertise",
       "features": "Merkmale",
       "firemode_current": "Akt. Feuermodus",
@@ -491,6 +492,7 @@
 	  "rating1": "Stufe 1",
 	  "rating2": "Stufe 2",
 	  "rating3": "Stufe 3",
+      "soaked": "{soaked} von {threshold} Schaden widerstanden",
       "specialization": "Spezialisierung",
       "threshold": "Schwellenwert",
       "value": "Wert",
@@ -719,6 +721,7 @@
       "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
+	  "damage_apply": "Schaden zufügen",
       "defRating": "Verteidigungswert",
       "defense_button": "Würfle Verteidigung",
       "edge": {
@@ -739,6 +742,7 @@
       "extend_check_success": "Ausgedehnte Probe erfolgreich",
       "failure": "Fehlschlag",
       "glitch": "Patzer",
+      "heal_apply": "Heilung wirken",
       "hits_bought": "Erfolge gekauft",
       "mode": "Modus",
       "modifier": "Pool Modifikator",
@@ -746,6 +750,7 @@
       "nosuccess": "Erfolge bei Schwellenwert ",
       "notarget": "Kein Ziel ausgewählt",
       "pool": "Würfel/Pool",
+      "soak_physical": "Schaden widerstehen",
       "spec": "Spezialiszierung",
       "spell": {
         "ampUp": {
