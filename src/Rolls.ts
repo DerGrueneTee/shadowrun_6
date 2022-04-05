@@ -6,7 +6,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor";
 import { RollDialog, SR6RollDialogOptions } from "./RollDialog.js";
 import { Spell, Weapon } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
-import { ConfiguredRoll, WeaponRoll, PreparedRoll, ReallyRoll, RollType } from "./dice/RollTypes.js";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll, ReallyRoll, RollType, SpellRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -60,6 +60,9 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			(data as WeaponRoll).calcPool = data.pool;
 			(data as WeaponRoll).calcAttackRating = [...(data as WeaponRoll).weapon.attackRating];	
 			(data as WeaponRoll).calcDmg = (data as WeaponRoll).weapon.dmg;
+		}
+		if (data.rollType==RollType.Spell) {
+			(data as SpellRoll).calcDamage = lifeform.attributes.mag.pool/2;
 		}
 		/*
 	  if (data.targetId && data.rollType === "weapon") {

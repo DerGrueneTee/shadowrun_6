@@ -23,6 +23,15 @@ export const defineHandlebarHelper = async function() {
       ((val[3] != 0) ? val[3] : "-") + "/" +
       ((val[4] != 0) ? val[4] : "-");
   });
+  Handlebars.registerHelper('spellRangeName', function (val) {
+    return (game as Game).i18n.localize(CONFIG.SR6.spell_range[val]);
+  });
+  Handlebars.registerHelper('spellTypeName', function (val) {
+    return (game as Game).i18n.localize(CONFIG.SR6.spell_type[val]+"_short");
+  });
+  Handlebars.registerHelper('spellDurationName', function (val) {
+    return (game as Game).i18n.localize(CONFIG.SR6.spell_duration[val]+"_short");
+  });
   Handlebars.registerHelper('concat', function (op1, op2) {
     return op1 + op2;
   });

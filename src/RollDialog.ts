@@ -1,6 +1,6 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform } from "./ActorTypes";
-import { ConfiguredRoll, WeaponRoll, PreparedRoll } from "./dice/RollTypes";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll } from "./dice/RollTypes";
 import { Gear, Spell, Weapon } from "./ItemTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 
@@ -65,10 +65,10 @@ export class RollDialog extends Dialog {
 	 html.show(this._onFiringModeChange.bind(this));
 
 	// React to changed amp up
-    html.find('.ampUp').change(this._onSpellAmpUpChange.bind(this));
+    html.find('#ampUp').change(this._onSpellAmpUpChange.bind(this));
 
 	// React to changed amp up
-    html.find('.incArea').change(this._onSpellIncreaseAreaChange.bind(this));
+    html.find('#incArea').change(this._onSpellIncreaseAreaChange.bind(this));
 
 	this._recalculateBaseAR();
   }
@@ -97,7 +97,7 @@ export class RollDialog extends Dialog {
 	 * HTML form
 	 */
 	_onCalcEdge(event) {
-		console.log("onCalcEdge ", this);
+//		console.log("onCalcEdge ", this);
 
 		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
 		let prepared : PreparedRoll = options.prepared!;	
@@ -347,43 +347,41 @@ export class RollDialog extends Dialog {
 	}
 	
 	//-------------------------------------------------------------
-	_onSpellAmpUpChange(event) {
-		/*
-		// Ignore this, if there is no actor
-		if (!this.data.data.actor) {
+	_onSpellAmpUpChange() {
+		let ampUpElement : HTMLSelectElement = (document.getElementById("ampUp") as HTMLSelectElement);
+		if (!ampUpElement)
 			return;
-		}
-		if (!event || !event.currentTarget) {
-			return;
-		}
 		
-		if (event.currentTarget.name === "ampUp") {
-			const ampUpSelect = Number.isNumeric(event.currentTarget.value) ? event.currentTarget.value : 0;
-			this.data.data.damageMod = ampUpSelect*1;
-			this.data.data.drainMod = ampUpSelect*2;
-			console.log("Increase damage by "+this.data.data.damageMod+" and drain by "+this.data.data.drainMod);
-		}
-		*/
+		let prepared : SpellRoll = (this.options as any).prepared;
+		if (!isLifeform(prepared.actor.data.data))
+			return;
+		
+		const baseMagic = prepared.actor.data.data.attributes.mag.pool;
+
+		let ampUpSelect : number = parseInt(ampUpElement.value);
+		prepared.calcDamage = ((prepared.spell.damage==="physical")? (baseMagic/2) : 0 ) + ampUpSelect;
+		prepared.calcDrain  = prepared.spell.drain + ampUpSelect*2;
+		
+		this.html.find("td[id='spellDrain']").text( prepared.calcDrain.toString() );
+		this.html.find("span[id='spellDmg']").text( prepared.calcDamage.toString() );
 	}
 	
 	//-------------------------------------------------------------
-	_onSpellIncreaseAreaChange(event) {
-		/*
-		// Ignore this, if there is no actor
-		if (!this.data.data.actor) {
+	_onSpellIncreaseAreaChange() {
+		let ampUpElement : HTMLSelectElement = (document.getElementById("incArea") as HTMLSelectElement);
+		if (!ampUpElement)
 			return;
-		}
-		if (!event || !event.currentTarget) {
-			return;
-		}
 		
-		if (event.currentTarget.name === "incArea") {
-			const incAreaSelect = Number.isNumeric(event.currentTarget.value) ? event.currentTarget.value : 0;
-			this.data.data.radius = incAreaSelect*2;
-			this.data.data.drainMod = incAreaSelect*1;
-			console.log("Increase radius by "+this.data.data.radius+"m and drain by "+this.data.data.drainMod);
-		}
-		*/
+		let prepared : SpellRoll = (this.options as any).prepared;
+		if (!isLifeform(prepared.actor.data.data))
+			return;
+
+		let ampUpSelect : number = parseInt(ampUpElement.value);
+		prepared.calcArea = 2 + ampUpSelect*2;
+		prepared.calcDrain  = prepared.spell.drain + ampUpSelect;
+		
+		this.html.find("td[id='spellDrain']").text( prepared.calcDrain.toString() );
+		this.html.find("span[id='spellArea']").text( prepared.calcArea.toString() );
 	}
 	
 	//-------------------------------------------------------------

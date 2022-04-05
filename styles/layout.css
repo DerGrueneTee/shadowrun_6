@@ -292,6 +292,10 @@ h3.highlight, h4.highlight {
 	color: var(--highlight-color)
 }
 
+table.spell-table td {
+	text-align: center;
+}
+
 
 .editor {
     flex: 1;

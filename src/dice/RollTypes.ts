@@ -160,11 +160,18 @@ export class SkillRoll extends PreparedRoll {
 export class SpellRoll extends SkillRoll {
 	rollType = RollType.Spell;
 	
+	item   : Item;
+	itemId : string;
 	spellId : string;
 	spellName : string | null;
 	spellDesc : string | null;
 	spellSrc: string | null;
 	spell: Spell;
+	/** Radius of spells with area effect - may be increased */
+	calcArea : number = 2;
+	calcDrain : number;
+	/** Damage of combat spells - may be amped up */
+	calcDamage : number = 0;
 	canAmpUpSpell: boolean;
 	canIncreaseArea: boolean;
 	defenseRating : number;
@@ -173,8 +180,10 @@ export class SpellRoll extends SkillRoll {
 	/**
 	 * @param skill {Skill}   The skill to roll upon
 	 */
-	constructor(actor: Lifeform, spellItem: Spell) {
+	constructor(actor: Lifeform, item: Item, itemId:string, spellItem: Spell) {
 		super(actor, "sorcery");
+		this.item      = item;
+		this.itemId    = itemId;
 		this.spell = spellItem;
 		this.skillSpec = "spellcasting";
 
@@ -194,6 +203,9 @@ export class SpellRoll extends SkillRoll {
 				this.threshold = 5 - Math.ceil(actor.essence);
 			}
 		}
+		
+		this.calcArea = 2;
+		this.calcDrain = spellItem.drain;
 	}
 }
 

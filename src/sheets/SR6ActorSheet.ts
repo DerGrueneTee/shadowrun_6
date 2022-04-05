@@ -520,6 +520,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	_onRollItemCheck(event, html) {
 		console.log("_onRollItemCheck");
 		event.preventDefault();
+		const attacker : Lifeform = (this.actor.data.data as Lifeform);
 		const itemId = event.currentTarget.dataset.itemId;
 		
 		let item : Item|undefined = this.actor.items.get(itemId);
@@ -533,7 +534,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (isWeapon(item.data.data)) { console.log("is weapon", item)}
 
 		
-		let roll : WeaponRoll = new WeaponRoll((this.actor.data.data as Lifeform), item, itemId, item.data.data);
+		let roll : WeaponRoll = new WeaponRoll(attacker, item, itemId, item.data.data);
 		console.log("_onRollItemCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollItem(roll);
 	}
@@ -546,6 +547,10 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (!(event.currentTarget as any).dataset) return;
 		const caster : Lifeform = (this.actor.data.data as Lifeform);
 		const itemId : string = (event.currentTarget as any).dataset.itemId;
+		let item : Item|undefined = this.actor.items.get(itemId);
+		if (!item) {
+			throw new Error("_onRollSpellCheck for non-existing item");
+		}
 		const skill  : Skill  = caster.skills["sorcery"];
 		let spellRaw = this.actor.items.get(itemId);
 		if (!spellRaw) {
@@ -553,7 +558,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			return;
 		}
 		const spell  : Spell  = (spellRaw.data.data as Spell);
-		let roll : SpellRoll = new SpellRoll(caster, spell);
+		let roll : SpellRoll = new SpellRoll(caster, item, itemId, spell);
 		roll.skillSpec="spellcasting";
 		(this.actor as Shadowrun6Actor).rollSpell(roll, false);
 	}

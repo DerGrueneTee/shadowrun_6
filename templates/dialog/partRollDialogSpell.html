@@ -1,7 +1,7 @@
     <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.spell.title"}}</h4>
     <table style="background-color: transparent; border: 1px">
     	<tr>
-    	  <td rowspan="2">
+    	  <td rowspan="3">
     	  	 <div class="edge-roll" >
     	      <img src="systems/shadowrun6-eden/images/magic-swirl.svg" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
     	    </div>
@@ -13,18 +13,18 @@
               <th>{{localize 'shadowrun6.spell.type'}}</th>
               <th>{{localize 'shadowrun6.spell.duration'}}</th>
               <th>{{localize 'shadowrun6.spell.drain'}}</th>
-              <th>{{localize 'shadowrun6.spell.area'}}</th>
-              <th>{{localize 'shadowrun6.spell.damage'}}</th>
+			     {{#if data.canIncreaseArea}}<th>{{localize 'shadowrun6.spell.area'}}</th>{{/if}}
+              {{#if (eq data.spell.category "combat")}}<th>{{localize 'shadowrun6.spell.damage'}}</th>{{/if}}
    	      </tr>
    	  	   <tr>
-   	  	   	{{log "partRollDialogSpell.html " this}}
-   	  		  <td>{{data.spell.range}}</td>
-    	  		  <td>{{data.spell.type}}</td>
-   	  		  <td>{{data.spell.duration}}</td>
-   	  		  <td>{{data.spell.drain}}</td>
-   	  		  <td>{{CONFIG.SR6.spell_range}}
-   	  		  <td>{{data.spell.damage}}</td>
-    	  		  <!--td><span name="calcDmg">{{data.calcDmg}}</span> {{#if data.gear.stun}}S{{else}}P{{/if}}</td-->
+   	  		  <td>{{spellRangeName data.spell.range}}</td>
+    	  		  <td>{{spellTypeName data.spell.type}}</td>
+    	  		  <td>{{spellDurationName data.spell.duration}}</td>
+   	  		  <td id="spellDrain">{{data.calcDrain}}</td>
+   	  		   {{#if data.canIncreaseArea}}<td><span id="spellArea">{{data.calcArea}}</span>m</td>{{/if}}
+              {{#if (eq data.spell.category "combat")}}
+   	  		  <td><span id="spellDmg">{{data.calcDamage}}</span> {{localize (concat3 "shadowrun6.item." data.spell.damage "_damage")}}</td>
+              {{/if}}
    	  	   </tr>
    	    </table>
    	  </td>
@@ -32,7 +32,7 @@
 		<tr>
 	     {{#if data.canAmpUpSpell}}
 	     <td>{{localize "shadowrun6.roll.spell.ampUp.title"}}</td>
-	     <td><select name="ampUp" class="ampUp">
+	     <td><select name="ampUp" id="ampUp">
             <option value="0" data-item-ampid="amp0"> - </option>
             <option value="1" data-item-ampid="amp1">{{localize "shadowrun6.roll.spell.ampUp.1"}}</option>
             <option value="2" data-item-ampid="amp2">{{localize "shadowrun6.roll.spell.ampUp.2"}}</option>
@@ -42,10 +42,12 @@
     	<tr>
 	     {{#if data.canIncreaseArea}}
 	     <td>{{localize "shadowrun6.roll.spell.incArea.title"}}</td>
-	     <td><select name="incArea" class="incArea">
-            <option value="0" data-item-incid="inc0"> - </option>
-            <option value="1" data-item-incid="inc1">{{localize "shadowrun6.roll.spell.incArea.1"}}</option>
-            <option value="2" data-item-incid="inc2">{{localize "shadowrun6.roll.spell.incArea.2"}}</option>
+	     <td><select name="incArea" id="incArea">
+            <option value="0" > - </option>
+            <option value="1" >{{localize "shadowrun6.roll.spell.incArea.1"}}</option>
+            <option value="2" >{{localize "shadowrun6.roll.spell.incArea.2"}}</option>
+            <option value="3" >{{localize "shadowrun6.roll.spell.incArea.3"}}</option>
+            <option value="4" >{{localize "shadowrun6.roll.spell.incArea.4"}}</option>
         </select></td>
         {{/if}}
     	</tr>

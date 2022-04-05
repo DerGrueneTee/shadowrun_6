@@ -396,6 +396,7 @@
       "mode_ss": "SS",
       "natural": "Nat. armor",
       "physical_damage": "P",
+      "physical_special_damage": "S",
       "price": "Price",
       "skill": "Skill",
       "skillspec": "Specialisation",
@@ -759,6 +760,8 @@
         "incArea": {
           "1": "Radius +2m, Drain+1",
           "2": "Radius +4m, Drain+2",
+          "3": "Radius +6m, Drain+3",
+          "4": "Radius +8m, Drain+4",
           "title": "Increase Area"
         },
         "title": "Adjust the spell"

@@ -865,7 +865,7 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {Object} spell      The spell to cast
 	 * @return Roll name
 	 */
-	_getSpellName(spell:Spell):string {
+	_getSpellName(spell:Spell, item:Item):string|null {
 		if (spell.genesisID) {
 			const key = "shadowrun6.compendium.spell." + spell.genesisID;
 			let name = (game as Game).i18n.localize(key);
@@ -873,7 +873,9 @@ export class Shadowrun6Actor extends Actor {
 				return name;
 		}
 		
-		return "Unnamed";
+		if (item)
+			return item.name;
+		throw new Error("Spell: No genesisID and no item");
 	}
 
 	//---------------------------------------------------------
@@ -882,15 +884,17 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {Object} item   The gear to use
 	 * @return Display name
 	 */
-	_getGearName(item) : string {
-		if (item.genesisId) {
-			const key = "shadowrun6.compendium.gear." + item.genesisId;
+	_getGearName(gear:Gear, item:Item) : string|null {
+		if (gear.genesisID) {
+			const key = "shadowrun6.compendium.gear." + gear.genesisID;
 			let name = (game as Game).i18n.localize(key);
 			if (key!=name)
 				return name;
 		}
 		
-		return item.name;
+		if (item)
+			return item.name;
+		throw new Error("Gear: No genesisID and no item");
 	}
 
 	//---------------------------------------------------------
@@ -953,7 +957,6 @@ export class Shadowrun6Actor extends Actor {
 		
 		// If present, replace item name, description and source references from compendium
 		roll.itemName = roll.item.name;
-		
 		if (roll.gear.description) {
 			roll.itemDesc = roll.gear.description;
 		}
@@ -966,6 +969,7 @@ export class Shadowrun6Actor extends Actor {
 				roll.itemSrc  = (game as Game).i18n.localize(key+"src");
 			}
 		}
+		
 		
 		switch ((game as any).user.targets.size) {
 		case 0:
@@ -1002,19 +1006,33 @@ export class Shadowrun6Actor extends Actor {
 		
 		roll.skillSpec  = (ritual)?"ritual_spellcasting":"spellcasting";
 		roll.threshold = 0;
+		
+		// If present, replace spell name, description and source references from compendium
+		roll.spellName = this._getSpellName(roll.spell, roll.item);
+		if (roll.spell.description) {
+			roll.spellDesc = roll.spell.description;
+		}
+		if (roll.spell.genesisID) {
+			let key = (ritual?"ritual.":"spell.")+roll.spell.genesisID+".";
+			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
+				// A translation exists
+				roll.spellName = (game as Game).i18n.localize(key+"name");
+				roll.spellDesc = (game as Game).i18n.localize(key+"desc");
+				roll.spellSrc = (game as Game).i18n.localize(key+"src");
+			}
+		}
 	
 		// Prepare action text
-		let actionText;
 		switch ((game as Game).user!.targets.size) {
 		case 0:
-			actionText = actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(roll.spell)});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_none", {name:roll.spellName});
 			break;
 		case 1:
 		   let targetName = (game as Game).user!.targets.values().next().value.name;
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:this._getSpellName(roll.spell), target:targetName});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", {name:roll.spellName, target:targetName});
 			break;
 		default:
-			actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:this._getSpellName(roll.spell)});
+			roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", {name:roll.spellName});
 		}
 		roll.actor     = this;
 		// Prepare check text
@@ -1045,20 +1063,6 @@ export class Shadowrun6Actor extends Actor {
 			}
 		}
 		
-		// If present, replace spell name, description and source references from compendium
-		roll.spellName = this._getSpellName(roll.spell);
-		if (roll.spell.description) {
-			roll.spellDesc = roll.spell.description;
-		}
-		if (roll.spell.genesisID) {
-			let key = (ritual?"ritual.":"spell.")+roll.spell.genesisID+".";
-			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
-				// A translation exists
-				roll.spellName = (game as Game).i18n.localize(key+"name");
-				roll.spellDesc = (game as Game).i18n.localize(key+"desc");
-				roll.spellSrc = (game as Game).i18n.localize(key+"src");
-			}
-		}
 
 /*		let data = {
 			isSpell : true,
