@@ -157,6 +157,7 @@ export class RollDialog extends Dialog {
 			}
 
 			// Calculate effective edge
+			/*
    		let effective = configured.edgePlayer - configured.edgeTarget;
   			if (effective>0) {
 	   		configured.edgePlayer = configured.edgePlayer - configured.edgeTarget;
@@ -168,6 +169,7 @@ export class RollDialog extends Dialog {
       		configured.edgePlayer = 0;
       		configured.edgeTarget = 0;
    		}
+			*/
 		
 			// Set new edge value
 			let actor : Lifeform = configured.actor.data.data as Lifeform;
@@ -193,12 +195,15 @@ export class RollDialog extends Dialog {
 				} else {
 					innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:speaker.alias, value:configured.edgePlayer});
 				}
-			} else if (configured.edgeTarget!=0) {
+			}
+			if (configured.edgeTarget!=0) {
 				//configured.targets
      			let targetName = "To Do"; //this.targetName ? this.targetName : (game as Game).i18n.localize("shadowrun6.roll.target");
-				innerText += (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:configured.edgeTarget});
-	 		} else {
-				innerText += (game as Game).i18n.localize("shadowrun6.roll.edge.no_gain");
+				innerText += "  " + (game as Game).i18n.format("shadowrun6.roll.edge.gain_player", {name:targetName, value:configured.edgeTarget});
+	 		}
+		
+			if (configured.edgePlayer==0 && configured.edgeTarget==0) {
+				innerText += "  " + (game as Game).i18n.localize("shadowrun6.roll.edge.no_gain");
 			}
 			
 			configured.edge_message = innerText;
