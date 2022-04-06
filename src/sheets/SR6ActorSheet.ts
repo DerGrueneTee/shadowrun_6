@@ -1,7 +1,7 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
-import { WeaponRoll, SkillRoll, SpellRoll } from "../dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -580,38 +580,40 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	_onCommonCheck(event, html) {
 		console.log("onCommonCheck");
 		event.preventDefault();
-		const pool = event.currentTarget.dataset.pool;
+		
+		let roll : PreparedRoll = new PreparedRoll();
+		roll.pool = event.currentTarget.dataset.pool;
+		
 		let classList = event.currentTarget.classList;
-		let title;
 		if (classList.contains("defense-roll") ) {
-			title = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
+			roll.checkText = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
 		} else if (classList.contains("attributeonly-roll")) {
-			title = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
+			roll.checkText = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
 		} else {
-			title = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
+			roll.checkText = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
 		}
-		let dialogConfig;
+		let dialogConfig : any;
 		if (classList.contains("defense-roll")) {
+			roll.allowBuyHits = false;
 			dialogConfig = {
 				useModifier: true,
 				useThreshold: false,
-				buyHits: false
 			};
 		} else if (classList.contains("attributeonly-roll")) {
+			roll.allowBuyHits = true;
 			dialogConfig = {
 				useModifier: true,
 				useThreshold: true,
-				buyHits: true
 			};
 		} else {
+			roll.allowBuyHits = true;
+			roll.useWildDie = 1;
 			dialogConfig = {
 				useModifier: true,
 				useThreshold: true,
-				buyHits: true,
-				useWilddie: true
 			};
 		}
-		(this.actor as Shadowrun6Actor).rollCommonCheck(pool, title, dialogConfig);
+		(this.actor as Shadowrun6Actor).rollCommonCheck(roll, dialogConfig);
 	}
 
 	//-----------------------------------------------------

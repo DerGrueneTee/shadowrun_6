@@ -4,7 +4,7 @@ import { SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
-import { WeaponRoll, SkillRoll, SpellRoll } from "./dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -1228,41 +1228,12 @@ export class Shadowrun6Actor extends Actor {
 	/*
 	 *
 	 */
-	rollCommonCheck(pool, title, dialogConfig, options = {}) {
-		console.log("TODO: rollCommonCheck(pool="+pool+")");
-/*
-		let data = mergeObject(options, {
-			pool: pool,
-			checkText: title,
-			dialogConfig: dialogConfig	
-		});
-		data.speaker = ChatMessage.getSpeaker({actor: this});
-		return doRoll(data);
-	*/
-	}
+	rollCommonCheck(roll : PreparedRoll, dialogConfig:any, options = {}) {
+		console.log("rollCommonCheck");
 
-	getUsersFirstTargetId() {
-			return null;
-			/*
-		if (this.userHasTargets()) {
-			return game.user.targets.values().next().value.data.actorId;
-		} else {
-			return null;
-		}
-		*/
-	}
-
-	userHasTargets() {
-		return false;
-		/*
-		let user = game.user;
-		return user.targets.size > 0;
-		*/
-	}
-
-	async rollAttack(attackId, options = {}) {
-		console.log("rollAttack(" + attackId + ", options=" + options + ")");
-		console.log("NOT IMPLEMENTED YET");
+		roll.actor     = this;
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(roll);	
 	}
 	
 	/***************************************

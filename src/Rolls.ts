@@ -260,7 +260,7 @@ function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData =
  * Convert ConfiguredRoll into a Foundry roll formula
  */
 function createFormula(roll:ConfiguredRoll) : string {
-	let regular : number = roll.pool + (roll.modifier?roll.modifier:0);
+	let regular : number = +roll.pool + (+roll.modifier?+roll.modifier:0);
 	let wild    : number = 0;
 	if (roll.useWildDie>0) {
 		regular -= roll.useWildDie;
