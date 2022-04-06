@@ -1,10 +1,10 @@
 import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill } from "./ActorTypes.js";
 import { Defense, SR6, SR6Config } from "./config.js";
-import { SkillDefinition } from "./DefinitionTypes.js";
+import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll } from "./dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -1107,18 +1107,28 @@ export class Shadowrun6Actor extends Actor {
 	//---------------------------------------------------------
 	/**
 	 */
-	performMatrixAction(action, actionId, options={}) {
-		console.log("ToDo performMatrixAction("+action+")");
+	performMatrixAction(roll : MatrixActionRoll) {
+		console.log("ToDo performMatrixAction:",roll);
+		
+		if (!isLifeform(this.data.data)) {
+			throw new Error("Must be executed by an Actor with Lifeform data");
+		}
+		
+		let action : MatrixAction = roll.action;
+		roll.attrib = action.attrib;
+		roll.skillId   = action.skill;
+		roll.skillSpec = action.spec;
+		roll.threshold = action.threshold;
 		// Prepare action text
-		let actionText = (game as Game).i18n.localize("shadowrun6.matrixaction."+actionId);
+		roll.actionText = (game as Game).i18n.localize("shadowrun6.matrixaction."+action.id);
 		// Prepare check text
 		if (!action.skill) {
 			console.log("ToDo: matrix actions without a test");
 			return;
 		}
-		//let checkText = this._getSkillCheckText(action.skill, action.spec, action.threshold, action.attrib);
+		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
-		let value = this._getSkillPool(action.skill, action.spec, action.attrib);
+		roll.pool = this._getSkillPool(action.skill, action.spec, action.attrib);
 	
 		/*
 		// Roll and return
@@ -1137,9 +1147,10 @@ export class Shadowrun6Actor extends Actor {
 			useThreshold: action.threshold!=0,
 			buyHits: true
 		});
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		return doRoll(data);
 		*/
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(roll);
+		
 	}
 
 	//-------------------------------------------------------------

@@ -52,6 +52,10 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			lifeform = (data.actor.data.data as Lifeform);
 			data.edge = (data.actor) ? lifeform.edge.value : 0;
 		}
+		if (!data.calcPool || data.calcPool==0) {
+			data.calcPool = data.pool;
+		}
+		
 		/*
 		 * Edge, Edge Boosts and Edge Actions
 		 */
@@ -65,15 +69,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		if (data.rollType==RollType.Spell && lifeform!=null) {
 			(data as SpellRoll).calcDamage = lifeform.attributes.mag.pool/2;
 		}
-		/*
-	  if (data.targetId && data.rollType === "weapon") {
-		data.targetName = game.actors.get(data.targetId).name;
-		data.extraText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
-		data.defRating = game.actors.get(data.targetId).data.data.derived.defense_rating.pool;
-	  } else if (data.targetId && data.rollType === "spell") {
-		data.extraText = " Spell targeting not implemented yet ";
-	  }
-		*/
+
 		// Render modal dialog
 		let template: string = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
 		let dialogData = {
@@ -154,8 +150,8 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 }
 
 
-function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData = {}): SR6Roll {
-	console.log("ENTER _dialogClosed(type=" + type + ", form=" + form + ", data=" + data + ")");
+function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRoll): SR6Roll {
+	console.log("ENTER _dialogClosed(type=" + type + ", data=" , data , ")");
 	try {
 		
 		let configured :ConfiguredRoll = (data as ConfiguredRoll);
@@ -187,6 +183,7 @@ function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData =
 		data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
 
 		let formula = "";
+		let isPrivate : boolean = false;
 	
 	   if (form) {	
    	   data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
@@ -195,9 +192,12 @@ function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData =
 	   	configured.buttonType = type;
       	configured.modifier = parseInt(form.modifier.value);
       	configured.defRating = (form.defRating)?parseInt(form.defRating.value):0;
+			console.log("rollMode = ", form.rollMode);
 
 			formula = createFormula(configured);
-			configured.pool = +configured.pool + +configured.modifier;
+			let base : number = configured.pool?configured.pool:0;
+			let mod  : number = configured.modifier?configured.modifier:0;
+			configured.pool = +base + +mod;
     	}
     
     // Execute the roll

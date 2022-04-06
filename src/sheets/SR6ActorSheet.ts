@@ -1,7 +1,7 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, RollType } from "../dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, RollType, MatrixActionRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -500,6 +500,47 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 		}
 	}
+
+	//-----------------------------------------------------
+	_onCommonCheck(event, html) {
+		console.log("onCommonCheck");
+		event.preventDefault();
+		
+		let roll : PreparedRoll = new PreparedRoll();
+		roll.pool = event.currentTarget.dataset.pool;
+		roll.rollType = RollType.Common;
+		
+		let classList = event.currentTarget.classList;
+		if (classList.contains("defense-roll") ) {
+			roll.actionText = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
+		} else if (classList.contains("attributeonly-roll")) {
+			roll.actionText = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
+		} else {
+			roll.actionText = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
+		}
+		let dialogConfig : any;
+		if (classList.contains("defense-roll")) {
+			roll.allowBuyHits = false;
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: false,
+			};
+		} else if (classList.contains("attributeonly-roll")) {
+			roll.allowBuyHits = true;
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: true,
+			};
+		} else {
+			roll.allowBuyHits = true;
+			roll.useWildDie = 1;
+			dialogConfig = {
+				useModifier: true,
+				useThreshold: true,
+			};
+		}
+		(this.actor as Shadowrun6Actor).rollCommonCheck(roll, dialogConfig);
+	}
 	
 	//-----------------------------------------------------
 	/**
@@ -571,59 +612,26 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		(this.actor as Shadowrun6Actor).rollSpell(roll, false);
 	}
 
+	//-----------------------------------------------------
 	_onRollRitualCheck(event, html) {
 		event.preventDefault();
 		const item = event.currentTarget.dataset.itemId;
 		(this.actor as Shadowrun6Actor).rollSpell(item, true);
 	}
 
-	_onCommonCheck(event, html) {
-		console.log("onCommonCheck");
-		event.preventDefault();
-		
-		let roll : PreparedRoll = new PreparedRoll();
-		roll.pool = event.currentTarget.dataset.pool;
-		roll.rollType = RollType.Common;
-		
-		let classList = event.currentTarget.classList;
-		if (classList.contains("defense-roll") ) {
-			roll.actionText = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
-		} else if (classList.contains("attributeonly-roll")) {
-			roll.actionText = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
-		} else {
-			roll.actionText = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
-		}
-		let dialogConfig : any;
-		if (classList.contains("defense-roll")) {
-			roll.allowBuyHits = false;
-			dialogConfig = {
-				useModifier: true,
-				useThreshold: false,
-			};
-		} else if (classList.contains("attributeonly-roll")) {
-			roll.allowBuyHits = true;
-			dialogConfig = {
-				useModifier: true,
-				useThreshold: true,
-			};
-		} else {
-			roll.allowBuyHits = true;
-			roll.useWildDie = 1;
-			dialogConfig = {
-				useModifier: true,
-				useThreshold: true,
-			};
-		}
-		(this.actor as Shadowrun6Actor).rollCommonCheck(roll, dialogConfig);
-	}
-
 	//-----------------------------------------------------
 	_onMatrixAction(event, html) {
 		event.preventDefault();
 		console.log("onMatrixAction ",event.currentTarget.dataset);
+		if (!event.currentTarget) return;
+		if (!(event.currentTarget as any).dataset) return;
+		const attacker : Lifeform = (this.actor.data.data as Lifeform);
+
 		const matrixId = event.currentTarget.dataset.matrixId;
 		const matrixAction = CONFIG.SR6.MATRIX_ACTIONS[matrixId];
-		(this.actor as Shadowrun6Actor).performMatrixAction(matrixAction, matrixId, { event: event });
+		let roll : MatrixActionRoll = new MatrixActionRoll(attacker, matrixAction);
+		console.log("_onMatrixAction before ", roll);
+		(this.actor as Shadowrun6Actor).performMatrixAction(roll);
 	}
 
 	//-----------------------------------------------------

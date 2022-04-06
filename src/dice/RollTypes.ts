@@ -2,7 +2,7 @@ import { ChatMessageData           } from "@league-of-foundry-developers/foundry
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform, Skill } from "../ActorTypes.js";
 import { Defense } from "../config.js";
-import { EdgeBoost, SkillDefinition } from "../DefinitionTypes.js";
+import { EdgeBoost, MatrixAction, SkillDefinition } from "../DefinitionTypes.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
@@ -11,7 +11,8 @@ export enum RollType {
 	Weapon = "weapon",
 	Spell = "spell",
 	Ritual = "ritual",
-	ComplexForm = "complexform"
+	ComplexForm = "complexform",
+	MatrixAction  = "matrix",
 }
 
 export enum ReallyRoll {
@@ -109,6 +110,8 @@ export class PreparedRoll extends CommonRollData {
 	/* Available edge */
 	edge: number;
 	edgeBoosts: EdgeBoost[];
+	/** Effective dice pool applying firing mode or other modifiers */
+	calcPool: number;
 	
 	copyFrom(copy : PreparedRoll) {
 		super.copyFrom(copy);
@@ -228,13 +231,13 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	attackRating  : number;
 	/** Effective attack rating after applying firing mode */
 	calcAttackRating:Array<number> = [0,0,0,0,0];
-	/** Effective dice pool applying firing mode */
-	calcPool: number;
 	/** Effective damage */
 	calcDmg: number;
 	/** How many units of ammunition are required */
 	calcRounds : number;
-	
+	fireMode : string;
+	burstMode: string | undefined;
+	faArea: string | undefined;
 	
 	constructor(actor: Lifeform, item: Item, itemId:string, gear:Gear) {
 		super(actor, (item.data.data as any).skill);
@@ -247,6 +250,23 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 			this.rollType = RollType.Weapon;
 			this.defendWith = Defense.PHYSICAL;
 		}
+	}
+}
+
+export class MatrixActionRoll extends SkillRoll {
+	rollType = RollType.MatrixAction;	
+	itemName: string | null;
+	itemDesc: string | null;
+	itemSrc : string | null;
+	action  : MatrixAction;
+	targets : IterableIterator<Token>;
+	defenseRating : number;
+	attackRating  : number;
+	
+	constructor(actor: Lifeform, action:MatrixAction) {
+		super(actor,action.skill);
+		this.action    = action;
+		this.skillSpec = this.action.spec;
 	}
 }
 
@@ -270,10 +290,9 @@ export class FinishedRoll extends PreparedRoll {
 	criticalglitch : boolean;
 	total   : number;
    tooltip : string;
-    results: string | DiceTerm.Result[];
-    formula: string;
+   results: string | DiceTerm.Result[];
+   formula: string;
 	publicRoll : boolean;
-	
 	
 	constructor(copy : PreparedRoll) {
 		super();

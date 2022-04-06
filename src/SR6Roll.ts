@@ -20,14 +20,15 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	constructor(formula: string, data: ConfiguredRoll, options?: SR6Roll['options']) {
 		super(formula, data, options);
 		this.configured = data;
-      console.log("In SR6Roll<init>(" + formula + " , ", data);
-    }
+      console.log("In SR6Roll<init>1(" + formula + " , ", data);
+      console.log("In SR6Roll<init>2(", options);
+   }
 
     evaluate(options?: InexactPartial<Options & { async: false }>): Evaluated<this>;
     evaluate(options: InexactPartial<Options> & { async: true }): Promise<Evaluated<this>>;
     evaluate(options?: InexactPartial<Options>): Evaluated<this> | Promise<Evaluated<this>> {
-		console.log("ENTER evaluate()");
-		console.log("   this: " , this);
+//		console.log("ENTER evaluate()");
+//		console.log("   this: " , this);
 		// IMPORTANT: Before merging arrays, have them calculated
 		super.evaluate(  { async:false });
 		try {
@@ -44,24 +45,24 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 				merged.results = this.dice[1].results.concat(this.dice[0].results);
 				(merged as any)._evaluated = true;
 				this.terms = [merged];
-				console.log(" result3 ",merged);
+//				console.log(" result3 ",merged);
 				this.results = merged.results;
 			} else {
 				this.results = this.dice[0].results;
 			}
 				
-			console.log("AFTER  _dice   : " , this._dice);
+/*			console.log("AFTER  _dice   : " , this._dice);
 			console.log("AFTER  dice    : " , this.dice);
 			console.log("AFTER  _total  : " + this._total);
 			console.log("AFTER  total   : " + this.total);
 			console.log("AFTER  _results: " + this.results);
 			console.log("   this: " , this);
-		
+*/		
             this._evaluated = true;
 				this._formula = (this.data as ConfiguredRoll).pool + "d6";
 				
 				this.finished = new FinishedRoll(this.configured);
-				console.log("before leaving evalulate(): finished=",this.finished)
+//				console.log("before leaving evalulate(): finished=",this.finished)
             return (this as Evaluated<this>);
         } finally {
             console.log("LEAVE evaluate()");
@@ -142,14 +143,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	 * @override
 	 */
 	modifyResults():void {
-		console.log("modifyResults",this);
 		this._assignBaseCSS();
-		console.log("modifyResults 2",this);
 		let ignoreFives = this._markWildDie();
-		console.log("IgnoreFives = "+ignoreFives);
 	
 		this.dice.forEach(term => {
-			console.log("Modify ",term);
     		let addedByExplosion = false;
 	    	term.results.forEach(result => {
      			if (addedByExplosion) {
@@ -200,7 +197,6 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
    * The number of glitches rolled.
    */
   getGlitches() {
-		console.log("getGlitches ", this);
     if (!this._evaluated || !this.results) {
       return NaN;
     }
@@ -238,9 +234,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	  * @override
      */
 	toJSON() {
-		console.log("toJSON ",this);
+		//console.log("toJSON ",this);
 		const json = super.toJSON();
-		console.log("toJSON: json=",json);
+		//console.log("toJSON: json=",json);
 		(json as any).configured = this.configured;
 		(json as any).results = this.results;
 		return json;
@@ -254,7 +250,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
      */
    static fromData<T extends Roll>(this: ConstructorOf<T>, data: Data): T {
 		const roll : Roll = super.fromData(data);
-		console.log("fromData ",roll);
+		//console.log("fromData ",roll);
     	(roll as any).configured = (data as any).configured;
     	(roll as any).results = (data as any).results;
 		console.log("fromData returning ",roll);
@@ -265,7 +261,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
    * @override 
 	****************************************/
   	getTooltip(): Promise<string> {
- 		console.log("getTooltip = ",this);
+ 		//console.log("getTooltip = ",this);
   		let parts = {};
 
     	return renderTemplate(SR6Roll.TOOLTIP_TEMPLATE, { parts,  finished: this.finished, data: this.data, results: this.results, total: this._total });
@@ -275,69 +271,33 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	 * Render to Chat message
 	 * @returns HTML
 	 ******************************************/
-	async render(chatOptions = { flavor:"kein_geschmack"}) : Promise<string> {
+	async render(options?: { flavor?: string | undefined; template?: string | undefined; isPrivate?: boolean | undefined; } | undefined) : Promise<string> {
 		console.log("ENTER render");
-		console.log("data = ",this);
+		console.log("options = ",options);
+		console.log("finished = ",this.finished);
 		try {
     		if ( !this._evaluated ) await this.evaluate({async: true});
-			let isPrivate = false;
-/*			chatOptions = mergeObject({
-		  		from: "render.chatOptions",
-        		user: (game as Game).user!.id,
-        		flavor: this.configured.actionText,
-        		template: SR6Roll.CHAT_TEMPLATE,
-      		}, chatOptions
-    		);
-*/
-			let chatData = new FinishedRoll(this.configured);
+			let isPrivate = options!.isPrivate;
+			this.finished = new FinishedRoll(this.configured);
 			if (this.configured)
-				chatData.actionText = isPrivate ? "" : this.configured.actionText;
-			//chatData.user    = (game as Game).user!.id,
-			chatData.success = this.isSuccess();
-			chatData.glitch  = this.isGlitch();
-			chatData.criticalglitch = this.isCriticalGlitch();
-			chatData.total   = this._total!;
-			chatData.configured = this.configured;
-			chatData.results = isPrivate ? "???" : this.results,
-			chatData.formula = isPrivate ? "???" : this._formula,
-			chatData.publicRoll = !isPrivate;
-			chatData.tooltip = isPrivate ? "" : await this.getTooltip();
+				this.finished.actionText = isPrivate ? "" : this.configured.actionText;
+			//finished.user    = (game as Game).user!.id,
+			this.finished.success = this.isSuccess();
+			this.finished.glitch  = this.isGlitch();
+			this.finished.criticalglitch = this.isCriticalGlitch();
+			this.finished.total   = this._total!;
+			this.finished.configured = this.configured;
+			this.finished.results = isPrivate ? "???" : this.results,
+			this.finished.formula = isPrivate ? "???" : this._formula,
+			this.finished.publicRoll = !isPrivate;
+			this.finished.tooltip = isPrivate ? "" : await this.getTooltip();
+			this.finished.publicRoll = ! options!.isPrivate;
 
-			return renderTemplate(SR6Roll.CHAT_TEMPLATE, chatData);
+			return renderTemplate(SR6Roll.CHAT_TEMPLATE, this.finished);
 		} finally {
 			console.log("LEAVE render");
 		}
   }
-
-/*
-		toMessadge(messageData={}, { create=true}={}) : Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> | MessageData<any> {
-   	console.log("ENTER toMessage");
-		try {
-        console.log("messageData ", messageData);
-		let chatOptions : FinishedRoll = (this as unknown as FinishedRoll);
-
-         // Prepare chat data
-        let chatOptions2:any = mergeObject({
-            from: "toMessage.chatOptionsMerged",
-            //user: game.user.id,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            content: "Hier stand this.total",
-            sound: CONFIG.sounds.dice,
-            _roll: this,
-				finished : chatOptions
-        }, chatOptions);
-		//return super.toMessage(chatOptions2);
-        let xsg : Promise<InstanceType<ConfiguredDocumentClass<typeof ChatMessage>> | undefined> = ChatMessage.create(chatOptions2);
-
-        console.log("called create" , xsg);	
-		let msg : SR6RollChatMessage = new SR6RollChatMessage(chatOptions2, this);        
-		return msg;
-
-		} finally {
-			console.log("LEAVE toMessage");
-		}	
-}
-*/
 
 }
 

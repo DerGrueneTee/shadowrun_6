@@ -20,6 +20,8 @@ import { preloadHandlebarsTemplates } from "./templates.js";
 import { defineHandlebarHelper } from "./util/helper.js";
 import { PreparedRoll } from "./dice/RollTypes.js";
 import { doRoll } from "./Rolls.js";
+import EdgeUtil from "./util/EdgeUtil.js";
+import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 const diceIconSelector : string = '#chat-controls .chat-control-icon .fa-dice-d20';
 
@@ -119,6 +121,21 @@ Hooks.once("init", async function () {
     }, "default");
   });
 
+	/*
+	 * Change default icon
+	 */
+  function onCreateItem(item, options, userId) {
+    console.log("onCreateItem  "+item.data.type);
+    let createData = item.data;
+    if (createData.img == "icons/svg/item-bag.svg" && CONFIG.SR6.icons[createData.type]) {
+      createData.img = CONFIG.SR6.icons[createData.type].default;
+      item.update({ ["img"]: createData.img });
+    }
+    console.log("onCreateItem: " + createData.img);
+  }
+
+  Hooks.on("createItem", (doc, options, userId) => onCreateItem(doc, options, userId));
+
   Hooks.on('ready', () => {
     // Render a modal on click.
     $(document).on('click', diceIconSelector, ev => {
@@ -132,8 +149,103 @@ Hooks.once("init", async function () {
     });
   });
 
-  Hooks.on('renderChatMessage', function (app, html, data) {
-	 console.log("ENTER renderChatMessage");
+	Hooks.on('renderShadowrun6ActorSheetPC', (doc,options,userId) => {
+    console.log("renderShadowrun6ActorSheetPC hook called");
+		
+	});
+
+	Hooks.on('renderShadowrun6ActorSheetVehicle', (app,html,data) => {
+//    console.log("renderShadowrun6ActorSheetVehicle hook called");
+	 _onRenderVehicleSheet(app,html,data);
+		
+	});
+
+	Hooks.on('renderSR6ItemSheet', (app,html,data) => {
+    console.log("renderSR6ItemSheet hook called");
+		
+	});
+
+  /*
+   * Something has been dropped on the HotBar 
+   */
+  Hooks.on("hotbarDrop", async (bar, data, slot) => {
+    console.log("DROP to Hotbar");
+    let macroData = {
+      name: "",
+      type: "script",
+      img: "icons/svg/dice-target.svg",
+      command: ""
+    };
+
+/*    // For items, memorize the skill check	
+    if (data.type === "Item") {
+      console.log("Item dropped " + data);
+      if (data.id) {
+        data.data = game.items.get(data.id).data;
+      }
+      if (data.data) {
+        macroData.name = data.data.name;
+        macroData.img = data.data.img;
+
+        let actorId = data.actorId || "";
+
+        if (actorId && game.user.isGM) {
+          const actorName = game.actors.get(actorId)?.data.name;
+          macroData.name += ` (${actorName})`;
+        }
+
+        macroData.command = `game.shadowrun6.itemCheck("${data.data.type}","${data.data.name}","${actorId}","${data.data.id}")`;
+
+      }
+    };
+
+    if (macroData.command != "" && macroData.name != "") {
+      let macro = await Macro.create(macroData, { displaySheet: false });
+
+      game.user.assignHotbarMacro(macro, slot);
+    }*/
+  });
+
+	Hooks.on('renderChatMessage', function (app:ChatMessage, html:JQuery, data:any) {
+		console.log("ENTER renderChatMessage");
+		registerChatMessageEdgeListener(this, app, html, data);
+    html.on("click", ".chat-edge", ev => {
+		let event : JQuery.ClickEvent = ev; 
+		 event.preventDefault();
+	    let roll = $(event.currentTarget); 
+	    let tip = roll.find(".chat-edge-collapsible");
+	    if (!tip.is(":visible")) {
+		    tip.slideDown(200);	
+	    } else {
+		    tip.slideUp(200);
+	    }
+		});
+    html.find(".rollable").click(event => {
+//      const type =  $(event.currentTarget).closestData("roll-type");
+		console.log("ENTER renderChatMessage.rollable.click -> event = ",event.currentTarget);
+      var targetId = ($(event.currentTarget) as any).closestData("targetid");
+		/* 
+		 * If no target was memorized in the button, try to find one from the
+		 * actor associated with the player 
+		 */
+	   if (!targetId) {
+			(game as Game).actors!.forEach(item => {
+	    		if (item.hasPlayerOwner)
+					targetId = item.data._id;
+		   });
+		}
+      console.log("TargetId "+targetId);
+
+		const dataset = event.currentTarget.dataset;
+      const rollType =  dataset.rollType;
+		console.log("Clicked on rollable : "+rollType);
+      if (rollType === "defense") {
+ 			const actor = (game as Game).actors!.get(targetId);
+       console.log("Target actor ",actor);
+       console.log("TODO: call rollDefense");
+		//rollDefense(actor, dataset);
+      }
+    });
     html.on("click", ".chat-edge", event => {
 		 event.preventDefault();
 	    let roll = $(event.currentTarget); 
@@ -144,6 +256,7 @@ Hooks.once("init", async function () {
 		    tip.slideUp(200);
 	    }
 		});
+
     html.on("click", ".chat-edge-post", event => {
 		 event.preventDefault();
 	    let roll = $(event.currentTarget.parentElement); 
@@ -168,4 +281,90 @@ Hooks.once("init", async function () {
 	 console.log("LEAVE renderChatMessage");
   });
 
+  /**
+   * If a player actor is created, change default token settings
+   */
+  Hooks.on('preCreateActor', (actor, createData, options, userId) => {
+    if (actor.type === 'Player') {
+      actor.data.token.update({ "actorLink": "true" });
+      actor.data.token.update({ "vision": "true" });
+    }
+  });
+
+  Hooks.on('preUpdateCombatant', (combatant, createData, options, userId) => {
+    console.log("Combatant with initiative "+createData.initiative);
+  });
+
+  Hooks.on('preUpdateCombat', (combat, createData, options, userId) => {
+    console.log("Combat with turn "+createData.turn+" in round "+combat.data.round);
+  });
+
+  Hooks.on('deleteCombat', (combat, createData, userId) => {
+    console.log("End Combat");
+  });
+
+Hooks.once("dragRuler.ready", (SpeedProvider) => {
+    class FictionalGameSystemSpeedProvider extends SpeedProvider {
+        get colors() {
+            return [
+                {id: "walk", default: 0x00FF00, name: "shadowrun6-eden.speeds.walk"},
+                {id: "dash", default: 0xFFFF00, name: "shadowrun6-eden.speeds.dash"},
+                {id: "run", default: 0xFF8000, name: "shadowrun6-eden.speeds.run"}
+            ]
+        }
+
+        getRanges(token) {
+            const baseSpeed = 5; //token.actor.data.speed
+
+			// A character can always walk it's base speed and dash twice it's base speed
+			const ranges = [
+				{range: 10, color: "walk"},
+				{range: 15, color: "dash"}
+			]
+
+			// Characters that aren't wearing armor are allowed to run with three times their speed
+			if (!token.actor.data.isWearingArmor) {
+				ranges.push({range: baseSpeed * 3, color: "dash"})
+			}
+
+            return ranges
+        }
+    }
+
+    (this as any).dragRuler.registerSystem("shadowrun6-eden", FictionalGameSystemSpeedProvider)
+})
+
 });
+
+($.fn as any).closestData = function (dataName, defaultValue = "") {
+  let value = this.closest(`[data-${dataName}]`)?.data(dataName);
+  return (value) ? value : defaultValue;
+}
+
+/* -------------------------------------------- */
+function registerChatMessageEdgeListener(event: Event, chatMsg:ChatMessage, html:JQuery, data:ChatMessageData) {
+	if (!chatMsg.isOwner) {
+		console.log("I am not owner of that chat message from "+(data as any).alias);		
+		return;
+	}
+	 // React to changed edge boosts and actions
+	 let boostSelect = html.find('.edgeBoosts');
+	let edgeActions = html.find('.edgeActions');
+	if (boostSelect) {
+    	boostSelect.change(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
+    	boostSelect.keyup(event => EdgeUtil.onEdgeBoostActionChange(event,"POST", chatMsg, html, data));
+	}
+
+	// chatMsg.roll is a SR6Roll
+	let btnPerform  = html.find('.edgePerform');
+	let roll : SR6Roll = chatMsg.roll as SR6Roll;
+	if (btnPerform && roll) {
+		btnPerform.click(event => EdgeUtil.peformPostEdgeBoost(chatMsg, html, data, btnPerform, boostSelect,  edgeActions));
+	}
+}
+
+function _onRenderVehicleSheet(application, html, data) {
+	let actorData = data.actor.data.data;
+	console.log("_onRenderVehicleSheet for "+actorData);
+}
+

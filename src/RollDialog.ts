@@ -48,6 +48,8 @@ export class RollDialog extends Dialog {
 
 		html.find("select[name='distance']").change(this._recalculateBaseAR.bind(this));
 		html.find("select[name='fireMode']").change(this._onFiringModeChange.bind(this));
+		html.find("select[name='bfType']").change(this._onBurstModeChange.bind(this));
+		html.find("select[name='fullAutoArea']").change(this._onAreaChange.bind(this));
 	/*
     if (!this.data.target) {
       html.find('.calc-edge').show(this._onNoTarget.bind(this));
@@ -267,10 +269,13 @@ export class RollDialog extends Dialog {
 	 */
 	_onEdgeBoostActionChange(event) {
 		console.log("_onEdgeBoostActionChange");
+		console.log("_onEdgeBoostActionChange  this=",this);
 
-		/*
+		let actor : Shadowrun6Actor = (this.options as any).actor;
+		let prepared : PreparedRoll = (this.options as any).prepared;
+		
 		// Ignore this, if there is no actor
-		if (!this.data.data.actor) {
+		if (!actor) {
 			return;
 		}
 		if (!event || !event.currentTarget) {
@@ -281,6 +286,8 @@ export class RollDialog extends Dialog {
 			const boostsSelect = event.currentTarget;
 			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;
 			console.log(" boostId = "+boostId);
+			
+			/*
 			this.data.data.edgeBoost = boostId;
 		   if (boostId==="edge_action") {
 				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , this.data.edge);
@@ -293,15 +300,18 @@ export class RollDialog extends Dialog {
 				this.data.data.edge_use="";
 			}
 			this._performEdgeBoostOrAction(this.data.data, boostId);
+			*/
 		} else if (event.currentTarget.name === "edgeAction") {
 			const actionSelect = event.currentTarget;
 			let actionId = actionSelect.children[actionSelect.selectedIndex].dataset.itemActionid;
 			console.log(" actionId = "+actionId);
+			/*
 			this.data.data.edgeAction = actionId;
 			this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_action."+actionId)
 			this._performEdgeBoostOrAction(this.data.data, actionId);
+			*/
 		}
-				*/
+			
 
 	}
 
@@ -373,6 +383,7 @@ export class RollDialog extends Dialog {
 		let arMod   : number = 0;
 		let dmgMod  : number = 0;
 		let rounds  : number = 1;
+		prepared.fireMode = newMode;
 		switch (newMode) {
 		case "SS":
 			this.html.find('.onlyFA').css("display", "none");
@@ -429,6 +440,31 @@ export class RollDialog extends Dialog {
 		this._recalculateBaseAR();
 	}
 	
+	//-------------------------------------------------------------
+	_onBurstModeChange(event : Event) {
+		console.log("ToDo: _onBurstModeChanged");
+		let prepared : WeaponRoll = (this.options as any).prepared;
+		
+		let fireModeElement : HTMLSelectElement = (document.getElementById("bfType") as HTMLSelectElement);
+		if (!fireModeElement)
+			return;
+		
+		prepared.burstMode = fireModeElement.value;
+	}
+	
+	//-------------------------------------------------------------
+	_onAreaChange(event : Event) {
+		console.log("ToDo: _onAreaChanged");
+		let prepared : WeaponRoll = (this.options as any).prepared;
+		
+		let fireModeElement : HTMLSelectElement = (document.getElementById("fullAutoArea") as HTMLSelectElement);
+		if (!fireModeElement)
+			return;
+		
+		prepared.faArea = fireModeElement.value;
+	}
+	
+	//-------------------------------------------------------------
   _onNoTarget() {
     document.getElementById("noTargetLabel")!.innerText = (game as Game).i18n.localize("shadowrun6.roll.notarget");
   }
