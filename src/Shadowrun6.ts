@@ -18,6 +18,10 @@ import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { CompendiumActorSheetNPC } from "./sheets/CompendiumActorSheetNPC.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { defineHandlebarHelper } from "./util/helper.js";
+import { PreparedRoll } from "./dice/RollTypes.js";
+import { doRoll } from "./Rolls.js";
+
+const diceIconSelector : string = '#chat-controls .chat-control-icon .fa-dice-d20';
 
 /**
  * Init hook. Called from Foundry when initializing the world
@@ -37,6 +41,7 @@ Hooks.once("init", async function () {
   CONFIG.Combat.documentClass = Shadowrun6Combat;
   CONFIG.Actor.documentClass = Shadowrun6Actor;
   CONFIG.Dice.rolls = [SR6Roll, Roll];
+  (game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 
  	registerSystemSettings();
 
@@ -112,6 +117,19 @@ Hooks.once("init", async function () {
       },
       visibility: 'visible'
     }, "default");
+  });
+
+  Hooks.on('ready', () => {
+    // Render a modal on click.
+    $(document).on('click', diceIconSelector, ev => {
+    console.log("diceIconSelector clicked  ",ev);
+      ev.preventDefault();
+      // Roll and return
+		let roll : PreparedRoll = new PreparedRoll();
+		roll.pool = 0;
+      roll.speaker = ChatMessage.getSpeaker({ actor: this });
+      doRoll(roll);
+    });
   });
 
   Hooks.on('renderChatMessage', function (app, html, data) {

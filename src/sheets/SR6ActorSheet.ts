@@ -1,7 +1,7 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll } from "../dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, RollType } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -583,14 +583,15 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		
 		let roll : PreparedRoll = new PreparedRoll();
 		roll.pool = event.currentTarget.dataset.pool;
+		roll.rollType = RollType.Common;
 		
 		let classList = event.currentTarget.classList;
 		if (classList.contains("defense-roll") ) {
-			roll.checkText = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
+			roll.actionText = (game as Game).i18n.localize("shadowrun6.defense." + event.currentTarget.dataset.itemId);
 		} else if (classList.contains("attributeonly-roll")) {
-			roll.checkText = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
+			roll.actionText = (game as Game).i18n.localize("shadowrun6.derived." + event.currentTarget.dataset.itemId);
 		} else {
-			roll.checkText = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
+			roll.actionText = (game as Game).i18n.localize("shadowrun6.rolltext." + event.currentTarget.dataset.itemId);
 		}
 		let dialogConfig : any;
 		if (classList.contains("defense-roll")) {

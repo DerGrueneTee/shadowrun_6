@@ -19,7 +19,7 @@ function isSpell(obj: any): obj is Spell {
 }
 
 export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
-	console.log("ENTER doRoll");
+	console.log("ENTER doRoll ",data);
 	try {
 		// Create the Roll instance
 		const _r: SR6Roll = await _showRollDialog(data);
@@ -44,16 +44,17 @@ export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
 async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 	console.log("ENTER _showRollDialog", this);
 	try {
-		if (!isLifeform(data.actor.data.data)) {
-			console.log("Actor is not a lifeform");
+		let lifeform : Lifeform|undefined;
+		if (data.actor) {
+			if (!isLifeform(data.actor.data.data)) {
+				console.log("Actor is not a lifeform");
+			}
+			lifeform = (data.actor.data.data as Lifeform);
+			data.edge = (data.actor) ? lifeform.edge.value : 0;
 		}
-		let lifeform: Lifeform = (data.actor.data.data as Lifeform);
-
 		/*
 		 * Edge, Edge Boosts and Edge Actions
 		 */
-		//data.actor = (game as Game).actors.get(data.speaker.actor);
-		data.edge = (data.actor) ? lifeform.edge.value : 0;
 		data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when == "PRE" && boost.cost <= data.edge);
 
 		if (data.rollType==RollType.Weapon) {
@@ -61,7 +62,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			(data as WeaponRoll).calcAttackRating = [...(data as WeaponRoll).weapon.attackRating];	
 			(data as WeaponRoll).calcDmg = (data as WeaponRoll).weapon.dmg;
 		}
-		if (data.rollType==RollType.Spell) {
+		if (data.rollType==RollType.Spell && lifeform!=null) {
 			(data as SpellRoll).calcDamage = lifeform.attributes.mag.pool/2;
 		}
 		/*
@@ -108,7 +109,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 						icon: '<i class="fas fa-dice-six"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
 						callback: html => {
-							console.log("in callback");
+							console.log("doRoll: in callback");
 							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data));
 							console.log("end callback");
 						}
@@ -143,6 +144,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			console.log("create RollDialog");
 			let dia2: RollDialog = new RollDialog(diagData, myDialogOptions);
 			dia2.render(true);
+			console.log("showRollDialog after render()");
 		});
 
 		return new Promise((resolve) => { });
@@ -155,105 +157,57 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 function _dialogClosed(type: ReallyRoll, form, data: PreparedRoll, messageData = {}): SR6Roll {
 	console.log("ENTER _dialogClosed(type=" + type + ", form=" + form + ", data=" + data + ")");
 	try {
-		console.log("data = ", data);
-		console.log("messageData = ", messageData);
 		
 		let configured :ConfiguredRoll = (data as ConfiguredRoll);
 		if (!configured.modifier) configured.modifier=0;
-		if (!isLifeform(data.actor.data.data))
-			throw new Error("Not a lifeform");
+		
+		if (data.actor) {
+			if (!isLifeform(data.actor.data.data))
+				throw new Error("Not a lifeform");
 
-	// Pay eventuallly selected edge boost
-	if (configured.edgeBoost && configured.edgeBoost!="none") {
-		console.log("Edge Boost selected: "+configured.edgeBoost);
-		if (configured.edgeBoost === "edge_action") {
-			console.log("ToDo: handle edge action");
-		} else {
-			let boost:EdgeBoost = CONFIG.SR6.EDGE_BOOSTS.find(boost => boost.id==configured.edgeBoost)!;
-			console.log("Pay "+boost.cost+" egde for Edge Boost: "+(game as Game).i18n.localize("shadowrun6.edge_boost."+configured.edgeBoost));
-			data.actor.data.data.edge.value = data.edge - boost.cost;
-			// Pay Edge cost
-			data.actor.update({ ["data.edge.value"]: data.actor.data.data.edge.value });
-		}
-	} else {
-		if (data.edge>0) {
-			data.actor.update({ ["data.edge.value"]: data.edge });
-		}
-	}
-	
-
-    data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
-
-	let formula = "";
-	
-    if (form) {	
-      data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
-      configured.useWildDie = form.useWildDie.checked?1:0;
-      configured.explode = form.explode.checked;
-	   configured.buttonType = type;
-      configured.modifier = parseInt(form.modifier.value);
-      configured.defRating = (form.defRating)?parseInt(form.defRating.value):0;
-
-		/*
-	   if (data.spell && data.spell.type=="ritual") {
-			data.threshold = data.spell.data.data.threshold;
-		}
-      
-      data.rollMode = form.rollMode.value;
-      messageData.rollMode = form.rollMode.value;
-      data.weapon = data.item ? true : false;
-      if (configured.modifier > 0) {
-        data.formula = data.pool + " + " + configured.modifier + "d6";
-      } else if (configured.modifier < 0){
-        data.formula = data.pool + " " + configured.modifier + "d6";
-      } else {
-        data.formula = data.pool + "d6";
-      }
-		*/
-		formula = createFormula(configured);
-    }
-
-	if (data.rollType==RollType.Spell) {
-		/*
-		if (data.spell) {
-			data.drain  = parseInt(data.spell.data.data.drain);	
-			data.radius = (data.spell.data.data.range == "line_of_sight_area" || data.spell.data.data.range == "self_area") ? 2 : 0;
-			if (data.spell.data.data.category == "combat") {
-				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : data.actor.data.data.attributes.mag.pool/2;
-				data.drain  = parseInt(data.spell.data.data.drain);	
-				// Amp up
-				if (data.damageMod) {
-					data.damage+= parseInt(data.damageMod);
+			// Pay eventuallly selected edge boost
+			if (configured.edgeBoost && configured.edgeBoost!="none") {
+				console.log("Edge Boost selected: "+configured.edgeBoost);
+				if (configured.edgeBoost === "edge_action") {
+					console.log("ToDo: handle edge action");
+				} else {
+					let boost:EdgeBoost = CONFIG.SR6.EDGE_BOOSTS.find(boost => boost.id==configured.edgeBoost)!;
+					console.log("Pay "+boost.cost+" egde for Edge Boost: "+(game as Game).i18n.localize("shadowrun6.edge_boost."+configured.edgeBoost));
+					data.actor.data.data.edge.value = data.edge - boost.cost;
+					// Pay Edge cost
+					data.actor.update({ ["data.edge.value"]: data.actor.data.data.edge.value });
+				}
+			} else {
+				if (data.edge>0) {
+					data.actor.update({ ["data.edge.value"]: data.edge });
 				}
 			}
-				// Increase area
-				if (data.radiusMod) {
-					data.radius+= data.radiusMod;
-				}
-				
-			if (data.drainMod) {
-				data.drain+= parseInt(data.drainMod);
-			}
 		}
-		*/
-	} else if (data.rollType==RollType.Weapon) {
-		/*
-		if (data.item) {
-			// TODO: Evaluate fire modes
-			console.log("ToDo: evaluate fire modes, called shots, etc.")
-			data.damage = data.item.data.data.dmg;
-			data.dmgDef = data.item.data.data.dmgDef;
-		}
-		*/
-	}
 
+		data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
+
+		let formula = "";
+	
+	   if (form) {	
+   	   data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
+      	configured.useWildDie = form.useWildDie.checked?1:0;
+      	configured.explode = form.explode.checked;
+	   	configured.buttonType = type;
+      	configured.modifier = parseInt(form.modifier.value);
+      	configured.defRating = (form.defRating)?parseInt(form.defRating.value):0;
+
+			formula = createFormula(configured);
+			configured.pool = +configured.pool + +configured.modifier;
+    	}
     
-		console.log("BEFORE");
     // Execute the roll
 		return new SR6Roll(formula, configured);
+	} catch (err) {
+		console.log("Oh NO! "+err.stack);
 	} finally {
 		console.log("LEAVE _dialogClosed()");
 	}
+	return this;
 }
 
 /*
