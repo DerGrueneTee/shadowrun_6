@@ -97,11 +97,13 @@ export class RollDialog extends Dialog {
 	 * HTML form
 	 */
 	_onCalcEdge(event) {
-		console.log("onCalcEdge ", this);
+//		console.log("onCalcEdge ", this);
 
 		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
 		let prepared : PreparedRoll = options.prepared!;	
 		let configured : ConfiguredRoll = options.configured!;	
+		
+		if (!configured.actor) return;
 	
    	try {
 			configured.edgePlayer = 0;
@@ -153,21 +155,6 @@ export class RollDialog extends Dialog {
 				}
 				
 			}
-
-			// Calculate effective edge
-			/*
-   		let effective = configured.edgePlayer - configured.edgeTarget;
-  			if (effective>0) {
-	   		configured.edgePlayer = configured.edgePlayer - configured.edgeTarget;
-      		configured.edgeTarget = 0;
-   		} else if (effective<0) {
-	   		configured.edgeTarget = configured.edgeTarget - configured.edgePlayer;
-      		configured.edgePlayer = 0;
-   		} else {
-      		configured.edgePlayer = 0;
-      		configured.edgeTarget = 0;
-   		}
-			*/
 		
 			// Set new edge value
 			let actor : Lifeform = configured.actor.data.data as Lifeform;
