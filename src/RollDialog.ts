@@ -97,32 +97,30 @@ export class RollDialog extends Dialog {
 	 * HTML form
 	 */
 	_onCalcEdge(event) {
-//		console.log("onCalcEdge ", this);
+		console.log("onCalcEdge ", this);
 
 		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
 		let prepared : PreparedRoll = options.prepared!;	
 		let configured : ConfiguredRoll = options.configured!;	
 	
    	try {
-			let edgePlayer : number = 0;
-			let edgeTarget : number = 0;
+			configured.edgePlayer = 0;
+			configured.edgeTarget = 0;
  
 	   	// Check situational edge
 	   	const situationA : HTMLInputElement | null = (document.getElementById("situationalEdgeA") as HTMLInputElement);
     		if (situationA && situationA.checked) {
-					edgePlayer++;
+					configured.edgePlayer++;
 	 		}
    		const situationD : HTMLInputElement | null = (document.getElementById("situationalEdgeD") as HTMLInputElement);
     		if (situationD && situationD.checked) {
-				edgeTarget++;
+				configured.edgeTarget++;
 	 		}
 
 			const drElement : HTMLInputElement | null = (document.getElementById("dr") as HTMLInputElement);
 			if (drElement) {
    			const dr : number = parseInt(drElement.value);
       		const arModElem : HTMLInputElement = (document.getElementById("arMod") as HTMLInputElement);
-				configured.edgePlayer = 0;
-				configured.edgeTarget = 0;
 			
 				if (isItemRoll(prepared)) {
       			const arElement: HTMLLabelElement = (document.getElementById("baseAR") as HTMLLabelElement);

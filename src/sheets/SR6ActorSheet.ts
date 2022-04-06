@@ -524,7 +524,6 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const itemId = event.currentTarget.dataset.itemId;
 		
 		let item : Item|undefined = this.actor.items.get(itemId);
-		console.log("_onRollItemCheck - item is ", item);
 		if (!item) {
 			throw new Error("onRollItemCheck for non-existing item");
 		}
@@ -532,9 +531,9 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			throw new Error("onRollItemCheck: No skill for item");
 		}
 		if (isWeapon(item.data.data)) { console.log("is weapon", item)}
-
+		const gear : Gear  = item.data.data;
 		
-		let roll : WeaponRoll = new WeaponRoll(attacker, item, itemId, item.data.data);
+		let roll : WeaponRoll = new WeaponRoll(attacker, item, itemId, gear);
 		console.log("_onRollItemCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollItem(roll);
 	}
@@ -547,6 +546,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (!(event.currentTarget as any).dataset) return;
 		const caster : Lifeform = (this.actor.data.data as Lifeform);
 		const itemId : string = (event.currentTarget as any).dataset.itemId;
+
 		let item : Item|undefined = this.actor.items.get(itemId);
 		if (!item) {
 			throw new Error("_onRollSpellCheck for non-existing item");

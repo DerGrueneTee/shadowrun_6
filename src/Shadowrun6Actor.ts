@@ -1063,38 +1063,7 @@ export class Shadowrun6Actor extends Actor {
 			}
 		}
 		
-
-/*		let data = {
-			isSpell : true,
-			pool: pool,
-			actionText: actionText,
-			checkText  : rollName,
-			skill: this.data.data.skills[skillId],
-			spec: spec,
-			spell: item,
-			spellName: spellName,
-			spellDesc: spellDesc,
-			spellSrc : spellSrc,
-			canModifySpell: canAmpUpSpell || canIncreaseArea,
-			canAmpUpSpell : canAmpUpSpell,
-			canIncreaseArea : canIncreaseArea,
-			attackRating: attackRating,
-			defRating : highestDefenseRating,
-			targets: game.user.targets,
-			isOpposed: isOpposed,
-			threshold: threshold,
-			rollType: ritual?"ritual":"spell",
-			isAllowDefense: true,
-			defendWith: defendWith,
-			hasDamageResist: hasDamageResist,
-			buyHits: !isOpposed
-		});
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
-		if (isOpposed) {
-			return doRoll(data);
-		} else {
-			return doRoll(data);
-		}*/
 		return doRoll(roll);
 	}
 
