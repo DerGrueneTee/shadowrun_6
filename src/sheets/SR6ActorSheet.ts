@@ -57,7 +57,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.complexform-roll').click(this._onRollComplexFormCheck.bind(this));
 			html.find(".attributeonly-roll").click(this._onCommonCheck.bind(this));
 			
-			//this.activateCreationListener(html);
+			this.activateCreationListener(html);
 			
 			html.find('.item-delete').click(event => {
 				const itemId = this._getClosestData($(event.currentTarget), 'item-id');
@@ -173,17 +173,17 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	}
 	
 	activateCreationListener(html) {
-		/*
-					html.find('.adeptpower-create').click(ev => {
-				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.adeptpower"),
-					type: "adeptpower",
-				};
-				return this.actor.createEmbeddedDocuments("Item", [itemData]);
-			});
+		console.log("activateCreationListener");
+		html.find('.adeptpower-create').click(ev => {
+			const itemData = {
+				name: (game as Game).i18n.localize("shadowrun6.newitem.adeptpower"),
+				type: "adeptpower",
+			};
+			return this.actor.createEmbeddedDocuments("Item", [itemData]);
+		});
 			html.find('.martialartstyle-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.martialartstyle"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.martialartstyle"),
 					type: "martialartstyle",
 				};
 				return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -200,7 +200,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.focus-create').click(ev => this._onCreateNewEmbeddedItem("focus"));
 			html.find('.weapon-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.weapon"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.weapon"),
 					type: "gear",
 					data: {
 						type: "WEAPON_FIREARMS"
@@ -217,7 +217,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find('.bodyware-create').click(ev => this._onCreateNewEmbeddedItem("gear","CYBERWARE"));
 			html.find('.close-weapon-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.weaponclose"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.weaponclose"),
 					type: "gear",
 					data: {
 						type: "WEAPON_CLOSE_COMBAT"
@@ -227,7 +227,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.martialart-style-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.martialartstyle"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.martialartstyle"),
 					type: "martialartstyle",
 					data: {
 						genesisID: this._create_UUID()
@@ -239,7 +239,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				const element = ev.currentTarget.closest(".item");
 				const styleId = element.dataset.styleId;
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.martialarttech"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.martialarttech"),
 					type: "martialarttech",
 					data: {
 						style: styleId,
@@ -249,7 +249,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.skill-knowledge-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.skill.knowledge"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.skill.knowledge"),
 					type: "skill",
 					data: {
 						genesisID: "knowledge"
@@ -259,7 +259,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.skill-language-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.skill.language"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.skill.language"),
 					type: "skill",
 					data: {
 						genesisID: "language",
@@ -270,7 +270,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.matrix-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.matrix"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.matrix"),
 					type: "gear",
 					data: {
 						genesisID: this._create_UUID(),
@@ -282,7 +282,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.vehicle-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.vehicles"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.vehicles"),
 					type: "gear",
 					data: {
 						genesisID: this._create_UUID(),
@@ -294,7 +294,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.drone-create').click(ev => {
 				const itemData = {
-					name: game.i18n.localize("shadowrun6.newitem.drones"),
+					name: (game as Game).i18n.localize("shadowrun6.newitem.drones"),
 					type: "gear",
 					data: {
 						genesisID: this._create_UUID(),
@@ -306,14 +306,22 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			});
 			html.find('.item-edit').click(ev => {
 				const element = ev.currentTarget.closest(".item");
-				const item = this.actor.items.get(element.dataset.itemId);
-				item.sheet.render(true);
+				const item : Item|undefined = this.actor.items.get(element.dataset.itemId);
+				console.log("edit ",item);
+				if (!item) {
+					throw new Error("Item is null");
+				}
+				
+				if (item.sheet) {
+					item.sheet.render(true);
+				}
 			});
-	*/
+	
 	}
 
-	_onCreateNewEmbeddedItem(type, itemtype) {
-		let nameType:string = itemtype ? +itemtype.toLowerCase() : type.toLowerCase();
+	//-----------------------------------------------------
+	_onCreateNewEmbeddedItem(type:string, itemtype: string|null = null) {
+		let nameType:string = itemtype ? itemtype.toLowerCase() : type.toLowerCase();
 		let itemData = {
 			name: (game as Game).i18n.localize("shadowrun6.newitem."+nameType) ,
 			type: type,

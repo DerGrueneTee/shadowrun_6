@@ -65,10 +65,10 @@ export class RollDialog extends Dialog {
 	 html.show(this._onFiringModeChange.bind(this));
 
 	// React to changed amp up
-    html.find('#ampUp').change(this._onSpellAmpUpChange.bind(this));
+    html.find('#ampUp').change(this._onSpellConfigChange.bind(this));
 
 	// React to changed amp up
-    html.find('#incArea').change(this._onSpellIncreaseAreaChange.bind(this));
+    html.find('#incArea').change(this._onSpellConfigChange.bind(this));
 
 	this._recalculateBaseAR();
   }
@@ -350,9 +350,10 @@ export class RollDialog extends Dialog {
 	}
 	
 	//-------------------------------------------------------------
-	_onSpellAmpUpChange() {
+	_onSpellConfigChange() {
 		let ampUpElement : HTMLSelectElement = (document.getElementById("ampUp") as HTMLSelectElement);
-		if (!ampUpElement)
+		let incElement   : HTMLSelectElement = (document.getElementById("incArea") as HTMLSelectElement);
+		if (!ampUpElement || !incElement)
 			return;
 		
 		let prepared : SpellRoll = (this.options as any).prepared;
@@ -362,28 +363,13 @@ export class RollDialog extends Dialog {
 		const baseMagic = prepared.actor.data.data.attributes.mag.pool;
 
 		let ampUpSelect : number = parseInt(ampUpElement.value);
-		prepared.calcDamage = ((prepared.spell.damage==="physical")? (baseMagic/2) : 0 ) + ampUpSelect;
-		prepared.calcDrain  = prepared.spell.drain + ampUpSelect*2;
+		let incSelect   : number = parseInt(incElement.value);
+		prepared.calcDamage = ((prepared.spell.damage==="physical" || prepared.spell.damage==="physical_special")? (baseMagic/2) : 0 ) + ampUpSelect;
+		prepared.calcDrain  = +prepared.spell.drain + +ampUpSelect*2 + +incSelect as number;
+		prepared.calcArea   = 2 + incSelect*2;
 		
 		this.html.find("td[id='spellDrain']").text( prepared.calcDrain.toString() );
 		this.html.find("span[id='spellDmg']").text( prepared.calcDamage.toString() );
-	}
-	
-	//-------------------------------------------------------------
-	_onSpellIncreaseAreaChange() {
-		let ampUpElement : HTMLSelectElement = (document.getElementById("incArea") as HTMLSelectElement);
-		if (!ampUpElement)
-			return;
-		
-		let prepared : SpellRoll = (this.options as any).prepared;
-		if (!isLifeform(prepared.actor.data.data))
-			return;
-
-		let ampUpSelect : number = parseInt(ampUpElement.value);
-		prepared.calcArea = 2 + ampUpSelect*2;
-		prepared.calcDrain  = prepared.spell.drain + ampUpSelect;
-		
-		this.html.find("td[id='spellDrain']").text( prepared.calcDrain.toString() );
 		this.html.find("span[id='spellArea']").text( prepared.calcArea.toString() );
 	}
 	
