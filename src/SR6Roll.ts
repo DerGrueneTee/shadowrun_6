@@ -1,14 +1,14 @@
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
-import { ConfiguredRoll, FinishedRoll, ReallyRoll } from "./dice/RollTypes.js";
+import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll } from "./dice/RollTypes.js";
 
 /**
  * 
  */
 export default class SR6Roll extends Roll<ConfiguredRoll> {
 	
-	finished   : FinishedRoll;
+	finished   : SR6ChatMessageData;
 	configured : ConfiguredRoll ;
 
     static CHAT_TEMPLATE = "systems/shadowrun6-eden/templates/chat/roll-sr6.html";
@@ -27,7 +27,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     evaluate(options?: InexactPartial<Options & { async: false }>): Evaluated<this>;
     evaluate(options: InexactPartial<Options> & { async: true }): Promise<Evaluated<this>>;
     evaluate(options?: InexactPartial<Options>): Evaluated<this> | Promise<Evaluated<this>> {
-//		console.log("ENTER evaluate()");
+		console.log("ENTER evaluate()");
 //		console.log("   this: " , this);
 		// IMPORTANT: Before merging arrays, have them calculated
 		super.evaluate(  { async:false });
@@ -47,8 +47,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 				this.terms = [merged];
 //				console.log(" result3 ",merged);
 				this.results = merged.results;
+				this.finished.pool = merged.number;
 			} else {
 				this.results = this.dice[0].results;
+				this.finished.pool = this.dice[0].number;
 			}
 				
 /*			console.log("AFTER  _dice   : " , this._dice);
@@ -61,7 +63,6 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
             this._evaluated = true;
 				this._formula = (this.data as ConfiguredRoll).pool + "d6";
 				
-				this.finished = new FinishedRoll(this.configured);
 //				console.log("before leaving evalulate(): finished=",this.finished)
             return (this as Evaluated<this>);
         } finally {
@@ -69,6 +70,8 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
         }
     }
 
+	/**********************************************
+	 */
    private  calculateTotal():number {
  		console.log("-----calculateTotal");
      let total:number = 0;
@@ -79,7 +82,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
       return total;
     }
 
-	/**
+	/**********************************************
 	 * @override
 	 */
 	_evaluateTotal() : number {
@@ -92,7 +95,8 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		});
 		
 		
-		this.finished = new FinishedRoll(this.configured);
+		console.log("_evaluateTotal: create SR6ChatMessageData")
+		this.finished = new SR6ChatMessageData(this.configured);
 		this.finished.glitch = this.isGlitch();
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
@@ -278,7 +282,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		try {
     		if ( !this._evaluated ) await this.evaluate({async: true});
 			let isPrivate = options!.isPrivate;
-			this.finished = new FinishedRoll(this.configured);
+			this.finished = new SR6ChatMessageData(this.configured);
 			if (this.configured)
 				this.finished.actionText = isPrivate ? "" : this.configured.actionText;
 			//finished.user    = (game as Game).user!.id,

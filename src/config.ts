@@ -8,6 +8,11 @@ export enum Defense {
 	SPELL_OTHER    = "spells_other",
 	TOXIN    = "toxins"
 }
+export enum Monitor {
+	PHYSICAL = "physical",
+   STUN     = "stun",
+	SOCIAL   = "social"
+}
 
 export class SR6Config {
 	PRIMARY_ATTRIBUTES = ["bod", "agi", "rea", "str", "wil", "log", "int", "cha"];

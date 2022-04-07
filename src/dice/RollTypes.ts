@@ -1,6 +1,6 @@
 import { ChatMessageData           } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { Lifeform, Skill } from "../ActorTypes.js";
+import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { Defense } from "../config.js";
 import { EdgeBoost, MatrixAction, SkillDefinition } from "../DefinitionTypes.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
@@ -38,7 +38,7 @@ class CommonRollData {
 	
 	/* Opposed rolls: How to oppose? */
 	defendWith: Defense;
-	isOpposed() : boolean {
+	get isOpposed() : boolean {
 		return this.defendWith != undefined;
 	}
 	
@@ -112,6 +112,7 @@ export class PreparedRoll extends CommonRollData {
 	edgeBoosts: EdgeBoost[];
 	/** Effective dice pool applying firing mode or other modifiers */
 	calcPool: number;
+	performer: Lifeform;
 	
 	copyFrom(copy : PreparedRoll) {
 		super.copyFrom(copy);
@@ -119,6 +120,7 @@ export class PreparedRoll extends CommonRollData {
 		this.freeEdge     = copy.freeEdge;
 		this.edge         = copy.edge;
 		this.edgeBoosts   = copy.edgeBoosts;
+		this.performer = copy.performer;
 	}
 }
 
@@ -128,7 +130,6 @@ export class SkillRoll extends PreparedRoll {
 	skillValue: Skill;
 	skillSpec: string;
 	attrib: string | undefined;
-	performer: Lifeform;
 
 	/**
 	 * @param skillVal {Skill}   The actors instance of that skill
@@ -149,7 +150,6 @@ export class SkillRoll extends PreparedRoll {
 		this.skillDef = copy.skillDef;
 		this.skillValue = copy.skillValue;
 		this.attrib   = copy.attrib;
-		this.performer = copy.performer;
 	}
 
 	/**
@@ -280,22 +280,63 @@ export class ConfiguredRoll extends PreparedRoll {
 	edgeTarget : number;
 	edge_message : string;
 	edgeAdjusted : number;
+	edge_use : string;
+	/** Edge action selected  */
+	edgeAction : string;
 	targets : IterableIterator<Token>;
 }
 
-export class FinishedRoll extends PreparedRoll {
+/**
+ * Data to show in a ChatMessage
+ */
+export class SR6ChatMessageData {
+	speaker: ChatSpeakerDataProperties;
+	actor: Shadowrun6Actor;
+
+	/**
+	 * Text to describe what is happening,  e.g. <i>X is shooting at Y</i>
+	 */
+	actionText: string;
+	
+	rollType : RollType;
+	
+	/* Opposed rolls: How to oppose? */
+	defendWith: Defense;
+	get isOpposed() : boolean {
+		return this.defendWith != undefined;
+	}
+	
+	/** How many dice have been rolled */
+	pool		 : number;
+	/** Was there a threshold? */
+	threshold : number | undefined;
+
 	configured : ConfiguredRoll;
-	success    : boolean;
+   tooltip   : string;
+   results   : string | DiceTerm.Result[];
+   formula   : string;
+	publicRoll : boolean;
+
+	total   : number;
+	success : boolean;
 	glitch  : boolean;
 	criticalglitch : boolean;
-	total   : number;
-   tooltip : string;
-   results: string | DiceTerm.Result[];
-   formula: string;
-	publicRoll : boolean;
+	
+	/** Damage after adjustment (Amp Up, Fire Mode ...) */
+	damage    : number;
+	/** Which monitor to apply damage to */
+	monitor   : Monitor;
+	
+	
+	nettoHits : number;
 	
 	constructor(copy : PreparedRoll) {
-		super();
-		super.copyFrom(copy);
+		this.speaker = copy.speaker;
+		this.actor   = copy.actor;
+		this.actionText = copy.actionText;
+		this.rollType   = copy.rollType;
+		this.defendWith = copy.defendWith;
+		this.threshold  = copy.threshold;
+		this.pool       = copy.pool;
 	}
 }

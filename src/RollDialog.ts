@@ -1,6 +1,6 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform } from "./ActorTypes";
-import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll } from "./dice/RollTypes";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData } from "./dice/RollTypes";
 import { Gear, Spell, Weapon } from "./ItemTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 
@@ -273,6 +273,7 @@ export class RollDialog extends Dialog {
 
 		let actor : Shadowrun6Actor = (this.options as any).actor;
 		let prepared : PreparedRoll = (this.options as any).prepared;
+		let configured : ConfiguredRoll = (this.options as any).configured;
 		
 		// Ignore this, if there is no actor
 		if (!actor) {
@@ -287,29 +288,29 @@ export class RollDialog extends Dialog {
 			let boostId = boostsSelect.children[boostsSelect.selectedIndex].dataset.itemBoostid;
 			console.log(" boostId = "+boostId);
 			
-			/*
-			this.data.data.edgeBoost = boostId;
+			
+			configured.edgeBoost = boostId;
 		   if (boostId==="edge_action") {
-				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , this.data.edge);
+				this._updateEdgeActions(this._element![0].getElementsByClassName("edgeActions")[0] , configured.edge);
 			} else {
-				this._updateEdgeActions(this._element[0].getElementsByClassName("edgeActions")[0] , 0);
+				this._updateEdgeActions(this._element![0].getElementsByClassName("edgeActions")[0] , 0);
 			}
 			if (boostId!="none") {
-				this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_boost."+boostId)
+				configured.edge_use = (game as Game).i18n.localize("shadowrun6.edge_boost."+boostId)
 			} else {
-				this.data.data.edge_use="";
+				configured.edge_use="";
 			}
-			this._performEdgeBoostOrAction(this.data.data, boostId);
-			*/
+			this._performEdgeBoostOrAction(configured, boostId);
+			
 		} else if (event.currentTarget.name === "edgeAction") {
 			const actionSelect = event.currentTarget;
 			let actionId = actionSelect.children[actionSelect.selectedIndex].dataset.itemActionid;
 			console.log(" actionId = "+actionId);
-			/*
-			this.data.data.edgeAction = actionId;
-			this.data.data.edge_use = game.i18n.localize("shadowrun6.edge_action."+actionId)
-			this._performEdgeBoostOrAction(this.data.data, actionId);
-			*/
+			
+			configured.edgeAction = actionId;
+			configured.edge_use = (game as Game).i18n.localize("shadowrun6.edge_action."+actionId)
+			this._performEdgeBoostOrAction(configured, actionId);
+			
 		}
 			
 
@@ -321,7 +322,7 @@ export class RollDialog extends Dialog {
 	}
 	
 	//-------------------------------------------------------------
-	_performEdgeBoostOrAction(data, boostOrActionId) {
+	_performEdgeBoostOrAction(data:ConfiguredRoll, boostOrActionId) {
 		console.log("ToDo: performEgdeBoostOrAction "+boostOrActionId);
 		if (boostOrActionId=="edge_action") {
 			return;
@@ -329,21 +330,20 @@ export class RollDialog extends Dialog {
 		
 		data.explode = false;
 		data.modifier = 0;
-		/*
+		
 		switch (boostOrActionId) {
 		case "add_edge_pool":
 			data.explode = true;
-			data.modifier = this.data.data.actor.data.data.edge.max;
+			data.modifier = (data.actor.data.data as Lifeform).edge.max;
 			break;
 		}	
 
 		// Update content on dialog	
-		$("input[name='modifier']")[0].value = data.modifier;
-		$("input[name='explode' ]")[0].value = data.explode;
-		$("input[name='explode' ]")[0].checked = data.explode;
+		($("input[name='modifier']")[0] as HTMLInputElement).value = data.modifier.toString();
+		//($("input[name='explode' ]")[0] as HTMLInputElement).value = data.explode;
+		($("input[name='explode' ]")[0] as HTMLInputElement).checked = data.explode;
 		this._updateDicePool(data);
-		
-		*/
+				
 	}
 	
 	//-------------------------------------------------------------
@@ -469,4 +469,12 @@ export class RollDialog extends Dialog {
     document.getElementById("noTargetLabel")!.innerText = (game as Game).i18n.localize("shadowrun6.roll.notarget");
   }
 
+	//-------------------------------------------------------------
+	onClose(): SR6ChatMessageData {
+		console.log("To Do: onClose()");
+		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
+		let prepared : PreparedRoll = options.prepared!;	
+		let configured : ConfiguredRoll = options.configured!;	
+		return new SR6ChatMessageData(configured);
+	}
 }

@@ -155,6 +155,7 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRol
 	try {
 		
 		let configured :ConfiguredRoll = (data as ConfiguredRoll);
+		console.log("dialogClosed: configured=",configured);
 		if (!configured.modifier) configured.modifier=0;
 		
 		if (data.actor) {
