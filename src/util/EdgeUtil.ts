@@ -4,13 +4,13 @@ import SR6Roll from "../SR6Roll.js";
 export default class EdgeUtil {
 	
 	//-------------------------------------------------------------
-	_updateEdgeBoosts(elem, available, when = "POST") {
+	static updateEdgeBoosts(elem : HTMLSelectElement, available:number, when = "POST") {
 		let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when==when && boost.cost<=available);
 
-/*		// Node for inserting new data before		
+		// Node for inserting new data before		
 		let insertBeforeElem = {};
 		// Remove previous data
-		var array = Array.from(elem.children);
+		var array : HTMLOptionElement[] = (Array.from(elem.children) as HTMLOptionElement[]);
 		array.forEach( child => {
 			if (child.value!="none" && child.value!="edge_action") {
 				elem.removeChild(child)
@@ -25,18 +25,18 @@ export default class EdgeUtil {
 			let opt = document.createElement("option");
 			opt.setAttribute("value", boost.id);
 			opt.setAttribute("data-item-boostid", boost.id);
-			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_boost."+boost.id)+" - ("+boost.cost+")");
+			let cont = document.createTextNode( (game as Game).i18n.localize("shadowrun6.edge_boost."+boost.id)+" - ("+boost.cost+")");
 			opt.appendChild(cont);
-			elem.insertBefore(opt, insertBeforeElem);
+			elem.insertBefore(opt, (insertBeforeElem as Node));
 		});
-*/	}
+	}
 
 	//-------------------------------------------------------------
-	_updateEdgeActions(elem, available) {
+	_updateEdgeActions(elem : HTMLSelectElement, available:number) {
 		let newEdgeActions = CONFIG.SR6.EDGE_ACTIONS.filter(action => action.cost<=available);
 
-/*		// Remove previous data
-		var array = Array.from(elem.children);
+		// Remove previous data
+		var array: HTMLOptionElement[] = (Array.from(elem.children) as HTMLOptionElement[]);
 		array.forEach( child => {
 			if (child.value!="none") {
 				elem.removeChild(child)
@@ -48,11 +48,11 @@ export default class EdgeUtil {
 			let opt = document.createElement("option");
 			opt.setAttribute("value", action.id);
 			opt.setAttribute("data-item-actionid", action.id);
-			let cont = document.createTextNode(game.i18n.localize("shadowrun6.edge_action."+action.id)+" - ("+action.cost+")");
+			let cont = document.createTextNode((game as Game).i18n.localize("shadowrun6.edge_action."+action.id)+" - ("+action.cost+")");
 			opt.appendChild(cont);
 			elem.appendChild(opt);
 		});
-*/	}
+	}
 	
 	//-------------------------------------------------------------
 	/*
