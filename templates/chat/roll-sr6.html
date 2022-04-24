@@ -29,7 +29,7 @@
         {{#if success}}
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
         {{else}}
-        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{data.threshold}}</div>
+        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{threshold}}</div>
         {{/if}} 
         <br/>
         {{#if criticalGlitch}}
@@ -107,13 +107,24 @@
      {{#each data.targets as |token id|}}
      <div>
       {{log "Token" id " = " token.data }} 
-     	<button class="rollable" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../data.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
+     	<button class="rollable" data-roll-type="defense" data-damage="{{../data.damage}}" data-defend-with="{{../configured.defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{../total}}): {{token.data.name}}</button>
      </div>
      {{/each}}
    {{else}} 
      <div>
-  	   <button class="rollable" data-roll-type="defense" data-damage="{{data.damage}}" data-defend-with="{{data.defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
+  	   <button class="rollable" data-roll-type="defense" data-damage="{{configured.calcDmg}}" data-defend-with="{{configured.defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.defense_button'}} ({{total}})</button>
      </div>
    {{/iff}}
-   {{/if}}        
+   {{/if}}
+   
+   <!-- Damage -->
+   {{#if (eq rollType "defense")}}
+        {{#if success}}
+        <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulDefense'}}</div>
+        {{else}}
+        <div class="resulttext" style="color: rgb(194, 76, 29); flex:2">{{ localize 'shadowrun6.roll.failedDefense'}} {{nettoDamage}}</div>
+  	     <button class="rollable" data-roll-type="damage" data-damage="{{nettoDamage}}" data-soak-with="soakPhysical">{{localize 'shadowrun6.roll.soak_button'}} ({{total}})</button>
+        {{/if}} 
+   {{/if}}
+     
 </div>

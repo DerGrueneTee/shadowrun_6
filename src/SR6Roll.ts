@@ -1,7 +1,7 @@
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
-import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll } from "./dice/RollTypes.js";
+import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll, RollType, DefenseRoll } from "./dice/RollTypes.js";
 
 /**
  * 
@@ -100,6 +100,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		this.finished.glitch = this.isGlitch();
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
+		
+		if (this.configured.rollType==RollType.Defense) {
+			this.finished.damage = (this.configured as unknown as DefenseRoll).damage;
+		}
 		
       return total;
 	}
@@ -224,9 +228,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     return this.isGlitch() && this.getHits() === 0;
   }
 
-  isSuccess() {
-    if (this.data.threshold > 0) {
-      return this._total! >= this.data.threshold;
+	isSuccess() {
+		console.log("SR6Roll.isSuccess for ",this)
+    if (this.finished.threshold! > 0) {
+      return this._total! >= this.finished.threshold!;
     } else {
       return this._total! > 0;
     }
@@ -241,6 +246,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		//console.log("toJSON ",this);
 		const json = super.toJSON();
 		//console.log("toJSON: json=",json);
+		(json as any).data = this.data;
 		(json as any).configured = this.configured;
 		(json as any).results = this.results;
 		return json;

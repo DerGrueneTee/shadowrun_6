@@ -4,7 +4,7 @@ import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll } from "./dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -1069,39 +1069,59 @@ export class Shadowrun6Actor extends Actor {
 
 	//-------------------------------------------------------------
 	/**
-	 * Roll a spell test. Some spells are opposed, some are simple tests.
-	 * @param {string} itemId       The item id of the spell
-	 * @param {boolean} ritual      TRUE if ritual spellcasting is used
-	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
-	rollDefense(itemId, options={}) {
-		console.log("ToDo rollDefense("+itemId+")");
-		/*
-		const skillId = "sorcery";
-		const spec    = (ritual)?"spellcasting":"ritual_spellcasting";
-		const item = this.items.get(itemId);
-		// Prepare action text
-		let actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast", {name:this._getSpellName(item)});
-		// Get pool
-		let pool = this._getSkillPool(skillId, spec);
-		let rollName = "Defense";
+	rollDefense(defendWith :Defense, threshold:number, damage : number) {
+		console.log("ToDo rollDefense("+defendWith+", "+threshold+","+damage+")");
 
-		let data = mergeObject(options, {
-			rollType: "defense",
-			pool: pool,
-			actionText: actionText,
-			checkText  : rollName,
-			isOpposed: false,
-			hasDamageResist: false,
-			buyHits: false
-		});
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		if (isOpposed) {
-			return doRoll(data);
-		} else {
-			return doRoll(data);
+		const data:SR6Actor = this.data.data as SR6Actor;
+		if (!isLifeform(data)) {
+			throw  "Can only roll defenses for lifeforms";
 		}
-		*/
+		
+		let defensePool : Pool|undefined = undefined;
+		let rollData : DefenseRoll = new DefenseRoll(threshold);
+		let gameI18n : Localization = (game as Game).i18n;
+		switch (defendWith) {
+		case Defense.PHYSICAL:
+			defensePool = data.defensepool.physical;
+			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.defense."+defendWith, {threshold:0});
+			rollData.actionText = gameI18n.localize("attrib.rea")+" + "+gameI18n.localize("attrib.int")+" ("+threshold+")";
+			break;
+		case Defense.SPELL_INDIRECT:
+			defensePool = data.defensepool.spells_indirect;
+			rollData.actionText = gameI18n.localize("shadowrun6.roll.actionText.defense."+defendWith);
+			rollData.actionText = gameI18n.localize("attrib.rea")+" + "+gameI18n.localize("attrib.wil")+" ("+threshold+")";
+			break;
+		case Defense.SPELL_DIRECT:
+			defensePool = data.defensepool.spells_direct;
+			rollData.actionText = gameI18n.localize("shadowrun6.roll.actionText.defense."+defendWith);
+			rollData.actionText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib.int")+" ("+threshold+")";
+			break;
+		case Defense.SPELL_OTHER:
+			defensePool = data.defensepool.spells_other;
+			rollData.actionText = gameI18n.localize("shadowrun6.roll.actionText.defense."+defendWith);
+			rollData.actionText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib.int");
+			break;
+		default:
+			console.log("Error! Don't know how to handle defense pool for "+defendWith)
+			throw "Error! Don't know how to handle defense pool for "+defendWith;
+		}
+		
+		console.log("Defend with pool ",defensePool);
+		// Prepare action text
+		console.log("before ",rollData);
+		rollData.threshold  = threshold;
+		console.log("after ",rollData);
+		rollData.damage     = damage;
+		rollData.actor      = this;
+		rollData.allowBuyHits= false;
+		rollData.pool       = defensePool.pool!;
+		rollData.rollType   = RollType.Defense;
+		rollData.performer  = data;
+		rollData.speaker = ChatMessage.getSpeaker({ actor: this });
+		console.log("Defend roll config ",rollData);
+		return doRoll(rollData);
+
 	}
 
 	//---------------------------------------------------------

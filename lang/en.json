@@ -741,6 +741,7 @@
 	   "fa_area": "Area",
 		"firemode": "Firemode",
       "failure": "Failure",
+      "failedDefense": "You got hit and now it is going to hurt",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",
       "mode": "Mode",
@@ -750,6 +751,7 @@
       "notarget": "No target selected",
       "pool": "Pool",
 		"range": "Distance",
+		"soak_button": "Soak damage",
       "spec": "Specialization",
       "spell": {
         "ampUp": {
@@ -769,6 +771,7 @@
       "subject": "Chatmessage",
       "success": "Success",
       "successes": "hits",
+      "successfulDefense": "You successfully avoided being hit",
       "target": "Target",
       "threshold": "Threshold",
 		"weapon":  "Define your attack",

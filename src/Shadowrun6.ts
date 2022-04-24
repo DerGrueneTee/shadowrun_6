@@ -7,7 +7,7 @@ import SR6Roll, { SR6RollChatMessage }  from "./SR6Roll.js";
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./Shadowrun6Combat.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
-import { SR6Config } from "./config.js";
+import { Defense, SR6Config } from "./config.js";
 import { Shadowrun6ActorSheet } from "./sheets/SR6ActorSheet.js";
 import { Shadowrun6ActorSheetPC } from "./sheets/ActorSheetPC.js";
 import { Shadowrun6ActorSheetNPC } from "./sheets/ActorSheetNPC.js";
@@ -239,11 +239,18 @@ Hooks.once("init", async function () {
 		const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
 		console.log("Clicked on rollable : "+rollType);
+		console.log("dataset : "+dataset);
+      const threshold : number =  parseInt(dataset.defendHits!);
+
       if (rollType === "defense") {
  			const actor = (game as Game).actors!.get(targetId);
-       console.log("Target actor ",actor);
-       console.log("TODO: call rollDefense");
-		//rollDefense(actor, dataset);
+      	console.log("Target actor ",actor);
+			console.log("TODO: call rollDefense with threshold "+threshold);
+			if (actor) {
+				let defendWith : Defense = (dataset.defendWith! as Defense);
+				let damage     : number  = (dataset.damage)?parseInt(dataset.damage):0;
+				(actor as Shadowrun6Actor).rollDefense(defendWith, threshold, damage);
+			}
       }
     });
     html.on("click", ".chat-edge", event => {

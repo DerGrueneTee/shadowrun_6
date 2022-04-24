@@ -13,6 +13,8 @@ export enum RollType {
 	Ritual = "ritual",
 	ComplexForm = "complexform",
 	MatrixAction  = "matrix",
+	Defense = "defense",
+	Damage = "damage",
 }
 
 export enum ReallyRoll {
@@ -121,6 +123,16 @@ export class PreparedRoll extends CommonRollData {
 		this.edge         = copy.edge;
 		this.edgeBoosts   = copy.edgeBoosts;
 		this.performer = copy.performer;
+	}
+}
+
+export class DefenseRoll extends PreparedRoll {	
+	damage : number;
+	
+	constructor(threshold : number) {	
+		super();
+		this.rollType = RollType.Defense;
+		this.threshold = threshold;
 	}
 }
 
