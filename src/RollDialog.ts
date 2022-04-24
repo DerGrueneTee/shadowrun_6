@@ -1,6 +1,6 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform } from "./ActorTypes";
-import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData } from "./dice/RollTypes";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData } from "./dice/RollTypes.js";
 import { Gear, Spell, Weapon } from "./ItemTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 
