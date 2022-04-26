@@ -1,5 +1,5 @@
 import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill } from "./ActorTypes.js";
-import { Defense, SR6, SR6Config } from "./config.js";
+import { Defense, MonitorType, SR6, SR6Config } from "./config.js";
 import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
@@ -1122,6 +1122,48 @@ export class Shadowrun6Actor extends Actor {
 		console.log("Defend roll config ",rollData);
 		return doRoll(rollData);
 
+	}
+
+	//-------------------------------------------------------------
+	/**
+	 */
+	rollSoak(monitor :MonitorType, damage:number) {
+		console.log("ToDo rollSoak("+monitor+", "+damage+")");
+		
+
+		const data:SR6Actor = this.data.data as SR6Actor;
+		if (!isLifeform(data)) {
+			throw  "Can only roll defenses for lifeforms";
+		}
+		
+		let defensePool : Pool|undefined = undefined;
+		let rollData : DefenseRoll = new DefenseRoll(damage);
+		let gameI18n : Localization = (game as Game).i18n;
+		switch (monitor) {
+		case MonitorType.PHYSICAL:
+			defensePool = data.defensepool.physical;
+			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.soak."+monitor, {damage:0});
+			rollData.actionText = gameI18n.localize("attrib.bod")+" + ? ("+damage+")";
+			break;
+		default:
+			console.log("Error! Don't know how to handle defense pool for "+monitor)
+			throw "Error! Don't know how to handle defense pool for "+monitor;
+		}
+		
+		console.log("Defend with pool ",defensePool);
+		// Prepare action text
+		console.log("before ",rollData);
+		rollData.threshold  = damage;
+		console.log("after ",rollData);
+		rollData.damage     = damage;
+		rollData.actor      = this;
+		rollData.allowBuyHits= false;
+		rollData.pool       = defensePool.pool!;
+		rollData.rollType   = RollType.Damage;
+		rollData.performer  = data;
+		rollData.speaker = ChatMessage.getSpeaker({ actor: this });
+		console.log("Soak roll config ",rollData);
+		return doRoll(rollData);
 	}
 
 	//---------------------------------------------------------

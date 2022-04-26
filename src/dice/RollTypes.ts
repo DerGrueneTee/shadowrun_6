@@ -1,7 +1,7 @@
 import { ChatMessageData           } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
-import { Defense } from "../config.js";
+import { Lifeform, Skill } from "../ActorTypes.js";
+import { Defense, MonitorType } from "../config.js";
 import { EdgeBoost, MatrixAction, SkillDefinition } from "../DefinitionTypes.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
@@ -337,7 +337,7 @@ export class SR6ChatMessageData {
 	/** Damage after adjustment (Amp Up, Fire Mode ...) */
 	damage    : number;
 	/** Which monitor to apply damage to */
-	monitor   : Monitor;
+	monitor   : MonitorType;
 	
 	
 	nettoHits : number;

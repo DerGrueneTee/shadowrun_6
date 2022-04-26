@@ -7,7 +7,7 @@ import SR6Roll, { SR6RollChatMessage }  from "./SR6Roll.js";
 import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./Shadowrun6Combat.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
-import { Defense, SR6Config } from "./config.js";
+import { Defense, MonitorType, SR6Config } from "./config.js";
 import { Shadowrun6ActorSheet } from "./sheets/SR6ActorSheet.js";
 import { Shadowrun6ActorSheetPC } from "./sheets/ActorSheetPC.js";
 import { Shadowrun6ActorSheetNPC } from "./sheets/ActorSheetNPC.js";
@@ -18,7 +18,7 @@ import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { CompendiumActorSheetNPC } from "./sheets/CompendiumActorSheetNPC.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { defineHandlebarHelper } from "./util/helper.js";
-import { PreparedRoll } from "./dice/RollTypes.js";
+import { PreparedRoll, RollType } from "./dice/RollTypes.js";
 import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
@@ -241,8 +241,29 @@ Hooks.once("init", async function () {
 		console.log("Clicked on rollable : "+rollType);
 		console.log("dataset : "+dataset);
       const threshold : number =  parseInt(dataset.defendHits!);
+ 			let actor = (game as Game).actors!.get(targetId);
+      	console.log("Target actor ",actor);
 
-      if (rollType === "defense") {
+		switch (rollType) {
+		case RollType.Defense:
+			console.log("TODO: call rollDefense with threshold "+threshold);
+			if (actor) {
+				let defendWith : Defense = (dataset.defendWith! as Defense);
+				let damage     : number  = (dataset.damage)?parseInt(dataset.damage):0;
+				(actor as Shadowrun6Actor).rollDefense(defendWith, threshold, damage);
+			}
+			break;
+		case RollType.Damage:
+			console.log("TODO: call rollSoakDamage with threshold "+threshold+" on monitor "+dataset.soakWith);
+			if (actor) {
+				let monitor : MonitorType = (dataset.monitor! as MonitorType);
+				let damage     : number  = (dataset.damage)?parseInt(dataset.damage):0;
+				(actor as Shadowrun6Actor).rollSoak(monitor, threshold);
+			}
+			break;
+		}
+		/*
+      if (rollType === RollType.Defense) {
  			const actor = (game as Game).actors!.get(targetId);
       	console.log("Target actor ",actor);
 			console.log("TODO: call rollDefense with threshold "+threshold);
@@ -252,6 +273,7 @@ Hooks.once("init", async function () {
 				(actor as Shadowrun6Actor).rollDefense(defendWith, threshold, damage);
 			}
       }
+		*/
     });
     html.on("click", ".chat-edge", event => {
 		 event.preventDefault();

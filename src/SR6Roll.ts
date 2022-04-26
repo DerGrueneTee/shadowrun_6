@@ -1,6 +1,7 @@
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
+import { MonitorType } from "./config.js";
 import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll, RollType, DefenseRoll } from "./dice/RollTypes.js";
 
 /**
@@ -95,16 +96,22 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		});
 		
 		
-		console.log("_evaluateTotal: create SR6ChatMessageData")
+		console.log("_evaluateTotal: create SR6ChatMessageData",this)
 		this.finished = new SR6ChatMessageData(this.configured);
 		this.finished.glitch = this.isGlitch();
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
 		
+		// ToDO: Detect real monitor
+		this.finished.monitor = MonitorType.PHYSICAL;
+		
 		if (this.configured.rollType==RollType.Defense) {
-			this.finished.damage = (this.configured as unknown as DefenseRoll).damage;
+			console.log("_evaluateTotal: calculate remaining damage");
+			this.finished.damage = (this.configured as unknown as DefenseRoll).damage + ( this.configured.threshold - total);
+			console.log("_evaluateTotal: remaining damage = "+this.finished.damage);
 		}
 		
+		console.log("_evaluateTotal: return ",this.finished)
       return total;
 	}
 
@@ -248,6 +255,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		//console.log("toJSON: json=",json);
 		(json as any).data = this.data;
 		(json as any).configured = this.configured;
+		(json as any).finished = this.finished;
 		(json as any).results = this.results;
 		return json;
 	}
@@ -262,6 +270,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		const roll : Roll = super.fromData(data);
 		//console.log("fromData ",roll);
     	(roll as any).configured = (data as any).configured;
+    	(roll as any).finished = (data as any).finished;
     	(roll as any).results = (data as any).results;
 		console.log("fromData returning ",roll);
     	return roll as T;
@@ -288,7 +297,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		try {
     		if ( !this._evaluated ) await this.evaluate({async: true});
 			let isPrivate = options!.isPrivate;
-			this.finished = new SR6ChatMessageData(this.configured);
+			//this.finished = new SR6ChatMessageData(this.configured);
 			if (this.configured)
 				this.finished.actionText = isPrivate ? "" : this.configured.actionText;
 			//finished.user    = (game as Game).user!.id,

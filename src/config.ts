@@ -6,9 +6,10 @@ export enum Defense {
 	SPELL_DIRECT   = "spells_direct",
 	SPELL_INDIRECT = "spells_indirect",
 	SPELL_OTHER    = "spells_other",
-	TOXIN    = "toxins"
+	TOXIN    = "toxins",
+	DAMAGE   = "damage",
 }
-export enum Monitor {
+export enum MonitorType {
 	PHYSICAL = "physical",
    STUN     = "stun",
 	SOCIAL   = "social"
