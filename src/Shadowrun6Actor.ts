@@ -160,8 +160,10 @@ export class Shadowrun6Actor extends Actor {
             data.derived.resist_toxin.pool = data.derived.resist_toxin.base + data.derived.resist_toxin.mod;
         }
         // Matrix perception
+        if (data.derived.matrix_perception) {
         //data.derived.matrix_perception.base = data.skills["electronics"].points + data.skills["electronics"].modifier + data.attributes["int"].pool;
-        data.derived.matrix_perception.pool = data.derived.matrix_perception.base + data.derived.matrix_perception.mod;
+      		data.derived.matrix_perception.pool = data.derived.matrix_perception.base + data.derived.matrix_perception.mod;
+		  }
     }
 
 	//---------------------------------------------------------
@@ -529,7 +531,7 @@ export class Shadowrun6Actor extends Actor {
 				if (gear.skill && gear.skill!="") {
 				//item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
 					gear.pool = this._getSkillPool(item.data.skill, gear.skillSpec, itemUser.skills[gear.skill].attrib);
-					gear.pool = gear.pool + gear.modifier;
+					gear.pool = gear.pool + +gear.modifier;
 				}
 			};
 			if (tmpItem.type == "gear" && isWeapon(item.data)) {
