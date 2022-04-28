@@ -312,6 +312,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 				this.finished.actionText = isPrivate ? "" : this.configured.actionText;
 				if (this.finished.rollType==RollType.Soak) {
 					this.finished.damage = this.finished.threshold! - this._total!;
+				/*
 					if (this.finished.speaker.token) {
 						console.log("####Apply "+this.finished.damage+" to token "+this.finished.speaker.alias);
 						let scene  = (game as Game).scenes!.get(this.finished.speaker.scene!);
@@ -328,6 +329,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 							this.finished.damageAfterSoakAlreadyApplied = true;
 						}
 					}
+				*/
 				}
 			}
 			//finished.user    = (game as Game).user!.id,

@@ -241,7 +241,8 @@ Hooks.once("init", async function () {
 		console.log("Clicked on rollable : "+rollType);
 		console.log("dataset : "+dataset);
       const threshold : number =  parseInt(dataset.defendHits!);
-      const damage    : number =  parseInt(dataset.damage!);
+      const damage    : number =  (dataset.damage)?parseInt(dataset.damage):0;
+      const monitor   : number =  parseInt(dataset.monitor!);
  			let actor = (game as Game).actors!.get(targetId);
       	console.log("Target actor ",actor);
 
@@ -251,7 +252,6 @@ Hooks.once("init", async function () {
 			console.log("TODO: call rollDefense with threshold "+threshold);
 			if (actor) {
 				let defendWith : Defense = (dataset.defendWith! as Defense);
-				let damage     : number  = (dataset.damage)?parseInt(dataset.damage):0;
 				(actor as Shadowrun6Actor).rollDefense(defendWith, threshold, damage);
 			}
 			break;
@@ -260,9 +260,14 @@ Hooks.once("init", async function () {
 			console.log("TODO: call rollSoak with threshold "+threshold+" on monitor "+dataset.soakWith);
 			if (actor) {
 				let soak   : SoakType = (dataset.soak! as SoakType);
-				let damage : number   = (dataset.damage)?parseInt(dataset.damage):0;
 				(actor as Shadowrun6Actor).rollSoak(soak, damage);
 			}
+			break;
+		case RollType.Damage:
+			/* Do not roll - just apply damage */
+			let monitor : MonitorType  = (dataset.monitor as MonitorType);
+			console.log("TODO: apply "+damage+" on monitor "+dataset.monitor);
+				(actor as Shadowrun6Actor).applyDamage(monitor, damage);
 			break;
 		}
 		/*

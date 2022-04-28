@@ -5,6 +5,7 @@ import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
 import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll, SoakType, SoakRoll } from "./dice/RollTypes.js";
+import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -1312,33 +1313,18 @@ export class Shadowrun6Actor extends Actor {
 	applyDamage(monitor : MonitorType, damage : number) {
 		console.log("ToDo: applyDamage("+monitor+", "+damage+")")
 		const data:Lifeform = this.data.data as Lifeform;
+		const damageObj : Monitor = data[monitor];
 		
-		let overflow : number|undefined;
-		switch (monitor) {
-		case MonitorType.PHYSICAL:
-			let newPhy = data.physical.dmg + damage;
-			console.log("Pre actor data now ",data.physical)
-			overflow = Math.max(data.physical.dmg - data.physical.max, 0);
-//			this.data.update({ [`data.physical.dmg`]: newPhy });
-//			console.log("New actor data now ",this.data)
-			break; 
-		case MonitorType.STUN:
-			data.stun.dmg += damage;
-			console.log("Pre actor data now ",this.data.data)
-			overflow = Math.max(data.stun.dmg - data.stun.max, 0);
-//			this.data.update({ "data.stun.dmg": data.stun.dmg });
-			console.log("New actor data now ",this.data.data)
-			break; 
-		}
-		console.log("Added "+damage+" to monitor "+monitor+" which results in overflow "+overflow);
-//      this.prepareData();
-
-/*		let tokenList : Token[] = (game as Game).canvas!.tokens!.placeables;
-		for(let target of tokenList){
-			console.log("Refresh token "+target.name);
-			target.refresh();
-		}
-*/	}
+		let hp = damageObj.dmg + damage;
+		// Did damage overflow the monitor?
+      let overflow : number = Math.max(0, hp - damageObj.max);
+		// Ensure actual damage is not higher than pool
+		hp = Math.min(Math.max(0, hp), damageObj.max);
+		
+		this.data.update({[`data.overflow.dmg`]: overflow});
+      this.data.update({[`data.`+monitor+`.dmg`]: hp });
+		console.log("Added "+damage+" to monitor "+monitor+" which results in overflow "+overflow+" on "+this.name);
+	}
 
 	//-------------------------------------------------------------
 	/*
