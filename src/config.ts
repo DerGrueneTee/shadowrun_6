@@ -8,6 +8,8 @@ export enum Defense {
 	SPELL_OTHER    = "spells_other",
 	TOXIN    = "toxins",
 	DAMAGE   = "damage",
+	DRAIN    = "drain",
+	FADING   = "fading",
 }
 export enum MonitorType {
 	PHYSICAL = "physical",

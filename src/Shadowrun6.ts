@@ -18,7 +18,7 @@ import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
 import { CompendiumActorSheetNPC } from "./sheets/CompendiumActorSheetNPC.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { defineHandlebarHelper } from "./util/helper.js";
-import { PreparedRoll, RollType } from "./dice/RollTypes.js";
+import { PreparedRoll, RollType, SoakType } from "./dice/RollTypes.js";
 import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
@@ -241,11 +241,13 @@ Hooks.once("init", async function () {
 		console.log("Clicked on rollable : "+rollType);
 		console.log("dataset : "+dataset);
       const threshold : number =  parseInt(dataset.defendHits!);
+      const damage    : number =  parseInt(dataset.damage!);
  			let actor = (game as Game).actors!.get(targetId);
       	console.log("Target actor ",actor);
 
 		switch (rollType) {
 		case RollType.Defense:
+			/* Avoid being hit/influenced */
 			console.log("TODO: call rollDefense with threshold "+threshold);
 			if (actor) {
 				let defendWith : Defense = (dataset.defendWith! as Defense);
@@ -253,12 +255,13 @@ Hooks.once("init", async function () {
 				(actor as Shadowrun6Actor).rollDefense(defendWith, threshold, damage);
 			}
 			break;
-		case RollType.Damage:
-			console.log("TODO: call rollSoakDamage with threshold "+threshold+" on monitor "+dataset.soakWith);
+		case RollType.Soak:
+			/* Resist incoming netto damage */
+			console.log("TODO: call rollSoak with threshold "+threshold+" on monitor "+dataset.soakWith);
 			if (actor) {
-				let monitor : MonitorType = (dataset.monitor! as MonitorType);
-				let damage     : number  = (dataset.damage)?parseInt(dataset.damage):0;
-				(actor as Shadowrun6Actor).rollSoak(monitor, threshold);
+				let soak   : SoakType = (dataset.soak! as SoakType);
+				let damage : number   = (dataset.damage)?parseInt(dataset.damage):0;
+				(actor as Shadowrun6Actor).rollSoak(soak, damage);
 			}
 			break;
 		}

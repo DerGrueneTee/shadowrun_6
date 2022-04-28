@@ -1,8 +1,10 @@
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
+import { SR6Actor } from "./ActorTypes.js";
 import { MonitorType } from "./config.js";
 import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll, RollType, DefenseRoll } from "./dice/RollTypes.js";
+import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 
 /**
  * 
@@ -29,7 +31,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     evaluate(options: InexactPartial<Options> & { async: true }): Promise<Evaluated<this>>;
     evaluate(options?: InexactPartial<Options>): Evaluated<this> | Promise<Evaluated<this>> {
 		console.log("ENTER evaluate()");
-//		console.log("   this: " , this);
+		console.log("   this: " , this);
 		// IMPORTANT: Before merging arrays, have them calculated
 		super.evaluate(  { async:false });
 		try {
@@ -101,6 +103,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		this.finished.glitch = this.isGlitch();
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
+		this.finished.threshold = this.configured.threshold;
 		
 		// ToDO: Detect real monitor
 		this.finished.monitor = MonitorType.PHYSICAL;
@@ -189,6 +192,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
      * @param explode If the dice should explode on sixes.
      */
     createFormula(count, limit = -1, explode = false) {
+		console.log("createFormula-------------------------------");
+		if (!count) {
+			throw new Error("createFormula: Number of dice not set"); 
+		}
         let formula = `${count}d6`;
         if (explode) {
             formula += 'x6';
@@ -294,12 +301,35 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		console.log("ENTER render");
 		console.log("options = ",options);
 		console.log("finished = ",this.finished);
+		console.log("configured = ",this.configured);
+		console.log("data = ",this.data);
 		try {
+			
     		if ( !this._evaluated ) await this.evaluate({async: true});
 			let isPrivate = options!.isPrivate;
 			//this.finished = new SR6ChatMessageData(this.configured);
-			if (this.configured)
+			if (this.configured) {
 				this.finished.actionText = isPrivate ? "" : this.configured.actionText;
+				if (this.finished.rollType==RollType.Soak) {
+					this.finished.damage = this.finished.threshold! - this._total!;
+					if (this.finished.speaker.token) {
+						console.log("####Apply "+this.finished.damage+" to token "+this.finished.speaker.alias);
+						let scene  = (game as Game).scenes!.get(this.finished.speaker.scene!);
+						console.log("Found scene ",scene);			
+					}
+					if (this.finished.speaker) {
+						let actor : Shadowrun6Actor = ( (game as Game).actors!.get(this.finished.speaker.actor!) as Shadowrun6Actor);
+						console.log("Found actor ",actor);
+						if (!this.finished.damageAfterSoakAlreadyApplied) {
+							console.log("####Apply "+this.finished.damage+" "+this.finished.monitor+" to actor "+this.finished.speaker.alias);
+							if (this.finished.damage>0) {
+								actor.applyDamage( this.finished.monitor, this.finished.damage);
+							}
+							this.finished.damageAfterSoakAlreadyApplied = true;
+						}
+					}
+				}
+			}
 			//finished.user    = (game as Game).user!.id,
 			this.finished.success = this.isSuccess();
 			this.finished.glitch  = this.isGlitch();
@@ -311,6 +341,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			this.finished.publicRoll = !isPrivate;
 			this.finished.tooltip = isPrivate ? "" : await this.getTooltip();
 			this.finished.publicRoll = ! options!.isPrivate;
+			
+
+			
 
 			return renderTemplate(SR6Roll.CHAT_TEMPLATE, this.finished);
 		} finally {

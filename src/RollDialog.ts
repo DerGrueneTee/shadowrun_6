@@ -350,8 +350,6 @@ export class RollDialog extends Dialog {
 	_onSpellConfigChange() {
 		let ampUpElement : HTMLSelectElement = (document.getElementById("ampUp") as HTMLSelectElement);
 		let incElement   : HTMLSelectElement = (document.getElementById("incArea") as HTMLSelectElement);
-		if (!ampUpElement || !incElement)
-			return;
 		
 		let prepared : SpellRoll = (this.options as any).prepared;
 		if (!isLifeform(prepared.actor.data.data))
@@ -359,8 +357,8 @@ export class RollDialog extends Dialog {
 		
 		const baseMagic = prepared.actor.data.data.attributes.mag.pool;
 
-		let ampUpSelect : number = parseInt(ampUpElement.value);
-		let incSelect   : number = parseInt(incElement.value);
+		let ampUpSelect : number = (ampUpElement)?parseInt(ampUpElement.value):0;
+		let incSelect   : number = (incElement)?parseInt(incElement.value):0;
 		prepared.calcDamage = ((prepared.spell.damage==="physical" || prepared.spell.damage==="physical_special")? (baseMagic/2) : 0 ) + ampUpSelect;
 		prepared.calcDrain  = +prepared.spell.drain + +ampUpSelect*2 + +incSelect as number;
 		prepared.calcArea   = 2 + incSelect*2;

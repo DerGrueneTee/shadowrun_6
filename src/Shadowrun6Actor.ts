@@ -4,7 +4,7 @@ import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
 import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll } from "./dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll, SoakType, SoakRoll } from "./dice/RollTypes.js";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -1087,22 +1087,22 @@ export class Shadowrun6Actor extends Actor {
 		case Defense.PHYSICAL:
 			defensePool = data.defensepool.physical;
 			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.defense."+defendWith, {threshold:0});
-			rollData.actionText = gameI18n.localize("attrib.rea")+" + "+gameI18n.localize("attrib.int")+" ("+threshold+")";
+			rollData.checkText = gameI18n.localize("attrib.rea")+" + "+gameI18n.localize("attrib.int")+" ("+threshold+")";
 			break;
 		case Defense.SPELL_INDIRECT:
 			defensePool = data.defensepool.spells_indirect;
 			rollData.actionText = gameI18n.localize("shadowrun6.roll.actionText.defense."+defendWith);
-			rollData.actionText = gameI18n.localize("attrib.rea")+" + "+gameI18n.localize("attrib.wil")+" ("+threshold+")";
+			rollData.checkText = gameI18n.localize("attrib.rea")+" + "+gameI18n.localize("attrib.wil")+" ("+threshold+")";
 			break;
 		case Defense.SPELL_DIRECT:
 			defensePool = data.defensepool.spells_direct;
 			rollData.actionText = gameI18n.localize("shadowrun6.roll.actionText.defense."+defendWith);
-			rollData.actionText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib.int")+" ("+threshold+")";
+			rollData.checkText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib.int")+" ("+threshold+")";
 			break;
 		case Defense.SPELL_OTHER:
 			defensePool = data.defensepool.spells_other;
 			rollData.actionText = gameI18n.localize("shadowrun6.roll.actionText.defense."+defendWith);
-			rollData.actionText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib.int");
+			rollData.checkText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib.int");
 			break;
 		default:
 			console.log("Error! Don't know how to handle defense pool for "+defendWith)
@@ -1129,8 +1129,8 @@ export class Shadowrun6Actor extends Actor {
 	//-------------------------------------------------------------
 	/**
 	 */
-	rollSoak(monitor :MonitorType, damage:number) {
-		console.log("ToDo rollSoak("+monitor+", "+damage+")");
+	rollSoak(soak :SoakType, damage:number) {
+		console.log("rollSoak: "+damage+" "+soak);
 		
 
 		const data:SR6Actor = this.data.data as SR6Actor;
@@ -1139,17 +1139,30 @@ export class Shadowrun6Actor extends Actor {
 		}
 		
 		let defensePool : Pool|undefined = undefined;
-		let rollData : DefenseRoll = new DefenseRoll(damage);
+		let rollData : SoakRoll = new SoakRoll(damage);
 		let gameI18n : Localization = (game as Game).i18n;
-		switch (monitor) {
-		case MonitorType.PHYSICAL:
+		switch (soak) {
+		case SoakType.DAMAGE_PHYSICAL:
 			defensePool = data.defensepool.physical;
-			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.soak."+monitor, {damage:0});
-			rollData.actionText = gameI18n.localize("attrib.bod")+" + ? ("+damage+")";
+			rollData.monitor    = MonitorType.PHYSICAL;
+			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.soak."+soak, {damage:damage});
+			rollData.checkText = gameI18n.localize("attrib.bod")+" + ? ("+damage+")";
+			break;
+		case SoakType.DAMAGE_STUN:
+			defensePool = data.defensepool.physical;
+			rollData.monitor    = MonitorType.STUN;
+			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.soak."+soak, {damage:damage});
+			rollData.checkText = gameI18n.localize("attrib.bod")+" + ? ("+damage+")";
+			break;
+		case SoakType.DRAIN:
+			defensePool = data.defensepool.drain;
+			rollData.monitor    = MonitorType.STUN;
+			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.soak."+soak, {damage:damage});
+			rollData.checkText = gameI18n.localize("attrib.wil")+" + ? ("+damage+")";
 			break;
 		default:
-			console.log("Error! Don't know how to handle defense pool for "+monitor)
-			throw "Error! Don't know how to handle defense pool for "+monitor;
+			console.log("Error! Don't know how to handle soak pool for "+soak)
+			throw "Error! Don't know how to handle soak pool for "+soak;
 		}
 		
 		console.log("Defend with pool ",defensePool);
@@ -1157,11 +1170,9 @@ export class Shadowrun6Actor extends Actor {
 		console.log("before ",rollData);
 		rollData.threshold  = damage;
 		console.log("after ",rollData);
-		rollData.damage     = damage;
 		rollData.actor      = this;
 		rollData.allowBuyHits= false;
 		rollData.pool       = defensePool.pool!;
-		rollData.rollType   = RollType.Damage;
 		rollData.performer  = data;
 		rollData.speaker = ChatMessage.getSpeaker({ actor: this });
 		console.log("Soak roll config ",rollData);
@@ -1298,6 +1309,31 @@ export class Shadowrun6Actor extends Actor {
 		*/
 	}
 
+	//-------------------------------------------------------------
+	applyDamage(monitor : MonitorType, damage : number) {
+		console.log("applyDamage("+monitor+", "+damage+")")
+		const data:Lifeform = this.data.data as Lifeform;
+		
+		let overflow : number|undefined;
+		switch (monitor) {
+		case MonitorType.PHYSICAL:
+			data.physical.dmg += damage;
+			console.log("Pre actor data now ",data.physical)
+			overflow = Math.max(data.physical.dmg - data.physical.max, 0);
+			this.data.update({ "data.physical.dmg": data.physical.dmg });
+			console.log("New actor data now ",this.data)
+			break; 
+		case MonitorType.STUN:
+			data.stun.dmg += damage;
+			console.log("Pre actor data now ",this.data.data)
+			overflow = Math.max(data.stun.dmg - data.stun.max, 0);
+			this.data.update({ "data.stun.dmg": data.stun.dmg });
+			console.log("New actor data now ",this.data.data)
+			break; 
+		}
+		console.log("Added "+damage+" to monitor "+monitor+" which results in overflow "+overflow);
+      this._prepareDerivedAttributes();
+	}
 
 	//-------------------------------------------------------------
 	/*

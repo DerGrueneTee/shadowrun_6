@@ -706,7 +706,13 @@
           "physical": "Defend against physical attack",
           "spells_direct": "Defend direct combat spells",
           "spells_indirect": "Defend indirect combat spells"
-        }
+        },
+		  "soak": {
+				"drain": "Resist {damage} Drain",
+				"fading":"Resist {damage} Fading",
+				"damage_physical":"Resist {damage} Physical Damage",
+				"damage_stun"    :"Resist {damage} Stun Damage"
+		  }
       },
       "ar_0": "Close",
       "ar_1": "Near",
@@ -720,11 +726,15 @@
 			"narrow_burst": "Narrow Burst",
 			"wide_burst": "Wide Burst"
 		},
+		"button": {
+			"defense": "Roll Defense",
+			"drain"  : "Resist Drain",
+			"soak"   : "Soak damage"
+		},
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
       "damage": "Damage: ",
       "defRating": "Defense: ",
-      "defense_button": "Roll Defense",
       "edge": {
         "gain_player": "{name} gets {value} Edge",
         "gain_player_capped": "{name} would {value} Edge, but cannot get more than {capped}",
@@ -742,6 +752,7 @@
 		"firemode": "Firemode",
       "failure": "Failure",
       "failedDefense": "You got hit and now it is going to hurt",
+      "failedSoak"   : "You got damage:",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",
       "mode": "Mode",
@@ -751,7 +762,6 @@
       "notarget": "No target selected",
       "pool": "Pool",
 		"range": "Distance",
-		"soak_button": "Soak damage",
       "spec": "Specialization",
       "spell": {
         "ampUp": {
@@ -772,6 +782,7 @@
       "success": "Success",
       "successes": "hits",
       "successfulDefense": "You successfully avoided being hit",
+      "successfulSoak"   : "You managed to ignore the damage",
       "target": "Target",
       "threshold": "Threshold",
 		"weapon":  "Define your attack",

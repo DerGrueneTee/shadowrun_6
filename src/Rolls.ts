@@ -21,7 +21,7 @@ function isSpell(obj: any): obj is Spell {
 export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
 	console.log("ENTER doRoll ",data);
 	try {
-		// Create the Roll instance
+		// Create ll instance
 		const _r: SR6Roll = await _showRollDialog(data);
 		console.log("returned from _showRollDialog with ", _r);
 		if (_r) {

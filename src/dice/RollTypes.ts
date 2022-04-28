@@ -1,6 +1,6 @@
 import { ChatMessageData           } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { Lifeform, Skill } from "../ActorTypes.js";
+import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { Defense, MonitorType } from "../config.js";
 import { EdgeBoost, MatrixAction, SkillDefinition } from "../DefinitionTypes.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
@@ -13,8 +13,17 @@ export enum RollType {
 	Ritual = "ritual",
 	ComplexForm = "complexform",
 	MatrixAction  = "matrix",
+	/** Defense is a way to reduce netto hits */
 	Defense = "defense",
-	Damage = "damage",
+	/** Reduce netto damage */
+	Soak    = "soak",
+}
+
+export enum SoakType {
+	DAMAGE_STUN     = "damage_stun",
+	DAMAGE_PHYSICAL = "damage_phys",
+	DRAIN           = "drain",
+	FADING          = "fading",
 }
 
 export enum ReallyRoll {
@@ -132,6 +141,17 @@ export class DefenseRoll extends PreparedRoll {
 	constructor(threshold : number) {	
 		super();
 		this.rollType = RollType.Defense;
+		this.threshold = threshold;
+	}
+}
+
+export class SoakRoll extends PreparedRoll {
+	monitor : MonitorType;
+	// Eventually add effects
+	
+	constructor(threshold : number) {	
+		super();
+		this.rollType = RollType.Soak;
 		this.threshold = threshold;
 	}
 }
@@ -339,7 +359,7 @@ export class SR6ChatMessageData {
 	/** Which monitor to apply damage to */
 	monitor   : MonitorType;
 	
-	
+	damageAfterSoakAlreadyApplied : boolean;
 	nettoHits : number;
 	
 	constructor(copy : PreparedRoll) {
