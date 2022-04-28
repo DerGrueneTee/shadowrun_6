@@ -72,7 +72,6 @@ export class Shadowrun6Actor extends Actor {
         }
     }
 
-
     //---------------------------------------------------------
     /*
      * Calculate the final attribute values
@@ -1311,29 +1310,35 @@ export class Shadowrun6Actor extends Actor {
 
 	//-------------------------------------------------------------
 	applyDamage(monitor : MonitorType, damage : number) {
-		console.log("applyDamage("+monitor+", "+damage+")")
+		console.log("ToDo: applyDamage("+monitor+", "+damage+")")
 		const data:Lifeform = this.data.data as Lifeform;
 		
 		let overflow : number|undefined;
 		switch (monitor) {
 		case MonitorType.PHYSICAL:
-			data.physical.dmg += damage;
+			let newPhy = data.physical.dmg + damage;
 			console.log("Pre actor data now ",data.physical)
 			overflow = Math.max(data.physical.dmg - data.physical.max, 0);
-			this.data.update({ "data.physical.dmg": data.physical.dmg });
-			console.log("New actor data now ",this.data)
+//			this.data.update({ [`data.physical.dmg`]: newPhy });
+//			console.log("New actor data now ",this.data)
 			break; 
 		case MonitorType.STUN:
 			data.stun.dmg += damage;
 			console.log("Pre actor data now ",this.data.data)
 			overflow = Math.max(data.stun.dmg - data.stun.max, 0);
-			this.data.update({ "data.stun.dmg": data.stun.dmg });
+//			this.data.update({ "data.stun.dmg": data.stun.dmg });
 			console.log("New actor data now ",this.data.data)
 			break; 
 		}
 		console.log("Added "+damage+" to monitor "+monitor+" which results in overflow "+overflow);
-      this._prepareDerivedAttributes();
-	}
+//      this.prepareData();
+
+/*		let tokenList : Token[] = (game as Game).canvas!.tokens!.placeables;
+		for(let target of tokenList){
+			console.log("Refresh token "+target.name);
+			target.refresh();
+		}
+*/	}
 
 	//-------------------------------------------------------------
 	/*
