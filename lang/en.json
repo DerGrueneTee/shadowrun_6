@@ -469,6 +469,7 @@
       "dice": "Dice",
       "edit": "Edit",
       "expertise": "Expertise",
+      "extended_test": "Extended Test",
 	   "faster": "Accelerate",
       "features": "Features",
       "firemode_current": "Current Firemode",
@@ -494,7 +495,8 @@
 	  "rating1": "Rating 1",
 	  "rating2": "Rating 2",
 	  "rating3": "Rating 3",
-	   "slower": "Decelerate",
+      "soaked": "Soaked {soaked} of {threshold} damage",
+	  "slower": "Decelerate",
       "specialization": "Specialization",
       "threshold": "Threshold",
       "value": "Value",
@@ -726,7 +728,7 @@
       "criticalglitch": "Critical glitch",
       "heal_apply": "Heal",
       "damage": "Damage: ",
-		"damage_apply": "Apply damage",
+	  "damage_apply": "Apply damage",
       "defRating": "Defense: ",
       "defense_button": "Roll Defense",
       "edge": {
@@ -754,7 +756,7 @@
       "nosuccess": "hits, threshold: ",
       "notarget": "No target selected",
       "pool": "Pool",
-		"soak_physical": "Soak damage",
+      "soak_physical": "Soak damage",
       "spec": "Specialization",
       "spell": {
         "ampUp": {

@@ -281,12 +281,11 @@ function _dialogClosed(type, form, data, messageData={}) {
             data.extendedAccumulate = data.extendedAccumulate ? data.extendedAccumulate + r._total : r._total;
         }
 		
-		//If this is a weapon, add net hits to damage and determin if damage is stun or physical
+		//If this is a weapon determin if damage is stun or physical
 		if (data.item)
 		{
 			data.damage = data.item.data.data.dmg;
-			data.damage += r._total; //  data.item.data.data.dmg
-      data.damageType = data.item.data.data.stun ? "S" : "P";
+            data.damageType = data.item.data.data.stun ? "S" : "P";
 		}
 		//Add net hit damage to weapon and spell rolls
 		console.log("Weapon Info:");
@@ -354,13 +353,17 @@ export function rollDefense(actor, dataset) {
 	   console.log("rollDefense: Call r.evaluate: "+r);
       r.evaluate();
 		data.nettohits=parseInt( data.threshold - r._total );
-	   console.log("Netto Hits: "+r.nettohits);
-		
 		data.soak=(r.nettohits<0)?0:(damage + data.nettohits);
 		data.isAllowSoak = true;
 		data.target = {id: targetId, name: game.actors.get(actorId).data.name};
         data.actorId = actorId;
 		data.damageType = dataset.damageType;
+        if (defendWith === 'spells_direct') {
+            data.isBringPain = true;
+            data.isAllowSoak = false;
+            data.skippedSoak = true; 
+            data.damageToApply = damage + data.nettohits;
+        }
 	   console.log("Damage to soak: "+data.soak);
 	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);

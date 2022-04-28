@@ -122,7 +122,7 @@
 
    <!-- Extended Roll -->
    {{#if data.extended}} 
-    <b>Extended Test: </b> {{data.extendedRoll}}
+    <b>{{ localize 'shadowrun6.label.extended_test'}}: </b> {{data.extendedRoll}}
     <hr />
     {{#if (ge data.extendedAccumulate data.threshold)}}
       <span style="color: green;">{{localize 'shadowrun6.roll.extend_check_success'}}</span>
@@ -139,7 +139,9 @@
    
    <!-- Bring the Pain -->
    {{#if data.isBringPain}}
-   Soaked {{data.soaked}} of {{data.threshold}} damage
+   {{#unless data.skippedSoak}}
+        {{ localize 'shadowrun6.label.soaked' soaked=data.soaked threshold=data.threshold }}
+   {{/unless}}
    <hr/>
    {{#iff data.damageToApply ">" 0}}
      <div>

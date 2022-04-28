@@ -421,10 +421,10 @@
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max - i });
 				}
 				break;
-            case "barOverflowBoxes":
-				if (this.actor.data.data.overflow.dmg == monitorAttribute.max-1 == i) {
-          			console.log(`setDamange (overflow health to ${i}`);
-					this.actor.update({ [`data.overflow.dmg`]: i});
+      		case "barOverflowBoxes":
+				if (this.actor.data.data.overflow.dmg == 1) {
+          			console.log(`setDamange (overflow health to 0`);
+					this.actor.update({ [`data.overflow.dmg`]: 0});
 				} else {
           			console.log(`setDamange (overflow health to ${i}`);
 					this.actor.update({ [`data.overflow.dmg`]: i });
