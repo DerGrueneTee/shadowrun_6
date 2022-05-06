@@ -141,6 +141,7 @@ export class Lifeform extends SR6Actor {
 	essence : number = 6.0;
 	mortype : string;
 	morDef  : MagicOrResonanceDefinition;
+	controlRig : number = 0;
 }
 export interface ILifeform {
    attributes:Attributes;
@@ -159,9 +160,14 @@ export class CurrentVehicle {
 	opMode  : string = "manual";
 	offRoad : false;
 	speed   : number;
+	handling: Pool;
+	ar      : Pool;
+	dr      : Pool;
+	modifier: number;
+	kmh     : number;
 }
 
-export class Vehicle {
+export class VehicleActor {
    physical: Monitor = new Monitor();
    stun    : Monitor = new Monitor();
    edge    : Monitor = new Monitor();

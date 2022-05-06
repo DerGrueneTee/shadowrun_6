@@ -1,4 +1,4 @@
-import { Vehicle } from "../ActorTypes.js";
+import { VehicleActor } from "../ActorTypes.js";
 import { Shadowrun6ActorSheet } from "./SR6ActorSheet.js";
 
 /**
@@ -43,7 +43,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	_onDecelerate(event, html) {
 		console.log("_onDecelerate");
-		let actorData:Vehicle = (this.actor.data.data as Vehicle);
+		let actorData:VehicleActor = (this.actor.data.data as VehicleActor);
 		let currentSpeed = actorData.vehicle.speed;
 		let newSpeed = currentSpeed - (( actorData.vehicle.offRoad)?actorData.accOff:actorData.accOn );
 		if (newSpeed<0) newSpeed = 0;
@@ -53,7 +53,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	_onAccelerate(event, html) {
 		console.log("_onAccelerate");
-		let actorData:Vehicle = (this.actor.data.data as Vehicle);
+		let actorData:VehicleActor = (this.actor.data.data as VehicleActor);
 		let currentSpeed = actorData.vehicle.speed;
 		let newSpeed = currentSpeed + (( actorData.vehicle.offRoad)?actorData.accOff:actorData.accOn );
 		if (newSpeed>actorData.tspd) newSpeed = actorData.tspd;

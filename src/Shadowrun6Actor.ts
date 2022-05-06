@@ -1,7 +1,7 @@
-import { Lifeform, Vehicle, ILifeform, Attribute, SR6Actor, Skills, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill } from "./ActorTypes.js";
+import { Lifeform, ILifeform, Attribute, SR6Actor, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill, CurrentVehicle, VehicleActor, MatrixUser } from "./ActorTypes.js";
 import { Defense, MonitorType, SR6, SR6Config } from "./config.js";
-import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
-import { ComplexForm,Gear,MatrixDevice,Persona,Spell,Weapon } from "./ItemTypes.js";
+import { MatrixAction } from "./DefinitionTypes.js";
+import { Armor, ComplexForm, Gear,MatrixDevice,Persona,Spell,Vehicle,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
 import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll, SoakType, SoakRoll } from "./dice/RollTypes.js";
@@ -10,14 +10,23 @@ import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/f
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
 }
+function isMatrixUser(obj: any): obj is MatrixUser {
+    return obj.persona != undefined;
+}
 function isGear(obj: any): obj is Gear {
     return obj.skill != undefined;
+}
+function isVehicle(obj: any): obj is Vehicle {
+    return obj.skill != undefined && obj.vehicle!=undefined;
 }
 function isSpell(obj: any): obj is Spell {
     return obj.category != undefined;
 }
 function isWeapon(obj: any): obj is Weapon {
     return obj.dmg != undefined;
+}
+function isArmor(obj: any): obj is Armor {
+    return obj.defense != undefined;
 }
 function isComplexForm(obj: any): obj is ComplexForm {
     return obj.fading != undefined;
@@ -205,8 +214,9 @@ export class Shadowrun6Actor extends Actor {
 			data.attackrating.astral.modString += "\n+" + data.attackrating.astral.mod;
 		} 
 		
-		/*
+		
 		// Matrix attack rating (Angriff + Schleicher)
+		if (isMatrixUser(data)) {
 		if (data.persona && data.persona.used) {
 			data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
 			data.attackrating.matrix.pool = data.attackrating.matrix.base;
@@ -214,6 +224,7 @@ export class Shadowrun6Actor extends Actor {
 				data.attackrating.matrix.pool += data.attackrating.matrix.mod;
 				data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
 			} 
+			}
 		
 		// Resonance attack rating (Electronics + Resonance)
 		data.attackrating.resonance.base = data.persona.used.a + data.attributes["res"].pool;
@@ -225,7 +236,6 @@ export class Shadowrun6Actor extends Actor {
 			data.attackrating.resonance.modString += "\n+" + data.attackrating.resonance.mod;
 		}
 		} 
-			*/
 		
 		// Vehicle combat attack rating (Pilot + Sensor)
 		data.attackrating.vehicle.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
@@ -288,16 +298,16 @@ export class Shadowrun6Actor extends Actor {
 				data.defenserating.physical.pool += data.defenserating.physical.mod;
 				data.defenserating.physical.modString += "<br/>\n+" + data.defenserating.physical.mod;
 			} 
-			/*
-			items.forEach(function (item, key) {
-				if (item.type == "gear" && item.data.data.type == "ARMOR") {
+			
+			items.forEach( item => {
+				if (item.type == "gear" && (item.data.data as Gear).type == "ARMOR" && isArmor(item.data.data)) {
 					if (item.data.data.usedForPool) {
 						data.defenserating.physical.pool += item.data.data.defense;
 						data.defenserating.physical.modString += "\n+" + item.data.data.defense + " " + item.name;
 					}
 				}
 			});
-			*/
+			
 			
 			// Astral Defense Rating
 			data.defenserating.astral.base = data.attributes["int"].pool;
@@ -308,14 +318,16 @@ export class Shadowrun6Actor extends Actor {
 				data.defenserating.astral.modString += "\n+" + data.defenserating.astral.mod;
 			} 
 			
-			/*
+			
 			// Matrix defense
+			if (isMatrixUser(data)) {
 			data.defenserating.matrix.base = data.persona.used.d + data.persona.used.f;
 			data.defenserating.matrix.modString = ""; //(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defenserating.matrix.pool = data.defenserating.matrix.base;
 			if (data.defenserating.matrix.mod) {
 				data.defenserating.matrix.pool += data.defenserating.matrix.mod;
 				data.defenserating.matrix.modString += "\n+" + data.defenserating.matrix.mod;
+			}
 			} 
 			
 			// Vehicles Defense Rating (Pilot + Armor)
@@ -327,7 +339,7 @@ export class Shadowrun6Actor extends Actor {
 				data.defenserating.vehicle.pool += data.defenserating.vehicle.mod;
 				data.defenserating.vehicle.modString += "\n+" + data.defenserating.vehicle.mod;
 			} 
-			*/
+			
 			
 			// Social Defense Rating
 			data.defenserating.social.base = data.attributes["cha"].pool;
@@ -562,40 +574,35 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the pool when using items with assigned skills
 	 */
 	_prepareVehiclePools() {
-		const actorData = this.data;
+        if (!isLifeform(this.data.data))
+            return;
+		const actorData :Lifeform = this.data.data;
 
-/*		if (!actorData.data.controlRig) {
-			actorData.data.controlRig=0;
+		if (!actorData.controlRig) {
+			actorData.controlRig=0;
 		}
 
-		actorData.items.forEach(tmpItem => {
-			let item = tmpItem.data;
+		this.data.items.forEach(tmpItem => {
 			// Any kind of gear
-			if (item.type == "gear" && (item.data.type==="VEHICLES" || item.data.type==="DRONES")) {
-				if (!item.data.vehicle) { 
-					item.data.vehicle = {
-						attrib: "rea",
-						opMode: "manual",
-						ar    : {},
-						dr    : {},
-						handling: {},
-						spec  : ""
-					};
-				};
-				if (!item.data.vehicle.attrib)  item.data.vehicle.attrib="rea";
-				if (!item.data.vehicle.ar)  item.data.vehicle.ar={};
-				if (!item.data.vehicle.dr)  item.data.vehicle.dr={};
-				if (!item.data.vehicle.handling)  item.data.vehicle.handling={};
+			if (tmpItem.type == "gear" && isVehicle(tmpItem.data.data)) {
+				let vehicleData : Vehicle = tmpItem.data.data; 
+				if (!vehicleData.vehicle) {
+					vehicleData.vehicle = new CurrentVehicle();
+				}
+				let current : CurrentVehicle = vehicleData.vehicle;
+				//if (!current.attrib)  current.attrib="rea";
+				if (!current.ar)  current.ar=new Pool;
+				if (!current.dr)  current.dr=new Pool;
+				if (!current.handling)  current.handling=new Pool();
 				
-				let specialization = item.data.vtype;
+				let specialization = vehicleData.vtype;
 				if ("GROUND" === specialization) { specialization = "ground_craft"; }
 				if ("WATER"  === specialization) { specialization = "watercraft"; }
 				if ("AIR"    === specialization) { specialization = "aircraft"; }
 				
-				let vehicle = item.data.vehicle;
-				item.data.vehicle.spec = specialization;
-				let opMode = vehicle.opMode;
-				let rigRating = parseInt(actorData.data.controlRig); 
+				vehicleData.skillSpec = specialization;
+				let opMode = current.opMode;
+				let rigRating : number = actorData.controlRig; 
 				let modRig = "";
 				if (rigRating>0) {
 					modRig = " + "+(game as Game).i18n.localize("shadowrun6.item.vehicle.rigRating.long")+" ("+rigRating+")";
@@ -605,68 +612,68 @@ export class Shadowrun6Actor extends Actor {
 					rigRating = 0; 
 					modRig = "";
 				case "riggedAR":
-					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
-					vehicle.ar.modString = 
-						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
+					current.ar.pool = actorData.skills.piloting.points + vehicleData.sen + +rigRating;
+					current.ar.modString = 
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+vehicleData.sen+")"+
 						modRig;
-					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
-					vehicle.dr.modString = 
-						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
+					current.dr.pool = actorData.skills.piloting.points + vehicleData.arm + +rigRating;
+					current.dr.modString = 
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+vehicleData.arm+")"+
 						modRig;
-					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"rea") + rigRating;
-					vehicle.handling.modString = 
-						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as Game).i18n.localize("attrib.rea_short")+"("+actorData.data.attributes.rea.pool+")"+
+					current.handling.pool = this._getSkillPool("piloting",specialization,"rea") + +rigRating;
+					current.handling.modString = 
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("attrib.rea_short")+"("+actorData.attributes.rea.pool+")"+
 						modRig;
 					break;
 				case "riggedVR":
-					item.data.vehicle.attrib="int";
-					vehicle.ar.pool = actorData.data.skills.piloting.points + item.data.sen + rigRating;
-					vehicle.ar.modString = 
-						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+item.data.sen+")"+
+					//item.data.vehicle.attrib="int";
+					current.ar.pool = actorData.skills.piloting.points + vehicleData.sen + +rigRating;
+					current.ar.modString = 
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long")+" ("+vehicleData.sen+")"+
 						modRig;
-					vehicle.dr.pool = actorData.data.skills.piloting.points + item.data.arm + rigRating;
-					vehicle.dr.modString = 
-						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+item.data.arm+")"+
+					current.dr.pool = actorData.skills.piloting.points + vehicleData.arm + +rigRating;
+					current.dr.modString = 
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long")+" ("+vehicleData.arm+")"+
 						modRig;
-					vehicle.handling.pool = this._getSkillPool("piloting",specialization,"int")+ rigRating;
-					vehicle.handling.modString = 
-						(game as Game).i18n.localize("skill.piloting")+"("+actorData.data.skills.piloting.points+") +"+ 
-						(game as Game).i18n.localize("attrib.int_short")+"("+actorData.data.attributes.int.pool+")"+
+					current.handling.pool = this._getSkillPool("piloting",specialization,"int")+ +rigRating;
+					current.handling.modString = 
+						(game as Game).i18n.localize("skill.piloting")+"("+actorData.skills.piloting.points+") +"+ 
+						(game as Game).i18n.localize("attrib.int_short")+"("+actorData.attributes.int.pool+")"+
 						modRig;
 					break;
 				default:
 				}
 			}
 		});
-*/	}
+	}
 
 	//---------------------------------------------------------
 	/*
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDerivedVehicleAttributes() {
-		const actorData = this.data;
-		const data = this.data.data;
+		const actorData  = this.data;
+		const data : VehicleActor = (this.data.data as VehicleActor);
 
-/*		// Monitors
+		// Monitors
 			if (data.physical) {
 				if (!data.physical.mod) data.physical.mod=0;
 				
-				data.physical.base = 8 + Math.round(data.bod / 2);
-				data.physical.max = data.physical.base + data.physical.mod;
+				let base:number = 8 + Math.round(data.bod / 2);
+				data.physical.max = +base + data.physical.mod;
 				data.physical.value = data.physical.max - data.physical.dmg;
 			}
 			// Use "stun" as matrix condition
 			if (data.stun) {
 				if (!data.stun.mod) data.stun.mod=0;
 				// 8 + (Device Rating / 2) where Dev.Rat. is Sensor
-				data.stun.base = 8 + Math.round(data.sen / 2);
-				data.stun.max = data.stun.base + data.stun.mod;
+				let base : number = 8 + Math.round(data.sen / 2);
+				data.stun.max = +base + data.stun.mod;
 				data.stun.value = data.stun.max - data.stun.dmg;
 			}
 		
@@ -678,7 +685,7 @@ export class Shadowrun6Actor extends Actor {
 		modifier += Math.floor(data.physical.dmg / 3);		
 		data.vehicle.modifier = modifier;
 		data.vehicle.kmh = data.vehicle.speed *1.2;
-*/	}
+	}
 	
 	//---------------------------------------------------------
 	/*
