@@ -1,15 +1,11 @@
 import SR6Roll from "./sr6_roll.js"
 
-//-------------------------------------------------------------
-/**
- * Called from Shadowrun6Actor.js
- */
 export async function doRoll(data) {
 	console.log("ENTER doRoll");
 
 	// Create the Roll instance
 	const _r = await _showRollDialog(data, _dialogClosed);
-	console.log("returned from _showRollDialog with ", _r);
+	console.log("returned from _showRollDialog with "+_r);
 	if (_r) {
   		delete data.type;
    	_r.toMessage(data);
@@ -25,6 +21,7 @@ export async function doRoll(data) {
  */
 async function _showRollDialog(data, onClose={}) {
   console.log("ENTER _showRollDialog");
+
   if (isNaN(data.threshold)) {
     data.threshold = 0;
   }
@@ -36,30 +33,9 @@ async function _showRollDialog(data, onClose={}) {
     data.modifier = 0;
   }
 
-  if (isNaN(data.extended)) {
-      data.extended = false;
-  }
-
 	if (!data.defRating) {
 		data.defRating = 0;
-	} else {
-        if (game.user.targets.size === 1) {
-            const source = TokenLayer.instance.objects.children.find(token => token.data._id === data.speaker.token); 
-            const target = game.user.targets.values().next().value;
-            const distance = canvas.grid.measureDistance(source.transform.position, target.transform.position, {gridSpaces: true});
-            if (distance <= 3) {
-                data.distance = 0;
-            } else if (distance > 3 && distance <= 50) {
-                data.distance = 1;
-            } else if (distance > 50 && distance <= 250) {
-                data.distance = 2;
-            } else if (distance > 250 && distance <= 500) {
-                data.distance = 3;
-            } else if (distance > 500) {
-                data.distance = 4;
-            }
-        }
-    }
+	}
 
 	/*
 	 * Edge, Edge Boosts and Edge Actions
@@ -68,6 +44,7 @@ async function _showRollDialog(data, onClose={}) {
     data.edge = (data.actor)?data.actor.data.data.edge.value:0;
     data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=data.edge);
 	 
+
   if (data.targetId && data.rollType === "weapon") {
     data.targetName = game.actors.get(data.targetId).name;
     data.extraText = game.i18n.localize("shadowrun6.roll.attack") + " " + data.targetName + " " + game.i18n.localize("shadowrun6.roll.with") + " " + data.item.name;
@@ -79,10 +56,8 @@ async function _showRollDialog(data, onClose={}) {
   let template = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
   let dialogData = {
 	 checkText: data.extraText,
-     distance: data.distance,
     data: data,
     rollModes: CONFIG.Dice.rollModes,
-    attributes: CONFIG.SR6.ATTRIBUTES
   };
   const html = await renderTemplate(template, dialogData);
   const title = data.title;
@@ -118,7 +93,7 @@ async function _showRollDialog(data, onClose={}) {
       };
     }
 	const myDialogOptions = {
-		width: 550,
+		width: 480,
 	  };
   console.log("create RollDialog");
     let x =  new RollDialog({
@@ -127,21 +102,10 @@ async function _showRollDialog(data, onClose={}) {
       target: data.targetId ? true : false,
       targetName: data.targetName,
       buttons: buttons,
-      distance: data.distance,
       default: "normal",
       data: data,
       attackType: data.attackType,
-      render: html => {
-        console.log("Register interactivity in the rendered dialog");
-
-        let chatRollMode = $(".roll-type-select").val();
-        $("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
-        if (data.skillId) {
-            $("select[name='attrib']").val(CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib);
-        } else if (data.item) {
-            $("select[name='attrib']").val(CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib);
-        }
-      },
+      render: html => console.log("Register interactivity in the rendered dialog"),
       close: () => resolve(null)
     }, myDialogOptions).render(true);
   });
@@ -193,34 +157,10 @@ function _dialogClosed(type, form, data, messageData={}) {
 		}
       data.explode = form.explode.checked;
       data.useWildDie = form.useWildDie.checked;
-      data.extended = form.extended && form.extended.checked;
-      if (data.extended) {
-        data.extendedPool = data.pool - 1;
-        data.extendedRoll = data.extendedRoll ? data.extendedRoll + 1 : 1;
-      }
       data.buttonType = type;
       data.rollMode = form.rollMode.value;
       messageData.rollMode = form.rollMode.value;
-      console.log(form.attrib);
-      if (form.attrib) {
-        data.attrib = form.attrib.value;
-        data.attribLong = game.i18n.localize('attrib.' + data.attrib);
-      }
       data.weapon = data.item ? true : false;
-
-      let attrBySkill = ""
-      if (data.skillId) {
-        attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.skillId).attrib;
-      } else if (data.item) {
-        attrBySkill = CONFIG.SR6.ATTRIB_BY_SKILL.get(data.item.data.data.skill).attrib;
-      }
-      if (attrBySkill && attrBySkill != data.attrib) { // Optional attribute was chosen
-        console.log("optional attribute chosen => attribute="+data.attrib);
-        data.pool = data.skill.points + data.actor.data.data.attributes[data.attrib].pool;
-        console.log("new pool="+data.skillId+"+"+data.attrib+"="+data.pool);
-        data.actionText = data.actionText.replace(game.i18n.localize("attrib."+attrBySkill), game.i18n.localize("attrib."+data.attrib));
-      }
-
       if (data.modifier > 0) {
         data.formula = data.pool + " + " + data.modifier + "d6";
       } else if (data.modifier < 0){
@@ -234,9 +174,8 @@ function _dialogClosed(type, form, data, messageData={}) {
 		if (data.spell) {
 			data.drain  = parseInt(data.spell.data.data.drain);	
 			data.radius = (data.spell.data.data.range == "line_of_sight_area" || data.spell.data.data.range == "self_area") ? 2 : 0;
-      data.damageType = data.spell.data.data.damage.includes("physical") ? "P" : "S";
-      if (data.spell.data.data.category == "combat") {
-				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : Math.ceil(data.actor.data.data.attributes.mag.pool/2);
+			if (data.spell.data.data.category == "combat") {
+				data.damage = ( data.spell.data.data.type == "mana" ) ? 0 : data.actor.data.data.attributes.mag.pool/2;
 				data.drain  = parseInt(data.spell.data.data.drain);	
 				// Amp up
 				if (data.damageMod) {
@@ -269,28 +208,9 @@ function _dialogClosed(type, form, data, messageData={}) {
 	   console.log("Call r.evaluate: ",r);
       r.evaluate();
 		data.results=r.results;
-		
 		if (data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "mana") {
 			data.hits += r._total;
 		}
-		else if(data.spell && data.spell.data.data.category=="combat" && data.spell.data.data.type == "physical")
-		{
-			data.damage += r._total;
-		}
-        if (data.extended) {
-            data.extendedAccumulate = data.extendedAccumulate ? data.extendedAccumulate + r._total : r._total;
-        }
-		
-		//If this is a weapon determin if damage is stun or physical
-		if (data.item)
-		{
-			data.damage = data.item.data.data.dmg;
-            data.damageType = data.item.data.data.stun ? "S" : "P";
-		}
-		//Add net hit damage to weapon and spell rolls
-		console.log("Weapon Info:");
-		console.log(data);
-
     } catch (err) {
       console.error("CommonRoll error: "+err);
       console.error("CommonRoll error: "+err.stack);
@@ -307,9 +227,8 @@ export function rollDefense(actor, dataset) {
 	console.log("ENTER rollDefense");
 	const defendWith = dataset.defendWith;
 	const defendHits = dataset.defendHits;
-	const damage     = parseInt(dataset.damage);
+	const damage     = dataset.damage;
 	const targetId = dataset.targetid;
-	const actorId = dataset.actorId;
 	console.log("ENTER rollDefense(actor="+actor+", defendWith="+defendWith+", defendHits="+defendHits+", damage="+damage+", targetId="+targetId+")");
 	let data = {
 		threshold : dataset.defendHits,
@@ -317,8 +236,6 @@ export function rollDefense(actor, dataset) {
 		checkText : "X",
 		defense   : {},
 		speaker   : ChatMessage.getSpeaker({ actor: this }),
-		baseDamage: damage,
-		defendWith: dataset.defendWith
 	}
 	switch (defendWith) {
 	case "physical":
@@ -348,23 +265,12 @@ export function rollDefense(actor, dataset) {
 	data.modifier = 0;
 	data.buttonType = 0; // Simulate Roll button clicked
    let r = new SR6Roll("", data);
-
     try {
-	   console.log("rollDefense: Call r.evaluate: "+r);
+	   console.log("Call r.evaluate: "+r);
       r.evaluate();
-		data.nettohits=parseInt( data.threshold - r._total );
-		data.soak=(r.nettohits<0)?0:(damage + data.nettohits);
-		data.isAllowSoak = true;
-		data.target = {id: targetId, name: game.actors.get(actorId).data.name};
-        data.actorId = actorId;
-		data.damageType = dataset.damageType;
-        if (defendWith === 'spells_direct') {
-            data.isBringPain = true;
-            data.isAllowSoak = false;
-            data.skippedSoak = true; 
-            data.damageToApply = damage + data.nettohits;
-        }
-	   console.log("Damage to soak: "+data.soak);
+		r.nettohits=data.threshold - r._total;
+		
+		r.damage=(r.nettohits<0)?0:(damage + r.nettohits);
 	   console.log("Call r.toMessage: ",r);
 		r.toMessage(data);
     } catch (err) {
@@ -372,128 +278,9 @@ export function rollDefense(actor, dataset) {
       console.error("CommonRoll error: "+err.stack);
       ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
     }
+	
 	
 	console.log("LEAVE rollDefense");
-	return r;
-	
-}
-
-export function applyDamage(actor, dataset) {
-	actor.applyDamage(dataset)
-}
-
-export function applyHeal(actor, dataset) {
-    // Healing is pretty much applying negative damage
-    actor.applyDamage(dataset);
-}
-
-export function rollExtended(dataset) {
-    console.log("ENTER rollExtended")
-
-    console.log(dataset);
-    let data = {
-        threshold: dataset.threshold,
-        actionText: dataset.actionText,
-        pool: dataset.extendedPool,
-        rollType: "skill",
-        explode: false,
-        isAllowSoak: false,
-        buttonType: 0,
-        extended: true,
-        modifier: 0,
-        extendedRoll: parseInt(dataset.extendedRoll) + parseInt(1),
-        extendedPool: parseInt(dataset.extendedPool) - parseInt(1),
-        extendedAccumulate: parseInt(dataset.extendedAccumulate),
-        formula: dataset.extendedPool + "d6"
-    }
-
-    console.log(data);
-
-    let r = new SR6Roll("", data);
-    try {
-      r.evaluate();
-	  data.results=r.results;
-      data.extendedAccumulate += r._total;
-    } catch(err) 
-    {
-      console.error("CommonRoll error: "+err);
-      console.error("CommonRoll error: "+err.stack);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-      return null;
-    }
-
-    r.toMessage(data);
-    console.log("LEAVE rollExtended")
-    return r;
-}
-
-export function rollSoak(actor, dataset) {	
-	console.log("ENTER rollSoak");
-	const soak     = parseInt(dataset.soak);
-	const targetId = dataset.targetid;
-	const actorId = dataset.actorId;
-	console.log("ENTER rollSoak(actor="+actor+", soak="+soak+", targetId="+targetId+")");
-	let data = {
-		threshold : soak,
-		actionText: "Soaked",
-		checkText : "X",
-		defense   : {},
-		speaker   : ChatMessage.getSpeaker({ actor: this }),
-		isBringPain: true,
-		defendWith: dataset.defendWith,
-    damageType: dataset.damageType
-	}
-	/*
-	switch (defendWith) {
-	case "physical":
-		data.defense = actor.data.data.defensepool.physical;
-		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.physical");
-		data.checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.int");
-		break;
-	case "spells_direct":
-		data.defense    = actor.data.data.defensepool.spells_direct;
-		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_direct");
-		data.checkText  = game.i18n.localize("attrib.wil")+" + "+game.i18n.localize("attrib.int");
-		break;
-	case "spells_indirect":
-		data.defense = actor.data.data.defensepool.spells_indirect;
-		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_indirect");
-		data.checkText  = game.i18n.localize("attrib.rea")+" + "+game.i18n.localize("attrib.wil");
-		break;
-	case "spells_other":
-		data.defense = actor.data.data.defensepool.spells_other;
-		data.actionText = game.i18n.format("shadowrun6.roll.actionText.defense.spells_other");
-		data.checkText  = game.i18n.localize("attrib.wil")+" + "+game.i18n.localize("attrib.int");
-		break;
-	}
-	*/
-	
-	// Prepare new roll
-	data.pool = actor.data.data.defensepool.damage_physical.pool;
-	console.log("Pool for soak: "+data.pool)
-	data.modifier = 0;
-	data.buttonType = 0; // Simulate Roll button clicked
-
-   let r = new SR6Roll("", data);
-    try {
-	   console.log("rollSoak: Call r.evaluate: ",r);
-      r.evaluate();
-		data.soaked=parseInt( r._total );
-	   console.log("Soaked: "+data.soaked+" of "+data.threshold+" damage");
-		
-		data.soaked = r._total;
-		data.damageToApply = (data.r_total<soak)?0:(data.threshold - data.soaked);
-		data.target = {id: targetId, name: game.actors.get(actorId).data.name}
-	   console.log("damageToApply: "+data.damageToApply);
-	   console.log("Call r.toMessage: ",r);
-		r.toMessage(data);
-    } catch (err) {
-      console.error("CommonRoll error: "+err);
-      console.error("CommonRoll error: "+err.stack);
-      ui.notifications.error(`Dice roll evaluation failed: ${err.message}`);
-    }
-
-	console.log("LEAVE rollSoak ");
 	return r;
 	
 }

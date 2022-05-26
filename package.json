@@ -1,0 +1,16 @@
+{
+  "private": true,
+  "name": "shadowrun6-eden",
+  "version": "1.0.0",
+  "description": "",
+  "sideEffects": [
+    "src/Shadowrun6.ts"
+  ],
+  "author": "Stefan Prelle",
+  "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.249.4"
+  },
+  "dependencies": {
+    "common.js": "^1.1.1"
+  }
+}

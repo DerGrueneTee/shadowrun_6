@@ -1,0 +1,34 @@
+    <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.edge.getting"}}</h4>
+    <table style="background-color: transparent; border: 1px">
+    	<tr>
+    	  <td rowspan="3">
+    	  	 <div class="edge-roll" >
+    	      <img src="systems/shadowrun6-eden/images/receive-money.svg" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
+    	    </div>
+    	  </td>
+    	  <td><table style="background-color: transparent; border: 0px">
+    	<tr>
+    	  <td>{{localize "shadowrun6.roll.attackRating"}}</td>
+    	  <td><label name="ar" id="baseAR">{{data.attackRating}}</label> + </td>
+    	  <td><input id="arMod" type="number" name="attackRatingMod" value="{{data.attackRatingMod}}" class="calc-edge-edit armod-value" style="width: 2em"/></td>
+    	  <td>vs</td>
+    	  <td>{{localize "shadowrun6.roll.defRating"}}</td>
+    	  <td><input id="dr" type="number" name="defRating" value="{{data.defRating}}" class="calc-edge-edit dr-value" style="width: 2em"/></td>
+    	</tr>
+    	<tr>
+    	  <td colspan="2">{{localize "shadowrun6.roll.edge.situational"}}<input type="checkbox" class="calc-edge-edit" name="situationalEdgeA" value="{{data.situationalEdgeA}}" id="situationalEdgeA" /></td>
+    	  <td colspan="2"></td>
+    	  <td colspan="2">{{localize "shadowrun6.roll.edge.situational"}}<input type="checkbox" class="calc-edge-edit" name="situationalEdgeD" value="{{data.situationalEdgeD}}" id="situationalEdgeD" /></td>
+    	</tr>
+    	<tr>
+    	  <td colspan="6" >
+    	    <label id="edgeLabel" style="font-style:italic"></label><br />
+          <label id="noTargetLabel"></label>
+    	  </td>
+    	</tr>
+    </table>
+    </td>
+    </tr>
+    </table>
+    <hr/>
+

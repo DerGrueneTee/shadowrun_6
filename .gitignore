@@ -51,5 +51,8 @@ Thumbs.db
 /.settings/
 /package/
 /package-lock.json
-
 install.zip
+/templates_old/
+/module/
+
+/tsconfig.nojson

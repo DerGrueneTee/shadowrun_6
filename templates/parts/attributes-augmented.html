@@ -1,7 +1,7 @@
     {{#each attributes as |attribute id|}}
     {{#ifIn id ../config.PRIMARY_ATTRIBUTES}}
     <div class="attribute" augmented-ui="b-clip-x exe">
-        <p>{{localize (concat "attrib." id )}}</p>
+         <p>{{localize (concat "attrib." id )}}</p>
          <span>{{attribute.pool}}</span>
          <input type="hidden" data-dtype="Number" name="data.attributes.{{id}}.pool" value="8" />
          <div class="field {{id}}Changed">

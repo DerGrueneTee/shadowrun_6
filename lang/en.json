@@ -400,6 +400,7 @@
       "mode_ss": "SS",
       "natural": "Nat. armor",
       "physical_damage": "P",
+      "physical_special_damage": "S",
       "price": "Price",
       "skill": "Skill",
       "skillspec": "Specialisation",
@@ -714,7 +715,13 @@
           "physical": "Defend against physical attack",
           "spells_direct": "Defend direct combat spells",
           "spells_indirect": "Defend indirect combat spells"
-        }
+        },
+		  "soak": {
+				"drain": "Resist {damage} Drain",
+				"fading":"Resist {damage} Fading",
+				"damage_physical":"Resist {damage} Physical Damage",
+				"damage_stun"    :"Resist {damage} Stun Damage"
+		  }
       },
       "ar_0": "Close",
       "ar_1": "Near",
@@ -723,16 +730,25 @@
       "ar_4": "Extreme",
       "attack": "Attack",
       "attackRating": "Attack Rating",
-      "attack_missed": "Missed the Attack",
+	   "bf_type": "Type",
+		"bf": {
+			"narrow_burst": "Narrow Burst",
+			"wide_burst": "Wide Burst"
+		},
+		"button": {
+			"defense": "Roll Defense",
+			"drain"  : "Resist Drain",
+			"soak"   : "Soak damage"
+		},
       "configure": "Configure your roll",
       "criticalglitch": "Critical glitch",
       "heal_apply": "Heal",
       "damage": "Damage: ",
 	  "damage_apply": "Apply damage",
       "defRating": "Defense: ",
-      "defense_button": "Roll Defense",
       "edge": {
         "gain_player": "{name} gets {value} Edge",
+        "gain_player_capped": "{name} would {value} Edge, but cannot get more than {capped}",
         "getting": "Getting Edge",
         "no_gain": "No one gets Edge",
         "situational": "Situational Edge",
@@ -743,11 +759,11 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explode",
-      "extend": "Extend",
-      "extended": "Extended",
-      "extend_check_failed": "Extended Check Failed",
-      "extend_check_success": "Extended Check Successful",
+	   "fa_area": "Area",
+		"firemode": "Firemode",
       "failure": "Failure",
+      "failedDefense": "You got hit and now it is going to hurt",
+      "failedSoak"   : "You got damage:",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",
       "mode": "Mode",
@@ -756,7 +772,7 @@
       "nosuccess": "hits, threshold: ",
       "notarget": "No target selected",
       "pool": "Pool",
-      "soak_physical": "Soak damage",
+		"range": "Distance",
       "spec": "Specialization",
       "spell": {
         "ampUp": {
@@ -767,6 +783,8 @@
         "incArea": {
           "1": "Radius +2m, Drain+1",
           "2": "Radius +4m, Drain+2",
+          "3": "Radius +6m, Drain+3",
+          "4": "Radius +8m, Drain+4",
           "title": "Increase Area"
         },
         "title": "Adjust the spell"
@@ -774,8 +792,11 @@
       "subject": "Chatmessage",
       "success": "Success",
       "successes": "hits",
+      "successfulDefense": "You successfully avoided being hit",
+      "successfulSoak"   : "You managed to ignore the damage",
       "target": "Target",
       "threshold": "Threshold",
+		"weapon":  "Define your attack",
       "wilddie": "Use wild die",
       "with": "with"
     },
@@ -1079,6 +1100,7 @@
       }
     },
     "spell": {
+		"area": "Area",
       "category": "Category",
       "category_combat": "Combat",
       "category_detection": "Detection",
@@ -1153,7 +1175,13 @@
 			"watercraft": "Watercraft",
 			"aircraft": "Aircraft"
 		}      
-    }
+    },
+	"weapon": {
+		"damage": "DV",
+		"attackRating":"Attack Rtg.",
+		"firemodes": "Modes",
+		"ammo": "Ammunition"
+	}
   },
   "skill": {
     "astral": "Astral",

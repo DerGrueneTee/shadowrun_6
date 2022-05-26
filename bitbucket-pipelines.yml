@@ -2,60 +2,78 @@
 # Use a skeleton to build, test and deploy using manual and parallel steps
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: atlassian/default-image:2
+image: atlassian/default-image:3
 
 pipelines:
-  default:
-    - step:
-        name: 'Build and Test'
-        deployment: test
-        script:
-          - echo "Your build and test goes here..."
-
+  custom:
+    staging:
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
-    - step:
-        name: 'Deployment to Staging'
-        deployment: staging
-        trigger: 'manual'
-        script:
-          - mkdir -p package/shadowrun6-eden
-          - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
-          - export VERSION=`cat version.txt`
-          - export MANIFEST="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json"
-          - export DOWNLOAD="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/shadowrun6-eden-staging.zip"
-          - envsubst < system-template.json > package/shadowrun6-eden/system.json
-          - cd package/ ; zip -r ../shadowrun6-eden-staging.zip shadowrun6-eden ; cd ..
-          - cp package/shadowrun6-eden/system.json system-staging.json
-          - pipe: atlassian/bitbucket-upload-file:0.3.2
-            variables:
-              BITBUCKET_USERNAME: $BITBUCKET_USERNAME
-              BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
-              FILENAME: 'shadowrun6-eden-staging.zip'
-          - pipe: atlassian/bitbucket-upload-file:0.3.2
-            variables:
-              BITBUCKET_USERNAME: $BITBUCKET_USERNAME
-              BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
-              FILENAME: 'system-staging.json'
-    - step:
-        name: 'Deployment to Production'
-        deployment: production
-        trigger: 'manual'
-        script:
-          - mkdir -p package/shadowrun6-eden
-          - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
-          - export VERSION=`cat version.txt`
-          - export MANIFEST="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system.json"
-          - export DOWNLOAD="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/shadowrun6-eden.zip"
-          - envsubst < system-template.json > package/shadowrun6-eden/system.json
-          - cd package/ ; zip -r ../shadowrun6-eden.zip shadowrun6-eden ; cd ..
-          - cp package/shadowrun6-eden/system.json system.json
-          - pipe: atlassian/bitbucket-upload-file:0.3.2
-            variables:
-              BITBUCKET_USERNAME: $BITBUCKET_USERNAME
-              BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
-              FILENAME: 'shadowrun6-eden.zip'
-          - pipe: atlassian/bitbucket-upload-file:0.3.2
-            variables:
-              BITBUCKET_USERNAME: $BITBUCKET_USERNAME
-              BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
-              FILENAME: 'package/shadowrun6-eden/system.json'
+      - step:
+          name: 'Deployment to Staging'
+          deployment: staging
+          trigger: 'manual'
+          script:
+            - mkdir -p package/shadowrun6-eden
+            - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
+            - export VERSION=`cat version.txt`
+            - export MANIFEST="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json"
+            - export DOWNLOAD="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/shadowrun6-eden-beta.zip"
+            - envsubst < system-template.json > package/shadowrun6-eden/system.json
+            - cd package/ ; zip -r ../shadowrun6-eden-beta.zip shadowrun6-eden ; cd ..
+            - cp package/shadowrun6-eden/system.json system-beta.json
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: 'shadowrun6-eden-beta.zip'
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: 'system-beta.json'
+      - step:
+          name: 'Deployment to Staging JS'
+          deployment: stagingjs
+          trigger: 'manual'
+          script:
+            - mkdir -p package/shadowrun6-eden
+            - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
+            - export VERSION=`cat version.txt`
+            - export MANIFEST="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json"
+            - export DOWNLOAD="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/shadowrun6-eden-staging.zip"
+            - envsubst < system-template.json > package/shadowrun6-eden/system.json
+            - cd package/ ; zip -r ../shadowrun6-eden-staging.zip shadowrun6-eden ; cd ..
+            - cp package/shadowrun6-eden/system.json system-staging.json
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: 'shadowrun6-eden-staging.zip'
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: 'system-staging.json'
+      - step:
+          name: 'Deployment to Production'
+          deployment: production
+          trigger: 'manual'
+          script:
+            - mkdir -p package/shadowrun6-eden
+            - cp -r icons images lang module styles template.json templates package/shadowrun6-eden
+            - export VERSION=`cat version.txt`
+            - export MANIFEST="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system.json"
+            - export DOWNLOAD="https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/shadowrun6-eden.zip"
+            - envsubst < system-template.json > package/shadowrun6-eden/system.json
+            - cd package/ ; zip -r ../shadowrun6-eden.zip shadowrun6-eden ; cd ..
+            - cp package/shadowrun6-eden/system.json system.json
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: 'shadowrun6-eden.zip'
+            - pipe: atlassian/bitbucket-upload-file:0.3.2
+              variables:
+                BITBUCKET_USERNAME: $BITBUCKET_USERNAME
+                BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
+                FILENAME: 'package/shadowrun6-eden/system.json'
