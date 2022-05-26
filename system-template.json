@@ -48,7 +48,77 @@
       "lang": "fr",
       "name": "Français",
       "path": "lang/fr.json"
-    }
+    },
+  {
+    "lang": "ca",
+    "name": "Català",
+    "path": "lang/ca-magicl10n.json"
+  },
+  {
+    "lang": "ko",
+    "name": "한국어 (Korean)",
+    "path": "lang/ko-magicl10n.json"
+  },
+  {
+    "lang": "cn",
+    "name": "中文 (Chinese)",
+    "path": "lang/cn-magicl10n.json"
+  },
+  {
+    "lang": "zh-tw",
+    "name": "Chinese (Traditional)",
+    "path": "lang/zh-tw-magicl10n.json"
+  },
+  {
+    "lang": "fr",
+    "name": "Français",
+    "path": "lang/fr-magicl10n.json"
+  },
+  {
+    "lang": "ja",
+    "name": "日本語 (Japanese)",
+    "path": "lang/ja-magicl10n.json"
+  },
+  {
+    "lang": "pt-BR",
+    "name": "Português (Brasil)",
+    "path": "lang/pt-BR-magicl10n.json"
+  },
+  {
+    "lang": "ru",
+    "name": "русский (Russian)",
+    "path": "lang/ru-magicl10n.json"
+  },
+  {
+    "lang": "cs",
+    "name": "Čeština",
+    "path": "lang/cs-magicl10n.json"
+  },
+  {
+    "lang": "it",
+    "name": "Italian",
+    "path": "lang/it-magicl10n.json"
+  },
+  {
+    "lang": "ar",
+    "name": "Arabic",
+    "path": "lang/ar-magicl10n.json"
+  },
+  {
+    "lang": "es",
+    "name": "Español",
+    "path": "lang/es-magicl10n.json"
+  },
+  {
+    "lang": "sv",
+    "name": "Swedish",
+    "path": "lang/sv-magicl10n.json"
+  },
+  {
+    "lang": "pl",
+    "name": "Polski",
+    "path": "lang/pl-magicl10n.json"
+  }
   ],
   "socket": false,
   "initiative": "1d6",
