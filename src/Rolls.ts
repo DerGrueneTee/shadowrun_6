@@ -1,5 +1,5 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
+import { Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll.js";
 import { Lifeform, Skill, SR6Actor } from "./ActorTypes";
 import { EdgeBoost, SkillDefinition } from "./DefinitionTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
