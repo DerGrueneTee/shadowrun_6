@@ -9,7 +9,7 @@ pipelines:
   default:
    - step:
        script:
-         - npm install -g typescript
+         - npm install -g typescript@4.6.2
          - npm install
          - ls node_modules
          - tsc -v
