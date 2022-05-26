@@ -2,9 +2,15 @@
 # Use a skeleton to build, test and deploy using manual and parallel steps
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
-image: atlassian/default-image:3
+#image: atlassian/default-image:3
+image: sandrokeil/typescript
 
 pipelines:
+  default:
+   - step:
+       script:
+         - tsc
+
   custom:
     staging:
     # The following deployment steps will be executed for each pipeline run. To configure your steps and conditionally deploy see https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
