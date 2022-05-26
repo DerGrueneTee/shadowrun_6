@@ -11,8 +11,10 @@ pipelines:
        script:
          - npm install -g typescript
          - npm install
+         - ls node_modules
          - tsc -v
          - tsc
+         - ls module
 
   custom:
     staging:
