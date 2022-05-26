@@ -3,12 +3,13 @@
 # -----
 # You can specify a custom docker image from Docker Hub as your build environment.
 #image: atlassian/default-image:3
-image: sandrokeil/typescript
 
 pipelines:
   default:
    - step:
        script:
+         - npm install -g typescript
+         - npm install -g @league-of-foundry-developers/foundry-vtt-types
          - tsc
 
   custom:
