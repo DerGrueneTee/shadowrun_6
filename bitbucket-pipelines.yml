@@ -1,8 +1,3 @@
-# This is an example Starter pipeline configuration
-# Use a skeleton to build, test and deploy using manual and parallel steps
-# -----
-# You can specify a custom docker image from Docker Hub as your build environment.
-#image: atlassian/default-image:3
 image: node:18
 
 pipelines:
@@ -10,11 +5,8 @@ pipelines:
    - step:
        script:
          - npm install -g typescript@4.6.2
-         - ls
          - npm ci
-         - ls node_modules
          - tsc
-         - ls module
 
   custom:
     staging:
