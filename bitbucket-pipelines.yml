@@ -10,10 +10,8 @@ pipelines:
    - step:
        script:
          - npm install -g typescript@4.6.2
-         - npm install
+         - npm install -g
          - ls node_modules
-         - npm -v
-         - tsc -v
          - tsc
          - ls module
 
