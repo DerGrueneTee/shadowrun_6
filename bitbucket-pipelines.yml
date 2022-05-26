@@ -34,6 +34,8 @@ pipelines:
                 BITBUCKET_USERNAME: $BITBUCKET_USERNAME
                 BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
                 FILENAME: 'system-beta.json'
+
+    staging-js:
       - step:
           name: 'Deployment to Staging JS'
           deployment: stagingjs
