@@ -9,8 +9,9 @@ pipelines:
   default:
    - step:
        script:
-         - npm ci typescript@4.6.2
+         - npm install -g typescript@4.6.2
          - npm ci
+         - ls node_modules
          - tsc
          - ls module
 
