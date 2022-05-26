@@ -2,11 +2,11 @@
 
 This is the repository for the Foundry VTT system for the roleplaying system **Shadowrun 6**. It is a non-profit fan project and does not include contents from the publications.
 
-*This system is under development and currently in very early stages - design and functionality may change without warning. Breaking changes are possible.*
-
 **Installation-URL (Release/Stable):** Not released yet
 
-**Installation-URL (Staging/Beta):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json)  (**Requires Foundry 0.8.x**)
+**Installation-URL (Beta/Unstable ):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json)  (**Requires Foundry 0.8.x**)
+
+**Installation-URL (Versions <0.9 ):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json)  (**Requires Foundry 0.8.x**)
 
 **Documentation:** [Wiki](https://rpgframework.atlassian.net/wiki/spaces/SR6FVTT/),  [Roadmap](https://rpgframework.atlassian.net/wiki/spaces/SR6FVTT/pages/1714421761/Roadmap)
 
@@ -47,8 +47,9 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * Vehicle Actor is unfinished
  
 ## The future ##
-The project is currently not actively maintained. I have to admit, that though I have ideas what I want to implement, I simply don't have enough time to keep working on Genesis *and* do this as a side project. 
-If you are interested in continuing the work, let me know (taranion#5388). Of course, I also do accept pull requests.
+This project currently switches from plain Javascript to Typescript, which means some steps back and cleanup of previous ... dirty implementations.
+Unfortunately I must admit, that having this project as a side project to *Genesis* isn't giving me enough time to have a decent development pace. But I try to keep both projects in sync, so the character transfer from Genesis to Foundry VTT works for you.
+
 
 ![Screenshot](screenshots/Screen_2021-06a.jpg)
 ![Screenshot](screenshots/Screen_2021-06b.jpg)
