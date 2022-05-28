@@ -133,6 +133,7 @@
       "toxin": "Resist Toxin"
     },
     "defense_rating": {
+	   "label":  "Defense Rating",
       "astral": "Mana Def. Rtg",
       "matrix": "Matrix Def. Rtg.",
       "physical": "Physical Def. Rtg",

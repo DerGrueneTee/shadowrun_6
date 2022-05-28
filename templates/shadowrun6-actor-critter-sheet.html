@@ -41,6 +41,8 @@
                         <dd>{{data.data.initiative.astral.base}} + {{data.data.initiative.astral.dicePool}}d6</dd>
                         <dt>{{ localize 'shadowrun6.actor.actions' }}</dt>
                         <dd>1 {{ localize 'shadowrun6.actor.actions_major' }}, {{data.data.initiative.actions}} {{localize 'shadowrun6.actor.actions_minor'}}</dd>
+                        <dt>{{ localize 'shadowrun6.defense_rating.label' }}</dt>
+                        <dd>{{data.data.defenserating.physical.pool}}</dd>
                         {{> "systems/shadowrun6-eden/templates/parts/npc-skills.html" skills=data.data.skills}}
                         {{> "systems/shadowrun6-eden/templates/parts/npc-spells.html" }}
                         {{> "systems/shadowrun6-eden/templates/parts/npc-critterpowers.html" }}
