@@ -1186,6 +1186,9 @@ export class Shadowrun6Actor extends Actor {
 			rollData.monitor    = MonitorType.STUN;
 			rollData.actionText = gameI18n.format("shadowrun6.roll.actionText.soak."+soak, {damage:damage});
 			rollData.checkText = gameI18n.localize("attrib.wil")+" + ? ("+damage+")";
+			if (data.tradition!=null) {
+				rollData.checkText = gameI18n.localize("attrib.wil")+" + "+gameI18n.localize("attrib."+data.tradition.attribute)+" ("+damage+")";
+			}
 			break;
 		default:
 			console.log("Error! Don't know how to handle soak pool for "+soak)
