@@ -1322,14 +1322,17 @@ export class Shadowrun6Actor extends Actor {
 		const data:Lifeform = this.data.data as Lifeform;
 		const damageObj : Monitor = data[monitor];
 		
-		let hp = damageObj.dmg + damage;
+		console.log("damageObj = ",damageObj);
+		
+		let newDmg = damageObj.dmg + damage;
 		// Did damage overflow the monitor?
-      let overflow : number = Math.max(0, hp - damageObj.max);
+      let overflow : number = Math.max(0, newDmg - damageObj.max);
+		console.log("newDmg=",newDmg,"   overflow=",overflow);
 		// Ensure actual damage is not higher than pool
-		hp = Math.min(Math.max(0, hp), damageObj.max);
+		newDmg = Math.min(Math.max(0, newDmg), damageObj.max);
 		
 		this.data.update({[`data.overflow.dmg`]: overflow});
-      this.data.update({[`data.`+monitor+`.dmg`]: hp });
+      this.data.update({[`data.`+monitor+`.dmg`]: newDmg });
 		console.log("Added "+damage+" to monitor "+monitor+" which results in overflow "+overflow+" on "+this.name);
 	}
 

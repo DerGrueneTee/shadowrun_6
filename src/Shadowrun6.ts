@@ -239,12 +239,13 @@ Hooks.once("init", async function () {
 		const dataset = event.currentTarget.dataset;
       const rollType =  dataset.rollType;
 		console.log("Clicked on rollable : "+rollType);
-		console.log("dataset : "+dataset);
+		console.log("dataset : ",dataset);
       const threshold : number =  parseInt(dataset.defendHits!);
       const damage    : number =  (dataset.damage)?parseInt(dataset.damage):0;
       const monitor   : number =  parseInt(dataset.monitor!);
- 			let actor = (game as Game).actors!.get(targetId);
-      	console.log("Target actor ",actor);
+ 		let actor = (game as Game).actors!.get(targetId);
+      console.log("Target actor ",actor);
+     	console.log("Target actor ",actor!.data.name);
 
 		switch (rollType) {
 		case RollType.Defense:

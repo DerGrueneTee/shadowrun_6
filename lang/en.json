@@ -723,6 +723,7 @@
 				"damage_stun"    :"Resist {damage} Stun Damage"
 		  }
       },
+		"apply_damage": "Apply damage",
       "ar_0": "Close",
       "ar_1": "Near",
       "ar_2": "Medium",
