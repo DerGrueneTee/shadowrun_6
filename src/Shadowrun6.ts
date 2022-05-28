@@ -39,7 +39,7 @@ Hooks.once("init", async function () {
   CONFIG.SR6 = new SR6Config;
 
 
-  //CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
+  CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
   CONFIG.Combat.documentClass = Shadowrun6Combat;
   CONFIG.Actor.documentClass = Shadowrun6Actor;
   CONFIG.Dice.rolls = [SR6Roll, Roll];

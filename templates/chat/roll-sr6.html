@@ -97,9 +97,8 @@
    		{{configured.spellDesc}}
 		</div>
    </div>
-  	<button class="rollable" data-roll-type="soak" data-soak="drain" data-damage="{{configured.calcDrain}}"  data-monitor="stun" data-defend-with="{{../defendWith}}" data-targetid="{{token.data.actorId}}">{{localize 'shadowrun6.roll.button.drain'}} ({{configured.calcDrain}})</button>
+  	<button class="rollable" data-roll-type="soak" data-soak="drain" data-damage="{{configured.calcDrain}}"  data-monitor="stun" data-defend-with="{{../defendWith}}" data-target-actor="{{speaker.actor}}"data-target-token="{{speaker.token}}">{{speaker.alias}}: {{localize 'shadowrun6.roll.button.drain'}} ({{configured.calcDrain}})</button>
    {{/if}}        
-    {{/if}}
    
    <!-- Defense -->
     {{log "Defense" data}}
@@ -127,7 +126,7 @@
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulDefense'}}</div>
         {{else}}
         <div class="resulttext" style="color: rgb(194, 76, 29); flex:2">{{ localize 'shadowrun6.roll.failedDefense'}} {{nettoDamage}}</div>
-  	     <!--button class="rollable" data-roll-type="soak" data-soak="damage_physical" data-defend-hits="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.button.soak'}} ({{damage}})</button-->
+  	     <button class="rollable" data-roll-type="soak" data-soak="damage_physical" data-defend-hits="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.button.soak'}} ({{damage}})</button>
         {{/if}} 
    {{/if}}
    
@@ -137,8 +136,9 @@
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulSoak'}}</div>
         {{else}}
         <div class="resulttext" style="color: rgb(194, 76, 29); flex:2">{{ localize 'shadowrun6.roll.failedSoak'}} {{damage}}</div>
-  	     <!--button class="rollable" data-roll-type="damage" data-damage="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.apply_damage'}} ({{damage}})</button-->
+  	     <button class="rollable" data-roll-type="damage" data-damage="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.apply_damage'}} ({{damage}})</button>
         {{/if}} 
    {{/if}}
+    {{/if}}
      
 </div>

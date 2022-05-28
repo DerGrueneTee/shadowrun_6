@@ -58,6 +58,7 @@ class CommonRollData {
 	threshold : number;
 	/* Use a wild die */
 	useWildDie : number = 0;
+	rollMode : "publicroll" | "gmroll" | "blindroll" | "selfroll" | undefined;
 	
 	/* How many dice shall be rolled */
 	pool: number;
@@ -333,6 +334,7 @@ export class SR6ChatMessageData {
 	actionText: string;
 	
 	rollType : RollType;
+	//rollMode : "publicroll" | "gmroll" | "blindroll" | "selfroll" | undefined;
 	
 	/* Opposed rolls: How to oppose? */
 	defendWith: Defense;

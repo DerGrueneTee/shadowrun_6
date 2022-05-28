@@ -25,7 +25,8 @@ export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
 		const _r: SR6Roll = await _showRollDialog(data);
 		console.log("returned from _showRollDialog with ", _r);
 		if (_r) {
-			_r.toMessage(data);
+			console.log("==============Calling toRoll() with ",data)
+			_r.toMessage(data, {rollMode:data.rollMode});
 		}
 
 		return _r;
@@ -192,7 +193,8 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRol
 	   	configured.buttonType = type;
       	configured.modifier = parseInt(form.modifier.value);
       	configured.defRating = (form.defRating)?parseInt(form.defRating.value):0;
-			console.log("rollMode = ", form.rollMode);
+			console.log("rollMode = ", form.rollMode.value);
+			configured.rollMode = form.rollMode.value;
 
 			formula = createFormula(configured);
 			let base : number = configured.pool?configured.pool:0;

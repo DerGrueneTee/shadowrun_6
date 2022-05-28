@@ -3,7 +3,7 @@ import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-v
 import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { SR6Actor } from "./ActorTypes.js";
 import { MonitorType } from "./config.js";
-import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll, RollType, DefenseRoll } from "./dice/RollTypes.js";
+import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll, RollType, DefenseRoll, PreparedRoll } from "./dice/RollTypes.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 
 /**
@@ -104,6 +104,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
 		this.finished.threshold = this.configured.threshold;
+		//this.finished.rollMode = this.configured.rollMode;
 		
 		// ToDO: Detect real monitor
 		this.finished.monitor = MonitorType.PHYSICAL;
@@ -300,9 +301,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	async render(options?: { flavor?: string | undefined; template?: string | undefined; isPrivate?: boolean | undefined; } | undefined) : Promise<string> {
 		console.log("ENTER render");
 		console.log("options = ",options);
-		console.log("finished = ",this.finished);
-		console.log("configured = ",this.configured);
-		console.log("data = ",this.data);
+		console.log("this = ",this);
+		console.log("this.data = ",this.data);
+		console.log("this.finished = ",this.finished);
 		try {
 			
     		if ( !this._evaluated ) await this.evaluate({async: true});
@@ -366,6 +367,15 @@ export class SR6RollChatMessage extends ChatMessage {
       context?: ConstructorParameters<ConstructorOf<foundry.documents.BaseChatMessage>>[1]
     ) {
         super(data, context);
-         console.log("In SR6RollChatMessage<init>(" + data + " , ", context);
+         console.log("In SR6RollChatMessage<init>(", data," , context,", context);
+		let prepared : PreparedRoll = (data as PreparedRoll);
+		
     }
+
+
+	getHTML(): Promise<JQuery> {
+        console.log("In SR6RollChatMessage.getHTML()",this);
+		return super.getHTML();
+	}
+
 }

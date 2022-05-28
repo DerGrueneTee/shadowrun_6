@@ -105,7 +105,7 @@ export class Shadowrun6Actor extends Actor {
      */
     _prepareDerivedAttributes() {
         const actorData = this.data;
-
+			console.log("###################prepareDerivedAttributes#####"+actorData.name);
         if (!isLifeform(this.data.data))
             return;
         const data:Lifeform = this.data.data;
@@ -277,19 +277,15 @@ export class Shadowrun6Actor extends Actor {
         if (!isLifeform(data))
             return;
 
-		// Store volatile
+		if (!data.defenserating) data.defenserating = new Ratings;
+		if (!data.defenserating.physical )  data.defenserating.physical = new Attribute();
+		if (!data.defenserating.astral   )  data.defenserating.astral   = new Attribute();
+		if (!data.defenserating.vehicle  )  data.defenserating.vehicle  = new Attribute();
+		if (!data.defenserating.matrix   )  data.defenserating.matrix   = new Attribute();
+		if (!data.defenserating.social   )  data.defenserating.social   = new Attribute();
+		if (!data.defenserating.resonance)  data.defenserating.resonance= new Attribute();
 
-		if (actorData.type === "Player" || actorData.type === "NPC") {
-/*			if (!data.defenserating) {
-				data.defenserating = {};
-			}
-			if (!data.defenserating.physical)  data.defenserating.physical = { mod: 0};
-			if (!data.defenserating.astral  )  data.defenserating.astral   = { mod: 0};
-			if (!data.defenserating.vehicle )  data.defenserating.vehicle  = { mod: 0};
-			if (!data.defenserating.matrix  )  data.defenserating.matrix   = { mod: 0};
-			if (!data.defenserating.social  )  data.defenserating.social   = { mod: 0};
-*/			
-			
+		// Store volatile
 			// Physical Defense Rating
 			data.defenserating.physical.base = data.attributes["bod"].pool;
 			data.defenserating.physical.modString = (game as Game).i18n.localize("attrib.bod_short") + " " + data.attributes["bod"].pool;
@@ -359,7 +355,6 @@ export class Shadowrun6Actor extends Actor {
 				}
 			});
 			*/
-		}
 	}
 
 	//---------------------------------------------------------
@@ -1356,7 +1351,9 @@ export class Shadowrun6Actor extends Actor {
 		
 		this.data.update({[`data.overflow.dmg`]: overflow});
       this.data.update({[`data.`+monitor+`.dmg`]: newDmg });
-		console.log("Added "+damage+" to monitor "+monitor+" which results in overflow "+overflow+" on "+this.name);
+		console.log("Added "+damage+" to monitor "+monitor+" of "+this.data.name+" which results in overflow "+overflow+" on "+this.name);
+		this._prepareDerivedAttributes();
+		console.log("ToDo: update tokens ",this.data.token);
 	}
 
 	//-------------------------------------------------------------
