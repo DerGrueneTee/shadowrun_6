@@ -1,12 +1,20 @@
-<!-- data.dialogConfig.actionText = Display string on what is happening -->
-<!-- data.dialogConfig.checkText  = What is rolled                -->
-<!--                   Survival + Intuition (3)      -->
-<!--                   Sorcery/Spellcasting + Magic  -->
-<!-- data.dialogConfig.isOpposed  = Test is made against a defense rating -->
-<!-- data.dialogConfig.useThreshold = Entering a threshold is required  -->
 {{log "configurable-roll-dialog.html  data=" data }}
 <form>
-    <h3>{{data.actionText}}</h3>
+	 <div style="display:flex; align-content: space-between">
+      <h3 style="flex:4; display:inline; align-self: flex-start">{{data.actionText}}</h3>
+      {{#if data.attrib}}
+      <span style="flex:2; display:inline">
+         {{localize "shadowrun6.label.attribute"}}
+         <select name="attrib" class="rollAttributeSelector">
+           {{#select data.attrib}}
+           {{#each CONFIG.SR6.ATTRIBUTES as |label attribute|}}
+            <option value="{{label}}">{{localize (concat "attrib." label)}}</option>
+           {{/each}}
+           {{/select}}
+         </select>
+       </span>
+        {{/if}}
+    </div>
     <h2 class="highlight" id="rolldia-checkText">{{data.checkText}}</h2>
 
    <!-- Spell modification -->
@@ -36,16 +44,6 @@
 		      <label class="edge-value" name="dicePool">{{data.calcPool}}</label>
 	       </div>
 	     </td>
-         <td>{{localize "shadowrun6.label.attribute"}}</td>
-         <td colspan="3">
-         <select name="attrib">
-           {{#select attributes}}
-           {{#each attributes as |label attribute|}}
-            <option value="{{label}}">{{localize (concat "attrib." label)}}</option>
-           {{/each}}
-           {{/select}}
-         </select>
-       </td>
         {{#if data.threshold}}
     		<td>{{localize "shadowrun6.roll.threshold"}}</td>
     		<td><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>

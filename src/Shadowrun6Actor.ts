@@ -1,6 +1,6 @@
 import { Lifeform, ILifeform, Attribute, SR6Actor, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill, CurrentVehicle, VehicleActor, MatrixUser } from "./ActorTypes.js";
 import { Defense, MonitorType, SR6, SR6Config } from "./config.js";
-import { MatrixAction } from "./DefinitionTypes.js";
+import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
 import { Armor, ComplexForm, Gear,MatrixDevice,Persona,Spell,Vehicle,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
@@ -824,7 +824,7 @@ export class Shadowrun6Actor extends Actor {
 			throw "Unknown skill '"+skillId+"'";
 		}
 			
-		let skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!;
+		let skillDef : SkillDefinition = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!;
 		if (!attrib) {
 			attrib = skillDef.attrib;
 		}
@@ -846,7 +846,8 @@ export class Shadowrun6Actor extends Actor {
 		}
 		
 		// Add attribute
-		value += (this.data.data as Lifeform).attributes[attrib].pool;
+		value = parseInt(value);
+		value += parseInt( (this.data.data as Lifeform).attributes[attrib].pool );
 		
 		return value;		
 	}
@@ -926,6 +927,19 @@ export class Shadowrun6Actor extends Actor {
 
 	//---------------------------------------------------------
 	/**
+	 * @param roll	Skill roll to manipulate
+	 */
+	updateSkillRoll(roll : SkillRoll, attrib : string) {
+		// Prepare check text
+		roll.checkText = this._getSkillCheckText(roll);
+		// Calculate pool
+		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec, attrib);
+		console.log("updateSkillRoll()", roll);
+		
+	}
+
+	//---------------------------------------------------------
+	/**
 	 * Roll a simple skill test
 	 * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
 	 * @param {string} skillId      The skill id (e.g. "con")
@@ -938,6 +952,12 @@ export class Shadowrun6Actor extends Actor {
 		roll.actor     = this;
 		// Prepare check text
 		roll.checkText = this._getSkillCheckText(roll);
+		// Find attribute
+		let skillDef : SkillDefinition = CONFIG.SR6.ATTRIB_BY_SKILL.get(roll.skillId)!;
+		if (!roll.attrib)
+			roll.attrib = skillDef.attrib; 
+		roll.actionText = roll.checkText; // (game as Game).i18n.format("shadowrun6.roll.actionText.skill");
+
 		// Calculate pool
 		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
 		console.log("rollSkill(", roll, ")");

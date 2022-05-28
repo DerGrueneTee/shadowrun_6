@@ -116,7 +116,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 				title: title,
 				content: html,
 				render: html => {
-					console.log("Register interactivity in the rendered dialog");
+					console.log("Register interactivity in the rendered dialog", this);
 					// Set roll mode to default from chat window
 					let chatRollMode : string = ($(".roll-type-select").val() as string);
 					$("select[name='rollMode']").not(".roll-type-select").val(chatRollMode);
@@ -148,7 +148,6 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		console.log("LEAVE _showRollDialog");
 	}
 }
-
 
 function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRoll): SR6Roll {
 	console.log("ENTER _dialogClosed(type=" + type + ", data=" , data , ")");

@@ -1,6 +1,6 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform } from "./ActorTypes";
-import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData } from "./dice/RollTypes.js";
+import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData, SkillRoll } from "./dice/RollTypes.js";
 import { Gear, Spell, Weapon } from "./ItemTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 
@@ -25,6 +25,9 @@ function attackRatingToString(val : number[]) : string {
 }
 function isItemRoll(obj: any): obj is WeaponRoll {
     return obj.rollType != undefined;
+}
+function isSkillRoll(obj: any): obj is SkillRoll {
+    return obj.skillId != undefined;
 }
 
 export class SR6RollDialogOptions {
@@ -73,6 +76,10 @@ export class RollDialog extends Dialog {
     html.find('#incArea').change(this._onSpellConfigChange.bind(this));
 
 	this._recalculateBaseAR();
+
+   // React to attribute change	
+	html.find('.rollAttributeSelector').change(this._onAttribChange.bind(this));
+
   }
 	
 	//-------------------------------------------------------------
@@ -317,8 +324,8 @@ export class RollDialog extends Dialog {
 	}
 
 	//-------------------------------------------------------------
-	_updateDicePool(data) {
-		$("label[name='dicePool']")[0].innerText = parseInt(data.pool) + parseInt(data.modifier).toString();
+	_updateDicePool(data : ConfiguredRoll) {
+		$("label[name='dicePool']")[0].innerText = (parseInt(data.pool as any) + parseInt(data.modifier as any)).toString();
 	}
 	
 	//-------------------------------------------------------------
@@ -460,6 +467,38 @@ export class RollDialog extends Dialog {
 			return;
 		
 		prepared.faArea = fireModeElement.value;
+	}
+
+	//-------------------------------------------------------------
+	 _onAttribChange(event) {
+		console.log("_onAttribChange ", this.options);
+		let actor : Shadowrun6Actor = (this.options as any).actor;
+		let prepared : PreparedRoll = (this.options as any).prepared;
+		let configured : ConfiguredRoll = (this.options as any).configured;
+		
+		// Ignore this, if there is no actor
+		if (!actor) {
+			return;
+		}
+		if (!event || !event.currentTarget) {
+			return;
+		}
+
+		if (isSkillRoll(prepared)) {
+			console.log("isSkillRoll ",prepared.skillId);
+			const attribSelect = event.currentTarget;
+			let newAttrib = attribSelect.children[attribSelect.selectedIndex].value;
+			console.log(" use attribute = "+newAttrib);
+			prepared.attrib = newAttrib;
+			actor.updateSkillRoll(prepared, newAttrib);
+			prepared.actionText = prepared.checkText;
+		}
+		console.log("new check: "+prepared.checkText);
+		console.log("new pool: "+prepared.pool);
+		configured.checkText = prepared.checkText;
+		configured.pool = prepared.pool;
+		(document.getElementById("rolldia-checkText") as HTMLHeadingElement).textContent= prepared.checkText;
+		this._updateDicePool(configured);
 	}
 	
 	//-------------------------------------------------------------

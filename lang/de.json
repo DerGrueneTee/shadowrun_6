@@ -703,12 +703,19 @@
         "cast_target_multiple": "zaubert {name} auf mehrere Ziele",
         "cast_target_none": "zaubert {name}",
         "cast_target_one": "zaubert {name} auf {target}",
+        "skill": "Fertigkeitswurf",
         "thread": "Webe {name}",
         "defense": {
           "physical": "Verteidigung g. physischen Angriff",
           "spells_direct": "Verteidigung g. dir. Kampfzauber",
           "spells_indirect": "Verteidigung g. ind. Kampfzauber"
-        }
+        },
+		  "soak": {
+				"drain": "Widerstehe {damage} Entzug",
+				"fading":"Widerstehe {damage} Schwund",
+				"damage_physical":"Widerstehe {damage} körperl. Schaden",
+				"damage_stun"    :"Widerstehe {damage} Betäubungsschaden"
+		  }
       },
       "ar_0": "Sehr nah",
       "ar_1": "Nah",
