@@ -30,14 +30,14 @@
     <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.configure"}}</h4>
     <table style="background-color: transparent; border: 0px">
     	<tr>
-    	  <td rowspan="3">
+    	  <td rowspan="4">
     	    <div class="edge-roll" style="flex: 0.48; margin-right: 10px">
 	         <img src="systems/shadowrun6-eden/images/BlankDice.png" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
 		      <label class="edge-value" name="dicePool">{{data.calcPool}}</label>
 	       </div>
 	     </td>
          <td>{{localize "shadowrun6.label.attribute"}}</td>
-         <td>
+         <td colspan="3">
          <select name="attrib">
            {{#select attributes}}
            {{#each attributes as |label attribute|}}
@@ -46,6 +46,10 @@
            {{/select}}
          </select>
        </td>
+        {{#if data.threshold}}
+    		<td>{{localize "shadowrun6.roll.threshold"}}</td>
+    		<td><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
+        {{/if}}
     	</tr>
       <tr>
         <td>{{localize "shadowrun6.roll.modifier"}}</td>
@@ -67,10 +71,8 @@
     	</tr>
     	<tr>
         {{#if data.threshold}}
-    		<td>{{localize "shadowrun6.roll.threshold"}}</td>
-    		<td colspan="3"><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
-    		<td style="text-align:right">{{localize "shadowrun6.roll.extended"}}</td>
-            <td><input type="checkbox" name="extended" {{checked data.extended}} /></td>
+    		<!--td style="text-align:right">{{localize "shadowrun6.roll.extended"}}</td>
+            <td><input type="checkbox" name="extended" {{checked data.extended}} /></td-->
         {{/if}}
     	</tr>
     </table>
