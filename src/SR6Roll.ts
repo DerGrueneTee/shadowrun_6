@@ -23,6 +23,12 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	constructor(formula: string, data: ConfiguredRoll, options?: SR6Roll['options']) {
 		super(formula, data, options);
 		this.configured = data;
+		// If entered from the combat tracker, the roll type is empty but the
+		// formula gives hints what is rolled
+		if (formula.indexOf("@initiative")> -1) {
+			this.configured.rollType = RollType.Initiative;
+			
+		}
       console.log("In SR6Roll<init>1(" + formula + " , ", data);
       console.log("In SR6Roll<init>2(", options);
    }
@@ -32,12 +38,13 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
     evaluate(options?: InexactPartial<Options>): Evaluated<this> | Promise<Evaluated<this>> {
 		console.log("ENTER evaluate()");
 		console.log("   this: " , this);
+		console.log("   formula: " , this._formula);
 		// IMPORTANT: Before merging arrays, have them calculated
 		super.evaluate(  { async:false });
 		try {
-			//console.log("BEFORE _total  : " , this._total);
-			//console.log("BEFORE total   : " , this.total);
-			//console.log("BEFORE dice    : " , this.dice);
+			console.log("BEFORE _total  : " , this._total);
+			console.log("BEFORE total   : " , this.total);
+			console.log("BEFORE dice    : " , this.dice);
 			this.modifyResults();
 			if (this.data.useWildDie) {
 				
@@ -51,9 +58,11 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 //				console.log(" result3 ",merged);
 				this.results = merged.results;
 				this.finished.pool = merged.number;
-			} else {
+			} else if (this.configured.rollType!=RollType.Initiative){
 				this.results = this.dice[0].results;
 				this.finished.pool = this.dice[0].number;
+			} else {
+				this.results = this.dice[0].results;
 			}
 				
 /*			console.log("AFTER  _dice   : " , this._dice);
@@ -63,8 +72,13 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			console.log("AFTER  _results: " + this.results);
 			console.log("   this: " , this);
 */		
+
             this._evaluated = true;
-				this._formula = (this.data as ConfiguredRoll).pool + "d6";
+				if (this.configured.rollType!=RollType.Initiative){
+					this._formula = (this.data as ConfiguredRoll).pool + "d6";
+				} else {
+					this._formula = this.formula;
+				}
 				
 //				console.log("before leaving evalulate(): finished=",this.finished)
             return (this as Evaluated<this>);
@@ -90,8 +104,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	 */
 	_evaluateTotal() : number {
 		console.log("-----evaluateTotal");
-		super._evaluateTotal();
-      let total:number = 0;
+		
+      let total:number = super._evaluateTotal();
+      let normalTotal:number = total;
 		this.dice.forEach(term => {
     		let addedByExplosion = false;
 	    	term.results.forEach(die =>  total+= die.count!);
@@ -105,6 +120,14 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		this.finished.success = this.isSuccess();
 		this.finished.threshold = this.configured.threshold;
 		//this.finished.rollMode = this.configured.rollMode;
+		if (this.configured.rollType===RollType.Initiative) {
+			this.finished.threshold=0;
+			this.finished.success=true;
+			this.finished.formula = this._formula;
+			this.finished.total = normalTotal;
+			this._total = normalTotal;
+			total = normalTotal;
+		}
 		
 		// ToDO: Detect real monitor
 		this.finished.monitor = MonitorType.PHYSICAL;
@@ -245,7 +268,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 
 	isSuccess() {
 		console.log("SR6Roll.isSuccess for ",this)
-    if (this.finished.threshold! > 0) {
+ 		if (this.finished.threshold! > 0) {
       return this._total! >= this.finished.threshold!;
     } else {
       return this._total! > 0;

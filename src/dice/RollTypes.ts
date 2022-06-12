@@ -18,7 +18,8 @@ export enum RollType {
 	/** Reduce netto damage */
 	Soak    = "soak",
 	/** Directly apply the given damage */
-	Damage  = "damage"
+	Damage  = "damage",
+	Initiative = "initiative"
 }
 
 export enum SoakType {

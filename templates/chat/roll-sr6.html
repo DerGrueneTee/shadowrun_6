@@ -29,11 +29,15 @@
         {{#if data.extended}}
             <div class="resulttext" style="flex:2;text-align: right;">{{ localize 'shadowrun6.roll.accumulated' }}: <b>{{data.extendedAccumulate}}</b> / {{data.threshold}}</div>
         {{else}}
-            {{#if success}}
-            <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
-            {{else}}
-            <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{threshold}}</div>
-            {{/if}} 
+        		{{#if (eq rollType "initiative")}}
+        		<div class="resulttext" style="flex:2">Total {{total}}</div>
+        		{{else}}                		
+              {{#if success}}
+              <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
+              {{else}}
+              <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.nosuccess'}} {{threshold}}</div>
+              {{/if}} 
+            {{/if}}        
         {{/if}}
         <br/>
         {{#if criticalGlitch}}
