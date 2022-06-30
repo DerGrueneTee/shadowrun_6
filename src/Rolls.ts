@@ -201,7 +201,8 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRol
 			let mod  : number = configured.modifier?configured.modifier:0;
 			configured.pool = +base + +mod;
     	}
-    
+    console.log("_dialogClosed: ",formula);
+
     // Execute the roll
 		return new SR6Roll(formula, configured);
 	} catch (err) {

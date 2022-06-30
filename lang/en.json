@@ -768,6 +768,7 @@
       "failedSoak"   : "You got damage:",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",
+      "hits": "hits",
       "mode": "Mode",
       "modifier": "Pool modifier",
       "noedgegain": "No edge gain",
