@@ -51,5 +51,5 @@ This project currently switches from plain Javascript to Typescript, which means
 Unfortunately I must admit, that having this project as a side project to *Genesis* isn't giving me enough time to have a decent development pace. But I try to keep both projects in sync, so the character transfer from Genesis to Foundry VTT works for you.
 
 
-![Screenshot](screenshots/Screen_2021-06a.jpg)
-![Screenshot](screenshots/Screen_2021-06b.jpg)
+![Screenshot](screenshots/PC_Sheet.png)
+![Screenshot](screenshots/Spell_Rolldialog.png)
