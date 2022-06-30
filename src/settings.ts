@@ -17,6 +17,7 @@ export const registerSystemSettings = () => {
   /**
    * Register resting variants
    */
+	/*
   (game as any).settings.register(SYSTEM_NAME, "maxEdgePerRound", {
     name: "shadowrun6.settings.maxEdgePerRound.name",
     hint: "shadowrun6.settings.maxEdgePerRound.hint",
@@ -34,4 +35,5 @@ export const registerSystemSettings = () => {
 //      });
     }
   });
+*/
 }
