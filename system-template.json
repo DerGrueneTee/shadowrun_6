@@ -19,7 +19,7 @@
    }
   ],
   "minimumCoreVersion":"0.8.0",
-  "compatibleCoreVersion": "9.255",
+  "compatibleCoreVersion": "9.999",
   "scripts": [
   ],
   "esmodules": [
