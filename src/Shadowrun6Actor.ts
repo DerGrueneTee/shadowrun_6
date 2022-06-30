@@ -91,7 +91,7 @@ export class Shadowrun6Actor extends Actor {
         const data = this.data.data;
          // Only run on lifeforms
         if (isLifeform(data)) {
-             SR6.PRIMARY_ATTRIBUTES.forEach(attr => {
+             SR6.ATTRIBUTES.forEach(attr => {
                 data.attributes[attr].pool =
                     data.attributes[attr].base
                     + data.attributes[attr].mod;
