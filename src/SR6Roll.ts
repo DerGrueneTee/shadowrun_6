@@ -51,8 +51,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
       if (this.data.useWildDie) {
         	(this.dice[1].options as any).colorset = "SR6_light";
         	this.results = this.results.concat( (die.terms[2] as any).results);
-			this._dice  = die.dice ;
-      }
+			//this._dice  = die.dice ;
+      } else {
+			this.results = (die.terms[0] as any).results;
+		}
 
 		try {
 			// Mark wild dice and assign count values to single die
@@ -79,8 +81,9 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	/**********************************************
 	 */
    private  calculateTotal():number {
+     console.log("LEAVE calculateTotal", this);
      let total:number = 0;
-		this._dice.forEach(term => {
+		this.dice.forEach(term => {
      		term.results.forEach(die =>  total+= die.count!);
 		});
       return total;
@@ -136,6 +139,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		this.finished.criticalglitch = this.isCriticalGlitch();
 		this.finished.success = this.isSuccess();
 		this.finished.threshold = this.configured.threshold;
+		this.finished.total = this.total!;
 		//this.finished.rollMode = this.configured.rollMode;
 		if (this.configured.rollType===RollType.Initiative) {
 			this.finished.threshold=0;
