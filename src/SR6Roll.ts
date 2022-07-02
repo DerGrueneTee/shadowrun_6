@@ -42,9 +42,8 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 
 		if (this.configured.buttonType===ReallyRoll.AUTOHITS) {
 			// Hits have been bought
-			console.log(" ääääää pool = ",this.configured.calcPool);
-			console.log(" äääfää pool = ",this.configured);
-      	let noOfDice : number = Math.floor(this.configured.calcPool / 4);
+			console.log("BOUGHT HITS for pool",this.configured.pool);
+      	let noOfDice : number = Math.floor(this.configured.pool / 4);
      		let formula = this.createFormula(noOfDice, -1, false);
       	let die : Evaluated<Roll> = new Roll(formula).evaluate({ async: false });
       	this.results = (die.terms[0] as any).results;
@@ -56,7 +55,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
       	this._total = noOfDice;
      	 	this._formula = (game as any).i18n.localize("shadowrun6.roll.hits_bought");
       	this._evaluated = true;
-      	//this._dice = die.terms;
+      	this.terms = die.terms;
 		} else {
  	     	let die : Evaluated<Roll> = new Roll(this._formula).evaluate({ async: false });
 			console.log("Nested roll has a total of "+die.total, die);
