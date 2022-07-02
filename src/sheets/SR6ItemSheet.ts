@@ -50,11 +50,11 @@ export class SR6ItemSheet extends ItemSheet {
         const itemId:string = this.object.data._id!;
         const field = element.dataset.field;
 		  console.log("Try to update field '"+field+"' of item "+itemId)
-		  if (this.item) {
-			 this.item.update({ [field]: value });
-		  } else {
+//		  if (this.item) {
+//			 this.item.update({ [field]: value });
+//		  } else {
         	 this.actor!.items.get(itemId)!.update({ [field]: value });
-        }
+//        }
       });
     } else if (this.isEditable) {
       html.find('[data-field]').change(event => {

@@ -583,6 +583,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		const gear : Gear  = item.data.data;
 		
 		let roll : WeaponRoll = new WeaponRoll(attacker, item, itemId, gear);
+		roll.useWildDie = gear.wild?1:0;
 		console.log("_onRollItemCheck before ", roll);
 		(this.actor as Shadowrun6Actor).rollItem(roll);
 	}

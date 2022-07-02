@@ -40,20 +40,39 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		console.log("   this: " , this);
 		console.log("   formula: " , this._formula);
 
-      let die : Evaluated<Roll> = new Roll(this._formula).evaluate({ async: false });
-		console.log("Nested roll has a total of "+die.total, die);
-      this.results = (die.terms[0] as any).results;
-		this._total = die._total ;
-		this.terms  = die.terms;
+		if (this.configured.buttonType===ReallyRoll.AUTOHITS) {
+			// Hits have been bought
+			console.log(" ääääää pool = ",this.configured.calcPool);
+			console.log(" äääfää pool = ",this.configured);
+      	let noOfDice : number = Math.floor(this.configured.calcPool / 4);
+     		let formula = this.createFormula(noOfDice, -1, false);
+      	let die : Evaluated<Roll> = new Roll(formula).evaluate({ async: false });
+      	this.results = (die.terms[0] as any).results;
+     		this.results.forEach(result => {
+        		result.result = 6;
+        		result.success = true;
+        		(result as any).classes = "die die_" + result.result;
+      	});
+      	this._total = noOfDice;
+     	 	this._formula = (game as any).i18n.localize("shadowrun6.roll.hits_bought");
+      	this._evaluated = true;
+      	//this._dice = die.terms;
+		} else {
+ 	     	let die : Evaluated<Roll> = new Roll(this._formula).evaluate({ async: false });
+			console.log("Nested roll has a total of "+die.total, die);
+      	this.results = (die.terms[0] as any).results;
+			this._total = die._total ;
+			this.terms  = die.terms;
 		
-		// In case of a wild die, color the wild die
-		// and merge results
-      if (this.data.useWildDie) {
-        	(this.dice[1].options as any).colorset = "SR6_light";
-        	this.results = this.results.concat( (die.terms[2] as any).results);
-			//this._dice  = die.dice ;
-      } else {
-			this.results = (die.terms[0] as any).results;
+			// In case of a wild die, color the wild die
+			// and merge results
+      	if (this.data.useWildDie) {
+       	 	(this.dice[1].options as any).colorset = "SR6_light";
+        		this.results = this.results.concat( (die.terms[2] as any).results);
+				//this._dice  = die.dice ;
+      	} else {
+				this.results = (die.terms[0] as any).results;
+			}
 		}
 
 		try {

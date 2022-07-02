@@ -286,6 +286,7 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 			this.rollType = RollType.Weapon;
 			this.defendWith = Defense.PHYSICAL;
 		}
+		this.pool = gear.pool;
 	}
 }
 

@@ -536,6 +536,7 @@ export class Shadowrun6Actor extends Actor {
 			if (item.type == "gear" && item.data && isGear(item.data)) {
 				let gear:Gear = (item.data as Gear);
 				if (gear.skill && gear.skill!="") {
+					console.log("Item"+item.name+" has skillspec "+gear.skill+" / "+gear.skillSpec+" of ",item);
 				//item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
 					gear.pool = this._getSkillPool(item.data.skill, gear.skillSpec, itemUser.skills[gear.skill].attrib);
 					gear.pool = gear.pool + +gear.modifier;
@@ -973,7 +974,9 @@ export class Shadowrun6Actor extends Actor {
 		// Prepare check text
 		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
-		roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
+		if (roll.pool==0) {
+			roll.pool  = this._getSkillPool(roll.skillId, roll.skillSpec);
+		}
 		console.log("rollItem(", roll, ")");
 		let item : Gear = roll.gear;
 
