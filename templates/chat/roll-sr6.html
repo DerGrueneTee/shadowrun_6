@@ -106,7 +106,7 @@
    
    <!-- Defense -->
     {{log "Defense" data}}
-   {{#if defendWith}}
+   {{#if DISABLEDdefendWith}}
    <hr/>
     {{log "targets " data.targets}}
     {{log "targets " data.targets.len}}
@@ -125,7 +125,7 @@
    {{/if}}
    
    <!-- Soak Damage -->
-   {{#if (eq rollType "defense")}}
+   {{#if (eq rollType "DISABLEDdefense")}}
         {{#if success}}
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulDefense'}}</div>
         {{else}}
@@ -135,7 +135,7 @@
    {{/if}}
    
    <!-- After Soak / Apply Damage -->
-   {{#if (eq rollType "soak")}}
+   {{#if (eq rollType "DISABLEDsoak")}}
         {{#if success}}
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulSoak'}}</div>
         {{else}}
