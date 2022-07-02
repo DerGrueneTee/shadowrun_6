@@ -50,6 +50,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
      		this.results.forEach(result => {
         		result.result = 6;
         		result.success = true;
+				result.count = 1;
         		(result as any).classes = "die die_" + result.result;
       	});
       	this._total = noOfDice;
