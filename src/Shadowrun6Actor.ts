@@ -105,7 +105,6 @@ export class Shadowrun6Actor extends Actor {
      */
     _prepareDerivedAttributes() {
         const actorData = this.data;
-			console.log("###################prepareDerivedAttributes#####"+actorData.name);
         if (!isLifeform(this.data.data))
             return;
         const data:Lifeform = this.data.data;
@@ -536,7 +535,6 @@ export class Shadowrun6Actor extends Actor {
 			if (item.type == "gear" && item.data && isGear(item.data)) {
 				let gear:Gear = (item.data as Gear);
 				if (gear.skill && gear.skill!="") {
-					console.log("Item"+item.name+" has skillspec "+gear.skill+" / "+gear.skillSpec+" of ",item);
 				//item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
 					gear.pool = this._getSkillPool(item.data.skill, gear.skillSpec, itemUser.skills[gear.skill].attrib);
 					gear.pool = gear.pool + +gear.modifier;

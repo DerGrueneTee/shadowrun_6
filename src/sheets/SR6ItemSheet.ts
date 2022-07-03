@@ -50,8 +50,14 @@ export class SR6ItemSheet extends ItemSheet {
 	
 	if (!this.isEditable) {
 		let x  = html.find(".data-desc");
-		console.log("Replace descriptions");
-		x[0].innerHTML = (game as Game).i18n.localize("quality."+(this.object.data.data as GenesisData).genesisID+".desc");
+		console.log("Replace descriptions for "+this.object.type+" and "+this.object.data.data);
+		switch (this.object.type) {
+		case "quality": 
+			x[0].innerHTML = (game as Game).i18n.localize("quality."+(this.object.data.data as GenesisData).genesisID+".desc");
+			break;
+		default:
+			x[0].innerHTML = (game as Game).i18n.localize(this.object.type+"."+(this.object.data.data as GenesisData).genesisID+".desc");
+		}
 	}
 	
     // Owner Only Listeners

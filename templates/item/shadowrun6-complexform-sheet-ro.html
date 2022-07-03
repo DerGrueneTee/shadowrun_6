@@ -1,0 +1,77 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92"
+            style="background-color: var(--highlight-color)" />
+        <div class="section">
+            <table>
+                <tr>
+                    <th>{{localize 'shadowrun6.complexform.skill'}}</th>
+                    <th>{{localize 'shadowrun6.complexform.oppAttr1'}}</th>
+                    <th>{{localize 'shadowrun6.complexform.oppAttr2'}}</th>
+                </tr>
+                <tr>
+                    <!--// select leer, electronics, cracking -->
+                    <td class="box centered">
+                        <select name="data.skill">
+                            {{#select item.data.data.skill}}
+                            <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
+                            <option value="electronics">{{localize 'skill.electronics'}}</option>
+                            <option value="cracking">{{localize 'skill.cracking'}}</option>
+                            {{/select}}
+                        </select>
+                    </td>
+                    <td class="box centered">
+                        <select name="data.oppAttr1">
+                            {{#select item.data.data.oppAttr1}}
+                            <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
+                            <option value="devRating">{{localize 'shadowrun6.label.devicerating.short'}}</option>
+                            <option value="a">{{localize 'shadowrun6.label.attack.short'}}</option>
+                            <option value="s">{{localize 'shadowrun6.label.sleaze.short'}}</option>
+                            <option value="d">{{localize 'shadowrun6.label.dataproc.short'}}</option>
+                            <option value="f">{{localize 'shadowrun6.label.firewall.short'}}</option>
+                            {{/select}}
+                        </select>
+                    </td>
+                    <td class="box centered">
+                        <select name="data.oppAttr2">
+                            {{#select item.data.data.oppAttr2}}
+                            <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
+                            <option value="devRating">{{localize 'shadowrun6.label.devicerating.short'}}</option>
+                            <option value="a">{{localize 'shadowrun6.label.attack.short'}}</option>
+                            <option value="s">{{localize 'shadowrun6.label.sleaze.short'}}</option>
+                            <option value="d">{{localize 'shadowrun6.label.dataproc.short'}}</option>
+                            <option value="f">{{localize 'shadowrun6.label.firewall.short'}}</option>
+                            {{/select}}
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>{{localize 'shadowrun6.complexform.duration'}}</th>
+                    <th>{{localize 'shadowrun6.complexform.fading'}}</th>
+                    <th>{{localize 'shadowrun6.complexform.threshold'}}</th>
+                </tr>
+                <tr>
+                    <td class="box centered">
+                        <select name="data.duration">
+                            {{selectOptions config.spell_duration selected=item.data.data.duration localize=true}}
+                        </select>
+                    </td>
+                    <td class="box centered">
+                        <input name="data.fading" value="{{item.data.data.fading}}" type="text" class="box centered"
+                            style="width:2em" />
+                    </td>
+                    <td class="box centered">
+                        <input name="data.threshold" value="{{item.data.data.threshold}}" type="text" class="box centered"
+                            style="width:2em" />
+                    </td>
+                </tr>
+            </table>
+            <h3>{{localize 'shadowrun6.item.description'}}</h3>
+            <textarea class="box" type="text" name="data.description" cols="50"
+                rows="8">{{item.data.data.description}}</textarea>
+        </div>
+    </section>
+</form>

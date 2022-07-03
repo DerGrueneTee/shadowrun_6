@@ -1,0 +1,41 @@
+<form class="flexcol {{cssClass}}" autocomplete="off">
+    {{!-- Sheet Body --}}
+    <section class="sheet-body">
+        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
+        <div class="section">
+            <table>
+                <tr>
+                    <th>{{localize 'shadowrun6.spell.type'}}</th>
+                    <th>{{localize 'shadowrun6.adeptpower.activation'}}</th>           
+                    <th>{{localize 'shadowrun6.spell.range'}}</th>
+                    <th>{{localize 'shadowrun6.spell.duration'}}</th>           
+                </tr>
+                <tr>
+                    <td>
+                        <select name="data.type">
+                            {{selectOptions config.spell_type selected=item.data.data.type localize=true}}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="data.action">
+                            {{selectOptions config.adeptpower_activation selected=item.data.data.activation
+                            localize=true}}
+                        </select>
+                    </td>
+                    <td>
+                        <select name="data.range">
+                            {{selectOptions config.spell_range selected=item.data.data.range localize=true}}
+                        </select>
+                    </td>
+                    <td>
+                    <select name="data.duration">
+                        {{selectOptions config.spell_duration selected=item.data.data.duration localize=true}}
+                    </select>
+                </td>
+            </table>
+            <h3>{{localize 'shadowrun6.item.description'}}</h3>
+            <textarea class="box" type="text" name="data.description" cols="20"
+                rows="8">{{item.data.data.description}}</textarea>
+        </div>
+    </section>
+</form>
