@@ -21,7 +21,7 @@ import { defineHandlebarHelper } from "./util/helper.js";
 import { PreparedRoll, RollType, SoakType } from "./dice/RollTypes.js";
 import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
-import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import { ChatMessageData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 const diceIconSelector : string = '#chat-controls .chat-control-icon .fa-dice-d20';
 
@@ -157,12 +157,14 @@ Hooks.once("init", async function () {
 	Hooks.on('renderShadowrun6ActorSheetVehicle', (app,html,data) => {
 //    console.log("renderShadowrun6ActorSheetVehicle hook called");
 	 _onRenderVehicleSheet(app,html,data);
-		
 	});
 
-	Hooks.on('renderSR6ItemSheet', (app,html,data) => {
+	Hooks.on('renderSR6ItemSheet', (app:SR6ItemSheet,html,data:Item) => {
     console.log("renderSR6ItemSheet hook called");
-		
+    console.log("  app  = ",app);
+    console.log("  html = ",html);
+    console.log("  data = ",data);
+	 _onRenderItemSheet(app,html,data);
 	});
 
   /*
@@ -404,5 +406,9 @@ function registerChatMessageEdgeListener(event: Event, chatMsg:ChatMessage, html
 function _onRenderVehicleSheet(application, html, data) {
 	let actorData = data.actor.data.data;
 	console.log("_onRenderVehicleSheet for "+actorData);
+}
+
+function _onRenderItemSheet(sheet:SR6ItemSheet, html : JQuery, item) {
+	console.log("_onRenderItemSheet for ",item);
 }
 

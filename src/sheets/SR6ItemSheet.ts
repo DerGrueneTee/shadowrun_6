@@ -1,4 +1,5 @@
 import { SR6Config } from "../config.js";
+import { GenesisData } from "../ItemTypes.js";
 
 interface SR6ItemSheetData extends ItemSheet.Data {
 	config:SR6Config;
@@ -15,13 +16,21 @@ export class SR6ItemSheet extends ItemSheet {
   }
 
 
-  get template() {
-	 console.log("in template()");
-	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
-    const path = 'systems/shadowrun6-eden/templates/item/';
-	 console.log(`${path}shadowrun6-${this.item.data.type}-sheet.html`);
-    return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
-  }
+	get template() {
+		console.log("in template()",this);
+    	const path = 'systems/shadowrun6-eden/templates/item/';
+	 	console.log(`${path}shadowrun6-${this.item.data.type}-sheet.html`);
+		if (this.isEditable) {
+			console.log("ReadWrite sheet ");
+    		return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
+		} else {
+			console.log("ReadOnly sheet",this);
+			let genItem : GenesisData = (this.item.data.data as GenesisData);
+			(this.item as any).descHtml = (game as Game).i18n.localize(this.item.data.type+"."+genItem.genesisID+".desc");
+			(this.item.data as any).descHtml2 = (game as Game).i18n.localize(this.item.data.type+"."+genItem.genesisID+".desc");
+    		return `${path}shadowrun6-${this.item.data.type}-sheet-ro.html`;
+		}
+	}
 
   /** @overrride */
   getData() {
@@ -37,6 +46,14 @@ export class SR6ItemSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
 	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
+	
+	
+	if (!this.isEditable) {
+		let x  = html.find(".data-desc");
+		console.log("Replace descriptions");
+		x[0].innerHTML = (game as Game).i18n.localize("quality."+(this.object.data.data as GenesisData).genesisID+".desc");
+	}
+	
     // Owner Only Listeners
     if ((this.actor && this.actor.isOwner)) {
       html.find('[data-field]').change(event => {

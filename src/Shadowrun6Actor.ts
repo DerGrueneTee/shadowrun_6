@@ -23,7 +23,7 @@ function isSpell(obj: any): obj is Spell {
     return obj.category != undefined;
 }
 function isWeapon(obj: any): obj is Weapon {
-    return obj.dmg != undefined;
+    return (obj.type==="WEAPON_FIREARMS" || obj.type==="WEAPON_CLOSE_COMBAT" || obj.type==="WEAPON_RANGED" || obj.type==="WEAPON_SPECIAL") && obj.dmg != undefined;
 }
 function isArmor(obj: any): obj is Armor {
     return obj.defense != undefined;
@@ -543,11 +543,14 @@ export class Shadowrun6Actor extends Actor {
 				}
 			};
 			if (tmpItem.type == "gear" && isWeapon(item.data)) {
-/*				if (item.data.stun) {
-					if (item.data.stun==='false') {item.data.stun = false;}
-					else if (item.data.stun==='true') { item.data.stun = true;}
+				if (item.data.stun) {
+					if ( (item.data.stun as any)==='false') {
+						item.data.stun = false;
+					} else if ((item.data.stun as any)==='true') { 
+						item.data.stun = true;
+					}
 				}
-*/				let suffix = item.data.stun?(game as Game).i18n.localize("shadowrun6.item.stun_damage"):(game as Game).i18n.localize("shadowrun6.item.physical_damage");
+				let suffix = item.data.stun?(game as Game).i18n.localize("shadowrun6.item.stun_damage"):(game as Game).i18n.localize("shadowrun6.item.physical_damage");
 				item.data.dmgDef = item.data.dmg+suffix;
 			}
 			
