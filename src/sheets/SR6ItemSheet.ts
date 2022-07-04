@@ -55,6 +55,9 @@ export class SR6ItemSheet extends ItemSheet {
 		case "quality": 
 			x[0].innerHTML = (game as Game).i18n.localize("quality."+(this.object.data.data as GenesisData).genesisID+".desc");
 			break;
+		case "gear": 
+			x[0].innerHTML = (game as Game).i18n.localize("item."+(this.object.data.data as GenesisData).genesisID+".desc");
+			break;
 		default:
 			x[0].innerHTML = (game as Game).i18n.localize(this.object.type+"."+(this.object.data.data as GenesisData).genesisID+".desc");
 		}

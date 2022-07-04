@@ -1030,7 +1030,8 @@
         "rifles": "Gewehre",
         "shotguns": "Schrotflinten",
         "submachine_guns": "Maschinengewehre",
-        "tasers": "Taser"
+        "tasers": "Taser",
+        "whips": "Whips"
       },
       "influence": {
         "etiquette": "Gebräuche",

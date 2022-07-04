@@ -1,3 +1,4 @@
+{{log "shadowrun6-spell-sheet-ro.html" data.data}}
 <form class="flexcol {{cssClass}}" autocomplete="off" style="padding-right: 100px">
     {{!-- Sheet Body --}}
   	{{#if data.data.genesisID}}
@@ -6,59 +7,26 @@
 	{{else}}
 	<h2>{item.name</h2>
    {{/if}}
-    <section class="sheet-body">
-        <div class="section">
-            <table>
-                <tr>
-                    <th colspan="1">{{localize 'shadowrun6.spell.category'}}</th>
-                    <th colspan="2">{{localize 'shadowrun6.spell.isOpposed'}}</th>
-                    <th colspan="2">{{localize 'shadowrun6.spell.withEssence'}}</th>
-                </tr>
-                <tr style="text-align:center">
-                    <td colspan="2">
-                        <select name="data.category">
-                            {{selectOptions config.spell_category selected=item.data.data.category localize=true}}
-                        </select>
-                    </td>
-                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.isOpposed}}
-                            name="data.isOpposed" /></td>
-                    <td colspan="2"><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.withEssence}}
-                            name="data.withEssence" /></td>
-                </tr>
-                <tr>
-                    <th>{{localize 'shadowrun6.spell.range'}}</th>
-                    <th>{{localize 'shadowrun6.spell.type'}}</th>
-                    <th>{{localize 'shadowrun6.spell.duration'}}</th>           
-                    <th>{{localize 'shadowrun6.spell.drain'}}</th>           
-                    <th>{{localize 'shadowrun6.spell.damage'}}</th>           
-                </tr>
-                <tr>
-                    <td>
-                        <select name="data.range">
-                            {{selectOptions config.spell_range selected=item.data.data.range localize=true}}
-                        </select>
-                    </td>
-                    <td>
-                        <select name="data.type">
-                            {{selectOptions config.spell_type selected=item.data.data.type localize=true}}
-                        </select>
-                    </td>
-                    <td>
-                    <select name="data.duration">
-                        {{selectOptions config.spell_duration selected=item.data.data.duration localize=true}}
-                    </select>
-                </td>
-                <td>
-                    <input name="data.drain" value="{{item.data.data.drain}}" type="text" class="box centered" style="width:2em"/>
-                </td>
-                    <td>
-                        <select name="data.damage">
-                            {{selectOptions config.spell_damage selected=item.data.data.damage localize=true}}
-                        </select>
-                    </td>
-            </table>
-        </div>
-    </section>
+   
+   <table class="vehicle-stats-table" style="width: 20em">
+	<thead>
+	<tr>
+		<th style="align: center">{{ localize 'shadowrun6.spell.range' }}</th>
+		<th>{{ localize 'shadowrun6.spell.type' }}</th>
+		<th>{{ localize 'shadowrun6.spell.duration' }}</th>
+		<th>{{ localize 'shadowrun6.spell.drain' }}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr style="text-align:center">
+	  <td>{{data.data.data.range}}</td>
+	  <td>{{data.data.data.type}}</td>
+	  <td>{{data.data.data.duration}}</td>
+	  <td>{{data.data.data.drain}}</td>
+	</tr>
+	</tbody>
+   </table> 
+   
   	{{#if data.data.genesisID}}
 	<div class="data-desc" id="data-desc"/>
 	{{else}}

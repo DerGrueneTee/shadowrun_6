@@ -47,6 +47,9 @@ line {
 	padding-left: 2px;
 	padding-right: 3px;
 }
+.shadowrun6 th {
+	text-shadow: none; 
+}
 table td {
 	padding: 1px;
 }

@@ -1,9 +1,67 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
+{{log "shadowrun6-gear-sheet-ro.html" data}}
+<form class="flexcol {{cssClass}}" autocomplete="off" style="padding-right: 100px">
     {{!-- Sheet Body --}}
+  	{{#if data.data.genesisID}}
+	<h2>{{localize (concat (concat "item." data.data.genesisID) ".name")}}</h2>
+	<h4  style="font-style: italic">{{localize (concat (concat "item." data.data.genesisID) ".src")}}</h4>
+	{{else}}
+	<h2>{item.name</h2>
+   {{/if}}
+   <h4>{{localize (concat 'shadowrun6.gear.subtype.' item.data.data.subtype)}}</h4>
+   
+   <table class="vehicle-stats-table" style="width: 25em">
+	<thead>
+	<tr style="align: center">
+     <!-- ********** WAFFEN ********** -->
+     {{#if (or
+            (eq item.data.data.type "WEAPON_FIREARMS")
+            (eq item.data.data.type "WEAPON_RANGED")
+            (eq item.data.data.type "WEAPON_CLOSE_COMBAT")
+            (eq item.data.data.type "WEAPON_SPECIAL"))}}
+		<th>{{ localize 'shadowrun6.item.damage' }}</th>
+		<th>{{ localize 'shadowrun6.item.mode' }}</th>
+		<th>{{ localize 'shadowrun6.item.attackvalues' }}</th>
+      {{/if}}
+		{{#if (eq item.data.data.type "ARMOR")}}
+      <th>{{localize 'shadowrun6.item.defencerating'}}</th>
+     	<th>{{localize 'shadowrun6.item.capacity'}}</th>
+      <th>{{localize 'shadowrun6.item.social'}}</th>
+		{{/if}}
+		<th>{{ localize 'shadowrun6.item.availability' }}</th>
+		<th>{{ localize 'shadowrun6.item.price' }} </th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr style="text-align:center">
+     {{#if (or
+            (eq item.data.data.type "WEAPON_FIREARMS")
+            (eq item.data.data.type "WEAPON_RANGED")
+            (eq item.data.data.type "WEAPON_CLOSE_COMBAT")
+            (eq item.data.data.type "WEAPON_SPECIAL"))}}
+		<td>{{item.data.data.dmgDef}}</td>
+		<td>{{item.data.data.modes}}</td>
+		<td>{{item.data.data.attackRating}}</td>
+    	{{/if}}
+		{{#if (eq item.data.data.type "ARMOR")}}
+		<td>{{item.data.data.defense}}</td>
+		<td>{{item.data.data.capacity}}</td>
+		<td>{{item.data.data.social}}</td>
+		{{/if}}
+	  <td>{{item.data.data.availDef}}</td>
+	  <td>{{item.data.data.price}}</td>
+	</tr>
+	</tbody>
+   </table>
+    
+	{{#if item.data.data.skill}}
+   <p>
+   	{{localize (concat "skill." item.data.data.skill)}}
+   	/
+   	{{localize (concat (concat (concat "shadowrun6.special." item.data.data.skill) ".") item.data.data.skillSpec)}} 
+   </p>
+	{{/if}}
+	   
     <section class="sheet-body">
-        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92"
-            style="background-color: var(--highlight-color)" />
         <div class="section">
             <table>
                 <tr>
@@ -271,13 +329,16 @@
                 </tr>
             </table>
             {{/if}}
-            <h3>{{localize 'shadowrun6.item.accessories'}}</h3>
-            <textarea class="box" type="text" name="data.accessories" cols="60"
-                rows="4">{{item.data.data.accessories}}</textarea>
-            <!-- ********** Beschreibung ********** -->
-            <h3>{{localize 'shadowrun6.item.description'}}</h3>
-            <textarea class="box" type="text" name="data.description" cols="60"
-                rows="6">{{item.data.data.description}}</textarea>
         </div>
     </section>
+   <!-- Accessories -->
+	<h3>{{localize 'shadowrun6.item.accessories'}}</h3>
+   <p>{{item.data.data.accessories}}</p>
+   
+	<h3>{{localize 'shadowrun6.item.description'}}</h3>
+  	{{#if data.data.genesisID}}
+	<div class="data-desc" id="data-desc"/>
+	{{else}}
+	<div class="data-desc" id="data-desc">{{data.description}}</div>
+   {{/if}}
 </form>
