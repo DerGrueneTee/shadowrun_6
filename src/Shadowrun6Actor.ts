@@ -203,11 +203,13 @@ export class Shadowrun6Actor extends Actor {
 			data.attackrating.physical.modString += "\n+" + data.attackrating.physical.mod;
 		} 
 		
-		let traditionAttr = data.attributes[data.tradition.attribute];
-		data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
-		data.attackrating.astral.modString  = (game as Game).i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
-		data.attackrating.astral.modString += (game as Game).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + data.attributes[data.tradition.attribute].pool;
-		data.attackrating.astral.pool = data.attackrating.astral.base
+		if (data.tradition) {
+			let traditionAttr = data.attributes[data.tradition.attribute];
+			data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
+			data.attackrating.astral.modString  = (game as Game).i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool+"\n";
+			data.attackrating.astral.modString += (game as Game).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + data.attributes[data.tradition.attribute].pool;
+			data.attackrating.astral.pool = data.attackrating.astral.base
+		}
 		if (data.attackrating.astral.mod) {
 			data.attackrating.astral.pool += data.attackrating.astral.mod;
 			data.attackrating.astral.modString += "\n+" + data.attackrating.astral.mod;
@@ -500,15 +502,17 @@ export class Shadowrun6Actor extends Actor {
 			} 
 			
 			// Resist drain
-			let traditionAttr = data.attributes[data.tradition.attribute];
-			data.defensepool.drain.base = traditionAttr.pool + data.attributes["wil"].pool;
- 			data.defensepool.drain.modString = "\n"+(game as Game).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + traditionAttr.pool;
- 			data.defensepool.drain.modString += "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
-			data.defensepool.drain.pool = data.defensepool.drain.base;
-			if (data.defensepool.drain.mod) {
-				data.defensepool.drain.pool += data.defensepool.drain.mod;
-				data.defensepool.drain.modString += "\n+" + data.defensepool.drain.mod;
-			} 
+			if (data.tradition) {
+				let traditionAttr = data.attributes[data.tradition.attribute];
+				data.defensepool.drain.base = traditionAttr.pool + data.attributes["wil"].pool;
+ 				data.defensepool.drain.modString = "\n"+(game as Game).i18n.localize("attrib."+data.tradition.attribute+"_short") + " " + traditionAttr.pool;
+ 				data.defensepool.drain.modString += "\n"+(game as Game).i18n.localize("attrib.wil_short") + " " + data.attributes["wil"].pool;
+				data.defensepool.drain.pool = data.defensepool.drain.base;
+				if (data.defensepool.drain.mod) {
+					data.defensepool.drain.pool += data.defensepool.drain.mod;
+					data.defensepool.drain.modString += "\n+" + data.defensepool.drain.mod;
+				} 
+			}
 			
 			// Resist fading
 			data.defensepool.fading.base = data.attributes["wil"].pool + data.attributes["log"].pool;
@@ -1014,7 +1018,10 @@ export class Shadowrun6Actor extends Actor {
 		let checkText = this._getSkillCheckText(roll);
 
 		roll.targets = (game as Game).user!.targets.values();
-		roll.defenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
+		roll.defenseRating = this._getHighestDefenseRating( a =>  {
+			console.log("Determine defense pool of ",a);
+			return a.data.data.defenserating.physical.pool;
+		});
 		console.log("Highest defense rating of targets: "+roll.defenseRating);
 
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
