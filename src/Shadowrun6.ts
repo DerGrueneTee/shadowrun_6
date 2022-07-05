@@ -22,6 +22,7 @@ import { PreparedRoll, RollType, SoakType } from "./dice/RollTypes.js";
 import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { ChatMessageData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
 
 const diceIconSelector : string = '#chat-controls .chat-control-icon .fa-dice-d20';
 
@@ -41,6 +42,7 @@ Hooks.once("init", async function () {
 
   CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
   CONFIG.Combat.documentClass = Shadowrun6Combat;
+  CONFIG.Combatant.documentClass = Shadowrun6Combatant;
   CONFIG.Actor.documentClass = Shadowrun6Actor;
   CONFIG.Dice.rolls = [SR6Roll, Roll];
   (game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";

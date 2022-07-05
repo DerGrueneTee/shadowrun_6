@@ -17,7 +17,6 @@ export const registerSystemSettings = () => {
   /**
    * Register resting variants
    */
-	/*
   (game as any).settings.register(SYSTEM_NAME, "maxEdgePerRound", {
     name: "shadowrun6.settings.maxEdgePerRound.name",
     hint: "shadowrun6.settings.maxEdgePerRound.hint",
@@ -27,7 +26,7 @@ export const registerSystemSettings = () => {
     default: 2,
     onChange: max => {
       console.log("maxEdgePerRound adjusted to "+max);
-//      game.shadowrun6.maxEdgePerRound = max;
+		(game as Game).settings.set(SYSTEM_NAME, "maxEdgePerRound", max);
 //      game.actors.forEach(actor => {
 //        if (actor.data.type == "character") {
 //          actor.prepareData();
@@ -35,5 +34,4 @@ export const registerSystemSettings = () => {
 //      });
     }
   });
-*/
 }

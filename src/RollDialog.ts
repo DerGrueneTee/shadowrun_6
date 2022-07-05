@@ -1,8 +1,11 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
+import { BaseCombat } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents.mjs";
 import { Lifeform } from "./ActorTypes";
+import { SYSTEM_NAME } from "./constants.js";
 import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData, SkillRoll } from "./dice/RollTypes.js";
 import { Gear, Spell, Weapon } from "./ItemTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
+import Shadowrun6Combat from "./Shadowrun6Combat";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
@@ -167,6 +170,17 @@ export class RollDialog extends Dialog {
 		
 			// Set new edge value
 			let actor : Lifeform = configured.actor.data.data as Lifeform;
+			
+			// Limit the maximum edge
+			let max : number = ((game as Game).settings.get(SYSTEM_NAME, "maxEdgePerRound") as number);
+			let combat : StoredDocument<Shadowrun6Combat>|null = ((game as Game).combat as StoredDocument<Shadowrun6Combat>|null);
+			if (combat) {
+				max = combat.getMaxEdgeGain( configured.actor );
+			}
+			if (configured.edgePlayer>max) {
+				console.log("Reduce edge gain of attacker to "+max);
+				configured.edgePlayer = Math.min(configured.edgePlayer, max);
+			}
    		configured.edge = Math.min(7,actor.edge.value + configured.edgePlayer);
    		// Update in dialog
 			let edgeValue : HTMLLabelElement = (this._element![0].getElementsByClassName("edge-value")[0] as HTMLLabelElement);
