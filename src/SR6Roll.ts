@@ -12,6 +12,7 @@ import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 export default class SR6Roll extends Roll<ConfiguredRoll> {
 	
 	finished   : SR6ChatMessageData;
+	prepared   : PreparedRoll;
 	configured : ConfiguredRoll ;
 
     static CHAT_TEMPLATE = "systems/shadowrun6-eden/templates/chat/roll-sr6.html";

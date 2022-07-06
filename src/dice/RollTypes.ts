@@ -263,6 +263,8 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	gear   : Gear;
 	weapon : Weapon;
 	targets : IterableIterator<Token>;
+	
+	
 	defenseRating : number;
 	attackRating  : number;
 	/** Effective attack rating after applying firing mode */
@@ -307,6 +309,20 @@ export class MatrixActionRoll extends SkillRoll {
 	}
 }
 
+export class ConfiguredWeaponRollData {
+	defenseRating : number;
+	attackRating  : number;
+	/** Effective attack rating after applying firing mode */
+	calcAttackRating:Array<number> = [0,0,0,0,0];
+	/** Effective damage */
+	calcDmg: number;
+	/** How many units of ammunition are required */
+	calcRounds : number;
+	fireMode : string;
+	burstMode: string | undefined;
+	faArea: string | undefined;
+}
+
 export class ConfiguredRoll extends PreparedRoll {
 	edgeBoost:string;
 	modifier : number = 0;
@@ -321,6 +337,28 @@ export class ConfiguredRoll extends PreparedRoll {
 	/** Edge action selected  */
 	edgeAction : string;
 	targets : IterableIterator<Token>;
+	
+	/* This methods is a horrible crime - there must be a better solution */
+	updateSpecifics(copy : PreparedRoll) {
+		// In case this was a WeaponRoll
+		console.log("Copy WeaponRoll data to ConfiguredRoll");
+		(this as any).calcAttackRating = (copy as WeaponRoll).calcAttackRating;
+		(this as any).calcDmg = (copy as WeaponRoll).calcDmg;
+		(this as any).calcRounds = (copy as WeaponRoll).calcRounds;
+		(this as any).fireMode = (copy as WeaponRoll).fireMode;
+		(this as any).burstMode = (copy as WeaponRoll).burstMode;
+		(this as any).faArea = (copy as WeaponRoll).faArea;
+		
+		console.log("Copy SpellRoll data to ConfiguredRoll");
+		(this as any).spell = (copy as SpellRoll).spell;
+		(this as any).calcArea = (copy as SpellRoll).calcArea;
+		(this as any).calcDrain = (copy as SpellRoll).calcDrain;
+		(this as any).calcDamage = (copy as SpellRoll).calcDamage;
+		(this as any).canAmpUpSpell = (copy as SpellRoll).canAmpUpSpell;
+		(this as any).canIncreaseArea = (copy as SpellRoll).canIncreaseArea;
+		(this as any).defenseRating = (copy as SpellRoll).defenseRating;
+		(this as any).attackRating = (copy as SpellRoll).attackRating;
+	}
 }
 
 /**
@@ -369,6 +407,7 @@ export class SR6ChatMessageData {
 	nettoHits : number;
 	
 	constructor(copy : PreparedRoll) {
+		console.log("####SR6ChatMessageData####1###",copy);
 		this.speaker = copy.speaker;
 		this.actor   = copy.actor;
 		this.actionText = copy.actionText;
@@ -376,5 +415,6 @@ export class SR6ChatMessageData {
 		this.defendWith = copy.defendWith;
 		this.threshold  = copy.threshold;
 		this.pool       = copy.pool;
+		console.log("####SR6ChatMessageData####2###",this);
 	}
 }

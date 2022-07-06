@@ -1,5 +1,6 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { BaseCombat } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents.mjs";
+import { Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { Lifeform } from "./ActorTypes";
 import { SYSTEM_NAME } from "./constants.js";
 import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData, SkillRoll } from "./dice/RollTypes.js";
@@ -33,7 +34,7 @@ function isSkillRoll(obj: any): obj is SkillRoll {
     return obj.skillId != undefined;
 }
 
-export class SR6RollDialogOptions {
+export interface SR6RollDialogOptions extends DialogOptions {
 	actor   : Shadowrun6Actor;
 	prepared: PreparedRoll | null;
 	configured : ConfiguredRoll | null;
@@ -44,6 +45,13 @@ export class SR6RollDialogOptions {
 export class RollDialog extends Dialog {
 	
 	html: JQuery;
+
+  constructor(data: Dialog.Data, options?: Partial<DialogOptions>) {
+        super(data, options);
+		let rOptions : SR6RollDialogOptions = (options as SR6RollDialogOptions);
+         console.log("In RollDialog<init>(", data," , options,", rOptions);
+	}
+
 
 	activateListeners(html: JQuery): void {
    	super.activateListeners(html);
@@ -529,7 +537,7 @@ export class RollDialog extends Dialog {
 
 	//-------------------------------------------------------------
 	onClose(): SR6ChatMessageData {
-		console.log("To Do: onClose()");
+		console.log("To Do: onClose()------------------------------------");
 		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
 		let prepared : PreparedRoll = options.prepared!;	
 		let configured : ConfiguredRoll = options.configured!;	

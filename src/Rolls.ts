@@ -83,6 +83,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		const title = data.title;
 			
 			// Also prepare a ConfiguredRoll
+			console.log("###Create ConfiguredRoll");
 			let configured = new ConfiguredRoll();
 			configured.copyFrom(data);
 
@@ -150,15 +151,16 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 	}
 }
 
-function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRoll, configured: ConfiguredRoll): SR6Roll {
-	console.log("ENTER _dialogClosed(type=" + type + ", data=" , data , ")");
+function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: PreparedRoll, configured: ConfiguredRoll): SR6Roll {
+	console.log("ENTER _dialogClosed(type=" + type +")##########");
+	console.log("dialogClosed: prepared=",prepared);
+	configured.updateSpecifics(prepared);
+	console.log("dialogClosed: configured=",configured);
 	try {
-		
-		console.log("dialogClosed: configured=",configured);
 		if (!configured.modifier) configured.modifier=0;
 		
-		if (data.actor) {
-			if (!isLifeform(data.actor.data.data))
+		if (prepared.actor) {
+			if (!isLifeform(prepared.actor.data.data))
 				throw new Error("Not a lifeform");
 
 			// Pay eventuallly selected edge boost
@@ -169,24 +171,26 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRol
 				} else {
 					let boost:EdgeBoost = CONFIG.SR6.EDGE_BOOSTS.find(boost => boost.id==configured.edgeBoost)!;
 					console.log("Pay "+boost.cost+" egde for Edge Boost: "+(game as Game).i18n.localize("shadowrun6.edge_boost."+configured.edgeBoost));
-					data.actor.data.data.edge.value = data.edge - boost.cost;
+					prepared.actor.data.data.edge.value = prepared.edge - boost.cost;
 					// Pay Edge cost
-					data.actor.update({ ["data.edge.value"]: data.actor.data.data.edge.value });
+					console.log("Update Edge to "+(prepared.edge - boost.cost));
+					prepared.actor.update({ ["data.edge.value"]: prepared.actor.data.data.edge.value });
 				}
 			} else {
-				if (data.edge>0) {
-					data.actor.update({ ["data.edge.value"]: data.edge });
+				if (prepared.edge>0) {
+					console.log("Update Edge to "+prepared.edge);
+					prepared.actor.update({ ["data.edge.value"]: prepared.edge });
 				}
 			}
 		}
 
-		data.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
+		configured.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
 
 		let formula = "";
 		let isPrivate : boolean = false;
 	
 	   if (form) {	
-   	   data.threshold = (form.threshold)?parseInt(form.threshold.value):0;
+   	   configured.threshold = (form.threshold)?parseInt(form.threshold.value):0;
       	configured.useWildDie = form.useWildDie.checked?1:0;
       	configured.explode = form.explode.checked;
 	   	configured.buttonType = type;

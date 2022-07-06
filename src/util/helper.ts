@@ -7,6 +7,7 @@ function isLifeform(obj: any): obj is Lifeform {
 }
 
 export function attackRatingToString(val : number[]) : string { 
+	if (!val) return "NULL";
 	return val[0] + "/" +
       ((val[1] != 0) ? val[1] : "-") + "/" +
       ((val[2] != 0) ? val[2] : "-") + "/" +
@@ -17,6 +18,7 @@ export function attackRatingToString(val : number[]) : string {
 export const defineHandlebarHelper = async function() {
 	
   Handlebars.registerHelper('attackrating', function (val) {
+	 if (!val) return "NULL";
     return val[0] + "/" +
       ((val[1] != 0) ? val[1] : "-") + "/" +
       ((val[2] != 0) ? val[2] : "-") + "/" +
