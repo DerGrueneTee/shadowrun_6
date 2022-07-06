@@ -69,7 +69,6 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
       	if (this.data.useWildDie) {
        	 	(this.dice[1].options as any).colorset = "SR6_light";
         		this.results = this.results.concat( (die.terms[2] as any).results);
-				//this._dice  = die.dice ;
       	} else {
 				this.results = (die.terms[0] as any).results;
 			}
@@ -79,21 +78,19 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			// Mark wild dice and assign count values to single die
 	      this.modifyResults();
 
-			if (this.configured.rollType!=RollType.Initiative){
-	      this._total = this.calculateTotal();
-			console.log("  calculateTotal returned2: " , this._total);
-      	this._evaluated = true;
-					this._formula = (this.data as ConfiguredRoll).pool + "d6";
+			if (this.configured.rollType!=RollType.Initiative) {
+	      	this._total = this.calculateTotal();
+      		this._evaluated = true;
+				this._formula = (this.data as ConfiguredRoll).pool + "d6";
 			} else {
-					this._formula = this.formula;
+				this._formula = this.formula;
 			}
 	
 			this._prepareChatMessage();			
-//				console.log("before leaving evalulate(): finished=",this.finished)
-            return (this as Evaluated<this>);
-        } finally {
+         return (this as Evaluated<this>);
+       } finally {
             console.log("LEAVE evaluate()");
-        }
+       }
     }
 
 	/**********************************************
