@@ -165,22 +165,30 @@ export class RollDialog extends Dialog {
 					}
 					
 				}
-				
 			}
 		
 			// Set new edge value
 			let actor : Lifeform = configured.actor.data.data as Lifeform;
 			
+			let capped : boolean = false;
 			// Limit the maximum edge
 			let max : number = ((game as Game).settings.get(SYSTEM_NAME, "maxEdgePerRound") as number);
 			let combat : StoredDocument<Shadowrun6Combat>|null = ((game as Game).combat as StoredDocument<Shadowrun6Combat>|null);
 			if (combat) {
 				max = combat.getMaxEdgeGain( configured.actor );
 			}
+			// Check if the gained edge would be more than the player may get per round
 			if (configured.edgePlayer>max) {
 				console.log("Reduce edge gain of attacker to "+max);
 				configured.edgePlayer = Math.min(configured.edgePlayer, max);
+				capped = true;
 			}
+			// Check if new Edge value would be >7
+			if ( (actor.edge.value + configured.edgePlayer) >7 ) {
+				configured.edgePlayer = Math.max(0, 7 - actor.edge.value);
+				capped = true;
+			}
+			
    		configured.edge = Math.min(7,actor.edge.value + configured.edgePlayer);
    		// Update in dialog
 			let edgeValue : HTMLLabelElement = (this._element![0].getElementsByClassName("edge-value")[0] as HTMLLabelElement);
@@ -196,8 +204,7 @@ export class RollDialog extends Dialog {
 			
 			let speaker : ChatSpeakerDataProperties = configured.speaker;
     		if (configured.edgePlayer) {
-				let max : number = options.actor.getMaxEdgeGainThisRound();
-				if (configured.edgePlayer>max) {
+				if (capped) {
 					configured.edgePlayer = max;
 					innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player_capped", {name:speaker.alias, value:configured.edgePlayer, capped:max});
 				} else {

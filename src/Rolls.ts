@@ -81,6 +81,10 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		};
 		const html: string = await renderTemplate(template, dialogData);
 		const title = data.title;
+			
+			// Also prepare a ConfiguredRoll
+			let configured = new ConfiguredRoll();
+			configured.copyFrom(data);
 
 		// Create the Dialog window
 		return new Promise(resolve => {
@@ -92,12 +96,12 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 					bought: {
 						icon: '<i class="fas fa-dollar-sign"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.bought"),
-						callback: html => resolve(_dialogClosed(ReallyRoll.AUTOHITS, html[0].querySelector("form"), data))
+						callback: html => resolve(_dialogClosed(ReallyRoll.AUTOHITS, html[0].querySelector("form"), data, configured))
 					},
 					normal: {
 						icon: '<i class="fas fa-dice-six"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
-						callback: html => resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data))
+						callback: html => resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, configured))
 					}
 				};
 			} else {
@@ -107,7 +111,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
 						callback: html => {
 							console.log("doRoll: in callback");
-							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data));
+							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, configured));
 							console.log("end callback");
 						}
 					}
@@ -125,10 +129,6 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 				buttons: buttons,
 				default: "normal",
 			};
-			
-			// Also prepare a ConfiguredRoll
-			let configured = new ConfiguredRoll();
-			configured.copyFrom(data);
 			
 			const myDialogOptions ={
 				width: 520,
@@ -150,11 +150,10 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 	}
 }
 
-function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRoll): SR6Roll {
+function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, data: PreparedRoll, configured: ConfiguredRoll): SR6Roll {
 	console.log("ENTER _dialogClosed(type=" + type + ", data=" , data , ")");
 	try {
 		
-		let configured :ConfiguredRoll = (data as ConfiguredRoll);
 		console.log("dialogClosed: configured=",configured);
 		if (!configured.modifier) configured.modifier=0;
 		

@@ -315,7 +315,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	  * @override
      */
 	toJSON() {
-		//console.log("toJSON ",this);
+		console.log("toJSON ",this);
 		const json = super.toJSON();
 		//console.log("toJSON: json=",json);
 		(json as any).data = this.data;
@@ -333,7 +333,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
      */
    static fromData<T extends Roll>(this: ConstructorOf<T>, data: Data): T {
 		const roll : Roll = super.fromData(data);
-		//console.log("fromData ",roll);
+		console.log("fromData ",roll);
     	(roll as any).configured = (data as any).configured;
     	(roll as any).finished = (data as any).finished;
     	(roll as any).results = (data as any).results;

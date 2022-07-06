@@ -26,7 +26,6 @@ export default class Shadowrun6Combat extends Combat {
   }
 
 	getMaxEdgeGain(actor : Shadowrun6Actor) : number {
-		console.log("getMaxEdgeGain1 ",actor);
 		
 		let max : number = (game as Game).settings.get(SYSTEM_NAME, "maxEdgePerRound") as number;
 		// If no combat started, max gain is always setting max		
@@ -36,7 +35,6 @@ export default class Shadowrun6Combat extends Combat {
 		}
 		
 		let comb : Shadowrun6Combatant = (this.getCombatantByActor(actor.data._id!) as Shadowrun6Combatant);
-		console.log("getMaxEdgeGain2 ",comb);
 		if (comb) {
 			max -= Math.max(0,comb.edgeGained);
 		}
