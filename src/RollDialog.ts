@@ -36,8 +36,8 @@ function isSkillRoll(obj: any): obj is SkillRoll {
 
 export interface SR6RollDialogOptions extends DialogOptions {
 	actor   : Shadowrun6Actor;
-	prepared: PreparedRoll | null;
-	configured : ConfiguredRoll | null;
+	prepared: PreparedRoll;
+	dialogResult : ConfiguredRoll;
 }
 /**
  * Special Shadowrun 6 instance of the RollDialog
@@ -45,14 +45,30 @@ export interface SR6RollDialogOptions extends DialogOptions {
 export class RollDialog extends Dialog {
 	
 	html: JQuery;
+	actor   : Shadowrun6Actor;
+	prepared: PreparedRoll;
+	/** This field is used to return all settings made in the roll dialog */
+	dialogResult : ConfiguredRoll;
+	
+	/** Edge after applying gain and boost cost */
+	edge     : number = 0;
+	/** Dice added or substracted to the pool */
+	modifier : number = 0;
 
   constructor(data: Dialog.Data, options?: Partial<DialogOptions>) {
         super(data, options);
 		let rOptions : SR6RollDialogOptions = (options as SR6RollDialogOptions);
-         console.log("In RollDialog<init>(", data," , options,", rOptions);
+      console.log("In RollDialog<init>()", rOptions);
+		this.actor = rOptions.actor;
+		this.prepared = rOptions.prepared;
+		this.dialogResult = rOptions.dialogResult;
+		
+		this.edge = (this.actor.data.data as Lifeform).edge.value;
 	}
 
-
+	/********************************************
+	 * React to changes on the dialog
+	 ********************************************/
 	activateListeners(html: JQuery): void {
    	super.activateListeners(html);
 		this.html = html;
@@ -117,12 +133,8 @@ export class RollDialog extends Dialog {
 	 * HTML form
 	 */
 	_onCalcEdge(event) {
-//		console.log("onCalcEdge ", this);
-
-		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
-		let prepared : PreparedRoll = options.prepared!;	
-		let configured : ConfiguredRoll = options.configured!;	
-		
+		let configured : ConfiguredRoll = this.dialogResult;
+		let prepared : PreparedRoll = this.prepared;
 		if (!configured.actor) return;
 	
    	try {
@@ -197,15 +209,15 @@ export class RollDialog extends Dialog {
 				capped = true;
 			}
 			
-   		configured.edge = Math.min(7,actor.edge.value + configured.edgePlayer);
+   		this.edge = Math.min(7,actor.edge.value + configured.edgePlayer);
    		// Update in dialog
 			let edgeValue : HTMLLabelElement = (this._element![0].getElementsByClassName("edge-value")[0] as HTMLLabelElement);
 			if (edgeValue) { 
-	  			edgeValue.innerText = configured.edge.toString();
+	  			edgeValue.innerText = this.edge.toString();
 			}
 			// Update selection of edge boosts
-			this._updateEdgeBoosts( (this._element![0].getElementsByClassName("edgeBoosts")[0] as HTMLSelectElement), configured.edge);
-			let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=configured.edge);
+			this._updateEdgeBoosts( (this._element![0].getElementsByClassName("edgeBoosts")[0] as HTMLSelectElement), this.edge);
+			let newEdgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="PRE" && boost.cost<=this.edge);
 
     		// Prepare text for player
     		let innerText = "";
@@ -309,7 +321,7 @@ export class RollDialog extends Dialog {
 
 		let actor : Shadowrun6Actor = (this.options as any).actor;
 		let prepared : PreparedRoll = (this.options as any).prepared;
-		let configured : ConfiguredRoll = (this.options as any).configured;
+		let configured : ConfiguredRoll = this.dialogResult;
 		
 		// Ignore this, if there is no actor
 		if (!actor) {
@@ -327,7 +339,7 @@ export class RollDialog extends Dialog {
 			
 			configured.edgeBoost = boostId;
 		   if (boostId==="edge_action") {
-				this._updateEdgeActions(this._element![0].getElementsByClassName("edgeActions")[0] , configured.edge);
+				this._updateEdgeActions(this._element![0].getElementsByClassName("edgeActions")[0] , this.edge);
 			} else {
 				this._updateEdgeActions(this._element![0].getElementsByClassName("edgeActions")[0] , 0);
 			}
@@ -354,7 +366,7 @@ export class RollDialog extends Dialog {
 
 	//-------------------------------------------------------------
 	_updateDicePool(data : ConfiguredRoll) {
-		$("label[name='dicePool']")[0].innerText = (parseInt(data.pool as any) + parseInt(data.modifier as any)).toString();
+		$("label[name='dicePool']")[0].innerText = (parseInt(data.pool as any) + parseInt(this.modifier as any)).toString();
 	}
 	
 	//-------------------------------------------------------------
@@ -365,17 +377,18 @@ export class RollDialog extends Dialog {
 		}
 		
 		data.explode = false;
-		data.modifier = 0;
+		this.modifier = 0;
 		
 		switch (boostOrActionId) {
 		case "add_edge_pool":
+			
 			data.explode = true;
-			data.modifier = (data.actor.data.data as Lifeform).edge.max;
+			this.modifier = (data.actor.data.data as Lifeform).edge.max;
 			break;
 		}	
 
 		// Update content on dialog	
-		($("input[name='modifier']")[0] as HTMLInputElement).value = data.modifier.toString();
+		($("input[name='modifier']")[0] as HTMLInputElement).value = this.modifier.toString();
 		//($("input[name='explode' ]")[0] as HTMLInputElement).value = data.explode;
 		($("input[name='explode' ]")[0] as HTMLInputElement).checked = data.explode;
 		this._updateDicePool(data);
@@ -540,7 +553,7 @@ export class RollDialog extends Dialog {
 		console.log("To Do: onClose()------------------------------------");
 		const options : SR6RollDialogOptions = (this.options as any as SR6RollDialogOptions);
 		let prepared : PreparedRoll = options.prepared!;	
-		let configured : ConfiguredRoll = options.configured!;	
+		let configured : ConfiguredRoll = options.dialogResult!;	
 		return new SR6ChatMessageData(configured);
 	}
 }

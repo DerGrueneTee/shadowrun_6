@@ -5,17 +5,17 @@
   {{log "roll-sr6.html prepared=" prepared}}
   {{log "roll-sr6.html configured=" configured}}
   <h3>{{actionText}}</h3> 
-  {{#if data.isOpposed}}
+  {{#if isOpposed}}
   <div class="chat-edge" style="display:block">
-    <div>{{data.edge_message}}</div>
-    {{#if data.edge_use}}
-    <div style="color: var(--highlight-color)">{{data.edge_use}}</div>
+    <div>{{edge_message}}</div>
+    {{#if edge_use}}
+    <div style="color: var(--highlight-color)">{{edge_use}}</div>
     {{/if}}
-  <div class="chat-edge-collapsible" style="display:none">
+  <div class="chat-edge-collapsibleDISABLED" style="display:none">
     <header class="part-header flexrow">
-      <div>{{ localize 'shadowrun6.label.attack_rating'}}: <b>{{data.attackRating}}</b></div>
+      <div>{{ localize 'shadowrun6.label.attack_rating'}}: <b>{{attackRating}}</b></div>
       <br/>
-      <div>{{ localize 'shadowrun6.label.defense_rating'}}: <b>{{data.defRating}}</b></div>
+      <div>{{ localize 'shadowrun6.label.defense_rating'}}: <b>{{defRating}}</b></div>
     </header>
   </div>
   </div>

@@ -323,10 +323,11 @@ export class ConfiguredWeaponRollData {
 	faArea: string | undefined;
 }
 
-export class ConfiguredRoll extends PreparedRoll {
-	edgeBoost:string;
-	modifier : number = 0;
+export class ConfiguredRoll extends CommonRollData {
+	/** How was the dialog closed */
 	buttonType : ReallyRoll;
+
+	edgeBoost:string;
 	explode : boolean;
 	defRating : number;
    edgePlayer: number;
@@ -358,6 +359,10 @@ export class ConfiguredRoll extends PreparedRoll {
 		(this as any).canIncreaseArea = (copy as SpellRoll).canIncreaseArea;
 		(this as any).defenseRating = (copy as SpellRoll).defenseRating;
 		(this as any).attackRating = (copy as SpellRoll).attackRating;
+		(this as any).spellDesc = (copy as SpellRoll).spellDesc;
+		(this as any).spellId = (copy as SpellRoll).spellId;
+		(this as any).spellName = (copy as SpellRoll).spellName;
+		(this as any).spellSrc = (copy as SpellRoll).spellSrc;
 	}
 }
 
@@ -378,9 +383,12 @@ export class SR6ChatMessageData {
 	
 	/* Opposed rolls: How to oppose? */
 	defendWith: Defense;
-	get isOpposed() : boolean {
-		return this.defendWith != undefined;
-	}
+	isOpposed : boolean;
+	edge_message : string;
+	edgeAdjusted : number;
+	edge_use : string;
+	/** Edge action selected  */
+	edgeAction : string;
 	
 	/** How many dice have been rolled */
 	pool		 : number;
@@ -406,7 +414,7 @@ export class SR6ChatMessageData {
 	damageAfterSoakAlreadyApplied : boolean;
 	nettoHits : number;
 	
-	constructor(copy : PreparedRoll) {
+	constructor(copy : ConfiguredRoll) {
 		console.log("####SR6ChatMessageData####1###",copy);
 		this.speaker = copy.speaker;
 		this.actor   = copy.actor;
@@ -415,6 +423,10 @@ export class SR6ChatMessageData {
 		this.defendWith = copy.defendWith;
 		this.threshold  = copy.threshold;
 		this.pool       = copy.pool;
+		this.isOpposed  = this.defendWith != undefined;
+		this.edge_message = copy.edge_message;
+		this.edge_use   = copy.edge_use;
+		this.edgeAction = copy.edgeAction;
 		console.log("####SR6ChatMessageData####2###",this);
 	}
 }

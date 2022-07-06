@@ -7,6 +7,8 @@ import { RollDialog, SR6RollDialogOptions } from "./RollDialog.js";
 import { Spell, Weapon } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
 import { ConfiguredRoll, WeaponRoll, PreparedRoll, ReallyRoll, RollType, SpellRoll } from "./dice/RollTypes.js";
+import Shadowrun6Combat from "./Shadowrun6Combat";
+import Shadowrun6Combatant from "./Shadowrun6Combatant";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -46,6 +48,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 	console.log("ENTER _showRollDialog", this);
 	try {
 		let lifeform : Lifeform|undefined;
+		let dia2 : RollDialog ;
 		if (data.actor) {
 			if (!isLifeform(data.actor.data.data)) {
 				console.log("Actor is not a lifeform");
@@ -84,8 +87,8 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			
 			// Also prepare a ConfiguredRoll
 			console.log("###Create ConfiguredRoll");
-			let configured = new ConfiguredRoll();
-			configured.copyFrom(data);
+			let dialogResult = new ConfiguredRoll();
+			dialogResult.copyFrom(data);
 
 		// Create the Dialog window
 		return new Promise(resolve => {
@@ -97,12 +100,12 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 					bought: {
 						icon: '<i class="fas fa-dollar-sign"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.bought"),
-						callback: html => resolve(_dialogClosed(ReallyRoll.AUTOHITS, html[0].querySelector("form"), data, configured))
+						callback: html => resolve(_dialogClosed(ReallyRoll.AUTOHITS, html[0].querySelector("form"), data, dia2, dialogResult))
 					},
 					normal: {
 						icon: '<i class="fas fa-dice-six"></i>',
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
-						callback: html => resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, configured))
+						callback: html => resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, dia2, dialogResult))
 					}
 				};
 			} else {
@@ -112,7 +115,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
 						callback: html => {
 							console.log("doRoll: in callback");
-							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, configured));
+							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, dia2, dialogResult));
 							console.log("end callback");
 						}
 					}
@@ -137,10 +140,10 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 				resizeable : true,
 				actor   : data.actor,
 				prepared: data,
-				configured : configured
+				dialogResult : dialogResult
 			};
 			console.log("create RollDialog");
-			let dia2: RollDialog = new RollDialog(diagData, myDialogOptions);
+			dia2 = new RollDialog(diagData, myDialogOptions);
 			dia2.render(true);
 			console.log("showRollDialog after render()");
 		});
@@ -151,13 +154,29 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 	}
 }
 
-function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: PreparedRoll, configured: ConfiguredRoll): SR6Roll {
+function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: PreparedRoll, dialog :RollDialog, configured: ConfiguredRoll): SR6Roll {
 	console.log("ENTER _dialogClosed(type=" + type +")##########");
 	console.log("dialogClosed: prepared=",prepared);
 	configured.updateSpecifics(prepared);
 	console.log("dialogClosed: configured=",configured);
+	
+	/* Check if attacker gets edge */
+	if (configured.actor && configured.edgePlayer>0) {
+		console.log("Actor "+configured.actor.data._id+" gets "+configured.edgePlayer+" Edge");
+		let newEdge = (configured.actor.data.data as Lifeform).edge.value + configured.edgePlayer; 
+		configured.actor.update({ ["data.edge.value"]: newEdge });
+		let combat : StoredDocument<Shadowrun6Combat>|null = ((game as Game).combat as StoredDocument<Shadowrun6Combat>|null);
+		if (combat) {
+			console.log("In combat: mark edge gained in combatant "+configured.edgePlayer+" Edge");
+			let combatant : Combatant|undefined = combat.getCombatantByActor(configured.actor.data._id!)
+			if (combatant) {
+				(combatant as Shadowrun6Combatant).edgeGained += configured.edgePlayer;
+			}
+		}
+	}
+	
 	try {
-		if (!configured.modifier) configured.modifier=0;
+		if (!dialog.modifier) dialog.modifier=0;
 		
 		if (prepared.actor) {
 			if (!isLifeform(prepared.actor.data.data))
@@ -184,7 +203,7 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: Prepare
 			}
 		}
 
-		configured.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
+		//configured.edgeBoosts = CONFIG.SR6.EDGE_BOOSTS.filter(boost => boost.when=="POST");
 
 		let formula = "";
 		let isPrivate : boolean = false;
@@ -194,14 +213,15 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: Prepare
       	configured.useWildDie = form.useWildDie.checked?1:0;
       	configured.explode = form.explode.checked;
 	   	configured.buttonType = type;
-      	configured.modifier = parseInt(form.modifier.value);
+      	dialog.modifier = parseInt(form.modifier.value);
+			if (!dialog.modifier) dialog.modifier=0;
       	configured.defRating = (form.defRating)?parseInt(form.defRating.value):0;
 			console.log("rollMode = ", form.rollMode.value);
 			configured.rollMode = form.rollMode.value;
 
-			formula = createFormula(configured);
+			formula = createFormula(configured, dialog);
 			let base : number = configured.pool?configured.pool:0;
-			let mod  : number = configured.modifier?configured.modifier:0;
+			let mod  : number = dialog.modifier?dialog.modifier:0;
 			configured.pool = +base + +mod;
     	}
     console.log("_dialogClosed: ",formula);
@@ -219,9 +239,11 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: Prepare
 /*
  * Convert ConfiguredRoll into a Foundry roll formula
  */
-function createFormula(roll:ConfiguredRoll) : string {
+function createFormula(roll:ConfiguredRoll, dialog : RollDialog) : string {
 		console.log("createFormula-------------------------------");
-	let regular : number = +(roll.pool?roll.pool:0) + (+roll.modifier?+roll.modifier:0);
+		console.log("--pool = "+roll.pool);
+		console.log("--modifier = "+dialog.modifier);
+	let regular : number = +(roll.pool?roll.pool:0) + (dialog.modifier?dialog.modifier:0);
 	let wild    : number = 0;
 	if (roll.useWildDie>0) {
 		regular -= roll.useWildDie;
