@@ -78,16 +78,15 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		try {
 			// Mark wild dice and assign count values to single die
 	      this.modifyResults();
+
+			if (this.configured.rollType!=RollType.Initiative){
 	      this._total = this.calculateTotal();
 			console.log("  calculateTotal returned2: " , this._total);
       	this._evaluated = true;
-
-//      this._dice = die.terms;
-				if (this.configured.rollType!=RollType.Initiative){
 					this._formula = (this.data as ConfiguredRoll).pool + "d6";
-				} else {
+			} else {
 					this._formula = this.formula;
-				}
+			}
 	
 			this._prepareChatMessage();			
 //				console.log("before leaving evalulate(): finished=",this.finished)
