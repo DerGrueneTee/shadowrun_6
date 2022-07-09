@@ -17,7 +17,7 @@ function isGear(obj: any): obj is Gear {
     return obj.skill != undefined;
 }
 function isVehicle(obj: any): obj is Vehicle {
-    return obj.skill != undefined && obj.vehicle!=undefined;
+    return obj.skill != undefined && (obj.type==="VEHICLES" || obj.type==="DRONES");
 }
 function isSpell(obj: any): obj is Spell {
     return obj.category != undefined;
@@ -600,8 +600,10 @@ export class Shadowrun6Actor extends Actor {
 				if ("GROUND" === specialization) { specialization = "ground_craft"; }
 				if ("WATER"  === specialization) { specialization = "watercraft"; }
 				if ("AIR"    === specialization) { specialization = "aircraft"; }
-				
-				vehicleData.skillSpec = specialization;
+				// Set specialization if none exists
+				if (!vehicleData.skillSpec && specialization) {
+					vehicleData.skillSpec = specialization;
+				}
 				let opMode = current.opMode;
 				let rigRating : number = actorData.controlRig; 
 				let modRig = "";

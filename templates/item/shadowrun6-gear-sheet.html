@@ -59,7 +59,7 @@
                     <th colspan="5">{{localize 'shadowrun6.item.attackvalues'}}</th>
                     <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
                 </tr>
- {{log "shadowrun6-gear-sheet.html this=" item.data}}
+ {{log "shadowrun6-gear-sheet.html this=" item.data.data}}
                 <tr>
                     <td style="width: 2.5em"><input type="number" value="{{item.data.data.dmg}}" name="data.dmg" class="box centered" /></td>
                     <td>
@@ -113,7 +113,7 @@
                         </select>
                     </td>
                     <td>
-        	   			<select name="data.skillSpec" data-field="data.data.skillSpec">
+        	   			<select name="data.skillSpec" data-field="data.skillSpec">
         	   			{{#if item.data.data.skill}}
                      {{selectOptions (lookup config.skill_special item.data.data.skill) selected=data.data.skillSpec localize=true}}
                      {{/if}}           			

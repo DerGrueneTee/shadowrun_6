@@ -152,7 +152,7 @@ Hooks.once("init", async function () {
   });
 
 	Hooks.on('renderShadowrun6ActorSheetPC', (doc,options,userId) => {
-    console.log("renderShadowrun6ActorSheetPC hook called");
+    console.log("renderShadowrun6ActorSheetPC hook called",doc);
 		
 	});
 
@@ -163,9 +163,6 @@ Hooks.once("init", async function () {
 
 	Hooks.on('renderSR6ItemSheet', (app:SR6ItemSheet,html,data:Item) => {
     console.log("renderSR6ItemSheet hook called");
-    console.log("  app  = ",app);
-    console.log("  html = ",html);
-    console.log("  data = ",data);
 	 _onRenderItemSheet(app,html,data);
 	});
 

@@ -17,7 +17,7 @@ export class SR6ItemSheet extends ItemSheet {
 
 
 	get template() {
-		console.log("in template()",this);
+		console.log("in template()",this.item.data.data);
     	const path = 'systems/shadowrun6-eden/templates/item/';
 	 	console.log(`${path}shadowrun6-${this.item.data.type}-sheet.html`);
 		if (this.isEditable) {
@@ -65,7 +65,7 @@ export class SR6ItemSheet extends ItemSheet {
 	
     // Owner Only Listeners
     if ((this.actor && this.actor.isOwner)) {
-      html.find('[data-field]').change(event => {
+      html.find('[data-field]').change( async event => {
         const element = event.currentTarget;
         let value;
         if (element.type == "checkbox") {
@@ -75,12 +75,12 @@ export class SR6ItemSheet extends ItemSheet {
         }
         const itemId:string = this.object.data._id!;
         const field = element.dataset.field;
-		  console.log("Try to update field '"+field+"' of item "+itemId)
-//		  if (this.item) {
-//			 this.item.update({ [field]: value });
-//		  } else {
-        	 this.actor!.items.get(itemId)!.update({ [field]: value });
-//        }
+		  console.log("Try to update field '"+field+"' of item "+itemId+" with value "+value,this.item)
+		  if (this.item) {
+			 await this.item.update({ [field]: value });
+		  } else {
+        	 await this.actor!.items.get(itemId)!.update({ [field]: value });
+        }
       });
     } else if (this.isEditable) {
       html.find('[data-field]').change(event => {
