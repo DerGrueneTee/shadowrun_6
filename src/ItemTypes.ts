@@ -1,4 +1,4 @@
-import { CurrentVehicle, Monitor, Pool } from "./ActorTypes.js";
+import { CurrentVehicle, Initiative, Monitor, Pool } from "./ActorTypes.js";
 
 /**
  * Items
@@ -131,8 +131,27 @@ export class MatrixDevice extends Gear {
 	usedForPool: boolean;
 }
 
-export class Persona extends Gear {
+export class DevicePersona {
+	/** Built from devices Commlink/Cyberjack + Cyberdeck */
 	base: MatrixDevice = new MatrixDevice;
+	/** Final distribution */
+	mod: MatrixDevice = new MatrixDevice;	
+}
+export class LivingPersona {
+	/** Defined from attributes */
+	base: MatrixDevice = new MatrixDevice;
+	/** Resonance distribution */
+	mod: MatrixDevice = new MatrixDevice;	
+}
+
+export class Persona extends Gear {
+	/** */
+	device: DevicePersona = new DevicePersona;
+	/** Calculated living persona */
+	living: LivingPersona = new LivingPersona;
+	/** The decision which (virtual) Matrix persona to use */
 	used: MatrixDevice = new MatrixDevice;
+	/** Living persona -  */
 	monitor: Monitor   = new Monitor;
+	initiative : Initiative = new Initiative;
 }

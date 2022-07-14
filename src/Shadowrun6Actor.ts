@@ -1,7 +1,8 @@
-import { Lifeform, ILifeform, Attribute, SR6Actor, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill, CurrentVehicle, VehicleActor, MatrixUser } from "./ActorTypes.js";
+
+import { Lifeform, ILifeform, Attribute, SR6Actor, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill, CurrentVehicle, VehicleActor, MatrixUser, Initiative } from "./ActorTypes.js";
 import { Defense, MonitorType, SR6, SR6Config } from "./config.js";
 import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
-import { Armor, ComplexForm, Gear,MatrixDevice,Persona,Spell,Vehicle,Weapon } from "./ItemTypes.js";
+import { Armor, ComplexForm, DevicePersona, Gear,LivingPersona,MatrixDevice,Persona,Spell,Vehicle,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
 import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll, SoakType, SoakRoll } from "./dice/RollTypes.js";
@@ -169,7 +170,7 @@ export class Shadowrun6Actor extends Actor {
         }
         // Matrix perception
         if (data.derived.matrix_perception) {
-        //data.derived.matrix_perception.base = data.skills["electronics"].points + data.skills["electronics"].modifier + data.attributes["int"].pool;
+        		data.derived.matrix_perception.base = data.skills["electronics"].points + data.skills["electronics"].modifier + data.attributes["int"].pool;
       		data.derived.matrix_perception.pool = data.derived.matrix_perception.base + data.derived.matrix_perception.mod;
 		  }
     }
@@ -218,6 +219,7 @@ export class Shadowrun6Actor extends Actor {
 		
 		// Matrix attack rating (Angriff + Schleicher)
 		if (isMatrixUser(data)) {
+			console.log("prepareAttackRatings:",data.persona.used);
 		if (data.persona && data.persona.used) {
 			data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
 			data.attackrating.matrix.pool = data.attackrating.matrix.base;
@@ -318,6 +320,7 @@ export class Shadowrun6Actor extends Actor {
 			
 			// Matrix defense
 			if (isMatrixUser(data)) {
+			console.log("prepareDefenseRatings:",data.persona.used);
 			data.defenserating.matrix.base = data.persona.used.d + data.persona.used.f;
 			data.defenserating.matrix.modString = ""; //(game as Game).i18n.localize("attrib.int_short") + " " + data.attributes["int"].pool;
 			data.defenserating.matrix.pool = data.defenserating.matrix.base;
@@ -698,17 +701,22 @@ export class Shadowrun6Actor extends Actor {
 		const actorData:Player = (this.data.data as Player);
 
 		if (!actorData.persona            ) actorData.persona = new Persona;
-		if (!actorData.persona.base       ) actorData.persona.base = new MatrixDevice;
-		if (!actorData.persona.used       ) actorData.persona.used = new MatrixDevice;
-		if (!actorData.persona.monitor    ) actorData.persona.monitor = new Monitor;
+		if (!actorData.persona.used       ) actorData.persona.used  = new MatrixDevice;
+		if (!actorData.persona.device     ) actorData.persona.device = new DevicePersona;
+		if (!actorData.persona.device.base) actorData.persona.device.base = new MatrixDevice;
+		if (!actorData.persona.device.mod ) actorData.persona.device.mod  = new MatrixDevice;
+		if (!actorData.persona.living     ) actorData.persona.living = new LivingPersona;
+		if (!actorData.persona.living.mod ) actorData.persona.living.mod  = new MatrixDevice;
+		if (!actorData.persona.monitor    ) actorData.persona.monitor  = new Monitor;
+		if (!actorData.persona.initiative ) actorData.persona.initiative  = new Initiative;
 		
 		this.data.items.forEach(tmpItem => {
 			if (tmpItem.type == "gear" && isMatrixDevice(tmpItem.data.data)) {
 				let item:MatrixDevice = tmpItem.data.data;
 				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK") {
 					if (item.usedForPool) {
-						actorData.persona.base.d = item.d;
-						actorData.persona.base.f = item.f;
+						actorData.persona.device.base.d = item.d;
+						actorData.persona.device.base.f = item.f;
 						if (! actorData.persona.monitor.max) {
 							actorData.persona.monitor.max = ((item.subtype == "COMMLINK")?item.devRating:item.devRating)/2 +8;							
 						}
@@ -716,15 +724,15 @@ export class Shadowrun6Actor extends Actor {
 				};
 				if (item.subtype == "CYBERDECK") {
 					if (item.usedForPool) {
-						actorData.persona.base.a = item.a;
-						actorData.persona.base.s = item.s;
+						actorData.persona.device.base.a = item.a;
+						actorData.persona.device.base.s = item.s;
 						actorData.persona.monitor.max =item.devRating/2 +8;		
 					}
 				};
 			}			
 		});
+		console.log("preparePersona: device=",actorData.persona.device);
 		
-/*		if (!actorData.persona.used     ) actorData.persona.used = {};
 		actorData.persona.used.a = actorData.persona.device.mod.a;
 		actorData.persona.used.s = actorData.persona.device.mod.s;
 		actorData.persona.used.d = actorData.persona.device.mod.d;
@@ -733,17 +741,15 @@ export class Shadowrun6Actor extends Actor {
 		
 		// Living persona
 		if (actorData.mortype=="technomancer") {
-			if (!actorData.persona.living     ) actorData.persona.living = {};
-			if (!actorData.persona.living.base) actorData.persona.living.base = {};
-			if (!actorData.persona.living.mod ) actorData.persona.living.mod  = {};
+			if (!actorData.persona.living     ) actorData.persona.living = new LivingPersona();
 			actorData.persona.living.base.a = actorData.attributes["cha"].pool;
 			actorData.persona.living.base.s = actorData.attributes["int"].pool;
 			actorData.persona.living.base.d = actorData.attributes["log"].pool;
 			actorData.persona.living.base.f = actorData.attributes["wil"].pool;
-			actorData.persona.living.devRating = actorData.attributes["res"].pool;
+			actorData.persona.living.base.devRating = actorData.attributes["res"].pool;
 			// Initiative: Data processing + Intuition
-			actorData.persona.initative = {};
-			actorData.persona.initative.base = actorData.persona.living.base.d + actorData.attributes["int"].pool
+			actorData.persona.initiative = new Initiative;
+			actorData.persona.initiative.base = actorData.persona.living.base.d + actorData.attributes["int"].pool
 
 			actorData.persona.used.a = actorData.persona.living.base.a + actorData.persona.living.mod.a;
 			actorData.persona.used.s = actorData.persona.living.base.s + actorData.persona.living.mod.s;
@@ -751,6 +757,7 @@ export class Shadowrun6Actor extends Actor {
 			actorData.persona.used.f = actorData.persona.living.base.f + actorData.persona.living.mod.f;
 		}
 		
+		/*
 		if (actorData.skills) {
 			// Attack pool
 			actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
@@ -758,10 +765,11 @@ export class Shadowrun6Actor extends Actor {
 			if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
 			actorData.persona.attackPool += actorData.attributes["log"].pool;
 		}
-			
+
 		// Damage
 		actorData.persona.damage = Math.ceil(actorData.persona.used.a/2);
-*/	}
+		*/
+	}
 
 	//---------------------------------------------------------
 	/*
