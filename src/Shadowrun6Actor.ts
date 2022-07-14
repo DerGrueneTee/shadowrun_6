@@ -1020,11 +1020,13 @@ export class Shadowrun6Actor extends Actor {
 		let checkText = this._getSkillCheckText(roll);
 
 		roll.targets = (game as Game).user!.targets.values();
-		roll.defenseRating = this._getHighestDefenseRating( a =>  {
+		let highestDefenseRating : number = this._getHighestDefenseRating( a =>  {
 			console.log("Determine defense pool of ",a);
 			return a.data.data.defenserating.physical.pool;
 		});
 		console.log("Highest defense rating of targets: "+roll.defenseRating);
+		if (highestDefenseRating>0)
+			roll.defenseRating=highestDefenseRating;
 
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
 		return doRoll(roll);
@@ -1083,6 +1085,8 @@ export class Shadowrun6Actor extends Actor {
 		roll.attackRating = roll.performer.attackrating.astral.pool;
 		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: "+highestDefenseRating);
+		if (highestDefenseRating>0)
+			roll.defenseRating=highestDefenseRating;
 		roll.canAmpUpSpell   = roll.spell.category === "combat";
 		roll.canIncreaseArea = roll.spell.range==="line_of_sight_area" || roll.spell.range==="self_area";
 		if (roll.spell.category === "combat") {
