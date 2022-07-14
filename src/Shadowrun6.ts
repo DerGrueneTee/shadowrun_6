@@ -147,6 +147,7 @@ Hooks.once("init", async function () {
 		let roll : PreparedRoll = new PreparedRoll();
 		roll.pool = 0;
       roll.speaker = ChatMessage.getSpeaker({ actor: this });
+		roll.rollType = RollType.Common;
       doRoll(roll);
     });
   });
