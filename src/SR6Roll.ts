@@ -58,7 +58,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
      	 	this._formula = (game as any).i18n.localize("shadowrun6.roll.hits_bought");
       	this._evaluated = true;
       	this.terms = die.terms;
-		} else {
+		} else if (this.configured.buttonType===ReallyRoll.ROLL) {
  	     	let die : Evaluated<Roll> = new Roll(this._formula).evaluate({ async: false });
 			console.log("Nested roll has a total of "+die.total, die);
       	this.results = (die.terms[0] as any).results;
@@ -73,13 +73,19 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
       	} else {
 				this.results = (die.terms[0] as any).results;
 			}
+		} else {
+			console.log("Unmodified roll "+this._formula);
+ 	     	let die : Evaluated<Roll> = new Roll(this._formula).evaluate({ async: false });
+      	this.results = (die.terms[0] as any).results;
+			this._total = die._total ;
+			this.terms  = die.terms;
 		}
 
 		try {
 			// Mark wild dice and assign count values to single die
 	      this.modifyResults();
 
-			if (this.configured.rollType!=RollType.Initiative) {
+			if (this.configured.rollType && this.configured.rollType!=RollType.Initiative) {
 	      	this._total = this.calculateTotal();
       		this._evaluated = true;
 				this._formula = (this.data as ConfiguredRoll).pool + "d6";
@@ -365,7 +371,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		try {
 			
     		if ( !this._evaluated ) await this.evaluate({async: true});
-			let isPrivate = options!.isPrivate;
+			let isPrivate = options?options!.isPrivate:false;
 			if (!this.finished) {
 				console.log("#####this.finished not set#############");
 				this.finished = new SR6ChatMessageData(this.configured);
@@ -406,7 +412,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			this.finished.formula = isPrivate ? "???" : this._formula,
 			this.finished.publicRoll = !isPrivate;
 			this.finished.tooltip = isPrivate ? "" : await this.getTooltip();
-			this.finished.publicRoll = ! options!.isPrivate;
+			this.finished.publicRoll = ! isPrivate;
 			
 
 			
