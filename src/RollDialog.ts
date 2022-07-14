@@ -63,7 +63,7 @@ export class RollDialog extends Dialog {
 		this.prepared = rOptions.prepared;
 		this.dialogResult = rOptions.dialogResult;
 		
-		this.edge = (this.actor.data.data as Lifeform).edge.value;
+		this.edge = (this.actor)?(this.actor.data.data as Lifeform).edge.value:0;
 	}
 
 	/********************************************
