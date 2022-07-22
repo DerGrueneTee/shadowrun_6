@@ -19,9 +19,9 @@
 	</thead>
 	<tbody>
 	<tr style="text-align:center">
-	  <td>{{data.data.data.range}}</td>
-	  <td>{{data.data.data.type}}</td>
-	  <td>{{data.data.data.duration}}</td>
+	  <td>{{localize (lookup config.spell_range data.data.data.range )}}</td>
+	  <td>{{localize (lookup config.spell_type data.data.data.type )}}</td>
+	  <td>{{localize (lookup config.spell_duration data.data.data.duration )}}</td>
 	  <td>{{data.data.data.drain}}</td>
 	</tr>
 	</tbody>
