@@ -23,6 +23,7 @@ import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { ChatMessageData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
+import { GenesisData } from "./ItemTypes.js";
 
 const diceIconSelector : string = '#chat-controls .chat-control-icon .fa-dice-d20';
 
@@ -133,6 +134,19 @@ Hooks.once("init", async function () {
       createData.img = CONFIG.SR6.icons[createData.type].default;
       item.update({ ["img"]: createData.img });
     }
+
+		// If it is a compendium item, copy over text description
+		if ((createData.data as GenesisData).genesisID) {
+			let key : string = item.data.type+"."+item.data.data.genesisID;
+			console.log("Item with genesisID - check for "+key);
+			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
+				(createData.data as GenesisData).description = (game as Game).i18n.localize(key+".desc");
+				createData.name = (game as Game).i18n.localize(key+".name");
+     			item.update({ ["data.description"]: createData.data.description });
+			}
+				
+		}
+
     console.log("onCreateItem: " + createData.img);
   }
 
@@ -371,7 +385,8 @@ Hooks.once("dragRuler.ready", (SpeedProvider) => {
         }
     }
 
-    (this as any).dragRuler.registerSystem("shadowrun6-eden", FictionalGameSystemSpeedProvider)
+	// @ts-ignore
+  	dragRuler.registerSystem("shadowrun6-eden", FictionalGameSystemSpeedProvider)
 })
 
 });
