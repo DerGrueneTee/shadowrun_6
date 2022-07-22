@@ -99,6 +99,14 @@
       "pp": "PP",
       "perLevel": "per level"
     },
+	 "critterpower": {
+		"actiontitle": "Action",
+		"action": {
+			"auto": "Auto",
+			"major": "Major",
+			"minor": "Minor"
+	  }
+	 },
     "attack_rating": {
       "astral": "Mana Att. Rtg",
       "matrix": "Matrix Att. Rtg.",
@@ -1136,6 +1144,8 @@
       "duration_special_short": "Spec",
       "duration_sustained": "Sustained",
       "duration_sustained_short": "S",
+      "duration_always": "Always",
+      "duration_always_short": "A",
       "isOpposed": "Is Opposed",
       "range": "Range",
       "range_line_of_sight": "Line of sight",

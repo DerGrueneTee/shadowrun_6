@@ -165,6 +165,7 @@ export class SR6Config {
 		"sustained": "shadowrun6.spell.duration_sustained",
 		"permanent": "shadowrun6.spell.duration_permanent",
 		"limited": "shadowrun6.spell.duration_limited",
+		"always": "shadowrun6.spell.duration_always",
 		"special": "shadowrun6.spell.duration_special"
 	};
 	spell_damage = {
@@ -183,6 +184,11 @@ export class SR6Config {
 		"passive": "shadowrun6.adeptpower.activation_passive",
 		"minor_action": "shadowrun6.adeptpower.activation_minor",
 		"major_action": "shadowrun6.adeptpower.activation_major",
+	};
+	critterpower_action = {
+		"auto" : "shadowrun6.critterpower.action.auto",
+		"minor": "shadowrun6.critterpower.action.minor",
+		"major": "shadowrun6.critterpower.action.major",
 	};
 	skill_special = {
 		"astral": {
