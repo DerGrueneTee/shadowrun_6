@@ -1,34 +1,17 @@
-<form class="flexcol {{cssClass}}" autocomplete="off">
-    {{!-- Sheet Body --}}
-    <section class="sheet-body">
-        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
-        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92" style="background-color: var(--highlight-color)"/>
-        <div class="section">
-            <table>
-                <tr>
-                    <th>{{localize 'shadowrun6.adeptpower.activation'}}</th>
-                    <th>{{localize 'shadowrun6.adeptpower.cost'}}</th>
-                    <th>{{localize 'shadowrun6.adeptpower.haslevel'}}</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="data.activation">
-                            {{selectOptions config.adeptpower_activation selected=item.data.data.activation
-                            localize=true}}
-                        </select>
-                    </td>
-                    <td>
-                        <input name="data.cost" value="{{item.data.data.cost}}" type="number" class="box centered" />
-                    </td>
-                    <td>
-                        <input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.hasLevel}}
-                            name="data.hasLevel" />
-                    </td>
-                </tr>
-            </table>
-            <h3>{{localize 'shadowrun6.item.description'}}</h3>
-            <textarea class="box" type="text" name="data.description" cols="20"
-                rows="6">{{data.data.description}}</textarea>
-        </div>
-    </section>
+<form class="flexcol {{cssClass}}" autocomplete="off" style="padding-right: 100px">
+   {{log "adeptpower-sheet-ro.html" data.data}}
+  	{{#if data.data.genesisID}}
+	<h2>{{localize (concat (concat "adeptpower." data.data.genesisID) ".name")}}</h2>
+	<h4  style="font-style: italic">{{localize (concat (concat "adeptpower." data.data.genesisID) ".src")}}</h4>
+	
+	<span><b>{{localize 'shadowrun6.adeptpower.cost'}}:</b> {{item.data.data.cost}} {{localize 'shadowrun6.adeptpower.pp'}}
+	{{#if data.data.hasLevel}} {{localize 'shadowrun6.adeptpower.perLevel'}} {{/if}}
+	</span>
+	<span><b>{{localize 'shadowrun6.adeptpower.activation'}}:</b> {{localize (lookup config.adeptpower_activation item.data.data.activation )}}</span>
+	<br/>
+	<div class="data-desc" id="data-desc"/>
+	{{else}}
+	<h2>{item.name</h2>
+	<div class="data-desc" id="data-desc">{{data.description}}</div>
+   {{/if}}
 </form>

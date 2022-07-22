@@ -95,7 +95,9 @@
       "activation_minor": "Minor Action",
       "activation_passive": "Passive",
       "cost": "Cost",
-      "haslevel": "Has level"
+      "haslevel": "Has level",
+      "pp": "PP",
+      "perLevel": "per level"
     },
     "attack_rating": {
       "astral": "Mana Att. Rtg",
