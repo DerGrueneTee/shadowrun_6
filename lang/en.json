@@ -116,7 +116,7 @@
     },
     "complexform": {
       "duration": "Duration",
-      "fading": "Fading",
+      "fading": "Fade Value",
       "none": "None",
       "oppAttr1": "Opposing Attr. 1",
       "oppAttr2": "Opposing Attr. 2",
