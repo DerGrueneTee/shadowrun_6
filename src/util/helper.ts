@@ -68,7 +68,6 @@ export const defineHandlebarHelper = async function() {
 	Handlebars.registerHelper('description', function (itemData:GenesisData, type) {
 		let fallback : string = itemData.description;
    	let key = type+"."+itemData.genesisID+".desc";
-		console.log("Search "+key);
 		let name= (game as any).i18n.localize(key);
 		if (name==key) {
 			return fallback;
