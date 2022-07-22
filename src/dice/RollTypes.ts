@@ -9,6 +9,7 @@ import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 export enum RollType {
 	Common = "common",
 	Weapon = "weapon",
+	Skill = "skill",
 	Spell = "spell",
 	Ritual = "ritual",
 	ComplexForm = "complexform",
@@ -161,6 +162,8 @@ export class SoakRoll extends PreparedRoll {
 }
 
 export class SkillRoll extends PreparedRoll {
+	rollType = RollType.Skill;
+
 	skillId: string;
 	skillDef: SkillDefinition;
 	skillValue: Skill;
