@@ -18,7 +18,7 @@
  		{{#each actor.items as |item id|}} 
 		{{#iff item.type '==' 'gear'}}
 		{{#iff item.data.data.type '==' "ARMOR"}}
-       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{description item.data.data 'item'}}">
        	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
        	<td><label class="switch">
        	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.usedForPool" {{checked item.data.data.usedForPool}} type="checkbox" data-dtype="Boolean"/>

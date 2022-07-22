@@ -18,7 +18,7 @@
 		{{#iff item.type '==' 'ritual'}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
        	<td style="width:1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button></td>
-       	<td><input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
+       	<td><input type="text" value="{{item.name}}" data-field="name" title="{{description item.data.data item.type}}"/></td>
 			<td class="centered" style="width: 2em"> <input class="centered" type="text" value="{{item.data.data.threshold}}" data-field="data.threshold" data-type="Number"/></td>
 			<td class="centered">
 				<a class="item-control ritual-roll" title="Roll"   data-item-id="{{item.id}}" ><i class="fas fa-dice-six"></i></a>

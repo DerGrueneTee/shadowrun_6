@@ -18,7 +18,7 @@
 		{{#iff item.type '==' 'gear'}}
 		{{#iff item.data.data.type '==' "BIOWARE"}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
+			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{description item.data.data 'item'}}"/></td>
 			<td class="centered" style="width: 3em"> <input class="centered" type="text" value="{{item.data.data.essence}}" data-field="data.essence" data-type="Number"/></td>
 			<td class="centered"> - </td>
 			<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
@@ -28,7 +28,7 @@
 		{{/iff}} 
 		{{#iff item.data.data.type '==' "CYBERWARE"}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
+			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{description item.data.data 'item'}}"/></td>
 			<td  class="centered"style="width: 3em"> <input type="text" value="{{item.data.data.essence}}" data-field="data.essence" data-type="Number"/></td>
 			<td class="centered" style="width: 2em"> <input class="centered" type="text" value="{{item.data.data.capacity}}" data-field="data.capacity" data-type="Number"/></td>
 			<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i

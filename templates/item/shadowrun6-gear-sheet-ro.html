@@ -12,7 +12,7 @@
    <table class="vehicle-stats-table" style="width: 25em">
 	<thead>
 	<tr style="align: center">
-     <!-- ********** WAFFEN ********** -->
+     <!-- ********** WEAPONS ********** -->
      {{#if (or
             (eq item.data.data.type "WEAPON_FIREARMS")
             (eq item.data.data.type "WEAPON_RANGED")
@@ -22,10 +22,31 @@
 		<th>{{ localize 'shadowrun6.item.mode' }}</th>
 		<th>{{ localize 'shadowrun6.item.attackvalues' }}</th>
       {{/if}}
+     <!-- ********** ARMOR ********** -->
 		{{#if (eq item.data.data.type "ARMOR")}}
       <th>{{localize 'shadowrun6.item.defencerating'}}</th>
      	<th>{{localize 'shadowrun6.item.capacity'}}</th>
       <th>{{localize 'shadowrun6.item.social'}}</th>
+		{{/if}}
+     <!-- ********** VEHICLE ********** -->
+     {{#if (or
+            (eq item.data.data.type "VEHICLES")
+            (eq item.data.data.type "DRONE_MICRO")
+            (eq item.data.data.type "DRONE_MINI")
+            (eq item.data.data.type "DRONE_SMALL")
+            (eq item.data.data.type "DRONE_MEDIUM")
+            (eq item.data.data.type "DRONE_LARGE"))}}
+       <th colspan="2">{{ localize 'shadowrun6.section.vehicles.column.handling' }}</th>
+       <th>{{ localize 'shadowrun6.section.vehicles.column.acc' }}</th>
+       <th>{{ localize 'shadowrun6.section.vehicles.column.spdi' }}</th>
+       <th>{{ localize 'shadowrun6.section.vehicles.column.tspd' }}</th>
+                    <th>{{ localize 'shadowrun6.section.vehicles.column.bod' }}</th>
+                    <th>{{ localize 'shadowrun6.section.vehicles.column.arm' }}</th>
+                    <th>{{ localize 'shadowrun6.section.vehicles.column.pil' }}</th>
+                    <th>{{ localize 'shadowrun6.section.vehicles.column.sen' }}</th>
+                    {{#if (eq item.data.data.type "VEHICLES")}}
+                    <th>{{ localize 'shadowrun6.section.vehicles.column.sea' }}</th>
+                    {{/if}}
 		{{/if}}
 		<th>{{ localize 'shadowrun6.item.availability' }}</th>
 		<th>{{ localize 'shadowrun6.item.price' }} </th>
@@ -46,6 +67,27 @@
 		<td>{{item.data.data.defense}}</td>
 		<td>{{item.data.data.capacity}}</td>
 		<td>{{item.data.data.social}}</td>
+		{{/if}}
+     <!-- ********** VEHICLE ********** -->
+     {{#if (or
+            (eq item.data.data.type "VEHICLES")
+            (eq item.data.data.type "DRONE_MICRO")
+            (eq item.data.data.type "DRONE_MINI")
+            (eq item.data.data.type "DRONE_SMALL")
+            (eq item.data.data.type "DRONE_MEDIUM")
+            (eq item.data.data.type "DRONE_LARGE"))}}
+       <td>{{item.data.data.handlOn}}</td>
+       <td>{{item.data.data.handlOff}}</td>
+       <td>{{item.data.data.accOn}}</td>
+       <td>{{item.data.data.spdiOn}}</td>
+       <td>{{item.data.data.tspd}}</td>
+                    <td>{{item.data.data.bod}}</td>
+                    <td>{{item.data.data.arm}}</td>
+                    <td>{{item.data.data.pil}}</td>
+                    <td>{{item.data.data.sen}}</td>
+                    {{#if (eq item.data.data.type "VEHICLES")}}
+                    <td>{{item.data.data.sea}}></td>
+                    {{/if}}
 		{{/if}}
 	  <td>{{item.data.data.availDef}}</td>
 	  <td>{{item.data.data.price}}</td>

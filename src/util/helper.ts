@@ -1,9 +1,16 @@
 import { Lifeform, Skill } from "../ActorTypes";
 import { SkillDefinition } from "../DefinitionTypes";
+import { GenesisData } from "../ItemTypes";
 import { Shadowrun6Actor } from "../Shadowrun6Actor";
 
 function isLifeform(obj: any): obj is Lifeform {
     return obj.attributes != undefined;
+}
+
+function deHTML(html :string) : string {
+	html = html.replace(/<br\/>/gi, "\n");
+	html = html.replace(/<b>(.*?)<\/b>/gi, " $1");
+	return html;
 }
 
 export function attackRatingToString(val : number[]) : string { 
@@ -57,16 +64,18 @@ export const defineHandlebarHelper = async function() {
   Handlebars.registerHelper('spellFeat', getSpellFeatures);
   Handlebars.registerHelper('matrixPool', getMatrixActionPool);
 
-/*
-	Handlebars.registerHelper('description', function (itemData, type) {
+
+	Handlebars.registerHelper('description', function (itemData:GenesisData, type) {
+		let fallback : string = itemData.description;
    	let key = type+"."+itemData.genesisID+".desc";
-		let name= game.i18n.localize(key);
+		console.log("Search "+key);
+		let name= (game as any).i18n.localize(key);
 		if (name==key) {
-			return "";
+			return fallback;
 		}
-		return name;
+		return deHTML(name);
   });
-*/
+
 
   // Allows {if X = Y} type syntax in html using handlebars
   Handlebars.registerHelper("iff", function (a, operator, b, opts) {
