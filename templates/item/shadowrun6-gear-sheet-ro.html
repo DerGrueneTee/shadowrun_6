@@ -61,7 +61,7 @@
             (eq item.data.data.type "WEAPON_SPECIAL"))}}
 		<td>{{item.data.data.dmgDef}}</td>
 		<td>{{firemodes item.data.data.modes}}</td>
-		<td>{{item.data.data.attackRating}}</td>
+		<td>{{attackrating item.data.data.attackRating}}</td>
     	{{/if}}
 		{{#if (eq item.data.data.type "ARMOR")}}
 		<td>{{item.data.data.defense}}</td>
@@ -145,106 +145,6 @@
                             style="width: 3.4em" /></td>
                 </tr>
             </table>
-            <!-- ********** WAFFEN ********** -->
-            {{#if (or
-            (eq item.data.data.type "WEAPON_FIREARMS")
-            (eq item.data.data.type "WEAPON_RANGED")
-            (eq item.data.data.type "WEAPON_CLOSE_COMBAT")
-            (eq item.data.data.type "WEAPON_SPECIAL"))}}
-            <table>
-                <tr>
-                    <!--SCHADEN MODUS ANGRIFFSWERTE MUNITION-->
-                    <th colspan="2">{{localize 'shadowrun6.item.damage'}}</th>
-                    <th colspan="4">{{localize 'shadowrun6.item.mode'}}</th>
-                    <th colspan="5">{{localize 'shadowrun6.item.attackvalues'}}</th>
-                    <!-- <th>{{localize 'shadowrun6.item.ammunition'}}</th> -->
-                </tr>
- {{log "shadowrun6-gear-sheet.html this=" item.data}}
-                <tr>
-                    <td style="width: 2.5em"><input type="number" value="{{item.data.data.dmg}}" name="data.dmg" class="box centered" /></td>
-                    <td>
-                        <select name="data.stun">
-                            {{#select item.data.data.stun}}
-                            <option value="false">{{localize 'shadowrun6.item.physical_damage'}}</option>
-                            <option value="true">{{localize 'shadowrun6.item.stun_damage'}}</option>
-                            {{/select}}
-                        </select>
-                    </td>
-					<td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
-                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SS}}
-                            name="data.modes.SS" " />
-                    </td>
-                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
-                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.SA}}
-                            name="data.modes.SA" />
-                    </td>
-                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input
-                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.BF}}
-                            name="data.modes.BF" />
-                    </td>
-                    <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_fa'}}</span><input
-                            style="vertical-align: middle;" type="checkbox" {{checked item.data.data.modes.FA}}
-                            name="data.modes.FA" />
-                    </td>
-
-
-                    {{#each item.data.data.attackRating as |arating id|}}
-                    <td data-array="data.attackRating">
-                        <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.6em"
-                            class="centered box" />
-                    </td>
-                    {{/each}}
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th>{{localize 'shadowrun6.item.skill'}}</th>
-                    <th>{{localize 'shadowrun6.item.skillspec'}}</th>
-                </tr>
-                <tr>
-                    <td>
-                        <select name="data.skill" data-field="data.skill">
-                        <option value="">-</option>
-                            {{#select item.data.data.skill}}
-                            {{#each config.SKILLS_WEAPON as |skill id|}}
-                            <option value="{{@skill}}">{{localize (concat "skill." skill)}} </option>
-                            {{/each}}
-                            {{/select}}
-                        </select>
-                    </td>
-                    <td>
-        	   			<select name="data.skillSpec" data-field="data.data.skillSpec">
-        	   			{{#if item.data.data.skill}}
-                     {{selectOptions (lookup config.skill_special item.data.data.skill) selected=data.data.skillSpec localize=true}}
-                     {{/if}}           			
-         				</select>
-                    </td>
-                </tr>
-            </table>
-            {{/if}}
-            <!-- ********** Rüstung ********** -->
-            {{#if (eq item.data.data.type "ARMOR")}}
-            <table>
-                <tr>
-                    <th>{{localize 'shadowrun6.item.defencerating'}}</th>
-                    <th>{{localize 'shadowrun6.item.capacity'}}</th>
-                    <th>{{localize 'shadowrun6.item.social'}}</th>
-                    <th>{{localize 'shadowrun6.item.natural'}}</th>
-                </tr>
-                <tr>
-                    <td><input type="number" value="{{item.data.data.defense}}" name="data.defense"
-                            class="box centered" />
-                    </td>
-                    <td><input type="number" value="{{item.data.data.capacity}}" name="data.capacity"
-                            class="box centered" /></td>
-                    <td><input type="number" value="{{item.data.data.social}}" name="data.social"
-                            class="box centered" />
-                    </td>
-                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.natural}}
-                            name="data.natural" /></td>
-                </tr>
-            </table>
-            {{/if}}
             <!-- ********** BIOWARE / NANOWARE ********** -->
             {{#if (or
             (eq item.data.data.type "BIOWARE")
