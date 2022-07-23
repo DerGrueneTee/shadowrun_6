@@ -22,6 +22,15 @@ export function attackRatingToString(val : number[]) : string {
       ((val[4] != 0) ? val[4] : "-");
 }
 
+export function fireModesToString(val : boolean[]) : string { 
+	let list : string[] = [];
+	if (val["SS"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_ss"));
+	if (val["BF"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_bf"));
+	if (val["FA"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_fa"));
+	if (val["SA"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_sa"));
+	return list.toString();
+}
+
 export const defineHandlebarHelper = async function() {
 	
   Handlebars.registerHelper('attackrating', function (val) {
@@ -31,6 +40,15 @@ export const defineHandlebarHelper = async function() {
       ((val[2] != 0) ? val[2] : "-") + "/" +
       ((val[3] != 0) ? val[3] : "-") + "/" +
       ((val[4] != 0) ? val[4] : "-");
+  });
+	
+  Handlebars.registerHelper('firemodes', function (val) {
+	let list : string[] = [];
+	if (val["SS"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_ss"));
+	if (val["BF"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_bf"));
+	if (val["FA"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_fa"));
+	if (val["SA"]) list.push((game as Game).i18n.localize("shadowrun6.item.mode_sa"));
+	return list.toString();
   });
   Handlebars.registerHelper('spellRangeName', function (val) {
     return (game as Game).i18n.localize(CONFIG.SR6.spell_range[val]);

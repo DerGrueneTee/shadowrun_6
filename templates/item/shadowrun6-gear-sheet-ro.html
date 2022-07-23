@@ -60,7 +60,7 @@
             (eq item.data.data.type "WEAPON_CLOSE_COMBAT")
             (eq item.data.data.type "WEAPON_SPECIAL"))}}
 		<td>{{item.data.data.dmgDef}}</td>
-		<td>{{item.data.data.modes}}</td>
+		<td>{{firemodes item.data.data.modes}}</td>
 		<td>{{item.data.data.attackRating}}</td>
     	{{/if}}
 		{{#if (eq item.data.data.type "ARMOR")}}
