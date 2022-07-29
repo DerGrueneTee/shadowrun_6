@@ -31,7 +31,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			
 		}
       console.log("In SR6Roll<init>1(" + formula + " , ", data);
-      console.log("In SR6Roll<init>2(", options);
+      //console.log("In SR6Roll<init>2(", options);
    }
 
     evaluate(options?: InexactPartial<Options & { async: false }>): Evaluated<this>;
@@ -80,6 +80,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			this._total = die._total ;
 			this.terms  = die.terms;
 		}
+      	this._evaluated = true;
 
 		try {
 			// Mark wild dice and assign count values to single die
@@ -310,10 +311,10 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	isSuccess() {
 		console.log("SR6Roll.isSuccess for ",this)
  		if (this.finished.threshold! > 0) {
-      return this._total! >= this.finished.threshold!;
-    } else {
-      return this._total! > 0;
-    }
+        return this._total! >= this.finished.threshold!;
+      } else {
+        return this._total! > 0;
+      }
   }
 
     /**
@@ -340,11 +341,11 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
      */
    static fromData<T extends Roll>(this: ConstructorOf<T>, data: Data): T {
 		const roll : Roll = super.fromData(data);
-		console.log("fromData ",roll);
+		//console.log("fromData ",roll);
     	(roll as any).configured = (data as any).configured;
     	(roll as any).finished = (data as any).finished;
     	(roll as any).results = (data as any).results;
-		console.log("fromData returning ",roll);
+		//console.log("fromData returning ",roll);
     	return roll as T;
 	}
 
