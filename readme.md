@@ -14,6 +14,8 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 
 **For Support:** [Patreon](https://patreon.com/rpgframework)
 
+**Feature Requests:** [Leave a wish or vote for features](https://sr6-foundry.sleekplan.app/)
+
 ## Features ##
 
 ### Working ###
@@ -45,10 +47,6 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * Auto-calculating modifiers from condition monitors
  * better Critter support, better NPC support
  * Vehicle Actor is unfinished
- 
-## The future ##
-This project currently switches from plain Javascript to Typescript, which means some steps back and cleanup of previous ... dirty implementations.
-Unfortunately I must admit, that having this project as a side project to *Genesis* isn't giving me enough time to have a decent development pace. But I try to keep both projects in sync, so the character transfer from Genesis to Foundry VTT works for you.
 
 
 ![Screenshot](screenshots/PC_Sheet.png)
