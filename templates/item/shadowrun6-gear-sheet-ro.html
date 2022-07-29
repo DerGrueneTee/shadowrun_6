@@ -5,7 +5,7 @@
 	<h2>{{localize (concat (concat "item." data.data.genesisID) ".name")}}</h2>
 	<h4  style="font-style: italic">{{localize (concat (concat "item." data.data.genesisID) ".src")}}</h4>
 	{{else}}
-	<h2>{item.name</h2>
+	<h2>{{item.name}}</h2>
    {{/if}}
    <h4>{{localize (concat 'shadowrun6.gear.subtype.' item.data.data.subtype)}}</h4>
    
@@ -107,7 +107,7 @@
         <div class="section">
             <table>
                 <tr>
-                    <!--Typ, Subtyp, VerfÃ¼gbarkeit, Preis-->
+                    <!--Typ, Subtyp, Verfgbarkeit, Preis-->
                     <th>{{localize 'shadowrun6.item.type'}}</th>
                     <th>{{localize 'shadowrun6.item.subtype'}}</th>
                     <!--th>{{localize 'shadowrun6.label.column.count'}}</th-->
