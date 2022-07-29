@@ -1,11 +1,11 @@
 
-import { Lifeform, ILifeform, Attribute, SR6Actor, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill, CurrentVehicle, VehicleActor, MatrixUser, Initiative } from "./ActorTypes.js";
+import { Lifeform, ILifeform, Attribute, SR6Actor, Player, Derived, DefensePool, Pool, Ratings, Monitor, Skill, CurrentVehicle, VehicleActor, MatrixUser, Initiative, VehicleOpMode, VehicleSkills, VehicleSkill } from "./ActorTypes.js";
 import { Defense, MonitorType, SR6, SR6Config } from "./config.js";
 import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
 import { Armor, ComplexForm, DevicePersona, Gear,LivingPersona,MatrixDevice,Persona,Spell,Vehicle,Weapon } from "./ItemTypes.js";
 //import { doRoll } from "./dice/CommonRoll.js";
 import { doRoll } from "./Rolls.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll, SoakType, SoakRoll } from "./dice/RollTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, MatrixActionRoll, RollType, DefenseRoll, SoakType, SoakRoll, VehicleRoll } from "./dice/RollTypes.js";
 import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 function isLifeform(obj: any): obj is Lifeform {
@@ -77,6 +77,7 @@ export class Shadowrun6Actor extends Actor {
              }
              if (this.data.type === 'Vehicle') {
                this._prepareDerivedVehicleAttributes();
+               this._prepareVehicleActorSkills();
              }
         } catch (err) {
             console.log("Error " + err.stack);
@@ -692,6 +693,46 @@ export class Shadowrun6Actor extends Actor {
 		data.vehicle.modifier = modifier;
 		data.vehicle.kmh = data.vehicle.speed *1.2;
 	}
+
+	//---------------------------------------------------------
+	_prepareVehicleActorSkills() {
+		const actorData  = this.data;
+		const data : VehicleActor = (this.data.data as VehicleActor);
+		if (!data.skills) data.skills = new VehicleSkills;
+		if (!data.skills.piloting) data.skills.piloting = new VehicleSkill();
+		if (!data.skills.evasion ) data.skills.evasion  = new VehicleSkill();
+
+		let controllerActorId : string = data.vehicle.belongs;
+		if (!controllerActorId) {
+			console.log("No actor is controlling this vehicle");
+			return;
+		}
+		console.log("_prepareVehicleActorSkills1 ", (game as Game).actors)
+		let actor : Shadowrun6Actor  = ((game as Game).actors!.get(controllerActorId) as Shadowrun6Actor);
+		if (!controllerActorId) {
+			throw new Error("Controlled by unknown actor "+controllerActorId);
+		}
+
+		let person : Lifeform = actor.data.data as Lifeform;
+
+		console.log("_prepareVehicleActorSkills", data.vehicle.opMode)
+		switch (data.vehicle.opMode) {
+		case VehicleOpMode.MANUAL:
+			console.log("  Get MANUAL skills from ",person);
+			data.skills.piloting.points = person.skills.piloting.pool;
+			data.skills.piloting.pool = data.skills.piloting.points + data.skills.piloting.modifier;
+			data.skills.evasion.points = person.skills.piloting.pool;
+			data.skills.evasion.pool = data.skills.evasion.points + data.skills.evasion.modifier;
+			break;
+		case VehicleOpMode.RIGGED_AR:
+			console.log("  Get RIGGED_AR skills from ",person);
+			data.skills.piloting.points = person.skills.piloting.pool;
+			data.skills.piloting.pool = data.skills.piloting.points + data.skills.piloting.modifier;
+			data.skills.evasion.points = person.skills.piloting.pool;
+			data.skills.evasion.pool = data.skills.evasion.points + data.skills.evasion.modifier;
+			break;
+		}
+	}
 	
 	//---------------------------------------------------------
 	/*
@@ -812,6 +853,19 @@ export class Shadowrun6Actor extends Actor {
 		let useAttrib = (roll.attrib!=undefined)?roll.attrib : CONFIG.SR6.ATTRIB_BY_SKILL.get(roll.skillId)!.attrib;
 		let attrName = (game as Game).i18n.localize("attrib."+useAttrib);
 		rollName += attrName;
+		
+		if (roll.threshold && roll.threshold>0) {
+			rollName += " ("+roll.threshold+")";
+		}
+
+		return rollName;		
+	}
+
+	//---------------------------------------------------------
+	_getVehicleCheckText(roll:VehicleRoll) : string {
+		
+		// Build test name
+		let rollName = (game as Game).i18n.localize("skill." + roll.skillId);
 		
 		if (roll.threshold && roll.threshold>0) {
 			rollName += " ("+roll.threshold+")";
@@ -1227,6 +1281,26 @@ export class Shadowrun6Actor extends Actor {
 		rollData.speaker = ChatMessage.getSpeaker({ actor: this });
 		console.log("Soak roll config ",rollData);
 		return doRoll(rollData);
+	}
+
+	//---------------------------------------------------------
+	/**
+	 */
+	rollVehicle(roll : VehicleRoll) : Promise<Roll> {
+		console.log("rollVehicle(", roll, ")");
+		roll.actor     = this;
+		// Prepare check text
+		roll.checkText = this._getVehicleCheckText(roll);
+		roll.actionText = roll.checkText; // (game as Game).i18n.format("shadowrun6.roll.actionText.skill");
+
+		// Calculate pool
+		roll.pool  = roll.skillValue.pool;
+		console.log("rollVehicle(", roll, ")");
+
+		roll.allowBuyHits = true;
+		
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(roll);
 	}
 
 	//---------------------------------------------------------

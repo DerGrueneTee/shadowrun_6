@@ -1,6 +1,6 @@
 import { ChatMessageData           } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
+import { Lifeform, Monitor, Skill, VehicleActor, VehicleSkill } from "../ActorTypes.js";
 import { Defense, MonitorType } from "../config.js";
 import { EdgeBoost, MatrixAction, SkillDefinition } from "../DefinitionTypes.js";
 import { Gear, Spell, Weapon } from "../ItemTypes.js";
@@ -12,6 +12,7 @@ export enum RollType {
 	Skill = "skill",
 	Spell = "spell",
 	Ritual = "ritual",
+	Vehicle = "vehicle",
 	ComplexForm = "complexform",
 	MatrixAction  = "matrix",
 	/** Defense is a way to reduce netto hits */
@@ -310,6 +311,25 @@ export class MatrixActionRoll extends SkillRoll {
 		this.action    = action;
 		this.skillSpec = this.action.spec;
 	}
+}
+
+export class VehicleRoll extends PreparedRoll {
+	rollType = RollType.Vehicle;
+
+	skillId: string;
+	skillDef: SkillDefinition;
+	skillValue: VehicleSkill;
+
+	/**
+	 * @param skillVal {Skill}   The actors instance of that skill
+	 */
+	constructor(actor: VehicleActor, skillId: string) {
+		super();
+		this.skillId = skillId;
+		this.skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!;
+		this.skillValue = actor.skills[skillId];
+	}
+
 }
 
 export class ConfiguredWeaponRollData {

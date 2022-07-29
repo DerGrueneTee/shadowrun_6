@@ -962,6 +962,9 @@
 			},
         "title": "Vehicles"
       },
+      "vehicleskills": {
+				"operations": "Operations"
+	   },
       "weapon": {
         "add": "Add new weapon",
         "close": "Melee Weapons",
@@ -1184,6 +1187,9 @@
 			"riggedVR": "Jumped in (VR)",
 			"rcc": "via RCC (To Do)",
 			"autonomous": "Autonomous (To Do)"
+		},
+		"skill": {
+			"piloting": "Piloting"
 		},
 		"type": {
 			"groundcraft": "Groundcraft",

@@ -178,9 +178,7 @@ function _dialogClosed(type: ReallyRoll, form:HTMLFormElement, prepared: Prepare
 	try {
 		if (!dialog.modifier) dialog.modifier=0;
 		
-		if (prepared.actor) {
-			if (!isLifeform(prepared.actor.data.data))
-				throw new Error("Not a lifeform");
+		if (prepared.actor && isLifeform(prepared.actor.data.data)) {
 
 			// Pay eventuallly selected edge boost
 			if (configured.edgeBoost && configured.edgeBoost!="none") {

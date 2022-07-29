@@ -67,6 +67,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-vehicles.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-accessories.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-monitor.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-piloting.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-software.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-speed.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-stats.html",

@@ -13,7 +13,8 @@ export default class Shadowrun6Combat extends Combat {
    * By default sort by initiative, next falling back to name, lastly tie-breaking by combatant id.
    * @private
    */
-  _sortCombatants(a: Combatant, b: Combatant): number {
+ _sortCombatants(a: Combatant, b: Combatant): number {
+	console.log("_sortCombatants",a,b);	
     let ia = Number.isNumeric(a.initiative) ? a.initiative : -9999;
     let ib = Number.isNumeric(b.initiative) ? b.initiative : -9999;
     if (!ia) ia=0;

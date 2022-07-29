@@ -45,7 +45,7 @@ Hooks.once("init", async function () {
   CONFIG.Combat.documentClass = Shadowrun6Combat;
   CONFIG.Combatant.documentClass = Shadowrun6Combatant;
   CONFIG.Actor.documentClass = Shadowrun6Actor;
-  CONFIG.Dice.rolls = [SR6Roll, Roll];
+  CONFIG.Dice.rolls = [SR6Roll];
   (game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 
  	registerSystemSettings();

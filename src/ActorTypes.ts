@@ -155,9 +155,17 @@ export class MatrixUser extends Lifeform {
 export class Player extends MatrixUser {
 } 
 
+export enum VehicleOpMode {
+	MANUAL = "manual",
+	RIGGED_AR = "riggedAR",
+	RIGGED_VR = "riggedVR",
+	RCC = "rcc",
+	AUTONOMOUS = "autonomous"
+}
+
 export class CurrentVehicle {
 	belongs : string;
-	opMode  : string = "manual";
+	opMode  : VehicleOpMode = VehicleOpMode.MANUAL;
 	offRoad : false;
 	speed   : number;
 	handling: Pool;
@@ -167,10 +175,23 @@ export class CurrentVehicle {
 	kmh     : number;
 }
 
+export class VehicleSkill {
+	points	: number;
+	modifier : number;
+	pool     : number;
+}
+
+export class VehicleSkills {
+	piloting : VehicleSkill;
+	evasion  : VehicleSkill;
+	stealth  : VehicleSkill;
+}
+
 export class VehicleActor {
    physical: Monitor = new Monitor();
    stun    : Monitor = new Monitor();
    edge    : Monitor = new Monitor();
+	skills  : VehicleSkills = new VehicleSkills();
    handleOn: number;
 	handleOff: number;
    accOn   : number;

@@ -1,4 +1,6 @@
-import { VehicleActor } from "../ActorTypes.js";
+import { VehicleActor, VehicleSkill } from "../ActorTypes.js";
+import { SkillRoll, VehicleRoll } from "../dice/RollTypes.js";
+import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 import { Shadowrun6ActorSheet } from "./SR6ActorSheet.js";
 
 /**
@@ -38,6 +40,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 		if (this.actor.isOwner) {
 			html.find('.vehicle-slower').click(ev => this._onDecelerate(ev, html));
 			html.find('.vehicle-faster').click(ev => this._onAccelerate(ev, html));
+			html.find('.vehicleskill-roll').click(this._onRollVehicleSkillCheck.bind(this));
 		}
 	}
 
@@ -60,4 +63,32 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 		const field = "data.vehicle.speed";
 		this.actor.update({ [field]: newSpeed });
 	}
+	
+	//-----------------------------------------------------
+	/**
+	 * Handle rolling a Skill check
+	 * @param {Event} event   The originating click event
+	 * @private
+	 */
+	_onRollVehicleSkillCheck(event: Event, html) {
+		console.log("_onRollVehicleSkillCheck");
+		event.preventDefault();
+		if (!event.currentTarget) return;
+		if (!(event.currentTarget as any).dataset) return;
+		let dataset : any = (event.currentTarget as any).dataset;
+		console.log("dataset",dataset);
+		console.log("actorData",this.actor.data.data);
+		const skillId   : string = dataset.skill;
+		
+		let actorData : VehicleActor = this.actor.data.data as VehicleActor;
+		let vSkill : VehicleSkill = actorData.skills[skillId];
+		
+		console.log("Roll skill "+skillId+" with pool "+vSkill.pool+" and a threshold "+actorData.vehicle.modifier);
+		let roll : VehicleRoll = new VehicleRoll(actorData, skillId);
+		roll.threshold = actorData.vehicle.modifier;
+		
+		console.log("onRollSkillCheck before ", roll);
+		(this.actor as Shadowrun6Actor).rollVehicle(roll);
+	}
+
 }

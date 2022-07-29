@@ -235,6 +235,15 @@
 				  "actions": 0
 				}
 			},
+			"vehicleskill-template": {
+				"skills": {
+					"piloting": {
+						"points": 0,
+						"modifier": 0,
+						"pool": 0
+					}
+				}
+			},
 			"skill-template": {
 				"skills": {
 					"astral": {
@@ -427,7 +436,8 @@
 		},
 		"Vehicle": {
 			"templates": [
-				"monitor-template"
+				"monitor-template",
+				"vehicleskill-template"
 			],
 			"handlOn": 1,
 			"handlOff": 2,
