@@ -461,7 +461,7 @@ export class RollDialog extends Dialog {
 		// Calculate reduced attack rating
 		prepared.calcAttackRating = [...prepared.weapon.attackRating];
 		prepared.calcAttackRating.forEach( (element:number, index:number) => { 
-			prepared.calcAttackRating[index]=element+arMod; 
+			prepared.calcAttackRating[index]=parseInt(element as any) + parseInt(arMod as any); 
 			if (prepared.calcAttackRating[index]<=0) prepared.calcAttackRating[index]=0;
 		});
 		this.html.find("td[name='calcAR']").text( attackRatingToString(prepared.calcAttackRating) );
