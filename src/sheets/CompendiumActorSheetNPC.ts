@@ -5,7 +5,6 @@ import { Shadowrun6ActorSheet } from "./SR6ActorSheet.js";
  * @extends {ActorSheet}
  */
 export class CompendiumActorSheetNPC extends Shadowrun6ActorSheet {
-
 	/** @override */
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
@@ -16,5 +15,4 @@ export class CompendiumActorSheetNPC extends Shadowrun6ActorSheet {
 			editable: false
 		});
 	}
-
 }

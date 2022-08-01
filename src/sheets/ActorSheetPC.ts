@@ -5,8 +5,6 @@ import { Shadowrun6ActorSheet } from "./SR6ActorSheet.js";
  * @extends {ActorSheet}
  */
 export class Shadowrun6ActorSheetPC extends Shadowrun6ActorSheet {
-
-	
 	/** @override */
 	static get defaultOptions() {
 		const options = super.defaultOptions;
@@ -20,5 +18,4 @@ export class Shadowrun6ActorSheetPC extends Shadowrun6ActorSheet {
 			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]
 		});
 	}
-
 }

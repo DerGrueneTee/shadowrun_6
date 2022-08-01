@@ -1,11 +1,10 @@
 import { Shadowrun6ActorSheet } from "./SR6ActorSheet.js";
 
 /**
- * Extend the basic ActorSheet 
+ * Extend the basic ActorSheet
  * @extends {ActorSheet}
  */
 export class Shadowrun6ActorSheetCritter extends Shadowrun6ActorSheet {
-
 	/** @override */
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
@@ -18,5 +17,4 @@ export class Shadowrun6ActorSheetCritter extends Shadowrun6ActorSheet {
 			dragDrop: [{ dragSelector: ".item-list .item", dropSelector: null }]
 		});
 	}
-
 }

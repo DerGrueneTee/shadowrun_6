@@ -3,8 +3,7 @@
  * Pre-loaded templates are compiled and cached for fast access when rendering
  * @return {Promise}
  */
-export const preloadHandlebarsTemplates = async function() {
-
+export const preloadHandlebarsTemplates = async function () {
 	const templatePaths = [
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogEdge.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogOpposed.html",
@@ -71,8 +70,8 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/vehicle-software.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-speed.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-stats.html",
-		"systems/shadowrun6-eden/templates/parts/vehicle-weapons.html",
-		];
+		"systems/shadowrun6-eden/templates/parts/vehicle-weapons.html"
+	];
 
 	console.log(`Load templates`);
 	return loadTemplates(templatePaths);

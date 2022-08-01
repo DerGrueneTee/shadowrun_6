@@ -9,6 +9,7 @@
   "author": "Stefan Prelle",
   "devDependencies": {
     "@league-of-foundry-developers/foundry-vtt-types": "^9.268.0",
+    "prettier": "2.7.1",
     "typescript": "4.6.2"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "prettier": "prettier  --write \"{,src/**/*}.ts\""
   }
 }

@@ -1,4 +1,4 @@
-import { ChatMessageData           } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
+import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatMessageData";
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
 import { Lifeform, Monitor, Skill, VehicleActor, VehicleSkill } from "../ActorTypes.js";
 import { Defense, MonitorType } from "../config.js";
@@ -14,21 +14,21 @@ export enum RollType {
 	Ritual = "ritual",
 	Vehicle = "vehicle",
 	ComplexForm = "complexform",
-	MatrixAction  = "matrix",
+	MatrixAction = "matrix",
 	/** Defense is a way to reduce netto hits */
 	Defense = "defense",
 	/** Reduce netto damage */
-	Soak    = "soak",
+	Soak = "soak",
 	/** Directly apply the given damage */
-	Damage  = "damage",
+	Damage = "damage",
 	Initiative = "initiative"
 }
 
 export enum SoakType {
-	DAMAGE_STUN     = "damage_stun",
+	DAMAGE_STUN = "damage_stun",
 	DAMAGE_PHYSICAL = "damage_phys",
-	DRAIN           = "drain",
-	FADING          = "fading",
+	DRAIN = "drain",
+	FADING = "fading"
 }
 
 export enum ReallyRoll {
@@ -49,34 +49,34 @@ class CommonRollData {
 	actionText: string;
 	/** Describe what is being rolled */
 	checkText: string;
-	
-	rollType : RollType;
-	
+
+	rollType: RollType;
+
 	/* Opposed rolls: How to oppose? */
 	defendWith: Defense;
-	get isOpposed() : boolean {
+	get isOpposed(): boolean {
 		return this.defendWith != undefined;
 	}
-	
-	threshold : number;
+
+	threshold: number;
 	/* Use a wild die */
-	useWildDie : number = 0;
-	rollMode : "publicroll" | "gmroll" | "blindroll" | "selfroll" | undefined;
-	
+	useWildDie: number = 0;
+	rollMode: "publicroll" | "gmroll" | "blindroll" | "selfroll" | undefined;
+
 	/* How many dice shall be rolled */
 	pool: number;
-	
-	copyFrom(copy : CommonRollData) {
+
+	copyFrom(copy: CommonRollData) {
 		this.speaker = copy.speaker;
-		this.actor   = copy.actor;
-		this.title   = copy.title;
+		this.actor = copy.actor;
+		this.title = copy.title;
 		this.actionText = copy.actionText;
-		this.checkText  = copy.checkText;
-		this.rollType   = copy.rollType;
+		this.checkText = copy.checkText;
+		this.rollType = copy.rollType;
 		this.defendWith = copy.defendWith;
-		this.threshold  = copy.threshold;
+		this.threshold = copy.threshold;
 		this.useWildDie = copy.useWildDie;
-		this.pool       = copy.pool;
+		this.pool = copy.pool;
 	}
 }
 
@@ -84,43 +84,42 @@ class CommonRollData {
  * Returned after
  ************************************/
 export interface OpposedRoll {
-	defendWith : Defense;
-	attackRating : number;
+	defendWith: Defense;
+	attackRating: number;
 	defenseRating: number;
 }
 
 enum PoolUsage {
 	OneForOne,
-	OneForAll,
+	OneForAll
 }
 
 export interface AttackRollData {
-	defendWith : Defense;
+	defendWith: Defense;
 
 	/** Which tokens are selected */
-	targets?    : IterableIterator<Token> | null;
-	
-	attackRating? : number;
-	weaponAttackRating? : number[];
-	
-	poolUsage     : PoolUsage;
+	targets?: IterableIterator<Token> | null;
+
+	attackRating?: number;
+	weaponAttackRating?: number[];
+
+	poolUsage: PoolUsage;
 	/** when poolUsage is OneOnOne: How large is your pool per Token*/
-	perTargetPool : Map<Token, number>;
+	perTargetPool: Map<Token, number>;
 }
 
 export interface WeaponRollData extends AttackRollData {
-	weapon   : Weapon;
+	weapon: Weapon;
 }
 
 export interface SpellRollData extends AttackRollData {
-	spell    : Spell;
+	spell: Spell;
 }
 
 /**
  * The data fro a roll known before presenting a roll dialog
  */
 export class PreparedRoll extends CommonRollData {
-
 	allowBuyHits: boolean;
 	/* Does this check generate a free edge */
 	freeEdge: boolean;
@@ -130,21 +129,21 @@ export class PreparedRoll extends CommonRollData {
 	/** Effective dice pool applying firing mode or other modifiers */
 	calcPool: number;
 	performer: Lifeform;
-	
-	copyFrom(copy : PreparedRoll) {
+
+	copyFrom(copy: PreparedRoll) {
 		super.copyFrom(copy);
 		this.allowBuyHits = copy.allowBuyHits;
-		this.freeEdge     = copy.freeEdge;
-		this.edge         = copy.edge;
-		this.edgeBoosts   = copy.edgeBoosts;
+		this.freeEdge = copy.freeEdge;
+		this.edge = copy.edge;
+		this.edgeBoosts = copy.edgeBoosts;
 		this.performer = copy.performer;
 	}
 }
 
-export class DefenseRoll extends PreparedRoll {	
-	damage : number;
-	
-	constructor(threshold : number) {	
+export class DefenseRoll extends PreparedRoll {
+	damage: number;
+
+	constructor(threshold: number) {
 		super();
 		this.rollType = RollType.Defense;
 		this.threshold = threshold;
@@ -152,10 +151,10 @@ export class DefenseRoll extends PreparedRoll {
 }
 
 export class SoakRoll extends PreparedRoll {
-	monitor : MonitorType;
+	monitor: MonitorType;
 	// Eventually add effects
-	
-	constructor(threshold : number) {	
+
+	constructor(threshold: number) {
 		super();
 		this.rollType = RollType.Soak;
 		this.threshold = threshold;
@@ -183,50 +182,47 @@ export class SkillRoll extends PreparedRoll {
 		this.performer = actor;
 	}
 
-	
-	copyFrom(copy : SkillRoll) {
+	copyFrom(copy: SkillRoll) {
 		super.copyFrom(copy);
-		this.skillId  = copy.skillId;
+		this.skillId = copy.skillId;
 		this.skillDef = copy.skillDef;
 		this.skillValue = copy.skillValue;
-		this.attrib   = copy.attrib;
+		this.attrib = copy.attrib;
 	}
 
 	/**
 	 * Execute
 	 */
-	prepare(actor: Shadowrun6Actor): void {
-
-	}
+	prepare(actor: Shadowrun6Actor): void {}
 }
 
 export class SpellRoll extends SkillRoll {
 	rollType = RollType.Spell;
-	
-	item   : Item;
-	itemId : string;
-	spellId : string;
-	spellName : string | null;
-	spellDesc : string | null;
+
+	item: Item;
+	itemId: string;
+	spellId: string;
+	spellName: string | null;
+	spellDesc: string | null;
 	spellSrc: string | null;
 	spell: Spell;
 	/** Radius of spells with area effect - may be increased */
-	calcArea : number = 2;
-	calcDrain : number;
+	calcArea: number = 2;
+	calcDrain: number;
 	/** Damage of combat spells - may be amped up */
-	calcDamage : number = 0;
+	calcDamage: number = 0;
 	canAmpUpSpell: boolean;
 	canIncreaseArea: boolean;
-	defenseRating : number;
-	attackRating  : number;
+	defenseRating: number;
+	attackRating: number;
 
 	/**
 	 * @param skill {Skill}   The skill to roll upon
 	 */
-	constructor(actor: Lifeform, item: Item, itemId:string, spellItem: Spell) {
+	constructor(actor: Lifeform, item: Item, itemId: string, spellItem: Spell) {
 		super(actor, "sorcery");
-		this.item      = item;
-		this.itemId    = itemId;
+		this.item = item;
+		this.itemId = itemId;
 		this.spell = spellItem;
 		this.skillSpec = "spellcasting";
 
@@ -246,46 +242,45 @@ export class SpellRoll extends SkillRoll {
 				this.threshold = 5 - Math.ceil(actor.essence);
 			}
 		}
-		
+
 		this.calcArea = 2;
 		this.calcDrain = spellItem.drain;
 	}
 }
 
 function isWeapon(obj: any): obj is Weapon {
-    return obj.attackRating != undefined;
+	return obj.attackRating != undefined;
 }
 
 export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	rollType = RollType.Weapon;
-	
-	item   : Item;
-	itemId : string;
-	itemName : string | null;
-	itemDesc : string | null;
+
+	item: Item;
+	itemId: string;
+	itemName: string | null;
+	itemDesc: string | null;
 	itemSrc: string | null;
-	gear   : Gear;
-	weapon : Weapon;
-	targets : IterableIterator<Token>;
-	
-	
-	defenseRating : number;
-	attackRating  : number;
+	gear: Gear;
+	weapon: Weapon;
+	targets: IterableIterator<Token>;
+
+	defenseRating: number;
+	attackRating: number;
 	/** Effective attack rating after applying firing mode */
-	calcAttackRating:Array<number> = [0,0,0,0,0];
+	calcAttackRating: Array<number> = [0, 0, 0, 0, 0];
 	/** Effective damage */
 	calcDmg: number;
 	/** How many units of ammunition are required */
-	calcRounds : number;
-	fireMode : string;
+	calcRounds: number;
+	fireMode: string;
 	burstMode: string | undefined;
 	faArea: string | undefined;
-	
-	constructor(actor: Lifeform, item: Item, itemId:string, gear:Gear) {
+
+	constructor(actor: Lifeform, item: Item, itemId: string, gear: Gear) {
 		super(actor, (item.data.data as any).skill);
-		this.item      = item;
-		this.itemId    = itemId;
-		this.gear      = gear;
+		this.item = item;
+		this.itemId = itemId;
+		this.gear = gear;
 		this.skillSpec = this.gear.skillSpec;
 		if (isWeapon(gear)) {
 			this.weapon = gear;
@@ -297,18 +292,18 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 }
 
 export class MatrixActionRoll extends SkillRoll {
-	rollType = RollType.MatrixAction;	
+	rollType = RollType.MatrixAction;
 	itemName: string | null;
 	itemDesc: string | null;
-	itemSrc : string | null;
-	action  : MatrixAction;
-	targets : IterableIterator<Token>;
-	defenseRating : number;
-	attackRating  : number;
-	
-	constructor(actor: Lifeform, action:MatrixAction) {
-		super(actor,action.skill);
-		this.action    = action;
+	itemSrc: string | null;
+	action: MatrixAction;
+	targets: IterableIterator<Token>;
+	defenseRating: number;
+	attackRating: number;
+
+	constructor(actor: Lifeform, action: MatrixAction) {
+		super(actor, action.skill);
+		this.action = action;
 		this.skillSpec = this.action.spec;
 	}
 }
@@ -329,41 +324,40 @@ export class VehicleRoll extends PreparedRoll {
 		this.skillDef = CONFIG.SR6.ATTRIB_BY_SKILL.get(skillId)!;
 		this.skillValue = actor.skills[skillId];
 	}
-
 }
 
 export class ConfiguredWeaponRollData {
-	defenseRating : number;
-	attackRating  : number;
+	defenseRating: number;
+	attackRating: number;
 	/** Effective attack rating after applying firing mode */
-	calcAttackRating:Array<number> = [0,0,0,0,0];
+	calcAttackRating: Array<number> = [0, 0, 0, 0, 0];
 	/** Effective damage */
 	calcDmg: number;
 	/** How many units of ammunition are required */
-	calcRounds : number;
-	fireMode : string;
+	calcRounds: number;
+	fireMode: string;
 	burstMode: string | undefined;
 	faArea: string | undefined;
 }
 
 export class ConfiguredRoll extends CommonRollData {
 	/** How was the dialog closed */
-	buttonType : ReallyRoll;
+	buttonType: ReallyRoll;
 
-	edgeBoost:string;
-	explode : boolean;
-	defRating : number;
-   edgePlayer: number;
-	edgeTarget : number;
-	edge_message : string;
-	edgeAdjusted : number;
-	edge_use : string;
+	edgeBoost: string;
+	explode: boolean;
+	defRating: number;
+	edgePlayer: number;
+	edgeTarget: number;
+	edge_message: string;
+	edgeAdjusted: number;
+	edge_use: string;
 	/** Edge action selected  */
-	edgeAction : string;
-	targets : IterableIterator<Token>;
-	
+	edgeAction: string;
+	targets: IterableIterator<Token>;
+
 	/* This methods is a horrible crime - there must be a better solution */
-	updateSpecifics(copy : PreparedRoll) {
+	updateSpecifics(copy: PreparedRoll) {
 		// In case this was a WeaponRoll
 		console.log("Copy WeaponRoll data to ConfiguredRoll");
 		(this as any).calcAttackRating = (copy as WeaponRoll).calcAttackRating;
@@ -372,7 +366,7 @@ export class ConfiguredRoll extends CommonRollData {
 		(this as any).fireMode = (copy as WeaponRoll).fireMode;
 		(this as any).burstMode = (copy as WeaponRoll).burstMode;
 		(this as any).faArea = (copy as WeaponRoll).faArea;
-		
+
 		console.log("Copy SpellRoll data to ConfiguredRoll");
 		(this as any).spell = (copy as SpellRoll).spell;
 		(this as any).calcArea = (copy as SpellRoll).calcArea;
@@ -400,56 +394,56 @@ export class SR6ChatMessageData {
 	 * Text to describe what is happening,  e.g. <i>X is shooting at Y</i>
 	 */
 	actionText: string;
-	
-	rollType : RollType;
+
+	rollType: RollType;
 	//rollMode : "publicroll" | "gmroll" | "blindroll" | "selfroll" | undefined;
-	
+
 	/* Opposed rolls: How to oppose? */
 	defendWith: Defense;
-	isOpposed : boolean;
-	edge_message : string;
-	edgeAdjusted : number;
-	edge_use : string;
+	isOpposed: boolean;
+	edge_message: string;
+	edgeAdjusted: number;
+	edge_use: string;
 	/** Edge action selected  */
-	edgeAction : string;
-	
+	edgeAction: string;
+
 	/** How many dice have been rolled */
-	pool		 : number;
+	pool: number;
 	/** Was there a threshold? */
-	threshold : number | undefined;
+	threshold: number | undefined;
 
-	configured : ConfiguredRoll;
-   tooltip   : string;
-   results   : string | DiceTerm.Result[];
-   formula   : string;
-	publicRoll : boolean;
+	configured: ConfiguredRoll;
+	tooltip: string;
+	results: string | DiceTerm.Result[];
+	formula: string;
+	publicRoll: boolean;
 
-	total   : number;
-	success : boolean;
-	glitch  : boolean;
-	criticalglitch : boolean;
-	
+	total: number;
+	success: boolean;
+	glitch: boolean;
+	criticalglitch: boolean;
+
 	/** Damage after adjustment (Amp Up, Fire Mode ...) */
-	damage    : number;
+	damage: number;
 	/** Which monitor to apply damage to */
-	monitor   : MonitorType;
-	
-	damageAfterSoakAlreadyApplied : boolean;
-	nettoHits : number;
-	
-	constructor(copy : ConfiguredRoll) {
-		console.log("####SR6ChatMessageData####1###",copy);
+	monitor: MonitorType;
+
+	damageAfterSoakAlreadyApplied: boolean;
+	nettoHits: number;
+
+	constructor(copy: ConfiguredRoll) {
+		console.log("####SR6ChatMessageData####1###", copy);
 		this.speaker = copy.speaker;
-		this.actor   = copy.actor;
+		this.actor = copy.actor;
 		this.actionText = copy.actionText;
-		this.rollType   = copy.rollType;
+		this.rollType = copy.rollType;
 		this.defendWith = copy.defendWith;
-		this.threshold  = copy.threshold;
-		this.pool       = copy.pool;
-		this.isOpposed  = this.defendWith != undefined;
+		this.threshold = copy.threshold;
+		this.pool = copy.pool;
+		this.isOpposed = this.defendWith != undefined;
 		this.edge_message = copy.edge_message;
-		this.edge_use   = copy.edge_use;
+		this.edge_use = copy.edge_use;
 		this.edgeAction = copy.edgeAction;
-		console.log("####SR6ChatMessageData####2###",this);
+		console.log("####SR6ChatMessageData####2###", this);
 	}
 }
