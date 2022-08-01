@@ -77,8 +77,8 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		let template: string = "systems/shadowrun6-eden/templates/chat/configurable-roll-dialog.html";
 		let dialogData = {
 			//checkText: data.extraText,
-			data: data,
-			CONFIG: CONFIG,
+			data     : data,
+			CONFIG   : CONFIG,
 			rollModes: CONFIG.Dice.rollModes
 		};
 		const html: string = await renderTemplate(template, dialogData);
@@ -96,21 +96,21 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			if (data.allowBuyHits) {
 				buttons = {
 					bought: {
-						icon: '<i class="fas fa-dollar-sign"></i>',
-						label: (game as Game).i18n.localize("shadowrun6.rollType.bought"),
+						icon    : '<i class="fas fa-dollar-sign"></i>',
+						label   : (game as Game).i18n.localize("shadowrun6.rollType.bought"),
 						callback: (html) => resolve(_dialogClosed(ReallyRoll.AUTOHITS, html[0].querySelector("form"), data, dia2, dialogResult))
 					},
 					normal: {
-						icon: '<i class="fas fa-dice-six"></i>',
-						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
+						icon    : '<i class="fas fa-dice-six"></i>',
+						label   : (game as Game).i18n.localize("shadowrun6.rollType.normal"),
 						callback: (html) => resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, dia2, dialogResult))
 					}
 				};
 			} else {
 				buttons = {
 					normal: {
-						icon: '<i class="fas fa-dice-six"></i>',
-						label: (game as Game).i18n.localize("shadowrun6.rollType.normal"),
+						icon    : '<i class="fas fa-dice-six"></i>',
+						label   : (game as Game).i18n.localize("shadowrun6.rollType.normal"),
 						callback: (html) => {
 							console.log("doRoll: in callback");
 							resolve(_dialogClosed(ReallyRoll.ROLL, html[0].querySelector("form"), data, dia2, dialogResult));
@@ -120,9 +120,9 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 				};
 			}
 			const diagData: Dialog.Data = {
-				title: title,
+				title  : title,
 				content: html,
-				render: (html) => {
+				render : (html) => {
 					console.log("Register interactivity in the rendered dialog", this);
 					// Set roll mode to default from chat window
 					let chatRollMode: string = $(".roll-type-select").val() as string;
@@ -133,11 +133,11 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			};
 
 			const myDialogOptions = {
-				width: 520,
-				jQuery: true,
-				resizeable: true,
-				actor: data.actor,
-				prepared: data,
+				width       : 520,
+				jQuery      : true,
+				resizeable  : true,
+				actor       : data.actor,
+				prepared    : data,
 				dialogResult: dialogResult
 			};
 			console.log("create RollDialog");

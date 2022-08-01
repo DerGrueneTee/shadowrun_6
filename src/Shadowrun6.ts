@@ -83,7 +83,7 @@ Hooks.once("init", async function () {
 	Hooks.once("diceSoNiceReady", (dice3d) => {
 		dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "default");
 		dice3d.addDicePreset({
-			type: "d6",
+			type  : "d6",
 			labels: [
 				"",
 				"2",
@@ -103,28 +103,28 @@ Hooks.once("init", async function () {
 				//        "systems/shadowrun6-eden/icons/SR6_D6_6_o.png"
 			],
 			colorset: "SR6_dark",
-			system: "SR6"
+			system  : "SR6"
 		});
 		dice3d.addDicePreset({
-			type: "dc",
-			labels: ["systems/shadowrun6-eden/images/EdgeToken.png", "systems/shadowrun6-eden/images/EdgeToken.png"],
+			type    : "dc",
+			labels  : ["systems/shadowrun6-eden/images/EdgeToken.png", "systems/shadowrun6-eden/images/EdgeToken.png"],
 			bumpMaps: [,],
 			colorset: "SR6_dark",
-			system: "SR6"
+			system  : "SR6"
 		});
 		dice3d.addColorset(
 			{
-				name: "SR6_light",
+				name       : "SR6_light",
 				description: "SR 6 Pink",
-				category: "SR6",
-				foreground: "#470146",
-				background: "#f7c8f6",
-				outline: "#2e2b2e",
-				texture: "none",
-				edge: "#9F8003",
-				material: "glass",
-				font: "Arial Black",
-				fontScale: {
+				category   : "SR6",
+				foreground : "#470146",
+				background : "#f7c8f6",
+				outline    : "#2e2b2e",
+				texture    : "none",
+				edge       : "#9F8003",
+				material   : "glass",
+				font       : "Arial Black",
+				fontScale  : {
 					d6: 1.1,
 					df: 2.5
 				},
@@ -135,17 +135,17 @@ Hooks.once("init", async function () {
 
 		dice3d.addColorset(
 			{
-				name: "SR6_dark",
+				name       : "SR6_dark",
 				description: "SR 6 Pink Dark",
-				category: "SR6",
-				foreground: "#470146",
-				background: "#000000",
-				outline: "#2e2b2e",
-				texture: "none",
-				edge: "#470146",
-				material: "metal",
-				font: "Arial Black",
-				fontScale: {
+				category   : "SR6",
+				foreground : "#470146",
+				background : "#000000",
+				outline    : "#2e2b2e",
+				texture    : "none",
+				edge       : "#470146",
+				material   : "metal",
+				font       : "Arial Black",
+				fontScale  : {
 					d6: 1.1,
 					df: 2.5
 				},
@@ -216,9 +216,9 @@ Hooks.once("init", async function () {
 	Hooks.on("hotbarDrop", async (bar, data, slot) => {
 		console.log("DROP to Hotbar");
 		let macroData = {
-			name: "",
-			type: "script",
-			img: "icons/svg/dice-target.svg",
+			name   : "",
+			type   : "script",
+			img    : "icons/svg/dice-target.svg",
 			command: ""
 		};
 

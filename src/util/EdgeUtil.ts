@@ -223,7 +223,7 @@ export default class EdgeUtil {
 			// Update message
 			roll.results = roll.data.results;
 			chatMsg.update({
-				[`roll`]: roll.toJSON(),
+				[`roll`]   : roll.toJSON(),
 				["content"]: html[0].innerHTML
 			});
 		} catch (err) {
@@ -271,7 +271,7 @@ export default class EdgeUtil {
 			// Update message
 			roll.results = roll.data.results;
 			chatMsg.update({
-				[`roll`]: roll.toJSON(),
+				[`roll`]   : roll.toJSON(),
 				["content"]: html[0].innerHTML
 			});
 		} catch (err) {

@@ -8,10 +8,10 @@ export class CompendiumActorSheetNPC extends Shadowrun6ActorSheet {
 	/** @override */
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
-			classes: ["shadowrun6", "sheet", "actor"],
+			classes : ["shadowrun6", "sheet", "actor"],
 			template: "systems/shadowrun6-eden/templates/compendium-actor-npc-sheet.html",
-			width: 700,
-			height: 800,
+			width   : 700,
+			height  : 800,
 			editable: false
 		});
 	}

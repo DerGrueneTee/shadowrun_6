@@ -1,0 +1,12 @@
+{
+	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"rules": {
+		"key-spacing": [
+			2,
+			{
+				"align": "colon"
+			}
+		]
+	}
+}

@@ -10,7 +10,7 @@ export class SR6ItemSheet extends ItemSheet {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			classes: ["shadowrun6", "sheet", "item"],
-			width: 550
+			width  : 550
 		});
 	}
 

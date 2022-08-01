@@ -229,8 +229,8 @@ export class RollDialog extends Dialog {
 				if (capped) {
 					configured.edgePlayer = max;
 					innerText = (game as Game).i18n.format("shadowrun6.roll.edge.gain_player_capped", {
-						name: speaker.alias,
-						value: configured.edgePlayer,
+						name  : speaker.alias,
+						value : configured.edgePlayer,
 						capped: max
 					});
 				} else {

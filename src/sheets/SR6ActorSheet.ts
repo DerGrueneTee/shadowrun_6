@@ -152,8 +152,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 						event.originalEvent!.dataTransfer!.setData(
 							"text/plain",
 							JSON.stringify({
-								type: "Item",
-								data: itemData,
+								type   : "Item",
+								data   : itemData,
 								actorId: this.actor.id
 							})
 						);
@@ -261,7 +261,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				type: "skill",
 				data: {
 					genesisID: "language",
-					points: 1
+					points   : 1
 				}
 			};
 			return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -272,8 +272,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				type: "gear",
 				data: {
 					genesisID: this._create_UUID(),
-					type: "ELECTRONICS",
-					subtype: "COMMLINK"
+					type     : "ELECTRONICS",
+					subtype  : "COMMLINK"
 				}
 			};
 			return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -284,8 +284,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				type: "gear",
 				data: {
 					genesisID: this._create_UUID(),
-					type: "VEHICLES",
-					subtype: "CARS"
+					type     : "VEHICLES",
+					subtype  : "CARS"
 				}
 			};
 			return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -296,8 +296,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				type: "gear",
 				data: {
 					genesisID: this._create_UUID(),
-					type: "DRONES",
-					subtype: "SMALL_DRONES"
+					type     : "DRONES",
+					subtype  : "SMALL_DRONES"
 				}
 			};
 			return this.actor.createEmbeddedDocuments("Item", [itemData]);
@@ -512,20 +512,20 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (classList.contains("defense-roll")) {
 			roll.allowBuyHits = false;
 			dialogConfig = {
-				useModifier: true,
+				useModifier : true,
 				useThreshold: false
 			};
 		} else if (classList.contains("attributeonly-roll")) {
 			roll.allowBuyHits = true;
 			dialogConfig = {
-				useModifier: true,
+				useModifier : true,
 				useThreshold: true
 			};
 		} else {
 			roll.allowBuyHits = true;
 			roll.useWildDie = 1;
 			dialogConfig = {
-				useModifier: true,
+				useModifier : true,
 				useThreshold: true
 			};
 		}
