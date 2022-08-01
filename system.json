@@ -65,11 +65,6 @@
     "path": "lang/zh-tw-magicl10n.json"
   },
   {
-    "lang": "fr",
-    "name": "Français",
-    "path": "lang/fr-magicl10n.json"
-  },
-  {
     "lang": "ja",
     "name": "日本語 (Japanese)",
     "path": "lang/ja-magicl10n.json"
