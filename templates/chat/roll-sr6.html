@@ -57,16 +57,24 @@
    <div class="chat-weapon">
    	    <table class="spell-table">
    	      <tr>
-   	    	  <th>{{localize 'shadowrun6.weapon.damage'}}</th>
+   	    	  <th align="center">{{localize 'shadowrun6.weapon.damage'}}</th>
+   	    	  {{#if configured.fireMode}}
               <th>{{localize 'shadowrun6.weapon.firemodes'}}</th>
-              <th>{{localize 'shadowrun6.weapon.attackRating'}}</th>
+              {{/if}}
+              <th align="center">{{localize 'shadowrun6.weapon.attackRating'}}</th>
+   	    	  {{#if configured.fireMode}}
               <th>{{localize 'shadowrun6.weapon.ammo'}}</th>
+              {{/if}}
    	      </tr>
    	  	   <tr>
     	  		  <td><span name="calcDmg">{{configured.calcDmg}}</span> {{#if configured.gear.stun}}S{{else}}P{{/if}}</td>
+   	    	  {{#if configured.fireMode}}
    	  		  <td>{{localize (concat "shadowrun6.item.firemode." configured.fireMode)}}</td>
+              {{/if}}
     	  		  <td name="calcAR">{{attackrating configured.calcAttackRating}}</td>
+   	    	  {{#if configured.fireMode}}
    	  		  <td name="calcRounds">{{configured.calcRounds}}</td>
+              {{/if}}
    	  	   </tr>
    	    </table>
    </div>
