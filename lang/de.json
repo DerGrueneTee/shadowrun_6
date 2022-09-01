@@ -1104,6 +1104,8 @@
       "duration": "Dauer",
       "duration_instantaneous": "Sofort",
       "duration_instantaneous_short": "S",
+      "duration_immediate": "Sofort",
+      "duration_immediate_short": "S",
       "duration_limited": "Begrenzt",
       "duration_permanent": "Permanent",
       "duration_permanent_short": "P",

@@ -1139,6 +1139,8 @@
       "duration": "Duration",
       "duration_instantaneous": "Instantaneous",
       "duration_instantaneous_short": "I",
+      "duration_immediate": "Immediate",
+      "duration_immediate_short": "I",
       "duration_limited": "Limited",
       "duration_permanent": "Permanent",
       "duration_permanent_short": "P",
