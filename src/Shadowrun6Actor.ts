@@ -850,6 +850,8 @@ export class Shadowrun6Actor extends Actor {
 		// Living persona
 		if (actorData.mortype == "technomancer") {
 			if (!actorData.persona.living) actorData.persona.living = new LivingPersona();
+			if (!actorData.persona.living.base) actorData.persona.living.base = new MatrixDevice();
+			if (!actorData.persona.living.mod) actorData.persona.living.mod = new MatrixDevice();
 			actorData.persona.living.base.a = actorData.attributes["cha"].pool;
 			actorData.persona.living.base.s = actorData.attributes["int"].pool;
 			actorData.persona.living.base.d = actorData.attributes["log"].pool;
