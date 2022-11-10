@@ -203,22 +203,25 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		}
 
 		console.log("markWildDie: ", this.dice[1]);
-		let lastExploded: boolean | undefined = false;
-		this.dice[1].results.forEach((die) => {
-			if (!lastExploded) {
-				(die as any).classes += "_wild";
-				(die as any).wild = true;
-				// A 5 or 6 counts as 3 hits
-				if (die.success) {
-					die.count = 3;
-				} else if (die.result === 1) {
-					ignoreFives = true;
+		if (this.dice[1]) {
+			let lastExploded: boolean | undefined = false;
+			this.dice[1].results.forEach((die) => {
+				if (!lastExploded) {
+					(die as any).classes += "_wild";
+					(die as any).wild = true;
+					// A 5 or 6 counts as 3 hits
+					if (die.success) {
+						die.count = 3;
+					} else if (die.result === 1) {
+						ignoreFives = true;
+					}
 				}
-			}
-			lastExploded = die.exploded;
-
-			console.log("Die " + die.result + " = " + ignoreFives);
-		});
+				lastExploded = die.exploded;
+				console.debug("Die " + die.result + " = " + ignoreFives);
+			});
+		} else {
+			console.error("Wild die check not working in V10");
+		}
 
 		return ignoreFives;
 	}
