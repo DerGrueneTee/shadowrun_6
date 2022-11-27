@@ -49,7 +49,7 @@
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
 				{{# if (eq item.data.data.subtype "COMMLINK")}}	
-			   {{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config}}
+			   {{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config item=this }}
 			   {{/if}}
         	   </div> 
          </td>
@@ -78,7 +78,7 @@
          <td colspan="9">
          	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
-				{{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config}}
+				{{> "systems/shadowrun6-eden/templates/parts/programs.html" config=../config item=this }}
         	   </div>
          </td>
        </tr>

@@ -5,8 +5,9 @@
 			        	   {{#if (eq program.type 1)}}
         	   			<tr>
         	   				<td title="{{localize (concat (concat "shadowrun6.program." program.id ) ".desc")}}">{{localize (concat (concat "shadowrun6.program." program.id ) ".name")}}</td>
-        	   				<td><label class="switch">
-       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.program.active" {{checked ../item.data.data.program.active}} type="checkbox" data-dtype="Boolean"/>
+        	   				<td>
+								<label class="switch">
+       	<input type="checkbox" data-item-id="{{../item.id}}" data-check="data.program.{{this.id}}" {{checked (lookup ../item.data.data.program this.id) }} type="checkbox" data-dtype="Boolean"/>
                         <span class="shadowrun6-slider round"></span>
                     </label></td>
         	   			</tr>
@@ -20,7 +21,7 @@
         	   			<tr>
         	   				<td title="{{localize (concat (concat "shadowrun6.program." program.id ) ".desc")}}">{{localize (concat (concat "shadowrun6.program." program.id ) ".name")}}</td>
         	   				<td><label class="switch">
-       	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.program.active" {{checked ../item.data.data.program.active}} type="checkbox" data-dtype="Boolean"/>
+       	<input type="checkbox" data-item-id="{{../item.id}}" data-check="data.program.{{this.id}}" {{checked (lookup ../item.data.data.program this.id) }} type="checkbox" data-dtype="Boolean"/>
                         <span class="shadowrun6-slider round"></span>
                     </label></td>
         	   			</tr>
