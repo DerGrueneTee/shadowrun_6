@@ -6,16 +6,6 @@
         {{#each skills as |skill id|}}
         {{#if 
           (or
-            (and
-              (or
-                (eq id "astral") (eq id "conjuring") (eq id "enchanting") (eq id "sorcery")
-              )
-              (or
-                (eq ../actor.data.data.mortype "mundane")
-                (eq ../actor.data.data.mortype "technomancer")
-              )
-            )
-
             (and 
               (eq id "tasking")
               (ne ../actor.data.data.mortype "technomancer") 
