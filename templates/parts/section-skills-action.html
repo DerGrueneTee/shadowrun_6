@@ -31,8 +31,9 @@
        <li class="item flexrow draggable" data-skill-id="{{id}}">
 		   {{#if skill.specialization }}
        	<button type="button" class="collapsible-skill {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}}" data-item-id="{{this.id}}">+</button>
-        {{/if}}
+        {{else}}
        	<button type="button" class="collapsible-skill {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}} empty" data-item-id="{{this.id}}">+</button>
+        {{/if}}
          <label class="skill-value skill-key rollable skill-name skill-roll" data-skill="{{id}}">{{localize (concat "skill." id ) }}</label>
          <div class="skill-attrib">
            <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
@@ -76,7 +77,7 @@
          </div>
          </div>
        </li>
-       	{{/if}}
+       {{/if}}
        {{/each}}
      </ol> 
    </div>
