@@ -4,6 +4,13 @@
 	</div>
 	<div style="column-count: 2; margin-right: 5px;">
  		{{#each config.MATRIX_ACTIONS as |action idx|}} 
+		{{#if 
+			(and
+				(eq action.skill 'cracking')
+				(itemNotInList ../actor.items "CYBERDECK")
+			)
+		}}
+		{{else}}
        <div class="draggable item" data-matrix-action-id="{{this.id}}" style="display: flex; font-size:small; align-items:center;">
        	<label style="flex-grow:6">{{localize (concat 'shadowrun6.matrixaction.' this.id)}}</label>
          	{{#if (ne (matrixPool this.id ../actor) 0)}}
@@ -13,6 +20,7 @@
          </div>
          	{{/if}}
        </div>
+	   {{/if}}
        {{/each}}
 	</div>
 	</table>

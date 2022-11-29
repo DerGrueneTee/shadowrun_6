@@ -1,14 +1,38 @@
 <!-- Action skills -->
    <div class="section" style="width: 100%;">
      <h2 class="section-title">{{ localize 'shadowrun6.section.skills.action' }}</h2>
+
 	  <ol class="item-list">
         {{#each skills as |skill id|}}
+        {{#if 
+          (or
+            (and
+              (or
+                (eq id "astral") (eq id "conjuring") (eq id "enchanting") (eq id "sorcery")
+              )
+              (or
+                (eq ../actor.data.data.mortype "mundane")
+                (eq ../actor.data.data.mortype "technomancer")
+              )
+            )
+
+            (and 
+              (eq id "tasking")
+              (ne ../actor.data.data.mortype "technomancer") 
+            )
+
+            (and
+              (eq id "cracking")
+              (itemNotInList ../actor.items "CYBERDECK")
+            )
+          )
+        }}
+        {{else}}
        <li class="item flexrow draggable" data-skill-id="{{id}}">
 		   {{#if skill.specialization }}
        	<button type="button" class="collapsible-skill {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}}" data-item-id="{{this.id}}">+</button>
-       	{{else}}
+        {{/if}}
        	<button type="button" class="collapsible-skill {{lookup ../actor.data.flags.shadowrun6-eden (concat 'collapse-state-' id)}} empty" data-item-id="{{this.id}}">+</button>
-       	{{/if}}
          <label class="skill-value skill-key rollable skill-name skill-roll" data-skill="{{id}}">{{localize (concat "skill." id ) }}</label>
          <div class="skill-attrib">
            <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
@@ -52,6 +76,7 @@
          </div>
          </div>
        </li>
+       	{{/if}}
        {{/each}}
      </ol> 
    </div>
