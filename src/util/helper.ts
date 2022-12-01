@@ -90,6 +90,7 @@ export const defineHandlebarHelper = async function () {
 	Handlebars.registerHelper("ritualFeat", getRitualFeatures);
 	Handlebars.registerHelper("spellFeat", getSpellFeatures);
 	Handlebars.registerHelper("matrixPool", getMatrixActionPool);
+	Handlebars.registerHelper("itemNotInList", itemNotInList);
 
 	Handlebars.registerHelper("description", function (itemData: GenesisData, type) {
 		let fallback: string = itemData.description;
@@ -141,6 +142,16 @@ export const defineHandlebarHelper = async function () {
 		}
 	});
 };
+
+function itemNotInList(items, item) {
+	var bool = true;
+	items.forEach((elem) => {
+		if (elem.data.data.subtype == item) {
+			bool = false;
+		}
+	})
+	return bool;
+}
 
 function getSkillAttribute(key) {
 	let skillDef: SkillDefinition | undefined = CONFIG.SR6.ATTRIB_BY_SKILL.get(key);
