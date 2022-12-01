@@ -12,7 +12,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			classes       : ["shadowrun6", "sheet", "actor"],
-			template      : "systems/shadowrun6-eden/templates/shadowrun6-actor-vehicle-sheet.html",
+			template      : "systems/shadowrun6-eden/templates/actor/shadowrun6-Vehicle-sheet.html",
 			width         : 600,
 			height        : 800,
 			tabs          : [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "overview" }],
@@ -20,15 +20,6 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 			dragDrop      : [{ dragSelector: ".item-list .item", dropSelector: null }],
 			allVehicleUser: (game as Game).actors!.filter((actor) => actor.type == "Player" || actor.type == "NPC")
 		});
-	}
-
-	//-------------------------------------------------
-	get template() {
-		//	 console.log("in template()");
-		//	if (this.actor && this.actor.isOwner) { console.log("is owner"); } else { console.log("is not owner");}
-		const path = "systems/shadowrun6-eden/templates/";
-		//    return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
-		return `${path}shadowrun6-actor-vehicle-sheet.html`;
 	}
 
 	activateListeners(html) {

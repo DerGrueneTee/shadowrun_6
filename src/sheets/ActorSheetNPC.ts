@@ -9,7 +9,7 @@ export class Shadowrun6ActorSheetNPC extends Shadowrun6ActorSheet {
 	static get defaultOptions() {
 		return mergeObject(super.defaultOptions, {
 			classes : ["shadowrun6", "sheet", "actor"],
-			template: "systems/shadowrun6-eden/templates/shadowrun6-actor-npc-sheet.html",
+			template: "systems/shadowrun6-eden/templates/actor/shadowrun6-NPC-sheet.html",
 			width   : 700,
 			height  : 800,
 			tabs    : [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "overview" }],

@@ -1,6 +1,6 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
-import { Gear, Spell, Weapon } from "../ItemTypes.js";
+import { Gear, GenesisData, Spell, Weapon } from "../ItemTypes.js";
 import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, RollType, MatrixActionRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
@@ -34,6 +34,22 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		//console.log("getData2() " , data);
 		//console.log("CONFIG.SR6 " , CONFIG.SR6);
 		return data;
+	}
+
+	get template() {
+		console.log("in template()", this.actor.data.data);
+		const path = "systems/shadowrun6-eden/templates/actor/";
+		console.log(`${path}shadowrun6-${this.actor.data.type}-sheet.html`);
+		if (this.isEditable) {
+			console.log("ReadWrite sheet ");
+			return `${path}shadowrun6-${this.actor.data.type}-sheet.html`;
+		} else {
+			console.log("ReadOnly sheet", this);
+			let genItem: GenesisData = this.actor.data.data as GenesisData;
+			(this.actor as any).descHtml = (game as Game).i18n.localize(this.actor.data.type + "." + genItem.genesisID + ".desc");
+			(this.actor.data as any).descHtml2 = (game as Game).i18n.localize(this.actor.data.type + "." + genItem.genesisID + ".desc");
+			return `${path}shadowrun6-${this.actor.data.type}-sheet-ro.html`;
+		}
 	}
 
 	/**
