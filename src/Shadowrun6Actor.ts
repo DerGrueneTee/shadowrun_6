@@ -65,7 +65,7 @@ function isComplexForm(obj: any): obj is ComplexForm {
 	return obj.fading != undefined;
 }
 function isMatrixDevice(obj: any): obj is MatrixDevice {
-	return obj.d != undefined && obj.type == "ELECTRONICS";
+	return obj.d != undefined && (obj.type == "ELECTRONICS" || obj.type == 'CYBERWARE');
 }
 declare global {
 	interface CONFIG {

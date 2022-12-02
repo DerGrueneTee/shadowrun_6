@@ -7,7 +7,7 @@
   "ITEM": {
     "TypeAdeptpower": "Adeptenkraft",
     "TypeComplexform": "Komplexe Form",
-    "TypeComplexform": "Critterkraft",
+    "TypeCritterPower": "Critterkraft",
     "TypeContact" : "Connection",
     "TypeEcho": "Echo",
     "TypeGear": "Ausrüstung",
