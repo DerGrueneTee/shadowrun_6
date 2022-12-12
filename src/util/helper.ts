@@ -91,6 +91,10 @@ export const defineHandlebarHelper = async function () {
 	Handlebars.registerHelper("spellFeat", getSpellFeatures);
 	Handlebars.registerHelper("matrixPool", getMatrixActionPool);
 	Handlebars.registerHelper("itemNotInList", itemNotInList);
+	Handlebars.registerHelper("itemTypeInList", itemTypeInList);
+	Handlebars.registerHelper("itemsOfType", itemsOfType);
+	Handlebars.registerHelper("itemsOfGeartype", itemsOfGeartype);
+	Handlebars.registerHelper("skillPointsNotZero", skillPointsNotZero);
 
 	Handlebars.registerHelper("description", function (itemData: GenesisData, type) {
 		let fallback: string = itemData.description;
@@ -143,11 +147,35 @@ export const defineHandlebarHelper = async function () {
 	});
 };
 
+function itemsOfType(items, type) {
+	return items.filter((elem) => elem.data.type == type);
+}
+
+function itemsOfGeartype(items, geartype) {
+	return items.filter((elem) => elem.data.data.type == geartype);
+}
+
+function skillPointsNotZero(skills){
+	return Object.keys(skills)
+		.filter((key) => skills[key].points > 0)
+		.reduce((res, key) => (res[key] = skills[key], res), {});
+}
+
 function itemNotInList(items, item) {
 	var bool = true;
 	items.forEach((elem) => {
 		if (elem.data.data.subtype == item) {
 			bool = false;
+		}
+	})
+	return bool;
+}
+
+function itemTypeInList(items, type){
+	var bool = false;
+	items.forEach((elem) => {
+		if (elem.data.type == type) {
+			bool = true;
 		}
 	})
 	return bool;

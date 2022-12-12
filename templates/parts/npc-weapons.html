@@ -1,18 +1,12 @@
 <dt>{{ localize 'shadowrun6.section.weapon.title' }}</dt>
 <dd>
 	<!-- Weapons -->
-	{{#each actor.items as |item id|}} 
-		{{#if (eq item.type 'gear')}}
-		{{#if (eq item.data.data.type "WEAPON_FIREARMS") }}
-   <label class="" data-skill="{{id}}">{{item.name}}</label> 
-   <a class="item-control item-roll" data-item-id="{{this.id}}" data-skill="{{item.data.data.skill}}" data-skillSpec="{{item.data.data.skillSpec}}" title="Roll"><i class="fas fa-dice-six"></i></a>
-   ,<br/>
-		{{/if}}
-		{{#if (eq item.data.data.type "WEAPON_CLOSE_COMBAT") }}
-   <label class="">{{item.name}} </label>
-   <a class="item-control item-roll" data-item-id="{{this.id}}" data-skill="{{item.data.data.skill}}" data-skillSpec="{{item.data.data.skillSpec}}" title="Roll"><i class="fas fa-dice-six"></i></a>
-    ,<br/>
-		{{/if}}
-		{{/if}}
-   {{/each}}
+	{{#each (itemsOfGeartype actor.items 'WEAPON_FIREARMS') as |item id|}} 
+		<label class="">{{item.name}} </label>
+		<a class="item-control item-roll" data-item-id="{{this.id}}" data-skill="{{item.data.data.skill}}" data-skillSpec="{{item.data.data.skillSpec}}" title="Roll"><i class="fas fa-dice-six"></i></a>{{#unless @last}},&nbsp;{{/unless}}
+	{{/each}}
+	{{#each (itemsOfGeartype actor.items 'WEAPON_CLOSE_COMBAT') as |item id|}} 
+		<label class="">{{item.name}} </label>
+		<a class="item-control item-roll" data-item-id="{{this.id}}" data-skill="{{item.data.data.skill}}" data-skillSpec="{{item.data.data.skillSpec}}" title="Roll"><i class="fas fa-dice-six"></i></a>{{#unless @last}},&nbsp;{{/unless}}
+	{{/each}}
 </dd>

@@ -1,15 +1,14 @@
+{{#if (itemTypeInList actor.items 'gear')}}
 <dt>{{ localize 'shadowrun6.section.bodyware.title' }}</dt>
 <dd>
 	<!-- Bioware -->
-	{{#each actor.items as |item id|}} 
-		{{#iff item.type '==' 'gear'}}
-		{{#iff item.data.data.type '==' "BIOWARE"}}
-   <label class="" data-gear="{{id}}">{{item.name}}</label>, 
-   {{/iff}}
+	{{#each (itemsOfGeartype actor.items 'BIOWARE') as |item id|}} 
+		<label class="" data-gear="{{id}}">{{item.name}}</label>{{#unless @last}},&nbsp;{{/unless}}
+	{{/each}}
+
 	<!-- Cyberware -->
-		{{#iff item.data.data.type '==' "CYBERWARE"}}
-   <label class="" data-gear="{{id}}">{{item.name}}</label>, 
-		{{/iff}} 
-		{{/iff}} 
-   {{/each}}
+	{{#each (itemsOfGeartype actor.items 'CYBERWARE') as |item id|}} 
+		<label class="" data-gear="{{id}}">{{item.name}}</label>{{#unless @last}},&nbsp;{{/unless}}
+	{{/each}}
 </dd>
+{{/if}}

@@ -1,10 +1,9 @@
+{{#if (itemTypeInList actor.items 'adeptpower')}}
 <dt>{{ localize 'shadowrun6.section.adeptpowers.title' }}</dt>
 <dd>
-	<!-- Powers -->
-	{{#each actor.items as |item id|}} 
-	{{#iff item.type '==' 'adeptpower'}}
-   <label class="" data-skill="{{id}}">{{item.name}}</label>
-    ,
-   {{/iff}}
+	<!-- Adeptpowers -->
+	{{#each (itemsOfType actor.items 'adeptpower') as |item id|}} 
+      <label class="" data-skill="{{id}}">{{item.name}}</label>{{#unless @last}},&nbsp;{{/unless}}
    {{/each}}
 </dd>
+{{/if}}
