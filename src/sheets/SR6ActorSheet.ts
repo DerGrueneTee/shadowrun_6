@@ -239,6 +239,13 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			};
 			return this.actor.createEmbeddedDocuments("Item", [itemData]);
 		});
+		html.find('.critterpower-create').click(ev => {
+			const itemData = {
+				name: (game as Game).i18n.localize("shadowrun6.newitem.critterpower"),
+				type: "critterpower",
+			};
+			return this.actor.createEmbeddedDocuments("Item", [itemData]);
+		});
 		html.find(".martialart-style-create").click((ev) => {
 			const itemData = {
 				name: (game as Game).i18n.localize("shadowrun6.newitem.martialartstyle"),
