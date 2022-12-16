@@ -3,7 +3,7 @@ import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry
 import { Lifeform, Monitor, Skill, VehicleActor, VehicleSkill } from "../ActorTypes.js";
 import { Defense, MonitorType } from "../config.js";
 import { EdgeBoost, MatrixAction, SkillDefinition } from "../DefinitionTypes.js";
-import { Gear, Spell, Weapon } from "../ItemTypes.js";
+import { ComplexForm, Gear, Spell, Weapon } from "../ItemTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 export enum RollType {
@@ -248,6 +248,35 @@ export class SpellRoll extends SkillRoll {
 	}
 }
 
+export class ComplexFormRoll extends SkillRoll {
+	rollType = RollType.ComplexForm;
+
+	item: Item;
+	itemId: string;
+	formId: string;
+	formName: string | null;
+	formDesc: string | null;
+	formSrc: string | null;
+	form: ComplexForm;
+	calcFade: number;
+	defenseRating: number;
+	attackRating: number;
+
+	/**
+	 * @param skill {Skill}   The skill to roll upon
+	 */
+	constructor(actor: Lifeform, item: Item, itemId: string, formItem: ComplexForm) {
+		super(actor, "electronics");
+		this.item = item;
+		this.itemId = itemId;
+		this.form = formItem;
+		this.skillSpec = "complex_forms";
+		this.attrib = "res";
+
+		this.calcFade = formItem.fading;
+	}
+}
+
 function isWeapon(obj: any): obj is Weapon {
 	return obj.attackRating != undefined;
 }
@@ -380,6 +409,16 @@ export class ConfiguredRoll extends CommonRollData {
 		(this as any).spellId = (copy as SpellRoll).spellId;
 		(this as any).spellName = (copy as SpellRoll).spellName;
 		(this as any).spellSrc = (copy as SpellRoll).spellSrc;
+
+		console.log("Copy ComplexFormRoll data to ConfiguredRoll");
+		(this as any).form = (copy as ComplexFormRoll).form;
+		(this as any).calcFade = (copy as ComplexFormRoll).calcFade;
+		(this as any).defenseRating = (copy as ComplexFormRoll).defenseRating;
+		(this as any).attackRating = (copy as ComplexFormRoll).attackRating;
+		(this as any).formDesc = (copy as ComplexFormRoll).formDesc;
+		(this as any).formId = (copy as ComplexFormRoll).formId;
+		(this as any).formName = (copy as ComplexFormRoll).formName;
+		(this as any).formSrc = (copy as ComplexFormRoll).formSrc;
 	}
 }
 

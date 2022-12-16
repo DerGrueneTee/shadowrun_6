@@ -1038,7 +1038,8 @@
       "electronics": {
         "computer": "Computer",
         "hardware": "Hardware",
-        "software": "Software"
+        "software": "Software",
+        "complex_forms": "Complex Forms"
       },
       "enchanting": {
         "alchemy": "Alchemy",

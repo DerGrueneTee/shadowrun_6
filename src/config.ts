@@ -317,7 +317,8 @@ export class SR6Config {
 		electronics: {
 			computer: "shadowrun6.special.electronics.computer",
 			hardware: "shadowrun6.special.electronics.hardware",
-			software: "shadowrun6.special.electronics.software"
+			software: "shadowrun6.special.electronics.software",
+			complex_forms: "shadowrun6.special.electronics.complex_forms"
 		},
 		enchanting: {
 			alchemy      : "shadowrun6.special.enchanting.alchemy",

@@ -1,7 +1,7 @@
 import { Lifeform, Monitor, Skill } from "../ActorTypes.js";
 import { SR6Config } from "../config.js";
-import { Gear, GenesisData, Spell, Weapon } from "../ItemTypes.js";
-import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, RollType, MatrixActionRoll } from "../dice/RollTypes.js";
+import { ComplexForm, Gear, GenesisData, Spell, Weapon } from "../ItemTypes.js";
+import { WeaponRoll, SkillRoll, SpellRoll, PreparedRoll, RollType, MatrixActionRoll, ComplexFormRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 
 interface SR6ActorSheetData extends ActorSheet.Data {
@@ -644,8 +644,25 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 	//-----------------------------------------------------
 	_onRollComplexFormCheck(event, html) {
+		console.log("_onRollComplexFormCheck");
 		event.preventDefault();
-		const item = event.currentTarget.dataset.itemId;
-		(this.actor as Shadowrun6Actor).rollComplexForm(item, { event: event });
+		if (!event.currentTarget) return;
+		if (!(event.currentTarget as any).dataset) return;
+		const caster: Lifeform = this.actor.data.data as Lifeform;
+		const itemId: string = (event.currentTarget as any).dataset.itemId;
+
+		let item: Item | undefined = this.actor.items.get(itemId);
+		if (!item) {
+			throw new Error("_onRollComplexFormCheck for non-existing item");
+		}
+		let formRaw = this.actor.items.get(itemId);
+		if (!formRaw) {
+			console.log("No such item: " + itemId);
+			return;
+		}
+		const cform: ComplexForm = formRaw.data.data as ComplexForm;
+		let roll: ComplexFormRoll = new ComplexFormRoll(caster, item, itemId, cform);
+		roll.skillSpec = "complex_forms";
+		(this.actor as Shadowrun6Actor).rollComplexForm(roll);
 	}
 }

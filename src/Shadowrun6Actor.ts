@@ -33,7 +33,8 @@ import {
 	DefenseRoll,
 	SoakType,
 	SoakRoll,
-	VehicleRoll
+	VehicleRoll,
+    ComplexFormRoll,
 } from "./dice/RollTypes.js";
 import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
@@ -988,14 +989,15 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {Object} spell      The spell to cast
 	 * @return Roll name
 	 */
-	_getComplexFormName(complex) {
-		if (complex.genesisId) {
-			const key = "shadowrun6.compendium.complexform." + complex.genesisId;
+	_getComplexFormName(complex: ComplexForm, item:Item): string|null {
+		if (complex.genesisID) {
+			const key = "shadowrun6.compendium.complexform." + complex.genesisID;
 			let name = (game as Game).i18n.localize(key);
 			if (key != name) return name;
 		}
 
-		return complex.name;
+		if (item) return item.name;
+		throw new Error("Spell: No genesisID and no item");
 	}
 
 	//---------------------------------------------------------
@@ -1409,79 +1411,54 @@ export class Shadowrun6Actor extends Actor {
 	 * @param {string} itemId       The item id of the spell
 	 * @return {Promise<Roll>}      A Promise which resolves to the created Roll instance
 	 */
-	rollComplexForm(itemId, options = {}) {
-		console.log("ToDo: rollComplexForm(" + itemId + ")");
-		// Caster must be a lifeform
-		if (!isLifeform(this.data.data)) {
-			return;
-		}
+	rollComplexForm(roll: ComplexFormRoll) {
+		console.log("rollComplexForm( roll=" + roll+ ")");
 
-		/*
-		const complex = this.items.get(itemId);
-		let skillId = complex.data.data.skill;
-		if (!skillId)
-			skillId = "electronics";
-		const spec    = null;
-		let threshold = complex.data.data.threshold;
-		// Prepare action text
-		let actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.thread", {name:this._getComplexFormName(complex)});
-		// Get pool
-		let pool = this._getSkillPool(skillId, spec, "res");
-		let rollName = this._getSkillCheckText(skillId, spec, threshold, "res");		
+		roll.threshold = 0;
 
-		// Determine whether or not the spell is an opposed test
-		// and what defense eventually applies
-		let isOpposed = (complex.data.data.oppAttr1!=undefined);
-		let defendWith = "matrix";
-		let attackRating = this.data.data.attackrating.resonance.pool;
-		let highestDefenseRating = this._getHighestDefenseRating( a =>  a.data.data.defenserating.matrix.pool);
-		console.log("Highest defense rating of targets: "+highestDefenseRating);
-		
 		// If present, replace spell name, description and source references from compendium
-		let spellName = complex.name;
-		let spellDesc = "";
-		let spellSrc  = "";
-		if (complex.data.data.description) {
-			spellDesc = complex.data.data.description;
+		roll.formName = this._getComplexFormName(roll.form, roll.item);
+		if (roll.form.description) {
+			roll.formDesc = roll.form.description;
 		}
-		if (complex.data.data.genesisID) {
-			let key = "complexform."+complex.data.data.genesisID+".";
-			if (!(game as Game).i18n.localize(key+"name").startsWith(key)) {
+		if (roll.form.genesisID) {
+			let key = "complex_form." + roll.form.genesisID + ".";
+			if (!(game as Game).i18n.localize(key + "name").startsWith(key)) {
 				// A translation exists
-				spellName = (game as Game).i18n.localize(key+"name");
-				spellDesc = (game as Game).i18n.localize(key+"desc");
-				spellSrc = (game as Game).i18n.localize(key+"src");
+				roll.formName = (game as Game).i18n.localize(key + "name");
+				roll.formDesc = (game as Game).i18n.localize(key + "desc");
+				roll.formSrc = (game as Game).i18n.localize(key + "src");
 			}
 		}
 
-		let data = mergeObject(options, {
-			isSpell : true,
-			pool: pool,
-			actionText: actionText,
-			checkText  : rollName,
-			skill: this.data.data.skills[skillId],
-			spec: spec,
-			complexform: complex,
-			spellName: spellName,
-			spellDesc: spellDesc,
-			spellSrc : spellSrc,
-			attackRating: attackRating,
-			defRating : highestDefenseRating,
-			targets: game.user.targets.forEach( val => val.actor),
-			isOpposed: isOpposed,
-			threshold: threshold,
-			rollType: "complexform",
-			isAllowDefense: complex.oppAttr1!="",
-			defendWith: defendWith,
-			buyHits: !isOpposed
-		});
-		data.speaker = ChatMessage.getSpeaker({ actor: this });
-		if (isOpposed) {
-			return doRoll(data);
-		} else {
-			return doRoll(data);
+		// Prepare action text
+		switch ((game as Game).user!.targets.size) {
+			case 0:
+				roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_none", { name: roll.formName });
+				break;
+			case 1:
+				let targetName = (game as Game).user!.targets.values().next().value.name;
+				roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_one", { name: roll.formName, target: targetName });
+				break;
+			default:
+				roll.actionText = (game as Game).i18n.format("shadowrun6.roll.actionText.cast_target_multiple", { name: roll.formName });
 		}
-		*/
+		roll.actor = this;
+		// Prepare check text
+		roll.checkText = this._getSkillCheckText(roll);
+		// Calculate pool
+		roll.pool = this._getSkillPool(roll.skillId, roll.skillSpec);
+
+		// Determine whether or not the spell is an opposed test
+		// and what defense eventually applies
+		let hasDamageResist = true;
+		roll.attackRating = roll.performer.attackrating.astral.pool;
+		let highestDefenseRating = this._getHighestDefenseRating((a) => a.data.data.defenserating.physical.pool);
+		console.log("Highest defense rating of targets: " + highestDefenseRating);
+		if (highestDefenseRating > 0) roll.defenseRating = highestDefenseRating;
+
+		roll.speaker = ChatMessage.getSpeaker({ actor: this });
+		return doRoll(roll);
 	}
 
 	//-------------------------------------------------------------

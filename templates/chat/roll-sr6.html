@@ -90,7 +90,7 @@
    {{#if (eq rollType "spell")}}
    <hr/>
    <div class="chat-spell">
-   	<table class="spell-table">
+   	<table class="spell-table" style="text-align: center">
    	    <tr>
    	    	<th>{{localize 'shadowrun6.spell.range'}}</th>
             <th>{{localize 'shadowrun6.spell.type'}}</th>
@@ -109,6 +109,28 @@
    	</table>
 		<div class="chat-spell-collapsible" style="display:none">
    		{{configured.spellDesc}}
+		</div>
+   </div>
+  	<!--button class="rollable" data-roll-type="soak" data-soak="drain" data-damage="{{configured.calcDrain}}"  data-monitor="stun" data-defend-with="{{../defendWith}}" data-target-actor="{{speaker.actor}}"data-target-token="{{speaker.token}}">{{speaker.alias}}: {{localize 'shadowrun6.roll.button.drain'}} ({{configured.calcDrain}})</button-->
+   {{/if}}        
+   
+   <!-- Drain -->
+   {{#if (eq rollType "complexform")}}
+   <hr/>
+   <div class="chat-spell">
+   	<table class="spell-table" style="text-align: center">
+   	    <tr>
+            <th>{{localize 'shadowrun6.complexform.fading'}}</th>
+            <th>{{localize 'shadowrun6.spell.duration_short'}}</th>
+   	    </tr>
+   	  	<tr>
+    	  		<td>{{configured.calcFade}}</td>
+   	  		<td>{{localize (concat (concat 'shadowrun6.spell.duration_' configured.form.duration) "_short")}}</td>
+   	  		<td></td>
+   	  	</tr>
+   	</table>
+		<div class="chat-spell-collapsible" style="display:none">
+   		{{configured.formDesc}}
 		</div>
    </div>
   	<!--button class="rollable" data-roll-type="soak" data-soak="drain" data-damage="{{configured.calcDrain}}"  data-monitor="stun" data-defend-with="{{../defendWith}}" data-target-actor="{{speaker.actor}}"data-target-token="{{speaker.token}}">{{speaker.alias}}: {{localize 'shadowrun6.roll.button.drain'}} ({{configured.calcDrain}})</button-->

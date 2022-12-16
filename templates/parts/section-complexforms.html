@@ -21,7 +21,7 @@
 			<td class="centered" style="width: 3em"> {{localize (concat "shadowrun6.spell.duration_" (concat  item.data.data.duration "_short"))}}</td>
 			<td class="centered"style="width: 3em"> <input type="text" value="{{item.data.data.fading}}" data-field="data.fading" data-type="Number"/></td>
 			<td class="centered">
-				{{#iff item.data.data.fade ">" 0}}
+				{{#iff item.data.data.fading ">" 0}}
 				<a class="item-control complexform-roll"   data-item-id="{{item.id}}"  title="Roll"><i class="fas fa-dice-six"></i></a>
 				{{/iff}}
 				<a class="item-control item-edit"   title='{{localize 'shadowrun6.label.edit' }}'><i class="fas fa-edit"></i></a> 
