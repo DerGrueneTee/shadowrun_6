@@ -23,6 +23,7 @@ import EdgeUtil from "./util/EdgeUtil.js";
 import { ChatMessageData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
 import { GenesisData } from "./ItemTypes.js";
+import Importer from "./util/Importer.js";
 
 const diceIconSelector: string = "#chat-controls .chat-control-icon .fa-dice-d20";
 
@@ -79,6 +80,7 @@ Hooks.once("init", async function () {
 
 	preloadHandlebarsTemplates();
 	defineHandlebarHelper();
+	document.addEventListener('paste', (e) => Importer.pasteEventhandler(e), false);
 
 	Hooks.once("diceSoNiceReady", (dice3d) => {
 		dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "default");
@@ -210,6 +212,10 @@ Hooks.once("init", async function () {
 		_onRenderItemSheet(app, html, data);
 	});
 
+	Hooks.on("dropCanvasData", (doc, data) => {
+		console.log("dropCanvasData hook called", doc);
+	});
+
 	/*
 	 * Something has been dropped on the HotBar
 	 */
@@ -222,7 +228,7 @@ Hooks.once("init", async function () {
 			command: ""
 		};
 
-		/*    // For items, memorize the skill check	
+		/*    // For items, memorize the skill check
     if (data.type === "Item") {
       console.log("Item dropped " + data);
       if (data.id) {
