@@ -42,7 +42,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		console.log(`${path}shadowrun6-${this.actor.data.type}-sheet.html`);
 		if (this.isEditable) {
 			console.log("ReadWrite sheet ");
-			return `${path}shadowrun6-${this.actor.data.type}-sheet.html`;
+			return `${path}shadowrun6-${this.actor.data.type}-combinedsheet.html`;
 		} else {
 			console.log("ReadOnly sheet", this);
 			let genItem: GenesisData = this.actor.data.data as GenesisData;

@@ -2,8 +2,8 @@
 	"Shadowrun6ActorSheetNPC": "Bla",
 	"shadowrun6-eden.Shadowrun6ActorSheetNPC": "Blubb",
   "ACTOR": {
-    "TypeCritter": "Critter",
-    "TypeNpc": "NPC",
+    "TypeCritter": "Don't use (Critter)",
+    "TypeNpc": "NPC/Critter/Spirit/Sprite",
     "TypePlayer": "Player Character"
   },
   "ITEM": {
@@ -606,6 +606,14 @@
       "weapon": "Named weapons are much cooler",
       "weaponclose": "Something heavy"
     },
+    "npc": {
+    	"subtype": {
+      	"npc": "NPC",
+      	"critter": "Critter",
+      	"spirit": "Spirit",
+      	"sprite": "Sprite"
+      }
+    },
     "numerical": {
       "base": "base",
       "baseString": "Base Value",
@@ -1178,6 +1186,15 @@
       "indirect": "Indirect Combat",
       "sense_multi": "Multi-Sense",
       "sense_single": "Single-Sense"
+    },
+    "spirittype": {
+      "air": "Air",
+      "beasts": "Beasts",
+      "earth": "Earth",
+      "fire": "Fire",
+      "kin": "Kin",
+      "plant": "Plant",
+      "water": "Water"
     },
     "tradition": {
       "attribute": "Tradition Attribute"

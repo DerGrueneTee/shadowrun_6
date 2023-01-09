@@ -9,6 +9,8 @@ export const preloadHandlebarsTemplates = async function () {
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogOpposed.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogSpell.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogWeapon.html",
+		"systems/shadowrun6-eden/templates/parts/npc_full_edit_sheet.html",
+		"systems/shadowrun6-eden/templates/parts/npc_usage_sheet.html",
 		"systems/shadowrun6-eden/templates/parts/attributes.html",
 		"systems/shadowrun6-eden/templates/parts/edge-token.html",
 		"systems/shadowrun6-eden/templates/parts/initiatives.html",

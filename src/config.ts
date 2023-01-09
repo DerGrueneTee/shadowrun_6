@@ -145,6 +145,8 @@ export class SR6Config {
 		adept           : new MagicOrResonanceDefinition(true, false, false, true),
 		aspectedmagician: new MagicOrResonanceDefinition(true, false, true, false)
 	};
+	NPC_SUBTYPES = ["npc", "critter", "spirit", "sprite"];
+	SPIRIT_TYPES = ["air", "beasts", "earth", "fire", "kin", "plant", "water"]
 
 	ATTRIB_BY_SKILL = new Map([
 		["astral", new SkillDefinition("int", false)],

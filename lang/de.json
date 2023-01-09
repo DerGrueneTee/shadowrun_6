@@ -589,6 +589,14 @@
       "weapon": "Was mit viel Wumms",
       "weaponclose": "Etwas fürs Grobe"
     },
+    "npc": {
+    	"subtype": {
+      	"npc": "NSC/Scherge",
+      	"critter": "Critter",
+      	"spirit": "Geist",
+      	"sprite": "Sprite"
+      }
+    },
     "numerical": {
       "base": "Basis",
       "baseString": "Grundwert",
@@ -1141,6 +1149,15 @@
       "indirect": "Indirekter Kampfzauber",
       "sense_multi": "Vollsensorisch",
       "sense_single": "Monosensorisch"
+    },
+    "spirittype": {
+      "air": "Luft",
+      "beasts": "Beasts",
+      "earth": "Erde",
+      "fire": "Feuer",
+      "kin": "Menschen",
+      "plant": "Pflanzen",
+      "water": "Wasser"
     },
     "tradition": {
       "attribute": "Traditionsattribut"
