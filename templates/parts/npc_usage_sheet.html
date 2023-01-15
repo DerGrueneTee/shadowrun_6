@@ -15,7 +15,7 @@
     {{!-- Sheet Body --}}
     <section class="sheet-body">
 
-                <div class="section" style="width: 68%; margin: 5px">
+                <div class="section" style="width: 90%; margin: 5px">
                     {{> "systems/shadowrun6-eden/templates/parts/npc-attributes.html" attributes=data.data.attributes}}
                     <dl>
                         <dt>{{ localize 'shadowrun6.actor.initiative' }}</dt>
@@ -32,6 +32,7 @@
                         {{> "systems/shadowrun6-eden/templates/parts/npc-echoes.html" }}
                         {{> "systems/shadowrun6-eden/templates/parts/npc-augmentations.html" }}
                         {{> "systems/shadowrun6-eden/templates/parts/npc-gear.html" }}
+                        {{> "systems/shadowrun6-eden/templates/parts/npc-critterpowers.html" }}
                         {{> "systems/shadowrun6-eden/templates/parts/npc-weapons.html" }}
                     </dl>
                 </div>
