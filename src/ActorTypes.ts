@@ -147,6 +147,10 @@ export interface ILifeform {
 	attributes: Attributes;
 	skills: Skills;
 }
+export class Spirit extends Lifeform {
+	rating : number;
+	spiritType : string;
+}
 
 export class MatrixUser extends Lifeform {
 	persona: Persona = new Persona();

@@ -5,6 +5,11 @@
 		</div>
 		<div class="header-fields" style="flex:3">
 			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
+			<div class="npc-settings" style="display:flex">
+   {{#switch data.type}}
+		{{#case 'Spirit' }} {{> "systems/shadowrun6-eden/templates/parts/npc_usage_spirit.html" }} {{/case}}
+   {{/switch}}
+			</div>
 			<div style="display:flex; flex-direction:row; align-items:center;">
 			{{> "systems/shadowrun6-eden/templates/parts/monitors.html" attributes=data.data.attributes}}
 			{{> "systems/shadowrun6-eden/templates/parts/edge-token.html"}}
@@ -16,7 +21,7 @@
     <section class="sheet-body">
 
                 <div class="section" style="width: 90%; margin: 5px">
-                    {{> "systems/shadowrun6-eden/templates/parts/npc-attributes.html" attributes=data.data.attributes}}
+                    {{> "systems/shadowrun6-eden/templates/parts/npc-attributes-ro.html" attributes=data.data.attributes}}
                     <dl>
                         <dt>{{ localize 'shadowrun6.actor.initiative' }}</dt>
                         <dd>{{data.data.initiative.physical.base}} + {{data.data.initiative.physical.dicePool}}d6</dd>

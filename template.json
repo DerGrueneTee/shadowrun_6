@@ -458,7 +458,7 @@
 				"knowledge-template"
 			],
 			"rating" : 1,
-			"spiritpreset": "",
+			"spiritType": "",
 			"editmode": false
 		},
 		"Vehicle": {

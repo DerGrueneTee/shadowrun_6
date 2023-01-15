@@ -16,7 +16,8 @@ import {
 	Initiative,
 	VehicleOpMode,
 	VehicleSkills,
-	VehicleSkill
+	VehicleSkill,
+   Spirit
 } from "./ActorTypes.js";
 import { Defense, MonitorType, SR6, SR6Config } from "./config.js";
 import { MatrixAction, SkillDefinition } from "./DefinitionTypes.js";
@@ -40,6 +41,9 @@ import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/f
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
+}
+function isSpiritOrSprite(obj: any): obj is Spirit {
+	return obj.rating != undefined;
 }
 function isMatrixUser(obj: any): obj is MatrixUser {
 	return obj.persona != undefined;
@@ -85,6 +89,10 @@ export class Shadowrun6Actor extends Actor {
 		const data: SR6Actor = this.data.data as SR6Actor;
 
 		try {
+			if (this.data.type === "Spirit") {
+				this._applySpiritPreset();
+				this._applyForce();
+			}
 			this._prepareAttributes();
 			this._prepareDerivedAttributes();
 			if (this.data.type != "Vehicle" && this.data.type != "Critter") {
@@ -117,6 +125,135 @@ export class Shadowrun6Actor extends Actor {
 	}
 
 	//---------------------------------------------------------
+	/**
+	 * Apply the force rating as a attribute and skill modifier
+	 */
+	_applySpiritPreset() {
+		const data = this.data.data;
+		// Only run on spirits
+		if (!isSpiritOrSprite(data))
+			return;
+
+		switch (data.spiritType) {
+		case 'air':
+			data.attributes.bod.base=2;
+			data.attributes.agi.base=3;
+			data.attributes.rea.base=3;
+			data.attributes.str.base=0;
+			data.attributes.wil.base=0;
+			data.attributes.log.base=0;
+			data.attributes.int.base=0;
+			data.attributes.cha.base=0;
+			data.attributes.mag.base=0;
+			break;
+		case 'beasts':
+			data.attributes.bod.base=2;
+			data.attributes.agi.base=1;
+			data.attributes.rea.base=0;
+			data.attributes.str.base=2;
+			data.attributes.wil.base=0;
+			data.attributes.log.base=0;
+			data.attributes.int.base=0;
+			data.attributes.cha.base=0;
+			data.attributes.mag.base=0;
+			break;
+		case 'earth':
+			data.attributes.bod.base=4;
+			data.attributes.agi.base=2;
+			data.attributes.rea.base=-1;
+			data.attributes.str.base=4;
+			data.attributes.wil.base=0;
+			data.attributes.log.base=-1;
+			data.attributes.int.base=0;
+			data.attributes.cha.base=0;
+			data.attributes.mag.base=0;
+			break;
+		case 'fire':
+			data.attributes.bod.base=1;
+			data.attributes.agi.base=2;
+			data.attributes.rea.base=3;
+			data.attributes.str.base=2;
+			data.attributes.wil.base=0;
+			data.attributes.log.base=0;
+			data.attributes.int.base=1;
+			data.attributes.cha.base=0;
+			data.attributes.mag.base=0;
+			break;
+		case 'kin':
+			data.attributes.bod.base=1;
+			data.attributes.agi.base=0;
+			data.attributes.rea.base=2;
+			data.attributes.str.base=-2;
+			data.attributes.wil.base=0;
+			data.attributes.log.base=0;
+			data.attributes.int.base=1;
+			data.attributes.cha.base=0;
+			data.attributes.mag.base=0;
+			break;
+		case 'water':
+			data.attributes.bod.base=0;
+			data.attributes.agi.base=1;
+			data.attributes.rea.base=2;
+			data.attributes.str.base=0;
+			data.attributes.wil.base=0;
+			data.attributes.log.base=0;
+			data.attributes.int.base=1;
+			data.attributes.cha.base=0;
+			data.attributes.mag.base=0;
+			break;
+		}
+	}
+
+	//---------------------------------------------------------
+	/**
+	 * Apply the force rating as a attribute and skill modifier
+	 */
+	_applyForce() {
+		const data = this.data.data;
+		// Only run on spirits
+		if (isSpiritOrSprite(data)) {
+			const force : number = parseInt(data.rating as any);
+			data.mortype = "mysticadept";
+
+			SR6.ATTRIBUTES.forEach((attr) => {
+				data.attributes[attr].mod = force;
+			});
+
+			SR6.ATTRIB_BY_SKILL.forEach(function (skillDef, id) {
+				let skill : Skill = (data.skills[id] as Skill);
+				skill.modifier=0;
+				if (skill.points>0) {
+					skill.points=force;
+				}
+		   });
+
+		   // Magic rating
+ 		   data.attributes.mag.base = 0;
+ 		   data.essence = force;
+ 		   data.defenserating.physical.base = force;
+ 		   data.defenserating.astral.base = force;
+
+ 		   data.initiative.physical.base = force*2;
+			data.initiative.physical.pool = data.initiative.physical.base + data.initiative.physical.mod;
+			data.initiative.physical.dicePool = Math.min(5, data.initiative.physical.dice + data.initiative.physical.diceMod);
+			data.initiative.actions = data.initiative.physical.dicePool + 1;
+
+ 		   data.initiative.astral.base = force*2;
+			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
+			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
+
+			data.physical.max = 8 + Math.round(data.attributes.wil.pool / 2) + data.physical.mod;
+			data.physical.value = data.physical.max - data.physical.dmg;
+			data.stun.max = 0;
+			data.stun.value = 0;
+			data.stun.dmg=0;
+			data.stun.mod=0;
+
+
+		 }
+	}
+
+	//---------------------------------------------------------
 	/*
 	 * Calculate the final attribute values
 	 */
@@ -127,6 +264,8 @@ export class Shadowrun6Actor extends Actor {
 		if (isLifeform(data)) {
 			SR6.ATTRIBUTES.forEach((attr) => {
 				data.attributes[attr].pool = data.attributes[attr].base + data.attributes[attr].mod;
+				if (data.attributes[attr].pool<1)
+					data.attributes[attr].pool=1;
 			});
 		}
 	}
@@ -140,11 +279,12 @@ export class Shadowrun6Actor extends Actor {
 		if (!isLifeform(this.data.data)) return;
 		const data: Lifeform = this.data.data;
 
-		// Store volatile
-		if (data.physical) {
-			data.physical.max = 8 + Math.round(data.attributes["bod"].pool / 2) + data.physical.mod;
-			data.physical.value = data.physical.max - data.physical.dmg;
-		}
+		// Don't calculate monitors and initiative for spirits
+		if (this.data.type != "Spirit") {
+			if (data.physical) {
+				data.physical.max = 8 + Math.round(data.attributes["bod"].pool / 2) + data.physical.mod;
+				data.physical.value = data.physical.max - data.physical.dmg;
+			}
 
 		if (data.stun) {
 			data.stun.max = 8 + Math.round(data.attributes["wil"].pool / 2) + data.stun.mod;
@@ -161,6 +301,7 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
+		}
 		}
 
 		if (!data.derived) {
@@ -873,7 +1014,7 @@ export class Shadowrun6Actor extends Actor {
 			// Attack pool
 			actorData.persona.attackPool = actorData.skills["cracking"].points + actorData.skills["cracking"].modifier;
 			if (actorData.skills.expertise=="cybercombat") { actorData.persona.attackPool+=3} else
-			if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2} 
+			if (actorData.skills.specialization=="cybercombat") { actorData.persona.attackPool+=2}
 			actorData.persona.attackPool += actorData.attributes["log"].pool;
 		}
 

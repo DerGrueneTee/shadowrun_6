@@ -57,6 +57,8 @@
 				</div>
 			</td>
 		</tr>
+		{{log "data.data" data.data}}
+		{{#iff data.data.stun.max "!=" 0}}
 		<tr>
 			<td><img src="systems/shadowrun6-eden/images/brain.svg" style="border: 0px; height: auto; width: 48px" /></td>
 			<td><label for="data.stun" title="{{localize 'shadowrun6.monitor.stun'}}">{{localize 'shadowrun6.monitor.stun'}}</label></td>
@@ -75,6 +77,7 @@
 				</div>
 			</td>
 		</tr>
+		{{/iff}}
 		<!--tr>
 			<td><i class="fas fa-skull"></td>
 			<td><label for="data.stun" title="{{localize 'shadowrun6.monitor.overflow'}}">{{localize 'shadowrun6.monitor.overflow'}}</label></td>

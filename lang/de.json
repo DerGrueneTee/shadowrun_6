@@ -1,8 +1,10 @@
 {
   "ACTOR": {
-    "TypeCritter": "Kreatur",
-    "TypeNpc": "NSC",
-    "TypePlayer": "Spieler-Charakter"
+    "TypeCritter": "Critter",
+    "TypeNpc"    : "Scherge/NSC",
+    "TypePlayer": "Spieler-Charakter",
+    "TypeSpirit": "Geist",
+    "TypeVehicle": "Fahrzeug/Drohne"
   },
   "ITEM": {
     "TypeAdeptpower": "Adeptenkraft",
@@ -471,6 +473,7 @@
       "features": "Merkmale",
       "firemode_current": "Akt. Feuermodus",
       "firemodes": "Feuermodi",
+      "force": "Kraftstufe",
       "gender": "Geschlecht",
       "legality.illegal.short": "I",
       "legality.legal.short": "L",

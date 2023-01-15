@@ -2,9 +2,11 @@
 	"Shadowrun6ActorSheetNPC": "Bla",
 	"shadowrun6-eden.Shadowrun6ActorSheetNPC": "Blubb",
   "ACTOR": {
-    "TypeCritter": "Don't use (Critter)",
-    "TypeNpc": "NPC/Critter/Spirit/Sprite",
-    "TypePlayer": "Player Character"
+    "TypeCritter": "Critter",
+    "TypeNpc": "Grunt/NPC",
+    "TypePlayer": "Player Character",
+    "TypeSpirit": "Spirit",
+    "TypeVehicle": "Vehicle/Drone"
   },
   "ITEM": {
     "TypeAdeptpower": "Adept Power",
@@ -486,6 +488,7 @@
       "features": "Features",
       "firemode_current": "Current Firemode",
       "firemodes": "Firemodes",
+      "force": "Force",
       "gender": "Gender",
       "legality.illegal.short": "I",
       "legality.legal.short": "L",
