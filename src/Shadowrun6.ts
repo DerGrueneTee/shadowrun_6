@@ -51,11 +51,8 @@ Hooks.once("init", async function () {
 	// Register sheet application classes
 	Actors.unregisterSheet("core", ActorSheet);
 	Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetPC, { types: ["Player"], makeDefault: true });
-	Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetNPC, { types: ["NPC"], makeDefault: true });
-	Actors.registerSheet("shadowrun6-eden", CompendiumActorSheetNPC, { types: ["NPC"], makeDefault: false });
+	Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetNPC, { types: ["NPC","Critter","Spirit"], makeDefault: true });
 	Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetVehicle, { types: ["Vehicle"], makeDefault: true });
-	Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetCritter, { types: ["Critter"], makeDefault: true });
-	//Actors.registerSheet("shadowrun6-eden", Shadowrun6ActorSheetVehicleCompendium, { types: ["Vehicle"], makeDefault: false });
 
 	Items.registerSheet("shadowrun6-eden", SR6ItemSheet, {
 		types: [

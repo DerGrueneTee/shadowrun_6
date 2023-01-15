@@ -38,16 +38,19 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 	get template() {
 		console.log("in template()", this.actor.data.data);
+		console.log("default: ", super.template);
 		const path = "systems/shadowrun6-eden/templates/actor/";
-		console.log(`${path}shadowrun6-${this.actor.data.type}-sheet.html`);
+		//console.log(`${path}shadowrun6-${this.actor.data.type}-sheet.html`);
 		if (this.isEditable) {
 			console.log("ReadWrite sheet ");
-			return `${path}shadowrun6-${this.actor.data.type}-sheet.html`;
+			//return `${path}shadowrun6-${this.actor.data.type}-sheet.html`;
+			return super.template;
 		} else {
 			console.log("ReadOnly sheet", this);
 			let genItem: GenesisData = this.actor.data.data as GenesisData;
 			(this.actor as any).descHtml = (game as Game).i18n.localize(this.actor.data.type + "." + genItem.genesisID + ".desc");
 			(this.actor.data as any).descHtml2 = (game as Game).i18n.localize(this.actor.data.type + "." + genItem.genesisID + ".desc");
+		console.log(`${path}shadowrun6-${this.actor.data.type}-sheet-ro.html`);
 			return `${path}shadowrun6-${this.actor.data.type}-sheet-ro.html`;
 		}
 	}

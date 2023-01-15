@@ -243,7 +243,7 @@
         "INDUSTRIAL_CHEMICALS": "Industriechemikalien",
         "INSTRUMENT": "Instrumente",
         "INSTRUMENT_ACCESSORY": "Instrument-Zubehör",
-		  "LARGE_DRONES": "Große Drohnen",	
+		  "LARGE_DRONES": "Große Drohnen",
         "LAUNCHERS": "Granatwerfer",
         "LAV": "Bodeneffekt-Vektorschubfahrzeuge",
         "LTAV": "Luftschiffe",
@@ -252,9 +252,9 @@
         "MACHINE_PISTOLS": "Automatikpistolen",
         "MAGICAL_FORMULA": "Magische Formeln",
         "MAGIC_SUPPLIES": "Magische Vorräte",
-			"MICRODRONES": "Mikrodrohnen",	
-			"MINIDRONES": "Minidrohnen",	
-			"MEDIUM_DRONES": "Mittlere Drohnen",	
+			"MICRODRONES": "Mikrodrohnen",
+			"MINIDRONES": "Minidrohnen",
+			"MEDIUM_DRONES": "Mittlere Drohnen",
         "PREPARATION": "Erzeugnisse",
         "PREPARATION_EXTENDED": "Erzeugnisse (verlängerte Haltbarkeit)",
         "MISSILES": "Lenkraketen",
@@ -305,7 +305,7 @@
         "SKILLSOFT": "Talentsoft",
         "SLAP_PATCHES": "Slap-Patches",
         "SNIPER_RIFLES": "Scharfschützengewehre",
-		  "SMALL_DRONES": "Kleine Drohnen",	
+		  "SMALL_DRONES": "Kleine Drohnen",
         "SOFTWARE": "Software",
         "SPACECRAFT": "Raumschiffe",
         "SPECIAL_WEAPONS": "Spezielle Waffen",
@@ -406,11 +406,11 @@
       "subtype": "Unterart",
       "type": "Art",
       "vehicle": {
-			"armor.long": "Panz",	
+			"armor.long": "Panz",
 			"armor.short": "P",
 			"rigRating.long": "Riggerkontrolle",
-			"sensor.long": "Sensor",	
-			"sensor.short": "S"	
+			"sensor.long": "Sensor",
+			"sensor.short": "S"
 		}
     },
     "itemtype": {
@@ -595,7 +595,9 @@
       	"critter": "Critter",
       	"spirit": "Geist",
       	"sprite": "Sprite"
-      }
+      },
+      "gruntrules": "Scherge",
+      "mortype": "Magie/Resonanz"
     },
     "numerical": {
       "base": "Basis",
@@ -605,7 +607,7 @@
     },
 	"programtype": {
 		"basic": "Standardprogramme",
-		"hacking": "Hackingprogramme"	
+		"hacking": "Hackingprogramme"
 	},
     "program": {
       "baby_monitor": {
@@ -1197,7 +1199,7 @@
 			"groundcraft": "Bodenfahrzeuge",
 			"watercraft": "Wasserfahrzeuge",
 			"aircraft": "Luftfahrzeuge"
-		}      
+		}
     }
   },
 	"skill": {

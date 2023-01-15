@@ -1,43 +1,16 @@
 	{{!-- Sheet Header --}}
-	<header class="sheet-header" style="display: inline-flex">
+	<header class="sheet-header" style="display: inline-flex; width: 90%">
 		<div>
 		  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
 		</div>
 		<div class="header-fields" style="flex:3">
-			<div class="npc-settings">
-			{{#if (eq data.data.subtype "npc")}}
-			  <input name="gruntrules" type="checkbox" value="{{data.gruntrules}}" />
-			  <label>{{localize 'shadowrun6.npc.gruntrules' }}</label>
-			{{else if (eq data.data.subtype "spirit")}}
-           Type <select name="data.spiritpreset" data-field="data.spiritpreset" style="background: rgba(255,255,255,0.25); border: 0px">
-				{{#select data.data.spiritpreset}}
-					{{#each config.SPIRIT_TYPES as |type id|}}
-						<option value="{{@type}}" name=data.spiritpreset>{{localize (concat "shadowrun6.spirittype." type)}}</option>
-					{{/each}}
-				{{/select}}
-			</select>
-      <span>Force <input class="centered box" style="width: 2em; height: 1.3em" type="text" name="data.rating" value="{{data.rating}}" data-dtype="Number"/></span>
-			{{/if}}
-			<br/>
-			</div>
 			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
-			{{!-- Character Summary --}}
-			<div class="description" style="width: 80%">
-				<input class="autoexpand" name="data.metatype" type="text" value="{{data.data.metatype}}"
-					placeholder="{{localize 'shadowrun6.actor.metatype'}}" />
-				&nbsp;&middot;&nbsp;
-				<input class="autoexpand" name="data.gender" type="text" value="{{data.data.gender}}"
-					placeholder="{{localize 'shadowrun6.label.gender'}}" />
-				&nbsp;&middot;&nbsp;
-            <select name="data.mortype" data-field="data.mortype" style="background: rgba(255,255,255,0.25); border: 0px">
-				{{#select data.data.mortype}}
-					{{#each config.MOR_TYPES as |type id|}}
-						<option value="{{@type}}" name=data.mortype>{{localize (concat "shadowrun6.mortype." type)}}</option>
-					{{/each}}
-				{{/select}}
-			</select>
-			</div>
-			<div style="display:flex; flex-direction:row; align-items:center;">
+			<div class="npc-settings" style="display:flex">
+   {{#switch data.type}}
+		{{#case 'Critter'}} {{> "systems/shadowrun6-eden/templates/parts/npc_edit_critter.html"}} {{/case}}
+		{{#case 'NPC'    }} {{> "systems/shadowrun6-eden/templates/parts/npc_edit_grunt.html"  }} {{/case}}
+		{{#case 'Spirit' }} {{> "systems/shadowrun6-eden/templates/parts/npc_edit_spirit.html" }} {{/case}}
+   {{/switch}}
 			</div>
 		</div>
 	</header>

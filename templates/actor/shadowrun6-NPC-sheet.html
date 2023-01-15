@@ -4,15 +4,6 @@
        	<input type="checkbox" data-item-id="{{this.id}}" data-check="data.editmode" {{checked this.data.data.editmode}} type="checkbox" data-dtype="Boolean"/>
          <span class="shadowrun6-slider round"></span>
          </label>
-   {{#if data.data.editmode}}
-   <select name="data.subtype" data-field="data.subtype" style="background: rgba(255,255,255,0.25); border: 0px">
-				{{#select data.data.subtype}}
-					{{#each config.NPC_SUBTYPES as |type id|}}
-						<option value="{{@type}}" name=data.subtype>{{localize (concat "shadowrun6.npc.subtype." type)}}</option>
-					{{/each}}
-				{{/select}}
-			</select>
-      {{/if}}
     </span>
   </div>
    {{log this}}

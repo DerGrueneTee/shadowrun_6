@@ -1,0 +1,11 @@
+<label for="spirit_type">Type</label>
+<select name="spirit_type" name="data.spiritpreset" data-field="data.spiritpreset" style="background: rgba(255,255,255,0.25); border: 0px">
+{{#select data.data.spiritpreset}}
+	{{#each config.SPIRIT_TYPES as |type id|}}
+	<option value="{{@type}}" name=data.spiritpreset>{{localize (concat "shadowrun6.spirittype." type)}}</option>
+	{{/each}}
+{{/select}}
+</select>
+<label for="spirit_force">Force</label>
+<input type="spirit_force" class="centered box" style="width: 2em; height: 1.3em" type="text" name="data.rating" value="{{data.rating}}" data-dtype="Number"/>
+

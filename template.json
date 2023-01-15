@@ -4,6 +4,7 @@
 			"Player",
 			"NPC",
 			"Critter",
+			"Spirit",
 			"Vehicle"
 		],
 		"templates": {
@@ -432,10 +433,8 @@
 				"magic-template"
 			],
 			"mortype": "mundane",
-			"subtype": "npc",
 			"rating" : 1,
 			"gruntmeta": "",
-			"spiritpreset": "",
 			"editmode": false
 		},
 		"Critter": {
@@ -446,7 +445,21 @@
 				"initiative-template",
 				"skill-template",
 				"knowledge-template"
-			]
+			],
+			"editmode": false
+		},
+		"Spirit": {
+			"name": "",
+			"templates": [
+				"attribute-template",
+				"monitor-template",
+				"initiative-template",
+				"skill-template",
+				"knowledge-template"
+			],
+			"rating" : 1,
+			"spiritpreset": "",
+			"editmode": false
 		},
 		"Vehicle": {
 			"templates": [
