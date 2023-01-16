@@ -1,17 +1,23 @@
 {
 	"compilerOptions": {
 		"allowJs": true,
-  		"target": "esnext",
+		"target": "esnext",
 		"module": "esnext",
 		"types": [
-			"@league-of-foundry-developers/foundry-vtt-types", 
+			"@league-of-foundry-developers/foundry-vtt-types",
 			"node"
-		], 
-  		"moduleResolution": "node",
-  		"strictNullChecks": true,
-  		"outDir": "module",
-		"allowSyntheticDefaultImports": true
+		],
+		"moduleResolution": "node",
+		"strictNullChecks": true,
+		"outDir": "module",
+		"allowSyntheticDefaultImports": true,
+		"sourceMap": true
 	},
-	"include": ["src/**/*"],
-	"exclude": ["node_modules", "**/*.spec.ts"]
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"node_modules",
+		"**/*.spec.ts"
+	]
 }

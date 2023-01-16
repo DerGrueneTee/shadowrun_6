@@ -992,6 +992,10 @@
         "hint": "Defines the maximum egde a player or NPC can gain per turn.",
         "name": "Max. Edge per turn"
       },
+      "importToCompendium": {
+        "hint": "Define if imported NPCs should be added as actors or as entries to the NPCs compendium",
+        "name": "Import to compendium"
+      },
       "defaultThreshold": {
         "hint": "Defines the default threshold used for any skill check",
         "name": "Default Threshold"

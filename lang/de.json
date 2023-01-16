@@ -10,16 +10,16 @@
     "TypeAdeptpower": "Adeptenkraft",
     "TypeComplexform": "Komplexe Form",
     "TypeCritterPower": "Critterkraft",
-    "TypeContact" : "Connection",
+    "TypeContact": "Connection",
     "TypeEcho": "Echo",
     "TypeGear": "Ausrüstung",
-    "TypeLifestyle" : "Lebensstil",
+    "TypeLifestyle": "Lebensstil",
     "TypeMartialartstyle": "Kampfkunststil",
     "TypeMartialarttech": "Kampfkunstechnik",
     "TypeMetamagic": "Metamagie",
     "TypeQuality": "Vor-/Nachteil",
     "TypeRitual": "Ritual",
-    "TypeSin" : "SIN",
+    "TypeSin": "SIN",
     "TypeSkill": "Sprach-/Wissensfertigkeit",
     "TypeSpell": "Zauber",
     "TypeWeapon": "Waffe"
@@ -149,7 +149,7 @@
       "heal": {
         "physical": "Körperliches Heilen",
         "stun": "Geistiges Heilen"
-    }
+      }
     },
     "edge_action": {
       "anticipation": "Vorausschau",
@@ -245,7 +245,7 @@
         "INDUSTRIAL_CHEMICALS": "Industriechemikalien",
         "INSTRUMENT": "Instrumente",
         "INSTRUMENT_ACCESSORY": "Instrument-Zubehör",
-		  "LARGE_DRONES": "Große Drohnen",
+        "LARGE_DRONES": "Große Drohnen",
         "LAUNCHERS": "Granatwerfer",
         "LAV": "Bodeneffekt-Vektorschubfahrzeuge",
         "LTAV": "Luftschiffe",
@@ -254,9 +254,9 @@
         "MACHINE_PISTOLS": "Automatikpistolen",
         "MAGICAL_FORMULA": "Magische Formeln",
         "MAGIC_SUPPLIES": "Magische Vorräte",
-			"MICRODRONES": "Mikrodrohnen",
-			"MINIDRONES": "Minidrohnen",
-			"MEDIUM_DRONES": "Mittlere Drohnen",
+        "MICRODRONES": "Mikrodrohnen",
+        "MINIDRONES": "Minidrohnen",
+        "MEDIUM_DRONES": "Mittlere Drohnen",
         "PREPARATION": "Erzeugnisse",
         "PREPARATION_EXTENDED": "Erzeugnisse (verlängerte Haltbarkeit)",
         "MISSILES": "Lenkraketen",
@@ -388,7 +388,7 @@
         "category": {
           "grappling": "Ringen",
           "mobility": "Mobilität",
-			 "ranged"  : "Fernkampf",
+          "ranged": "Fernkampf",
           "striking": "Schlag",
           "weapon": "Waffen"
         }
@@ -408,12 +408,12 @@
       "subtype": "Unterart",
       "type": "Art",
       "vehicle": {
-			"armor.long": "Panz",
-			"armor.short": "P",
-			"rigRating.long": "Riggerkontrolle",
-			"sensor.long": "Sensor",
-			"sensor.short": "S"
-		}
+        "armor.long": "Panz",
+        "armor.short": "P",
+        "rigRating.long": "Riggerkontrolle",
+        "sensor.long": "Sensor",
+        "sensor.short": "S"
+      }
     },
     "itemtype": {
       "ACCESSORY": "Zubehör",
@@ -485,33 +485,33 @@
       "name": "Name",
       "none": "-",
       "not_present": "nicht vorhandel",
-	  "offroad": "Off-Road",
-	  "onroad": "Straßen",
+      "offroad": "Off-Road",
+      "onroad": "Straßen",
       "points": "Punkte",
       "pool": "Pool",
       "poolmod": "Pool-Modifikator",
       "programs.short": "P",
       "progSlots": "Programm-Plätze",
-	  "rating1": "Stufe 1",
-	  "rating2": "Stufe 2",
-	  "rating3": "Stufe 3",
+      "rating1": "Stufe 1",
+      "rating2": "Stufe 2",
+      "rating3": "Stufe 3",
       "soaked": "{soaked} von {threshold} Schaden widerstanden",
       "specialization": "Spezialisierung",
       "threshold": "Schwellenwert",
       "value": "Wert",
       "wilddie": "Schicksalswürfel"
     },
-    "lifestyle" : {
-      "cost" : "Kosten",
-      "paid" : "Bezahlt",
-      "type" : "Art",
-      "sin" : "Verkn. SIN",
-      "street" : "Straße",
-      "squatter" : "Squatter",
-      "low" : "Unterschicht",
-      "middle" : "Mittelschicht",
-      "high" : "Oberschicht",
-      "luxury" : "Luxus"
+    "lifestyle": {
+      "cost": "Kosten",
+      "paid": "Bezahlt",
+      "type": "Art",
+      "sin": "Verkn. SIN",
+      "street": "Straße",
+      "squatter": "Squatter",
+      "low": "Unterschicht",
+      "middle": "Mittelschicht",
+      "high": "Oberschicht",
+      "luxury": "Luxus"
     },
     "matrixaction": {
       "backdoor_entry": "Hintertür benutzen",
@@ -548,7 +548,7 @@
       "trace_icon": "Icon aufspüren"
     },
     "monitor": {
-		"matrix": "Matrix",
+      "matrix": "Matrix",
       "physical": "Körperlich",
       "stun": "Geistig",
       "overflow": "Überzählig"
@@ -608,10 +608,10 @@
       "max": "Max",
       "mod": "Mod"
     },
-	"programtype": {
-		"basic": "Standardprogramme",
-		"hacking": "Hackingprogramme"
-	},
+    "programtype": {
+      "basic": "Standardprogramme",
+      "hacking": "Hackingprogramme"
+    },
     "program": {
       "baby_monitor": {
         "name": "Babymonitor",
@@ -724,12 +724,12 @@
           "spells_direct": "Verteidigung g. dir. Kampfzauber",
           "spells_indirect": "Verteidigung g. ind. Kampfzauber"
         },
-		  "soak": {
-				"drain": "Widerstehe {damage} Entzug",
-				"fading":"Widerstehe {damage} Schwund",
-				"damage_physical":"Widerstehe {damage} körperl. Schaden",
-				"damage_stun"    :"Widerstehe {damage} Betäubungsschaden"
-		  }
+        "soak": {
+          "drain": "Widerstehe {damage} Entzug",
+          "fading": "Widerstehe {damage} Schwund",
+          "damage_physical": "Widerstehe {damage} körperl. Schaden",
+          "damage_stun": "Widerstehe {damage} Betäubungsschaden"
+        }
       },
       "ar_0": "Sehr nah",
       "ar_1": "Nah",
@@ -738,15 +738,15 @@
       "ar_4": "Sehr weit",
       "attack": "Angriff gegen ",
       "attackRating": "Angriffswert",
-	   "bf_type": "Art",
-		"bf": {
-			"narrow_burst": "Enge Salve",
-			"wide_burst": "Weite Salve"
-		},
+      "bf_type": "Art",
+      "bf": {
+        "narrow_burst": "Enge Salve",
+        "wide_burst": "Weite Salve"
+      },
       "configure": "Justiere deinen Wurf",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
-	  "damage_apply": "Schaden zufügen",
+      "damage_apply": "Schaden zufügen",
       "defRating": "Verteidigungswert",
       "defense_button": "Würfle Verteidigung",
       "edge": {
@@ -762,8 +762,8 @@
       "edgegain_player": " (Player)",
       "exp": "Expertise",
       "explode": "Explodiert",
-	   "fa_area": "Fläche",
-		"firemode": "Feuermodus",
+      "fa_area": "Fläche",
+      "firemode": "Feuermodus",
       "failure": "Fehlschlag",
       "glitch": "Patzer",
       "heal_apply": "Heilung wirken",
@@ -795,7 +795,7 @@
       "successes": "Erfolge",
       "target": "Ziel",
       "threshold": "Schwellenwert",
-      "weapon":  "Wie greifst Du an?",
+      "weapon": "Wie greifst Du an?",
       "wilddie": "Schicksalswürfel verwenden",
       "with": "mit "
     },
@@ -892,9 +892,9 @@
         "add": "Metamagie hinzufügen",
         "title": "Metamagie"
       },
-		"notes": {
-			"title": "Notizen"
-		},
+      "notes": {
+        "title": "Notizen"
+      },
       "persona": {
         "distribute": "Verteile",
         "title": "Persona"
@@ -931,18 +931,18 @@
       "survival": "Überlebensausrüstung",
       "vehicles": {
         "add": "Fahrzeug hinzufügen",
-		"column": {
-				"handling": "Han",
-				"acc": "Bes",
-				"spdi": "G.Int",
-				"tspd": "Geschw",
-				"bod": "Rum",
-				"arm": "Pan",
-				"pil": "Pil",
-				"sen": "Sen",
-				"sea": "Sit",
-                "vtype": "Art"
-			},
+        "column": {
+          "handling": "Han",
+          "acc": "Bes",
+          "spdi": "G.Int",
+          "tspd": "Geschw",
+          "bod": "Rum",
+          "arm": "Pan",
+          "pil": "Pil",
+          "sen": "Sen",
+          "sea": "Sit",
+          "vtype": "Art"
+        },
         "title": "Fahrzeuge"
       },
       "weapon": {
@@ -957,20 +957,24 @@
         "hint": "Definiert wieviel Edge jemand pro Kampfrunde maximal erhalten kann",
         "name": "Max. Edge pro Runde"
       },
+      "importToCompendium": {
+        "hint": "Sollen NPCs als Aktoren oder Einträge in das NPCs compendium importiert werden",
+        "name": "In das Kompendium importieren"
+      },
       "defaultThreshold": {
         "hint": "Definiert den Standard-Schwellenwert für Fertigkeitsproben",
         "name": "Standard-Schwellenwert"
       }
     },
-    "sin" : {
-      "quality" : "Qualität",
-      "real_sin" : "Echte SIN",
-      "anyone" : "Irgendjemand",
-      "rough_match" : "Grobe Übereinstimmung",
+    "sin": {
+      "quality": "Qualität",
+      "real_sin": "Echte SIN",
+      "anyone": "Irgendjemand",
+      "rough_match": "Grobe Übereinstimmung",
       "good_match": "Gute Übereinstimmung",
       "superficially_plausible": "Oberflächlich Plausibel",
-      "highly_plausible" : "Hohe Plausibilität",
-      "second_life" : "Zweites Leben"
+      "highly_plausible": "Hohe Plausibilität",
+      "second_life": "Zweites Leben"
     },
     "special": {
       "astral": {
@@ -1189,41 +1193,41 @@
       "tasking": "Tasken"
     },
     "vehicle": {
-	   "action_label": "Handling / Fahrzeug",
-	   "mode_label": "Mode",
-		"mode": {
-			"manual": "Manuell",
-			"riggedAR": "Reingesprungen (AR)",
-			"riggedVR": "Reingesprungen (VR)",
-			"rcc": "via RCC (To Do)",
-			"autonomous": "Autonom (To Do)"
-		},
-		"type": {
-			"groundcraft": "Bodenfahrzeuge",
-			"watercraft": "Wasserfahrzeuge",
-			"aircraft": "Luftfahrzeuge"
-		}
+      "action_label": "Handling / Fahrzeug",
+      "mode_label": "Mode",
+      "mode": {
+        "manual": "Manuell",
+        "riggedAR": "Reingesprungen (AR)",
+        "riggedVR": "Reingesprungen (VR)",
+        "rcc": "via RCC (To Do)",
+        "autonomous": "Autonom (To Do)"
+      },
+      "type": {
+        "groundcraft": "Bodenfahrzeuge",
+        "watercraft": "Wasserfahrzeuge",
+        "aircraft": "Luftfahrzeuge"
+      }
     }
   },
-	"skill": {
-      "astral": "Astral",
-      "athletics": "Athletik",
-      "biotech": "Biotech",
-      "close_combat": "Nahkampf",
-      "con": "Überreden",
-      "conjuring": "Beschwören",
-      "cracking": "Cracken",
-      "electronics": "Elektronik",
-      "enchanting": "Verzaubern",
-      "engineering": "Mechanik",
-      "exotic_weapons": "Exotische Waffen",
-      "firearms": "Feuerwaffen",
-      "influence": "Einfluss",
-      "outdoors": "Natur",
-      "perception": "Wahrnehmung",
-      "piloting": "Steuern",
-      "sorcery": "Hexerei",
-      "stealth": "Heimlichkeit",
-      "tasking": "Tasken"
-    }
+  "skill": {
+    "astral": "Astral",
+    "athletics": "Athletik",
+    "biotech": "Biotech",
+    "close_combat": "Nahkampf",
+    "con": "Überreden",
+    "conjuring": "Beschwören",
+    "cracking": "Cracken",
+    "electronics": "Elektronik",
+    "enchanting": "Verzaubern",
+    "engineering": "Mechanik",
+    "exotic_weapons": "Exotische Waffen",
+    "firearms": "Feuerwaffen",
+    "influence": "Einfluss",
+    "outdoors": "Natur",
+    "perception": "Wahrnehmung",
+    "piloting": "Steuern",
+    "sorcery": "Hexerei",
+    "stealth": "Heimlichkeit",
+    "tasking": "Tasken"
+  }
 }
