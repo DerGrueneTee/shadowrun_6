@@ -38,7 +38,7 @@ export const registerSystemSettings = () => {
 		scope: "world",
 		config: true,
 		type: Boolean,
-		default: true,
+		default: false,
 		onChange: (toggle) => {
 			console.log("importToCompendium changed to " + toggle);
 			(game as Game).settings.set(SYSTEM_NAME, "importToCompendium", toggle);

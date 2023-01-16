@@ -958,7 +958,7 @@
         "name": "Max. Edge pro Runde"
       },
       "importToCompendium": {
-        "hint": "Sollen NPCs als Aktoren oder Einträge in das NPCs compendium importiert werden",
+        "hint": "Sollen NSCs in das Kompendium (statt in die Actor-Liste) importiert werden?",
         "name": "In das Kompendium importieren"
       },
       "defaultThreshold": {
