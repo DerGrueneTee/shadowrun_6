@@ -62,8 +62,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	activateListeners(html) {
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
-			html.find(".calcPHYBar").on("input", this._redrawBar(html, "Phy", (this.actor.data.data as Lifeform).physical));
-			html.find(".calcStunBar").on("input", this._redrawBar(html, "Stun", (this.actor.data.data as Lifeform).stun));
+			html.find(".health-phys").on("input", this._redrawBar(html, "Phy", (this.actor.data.data as Lifeform).physical));
+			html.find(".health-stun").on("input", this._redrawBar(html, "Stun", (this.actor.data.data as Lifeform).stun));
 
 			// Roll Skill Checks
 			html.find(".skill-roll").click(this._onRollSkillCheck.bind(this));
