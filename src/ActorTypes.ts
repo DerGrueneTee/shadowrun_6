@@ -130,6 +130,9 @@ export class Lifeform extends SR6Actor {
 		actions: number;
 		physical: Initiative;
 		astral: Initiative;
+		matrixar: Initiative;
+		matrixcold: Initiative;
+		matrixhot: Initiative;
 	};
 	physical: Monitor = new Monitor();
 	stun: Monitor = new Monitor();

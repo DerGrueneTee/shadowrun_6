@@ -301,6 +301,10 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.base = data.attributes["log"].pool + data.attributes["int"].pool;
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
+
+			data.initiative.matrixar.base = data.attributes["rea"].pool + data.attributes["int"].pool;
+			data.initiative.matrixar.pool = data.initiative.matrixar.base + data.initiative.matrixar.mod;
+			data.initiative.matrixar.dicePool = data.initiative.matrixar.dice + data.initiative.matrixar.diceMod;
 		}
 		}
 
@@ -387,16 +391,26 @@ export class Shadowrun6Actor extends Actor {
 			data.attackrating.astral.modString += "\n+" + data.attackrating.astral.mod;
 		}
 
-		// Matrix attack rating (Angriff + Schleicher)
 		if (isMatrixUser(data)) {
 			console.log("prepareAttackRatings:", data.persona.used);
 			if (data.persona && data.persona.used) {
+				// Matrix attack rating (Angriff + Schleicher)
 				data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
 				data.attackrating.matrix.pool = data.attackrating.matrix.base;
 				if (data.attackrating.matrix.mod) {
 					data.attackrating.matrix.pool += data.attackrating.matrix.mod;
 					data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
 				}
+
+				// Initiative VR Cold
+				data.initiative.matrixcold.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
+				data.initiative.matrixcold.pool = data.initiative.matrixcold.base + data.initiative.matrixcold.mod;
+				data.initiative.matrixcold.dicePool = data.initiative.matrixcold.dice + data.initiative.matrixcold.diceMod;
+
+				// Initiative VR Hot
+				data.initiative.matrixhot.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
+				data.initiative.matrixhot.pool = data.initiative.matrixhot.base + data.initiative.matrixhot.mod;
+				data.initiative.matrixhot.dicePool = data.initiative.matrixhot.dice + data.initiative.matrixhot.diceMod;
 			}
 
 			// Resonance attack rating (Electronics + Resonance)
