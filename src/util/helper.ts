@@ -2,6 +2,7 @@ import { Lifeform, Skill } from "../ActorTypes";
 import { SkillDefinition } from "../DefinitionTypes";
 import { GenesisData } from "../ItemTypes";
 import { Shadowrun6Actor } from "../Shadowrun6Actor";
+import Shadowrun6Combatant from "../Shadowrun6Combatant";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -83,6 +84,13 @@ export const defineHandlebarHelper = async function () {
 		}
 		return options.inverse(this);
 	});
+	Handlebars.registerHelper( 'getByKey', function ( map, key ) {
+   	return map.get(key);
+   });
+	Handlebars.registerHelper( 'getIniType', function ( map, key ) {
+   	return (map.get(key) as Shadowrun6Combatant).iniType;
+   });
+
 
 	Handlebars.registerHelper("skillAttr", getSkillAttribute);
 	Handlebars.registerHelper("skillPool", getSkillPool);

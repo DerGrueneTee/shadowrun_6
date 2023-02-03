@@ -366,12 +366,12 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	async render(
 		options?: { flavor?: string | undefined; template?: string | undefined; isPrivate?: boolean | undefined } | undefined
 	): Promise<string> {
-		console.log("ENTER render");
+/*		console.log("ENTER render");
 		console.log("options = ", options);
 		console.log("this = ", this);
 		console.log("this.data = ", this.data);
 		console.log("this.finished = ", this.finished);
-		try {
+*/		try {
 			if (!this._evaluated) await this.evaluate({ async: true });
 			let isPrivate = options ? options!.isPrivate : false;
 			if (!this.finished) {
@@ -387,7 +387,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 					if (this.finished.speaker.token) {
 						console.log("####Apply "+this.finished.damage+" to token "+this.finished.speaker.alias);
 						let scene  = (game as Game).scenes!.get(this.finished.speaker.scene!);
-						console.log("Found scene ",scene);			
+						console.log("Found scene ",scene);
 					}
 					if (this.finished.speaker) {
 						let actor : Shadowrun6Actor = ( (game as Game).actors!.get(this.finished.speaker.actor!) as Shadowrun6Actor);
@@ -432,12 +432,12 @@ export class SR6RollChatMessage extends ChatMessage {
 		context?: ConstructorParameters<ConstructorOf<foundry.documents.BaseChatMessage>>[1]
 	) {
 		super(data, context);
-		console.log("In SR6RollChatMessage<init>(", data, " , context,", context);
+		//console.log("In SR6RollChatMessage<init>(", data, " , context,", context);
 		let prepared: PreparedRoll = data as PreparedRoll;
 	}
 
 	getHTML(): Promise<JQuery> {
-		console.log("In SR6RollChatMessage.getHTML()", this);
+		//console.log("In SR6RollChatMessage.getHTML()", this);
 		return super.getHTML();
 	}
 }

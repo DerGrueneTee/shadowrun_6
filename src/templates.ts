@@ -5,6 +5,7 @@
  */
 export const preloadHandlebarsTemplates = async function () {
 	const templatePaths = [
+		"systems/shadowrun6-eden/templates/combat-tracker.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogEdge.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogOpposed.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogSpell.html",

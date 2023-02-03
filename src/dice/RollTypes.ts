@@ -30,6 +30,15 @@ export enum SoakType {
 	DRAIN = "drain",
 	FADING = "fading"
 }
+export enum InitiativeType {
+  PHYSICAL = "physical",
+  ASTRAL   = "astral",
+  MATRIX   = "matrix",
+  // Get rid of the types below
+  MATRIX_AR = "matrixar",
+  MATRIX_COLD = "matrixcold",
+  MATRIX_HOT  = "matrixhot"
+}
 
 export enum ReallyRoll {
 	ROLL,

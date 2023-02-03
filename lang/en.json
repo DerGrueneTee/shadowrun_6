@@ -116,6 +116,11 @@
       "social": "Social Att. Rtg.",
       "vehicle": "Vehicle Att. Rtg."
     },
+    "combat": {
+		"togglePhysical": "Use physical initiative",
+		"toggleMatrix": "Use matrix initiative",
+		"toggleAstral": "Use astral initiative"
+	},
     "complexform": {
       "duration": "Duration",
       "fading": "Fade Value",

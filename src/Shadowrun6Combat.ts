@@ -60,4 +60,6 @@ export default class Shadowrun6Combat extends Combat {
 		});
 		return super.nextRound();
 	}
+
+
 }

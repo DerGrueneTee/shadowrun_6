@@ -22,6 +22,7 @@ import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
 import { ChatMessageData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
+import Shadowrun6CombatTracker from "./Shadowrun6CombatTracker.js";
 import { GenesisData } from "./ItemTypes.js";
 import Importer from "./util/Importer.js";
 
@@ -42,6 +43,7 @@ Hooks.once("init", async function () {
 	CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
 	CONFIG.Combat.documentClass = Shadowrun6Combat;
 	CONFIG.Combatant.documentClass = Shadowrun6Combatant;
+	CONFIG.ui.combat = Shadowrun6CombatTracker;
 	CONFIG.Actor.documentClass = Shadowrun6Actor;
 	CONFIG.Dice.rolls = [SR6Roll];
 	(game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";

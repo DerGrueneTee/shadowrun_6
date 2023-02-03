@@ -104,6 +104,11 @@
       "social": "Sozial Ang.W.",
       "vehicle": "Fahrzeug Angr.W"
     },
+    "combat": {
+		"togglePhysical": "Verwende physische Initiative",
+		"toggleMatrix": "Verwende Matrix Initiative",
+		"toggleAstral": "Verwende astrale Initiative"
+	},
     "complexform": {
       "duration": "Dauer",
       "fading": "Schwund",
