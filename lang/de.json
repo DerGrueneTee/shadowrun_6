@@ -364,12 +364,9 @@
       }
     },
     "initiative": {
-      "astral": "Astrale Initiative",
-      "matrix": "Matrix-Initiative",
-      "physical": "Initiative",
-      "matrix_ar": "Matrix AR",
-      "matrix_cold": "Matrix VR",
-      "matrix_hot": "Matrix VR (heiß)"
+      "astral": "Astral",
+      "matrix": "Matrix",
+      "physical": "Physisch"
     },
     "item": {
       "accessories": "Einbauten",
@@ -470,6 +467,7 @@
       "damage_short": "Sch",
       "defense_rating": "Verteidigungswert",
       "delete": "Löschen",
+     "device_mode": "Gerätemodus",
       "devRating": "Geräte-Stufe",
       "dice": "Würfel",
       "edit": "Bearbeiten",
