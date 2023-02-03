@@ -136,6 +136,7 @@ export class SR6Config {
 		]
 	};
 	SKILLS_WEAPON = ["firearms", "close_combat", "exotic_weapons", "athletics"];
+	MATRIX_INITIATIVE_TYPES = ["ar", "vrcold", "vrhot"];
 	MOR_TYPES = ["mundane", "magician", "mysticadept", "technomancer", "adept", "aspectedmagician"];
 	MOR_DEFINITIONS = {
 		mundane         : new MagicOrResonanceDefinition(),

@@ -11,46 +11,28 @@
 				<td ><b>{{ localize 'shadowrun6.initiative.physical' }}</b></td>
 				<td class="centered">{{initiative.physical.base}} + <input class="centered box calcIni" name="data.initiative.physical.mod" type="text" value="{{data.data.initiative.physical.mod}}" data-dtype="Number" id="dataIniPhyMod" style="width: 1.2em" ></td>
 				<td class="centered">
-				( {{data.data.initiative.physical.dice}} + 
+				( {{data.data.initiative.physical.dice}} +
 				<input class="centered box calcIni" name="data.initiative.physical.diceMod" type="text" value="{{data.data.initiative.physical.diceMod}}" data-dtype="Number"
 				id="dataIniPhyDiceMod" style="width: 1.2em" >) {{initiative.physical.dicePool}}d6</td>
 			</tr>
-			
+
 			<!-- Astral initiative -->
 			<tr>
 				<td ><b>{{ localize 'shadowrun6.initiative.astral' }}</b></td>
 				<td class="centered">{{initiative.astral.base}} + <input class="centered box calcIni" name="data.initiative.astral.mod" type="text" value="{{data.data.initiative.astral.mod}}" data-dtype="Number" id="dataIniAstMod" style="width: 1.2em" ></td>
 				<td class="centered">
-				( {{data.data.initiative.astral.dice}} + 
+				( {{data.data.initiative.astral.dice}} +
 				<input class="centered box calcIni" name="data.initiative.astral.diceMod" type="text" value="{{data.data.initiative.astral.diceMod}}" data-dtype="Number"
 				id="dataIniAstDiceMod" style="width: 1.2em" >) {{initiative.astral.dicePool}}d6</td>
 			</tr>
-			<!-- AR Initiative -->
+			<!-- Matrix Initiative -->
 			<tr>
-				<td ><b>{{ localize 'shadowrun6.initiative.matrix_ar' }}</b></td>
-				<td class="centered">{{initiative.matrixar.base}} + <input class="centered box calcIni" name="data.initiative.matrixar.mod" type="text" value="{{data.data.initiative.matrixar.mod}}" data-dtype="Number" id="dataIniMatrixarMod" style="width: 1.2em" ></td>
+				<td ><b>{{ localize 'shadowrun6.initiative.matrix' }}</b></td>
+				<td class="centered">{{initiative.matrix.base}} + <input class="centered box calcIni" name="data.initiative.matrix.mod" type="text" value="{{data.data.initiative.matrix.mod}}" data-dtype="Number" id="dataIniMatrixMod" style="width: 1.2em" ></td>
 				<td class="centered">
-				( {{data.data.initiative.matrixar.dice}} + 
-				<input class="centered box calcIni" name="data.initiative.matrixar.diceMod" type="text" value="{{data.data.initiative.matrixar.diceMod}}" data-dtype="Number"
-				id="dataIniMatrixarDiceMod" style="width: 1.2em" >) {{initiative.matrixar.dicePool}}d6</td>
-			</tr>
-			<!-- VR Cold Initiative -->
-			<tr>
-				<td ><b>{{ localize 'shadowrun6.initiative.matrix_cold' }}</b></td>
-				<td class="centered">{{initiative.matrixcold.base}} + <input class="centered box calcIni" name="data.initiative.matrixcold.mod" type="text" value="{{data.data.initiative.matrixcold.mod}}" data-dtype="Number" id="dataIniMatrixcoldMod" style="width: 1.2em" ></td>
-				<td class="centered">
-				( {{data.data.initiative.matrixcold.dice}} + 
-				<input class="centered box calcIni" name="data.initiative.matrixcold.diceMod" type="text" value="{{data.data.initiative.matrixcold.diceMod}}" data-dtype="Number"
-				id="dataIniMatrixcoldDiceMod" style="width: 1.2em" >) {{initiative.matrixcold.dicePool}}d6</td>
-			</tr>
-			<!-- VR Hot Initiative -->
-			<tr>
-				<td ><b>{{ localize 'shadowrun6.initiative.matrix_hot' }}</b></td>
-				<td class="centered">{{initiative.matrixhot.base}} + <input class="centered box calcIni" name="data.initiative.matrixhot.mod" type="text" value="{{data.data.initiative.matrixhot.mod}}" data-dtype="Number" id="dataIniMatrixhotMod" style="width: 1.2em" ></td>
-				<td class="centered">
-				( {{data.data.initiative.matrixhot.dice}} + 
-				<input class="centered box calcIni" name="data.initiative.matrixhot.diceMod" type="text" value="{{data.data.initiative.matrixhot.diceMod}}" data-dtype="Number"
-				id="dataIniMatrixhotDiceMod" style="width: 1.2em" >) {{initiative.matrixhot.dicePool}}d6</td>
+				( {{data.data.initiative.matrix.dice}} +
+				<input class="centered box calcIni" name="data.initiative.matrix.diceMod" type="text" value="{{data.data.initiative.matrix.diceMod}}" data-dtype="Number"
+				id="dataIniMatrixDiceMod" style="width: 1.2em" >) {{initiative.matrix.dicePool}}d6</td>
 			</tr>
 		</table>
 	</div>

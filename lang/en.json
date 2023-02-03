@@ -377,12 +377,9 @@
       }
     },
     "initiative": {
-      "astral": "Astral",
-      "matrix": "Matrix-Initiative",
-      "physical": "Regular",
-      "matrix_ar": "Matrix AR",
-      "matrix_cold": "Matrix VR",
-      "matrix_hot": "Matrix VR (hot)"
+      "astral"  : "Astral",
+      "physical": "Physical",
+      "matrix"  : "Matrix"
     },
     "item": {
       "accessories": "Accessories",
@@ -495,6 +492,7 @@
       "firemodes": "Firemodes",
       "force": "Force",
       "gender": "Gender",
+      "initiative_mode": "Initiative Mode",
       "legality.illegal.short": "I",
       "legality.legal.short": "L",
       "level": "Has levels",
@@ -568,6 +566,11 @@
       "tarpit": "Tarpit",
       "trace_icon": "Trace Icon"
     },
+      "matrixini": {
+			"ar": "AR",
+			"vrcold": "VR",
+			"vrhot": "VR Hot"
+	   },
     "monitor": {
 		"matrix": "Matrix",
       "physical": "Physical",

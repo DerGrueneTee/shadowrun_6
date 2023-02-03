@@ -213,19 +213,9 @@
 					"dice": 1,
 					"diceMod": 0
 				  },
-				  "matrixar": {
+				  "matrix": {
 					"mod": 0,
 					"dice": 1,
-					"diceMod": 0
-				  },
-				  "matrixcold": {
-					"mod": 0,
-					"dice": 2,
-					"diceMod": 0
-				  },
-			     "matrixhot": {
-					"mod": 0,
-					"dice": 3,
 					"diceMod": 0
 				  },
 				  "physical": {
@@ -412,6 +402,7 @@
 			],
 			"metatype": "",
 			"mortype": "mundane",
+			"matrixIni": "vrcold",
 			"gender": "",
 			"nuyen": 0,
 			"overwatch": 0,
@@ -433,6 +424,7 @@
 				"magic-template"
 			],
 			"mortype": "mundane",
+			"matrixIni": "vrcold",
 			"rating" : 1,
 			"gruntmeta": "",
 			"editmode": false

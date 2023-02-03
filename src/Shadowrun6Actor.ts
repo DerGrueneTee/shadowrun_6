@@ -302,9 +302,10 @@ export class Shadowrun6Actor extends Actor {
 			data.initiative.astral.pool = data.initiative.astral.base + data.initiative.astral.mod;
 			data.initiative.astral.dicePool = data.initiative.astral.dice + data.initiative.astral.diceMod;
 
-			data.initiative.matrixar.base = data.attributes["rea"].pool + data.attributes["int"].pool;
-			data.initiative.matrixar.pool = data.initiative.matrixar.base + data.initiative.matrixar.mod;
-			data.initiative.matrixar.dicePool = data.initiative.matrixar.dice + data.initiative.matrixar.diceMod;
+			if (!data.initiative.matrix) data.initiative.matrix = new Initiative;
+			data.initiative.matrix.base = data.attributes["rea"].pool + data.attributes["int"].pool;
+			data.initiative.matrix.pool = data.initiative.matrix.base + data.initiative.matrix.mod;
+			data.initiative.matrix.dicePool = data.initiative.matrix.dice + data.initiative.matrix.diceMod;
 		}
 		}
 
@@ -402,15 +403,22 @@ export class Shadowrun6Actor extends Actor {
 					data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
 				}
 
-				// Initiative VR Cold
-				data.initiative.matrixcold.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
-				data.initiative.matrixcold.pool = data.initiative.matrixcold.base + data.initiative.matrixcold.mod;
-				data.initiative.matrixcold.dicePool = data.initiative.matrixcold.dice + data.initiative.matrixcold.diceMod;
-
-				// Initiative VR Hot
-				data.initiative.matrixhot.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
-				data.initiative.matrixhot.pool = data.initiative.matrixhot.base + data.initiative.matrixhot.mod;
-				data.initiative.matrixhot.dicePool = data.initiative.matrixhot.dice + data.initiative.matrixhot.diceMod;
+				switch (data.matrixIni) {
+				case "ar":
+					data.initiative.matrix.base = data.attributes["rea"].pool + data.attributes["int"].pool;
+					data.initiative.matrix.dice = 1;
+					break;
+				case "vrcold":
+					data.initiative.matrix.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
+					data.initiative.matrix.dice = 2;
+					break;
+				case "vrhot":
+					data.initiative.matrix.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
+					data.initiative.matrix.dice = 3;
+					break;
+				}
+				data.initiative.matrix.pool = data.initiative.matrix.base + data.initiative.matrix.mod;
+				data.initiative.matrix.dicePool = data.initiative.matrix.dice + data.initiative.matrix.diceMod;
 			}
 
 			// Resonance attack rating (Electronics + Resonance)
@@ -422,6 +430,8 @@ export class Shadowrun6Actor extends Actor {
 				data.attackrating.resonance.pool += data.attackrating.resonance.mod;
 				data.attackrating.resonance.modString += "\n+" + data.attackrating.resonance.mod;
 			}
+		} else {
+			data.attackrating.matrix.base=0;
 		}
 
 		// Vehicle combat attack rating (Pilot + Sensor)

@@ -1,7 +1,7 @@
 <div style="display: flex; width:100%">
 	<div>
    {{#if showResonance}}
-   {{#if data.data.morDef.resonance}}   
+   {{#if data.data.morDef.resonance}}
   	<div class="attributes" style="margin-bottom: 10px; margin-top:0.4rem">
    	<div class="attribute" augmented-ui="b-clip-x exe">
       	<p>{{localize "attrib.res" }}</p>
@@ -15,7 +15,7 @@
             <label>{{localize 'shadowrun6.numerical.mod'}}</label>
             <input type="number" data-dtype="Number" name="data.attributes.res.mod" value="{{data.data.attributes.res.mod}}" placeholder="±adj" title="{{attribute.modString}}" />
          </div>
-		</div>		
+		</div>
    </div>
    {{/if}}
    {{/if}}
@@ -38,7 +38,7 @@
 		</thead>
 		<tbody>
      <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-		   {{#if data.data.morDef.resonance}}   
+		   {{#if data.data.morDef.resonance}}
           <td class="centered">{{data.data.persona.living.devRating}} ==&gt;</td>
          <td class="centered">{{data.data.persona.living.base.a}}+<input class="box" name="data.persona.living.mod.a" type="text" value="{{data.data.persona.living.mod.a}}" data-dtype="Number"
 				style="width: 1.5em" ></td>
@@ -60,7 +60,7 @@
 				style="width: 2em" ></td>
     {{/if}}
       </tr>
-		
+
 		</tbody>
 	</table>
 		<table>
@@ -92,7 +92,18 @@
 				style="width: 2em"></td>
 				<td class="centered" title="{{data.data.derived.matrix_perception.modString}}">{{data.data.derived.matrix_perception.pool}}</td>
 			</tr>
-			{{#if data.data.morDef.resonance}}   
+			<tr>
+				<th>{{localize 'shadowrun6.label.initiative_mode' }}</th>
+            <td colspan="2"><select name="data.matrixIni" data-field="data.matrixIni" style="background: rgba(255,255,255,0.25); border: 0px">
+				{{#select data.data.matrixIni}}
+					{{#each config.MATRIX_INITIATIVE_TYPES as |type id|}}
+						<option value="{{@type}}" name=data.matrixIni>{{localize (concat "shadowrun6.matrixini." type)}}</option>
+					{{/each}}
+				{{/select}}
+			   </select>
+				</td>
+			</tr>
+			{{#if data.data.morDef.resonance}}
 			<tr>
 				<td ><b>{{ localize 'shadowrun6.defense.fading' }}</b></td>
 				<td class="centered">{{data.data.defensepool.fading.base}}</td>

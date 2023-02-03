@@ -130,9 +130,7 @@ export class Lifeform extends SR6Actor {
 		actions: number;
 		physical: Initiative;
 		astral: Initiative;
-		matrixar: Initiative;
-		matrixcold: Initiative;
-		matrixhot: Initiative;
+		matrix: Initiative;
 	};
 	physical: Monitor = new Monitor();
 	stun: Monitor = new Monitor();
@@ -143,6 +141,7 @@ export class Lifeform extends SR6Actor {
 	skills: Skills = new Skills();
 	essence: number = 6.0;
 	mortype: string;
+	matrixIni : string;
 	morDef: MagicOrResonanceDefinition;
 	controlRig: number = 0;
 }
