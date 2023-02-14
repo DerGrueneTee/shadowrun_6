@@ -46,6 +46,7 @@ Hooks.once("init", async function () {
 	CONFIG.ui.combat = Shadowrun6CombatTracker;
 	CONFIG.Actor.documentClass = Shadowrun6Actor;
 	CONFIG.Dice.rolls = [SR6Roll];
+	(CONFIG as any).compatibility.mode = 0;
 	(game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 
 	registerSystemSettings();
@@ -80,6 +81,35 @@ Hooks.once("init", async function () {
 	preloadHandlebarsTemplates();
 	defineHandlebarHelper();
 	document.addEventListener('paste', (e) => Importer.pasteEventhandler(e), false);
+
+/* https://discord.com/channels/732325252788387980/915388333125955645/1001455991151394836
+Hooks.once('init', () => {
+    if ( (game as any).release.generation >= 10) return;
+
+    Object.defineProperties((game as Game).system, {
+        version: { get: function () { return this.data.version; } },
+        initiative: { get: function () { return this.data.initiative; } }
+    });
+
+    Object.defineProperties(TokenDocument.prototype, {
+        hidden: { get: function () { return this.data.hidden; } },
+        actorData: { get: function () { return this.data.actorData; } },
+        actorLink: { get: function () { return this.data.actorLink; } }
+    });
+
+    Object.defineProperties(Actor.prototype, {
+        system: { get: function () { return this.data.data; } },
+        prototypeToken: { get: function () { return this.data.token; } },
+        ownership: { get: function () { return this.data.permission; } },
+    });
+
+    Object.defineProperties(Item.prototype, {
+        system: { get: function () { return this.data.data; } },
+    });
+
+    globalThis.isEmpty = isObjectEmpty;
+});
+	*/
 
 	Hooks.once("diceSoNiceReady", (dice3d) => {
 		dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "default");

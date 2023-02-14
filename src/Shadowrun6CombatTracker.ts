@@ -3,7 +3,11 @@ import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
 
 export default class Shadowrun6CombatTracker extends CombatTracker {
 	get template() {
-		return "systems/shadowrun6-eden/templates/combat-tracker.html";
+		if ( (game as any).release.generation <=9) {
+			return "systems/shadowrun6-eden/templates/combat-trackerv9.html";
+		} else {
+			return "systems/shadowrun6-eden/templates/combat-tracker.html";
+		}
 	}
 
 	/*
@@ -22,9 +26,9 @@ export default class Shadowrun6CombatTracker extends CombatTracker {
 			if (data != undefined) {
 				data.turns.forEach(function (turn:Shadowrun6Turn) {
 				  let combatant : Shadowrun6Combatant | undefined = (data.combat?.combatants.get(turn.id) as Shadowrun6Combatant);
-				  turn.isPhysical = combatant!.iniType==InitiativeType.PHYSICAL;
-				  turn.isMatrix   = combatant!.iniType==InitiativeType.MATRIX;
-				  turn.isAstral   = combatant!.iniType==InitiativeType.ASTRAL;
+				  turn.isPhysical = combatant!.initiativeType==InitiativeType.PHYSICAL;
+				  turn.isMatrix   = combatant!.initiativeType==InitiativeType.MATRIX;
+				  turn.isAstral   = combatant!.initiativeType==InitiativeType.ASTRAL;
 				});
 			}
 			return data;
@@ -38,6 +42,8 @@ export default class Shadowrun6CombatTracker extends CombatTracker {
 	 */
    protected _onCombatantControl(event: JQuery.ClickEvent): Promise<void> {
 		console.log("---------SR6CombatTracker._onCombatantControl", event);
+		event.preventDefault();
+    	event.stopPropagation();
 		const btn = event.currentTarget;
 		const li = btn.closest(".combatant");
 		const combat = this.viewed;
@@ -57,10 +63,15 @@ export default class Shadowrun6CombatTracker extends CombatTracker {
 	}
 
 	async _onChangeInitiativeType(combatant : Shadowrun6Combatant , value : InitiativeType) {
-		  combatant.iniType = value;
-        await combatant.update({iniType: value});
-        // Refresh combat tracker
-        combatant.combat?.update();
+		console.log("---------SR6CombatTracker._onChangeInitiativeType  change from "+combatant.iniType+" to "+value);
+		const newValue = value;
+		// This should work, but doesn't
+      await combatant.update({iniType: newValue});
+      // This works as expected
+      await combatant.update({defeated: true});
+      // This works only locally
+		combatant.iniType = value;
+      combatant.combat?.update();
 	}
 
 

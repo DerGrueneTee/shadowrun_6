@@ -13,6 +13,7 @@ export default class Shadowrun6Combatant extends Combatant {
 	}
 
     get initiativeType(): InitiativeType {
+		if (!this.iniType) return InitiativeType.PHYSICAL;
 		return this.iniType;
 	}
 
@@ -20,7 +21,7 @@ export default class Shadowrun6Combatant extends Combatant {
 	protected _getInitiativeFormula(): string {
 	   console.log("Shadowrun6Combatant._getInitiativeFormula: ",this.iniType);
 
-	   switch (this.iniType) {
+	   switch (this.initiativeType) {
 		case InitiativeType.PHYSICAL : return "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 		case InitiativeType.ASTRAL   : return "@initiative.astral.pool + (@initiative.astral.dicePool)d6";
 		case InitiativeType.MATRIX   : return "@initiative.matrix.pool + (@initiative.matrix.dicePool)d6";
