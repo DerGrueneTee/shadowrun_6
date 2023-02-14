@@ -88,7 +88,7 @@ export const defineHandlebarHelper = async function () {
    	return map.get(key);
    });
 	Handlebars.registerHelper( 'getIniType', function ( map, key ) {
-   	return (map.get(key) as Shadowrun6Combatant).iniType;
+   	return (map.get(key) as Shadowrun6Combatant).initiativeType;
    });
 
 

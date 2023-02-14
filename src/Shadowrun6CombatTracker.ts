@@ -63,15 +63,8 @@ export default class Shadowrun6CombatTracker extends CombatTracker {
 	}
 
 	async _onChangeInitiativeType(combatant : Shadowrun6Combatant , value : InitiativeType) {
-		console.log("---------SR6CombatTracker._onChangeInitiativeType  change from "+combatant.iniType+" to "+value);
-		const newValue = value;
-		// This should work, but doesn't
-      await combatant.update({iniType: newValue});
-      // This works as expected
-      await combatant.update({defeated: true});
-      // This works only locally
-		combatant.iniType = value;
-      combatant.combat?.update();
+		console.log("---------SR6CombatTracker._onChangeInitiativeType  change from "+combatant.initiativeType+" to "+value);
+		combatant.setFlag("shadowrun6-eden","iniType", value);
 	}
 
 

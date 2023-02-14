@@ -1,8 +1,8 @@
+import { Data } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll.js";
 import { InitiativeType } from "./dice/RollTypes.js";
 
 export default class Shadowrun6Combatant extends Combatant {
 	edgeGained: number = 0;
-	iniType : InitiativeType = InitiativeType.PHYSICAL;
 
 	constructor(
 		data: ConstructorParameters<typeof foundry.documents.BaseCombatant>[0],
@@ -13,13 +13,12 @@ export default class Shadowrun6Combatant extends Combatant {
 	}
 
     get initiativeType(): InitiativeType {
-		if (!this.iniType) return InitiativeType.PHYSICAL;
-		return this.iniType;
+		return this.getFlag("shadowrun6-eden", "iniType") as InitiativeType;
 	}
 
 
 	protected _getInitiativeFormula(): string {
-	   console.log("Shadowrun6Combatant._getInitiativeFormula: ",this.iniType);
+	   console.log("Shadowrun6Combatant._getInitiativeFormula: ", this.initiativeType);
 
 	   switch (this.initiativeType) {
 		case InitiativeType.PHYSICAL : return "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
@@ -32,6 +31,7 @@ export default class Shadowrun6Combatant extends Combatant {
 
 	 rollInitiative(formula: string): Promise<this | undefined> {
 	   console.log("Shadowrun6Combatant.rollInitiative: ",formula);
+
 	   return super.rollInitiative(formula);
 	 }
 
@@ -39,4 +39,5 @@ export default class Shadowrun6Combatant extends Combatant {
 	   console.log("Shadowrun6Combatant.getInitiativeRoll: ",formula);
 	   return super.getInitiativeRoll(formula);
 	  }
+
 }
