@@ -10,16 +10,6 @@ export default class Shadowrun6CombatTracker extends CombatTracker {
 		}
 	}
 
-	/*
-	activateListeners(html: JQuery<HTMLElement>): void {
-   	super.activateListeners(html);
-
-   	console.log("SR6CombatTracker.activateListener");
-   	// see https://www.youtube.com/watch?v=OlagJzZsEew&t=671s
-   	//html.find(".shotcost").change(this._onShotCostChanged.bind(this));
-	}
-	*/
-
 	async getData(options?: Partial<ApplicationOptions> | undefined): Promise<CombatTracker.Data> {
 		let data : Promise<CombatTracker.Data> = super.getData(options);
 		data.then(function (data:CombatTracker.Data) {

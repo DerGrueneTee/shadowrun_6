@@ -10,6 +10,7 @@ export default class Shadowrun6Combatant extends Combatant {
 	) {
 		super(data, context);
 		console.log("Shadowrun6Combatant.<init>");
+		this.setFlag("shadowrun6-eden","iniType", InitiativeType.PHYSICAL);
 	}
 
     get initiativeType(): InitiativeType {

@@ -86,6 +86,7 @@
                 </div>
             </div>
 
+             {{#if this.owner}}
              <div class="token-name flexcol">
              	 <h4>&nbsp;</h4>
              	 {{log "tracker" this}}
@@ -98,6 +99,7 @@
                   <i class="fas fa-magic"></i></a>
                  </div>
             </div>
+            {{/if}}
             {{#if this.hasResource}}
             <div class="token-resource">
                 <span class="resource">{{this.resource}}</span>
