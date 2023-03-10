@@ -170,6 +170,8 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 
 		// ToDO: Detect real monitor
 		this.finished.monitor = MonitorType.PHYSICAL;
+		this.finished.targets = this.configured.targetIds;
+		console.log("targetIds in Chat message: ", this.finished.targets);
 
 		if (this.configured.rollType == RollType.Defense) {
 			console.log("_evaluateTotal: calculate remaining damage");
@@ -366,12 +368,12 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 	async render(
 		options?: { flavor?: string | undefined; template?: string | undefined; isPrivate?: boolean | undefined } | undefined
 	): Promise<string> {
-/*		console.log("ENTER render");
+		console.log("ENTER render");
 		console.log("options = ", options);
 		console.log("this = ", this);
 		console.log("this.data = ", this.data);
 		console.log("this.finished = ", this.finished);
-*/		try {
+		try {
 			if (!this._evaluated) await this.evaluate({ async: true });
 			let isPrivate = options ? options!.isPrivate : false;
 			if (!this.finished) {

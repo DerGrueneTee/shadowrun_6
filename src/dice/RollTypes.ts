@@ -41,6 +41,20 @@ export enum ReallyRoll {
 	AUTOHITS
 }
 
+export class TokenData {
+	id : string;
+	actorId : string |null;
+	sceneId : string | null;
+	name : string;
+	constructor(token : Token) {
+		this.id = token.id;
+		this.name = token.name;
+		this.sceneId = token.scene.id;
+		if (token.actor)
+			this.actorId = token.actor.id;
+	}
+}
+
 class CommonRollData {
 	speaker: ChatSpeakerDataProperties;
 	actor: Shadowrun6Actor;
@@ -103,14 +117,14 @@ export interface AttackRollData {
 	defendWith: Defense;
 
 	/** Which tokens are selected */
-	targets?: IterableIterator<Token> | null;
+	targets?: TokenData[] | null;
 
 	attackRating?: number;
 	weaponAttackRating?: number[];
 
 	poolUsage: PoolUsage;
-	/** when poolUsage is OneOnOne: How large is your pool per Token*/
-	perTargetPool: Map<Token, number>;
+	/** when poolUsage is OneOnOne: How large is your pool per TokenData*/
+	perTargetPool: Map<TokenData, number>;
 }
 
 export interface WeaponRollData extends AttackRollData {
@@ -296,7 +310,7 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	itemSrc: string | null;
 	gear: Gear;
 	weapon: Weapon;
-	targets: IterableIterator<Token>;
+	targets: TokenData[];
 
 	defenseRating: number;
 	attackRating: number;
@@ -331,7 +345,7 @@ export class MatrixActionRoll extends SkillRoll {
 	itemDesc: string | null;
 	itemSrc: string | null;
 	action: MatrixAction;
-	targets: IterableIterator<Token>;
+	targets: TokenData[];
 	defenseRating: number;
 	attackRating: number;
 
@@ -388,10 +402,12 @@ export class ConfiguredRoll extends CommonRollData {
 	edge_use: string;
 	/** Edge action selected  */
 	edgeAction: string;
-	targets: IterableIterator<Token>;
+	/** Target tokens */
+	targetIds: TokenData[];
 
 	/* This methods is a horrible crime - there must be a better solution */
 	updateSpecifics(copy: PreparedRoll) {
+		this.targetIds = (copy as WeaponRoll).targets;
 		// In case this was a WeaponRoll
 		console.log("Copy WeaponRoll data to ConfiguredRoll");
 		(this as any).calcAttackRating = (copy as WeaponRoll).calcAttackRating;
@@ -467,6 +483,7 @@ export class SR6ChatMessageData {
 	glitch: boolean;
 	criticalglitch: boolean;
 
+	targets : TokenData[] | null;
 	/** Damage after adjustment (Amp Up, Fire Mode ...) */
 	damage: number;
 	/** Which monitor to apply damage to */
@@ -488,6 +505,7 @@ export class SR6ChatMessageData {
 		this.edge_message = copy.edge_message;
 		this.edge_use = copy.edge_use;
 		this.edgeAction = copy.edgeAction;
+		this.targets = copy.targetIds;
 		console.log("####SR6ChatMessageData####2###", this);
 	}
 }

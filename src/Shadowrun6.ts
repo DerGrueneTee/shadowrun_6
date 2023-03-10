@@ -46,7 +46,7 @@ Hooks.once("init", async function () {
 	CONFIG.ui.combat = Shadowrun6CombatTracker;
 	CONFIG.Actor.documentClass = Shadowrun6Actor;
 	CONFIG.Dice.rolls = [SR6Roll];
-	(CONFIG as any).compatibility.mode = 0;
+//	(CONFIG as any).compatibility.mode = 0;
 	(game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 
 	registerSystemSettings();
@@ -302,27 +302,51 @@ Hooks.once('init', () => {
 		});
 		html.find(".rollable").click((event) => {
 			//      const type =  $(event.currentTarget).closestData("roll-type");
-			console.log("ENTER renderChatMessage.rollable.click -> event = ", event.currentTarget);
-			var targetId = ($(event.currentTarget) as any).closestData("targetid");
+			console.log("ENTER renderChatMessage.rollable.click -> event.currentTarget = ", event.currentTarget);
+			const dataset : DOMStringMap = event.currentTarget.dataset;
+
+			let actorId : string|undefined = dataset["actorid"];
+			let sceneId : string|undefined = dataset["sceneid"];
+			let tokenId : string|undefined = dataset["targetid"];
+
+			let actor : Actor | undefined ;
+			let token : Token | undefined;
+
+			// If scene and token ID is given, resolve token
+			if (sceneId && tokenId) {
+				let scene : Scene = (game as Game).scenes![sceneId];
+				if (scene) {
+					let t1 : TokenDocument|undefined = scene.tokens.get(tokenId);
+					console.log("Token ",t1);
+				}
+			}
+
+			// If we already have a actor that is rolling, that is great.
+			// If not, find one
+			if (actorId) {
+				actor = (game as Game).actors!.get(actorId);
+			}
+/*			var targetId = ($(event.currentTarget) as any).closestData("targetid");
 			/*
 			 * If no target was memorized in the button, try to find one from the
 			 * actor associated with the player
 			 */
-			if (!targetId) {
+			if (!actor) {
+
+
+				console.log("No target ID found - use characters actor if possible");
 				(game as Game).actors!.forEach((item) => {
-					if (item.hasPlayerOwner) targetId = item.data._id;
+					if (item.hasPlayerOwner) actor = item;
 				});
 			}
-			console.log("TargetId " + targetId);
+			console.log("Target Token Id " + actor);
 
-			const dataset = event.currentTarget.dataset;
 			const rollType = dataset.rollType;
 			console.log("Clicked on rollable : " + rollType);
 			console.log("dataset : ", dataset);
 			const threshold: number = parseInt(dataset.defendHits!);
 			const damage: number = dataset.damage ? parseInt(dataset.damage) : 0;
 			const monitor: number = parseInt(dataset.monitor!);
-			let actor = (game as Game).actors!.get(targetId);
 			console.log("Target actor ", actor);
 			console.log("Target actor ", actor!.data.name);
 

@@ -4,7 +4,7 @@
   {{log "roll-sr6.html data=" data}}
   {{log "roll-sr6.html prepared=" prepared}}
   {{log "roll-sr6.html configured=" configured}}
-  <h3>{{actionText}}</h3> 
+  <h3>{{actionText}}</h3>
   {{#if isOpposed}}
   <div class="chat-edge" style="display:block">
     <div>{{edge_message}}</div>
@@ -20,8 +20,8 @@
   </div>
   </div>
   <hr/>
-   {{/if}}        
-  
+   {{/if}}
+
   {{#if publicRoll}}
   <div>
     <div class="dice-result">
@@ -33,13 +33,13 @@
         {{else}}
         		{{#if (eq rollType "initiative")}}
         		<div class="resulttext" style="flex:2">Total {{total}}</div>
-        		{{else}}                		
+        		{{else}}
               {{#if success}}
               <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.success'}}: <b>{{total}}</b> {{localize 'shadowrun6.roll.successes'}}</div>
               {{else}}
               <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.failure'}}: </b>{{total}}</b> {{localize 'shadowrun6.roll.hits'}}</div>
-              {{/if}} 
-            {{/if}}        
+              {{/if}}
+            {{/if}}
         {{/if}}
         <br/>
         {{#if criticalglitch}}
@@ -51,7 +51,7 @@
         {{{tooltip}}}
     </div>
    </div>
-   
+
    <!-- Usage Details -->
    {{#if (eq rollType "weapon")}}
    <div class="chat-weapon">
@@ -78,14 +78,14 @@
    	  	   </tr>
    	    </table>
    </div>
-   {{/if}}        
+   {{/if}}
   	{{#if data.matrixAction}}
    <hr/>
    <div>
      <b>{{localize 'shadowrun6.roll.damage'}}</b> To Do
    </div>
-   {{/if}}        
-   
+   {{/if}}
+
    <!-- Drain -->
    {{#if (eq rollType "spell")}}
    <hr/>
@@ -112,8 +112,8 @@
 		</div>
    </div>
   	<!--button class="rollable" data-roll-type="soak" data-soak="drain" data-damage="{{configured.calcDrain}}"  data-monitor="stun" data-defend-with="{{../defendWith}}" data-target-actor="{{speaker.actor}}"data-target-token="{{speaker.token}}">{{speaker.alias}}: {{localize 'shadowrun6.roll.button.drain'}} ({{configured.calcDrain}})</button-->
-   {{/if}}        
-   
+   {{/if}}
+
    <!-- Drain -->
    {{#if (eq rollType "complexform")}}
    <hr/>
@@ -134,47 +134,48 @@
 		</div>
    </div>
   	<!--button class="rollable" data-roll-type="soak" data-soak="drain" data-damage="{{configured.calcDrain}}"  data-monitor="stun" data-defend-with="{{../defendWith}}" data-target-actor="{{speaker.actor}}"data-target-token="{{speaker.token}}">{{speaker.alias}}: {{localize 'shadowrun6.roll.button.drain'}} ({{configured.calcDrain}})</button-->
-   {{/if}}        
-   
+   {{/if}}
+
    <!-- Defense -->
-    {{log "Defense" data}}
-   {{#if DISABLEDdefendWith}}
+    {{log "************************Defense1" data}}
+    {{log "************************Defense2" this}}
+   {{#if defendWith}}
    <hr/>
-    {{log "targets " data.targets}}
-    {{log "targets " data.targets.len}}
-   {{#iff data.targets.size ">" 0}}
-     {{#each data.targets as |token id|}}
+    {{log "targets " targetIds}}
+    {{log "targets " targetIds.length}}
+   {{#iff targets.length ">" 0}}
+     {{#each targets as |token id|}}
      <div>
-      {{log "Token" id " = " token.data }} 
-     	<button class="rollable" data-roll-type="defense" data-damage="{{../data.damage}}"  data-monitor="{{../monitor}}" data-defend-with="{{../defendWith}}" data-targetid="{{token.data.actorId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.button.defense'}} ({{../total}}): {{token.data.name}}</button>
+      {{log "Token" id " = " token }}
+     	<button class="rollable" data-roll-type="defense" data-damage="{{../data.damage}}"  data-monitor="{{../monitor}}" data-defend-with="{{../defendWith}}" data-targetid="{{token.id}}" data-actorId="{{token.actorId}}" data-sceneId="{{token.sceneId}}" data-defend-hits="{{../total}}">{{localize 'shadowrun6.roll.button.defense'}} ({{../total}}): {{token.name}}</button>
      </div>
      {{/each}}
-   {{else}} 
+   {{else}}
      <div>
-  	   <button class="rollable" data-roll-type="defense" data-damage="{{configured.calcDmg}}"  data-monitor="{{monitor}}" data-defend-with="{{defendWith}}" data-targetid="{{data.targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.button.defense'}} ({{total}})</button>
+  	   <button class="rollable" data-roll-type="defense" data-damage="{{configured.calcDmg}}"  data-monitor="{{monitor}}" data-defend-with="{{defendWith}}" data-targetid="{{targetId}}" data-defend-hits="{{total}}">{{localize 'shadowrun6.roll.button.defense'}} ({{total}})</button>
      </div>
    {{/iff}}
    {{/if}}
-   
+
    <!-- Soak Damage -->
-   {{#if (eq rollType "DISABLEDdefense")}}
+   {{#if (eq rollType "defense")}}
         {{#if success}}
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulDefense'}}</div>
         {{else}}
         <div class="resulttext" style="color: rgb(194, 76, 29); flex:2">{{ localize 'shadowrun6.roll.failedDefense'}} {{nettoDamage}}</div>
   	     <button class="rollable" data-roll-type="soak" data-soak="damage_physical" data-defend-hits="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.button.soak'}} ({{damage}})</button>
-        {{/if}} 
+        {{/if}}
    {{/if}}
-   
+
    <!-- After Soak / Apply Damage -->
-   {{#if (eq rollType "DISABLEDsoak")}}
+   {{#if (eq rollType "soak")}}
         {{#if success}}
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulSoak'}}</div>
         {{else}}
         <div class="resulttext" style="color: rgb(194, 76, 29); flex:2">{{ localize 'shadowrun6.roll.failedSoak'}} {{damage}}</div>
   	     <button class="rollable" data-roll-type="damage" data-damage="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.apply_damage'}} ({{damage}})</button>
-        {{/if}} 
+        {{/if}}
    {{/if}}
     {{/if}}
-     
+
 </div>

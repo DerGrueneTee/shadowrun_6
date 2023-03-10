@@ -88,6 +88,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		console.log("###Create ConfiguredRoll");
 		let dialogResult = new ConfiguredRoll();
 		dialogResult.copyFrom(data);
+		dialogResult.updateSpecifics(data);
 
 		// Create the Dialog window
 		return new Promise((resolve) => {
@@ -204,6 +205,8 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 		let isPrivate: boolean = false;
 
 		if (form) {
+			console.log("---prepared.targets = ", (prepared as any).targets);
+			console.log("---configured.targetIds = ",configured.targetIds);
 			configured.threshold = form.threshold ? parseInt(form.threshold.value) : 0;
 			configured.useWildDie = form.useWildDie.checked ? 1 : 0;
 			configured.explode = form.explode.checked;

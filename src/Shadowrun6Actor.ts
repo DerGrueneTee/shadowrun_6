@@ -36,6 +36,7 @@ import {
 	SoakRoll,
 	VehicleRoll,
     ComplexFormRoll,
+    TokenData
 } from "./dice/RollTypes.js";
 import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
@@ -1207,10 +1208,11 @@ export class Shadowrun6Actor extends Actor {
 	_getHighestDefenseRating(map) {
 		let highest = 0;
 		for (var it = (game as Game).user!.targets.values(), val = null; (val = it.next().value); ) {
-			console.log("_getHighestDefenseRating: Target Token: val = ", val);
+			//console.log("_getHighestDefenseRating: Target Token: val = ", val);
 			let token: Token = val as Token;
 			let actor: Shadowrun6Actor = token.actor as Shadowrun6Actor;
 			let here: number = map(actor);
+			console.log("Defense Rating of ",token.data._id," is ",here)
 			if (here > highest) highest = here;
 		}
 		return highest;
@@ -1304,12 +1306,13 @@ export class Shadowrun6Actor extends Actor {
 		// Prepare check text
 		let checkText = this._getSkillCheckText(roll);
 
-		roll.targets = (game as Game).user!.targets.values();
+		roll.targets = Array.from( (game as Game).user!.targets.values(), token => new TokenData(token) );
+		console.log("ääääääääääääääääää targets ", roll.targets);
 		let highestDefenseRating: number = this._getHighestDefenseRating((a) => {
-			console.log("Determine defense pool of ", a);
+			console.log("Determine defense rating of ", a);
 			return a.data.data.defenserating.physical.pool;
 		});
-		console.log("Highest defense rating of targets: " + roll.defenseRating);
+		console.log("Highest defense rating of targets: " + highestDefenseRating);
 		if (highestDefenseRating > 0) roll.defenseRating = highestDefenseRating;
 
 		roll.speaker = ChatMessage.getSpeaker({ actor: this });
