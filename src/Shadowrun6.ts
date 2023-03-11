@@ -25,6 +25,7 @@ import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
 import Shadowrun6CombatTracker from "./Shadowrun6CombatTracker.js";
 import { GenesisData } from "./ItemTypes.js";
 import Importer from "./util/Importer.js";
+import { BaseUser } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents.mjs";
 
 const diceIconSelector: string = "#chat-controls .chat-control-icon .fa-dice-d20";
 
@@ -332,14 +333,18 @@ Hooks.once('init', () => {
 			 * actor associated with the player
 			 */
 			if (!actor) {
-
-
 				console.log("No target ID found - use characters actor if possible");
 				(game as Game).actors!.forEach((item) => {
 					if (item.hasPlayerOwner) actor = item;
 				});
 			}
-			console.log("Target Token Id " + actor);
+			console.log("Actor " , actor);
+			if (actor) {
+				if (!actor.isOwner) {
+					console.log("Current user not owner of actor ", actor.data.name);
+					return;
+				}
+			}
 
 			const rollType = dataset.rollType;
 			console.log("Clicked on rollable : " + rollType);
