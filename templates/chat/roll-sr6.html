@@ -157,6 +157,7 @@
    {{/if}}
 
    <!-- Soak Damage -->
+   <!--
    {{#if (eq rollType "defense")}}
         {{#if success}}
         <div class="resulttext" style="flex:2">{{ localize 'shadowrun6.roll.successfulDefense'}}</div>
@@ -164,7 +165,7 @@
         <div class="resulttext" style="color: rgb(194, 76, 29); flex:2">{{ localize 'shadowrun6.roll.failedDefense'}} {{nettoDamage}}</div>
   	     <button class="rollable" data-roll-type="soak" data-soak="damage_physical" data-defend-hits="{{damage}}" data-monitor="{{monitor}}">{{localize 'shadowrun6.roll.button.soak'}} ({{damage}})</button>
         {{/if}}
-   {{/if}}
+   {{/if}} -->
 
    <!-- After Soak / Apply Damage -->
    {{#if (eq rollType "soak")}}
