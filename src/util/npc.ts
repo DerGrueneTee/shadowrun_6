@@ -99,34 +99,34 @@ enum SectionType {
 
 }
 
-const STATS_LINES: string[] = ["K G R S W L I C ESS", "K G R S W L I C EDG ESS", "B A R S W L I C ESS"];
+const STATS_LINES: string[] = ["K G R S W L I C ESS", "K G R S W L I C EDG ESS", "B A R S W L I C ESS", "CON AGI RÉA FOR VOL LOG INT CHA ESS"];
 const ALTERNATE_STATS_LNIE: string[] = ["K", "B"]
-const STATS_MAGIC_LINES: string[] = ["K G R S W L I C M ESS", "K G R S W L I C EDG M ESS", "B A R S W L I C M ESS"];
-const STATS_RES_LINES: string[] = ["K G R S W L I C RES ESS", "K G R S W L I C EDG R ESS", "B A R S W L I C RS ESS"];
-const DR_LINES: string[] = ["DR I/ID AC CM MOVE"];
-const INIT_LINES: string[] = ["Initiative:"];
-const INIT_ASTRAL_LINES: string[] = ["Astrale Initiative:"];
-const ACTIONS_LINE: string[] = ["Handlungen:"];
-const STATUS_LINES: string[] = ["Zustandsmonitor:"];
-const DEFENSE_LINES: string[] = ["Verteidigungswert:"];
-const SKILLS_LINES: string[] = ["Fertigkeiten:", "Skills:"];
-const SKILLS_POOLED_LINES: string[] = ["Fertigkeiten (Würfelpools):"];
-const LANG_LINES: string[] = ["Sprachfertigkeiten:"];
-const GEAR_LINES: string[] = ["Ausrüstung:", "Gear:"];
-const CYBERWARE_LINES: string[] = ["Bodytech:", "Augmentations:"];
-const WEAPON_LINES: string[] = ["Waffen:", "Weapons:"];
-const SPELLS_LINES: string[] = ["Zauber:", "Spells:"];
-const VEHICLES_LINES: string[] = ["Fahrzeuge und Drohnen:", "Vehicles and Drones:"];
-const ADEPT_POWERS_LINES: string[] = ["Adeptenkräfte:", "Powers:"];
-const COMPLEX_FORMS_LINES: string[] = ["Komplexe Formen:", "Complex Forms:"];
-const METAMAGIC_LINES: string[] = ["Metamagie:", "Metamagics:"];
-const INITIATION_LINES: string[] = ["Initiatengrad:", "Initiate Grade:"];
-const PROGRAMS_LINES: string[] = ["Programme:", "Programs:"];
-const PERSONA_LINES: string[] = ["Lebende Persona:"];
-const POWERS_LINES: string[] = ["Kräfte:"];
-const AGE_LINES: string[] = ["Alter"];
-const INFLUENCE_LINES: string[] = ["Einflussstufe"];
-const DESC_LINES: string[] = ["Bevorzugte Zahlungsmethode"];
+const STATS_MAGIC_LINES: string[] = ["K G R S W L I C M ESS", "K G R S W L I C EDG M ESS", "B A R S W L I C M ESS", "CON AGI RÉA FOR VOL LOG INT CHA MAG ESS"];
+const STATS_RES_LINES: string[] = ["K G R S W L I C RES ESS", "K G R S W L I C EDG R ESS", "B A R S W L I C RS ESS", "CON AGI RÉA FOR VOL LOG INT CHA RES ESS"];
+const DR_LINES: string[] = ["DR I/ID AC CM MOVE", "SD I/DI PA ME DÉPLACEMENT", "SD I/DI PA ME DÉPLACEMENT DRAIN", "SD I/DI PA ME DÉPLA. DRAIN", "SD I/DI PA ME DÉPLA.", "SD I/DI PA ME DÉPLA. TECHNO."]; // the french books are inconsistent
+const INIT_LINES: string[] = ["Initiative:"]; // DE specific
+const INIT_ASTRAL_LINES: string[] = ["Astrale Initiative:"]; // DE specific
+const ACTIONS_LINE: string[] = ["Handlungen:"]; // DE specific
+const STATUS_LINES: string[] = ["Zustandsmonitor:"]; // DE specific
+const DEFENSE_LINES: string[] = ["Verteidigungswert:"]; // DE specific
+const SKILLS_LINES: string[] = ["Fertigkeiten:", "Skills:", "Compétences :"];
+const SKILLS_POOLED_LINES: string[] = ["Fertigkeiten (Würfelpools):"]; // DE specific extra books
+const LANG_LINES: string[] = ["Sprachfertigkeiten:"]; // DE specific extra books
+const GEAR_LINES: string[] = ["Ausrüstung:", "Gear:", "Équipement :"];
+const CYBERWARE_LINES: string[] = ["Bodytech:", "Augmentations:", "Augmentations :", "Augmentations (alphaware) :"]; // FR specific alphaware
+const WEAPON_LINES: string[] = ["Waffen:", "Weapons:", "Armes :"];
+const SPELLS_LINES: string[] = ["Zauber:", "Spells:", "Sorts :"];
+const VEHICLES_LINES: string[] = ["Fahrzeuge und Drohnen:", "Vehicles and Drones:", "Véhicules et drones :"];
+const ADEPT_POWERS_LINES: string[] = ["Adeptenkräfte:", "Powers:", "Pouvoirs d’adepte :"];
+const COMPLEX_FORMS_LINES: string[] = ["Komplexe Formen:", "Complex Forms:", "Formes complexes :"];
+const METAMAGIC_LINES: string[] = ["Metamagie:", "Metamagics:", "Métamagies :"];
+const INITIATION_LINES: string[] = ["Initiatengrad:", "Initiate Grade:", "Grade d’initié :"];
+const PROGRAMS_LINES: string[] = ["Programme:", "Programs:"]; // FR rolls this into equipment
+const PERSONA_LINES: string[] = ["Lebende Persona:"]; // DE specific
+const POWERS_LINES: string[] = ["Kräfte:"]; // DE specific
+const AGE_LINES: string[] = ["Alter"]; // DE specific extra books
+const INFLUENCE_LINES: string[] = ["Einflussstufe"]; // DE specific extra books
+const DESC_LINES: string[] = ["Bevorzugte Zahlungsmethode"]; // DE specific extra books
 
 function isSectionStart(line: string): SectionType {
     if (line.match(/^(.*?\s+)?(Mensch|Zwerg|Ork|Troll|Elfe|Elf|Drache|Drachin|Geist)(in)?$/)) {
@@ -341,6 +341,7 @@ class Attributes {
     public special: Attibute | undefined;
     public edge: Attibute | undefined;
     constructor(def: string, has_special: boolean = false) {
+        def = def.replace(/\s+\(/g, "(")
         let parts = def.split(" ").map(def => {
             return new Attibute(def)
         });
@@ -921,15 +922,22 @@ export class NPC {
                     break;
                 }
                 case SectionType.DRStats: {
-                    //                                     1        2           3      4     5         6          7      8       9
-                    //                                     2                    4    / 1     A1    ,   I2         9      10   / 15   /+  1
-                    let matches = section.content.match(/(\d+)(?:\((\d+)\))?\s+(\d+)\/(\d+)\s+A(\d+),\s*I(\d+)\s+(\d+)\s+(\d+)\/(\d+)\/\+(\d+)/)
+                    //                                       1        2           3      4                      5      8       9
+                    //                                       2                    4    / 1     A1  ,   I2       9      10   / 15   /+  1
+                    let matches_en = section.content.match(/(\d+)(?:\((\d+)\))?\s+(\d+)\/\d+\s+A\d+,\s*I\d+\s+(\d+)\s+\d+\/\d+\/\+\d+/)
+                    // 9 12/1 (physique) 10/2 (astrale) MAJ 1, MIN 2 (physique) MAJ 1, MIN 3 (astrale) 11 10/15/+1 12
+                    let matches_fr = section.content.match(/^(\d+)\s+(\d+)\/(\d+)(?:\s*\([^)]+\))?(?:\s*[^\/]+?\/.+?\s*\([^)]+\))*\s+MAJ\s+\d+,\s*MIN\s+\d+(?:\s*\([^)]+\))?(?:\s*MAJ\s*\d+,\s*MIN\s*\d+\s*\([^)]+\))*\s+(\d+)(?:\s+\([^)]+\))?(?:\s+\d+\s+\([^)]+\))*\s+\d+\/\s*\d+\/\s*\+\d(?:\s+\d+)?$/)
 
-                    if (matches) {
-                        this.defense = parseInt(matches[2]) || parseInt(matches[1]);
+                    if (matches_en) {
+                        this.defense = parseInt(matches_en[2]) || parseInt(matches_en[1]);
                         // This is a bit of a cheat
-                        this.initiative = new Initiative(matches[5] + " + " + matches[6] + "W6");
-                        this.status = new Status(matches[7]);
+                        this.initiative = new Initiative(matches_en[3] + " + " + matches_en[4] + "W6");
+                        this.status = new Status(matches_en[5]);
+                    } else if (matches_fr) {
+                        this.defense = parseInt(matches_fr[1]);
+                        // This is a bit of a cheat
+                        this.initiative = new Initiative(matches_fr[2] + " + " + matches_fr[3] + "W6");
+                        this.status = new Status(matches_fr[4]);
                     } else {
                         throw new Error("Could not parse DR stats: " + section.content);
                     }
