@@ -1671,4 +1671,18 @@ export class Shadowrun6Actor extends Actor {
 	getMaxEdgeGainThisRound(): number {
 		return 2;
 	}
+
+
+	//-------------------------------------------------------------
+	async importFromJSON(json: string) {
+		console.log("importFromJSON");
+      const data = JSON.parse(json);
+
+      // If Genesis-JSON-Export
+      if (data.jsonExporterVersion && data.system === "SHADOWRUN6") {
+      	let newData : any = this.toObject();
+            newData.data.sex = data.gender;
+      }
+		return super.importFromJSON(json)
+	}
 }
