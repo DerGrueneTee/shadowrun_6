@@ -28,6 +28,33 @@
     "ADVANTAGE": "Vorteil",
     "DISADVANTAGE": "Nachteil"
   },
+  "TYPES": {
+  		"Actor": {
+    		"Critter": "Critter",
+    		"NPC"    : "Scherge/NSC",
+    		"Player": "Spieler-Charakter",
+    		"Spirit": "Geist",
+    		"Vehicle": "Fahrzeug/Drohne"
+  		},
+	  "Item": {
+   		"adeptPower": "Adeptenkraft",
+    		"complexform": "Komplexe Form",
+    		"critterPower": "Critterkraft",
+    		"contact": "Connection",
+    		"echo": "Echo",
+    		"gear": "Ausrüstung",
+    		"lifestyle": "Lebensstil",
+    		"martialartstyle": "Kampfkunststil",
+    		"martialarttech": "Kampfkunstechnik",
+    		"metamagic": "Metamagie",
+    		"quality": "Vor-/Nachteil",
+    		"ritual": "Ritual",
+    		"sin": "SIN",
+    		"skill": "Sprach-/Wissensfertigkeit",
+    		"spell": "Zauber",
+    		"weapon": "Waffe"
+	  }
+  },
   "attrib": {
     "agi": "Geschicklichkeit",
     "agi_short": "GES",
