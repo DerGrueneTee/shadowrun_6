@@ -38,7 +38,7 @@ import {
     ComplexFormRoll,
     TokenData
 } from "./dice/RollTypes.js";
-import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import { ActorData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -78,6 +78,18 @@ declare global {
 		SR6: SR6Config;
 	}
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+function getActorData(obj: any): Shadowrun6Actor {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
+function getItemData(obj: any): ItemData {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
 
 export class Shadowrun6Actor extends Actor {
 	/**
@@ -85,18 +97,19 @@ export class Shadowrun6Actor extends Actor {
 	 */
 	prepareData() {
 		super.prepareData();
-		console.log("Shadowrun6Actor.prepareData() " + this.data.name + " = " + this.data.type);
 
-		const data: SR6Actor = this.data.data as SR6Actor;
+		const actorData : Shadowrun6Actor = getActorData(this);
+		const system: SR6Actor = getSystemData(this);
+		console.log("Shadowrun6Actor.prepareData() " + actorData.name + " = " + actorData.type);
 
 		try {
-			if (this.data.type === "Spirit") {
+			if (actorData.type === "Spirit") {
 				this._applySpiritPreset();
 				this._applyForce();
 			}
 			this._prepareAttributes();
 			this._prepareDerivedAttributes();
-			if (this.data.type != "Vehicle" && this.data.type != "Critter") {
+			if (actorData.type != "Vehicle" && actorData.type != "Critter") {
 				this._preparePersona();
 				this._prepareAttackRatings();
 				this._prepareDefenseRatings();
@@ -105,18 +118,18 @@ export class Shadowrun6Actor extends Actor {
 				this._prepareItemPools();
 				this._prepareVehiclePools();
 				this._calculateEssence();
-				if (isLifeform(data) && data.mortype) {
-					data.morDef = SR6.MOR_DEFINITIONS[data.mortype];
+				if (isLifeform(system) && system.mortype) {
+					system.morDef = SR6.MOR_DEFINITIONS[system.mortype];
 				}
 			}
-			if (this.data.type === "Critter") {
+			if (actorData.type === "Critter") {
 				this._prepareAttackRatings();
 				this._prepareDefenseRatings();
 				this._prepareSkills();
 				this._prepareDefensePools();
 				//     this._prepareItemPools();
 			}
-			if (this.data.type === "Vehicle") {
+			if (actorData.type === "Vehicle") {
 				this._prepareDerivedVehicleAttributes();
 				this._prepareVehicleActorSkills();
 			}
@@ -130,7 +143,7 @@ export class Shadowrun6Actor extends Actor {
 	 * Apply the force rating as a attribute and skill modifier
 	 */
 	_applySpiritPreset() {
-		const data = this.data.data;
+		const data = getSystemData(this);
 		// Only run on spirits
 		if (!isSpiritOrSprite(data))
 			return;
@@ -210,7 +223,7 @@ export class Shadowrun6Actor extends Actor {
 	 * Apply the force rating as a attribute and skill modifier
 	 */
 	_applyForce() {
-		const data = this.data.data;
+		const data = getSystemData(this);
 		// Only run on spirits
 		if (isSpiritOrSprite(data)) {
 			const force : number = parseInt(data.rating as any);
@@ -259,8 +272,7 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the final attribute values
 	 */
 	_prepareAttributes() {
-		const actorData = this.data;
-		const data = this.data.data;
+		const data: SR6Actor = getSystemData(this);
 		// Only run on lifeforms
 		if (isLifeform(data)) {
 			SR6.ATTRIBUTES.forEach((attr) => {
@@ -276,12 +288,13 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDerivedAttributes() {
-		const actorData = this.data;
-		if (!isLifeform(this.data.data)) return;
-		const data: Lifeform = this.data.data;
+		const actorData: Shadowrun6Actor = getActorData(this);
+		const system: SR6Actor = getSystemData(this);
+		if (!isLifeform(system)) return;
+		const data: Lifeform = system;
 
 		// Don't calculate monitors and initiative for spirits
-		if (this.data.type != "Spirit") {
+		if (actorData.type != "Spirit") {
 			if (data.physical) {
 				data.physical.max = 8 + Math.round(data.attributes["bod"].pool / 2) + data.physical.mod;
 				data.physical.value = data.physical.max - data.physical.dmg;
@@ -357,99 +370,97 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attack ratings
 	 */
 	_prepareAttackRatings() {
-		const actorData = this.data;
-		const data = this.data.data;
-		const items = this.data.items;
+		const system: SR6Actor = getSystemData(this);
+		if (!isLifeform(system)) return;
 
-		if (!isLifeform(data)) return;
-		if (!data.attackrating) data.attackrating = new Ratings();
-		if (!data.attackrating.physical) data.attackrating.physical = new Attribute();
-		if (!data.attackrating.astral) data.attackrating.astral = new Attribute();
-		if (!data.attackrating.vehicle) data.attackrating.vehicle = new Attribute();
-		if (!data.attackrating.matrix) data.attackrating.matrix = new Attribute();
-		if (!data.attackrating.social) data.attackrating.social = new Attribute();
-		if (!data.attackrating.resonance) data.attackrating.resonance = new Attribute();
+		if (!system.attackrating) system.attackrating = new Ratings();
+		if (!system.attackrating.physical) system.attackrating.physical = new Attribute();
+		if (!system.attackrating.astral) system.attackrating.astral = new Attribute();
+		if (!system.attackrating.vehicle) system.attackrating.vehicle = new Attribute();
+		if (!system.attackrating.matrix) system.attackrating.matrix = new Attribute();
+		if (!system.attackrating.social) system.attackrating.social = new Attribute();
+		if (!system.attackrating.resonance) system.attackrating.resonance = new Attribute();
 
 		/* Physical Attack Rating - used for unarmed combat */
-		data.attackrating.physical.base = data.attributes["rea"].pool + data.attributes["str"].pool;
-		data.attackrating.physical.modString = (game as Game).i18n.localize("attrib.rea_short") + " " + data.attributes["rea"].pool + "\n";
-		data.attackrating.physical.modString += (game as Game).i18n.localize("attrib.str_short") + " " + data.attributes["str"].pool;
-		data.attackrating.physical.pool = data.attackrating.physical.base + data.attackrating.physical.mod;
-		if (data.attackrating.physical.mod) {
-			data.attackrating.physical.pool += data.attackrating.physical.mod;
-			data.attackrating.physical.modString += "\n+" + data.attackrating.physical.mod;
+		system.attackrating.physical.base = system.attributes["rea"].pool + system.attributes["str"].pool;
+		system.attackrating.physical.modString = (game as Game).i18n.localize("attrib.rea_short") + " " + system.attributes["rea"].pool + "\n";
+		system.attackrating.physical.modString += (game as Game).i18n.localize("attrib.str_short") + " " + system.attributes["str"].pool;
+		system.attackrating.physical.pool = system.attackrating.physical.base + system.attackrating.physical.mod;
+		if (system.attackrating.physical.mod) {
+			system.attackrating.physical.pool += system.attackrating.physical.mod;
+			system.attackrating.physical.modString += "\n+" + system.attackrating.physical.mod;
 		}
 
-		if (data.tradition) {
-			let traditionAttr = data.attributes[data.tradition.attribute];
-			data.attackrating.astral.base = data.attributes["mag"].pool + traditionAttr.pool;
-			data.attackrating.astral.modString = (game as Game).i18n.localize("attrib.mag_short") + " " + data.attributes["mag"].pool + "\n";
-			data.attackrating.astral.modString +=
-				(game as Game).i18n.localize("attrib." + data.tradition.attribute + "_short") + " " + data.attributes[data.tradition.attribute].pool;
-			data.attackrating.astral.pool = data.attackrating.astral.base;
+		if (system.tradition) {
+			let traditionAttr = system.attributes[system.tradition.attribute];
+			system.attackrating.astral.base = system.attributes["mag"].pool + traditionAttr.pool;
+			system.attackrating.astral.modString = (game as Game).i18n.localize("attrib.mag_short") + " " + system.attributes["mag"].pool + "\n";
+			system.attackrating.astral.modString +=
+				(game as Game).i18n.localize("attrib." + system.tradition.attribute + "_short") + " " + system.attributes[system.tradition.attribute].pool;
+			system.attackrating.astral.pool = system.attackrating.astral.base;
 		}
-		if (data.attackrating.astral.mod) {
-			data.attackrating.astral.pool += data.attackrating.astral.mod;
-			data.attackrating.astral.modString += "\n+" + data.attackrating.astral.mod;
+		if (system.attackrating.astral.mod) {
+			system.attackrating.astral.pool += system.attackrating.astral.mod;
+			system.attackrating.astral.modString += "\n+" + system.attackrating.astral.mod;
 		}
 
-		if (isMatrixUser(data)) {
-			console.log("prepareAttackRatings:", data.persona.used);
-			if (data.persona && data.persona.used) {
+		if (isMatrixUser(system)) {
+			console.log("prepareAttackRatings:", system.persona.used);
+			if (system.persona && system.persona.used) {
 				// Matrix attack rating (Angriff + Schleicher)
-				data.attackrating.matrix.base = data.persona.used.a + data.persona.used.s;
-				data.attackrating.matrix.pool = data.attackrating.matrix.base;
-				if (data.attackrating.matrix.mod) {
-					data.attackrating.matrix.pool += data.attackrating.matrix.mod;
-					data.attackrating.matrix.modString += "\n+" + data.attackrating.matrix.mod;
+				system.attackrating.matrix.base = system.persona.used.a + system.persona.used.s;
+				system.attackrating.matrix.pool = system.attackrating.matrix.base;
+				if (system.attackrating.matrix.mod) {
+					system.attackrating.matrix.pool += system.attackrating.matrix.mod;
+					system.attackrating.matrix.modString += "\n+" + system.attackrating.matrix.mod;
 				}
 
-				switch (data.matrixIni) {
+				switch (system.matrixIni) {
 				case "ar":
-					data.initiative.matrix.base = data.attributes["rea"].pool + data.attributes["int"].pool;
-					data.initiative.matrix.dice = 1;
+					system.initiative.matrix.base = system.attributes["rea"].pool + system.attributes["int"].pool;
+					system.initiative.matrix.dice = 1;
 					break;
 				case "vrcold":
-					data.initiative.matrix.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
-					data.initiative.matrix.dice = 2;
+					system.initiative.matrix.base = system.attributes["int"].pool + (system.persona.used.d ?? system.persona.device.base.d);
+					system.initiative.matrix.dice = 2;
 					break;
 				case "vrhot":
-					data.initiative.matrix.base = data.attributes["int"].pool + (data.persona.used.d ?? data.persona.device.base.d);
-					data.initiative.matrix.dice = 3;
+					system.initiative.matrix.base = system.attributes["int"].pool + (system.persona.used.d ?? system.persona.device.base.d);
+					system.initiative.matrix.dice = 3;
 					break;
 				}
-				data.initiative.matrix.pool = data.initiative.matrix.base + data.initiative.matrix.mod;
-				data.initiative.matrix.dicePool = data.initiative.matrix.dice + data.initiative.matrix.diceMod;
+				system.initiative.matrix.pool = system.initiative.matrix.base + system.initiative.matrix.mod;
+				system.initiative.matrix.dicePool = system.initiative.matrix.dice + system.initiative.matrix.diceMod;
 			}
 
 			// Resonance attack rating (Electronics + Resonance)
-			data.attackrating.resonance.base = data.persona.used.a + data.attributes["res"].pool;
-			data.attackrating.resonance.modString = (game as Game).i18n.localize("skill.electronics") + " + ";
-			data.attackrating.resonance.modString += (game as Game).i18n.localize("attrib.res_short");
-			data.attackrating.resonance.pool = data.attackrating.resonance.base;
-			if (data.attackrating.resonance.mod) {
-				data.attackrating.resonance.pool += data.attackrating.resonance.mod;
-				data.attackrating.resonance.modString += "\n+" + data.attackrating.resonance.mod;
+			system.attackrating.resonance.base = system.persona.used.a + system.attributes["res"].pool;
+			system.attackrating.resonance.modString = (game as Game).i18n.localize("skill.electronics") + " + ";
+			system.attackrating.resonance.modString += (game as Game).i18n.localize("attrib.res_short");
+			system.attackrating.resonance.pool = system.attackrating.resonance.base;
+			if (system.attackrating.resonance.mod) {
+				system.attackrating.resonance.pool += system.attackrating.resonance.mod;
+				system.attackrating.resonance.modString += "\n+" + system.attackrating.resonance.mod;
 			}
 		} else {
-			data.attackrating.matrix.base=0;
+			system.attackrating.matrix.base=0;
 		}
 
 		// Vehicle combat attack rating (Pilot + Sensor)
-		data.attackrating.vehicle.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
-		data.attackrating.vehicle.pool = data.attackrating.vehicle.base;
-		if (data.attackrating.vehicle.mod) {
-			data.attackrating.vehicle.pool += data.attackrating.vehicle.mod;
-			data.attackrating.vehicle.modString += "\n+" + data.attackrating.vehicle.mod;
+		system.attackrating.vehicle.base = 0; //data.attributes["rea"].pool + data.attributes["str"].pool;
+		system.attackrating.vehicle.pool = system.attackrating.vehicle.base;
+		if (system.attackrating.vehicle.mod) {
+			system.attackrating.vehicle.pool += system.attackrating.vehicle.mod;
+			system.attackrating.vehicle.modString += "\n+" + system.attackrating.vehicle.mod;
 		}
 
 		// Social value
-		data.attackrating.social.base = data.attributes["cha"].pool;
-		data.attackrating.social.modString = (game as Game).i18n.localize("attrib.cha_short") + " " + data.attributes["cha"].pool;
-		data.attackrating.social.pool = data.attackrating.social.base;
-		if (data.attackrating.social.mod) {
-			data.attackrating.social.pool += data.attackrating.social.mod;
-			data.attackrating.social.modString += "\n+" + data.attackrating.social.mod;
+		system.attackrating.social.base = system.attributes["cha"].pool;
+		system.attackrating.social.modString = (game as Game).i18n.localize("attrib.cha_short") + " " + system.attributes["cha"].pool;
+		system.attackrating.social.pool = system.attackrating.social.base;
+		if (system.attackrating.social.mod) {
+			system.attackrating.social.pool += system.attackrating.social.mod;
+			system.attackrating.social.modString += "\n+" + system.attackrating.social.mod;
 		}
 		/*
 		items.forEach(function (item, key) {
@@ -468,9 +479,11 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDefenseRatings() {
-		const actorData = this.data;
-		const data = this.data.data;
-		const items = this.data.items;
+		const actorData = getActorData(this);
+		const system: SR6Actor = getSystemData(this);
+		if (!isLifeform(system)) return;
+		const data: Lifeform = system;
+		const items = actorData.items;
 
 		if (!isLifeform(data)) return;
 
@@ -493,10 +506,11 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 		items.forEach((item) => {
-			if (item.type == "gear" && (item.data.data as Gear).type == "ARMOR" && isArmor(item.data.data)) {
-				if (item.data.data.usedForPool) {
-					data.defenserating.physical.pool += item.data.data.defense;
-					data.defenserating.physical.modString += "\n+" + item.data.data.defense + " " + item.name;
+			let itemSystem : Gear = getSystemData(item);
+			if (item.type == "gear" && itemSystem.type == "ARMOR" && isArmor(itemSystem)) {
+				if (itemSystem.usedForPool) {
+					data.defenserating.physical.pool += itemSystem.defense;
+					data.defenserating.physical.modString += "\n+" + itemSystem.defense + " " + item.name;
 				}
 			}
 		});
@@ -557,8 +571,10 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the final attribute values
 	 */
 	_prepareSkills() {
-		const actorData = this.data;
-		const data: Lifeform = this.data.data as Lifeform;
+		const actorData = getActorData(this);
+		const system: SR6Actor = getSystemData(this);
+		if (!isLifeform(system)) return;
+		const data: Lifeform = system;
 		// Only calculate for PCs - ignore for NPCs/Critter
 		if (actorData.type === "Player" || actorData.type === "NPC") {
 			CONFIG.SR6.ATTRIB_BY_SKILL.forEach(function (skillDef, id) {
@@ -592,9 +608,9 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDefensePools() {
-		const actorData = this.data;
-		if (!isLifeform(this.data.data)) return;
-		const data: Lifeform = this.data.data;
+		const system: SR6Actor = getSystemData(this);
+		if (!isLifeform(system)) return;
+		const data: Lifeform = system;
 
 		if (!data.defensepool) data.defensepool = new DefensePool();
 		if (!data.defensepool.physical) data.defensepool.physical = new Pool();
@@ -727,41 +743,44 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the pool when using items with assigned skills
 	 */
 	_prepareItemPools() {
-		const actorData = this.data;
-		const itemUser = this.data.data as Lifeform;
+		const actorData = getActorData(this);
+		const system: SR6Actor = getSystemData(this);
+		if (!isLifeform(system)) return;
+		const itemUser: Lifeform = system;
 
 		actorData.items.forEach((tmpItem) => {
-			let item = tmpItem.data;
-			if (item.type == "gear" && item.data && isGear(item.data)) {
-				let gear: Gear = item.data as Gear;
+			let item : ItemData = getItemData(tmpItem);
+			let system : any = getSystemData(tmpItem);
+			if (item.type == "gear" && system && isGear(system)) {
+				let gear: Gear = system as Gear;
 				if (gear.skill && gear.skill != "") {
 					//item.data.pool = tmpItem.actor.data.data.skills[item.data.skill].pool;
-					gear.pool = this._getSkillPool(item.data.skill, gear.skillSpec, itemUser.skills[gear.skill].attrib);
+					gear.pool = this._getSkillPool(gear.skill, gear.skillSpec, itemUser.skills[gear.skill].attrib);
 					gear.pool = gear.pool + +gear.modifier;
 				}
 			}
-			if (tmpItem.type == "gear" && isWeapon(item.data)) {
-				if (item.data.stun) {
-					if ((item.data.stun as any) === "false") {
-						item.data.stun = false;
-					} else if ((item.data.stun as any) === "true") {
-						item.data.stun = true;
+			if (tmpItem.type == "gear" && isWeapon(system)) {
+				if (system.stun) {
+					if ((system.stun as any) === "false") {
+						system.stun = false;
+					} else if ((system.stun as any) === "true") {
+						system.stun = true;
 					}
 				}
-				let suffix = item.data.stun
+				let suffix = system.stun
 					? (game as Game).i18n.localize("shadowrun6.item.stun_damage")
 					: (game as Game).i18n.localize("shadowrun6.item.physical_damage");
-				item.data.dmgDef = item.data.dmg + suffix;
+				system.dmgDef = system.dmg + suffix;
 			}
 
-			if (tmpItem.type == "complexform" && isComplexForm(item.data)) {
-				if (!item.data.skill) {
-					let cform = CONFIG.SR6.COMPLEX_FORMS[item.data.genesisID];
+			if (tmpItem.type == "complexform" && isComplexForm(system)) {
+				if (!system.skill) {
+					let cform = CONFIG.SR6.COMPLEX_FORMS[system.genesisID];
 					if (cform && cform.skill) {
-						item.data.skill = cform.skill;
-						item.data.oppAttr1 = cform.opposedAttr1;
-						item.data.oppAttr2 = cform.opposedAttr2;
-						item.data.threshold = cform.threshold;
+						system.skill = cform.skill;
+						system.oppAttr1 = cform.opposedAttr1;
+						system.oppAttr2 = cform.opposedAttr2;
+						system.threshold = cform.threshold;
 					}
 				}
 			}
@@ -773,17 +792,19 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the pool when using items with assigned skills
 	 */
 	_prepareVehiclePools() {
-		if (!isLifeform(this.data.data)) return;
-		const actorData: Lifeform = this.data.data;
+		const actorData : Shadowrun6Actor = getActorData(this);
+		const systemRaw: SR6Actor = getSystemData(this);
+		if (!isLifeform(systemRaw)) return;
+		const system: Lifeform = systemRaw;
 
-		if (!actorData.controlRig) {
-			actorData.controlRig = 0;
+		if (!system.controlRig) {
+			system.controlRig = 0;
 		}
 
-		this.data.items.forEach((tmpItem) => {
+		actorData.items.forEach((tmpItem) => {
 			// Any kind of gear
-			if (tmpItem.type == "gear" && isVehicle(tmpItem.data.data)) {
-				let vehicleData: Vehicle = tmpItem.data.data;
+			if (tmpItem.type == "gear" && isVehicle(getSystemData(tmpItem))) {
+				let vehicleData: Vehicle = getSystemData(tmpItem);
 				if (!vehicleData.vehicle) {
 					vehicleData.vehicle = new CurrentVehicle();
 				}
@@ -808,7 +829,7 @@ export class Shadowrun6Actor extends Actor {
 					vehicleData.skillSpec = specialization;
 				}
 				let opMode = current.opMode;
-				let rigRating: number = actorData.controlRig;
+				let rigRating: number = system.controlRig;
 				let modRig = "";
 				if (rigRating > 0) {
 					modRig = " + " + (game as Game).i18n.localize("shadowrun6.item.vehicle.rigRating.long") + " (" + rigRating + ")";
@@ -818,22 +839,22 @@ export class Shadowrun6Actor extends Actor {
 						rigRating = 0;
 						modRig = "";
 					case "riggedAR":
-						current.ar.pool = actorData.skills.piloting.points + vehicleData.sen + +rigRating;
+						current.ar.pool = system.skills.piloting.points + vehicleData.sen + +rigRating;
 						current.ar.modString =
 							(game as Game).i18n.localize("skill.piloting") +
 							"(" +
-							actorData.skills.piloting.points +
+							system.skills.piloting.points +
 							") +" +
 							(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long") +
 							" (" +
 							vehicleData.sen +
 							")" +
 							modRig;
-						current.dr.pool = actorData.skills.piloting.points + vehicleData.arm + +rigRating;
+						current.dr.pool = system.skills.piloting.points + vehicleData.arm + +rigRating;
 						current.dr.modString =
 							(game as Game).i18n.localize("skill.piloting") +
 							"(" +
-							actorData.skills.piloting.points +
+							system.skills.piloting.points +
 							") +" +
 							(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long") +
 							" (" +
@@ -844,32 +865,32 @@ export class Shadowrun6Actor extends Actor {
 						current.handling.modString =
 							(game as Game).i18n.localize("skill.piloting") +
 							"(" +
-							actorData.skills.piloting.points +
+							system.skills.piloting.points +
 							") +" +
 							(game as Game).i18n.localize("attrib.rea_short") +
 							"(" +
-							actorData.attributes.rea.pool +
+							system.attributes.rea.pool +
 							")" +
 							modRig;
 						break;
 					case "riggedVR":
 						//item.data.vehicle.attrib="int";
-						current.ar.pool = actorData.skills.piloting.points + vehicleData.sen + +rigRating;
+						current.ar.pool = system.skills.piloting.points + vehicleData.sen + +rigRating;
 						current.ar.modString =
 							(game as Game).i18n.localize("skill.piloting") +
 							"(" +
-							actorData.skills.piloting.points +
+							system.skills.piloting.points +
 							") +" +
 							(game as Game).i18n.localize("shadowrun6.item.vehicle.sensor.long") +
 							" (" +
 							vehicleData.sen +
 							")" +
 							modRig;
-						current.dr.pool = actorData.skills.piloting.points + vehicleData.arm + +rigRating;
+						current.dr.pool = system.skills.piloting.points + vehicleData.arm + +rigRating;
 						current.dr.modString =
 							(game as Game).i18n.localize("skill.piloting") +
 							"(" +
-							actorData.skills.piloting.points +
+							system.skills.piloting.points +
 							") +" +
 							(game as Game).i18n.localize("shadowrun6.item.vehicle.armor.long") +
 							" (" +
@@ -880,11 +901,11 @@ export class Shadowrun6Actor extends Actor {
 						current.handling.modString =
 							(game as Game).i18n.localize("skill.piloting") +
 							"(" +
-							actorData.skills.piloting.points +
+							system.skills.piloting.points +
 							") +" +
 							(game as Game).i18n.localize("attrib.int_short") +
 							"(" +
-							actorData.attributes.int.pool +
+							system.attributes.int.pool +
 							")" +
 							modRig;
 						break;
@@ -899,45 +920,43 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_prepareDerivedVehicleAttributes() {
-		const actorData = this.data;
-		const data: VehicleActor = this.data.data as VehicleActor;
+		const system: VehicleActor = getSystemData(this) as VehicleActor;
 
 		// Monitors
-		if (data.physical) {
-			if (!data.physical.mod) data.physical.mod = 0;
+		if (system.physical) {
+			if (!system.physical.mod) system.physical.mod = 0;
 
-			let base: number = 8 + Math.round(data.bod / 2);
-			data.physical.max = +base + data.physical.mod;
-			data.physical.value = data.physical.max - data.physical.dmg;
+			let base: number = 8 + Math.round(system.bod / 2);
+			system.physical.max = +base + system.physical.mod;
+			system.physical.value = system.physical.max - system.physical.dmg;
 		}
 		// Use "stun" as matrix condition
-		if (data.stun) {
-			if (!data.stun.mod) data.stun.mod = 0;
+		if (system.stun) {
+			if (!system.stun.mod) system.stun.mod = 0;
 			// 8 + (Device Rating / 2) where Dev.Rat. is Sensor
-			let base: number = 8 + Math.round(data.sen / 2);
-			data.stun.max = +base + data.stun.mod;
-			data.stun.value = data.stun.max - data.stun.dmg;
+			let base: number = 8 + Math.round(system.sen / 2);
+			system.stun.max = +base + system.stun.mod;
+			system.stun.value = system.stun.max - system.stun.dmg;
 		}
 
 		// Test modifier depending on speed
-		let interval = data.vehicle.offRoad ? data.spdiOff : data.spdiOn;
+		let interval = system.vehicle.offRoad ? system.spdiOff : system.spdiOn;
 		if (interval <= 1) interval = 1;
-		let modifier = Math.floor(data.vehicle.speed / interval);
+		let modifier = Math.floor(system.vehicle.speed / interval);
 		// Modify with physical monitor
-		modifier += Math.floor(data.physical.dmg / 3);
-		data.vehicle.modifier = modifier;
-		data.vehicle.kmh = data.vehicle.speed * 1.2;
+		modifier += Math.floor(system.physical.dmg / 3);
+		system.vehicle.modifier = modifier;
+		system.vehicle.kmh = system.vehicle.speed * 1.2;
 	}
 
 	//---------------------------------------------------------
 	_prepareVehicleActorSkills() {
-		const actorData = this.data;
-		const data: VehicleActor = this.data.data as VehicleActor;
-		if (!data.skills) data.skills = new VehicleSkills();
-		if (!data.skills.piloting) data.skills.piloting = new VehicleSkill();
-		if (!data.skills.evasion) data.skills.evasion = new VehicleSkill();
+		const system: VehicleActor = getSystemData(this) as VehicleActor;
+		if (!system.skills) system.skills = new VehicleSkills();
+		if (!system.skills.piloting) system.skills.piloting = new VehicleSkill();
+		if (!system.skills.evasion) system.skills.evasion = new VehicleSkill();
 
-		let controllerActorId: string = data.vehicle.belongs;
+		let controllerActorId: string = system.vehicle.belongs;
 		if (!controllerActorId) {
 			console.log("No actor is controlling this vehicle");
 			return;
@@ -950,21 +969,21 @@ export class Shadowrun6Actor extends Actor {
 
 		let person: Lifeform = actor.data.data as Lifeform;
 
-		console.log("_prepareVehicleActorSkills", data.vehicle.opMode);
-		switch (data.vehicle.opMode) {
+		console.log("_prepareVehicleActorSkills", system.vehicle.opMode);
+		switch (system.vehicle.opMode) {
 			case VehicleOpMode.MANUAL:
 				console.log("  Get MANUAL skills from ", person);
-				data.skills.piloting.points = person.skills.piloting.pool;
-				data.skills.piloting.pool = data.skills.piloting.points + data.skills.piloting.modifier;
-				data.skills.evasion.points = person.skills.piloting.pool;
-				data.skills.evasion.pool = data.skills.evasion.points + data.skills.evasion.modifier;
+				system.skills.piloting.points = person.skills.piloting.pool;
+				system.skills.piloting.pool = system.skills.piloting.points + system.skills.piloting.modifier;
+				system.skills.evasion.points = person.skills.piloting.pool;
+				system.skills.evasion.pool = system.skills.evasion.points + system.skills.evasion.modifier;
 				break;
 			case VehicleOpMode.RIGGED_AR:
 				console.log("  Get RIGGED_AR skills from ", person);
-				data.skills.piloting.points = person.skills.piloting.pool;
-				data.skills.piloting.pool = data.skills.piloting.points + data.skills.piloting.modifier;
-				data.skills.evasion.points = person.skills.piloting.pool;
-				data.skills.evasion.pool = data.skills.evasion.points + data.skills.evasion.modifier;
+				system.skills.piloting.points = person.skills.piloting.pool;
+				system.skills.piloting.pool = system.skills.piloting.points + system.skills.piloting.modifier;
+				system.skills.evasion.points = person.skills.piloting.pool;
+				system.skills.evasion.pool = system.skills.evasion.points + system.skills.evasion.modifier;
 				break;
 		}
 	}
@@ -974,64 +993,66 @@ export class Shadowrun6Actor extends Actor {
 	 *
 	 */
 	_preparePersona() {
-		const actorData: Player = this.data.data as Player;
+		const actorData : Shadowrun6Actor = getActorData(this);
+		const system: any = getSystemData(this);
 
-		if (!actorData.persona) actorData.persona = new Persona();
-		if (!actorData.persona.used) actorData.persona.used = new MatrixDevice();
-		if (!actorData.persona.device) actorData.persona.device = new DevicePersona();
-		if (!actorData.persona.device.base) actorData.persona.device.base = new MatrixDevice();
-		if (!actorData.persona.device.mod) actorData.persona.device.mod = new MatrixDevice();
-		if (!actorData.persona.living) actorData.persona.living = new LivingPersona();
-		if (!actorData.persona.living.mod) actorData.persona.living.mod = new MatrixDevice();
-		if (!actorData.persona.monitor) actorData.persona.monitor = new Monitor();
-		if (!actorData.persona.initiative) actorData.persona.initiative = new Initiative();
+		if (!system.persona) system.persona = new Persona();
+		if (!system.persona.used) system.persona.used = new MatrixDevice();
+		if (!system.persona.device) system.persona.device = new DevicePersona();
+		if (!system.persona.device.base) system.persona.device.base = new MatrixDevice();
+		if (!system.persona.device.mod) system.persona.device.mod = new MatrixDevice();
+		if (!system.persona.living) system.persona.living = new LivingPersona();
+		if (!system.persona.living.mod) system.persona.living.mod = new MatrixDevice();
+		if (!system.persona.monitor) system.persona.monitor = new Monitor();
+		if (!system.persona.initiative) system.persona.initiative = new Initiative();
 
-		this.data.items.forEach((tmpItem) => {
-			if (tmpItem.type == "gear" && isMatrixDevice(tmpItem.data.data)) {
-				let item: MatrixDevice = tmpItem.data.data;
+		actorData.items.forEach((tmpItem) => {
+			const systemItem : any = getSystemData(tmpItem);
+			if (tmpItem.type == "gear" && isMatrixDevice(systemItem)) {
+				let item: MatrixDevice = getSystemData(tmpItem);
 				if (item.subtype == "COMMLINK" || item.subtype == "CYBERJACK") {
 					if (item.usedForPool) {
-						actorData.persona.device.base.d = item.d;
-						actorData.persona.device.base.f = item.f;
-						if (!actorData.persona.monitor.max) {
-							actorData.persona.monitor.max = (item.subtype == "COMMLINK" ? item.devRating : item.devRating) / 2 + 8;
+						system.persona.device.base.d = item.d;
+						system.persona.device.base.f = item.f;
+						if (!system.persona.monitor.max) {
+							system.persona.monitor.max = (item.subtype == "COMMLINK" ? item.devRating : item.devRating) / 2 + 8;
 						}
 					}
 				}
 				if (item.subtype == "CYBERDECK") {
 					if (item.usedForPool) {
-						actorData.persona.device.base.a = item.a;
-						actorData.persona.device.base.s = item.s;
-						actorData.persona.monitor.max = item.devRating / 2 + 8;
+						system.persona.device.base.a = item.a;
+						system.persona.device.base.s = item.s;
+						system.persona.monitor.max = item.devRating / 2 + 8;
 					}
 				}
 			}
 		});
-		console.log("preparePersona: device=", actorData.persona.device);
+		console.log("preparePersona: device=", system.persona.device);
 
-		actorData.persona.used.a = actorData.persona.device.mod.a;
-		actorData.persona.used.s = actorData.persona.device.mod.s;
-		actorData.persona.used.d = actorData.persona.device.mod.d;
-		actorData.persona.used.f = actorData.persona.device.mod.f;
+		system.persona.used.a = system.persona.device.mod.a;
+		system.persona.used.s = system.persona.device.mod.s;
+		system.persona.used.d = system.persona.device.mod.d;
+		system.persona.used.f = system.persona.device.mod.f;
 
 		// Living persona
-		if (actorData.mortype == "technomancer") {
-			if (!actorData.persona.living) actorData.persona.living = new LivingPersona();
-			if (!actorData.persona.living.base) actorData.persona.living.base = new MatrixDevice();
-			if (!actorData.persona.living.mod) actorData.persona.living.mod = new MatrixDevice();
-			actorData.persona.living.base.a = actorData.attributes["cha"].pool;
-			actorData.persona.living.base.s = actorData.attributes["int"].pool;
-			actorData.persona.living.base.d = actorData.attributes["log"].pool;
-			actorData.persona.living.base.f = actorData.attributes["wil"].pool;
-			actorData.persona.living.base.devRating = actorData.attributes["res"].pool;
+		if (system.mortype == "technomancer") {
+			if (!system.persona.living) system.persona.living = new LivingPersona();
+			if (!system.persona.living.base) system.persona.living.base = new MatrixDevice();
+			if (!system.persona.living.mod) system.persona.living.mod = new MatrixDevice();
+			system.persona.living.base.a = system.attributes["cha"].pool;
+			system.persona.living.base.s = system.attributes["int"].pool;
+			system.persona.living.base.d = system.attributes["log"].pool;
+			system.persona.living.base.f = system.attributes["wil"].pool;
+			system.persona.living.base.devRating = system.attributes["res"].pool;
 			// Initiative: Data processing + Intuition
-			actorData.persona.initiative = new Initiative();
-			actorData.persona.initiative.base = actorData.persona.living.base.d + actorData.attributes["int"].pool;
+			system.persona.initiative = new Initiative();
+			system.persona.initiative.base = system.persona.living.base.d + system.attributes["int"].pool;
 
-			actorData.persona.used.a = actorData.persona.living.base.a + actorData.persona.living.mod.a;
-			actorData.persona.used.s = actorData.persona.living.base.s + actorData.persona.living.mod.s;
-			actorData.persona.used.d = actorData.persona.living.base.d + actorData.persona.living.mod.d;
-			actorData.persona.used.f = actorData.persona.living.base.f + actorData.persona.living.mod.f;
+			system.persona.used.a = system.persona.living.base.a + system.persona.living.mod.a;
+			system.persona.used.s = system.persona.living.base.s + system.persona.living.mod.s;
+			system.persona.used.d = system.persona.living.base.d + system.persona.living.mod.d;
+			system.persona.used.f = system.persona.living.base.f + system.persona.living.mod.f;
 		}
 
 		/*
@@ -1053,18 +1074,20 @@ export class Shadowrun6Actor extends Actor {
 	 * Calculate the attributes like Initiative
 	 */
 	_calculateEssence() {
-		const actorData = this.data;
-		if (!isLifeform(this.data.data)) return;
-		const data: Lifeform = this.data.data;
+		const data2: SR6Actor = getSystemData(this);
+		const actorData : any = getActorData(this);
+		if (!isLifeform(data2)) return;
+		const system: Lifeform = data2;
 
 		let essence = 6.0;
 		actorData.items.forEach((tmpItem) => {
-			let item = tmpItem.data;
-			if (item.type == "gear" && item.data && (item.data as any).essence) {
-				essence -= (item.data as any).essence;
+			let item : ItemData = getItemData(tmpItem);
+			let itemSystem : any = getSystemData(tmpItem);
+			if (item.type == "gear" && itemSystem && itemSystem.essence) {
+				essence -= itemSystem.essence;
 			}
 		});
-		data.essence = Number(essence.toFixed(2));
+		system.essence = Number(essence.toFixed(2));
 	}
 
 	//---------------------------------------------------------
@@ -1115,8 +1138,9 @@ export class Shadowrun6Actor extends Actor {
 	 * @return Roll name
 	 */
 	_getSkillPool(skillId, spec, attrib: string | undefined = undefined) {
+		const system : SR6Actor = getSystemData(this);
 		if (!skillId) throw "Skill ID may not be undefined";
-		const skl = (this.data.data as Lifeform).skills[skillId];
+		const skl = (system as Lifeform).skills[skillId];
 		if (!skillId) {
 			throw "Unknown skill '" + skillId + "'";
 		}
@@ -1144,7 +1168,7 @@ export class Shadowrun6Actor extends Actor {
 
 		// Add attribute
 		value = parseInt(value);
-		value += parseInt((this.data.data as Lifeform).attributes[attrib].pool);
+		value += parseInt((system as Lifeform).attributes[attrib].pool);
 
 		return value;
 	}

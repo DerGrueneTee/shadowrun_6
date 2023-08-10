@@ -1,5 +1,5 @@
 {
-  "name": "shadowrun6-eden",
+  "id": "shadowrun6-eden",
   "title": "Shadowrun 6",
   "description": "RPGFramework Eden implementation for Shadowrun 6",
   "author": "Stefan u. Anja Prelle",
@@ -19,8 +19,13 @@
   "url": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/",
   "flags": {},
   "version": "0.0.1",
-  "minimumCoreVersion": "0.8.0",
-  "compatibleCoreVersion": "9.999",
+  "minimumCoreVersion":"0.8.0",
+  "compatibleCoreVersion": "11",
+  "compatibility": {
+	  "minimum": 9,
+	  "verified": "10",
+	  "maximum": 11
+  },
   "scripts": [],
   "esmodules": [
     "module/Shadowrun6.js"
@@ -117,7 +122,7 @@
   ],
   "packs": [],
   "system": [],
-  "dependencies": [],
+  "relationships": [],
   "socket": false,
   "manifest": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/raw/master/system.json",
   "download": "https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/get/master.zip",
