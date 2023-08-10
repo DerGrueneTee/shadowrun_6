@@ -39,6 +39,7 @@ export class SR6Config {
 		"WEAPON_SPECIAL",
 		"AMMUNITION",
 		"CHEMICALS",
+		"SOFTWARE",
 		"SURVIVAL",
 		"BIOLOGY",
 		"VEHICLES",
@@ -86,6 +87,7 @@ export class SR6Config {
 		],
 		["NANOWARE", []],
 		["GENETICS", []],
+		["SOFTWARE", ["AUTOSOFT"]],
 		["WEAPON_CLOSE_COMBAT", ["BLADES", "CLUBS", "WHIPS", "UNARMED", "OTHER_CLOSE"]],
 		["WEAPON_RANGED", ["BOWS", "CROSSBOWS", "THROWING"]],
 		[

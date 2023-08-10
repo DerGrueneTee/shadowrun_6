@@ -10,24 +10,24 @@
                                         <td><span style="vertical-align: middle;">{{localize
                                                         'shadowrun6.ritualfeatures.anchored'}}</span><input
                                                         style="vertical-align: middle;" type="checkbox" {{checked
-                                                        item.data.data.feature.anchored}}
+                                                        item.system.feature.anchored}}
                                                         name="data.feature.anchored" />
                                         </td>
                                         <td><span style="vertical-align: middle;">{{localize
                                                         'shadowrun6.ritualfeatures.material_link'}}</span><input
                                                         style="vertical-align: middle;" type="checkbox" {{checked
-                                                        item.data.data.feature.material_link}}
+                                                        item.system.feature.material_link}}
                                                         name="data.feature.material_link" />
                                         </td>
                                         <td><span style="vertical-align: middle;">{{localize
                                                         'shadowrun6.ritualfeatures.minion'}}</span><input
                                                         style="vertical-align: middle;" type="checkbox" {{checked
-                                                        item.data.data.feature.minion}} name="data.feature.minion" />
+                                                        item.system.feature.minion}} name="data.feature.minion" />
                                         </td>
                                         <td><span style="vertical-align: middle;">{{localize
                                                         'shadowrun6.ritualfeatures.spotter'}}</span><input
                                                         style="vertical-align: middle;" type="checkbox" {{checked
-                                                        item.data.data.feature.spotter}} name="data.feature.spotter" />
+                                                        item.system.feature.spotter}} name="data.feature.spotter" />
                                         </td>
                                 </tr>
                                 <tr>
@@ -35,13 +35,13 @@
                                                 <span style="vertical-align: middle;">{{localize
                                                         'shadowrun6.label.threshold'}}</span>
                                                 <input style="vertical-align: middle;" type="number"
-                                                        name="data.threshold" value="{{item.data.data.threshold}}" />
+                                                        name="data.threshold" value="{{item.system.threshold}}" />
                                         </td>
                                 </tr>
                         </table>
                         <h3>{{localize 'shadowrun6.item.description'}}</h3>
                         <textarea class="box" type="text" name="data.description" cols="20"
-                                rows="6">{{item.data.data.description}}</textarea>
+                                rows="6">{{item.system.description}}</textarea>
                 </div>
         </section>
 </form>

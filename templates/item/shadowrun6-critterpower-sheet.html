@@ -13,29 +13,29 @@
                 <tr>
                     <td>
                         <select name="data.type">
-                            {{selectOptions config.spell_type selected=item.data.data.type localize=true}}
+                            {{selectOptions config.spell_type selected=item.system.type localize=true}}
                         </select>
                     </td>
                     <td>
                         <select name="data.action">
-                            {{selectOptions config.adeptpower_activation selected=item.data.data.action
+                            {{selectOptions config.adeptpower_activation selected=item.system.action
                             localize=true}}
                         </select>
                     </td>
                     <td>
                         <select name="data.range">
-                            {{selectOptions config.spell_range selected=item.data.data.range localize=true}}
+                            {{selectOptions config.spell_range selected=item.system.range localize=true}}
                         </select>
                     </td>
                     <td>
                     <select name="data.duration">
-                        {{selectOptions config.spell_duration selected=item.data.data.duration localize=true}}
+                        {{selectOptions config.spell_duration selected=item.system.duration localize=true}}
                     </select>
                 </td>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
             <textarea class="box" type="text" name="data.description" cols="20"
-                rows="8">{{item.data.data.description}}</textarea>
+                rows="8">{{item.system.description}}</textarea>
         </div>
     </section>
 </form>

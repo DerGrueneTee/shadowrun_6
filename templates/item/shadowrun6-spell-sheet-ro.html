@@ -1,13 +1,13 @@
-{{log "shadowrun6-spell-sheet-ro.html" data.data}}
+{{log "shadowrun6-spell-sheet-ro.html" system}}
 <form class="flexcol {{cssClass}}" autocomplete="off" style="padding-right: 100px">
     {{!-- Sheet Body --}}
-  	{{#if data.data.genesisID}}
-	<h2>{{localize (concat (concat "spell." data.data.genesisID) ".name")}}</h2>
-	<h4  style="font-style: italic">{{localize (concat (concat "spell." data.data.genesisID) ".src")}}</h4>
+  	{{#if system.genesisID}}
+	<h2>{{localize (concat (concat "spell." system.genesisID) ".name")}}</h2>
+	<h4  style="font-style: italic">{{localize (concat (concat "spell." system.genesisID) ".src")}}</h4>
 	{{else}}
 	<h2>{{item.name}}</h2>
    {{/if}}
-   
+
    <table class="vehicle-stats-table" style="width: 20em">
 	<thead>
 	<tr>
@@ -19,15 +19,15 @@
 	</thead>
 	<tbody>
 	<tr style="text-align:center">
-	  <td>{{localize (lookup config.spell_range data.data.data.range )}}</td>
-	  <td>{{localize (lookup config.spell_type data.data.data.type )}}</td>
-	  <td>{{localize (lookup config.spell_duration data.data.data.duration )}}</td>
-	  <td>{{data.data.data.drain}}</td>
+	  <td>{{localize (lookup config.spell_range system.data.range )}}</td>
+	  <td>{{localize (lookup config.spell_type system.data.type )}}</td>
+	  <td>{{localize (lookup config.spell_duration system.data.duration )}}</td>
+	  <td>{{system.data.drain}}</td>
 	</tr>
 	</tbody>
-   </table> 
-   
-  	{{#if data.data.genesisID}}
+   </table>
+
+  	{{#if system.genesisID}}
 	<div class="data-desc" id="data-desc"/>
 	{{else}}
 	<div class="data-desc" id="data-desc">{{data.description}}</div>

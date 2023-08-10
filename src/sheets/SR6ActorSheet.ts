@@ -20,6 +20,14 @@ function isWeapon(obj: any): obj is Weapon {
 function isSpell(obj: any): obj is Spell {
 	return obj.drain != undefined;
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+function getActorData(obj: any): Shadowrun6Actor {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
 
 /**
  * Extend the basic ActorSheet with some very simple modifications
@@ -29,29 +37,30 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	/** @overrride */
 	getData() {
 		let data = super.getData();
-		//console.log("getData1() " , data);
 		(data as SR6ActorSheetData).config = CONFIG.SR6;
-		//console.log("getData2() " , data);
-		//console.log("CONFIG.SR6 " , CONFIG.SR6);
+		if ( (game as any).release.generation >= 10) {
+			(data as any).system = (data as any).data.system;
+		} else {
+			(data as any).system = (data as any).data.data.data;
+		}
+		console.log("getData1() " , data);
 		return data;
 	}
 
 	get template() {
-		console.log("in template()", this.actor.data.data);
+		console.log("in template()", getSystemData(this.actor));
 		console.log("default: ", super.template);
 		const path = "systems/shadowrun6-eden/templates/actor/";
-		//console.log(`${path}shadowrun6-${this.actor.data.type}-sheet.html`);
 		if (this.isEditable) {
 			console.log("ReadWrite sheet ");
-			//return `${path}shadowrun6-${this.actor.data.type}-sheet.html`;
 			return super.template;
 		} else {
 			console.log("ReadOnly sheet", this);
-			let genItem: GenesisData = this.actor.data.data as GenesisData;
-			(this.actor as any).descHtml = (game as Game).i18n.localize(this.actor.data.type + "." + genItem.genesisID + ".desc");
-			(this.actor.data as any).descHtml2 = (game as Game).i18n.localize(this.actor.data.type + "." + genItem.genesisID + ".desc");
-		console.log(`${path}shadowrun6-${this.actor.data.type}-sheet-ro.html`);
-			return `${path}shadowrun6-${this.actor.data.type}-sheet-ro.html`;
+			let genItem: GenesisData = getSystemData(this.actor) as GenesisData;
+			(this.actor as any).descHtml = (game as Game).i18n.localize(getActorData(this.actor).type + "." + genItem.genesisID + ".desc");
+			(getActorData(this.actor) as any).descHtml2 = (game as Game).i18n.localize(getActorData(this.actor).type + "." + genItem.genesisID + ".desc");
+		console.log(`${path}shadowrun6-${getActorData(this.actor).type}-sheet-ro.html`);
+			return `${path}shadowrun6-${getActorData(this.actor).type}-sheet-ro.html`;
 		}
 	}
 
@@ -62,8 +71,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	activateListeners(html) {
 		// Owner Only Listeners
 		if (this.actor.isOwner) {
-			html.find(".health-phys").on("input", this._redrawBar(html, "Phy", (this.actor.data.data as Lifeform).physical));
-			html.find(".health-stun").on("input", this._redrawBar(html, "Stun", (this.actor.data.data as Lifeform).stun));
+			html.find(".health-phys").on("input", this._redrawBar(html, "Phy", (getSystemData(this.actor) as Lifeform).physical));
+			html.find(".health-stun").on("input", this._redrawBar(html, "Stun", (getSystemData(this.actor) as Lifeform).stun));
 
 			// Roll Skill Checks
 			html.find(".skill-roll").click(this._onRollSkillCheck.bind(this));
@@ -128,7 +137,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				//				console.log("Collapsible: temp style are '"+element.classList);
 				let value = element.classList.contains("open") ? "open" : "closed";
 				//				console.log("Update flag 'collapse-state' with "+value);
-				//				item.data.flags["shadowrun6-eden"]["collapse-state"] = value;
+
 				item.setFlag("shadowrun6-eden", "collapse-state", value);
 				//				console.log("Collapsible: new styles are '"+element.classList+"' and flag is "+item.getFlag("shadowrun6-eden","collapse-state"));
 			});
@@ -136,7 +145,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			html.find(".collapsible-skill").click((event) => {
 				const element = event.currentTarget;
 				const skillId = this._getClosestData($(event.currentTarget), "skill-id");
-				const item = (this.actor.data.data as Lifeform).skills[skillId];
+				const item = (getSystemData(this.actor) as Lifeform).skills[skillId];
 				element.classList.toggle("open");
 				let content = $(element.parentElement).find(".collapsible-content")[0];
 				if (content.style.maxHeight) {
@@ -167,7 +176,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 					const itemId = event.currentTarget.dataset.itemId;
 					if (itemId) {
 						console.log("Item " + itemId + " dragged");
-						const itemData = this.actor.data.items.find((el) => el.id === itemId);
+						const itemData = getActorData(this.actor).items.find((el) => el.id === itemId);
 						event.originalEvent!.dataTransfer!.setData(
 							"text/plain",
 							JSON.stringify({
@@ -367,12 +376,12 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 	//-----------------------------------------------------
 	_setDamage(html, i, monitorAttribute, id, event) {
-		if (!isLifeform(this.actor.data.data)) return;
+		if (!isLifeform(getSystemData(this.actor))) return;
 		switch (event.target.parentNode.getAttribute("id")) {
 			case "barPhyBoxes":
 				console.log("setDamage (physical health to " + event.currentTarget.dataset.value + ")");
 				//Allow setting zero health by clicking again
-				if ((this.actor.data.data.physical.dmg == monitorAttribute.max - 1) == i) {
+				if ((getSystemData(this.actor).physical.dmg == monitorAttribute.max - 1) == i) {
 					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max });
 				} else {
 					this.actor.update({ [`data.physical.dmg`]: monitorAttribute.max - i });
@@ -381,7 +390,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			case "barStunBoxes":
 				console.log("setDamage (stun health to " + event.currentTarget.dataset.value + ")");
 				//Allow setting zero health by clicking again
-				if ((this.actor.data.data.stun.dmg == monitorAttribute.max - 1) == i) {
+				if ((getSystemData(this.actor).stun.dmg == monitorAttribute.max - 1) == i) {
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max });
 				} else {
 					this.actor.update({ [`data.stun.dmg`]: monitorAttribute.max - i });
@@ -470,7 +479,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		let percVerz = (totalVer / vMax) * 100;
 		console.log("Percent = " + percVerz);
 		html.find("#barPhyCur")[0].style.width = percVerz + "%";
-		//	    this.object.data.data.le.cur = totalCur;
+
 
 		let myNode = html.find("#barPhyBoxes")[0];
 		// Only change nodes when necessary
@@ -571,7 +580,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		if (!(event.currentTarget as any).dataset) return;
 		let dataset: any = (event.currentTarget as any).dataset;
 		const skillId: string = dataset.skill;
-		let roll: SkillRoll = new SkillRoll(this.actor.data.data as Lifeform, skillId);
+		let roll: SkillRoll = new SkillRoll(getSystemData(this.actor) as Lifeform, skillId);
 		roll.skillSpec = dataset.skillspec;
 		if (dataset.threshold) roll.threshold = dataset.threshold;
 		roll.attrib = dataset.attrib;
@@ -584,20 +593,20 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	_onRollItemCheck(event, html) {
 		console.log("_onRollItemCheck");
 		event.preventDefault();
-		const attacker: Lifeform = this.actor.data.data as Lifeform;
+		const attacker: Lifeform = getSystemData(this.actor) as Lifeform;
 		const itemId = event.currentTarget.dataset.itemId;
 
 		let item: Item | undefined = this.actor.items.get(itemId);
 		if (!item) {
 			throw new Error("onRollItemCheck for non-existing item");
 		}
-		if (!isGear(item.data.data)) {
+		if (!isGear(getSystemData(item))) {
 			throw new Error("onRollItemCheck: No skill for item");
 		}
-		if (isWeapon(item.data.data)) {
+		if (isWeapon(getSystemData(item))) {
 			console.log("is weapon", item);
 		}
-		const gear: Gear = item.data.data;
+		const gear: Gear = getSystemData(item);
 
 		let roll: WeaponRoll = new WeaponRoll(attacker, item, itemId, gear);
 		roll.useWildDie = gear.wild ? 1 : 0;
@@ -611,7 +620,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		event.preventDefault();
 		if (!event.currentTarget) return;
 		if (!(event.currentTarget as any).dataset) return;
-		const caster: Lifeform = this.actor.data.data as Lifeform;
+		const caster: Lifeform = getSystemData(this.actor) as Lifeform;
 		const itemId: string = (event.currentTarget as any).dataset.itemId;
 
 		let item: Item | undefined = this.actor.items.get(itemId);
@@ -624,7 +633,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			console.log("No such item: " + itemId);
 			return;
 		}
-		const spell: Spell = spellRaw.data.data as Spell;
+		const spell: Spell = getSystemData(spellRaw) as Spell;
 		let roll: SpellRoll = new SpellRoll(caster, item, itemId, spell);
 		roll.skillSpec = "spellcasting";
 		(this.actor as Shadowrun6Actor).rollSpell(roll, false);
@@ -643,7 +652,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		console.log("onMatrixAction ", event.currentTarget.dataset);
 		if (!event.currentTarget) return;
 		if (!(event.currentTarget as any).dataset) return;
-		const attacker: Lifeform = this.actor.data.data as Lifeform;
+		const attacker: Lifeform = getSystemData(this.actor) as Lifeform;
 
 		const matrixId = event.currentTarget.dataset.matrixId;
 		const matrixAction = CONFIG.SR6.MATRIX_ACTIONS[matrixId];
@@ -658,7 +667,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		event.preventDefault();
 		if (!event.currentTarget) return;
 		if (!(event.currentTarget as any).dataset) return;
-		const caster: Lifeform = this.actor.data.data as Lifeform;
+		const caster: Lifeform = getSystemData(this.actor) as Lifeform;
 		const itemId: string = (event.currentTarget as any).dataset.itemId;
 
 		let item: Item | undefined = this.actor.items.get(itemId);
@@ -670,7 +679,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			console.log("No such item: " + itemId);
 			return;
 		}
-		const cform: ComplexForm = formRaw.data.data as ComplexForm;
+		const cform: ComplexForm = getSystemData(formRaw) as ComplexForm;
 		let roll: ComplexFormRoll = new ComplexFormRoll(caster, item, itemId, cform);
 		roll.skillSpec = "complex_forms";
 		(this.actor as Shadowrun6Actor).rollComplexForm(roll);

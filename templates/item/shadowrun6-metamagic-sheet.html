@@ -11,17 +11,17 @@
                     <th colspan="2">{{localize 'shadowrun6.label.mages'}}</th>
                 </tr>
                 <tr style="text-align:center">
-                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.level}}
+                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.system.level}}
                         name="data.level" /></td>
-                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.adepts}}
+                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.system.adepts}}
                             name="data.adepts" /></td>
-                    <td colspan="2"><input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.mages}}
+                    <td colspan="2"><input style="vertical-align: middle;" type="checkbox" {{checked item.system.mages}}
                             name="data.mages" /></td>
                 </tr>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
             <textarea class="box" type="text" name="data.description" cols="20"
-                rows="8">{{item.data.data.description}}</textarea>
+                rows="8">{{item.system.description}}</textarea>
         </div>
     </section>
 </form>

@@ -39,6 +39,14 @@ function isItemRoll(obj: any): obj is WeaponRoll {
 function isSkillRoll(obj: any): obj is SkillRoll {
 	return obj.skillId != undefined;
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+function getActorData(obj: any): Shadowrun6Actor {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
 
 export interface SR6RollDialogOptions extends DialogOptions {
 	actor: Shadowrun6Actor;
@@ -68,7 +76,7 @@ export class RollDialog extends Dialog {
 		this.prepared = rOptions.prepared;
 		this.dialogResult = rOptions.dialogResult;
 
-		this.edge = this.actor ? (this.actor.data.data as Lifeform).edge.value : 0;
+		this.edge = this.actor ? (getSystemData(this.actor) as Lifeform).edge.value : 0;
 	}
 
 	/********************************************
@@ -190,7 +198,7 @@ export class RollDialog extends Dialog {
 			}
 
 			// Set new edge value
-			let actor: Lifeform = configured.actor.data.data as Lifeform;
+			let actor: Lifeform = getSystemData( configured.actor ) as Lifeform;
 
 			let capped: boolean = false;
 			// Limit the maximum edge
@@ -379,7 +387,7 @@ export class RollDialog extends Dialog {
 		switch (boostOrActionId) {
 			case "add_edge_pool":
 				data.explode = true;
-				this.modifier = (data.actor.data.data as Lifeform).edge.max;
+				this.modifier = (getSystemData(data.actor) as Lifeform).edge.max;
 				break;
 		}
 
@@ -396,9 +404,10 @@ export class RollDialog extends Dialog {
 		let incElement: HTMLSelectElement = document.getElementById("incArea") as HTMLSelectElement;
 
 		let prepared: SpellRoll = (this.options as any).prepared;
-		if (!isLifeform(prepared.actor.data.data)) return;
+		if (!isLifeform(getSystemData(prepared.actor))) return;
+		let lifeform : Lifeform = getSystemData(prepared.actor);
 
-		const baseMagic = prepared.actor.data.data.attributes.mag.pool;
+		const baseMagic = lifeform.attributes.mag.pool;
 
 		let ampUpSelect: number = ampUpElement ? parseInt(ampUpElement.value) : 0;
 		let incSelect: number = incElement ? parseInt(incElement.value) : 0;

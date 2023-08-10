@@ -11,15 +11,15 @@
                     <th>{{localize 'shadowrun6.contact.loyalty'}}</th>
                 </tr>
                 <tr>
-                    <td style="width:8em"> <input  class="box" type="text" value="{{item.data.data.type}}" name="data.type"  /></td>
-                    <td class="box centered"> <input  class="box" type="number" value="{{item.data.data.rating}}" name="data.rating" style="width:2em" /></td>
-                    <td class="box centered"> <input  class="box" type="number" value="{{item.data.data.loyalty}}" name="data.loyalty"
+                    <td style="width:8em"> <input  class="box" type="text" value="{{item.system.type}}" name="data.type"  /></td>
+                    <td class="box centered"> <input  class="box" type="number" value="{{item.system.rating}}" name="data.rating" style="width:2em" /></td>
+                    <td class="box centered"> <input  class="box" type="number" value="{{item.system.loyalty}}" name="data.loyalty"
                             style="width:2em" /></td>
                 </tr>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
             <textarea class="box" type="text" name="data.description" cols="50"
-                rows="8">{{item.data.data.description}}</textarea>
+                rows="8">{{item.system.description}}</textarea>
         </div>
     </section>
 </form>

@@ -13,16 +13,16 @@
                 </tr>
                     <td>
                         <select name="data.type">
-                        {{selectOptions config.LIFESTYLE_TYPE selected=item.data.data.type localize=true}}
+                        {{selectOptions config.LIFESTYLE_TYPE selected=item.system.type localize=true}}
                     </select>
-                    <td class="centered"> <input class="box" type="number" value="{{item.data.data.cost}}" name="data.cost" /></td>
-                    <td class="centered"> <input class="box" type="number" value="{{item.data.data.paid}}" name="data.paid" /></td>
-                    <td> <input class="box" type="text" value="{{item.data.data.sin}}" name="data.sin" /></td>
+                    <td class="centered"> <input class="box" type="number" value="{{item.system.cost}}" name="data.cost" /></td>
+                    <td class="centered"> <input class="box" type="number" value="{{item.system.paid}}" name="data.paid" /></td>
+                    <td> <input class="box" type="text" value="{{item.system.sin}}" name="data.sin" /></td>
                 </tr>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
             <textarea class="box" type="text" name="data.description" cols="50"
-                rows="8">{{item.data.data.description}}</textarea>
+                rows="8">{{item.system.description}}</textarea>
         </div>
     </section>
 </form>

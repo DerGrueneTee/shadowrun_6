@@ -4,6 +4,14 @@ import { GenesisData } from "../ItemTypes.js";
 interface SR6ItemSheetData extends ItemSheet.Data {
 	config: SR6Config;
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+function getActorData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
 
 export class SR6ItemSheet extends ItemSheet {
 	/** @override */
@@ -15,18 +23,18 @@ export class SR6ItemSheet extends ItemSheet {
 	}
 
 	get template() {
-		console.log("in template()", this.item.data.data);
+		console.log("in template()", getSystemData(this.item));
 		const path = "systems/shadowrun6-eden/templates/item/";
-		console.log(`${path}shadowrun6-${this.item.data.type}-sheet.html`);
+		console.log(`${path}shadowrun6-${getActorData(this.item).type}-sheet.html`);
 		if (this.isEditable) {
 			console.log("ReadWrite sheet ");
-			return `${path}shadowrun6-${this.item.data.type}-sheet.html`;
+			return `${path}shadowrun6-${getActorData(this.item).type}-sheet.html`;
 		} else {
 			console.log("ReadOnly sheet", this);
-			let genItem: GenesisData = this.item.data.data as GenesisData;
-			(this.item as any).descHtml = (game as Game).i18n.localize(this.item.data.type + "." + genItem.genesisID + ".desc");
-			(this.item.data as any).descHtml2 = (game as Game).i18n.localize(this.item.data.type + "." + genItem.genesisID + ".desc");
-			return `${path}shadowrun6-${this.item.data.type}-sheet-ro.html`;
+			let genItem: GenesisData = getSystemData(this.item) as GenesisData;
+			(this.item as any).descHtml = (game as Game).i18n.localize(getActorData(this.item).type + "." + genItem.genesisID + ".desc");
+			(getActorData(this.item) as any).descHtml2 = (game as Game).i18n.localize(getActorData(this.item).type + "." + genItem.genesisID + ".desc");
+			return `${path}shadowrun6-${getActorData(this.item).type}-sheet-ro.html`;
 		}
 	}
 
@@ -51,16 +59,16 @@ export class SR6ItemSheet extends ItemSheet {
 
 		if (!this.isEditable) {
 			let x = html.find(".data-desc");
-			console.log("Replace descriptions for " + this.object.type + " and ", this.object.data.data);
+			console.log("Replace descriptions for " + this.object.type + " and ", getSystemData(this.object));
 			switch (this.object.type) {
 				case "quality":
-					x[0].innerHTML = (game as Game).i18n.localize("quality." + (this.object.data.data as GenesisData).genesisID + ".desc");
+					x[0].innerHTML = (game as Game).i18n.localize("quality." + (getSystemData(this.object) as GenesisData).genesisID + ".desc");
 					break;
 				case "gear":
-					x[0].innerHTML = (game as Game).i18n.localize("item." + (this.object.data.data as GenesisData).genesisID + ".desc");
+					x[0].innerHTML = (game as Game).i18n.localize("item." + (getSystemData(this.object) as GenesisData).genesisID + ".desc");
 					break;
 				default:
-					x[0].innerHTML = (game as Game).i18n.localize(this.object.type + "." + (this.object.data.data as GenesisData).genesisID + ".desc");
+					x[0].innerHTML = (game as Game).i18n.localize(this.object.type + "." + (getSystemData(this.object) as GenesisData).genesisID + ".desc");
 			}
 		}
 
@@ -74,7 +82,7 @@ export class SR6ItemSheet extends ItemSheet {
 				} else {
 					value = element.value;
 				}
-				const itemId: string = this.object.data._id!;
+				const itemId: string = getActorData(this.object)._id!;
 				const field = element.dataset.field;
 				console.log("Try to update field '" + field + "' of item " + itemId + " with value " + value, this.item);
 				if (this.item) {
@@ -112,14 +120,14 @@ export class SR6ItemSheet extends ItemSheet {
 				newValue = duplicate(
 					array.split(".").reduce(function (prev, curr) {
 						return prev ? prev[curr] : null;
-					}, this.object.data)
+					}, getActorData(this.object))
 				);
 				newValue[idx][field] = element.value;
 			} else {
 				newValue = duplicate(
 					array.split(".").reduce(function (prev, curr) {
 						return prev ? prev[curr] : null;
-					}, this.object.data)
+					}, getActorData(this.object))
 				);
 				newValue[idx] = element.value;
 			}

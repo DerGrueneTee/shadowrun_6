@@ -13,22 +13,22 @@
                 <tr>
                     <td>
                         <select name="data.activation">
-                            {{selectOptions config.adeptpower_activation selected=item.data.data.activation
+                            {{selectOptions config.adeptpower_activation selected=item.system.activation
                             localize=true}}
                         </select>
                     </td>
                     <td>
-                        <input name="data.cost" value="{{item.data.data.cost}}" type="number" class="box centered" />
+                        <input name="data.cost" value="{{item.system.cost}}" type="number" class="box centered" />
                     </td>
                     <td>
-                        <input style="vertical-align: middle;" type="checkbox" {{checked item.data.data.hasLevel}}
+                        <input style="vertical-align: middle;" type="checkbox" {{checked item.system.hasLevel}}
                             name="data.hasLevel" />
                     </td>
                 </tr>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
             <textarea class="box" type="text" name="data.description" cols="20"
-                rows="6">{{data.data.description}}</textarea>
+                rows="6">{{system.description}}</textarea>
         </div>
     </section>
 </form>

@@ -1,6 +1,6 @@
 <label for="spirit_type">Type</label>
 <select name="spirit_type" name="data.spiritType" data-field="data.spiritType" style="background: rgba(255,255,255,0.25); border: 0px">
-{{#select data.data.spiritType}}
+{{#select system.spiritType}}
 	<option value="custom" name=data.spiritType>Custom</option>
 	{{#each config.SPIRIT_TYPES as |type id|}}
 	<option value="{{@type}}" name=data.spiritType>{{localize (concat "shadowrun6.spirittype." type)}}</option>
@@ -8,8 +8,8 @@
 {{/select}}
 </select>
 <label for="spirit_force">{{localize "shadowrun6.label.force"}}</label>
-<select id="spirit_force" name="data.rating" name="data.data.rating" data-field="data.rating" style="border: 0px">
-{{#select data.data.rating}}
+<select id="spirit_force" name="data.rating" name="system.rating" data-field="data.rating" style="border: 0px">
+{{#select system.rating}}
 	<option value="1" name="data.rating">1</option>
 	<option value="2" name="data.rating">2</option>
 	<option value="3" name="data.rating">3</option>

@@ -4,8 +4,8 @@
 			<tr>
 				<td>Control Rig</td>
 				<td>
-					<select name="data.data.controlRig" data-field="data.controlRig">
-                     {{selectOptions config.CONTROL_RIG_RATING selected=data.data.controlRig localize=true}}           			
+					<select name="system.controlRig" data-field="data.controlRig">
+                     {{selectOptions config.CONTROL_RIG_RATING selected=system.controlRig localize=true}}
          		</select>
 				</td>
 			</tr>
@@ -22,15 +22,15 @@
 			</tr>
 		</thead>
 		<tbody>
- 		{{#each actor.items as |item id|}} 
+ 		{{#each actor.items as |item id|}}
 		{{#if (eq item.type 'gear')}}
-		{{#if (eq item.data.data.type "ELECTRONICS") }}
-		{{#if (eq item.data.data.subtype "RIGGER_CONSOLE") }}
-      <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}"></button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td><label class="middle-column" >{{item.data.data.devRating}}</label></td>
-         <td class="centered">{{item.data.data.d}}</td>
-         <td class="centered">{{item.data.data.f}}</td>
+		{{#if (eq item.system.type "ELECTRONICS") }}
+		{{#if (eq item.system.subtype "RIGGER_CONSOLE") }}
+      <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.system.description}}">
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}"></button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><label class="middle-column" >{{item.system.devRating}}</label></td>
+         <td class="centered">{{item.system.d}}</td>
+         <td class="centered">{{item.system.f}}</td>
 			<td class="centered">
 				<a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
 					class="fas fa-edit"></i></a> <a class="item-control item-delete"

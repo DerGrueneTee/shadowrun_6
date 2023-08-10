@@ -15,18 +15,18 @@
 		  <th colspan="2">{{ localize 'shadowrun6.label.column.action' }}</th>
 		</tr>
 	  </thead>
-		{{#each actor.items as |item id|}} 
+		{{#each actor.items as |item id|}}
 		{{#iff item.type '==' 'contact'}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-			<td style="width: 8em"> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
-			<td class="centered" style="width: 3em"> <input type="text" value="{{item.data.data.type}}" data-field="data.type" class="secondary" /></td>
-			<td class="centered" style="width: 1em"> <input type="text" value="{{item.data.data.rating}}" data-field="data.rating" class="secondary" /></td>
-			<td class="centered" style="width: 1em"> <input type="text" value="{{item.data.data.loyalty}}" data-field="data.loyalty" class="secondary" /></td>
+			<td style="width: 8em"> <input type="text" value="{{item.name}}" data-field="name" title="{{item.system.description}}"/></td>
+			<td class="centered" style="width: 3em"> <input type="text" value="{{item.system.type}}" data-field="system.type" class="secondary" /></td>
+			<td class="centered" style="width: 1em"> <input type="text" value="{{item.system.rating}}" data-field="system.rating" class="secondary" /></td>
+			<td class="centered" style="width: 1em"> <input type="text" value="{{item.system.loyalty}}" data-field="system.loyalty" class="secondary" /></td>
 			<td class="centered" style="width: 2em"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
 					class="fas fa-edit"></i></a> <a class="item-control item-delete"
 				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
 	   </tr>
-		{{/iff}} 
+		{{/iff}}
 		{{/each}}
 </table>
 </div>

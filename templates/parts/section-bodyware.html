@@ -14,34 +14,34 @@
 	        <th>{{ localize 'shadowrun6.label.column.action' }}</th>
 	      </tr>
 	    </thead>
-		{{#each actor.items as |item id|}} 
+		{{#each actor.items as |item id|}}
 		{{#iff item.type '==' 'gear'}}
-		{{#iff item.data.data.type '==' "BIOWARE"}}
+		{{#iff item.system.type '==' "BIOWARE"}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{description item.data.data 'item'}}"/></td>
-			<td class="centered" style="width: 3em"> <input class="centered" type="text" value="{{item.data.data.essence}}" data-field="data.essence" data-type="Number"/></td>
+			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{description item.system 'item'}}"/></td>
+			<td class="centered" style="width: 3em"> <input class="centered" type="text" value="{{item.system.essence}}" data-field="data.essence" data-type="Number"/></td>
 			<td class="centered"> - </td>
 			<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
 					class="fas fa-edit"></i></a> <a class="item-control item-delete"
 				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
 	   </tr>
-		{{/iff}} 
-		{{#iff item.data.data.type '==' "CYBERWARE"}}
+		{{/iff}}
+		{{#iff item.system.type '==' "CYBERWARE"}}
 		<tr class="item list-item" data-item-id="{{item.id}}">
-			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{description item.data.data 'item'}}"/></td>
-			<td  class="centered"style="width: 3em"> <input type="text" value="{{item.data.data.essence}}" data-field="data.essence" data-type="Number"/></td>
-			<td class="centered" style="width: 2em"> <input class="centered" type="text" value="{{item.data.data.capacity}}" data-field="data.capacity" data-type="Number"/></td>
+			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{description item.system 'item'}}"/></td>
+			<td  class="centered"style="width: 3em"> <input type="text" value="{{item.system.essence}}" data-field="data.essence" data-type="Number"/></td>
+			<td class="centered" style="width: 2em"> <input class="centered" type="text" value="{{item.system.capacity}}" data-field="data.capacity" data-type="Number"/></td>
 			<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
 					class="fas fa-edit"></i></a> <a class="item-control item-delete"
 				title='{{localize 'shadowrun6.label.delete' }}'><i class="fas fa-trash"></i></a></td>
 	   </tr>
-		{{/iff}} 
-		{{/iff}} 
+		{{/iff}}
+		{{/iff}}
 		{{/each}}
 	    <tfoot>
 	      <tr>
 	        <th style="text-align: right; font-weight:normal">{{ localize 'shadowrun6.section.bodyware.footer.total_essence' }}:</th>
-	        <th style="width: 3em">{{actor.data.data.essence}}</th>
+	        <th style="width: 3em">{{actor.system.essence}}</th>
 	        <th></th>
 	        <th></th>
 	      </tr>

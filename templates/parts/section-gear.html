@@ -13,28 +13,28 @@
 	        <th>{{ localize 'shadowrun6.label.column.action' }}</th>
 	      </tr>
 	    </thead>
-		{{#each actor.items as |item id|}} 
+		{{#each actor.items as |item id|}}
 		{{#iff item.type '==' 'gear'}}
-		{{#if (eq item.data.data.type ../geartype) }}
+		{{#if (eq item.system.type ../geartype) }}
 		<tr class="item list-item" data-item-id="{{item.id}}">
        	<td style="margin-right: 1rem; width: 0.7em;">
-		   {{#if item.data.data.accessories }}
-       	<button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button>
+		   {{#if item.system.accessories }}
+       	<button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button>
        	{{else}}
-       	<button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}} empty" data-item-id="{{this.id}}">+</button>
+       	<button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}} empty" data-item-id="{{this.id}}">+</button>
        	{{/if}}
        	</td>
-			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.data.data.description}}"/></td>
+			<td> <input type="text" value="{{item.name}}" data-field="name" title="{{item.system.description}}"/></td>
 			<td style="width: 2em" class="centered">
-			{{#if item.data.data.needsRating}}
-			<input type="text" value="{{item.data.data.rating}}" data-field="data.rating" title="{{item.data.data.rating}}"/>
+			{{#if item.system.needsRating}}
+			<input type="text" value="{{item.system.rating}}" data-field="data.rating" title="{{item.system.rating}}"/>
 			{{else}}
 			-
 			{{/if}}
 			</td>
 			<td style="width: 2em" class="centered">
-			{{#if item.data.data.countable}}
-			<input type="text" value="{{item.data.data.count}}" data-field="data.count" title="{{item.data.data.count}}"/>
+			{{#if item.system.countable}}
+			<input type="text" value="{{item.system.count}}" data-field="data.count" title="{{item.system.count}}"/>
 			{{else}}
 			-
 			{{/if}}
@@ -45,14 +45,14 @@
 	   </tr>
        <tr>
          <td colspan="5">
-         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
+         	<div class="collapsible-content {{item.flags.shadowrun6-eden.collapse-state}}">
+        	   {{ localize 'shadowrun6.label.accessories' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="accessories" type="text" data-dtype="Text" style="width: 25em">{{item.system.accessories}}</textarea>
          	</div>
          </td>
        </tr>
-		{{/if}} 
-		
-		{{/iff}} 
+		{{/if}}
+
+		{{/iff}}
 		{{/each}}
 </table>
 </div>

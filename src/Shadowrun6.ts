@@ -7,14 +7,11 @@ import { registerSystemSettings } from "./settings.js";
 import Shadowrun6Combat from "./Shadowrun6Combat.js";
 import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 import { Defense, MonitorType, SR6Config } from "./config.js";
-import { Shadowrun6ActorSheet } from "./sheets/SR6ActorSheet.js";
 import { Shadowrun6ActorSheetPC } from "./sheets/ActorSheetPC.js";
 import { Shadowrun6ActorSheetNPC } from "./sheets/ActorSheetNPC.js";
 import { Shadowrun6ActorSheetVehicle } from "./sheets/ActorSheetVehicle.js";
-import { Shadowrun6ActorSheetCritter } from "./sheets/ActorSheetCritter.js";
 //import { Shadowrun6ActorSheetVehicleCompendium } from "./sheets/ActorSheetVehicleCompendium.js";
 import { SR6ItemSheet } from "./sheets/SR6ItemSheet.js";
-import { CompendiumActorSheetNPC } from "./sheets/CompendiumActorSheetNPC.js";
 import { preloadHandlebarsTemplates } from "./templates.js";
 import { defineHandlebarHelper } from "./util/helper.js";
 import { PreparedRoll, RollType, SoakType } from "./dice/RollTypes.js";
@@ -25,9 +22,17 @@ import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
 import Shadowrun6CombatTracker from "./Shadowrun6CombatTracker.js";
 import { GenesisData } from "./ItemTypes.js";
 import Importer from "./util/Importer.js";
-import { BaseUser } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents.mjs";
 
 const diceIconSelector: string = "#chat-controls .chat-control-icon .fa-dice-d20";
+
+function getData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
+function getRoll(obj: ChatMessage): Roll|null {
+	if ( (game as any).release.generation >= 10) return (obj as any).rolls[0];
+	return obj.roll;
+}
 
 /**
  * Init hook. Called from Foundry when initializing the world
@@ -37,8 +42,6 @@ Hooks.once("init", async function () {
 
 	CONFIG.debug.hooks = false;
 	CONFIG.debug.dice = true;
-	// Record Configuration Values
-	// Record Configuration Values
 	CONFIG.SR6 = new SR6Config();
 
 	CONFIG.ChatMessage.documentClass = SR6RollChatMessage;
@@ -48,7 +51,7 @@ Hooks.once("init", async function () {
 	CONFIG.Actor.documentClass = Shadowrun6Actor;
 	CONFIG.Dice.rolls = [SR6Roll];
 //	(CONFIG as any).compatibility.mode = 0;
-	(game as Game).system.data.initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
+	getData(game).initiative = "@initiative.physical.pool + (@initiative.physical.dicePool)d6";
 
 	registerSystemSettings();
 
@@ -83,25 +86,25 @@ Hooks.once("init", async function () {
 	defineHandlebarHelper();
 	document.addEventListener('paste', (e) => Importer.pasteEventhandler(e), false);
 
-/* https://discord.com/channels/732325252788387980/915388333125955645/1001455991151394836
-Hooks.once('init', () => {
+	// https://discord.com/channels/732325252788387980/915388333125955645/1001455991151394836
+	Hooks.once('initREMOVEME', () => {
     if ( (game as any).release.generation >= 10) return;
 
     Object.defineProperties((game as Game).system, {
-        version: { get: function () { return this.data.version; } },
+        version   : { get: function () { return this.data.version; } },
         initiative: { get: function () { return this.data.initiative; } }
     });
 
     Object.defineProperties(TokenDocument.prototype, {
-        hidden: { get: function () { return this.data.hidden; } },
+        hidden   : { get: function () { return this.data.hidden; } },
         actorData: { get: function () { return this.data.actorData; } },
         actorLink: { get: function () { return this.data.actorLink; } }
     });
 
     Object.defineProperties(Actor.prototype, {
-        system: { get: function () { return this.data.data; } },
+        system        : { get: function () { return this.data.data; } },
         prototypeToken: { get: function () { return this.data.token; } },
-        ownership: { get: function () { return this.data.permission; } },
+        ownership     : { get: function () { return this.data.permission; } },
     });
 
     Object.defineProperties(Item.prototype, {
@@ -110,7 +113,7 @@ Hooks.once('init', () => {
 
     globalThis.isEmpty = isObjectEmpty;
 });
-	*/
+
 
 	Hooks.once("diceSoNiceReady", (dice3d) => {
 		dice3d.addSystem({ id: "SR6", name: "Shadowrun 6 - Eden" }, "default");
@@ -503,15 +506,14 @@ function registerChatMessageEdgeListener(event: Event, chatMsg: ChatMessage, htm
 
 	// chatMsg.roll is a SR6Roll
 	let btnPerform = html.find(".edgePerform");
-	let roll: SR6Roll = chatMsg.roll as SR6Roll;
+	let roll: SR6Roll = getRoll(chatMsg) as SR6Roll;
 	if (btnPerform && roll) {
 		btnPerform.click((event) => EdgeUtil.peformPostEdgeBoost(chatMsg, html, data, btnPerform, boostSelect, edgeActions));
 	}
 }
 
 function _onRenderVehicleSheet(application, html, data) {
-	let actorData = data.actor.data.data;
-	console.log("_onRenderVehicleSheet for " + actorData);
+	console.log("_onRenderVehicleSheet for " + data.actor);
 }
 
 function _onRenderItemSheet(sheet: SR6ItemSheet, html: JQuery, item) {

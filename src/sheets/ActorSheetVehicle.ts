@@ -3,6 +3,15 @@ import { SkillRoll, VehicleRoll } from "../dice/RollTypes.js";
 import { Shadowrun6Actor } from "../Shadowrun6Actor.js";
 import { Shadowrun6ActorSheet } from "./SR6ActorSheet.js";
 
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+function getActorData(obj: any): Shadowrun6Actor {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
+
 /**
  * Sheet for Vehicle actors
  * @extends {ActorSheet}
@@ -36,7 +45,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	_onDecelerate(event, html) {
 		console.log("_onDecelerate");
-		let actorData: VehicleActor = this.actor.data.data as VehicleActor;
+		let actorData: VehicleActor = getSystemData(this.actor) as VehicleActor;
 		let currentSpeed = actorData.vehicle.speed;
 		let newSpeed = currentSpeed - (actorData.vehicle.offRoad ? actorData.accOff : actorData.accOn);
 		if (newSpeed < 0) newSpeed = 0;
@@ -46,7 +55,7 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	_onAccelerate(event, html) {
 		console.log("_onAccelerate");
-		let actorData: VehicleActor = this.actor.data.data as VehicleActor;
+		let actorData: VehicleActor = getSystemData(this.actor) as VehicleActor;
 		let currentSpeed = actorData.vehicle.speed;
 		let newSpeed = currentSpeed + (actorData.vehicle.offRoad ? actorData.accOff : actorData.accOn);
 		if (newSpeed > actorData.tspd) newSpeed = actorData.tspd;
@@ -66,11 +75,9 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 		if (!event.currentTarget) return;
 		if (!(event.currentTarget as any).dataset) return;
 		let dataset: any = (event.currentTarget as any).dataset;
-		console.log("dataset", dataset);
-		console.log("actorData", this.actor.data.data);
 		const skillId: string = dataset.skill;
 
-		let actorData: VehicleActor = this.actor.data.data as VehicleActor;
+		let actorData: VehicleActor = getSystemData(this.actor) as VehicleActor;
 		let vSkill: VehicleSkill = actorData.skills[skillId];
 
 		console.log("Roll skill " + skillId + " with pool " + vSkill.pool + " and a threshold " + actorData.vehicle.modifier);

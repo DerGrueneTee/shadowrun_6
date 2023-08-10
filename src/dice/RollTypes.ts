@@ -299,6 +299,10 @@ export class ComplexFormRoll extends SkillRoll {
 function isWeapon(obj: any): obj is Weapon {
 	return obj.attackRating != undefined;
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
 
 export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	rollType = RollType.Weapon;
@@ -325,7 +329,7 @@ export class WeaponRoll extends SkillRoll implements OpposedRoll {
 	faArea: string | undefined;
 
 	constructor(actor: Lifeform, item: Item, itemId: string, gear: Gear) {
-		super(actor, (item.data.data as any).skill);
+		super(actor, getSystemData(item).skill);
 		this.item = item;
 		this.itemId = itemId;
 		this.gear = gear;
