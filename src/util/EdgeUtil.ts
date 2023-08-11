@@ -1,6 +1,11 @@
 import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import SR6Roll from "../SR6Roll.js";
 
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+
 export default class EdgeUtil {
 	//-------------------------------------------------------------
 	static updateEdgeBoosts(elem: HTMLSelectElement, available: number, when = "POST") {
@@ -123,7 +128,6 @@ export default class EdgeUtil {
 		switch (boostOrActionId) {
 			case "add_edge_pool":
 				data.explode = true;
-				//data.modifier = this.data.data.actor.data.data.edge.max;
 				break;
 		}
 
@@ -137,11 +141,12 @@ export default class EdgeUtil {
 	//-------------------------------------------------------------
 	async _payEdge(cost, user, actor) {
 		console.log("ENTER: _payEdge(" + cost + "," + user + "," + actor + ")");
-		actor.data.data.edge.value -= cost;
-		if (actor.data.data.edge.value < 0) {
-			actor.data.data.edge.value = 0;
+		let system : any = getSystemData(actor);
+		system.edge.value -= cost;
+		if (system.edge.value < 0) {
+			system.edge.value = 0;
 		}
-		actor.update({ [`data.edge.value`]: actor.data.data.edge.value });
+		actor.updateSource({ [`edge.value`]: system.edge.value });
 
 		/*		let er = new Roll(cost+"dc", {}, {
 			blind: true,
@@ -300,11 +305,11 @@ export default class EdgeUtil {
 			boostOrActionId = chatMsg.data.edgeAction;
 		}
 		console.log("to perform: "+boostOrActionId);
-		
+
 		// Remove "Spending Edge"
 		html.find(".spend_edge").empty();
-		
-		
+
+
 		switch (boostOrActionId) {
 		case "reroll_one":
 			console.debug("Reroll one die");
@@ -324,7 +329,7 @@ export default class EdgeUtil {
 			break;
 		default:
 			console.log("ToDo: Support edge action "+boostOrActionId);
-		}	
+		}
 	*/
 
 		/*
@@ -342,7 +347,7 @@ export default class EdgeUtil {
 			console.log(" toMessage  r    = ",r);
 			console.log(" Reroll = ",r.results);
 			r.toMessage(rollData);
-			
+
 	    	let chatOptions = mergeObject( {
 				from: "peformPostEdgeBoost.chatOptionsMerged",
 				user: game.user.id,

@@ -3,7 +3,7 @@
             {{#select system.vehicle.belongs}}
             <option value="">-</option>
             {{#each this.options.allVehicleUser as |owner id|}}
-            <option value="{{owner.id}}" data-item-owner="{{owner.id}}">{{owner.data.name}}</option>
+            <option value="{{owner.id}}" data-item-owner="{{owner.id}}">{{owner.name}}</option>
             {{/each}}
             {{/select}}
 </select><br/>

@@ -8,7 +8,7 @@
 		{{#if (eq item.type 'gear')}}
 		{{#if (eq item.system.type "WEAPON_FIREARMS") }}
        <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.system.description}}">
-       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column important-column">{{item.system.dmgDef}}</label></td>
          <td><label class="middle-column" >{{attackrating item.system.attackRating}}</label></td>
          <td class="skill-pool" style="width: 3em">
@@ -23,7 +23,7 @@
        </tr>
        <tr>
          <td colspan="6">
-         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
+         	<div class="collapsible-content {{item.flags.shadowrun6-eden.collapse-state}}">
         	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.system.accessories}}</textarea>
          	{{ localize 'shadowrun6.label.firemode_current' }}
          	<select name="firemodeUsed" data-field="firemodeUsed" >

@@ -176,7 +176,6 @@ export class RollDialog extends Dialog {
 					}
 
 					let finalAR: number = ar;
-					//this.data.data.attackRating = ar;
 					let result = ar - dr;
 					if (result >= 4) {
 						configured.edgePlayer++;

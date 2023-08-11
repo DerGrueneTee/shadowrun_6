@@ -19,6 +19,10 @@ function isWeapon(obj: any): obj is Weapon {
 function isSpell(obj: any): obj is Spell {
 	return obj.drain != undefined;
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
 
 export async function doRoll(data: PreparedRoll): Promise<SR6Roll> {
 	console.log("ENTER doRoll ", data);
@@ -49,10 +53,10 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 		let lifeform: Lifeform | undefined;
 		let dia2: RollDialog;
 		if (data.actor) {
-			if (!isLifeform(data.actor.data.data)) {
+			if (!isLifeform(getSystemData(data.actor))) {
 				console.log("Actor is not a lifeform");
 			}
-			lifeform = data.actor.data.data as Lifeform;
+			lifeform = getSystemData(data.actor) as Lifeform;
 			data.edge = data.actor ? lifeform.edge.value : 0;
 		}
 		if (!data.calcPool || data.calcPool == 0) {
@@ -162,7 +166,7 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 	/* Check if attacker gets edge */
 	if (configured.actor && configured.edgePlayer > 0) {
 		console.log("Actor " + configured.actor.data._id + " gets " + configured.edgePlayer + " Edge");
-		let newEdge = (configured.actor.data.data as Lifeform).edge.value + configured.edgePlayer;
+		let newEdge = (getSystemData(configured.actor) as Lifeform).edge.value + configured.edgePlayer;
 		configured.actor.update({ ["data.edge.value"]: newEdge });
 		let combat: StoredDocument<Shadowrun6Combat> | null = (game as Game).combat as StoredDocument<Shadowrun6Combat> | null;
 		if (combat) {
@@ -176,8 +180,8 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 
 	try {
 		if (!dialog.modifier) dialog.modifier = 0;
-
-		if (prepared.actor && isLifeform(prepared.actor.data.data)) {
+		let system : any = getSystemData(prepared.actor);
+		if (prepared.actor && isLifeform(system)) {
 			// Pay eventuallly selected edge boost
 			if (configured.edgeBoost && configured.edgeBoost != "none") {
 				console.log("Edge Boost selected: " + configured.edgeBoost);
@@ -186,10 +190,10 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 				} else {
 					let boost: EdgeBoost = CONFIG.SR6.EDGE_BOOSTS.find((boost) => boost.id == configured.edgeBoost)!;
 					console.log("Pay " + boost.cost + " egde for Edge Boost: " + (game as Game).i18n.localize("shadowrun6.edge_boost." + configured.edgeBoost));
-					prepared.actor.data.data.edge.value = prepared.edge - boost.cost;
+					system.edge.value = prepared.edge - boost.cost;
 					// Pay Edge cost
 					console.log("Update Edge to " + (prepared.edge - boost.cost));
-					prepared.actor.update({ ["data.edge.value"]: prepared.actor.data.data.edge.value });
+					prepared.actor.update({ ["data.edge.value"]: system.edge.value });
 				}
 			} else {
 				if (prepared.edge > 0) {

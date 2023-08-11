@@ -98,7 +98,7 @@
 						<h4 class="item-name">{{item.name}}</h4>
 						{{!-- Iterate through all attributes on the item and output buttons for any that are formula. --}}
 						<div class="item-buttons">
-							{{#each item.data.attributes as |itemAttr key|}}
+							{{#each item.system.attributes as |itemAttr key|}}
 							{{#if itemAttr.dtype}}
 							{{#if itemAttr.isFormula}}
 							{{!-- Use the items.name.key format for shorthand. --}}
@@ -134,10 +134,10 @@
 							{{/each}}
 						</div>
 						<div class="skill-points">
-							<span>{{localize (concat3 "attrib." (skillAttr item.data.id) "_short")}}</span>
+							<span>{{localize (concat3 "attrib." (skillAttr item.id) "_short")}}</span>
 						</div>
 						<div class="skill-points">
-							<input class="skill-value" type="number" name="item.data.points" value="{{item.data.points}}" />
+							<input class="skill-value" type="number" name="item.system.points" value="{{item.system.points}}" />
 						</div>
 						<div class="item-controls">
 							<a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

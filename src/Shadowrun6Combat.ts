@@ -1,8 +1,14 @@
+import { ActorData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs";
 import { Lifeform } from "./ActorTypes";
 import { Shadowrun6Actor } from "./Shadowrun6Actor";
 import Shadowrun6Combatant from "./Shadowrun6Combatant";
 
 import { SYSTEM_NAME } from "./constants.js";
+
+function getActorData(obj: any): ActorData {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
 
 export default class Shadowrun6Combat extends Combat {
 	/**
@@ -32,7 +38,8 @@ export default class Shadowrun6Combat extends Combat {
 			return max;
 		}
 
-		let comb: Shadowrun6Combatant = this.getCombatantByActor(actor.data._id!) as Shadowrun6Combatant;
+		let actorData : ActorData = getActorData(actor);
+		let comb: Shadowrun6Combatant = this.getCombatantByActor(actorData._id!) as Shadowrun6Combatant;
 		if (comb) {
 			max -= Math.max(0, comb.edgeGained);
 		}

@@ -33,6 +33,14 @@ function getRoll(obj: ChatMessage): Roll|null {
 	if ( (game as any).release.generation >= 10) return (obj as any).rolls[0];
 	return obj.roll;
 }
+function getSystemData(obj: any): any {
+	if ( (game as any).release.generation >= 10) return obj.system;
+	return obj.data.data;
+}
+function getActorData(obj: any): Shadowrun6Actor {
+	if ( (game as any).release.generation >= 10) return obj;
+	return obj.data;
+}
 
 /**
  * Init hook. Called from Foundry when initializing the world
@@ -203,7 +211,9 @@ Hooks.once("init", async function () {
 
 		// If it is a compendium item, copy over text description
 		if ((createData.data as GenesisData).genesisID) {
-			let key: string = item.data.type + "." + item.data.data.genesisID;
+			let actor  : any = getActorData(item);
+			let system : any = getSystemData(item);
+			let key: string = actor.type + "." + system.genesisID;
 			console.log("Item with genesisID - check for " + key);
 			if (!(game as Game).i18n.localize(key + "name").startsWith(key)) {
 				(createData.data as GenesisData).description = (game as Game).i18n.localize(key + ".desc");
@@ -356,7 +366,7 @@ Hooks.once("init", async function () {
 			const damage: number = dataset.damage ? parseInt(dataset.damage) : 0;
 			const monitor: number = parseInt(dataset.monitor!);
 			console.log("Target actor ", actor);
-			console.log("Target actor ", actor!.data.name);
+			console.log("Target actor ", actor!.name);
 
 			switch (rollType) {
 				case RollType.Defense:
@@ -445,7 +455,8 @@ Hooks.once("init", async function () {
 	});
 
 	Hooks.on("preUpdateCombat", (combat, createData, options, userId) => {
-		console.log("Combat with turn " + createData.turn + " in round " + combat.data.round);
+		let realCombat : any = getData(combat);
+		console.log("Combat with turn " + createData.turn + " in round " + realCombat.round);
 	});
 
 	Hooks.on("deleteCombat", (combat, createData, userId) => {

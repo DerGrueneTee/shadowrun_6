@@ -80,11 +80,6 @@
     "path": "lang/pt-BR-magicl10n.json"
   },
   {
-    "lang": "de",
-    "name": "Deutsch (German)",
-    "path": "lang/de-magicl10n.json"
-  },
-  {
     "lang": "ru",
     "name": "русский (Russian)",
     "path": "lang/ru-magicl10n.json"

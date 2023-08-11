@@ -45,22 +45,22 @@ export class Shadowrun6ActorSheetVehicle extends Shadowrun6ActorSheet {
 
 	_onDecelerate(event, html) {
 		console.log("_onDecelerate");
-		let actorData: VehicleActor = getSystemData(this.actor) as VehicleActor;
-		let currentSpeed = actorData.vehicle.speed;
-		let newSpeed = currentSpeed - (actorData.vehicle.offRoad ? actorData.accOff : actorData.accOn);
+		let system: VehicleActor = getSystemData(this.actor) as VehicleActor;
+		let currentSpeed = system.vehicle.speed;
+		let newSpeed = currentSpeed - (system.vehicle.offRoad ? system.accOff : system.accOn);
 		if (newSpeed < 0) newSpeed = 0;
 		const field = "data.vehicle.speed";
-		this.actor.update({ [field]: newSpeed });
+		(this.actor as any).updateSource({ [field]: newSpeed });
 	}
 
 	_onAccelerate(event, html) {
 		console.log("_onAccelerate");
-		let actorData: VehicleActor = getSystemData(this.actor) as VehicleActor;
-		let currentSpeed = actorData.vehicle.speed;
-		let newSpeed = currentSpeed + (actorData.vehicle.offRoad ? actorData.accOff : actorData.accOn);
-		if (newSpeed > actorData.tspd) newSpeed = actorData.tspd;
-		const field = "data.vehicle.speed";
-		this.actor.update({ [field]: newSpeed });
+		let system: VehicleActor = getSystemData(this.actor) as VehicleActor;
+		let currentSpeed = system.vehicle.speed;
+		let newSpeed = currentSpeed + (system.vehicle.offRoad ? system.accOff : system.accOn);
+		if (newSpeed > system.tspd) newSpeed = system.tspd;
+		const field = "vehicle.speed";
+		(this.actor as any).updateSource({ [field]: newSpeed });
 	}
 
 	//-----------------------------------------------------

@@ -1423,7 +1423,7 @@ export class Shadowrun6Actor extends Actor {
 	rollDefense(defendWith: Defense, threshold: number, damage: number) {
 		console.log("ToDo rollDefense(" + defendWith + ", " + threshold + "," + damage + ")");
 
-		const data: SR6Actor = this.data.data as SR6Actor;
+		const data: SR6Actor = getSystemData(this) as SR6Actor;
 		if (!isLifeform(data)) {
 			throw "Can only roll defenses for lifeforms";
 		}
