@@ -3,7 +3,6 @@
   "title": "Shadowrun 6",
   "description": "RPGFramework Eden implementation for Shadowrun 6",
   "version": "$VERSION",
-  "templateVersion": 1,
   "author": "Stefan (taranion#5388) & Anja Prelle",
   "authors": [
 	{
@@ -18,8 +17,6 @@
     "email": "anja@rpgframework.de"
    }
   ],
-  "minimumCoreVersion":"0.8.0",
-  "compatibleCoreVersion": "11",
   "compatibility": {
 	  "minimum": 10,
 	  "verified": "11",
