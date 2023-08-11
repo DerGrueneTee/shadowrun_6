@@ -1,10 +1,10 @@
-# Shadowrun 6 for Foundry VTT
+0# Shadowrun 6 for Foundry VTT
 
 This is the repository for the Foundry VTT system for the roleplaying system **Shadowrun 6**. It is a non-profit fan project and does not include contents from the publications.
 
 **Installation-URL (Release/Stable):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system.json) (**Requires Foundry 9.x**)
 
-**Installation-URL (Beta/Unstable ):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json)  (**Requires Foundry 9.x**)
+**Installation-URL (Beta/Unstable ):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json)  (**Requires Foundry 10.x**)
 
 **Installation-URL (Old Stable):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json)  (**Requires Foundry 0.8.x**)
 
