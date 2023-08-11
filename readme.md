@@ -1,4 +1,4 @@
-0# Shadowrun 6 for Foundry VTT
+# Shadowrun 6 for Foundry VTT
 
 This is the repository for the Foundry VTT system for the roleplaying system **Shadowrun 6**. It is a non-profit fan project and does not include contents from the publications.
 
@@ -37,12 +37,12 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.4.x) Magic: spells, adept powers, rituals, metamagic
  * (since 0.4.x) Attack and defense rating comparison, gaining edge, spending pre-roll edge
  * (since 0.5.x) Matrix devices, beginning support for edge based rerolls
- * (since 0.5.1) Added machine based translations for several languages 
+ * (since 0.5.1) Added machine based translations for several languages
  * (since 0.6.0) Begin support drones & vehicles, Biography tab
  * (since 0.6.2) Work on a Vehicle Actor has begun
  * (since 0.7.0) Work on a Critter Actor has begun, Added Critter Power Item, Attack rolls from NPC sheet
  * (since 0.7.1) Improvements on roll dialogs, overflow bar, support for defense rolls from chat message
- 
+
 ### Not working yet ###
  * Auto-calculating modifiers from condition monitors
  * better Critter support, better NPC support
