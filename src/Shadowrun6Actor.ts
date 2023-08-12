@@ -967,7 +967,7 @@ export class Shadowrun6Actor extends Actor {
 			throw new Error("Controlled by unknown actor " + controllerActorId);
 		}
 
-		let person: Lifeform = actor.data.data as Lifeform;
+		let person: Lifeform = getSystemData(actor) as Lifeform;
 
 		console.log("_prepareVehicleActorSkills", system.vehicle.opMode);
 		switch (system.vehicle.opMode) {
