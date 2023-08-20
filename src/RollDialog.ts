@@ -1,6 +1,4 @@
 import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { BaseCombat } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/documents.mjs";
-import { Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
 import { Lifeform } from "./ActorTypes";
 import { SYSTEM_NAME } from "./constants.js";
 import { ConfiguredRoll, WeaponRoll, PreparedRoll, SpellRoll, SR6ChatMessageData, SkillRoll } from "./dice/RollTypes.js";

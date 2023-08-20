@@ -92,8 +92,12 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 				this.actor.deleteEmbeddedDocuments("Item", [itemId]);
 			});
 			html.find("[data-field]").change((event) => {
+				console.log("data-field", event);
 				const element = event.currentTarget;
 				let value = element.value;
+				if (element.type=="number" || (element.dataset && element.dataset.dtype && element.dataset.dtype=="Number")) {
+					value = parseInt (element.value);
+				}
 				const itemId = this._getClosestData($(event.currentTarget), "item-id");
 				const field = element.dataset.field;
 				if (itemId) {

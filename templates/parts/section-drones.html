@@ -50,7 +50,7 @@
         	   	<tr>
         	   		<td>{{ localize 'shadowrun6.vehicle.mode_label' }}:</td>
         	   		<td>
-        	   			<select name="system.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
+        	   			<select data-field="system.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
                      {{selectOptions ../config.VEHICLE_MODE selected=system.vehicle.opMode localize=true}}
          				</select>
         	   		</td>

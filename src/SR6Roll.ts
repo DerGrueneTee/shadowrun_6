@@ -1,10 +1,6 @@
-import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
-import { ConfiguredDocumentClass } from "@league-of-foundry-developers/foundry-vtt-types/src/types/helperTypes";
-import { Data, Evaluated, MessageData, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
-import { SR6Actor } from "./ActorTypes.js";
+import { Data, Evaluated, Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/client/dice/roll.js";
 import { MonitorType } from "./config.js";
 import { ConfiguredRoll, SR6ChatMessageData, ReallyRoll, RollType, DefenseRoll, PreparedRoll } from "./dice/RollTypes.js";
-import { Shadowrun6Actor } from "./Shadowrun6Actor.js";
 
 /**
  *

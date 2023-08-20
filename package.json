@@ -8,7 +8,7 @@
   ],
   "author": "Stefan Prelle",
   "devDependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^9.268.0",
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
     "@typescript-eslint/parser": "^5.31.0",
     "prettier": "2.7.1",
     "prettier-eslint": "^15.0.1",

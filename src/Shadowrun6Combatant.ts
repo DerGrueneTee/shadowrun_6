@@ -1,4 +1,3 @@
-import { Data } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll.js";
 import { InitiativeType } from "./dice/RollTypes.js";
 
 export default class Shadowrun6Combatant extends Combatant {

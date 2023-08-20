@@ -9,29 +9,29 @@
 			<!-- Physical initiative -->
 			<tr>
 				<td ><b>{{ localize 'shadowrun6.initiative.physical' }}</b></td>
-				<td class="centered">{{initiative.physical.base}} + <input class="centered box calcIni" name="data.initiative.physical.mod" type="text" value="{{system.initiative.physical.mod}}" data-dtype="Number" id="dataIniPhyMod" style="width: 1.2em" ></td>
+				<td class="centered">{{initiative.physical.base}} + <input class="centered box calcIni" data-field="data.initiative.physical.mod" type="text" value="{{system.initiative.physical.mod}}" data-dtype="Number" id="dataIniPhyMod" style="width: 1.2em" ></td>
 				<td class="centered">
 				( {{system.initiative.physical.dice}} +
-				<input class="centered box calcIni" name="data.initiative.physical.diceMod" type="text" value="{{system.initiative.physical.diceMod}}" data-dtype="Number"
+				<input class="centered box calcIni" data-field="data.initiative.physical.diceMod" type="text" value="{{system.initiative.physical.diceMod}}" data-dtype="Number"
 				id="dataIniPhyDiceMod" style="width: 1.2em" >) {{initiative.physical.dicePool}}d6</td>
 			</tr>
 
 			<!-- Astral initiative -->
 			<tr>
 				<td ><b>{{ localize 'shadowrun6.initiative.astral' }}</b></td>
-				<td class="centered">{{initiative.astral.base}} + <input class="centered box calcIni" name="data.initiative.astral.mod" type="text" value="{{system.initiative.astral.mod}}" data-dtype="Number" id="dataIniAstMod" style="width: 1.2em" ></td>
+				<td class="centered">{{initiative.astral.base}} + <input class="centered box calcIni" data-field="data.initiative.astral.mod" type="text" value="{{system.initiative.astral.mod}}" data-dtype="Number" id="dataIniAstMod" style="width: 1.2em" ></td>
 				<td class="centered">
 				( {{system.initiative.astral.dice}} +
-				<input class="centered box calcIni" name="data.initiative.astral.diceMod" type="text" value="{{system.initiative.astral.diceMod}}" data-dtype="Number"
+				<input class="centered box calcIni" data-field="data.initiative.astral.diceMod" type="text" value="{{system.initiative.astral.diceMod}}" data-dtype="Number"
 				id="dataIniAstDiceMod" style="width: 1.2em" >) {{initiative.astral.dicePool}}d6</td>
 			</tr>
 			<!-- Matrix Initiative -->
 			<tr>
 				<td ><b>{{ localize 'shadowrun6.initiative.matrix' }}</b></td>
-				<td class="centered">{{initiative.matrix.base}} + <input class="centered box calcIni" name="data.initiative.matrix.mod" type="text" value="{{system.initiative.matrix.mod}}" data-dtype="Number" id="dataIniMatrixMod" style="width: 1.2em" ></td>
+				<td class="centered">{{initiative.matrix.base}} + <input class="centered box calcIni" data-field="data.initiative.matrix.mod" type="text" value="{{system.initiative.matrix.mod}}" data-dtype="Number" id="dataIniMatrixMod" style="width: 1.2em" ></td>
 				<td class="centered">
 				( {{system.initiative.matrix.dice}} +
-				<input class="centered box calcIni" name="data.initiative.matrix.diceMod" type="text" value="{{system.initiative.matrix.diceMod}}" data-dtype="Number"
+				<input class="centered box calcIni" data-field="data.initiative.matrix.diceMod" type="text" value="{{system.initiative.matrix.diceMod}}" data-dtype="Number"
 				id="dataIniMatrixDiceMod" style="width: 1.2em" >) {{initiative.matrix.dicePool}}d6</td>
 			</tr>
 		</table>

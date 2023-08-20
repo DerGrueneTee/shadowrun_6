@@ -4,7 +4,7 @@
 		  <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120" />
 		</div>
 		<div class="header-fields" style="flex:3">
-			<h1><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
+			<h1><input data-field="name" type="text" value="{{actor.name}}" placeholder="{{localize 'shadowrun6.name' }}" /></h1>
 			<div class="npc-settings" style="display:flex">
    {{#switch data.type}}
 		{{#case 'Critter'}} {{> "systems/shadowrun6-eden/templates/parts/npc_edit_critter.html"}} {{/case}}
@@ -137,7 +137,7 @@
 							<span>{{localize (concat3 "attrib." (skillAttr item.id) "_short")}}</span>
 						</div>
 						<div class="skill-points">
-							<input class="skill-value" type="number" name="item.system.points" value="{{item.system.points}}" />
+							<input class="skill-value" type="number" data-field="item.system.points" value="{{item.system.points}}" />
 						</div>
 						<div class="item-controls">
 							<a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>

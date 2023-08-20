@@ -24,7 +24,7 @@
            <span>{{localize (concat3 "attrib." (skillAttr id) "_short")}}</span>
          </div>
          <div class="skill-points centered" style="width: 2em; flex-grow:0.4">
-           <input class="skill-value" type="number" name="data.skills.{{id}}.points" value="{{skill.points}}"  style="width: 2em" />
+           <input class="skill-value" type="number" data-field="data.skills.{{id}}.points" value="{{skill.points}}"  style="width: 2em" />
          </div>
          <div class="skill-pool">
            <span>{{skill.pool}}</span>
@@ -40,7 +40,7 @@
          	    <tr>
          	    	<td style="width: 7.5em; font-size: smaller; vertical-align:middle">{{ localize 'shadowrun6.label.specialization' }}</td>
          	    	<td style="width: 8em">
-         	    		<select name="data.skills.{{id}}.specialization" >
+         	    		<select data-field="data.skills.{{id}}.specialization" >
                    {{selectOptions (lookup ../config.skill_special id) selected=skill.specialization blank=(localize "shadowrun6.label.none") localize=true}}
                		</select>
                	</td>
@@ -50,7 +50,7 @@
          	    <tr>
          	    	<td style="width: 7.5em; font-size: smaller; vertical-align:middle">{{ localize 'shadowrun6.label.expertise' }} </td>
          	    	<td>
-         	    		<select name="data.skills.{{id}}.expertise" >
+         	    		<select data-field="data.skills.{{id}}.expertise" >
                    {{selectOptions (lookup ../config.skill_special id) selected=skill.expertise blank=(localize "shadowrun6.label.none") localize=true}}
                		</select>
                	</td>

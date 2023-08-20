@@ -7,7 +7,7 @@
             {{/each}}
             {{/select}}
 </select><br/>
-<label>Mode of Operation</label> <select name="system.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
+<label>Mode of Operation</label> <select data-field="system.vehicle.opMode" data-field="data.vehicle.opMode" data-item-id="{{this.id}}">
 {{selectOptions config.VEHICLE_MODE selected=system.vehicle.opMode localize=true}}
 </select>
 
@@ -28,7 +28,7 @@
 		<td><img src="systems/shadowrun6-eden/images/speedometer.svg" style="border: 0px; height: auto; width: 64px" /></td>
 		<td> <button type="button" class="vehicle-slower">{{localize 'shadowrun6.label.slower'}}</button> </td>
 		<td><input class="centered box" type="text" style="width: 4em"  value="{{system.vehicle.speed}}" data-dtype="Number"
-				name="data.vehicle.speed" /></td>
+				data-field="data.vehicle.speed" /></td>
 		<td> <button type="button" class="vehicle-faster">{{localize 'shadowrun6.label.faster'}}</button> </td>
 	</tr>
 </table>

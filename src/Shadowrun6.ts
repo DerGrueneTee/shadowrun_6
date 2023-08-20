@@ -17,7 +17,7 @@ import { defineHandlebarHelper } from "./util/helper.js";
 import { PreparedRoll, RollType, SoakType } from "./dice/RollTypes.js";
 import { doRoll } from "./Rolls.js";
 import EdgeUtil from "./util/EdgeUtil.js";
-import { ActorData, ChatMessageData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import { ChatMessageData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
 import Shadowrun6Combatant from "./Shadowrun6Combatant.js";
 import Shadowrun6CombatTracker from "./Shadowrun6CombatTracker.js";
 import { GenesisData } from "./ItemTypes.js";
@@ -206,7 +206,7 @@ Hooks.once("init", async function () {
 		let actor  : Shadowrun6Actor = getActorData(item);
 		if (actor.img == "icons/svg/item-bag.svg" && CONFIG.SR6.icons[actor.type]) {
 			(actor as any).img = CONFIG.SR6.icons[actor.type].default;
-			item.update({ ["img"]: actor.img });
+			item.updateSource({ ["img"]: actor.img });
 		}
 
 		// If it is a compendium item, copy over text description
@@ -216,7 +216,7 @@ Hooks.once("init", async function () {
 			if (!(game as Game).i18n.localize(key + "name").startsWith(key)) {
 				system.description = (game as Game).i18n.localize(key + ".desc");
 				(actor as any).name = (game as Game).i18n.localize(key + ".name");
-				item.update({ ["description"]: system.description });
+				item.updateSource({ ["description"]: system.description });
 			}
 
 		console.log("onCreateItem: " + actor.img);
@@ -442,8 +442,8 @@ Hooks.once("init", async function () {
 	 */
 	Hooks.on("preCreateActor", (actor, createData, options, userId) => {
 		if (actor.type === "Player") {
-			actor.token.update({ actorLink: "true" });
-			actor.token.update({ vision: "true" });
+			actor.prototypeToken.updateSource({ actorLink: "true" });
+			actor.prototypeToken.updateSource({ vision: "true" });
 		}
 	});
 

@@ -1,9 +1,6 @@
-import { ChatSpeakerDataProperties } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/chatSpeakerData";
-import { Options } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/foundry.js/roll";
-import { Lifeform, Skill, SR6Actor } from "./ActorTypes";
-import { EdgeBoost, SkillDefinition } from "./DefinitionTypes";
-import { Shadowrun6Actor } from "./Shadowrun6Actor";
-import { RollDialog, SR6RollDialogOptions } from "./RollDialog.js";
+import { Lifeform } from "./ActorTypes";
+import { EdgeBoost } from "./DefinitionTypes";
+import { RollDialog } from "./RollDialog.js";
 import { Spell, Weapon } from "./ItemTypes";
 import SR6Roll from "./SR6Roll.js";
 import { ConfiguredRoll, WeaponRoll, PreparedRoll, ReallyRoll, RollType, SpellRoll } from "./dice/RollTypes.js";
@@ -20,6 +17,7 @@ function isSpell(obj: any): obj is Spell {
 	return obj.drain != undefined;
 }
 function getSystemData(obj: any): any {
+	if (!obj) return null;
 	if ( (game as any).release.generation >= 10) return obj.system;
 	return obj.data.data;
 }

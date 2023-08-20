@@ -96,6 +96,7 @@ export class Shadowrun6Actor extends Actor {
 	 * @Override
 	 */
 	prepareData() {
+		console.log("Shadowrun6Actor.prepareData() " + this);
 		super.prepareData();
 
 		const actorData : Shadowrun6Actor = getActorData(this);
@@ -1668,8 +1669,8 @@ export class Shadowrun6Actor extends Actor {
 		// Ensure actual damage is not higher than pool
 		newDmg = Math.min(Math.max(0, newDmg), damageObj.max);
 
-		this.data.update({ [`data.overflow.dmg`]: overflow });
-		this.data.update({ [`data.` + monitor + `.dmg`]: newDmg });
+		(this.data as any).updateSource({ [`data.overflow.dmg`]: overflow });
+		(this.data as any).updateSource({ [`data.` + monitor + `.dmg`]: newDmg });
 		console.log(
 			"Added " + damage + " to monitor " + monitor + " of " + this.data.name + " which results in overflow " + overflow + " on " + this.name
 		);

@@ -5,7 +5,7 @@
          <span class="shadowrun6-slider round"></span>
          </label>
    {{#if system.editmode}}
-   <select name="data.subtype" data-field="data.subtype" style="background: rgba(255,255,255,0.25); border: 0px">
+   <select data-field="data.subtype" style="background: rgba(255,255,255,0.25); border: 0px">
 				{{#select system.subtype}}
 					{{#each config.NPC_SUBTYPES as |type id|}}
 						<option value="{{@type}}" name=data.subtype>{{localize (concat "shadowrun6.npc.subtype." type)}}</option>

@@ -13,7 +13,7 @@
     {{#each attributes as |attribute id|}}
     {{#ifIn id ../config.PRIMARY_ATTRIBUTES}}
     		  <td class="attribute  {{id}}Changed" id="{{id}}">
-             <input class="centered" name="data.attributes.{{id}}.current" type="text" value="{{attribute.base}}" data-dtype="Number">
+             <input class="centered" data-field="data.attributes.{{id}}.current" type="text" value="{{attribute.base}}" data-dtype="Number">
     		  </td>
     {{/ifIn}}
     {{/each}}
@@ -33,7 +33,7 @@
     {{#each attributes as |attribute id|}}
     {{#ifIn id ../config.SECONDARY_ATTRIBUTES}}
     		  <td class="attribute" id="{{id}}">
-             <input class="centered" name="data.attributes.{{id}}.current" type="text" value="{{attribute.pool}}" data-dtype="Number">
+             <input class="centered" data-field="data.attributes.{{id}}.current" type="text" value="{{attribute.pool}}" data-dtype="Number">
     		  </td>
     {{/ifIn}}
     {{/each}}
