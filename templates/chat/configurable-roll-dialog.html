@@ -50,6 +50,12 @@
         {{/if}}
     	</tr>
       <tr>
+        <td>{{localize "shadowrun6.roll.wound-modifier"}}</td>
+        <td colspan="3"></td>
+        <td></td>
+        <td><input type="checkbox" name="useWoundModifier" checked {{checked data.useWoundModifier}} /></td>
+      </tr>
+      <tr>
         <td>{{localize "shadowrun6.roll.modifier"}}</td>
         <td colspan="3"><input type="text" name="modifier" value="{{data.modifier}}" style="width: 3em"/></td>
         <td style="text-align:right">{{localize "shadowrun6.roll.wilddie"}}</td>

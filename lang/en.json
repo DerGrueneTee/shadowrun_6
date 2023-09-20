@@ -802,6 +802,7 @@
 			"soak"   : "Soak damage"
 		},
       "configure": "Configure your roll",
+      "wound-modifier": "Use wound modifier",
       "criticalglitch": "Critical glitch",
       "heal_apply": "Heal",
       "damage": "Damage: ",

@@ -39,6 +39,7 @@ import {
     TokenData
 } from "./dice/RollTypes.js";
 import { ActorData, ItemData } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs";
+import { systemDataField } from "@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/fields.mjs.js";
 
 function isLifeform(obj: any): obj is Lifeform {
 	return obj.attributes != undefined;
@@ -1690,6 +1691,19 @@ export class Shadowrun6Actor extends Actor {
 		return doRoll(roll);
 	}
 
+	getWoundPenalties(): number {
+		console.log("Current Wound Penalties");
+		
+		//const data: Lifeform = this.data.data as Lifeform;
+		const data: Lifeform = getSystemData(this);
+		
+		/* Get the penalties for physical and stun damage. Every 3 boxes = -1 penalty */
+		let phy: number = Math.floor(data.physical.dmg / 3);
+		let stun: number = Math.floor(data.stun.dmg / 3)
+
+		/* Return the combined penalties from physical and stun damage */
+		return (phy + stun);
+	}
 	/***************************************
 	 *
 	 **************************************/
