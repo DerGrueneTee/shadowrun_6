@@ -3,8 +3,10 @@
 	"shadowrun6-eden.Shadowrun6ActorSheetNPC": "Blubb",
   "ACTOR": {
     "TypeCritter": "Critter",
-    "TypeNpc": "NPC",
-    "TypePlayer": "Player Character"
+    "TypeNpc": "Grunt/NPC",
+    "TypePlayer": "Player Character",
+    "TypeSpirit": "Spirit",
+    "TypeVehicle": "Vehicle/Drone"
   },
   "ITEM": {
     "TypeAdeptpower": "Adept Power",
@@ -27,6 +29,33 @@
   "QUALITY_CATEGORIES": {
     "ADVANTAGE": "Advantage",
     "DISADVANTAGE": "Disadvantage"
+  },
+  "TYPES":{
+  		"Actor": {
+    		"Critter": "Critter",
+    		"NPC": "Grunt/NPC",
+    		"Player": "Player Character",
+    		"Spirit": "Spirit",
+    		"Vehicle": "Vehicle/Drone"
+  		},
+  		"Item": {
+    		"adeptpower": "Adept Power",
+    		"critterpower": "Critter Power",
+    		"complexform": "Complex Form",
+    		"contact" : "Contact",
+    		"echo": "Echo",
+    		"gear": "Gear",
+    		"lifestyle" : "Lifestyle",
+    		"martialartstyle": "Martial Art Style",
+    		"martialarttech": "Martial Art Technique",
+    		"metamagic": "Metamagic",
+    		"quality": "Quality",
+    		"ritual": "Ritual",
+    		"sin" : "SIN",
+    		"skill": "Language/Knowledge Skill",
+    		"spell": "Spell",
+    		"weapon": "Weapon"
+  	}
   },
   "attrib": {
     "agi": "Agility",
@@ -95,8 +124,18 @@
       "activation_minor": "Minor Action",
       "activation_passive": "Passive",
       "cost": "Cost",
-      "haslevel": "Has level"
+      "haslevel": "Has level",
+      "pp": "PP",
+      "perLevel": "per level"
     },
+	 "critterpower": {
+		"actiontitle": "Action",
+		"action": {
+			"auto": "Auto",
+			"major": "Major",
+			"minor": "Minor"
+	  }
+	 },
     "attack_rating": {
       "astral": "Mana Att. Rtg",
       "matrix": "Matrix Att. Rtg.",
@@ -104,9 +143,14 @@
       "social": "Social Att. Rtg.",
       "vehicle": "Vehicle Att. Rtg."
     },
+    "combat": {
+		"togglePhysical": "Use physical initiative",
+		"toggleMatrix": "Use matrix initiative",
+		"toggleAstral": "Use astral initiative"
+	},
     "complexform": {
       "duration": "Duration",
-      "fading": "Fading",
+      "fading": "Fade Value",
       "none": "None",
       "oppAttr1": "Opposing Attr. 1",
       "oppAttr2": "Opposing Attr. 2",
@@ -187,7 +231,7 @@
         "ARMOR_SHIELD": "Shields",
         "ASSAULT_CANNON": "Assault Cannon",
         "ATVS": "ATVs",
-        "AUDIO": "Audiotory Devices",
+        "AUDIO": "Auditory Devices",
         "AUDIO_ENHANCEMENT": "Audio Enhancements",
         "BIKES": "Bikes",
         "BIOTECH": "Biotech",
@@ -246,7 +290,7 @@
         "INDUSTRIAL_CHEMICALS": "Industrial Chemicals",
         "INSTRUMENT": "Instruments",
         "INSTRUMENT_ACCESSORY": "Instrument Accessories",
-		  "LARGE_DRONES": "Large Drones",	
+		  "LARGE_DRONES": "Large Drones",
         "LAUNCHERS": "Launchers",
         "LAV": "Low Altitude Vehicles (VectorThrust)",
         "LTAV": "Lighter Than Air Vehicles",
@@ -255,9 +299,9 @@
         "MACHINE_PISTOLS": "Machine Pistols",
         "MAGICAL_FORMULA": "Magical Formula",
         "MAGIC_SUPPLIES": "Magical Supplies",
-			"MICRODRONES": "Microdrones",	
-			"MINIDRONES": "Minidrones",	
-			"MEDIUM_DRONES": "Medium Drones",	
+			"MICRODRONES": "Microdrones",
+			"MINIDRONES": "Minidrones",
+			"MEDIUM_DRONES": "Medium Drones",
         "PREPARATION": "Preparations",
         "PREPARATION_EXTENDED": "Preparations (extended potency)",
         "MISSILES": "Missiles",
@@ -307,7 +351,7 @@
         "SHOTGUNS": "Shotguns",
         "SKILLSOFT": "Skillsofts",
         "SLAP_PATCHES": "Slap-Patches",
-			"SMALL_DRONES": "Small Drones",	
+			"SMALL_DRONES": "Small Drones",
         "SNIPER_RIFLES": "Sniper Rifles",
         "SOFTWARE": "Software",
         "SPACECRAFT": "Spacecrafts",
@@ -360,12 +404,9 @@
       }
     },
     "initiative": {
-      "astral": "Astral",
-      "matrix": "Matrix-Initiative",
-      "physical": "Regular",
-      "matrix_ar": "Matrix AR",
-      "matrix_cold": "Matrix VR",
-      "matrix_hot": "Matrix VR (hot)"
+      "astral"  : "Astral",
+      "physical": "Physical",
+      "matrix"  : "Matrix"
     },
     "item": {
       "accessories": "Accessories",
@@ -410,11 +451,11 @@
       "subtype": "Subtype",
       "type": "Type",
 		"vehicle": {
-			"armor.long": "Armor",	
+			"armor.long": "Armor",
 			"armor.short": "A",
 			"rigRating.long": "Control Rig",
-			"sensor.long": "Sensor",	
-			"sensor.short": "S"	
+			"sensor.long": "Sensor",
+			"sensor.short": "S"
 		}
     },
     "itemtype": {
@@ -467,6 +508,7 @@
       "damage_short": "Dmg",
       "defense_rating": "Defense Rating",
       "delete": "Delete",
+      "device_mode": "Device Mode",
       "devRating": "Device rtg.",
       "dice": "Dice",
       "edit": "Edit",
@@ -476,8 +518,9 @@
       "features": "Features",
       "firemode_current": "Current Firemode",
       "firemodes": "Firemodes",
+      "force": "Force",
       "gender": "Gender",
-      "legality.illegal.short": "I",
+       "legality.illegal.short": "I",
       "legality.legal.short": "L",
       "level": "Has levels",
       "mages": "Mages",
@@ -550,6 +593,11 @@
       "tarpit": "Tarpit",
       "trace_icon": "Trace Icon"
     },
+      "matrixini": {
+			"ar": "AR",
+			"vrcold": "VR",
+			"vrhot": "VR Hot"
+	   },
     "monitor": {
 		"matrix": "Matrix",
       "physical": "Physical",
@@ -573,6 +621,7 @@
       "chemicals": "The good stuff",
       "complexform": "How complex do you like it?",
       "contact": "Who you gonna call? Ghostbusters!",
+      "critterpower": "What's so special about it?",
       "cyberware": "Some cool cyber enhancement",
 	 	"drones": "My Flying Eye",
       "electronics": "Nerd toy",
@@ -595,6 +644,16 @@
       "weapon": "Named weapons are much cooler",
       "weaponclose": "Something heavy"
     },
+    "npc": {
+    	"subtype": {
+      	"npc": "NPC",
+      	"critter": "Critter",
+      	"spirit": "Spirit",
+      	"sprite": "Sprite"
+      },
+      "gruntrules": "Uses grunt rules",
+      "mortype": "Magic/Resonance"
+    },
     "numerical": {
       "base": "base",
       "baseString": "Base Value",
@@ -603,7 +662,7 @@
     },
 	"programtype": {
 		"basic": "Basic programs",
-		"hacking": "Hacking programs"	
+		"hacking": "Hacking programs"
 	},
     "program": {
       "baby_monitor": {
@@ -768,6 +827,7 @@
       "failedSoak"   : "You got damage:",
       "glitch": "Glitch",
       "hits_bought": "Hits bought",
+      "hits": "hits",
       "mode": "Mode",
       "modifier": "Pool modifier",
       "noedgegain": "No edge gain",
@@ -937,7 +997,7 @@
 		"survival": "Survival",
       "vehicles": {
         "add": "Add new vehicle",
-		"column": {
+		   "column": {
 				"handling": "Han",
 				"acc": "Acc",
 				"spdi": "S.Int",
@@ -951,6 +1011,10 @@
 			},
         "title": "Vehicles"
       },
+      "vehicleskills": {
+		  		"brain": "Electronic Brain",
+				"operations": "Operations"
+	   },
       "weapon": {
         "add": "Add new weapon",
         "close": "Melee Weapons",
@@ -963,6 +1027,10 @@
       "maxEdgePerRound": {
         "hint": "Defines the maximum egde a player or NPC can gain per turn.",
         "name": "Max. Edge per turn"
+      },
+      "importToCompendium": {
+        "hint": "Define if imported NPCs should be added as actors or as entries to the NPCs compendium",
+        "name": "Import to compendium"
       },
       "defaultThreshold": {
         "hint": "Defines the default threshold used for any skill check",
@@ -1024,7 +1092,8 @@
       "electronics": {
         "computer": "Computer",
         "hardware": "Hardware",
-        "software": "Software"
+        "software": "Software",
+        "complex_forms": "Complex Forms"
       },
       "enchanting": {
         "alchemy": "Alchemy",
@@ -1108,7 +1177,7 @@
       "category_detection": "Detection",
       "category_health": "Health",
       "category_illusion": "Illusion",
-      "category_manipulation": "Manipultaion",
+      "category_manipulation": "Manipulation",
       "damage": "Damage",
       "damage_physical": "Physical",
       "damage_physical_short": "P",
@@ -1125,6 +1194,8 @@
       "duration": "Duration",
       "duration_instantaneous": "Instantaneous",
       "duration_instantaneous_short": "I",
+      "duration_immediate": "Immediate",
+      "duration_immediate_short": "I",
       "duration_limited": "Limited",
       "duration_permanent": "Permanent",
       "duration_permanent_short": "P",
@@ -1133,6 +1204,8 @@
       "duration_special_short": "Spec",
       "duration_sustained": "Sustained",
       "duration_sustained_short": "S",
+      "duration_always": "Always",
+      "duration_always_short": "A",
       "isOpposed": "Is Opposed",
       "range": "Range",
       "range_line_of_sight": "Line of sight",
@@ -1159,6 +1232,15 @@
       "sense_multi": "Multi-Sense",
       "sense_single": "Single-Sense"
     },
+    "spirittype": {
+      "air": "Air",
+      "beasts": "Beasts",
+      "earth": "Earth",
+      "fire": "Fire",
+      "kin": "Kin",
+      "plant": "Plant",
+      "water": "Water"
+    },
     "tradition": {
       "attribute": "Tradition Attribute"
     },
@@ -1172,11 +1254,14 @@
 			"rcc": "via RCC (To Do)",
 			"autonomous": "Autonomous (To Do)"
 		},
+		"skill": {
+			"piloting": "Piloting"
+		},
 		"type": {
 			"groundcraft": "Groundcraft",
 			"watercraft": "Watercraft",
 			"aircraft": "Aircraft"
-		}      
+		}
     },
 	"weapon": {
 		"damage": "DV",

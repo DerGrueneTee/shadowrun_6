@@ -2,9 +2,9 @@
 
 This is the repository for the Foundry VTT system for the roleplaying system **Shadowrun 6**. It is a non-profit fan project and does not include contents from the publications.
 
-**Installation-URL (Release/Stable):** Not released yet
+**Installation-URL (Release/Stable):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system.json) (**Requires Foundry 9.x**)
 
-**Installation-URL (Beta/Unstable ):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json)  (**Requires Foundry 0.8.x**)
+**Installation-URL (Beta/Unstable ):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-beta.json)  (**Requires Foundry 10.x**)
 
 **Installation-URL (Old Stable):** [https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json](https://bitbucket.org/rpgframework-cloud/shadowrun6-eden/downloads/system-staging.json)  (**Requires Foundry 0.8.x**)
 
@@ -13,6 +13,8 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
 **Discussion:** [Discord](https://discord.gg/USE9Gte)
 
 **For Support:** [Patreon](https://patreon.com/rpgframework)
+
+**Feature Requests:** [Leave a wish or vote for features](https://sr6-foundry.sleekplan.app/)
 
 ## Features ##
 
@@ -35,21 +37,17 @@ This is the repository for the Foundry VTT system for the roleplaying system **S
  * (since 0.4.x) Magic: spells, adept powers, rituals, metamagic
  * (since 0.4.x) Attack and defense rating comparison, gaining edge, spending pre-roll edge
  * (since 0.5.x) Matrix devices, beginning support for edge based rerolls
- * (since 0.5.1) Added machine based translations for several languages 
+ * (since 0.5.1) Added machine based translations for several languages
  * (since 0.6.0) Begin support drones & vehicles, Biography tab
  * (since 0.6.2) Work on a Vehicle Actor has begun
  * (since 0.7.0) Work on a Critter Actor has begun, Added Critter Power Item, Attack rolls from NPC sheet
  * (since 0.7.1) Improvements on roll dialogs, overflow bar, support for defense rolls from chat message
- 
+
 ### Not working yet ###
  * Auto-calculating modifiers from condition monitors
  * better Critter support, better NPC support
  * Vehicle Actor is unfinished
- 
-## The future ##
-This project currently switches from plain Javascript to Typescript, which means some steps back and cleanup of previous ... dirty implementations.
-Unfortunately I must admit, that having this project as a side project to *Genesis* isn't giving me enough time to have a decent development pace. But I try to keep both projects in sync, so the character transfer from Genesis to Foundry VTT works for you.
 
 
-![Screenshot](screenshots/Screen_2021-06a.jpg)
-![Screenshot](screenshots/Screen_2021-06b.jpg)
+![Screenshot](screenshots/PC_Sheet.png)
+![Screenshot](screenshots/Spell_Rolldialog.png)

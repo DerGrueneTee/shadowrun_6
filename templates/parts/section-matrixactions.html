@@ -3,13 +3,13 @@
 		<h2 class="section-title">{{ localize 'shadowrun6.section.matrix_actions.title' }}</h2>
 	</div>
 	<div style="column-count: 2; margin-right: 5px;">
- 		{{#each config.MATRIX_ACTIONS as |action idx|}} 
+ 		{{#each config.MATRIX_ACTIONS as |action idx|}}
        <div class="draggable item" data-matrix-action-id="{{this.id}}" style="display: flex; font-size:small; align-items:center;">
        	<label style="flex-grow:6">{{localize (concat 'shadowrun6.matrixaction.' this.id)}}</label>
          	{{#if (ne (matrixPool this.id ../actor) 0)}}
          <div class="skill-pool" style="flex-grow:0.9; text-align:right">
          	<label class="item-pool">{{matrixPool this.id ../actor}}</label>
-         	<a class="item-control matrix-roll" data-matrix-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         	<a class="item-control matrix-roll" data-matrix-id="{{this.id}}" title="{{localize (concat "skill." item.system.skill)}}"><i class="fas fa-dice-six"></i></a>
          </div>
          	{{/if}}
        </div>

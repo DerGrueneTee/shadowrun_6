@@ -1,0 +1,27 @@
+<label for="spirit_type">Type</label>
+<select name="spirit_type" name="data.spiritType" data-field="data.spiritType" style="background: rgba(255,255,255,0.25); border: 0px">
+{{#select system.spiritType}}
+	<option value="custom" name=data.spiritType>Custom</option>
+	{{#each config.SPIRIT_TYPES as |type id|}}
+	<option value="{{@type}}" name=data.spiritType>{{localize (concat "shadowrun6.spirittype." type)}}</option>
+	{{/each}}
+{{/select}}
+</select>
+<label for="spirit_force">{{localize "shadowrun6.label.force"}}</label>
+<select id="spirit_force" name="data.rating" name="system.rating" data-field="data.rating" style="border: 0px">
+{{#select system.rating}}
+	<option value="1" name="data.rating">1</option>
+	<option value="2" name="data.rating">2</option>
+	<option value="3" name="data.rating">3</option>
+	<option value="4" name="data.rating">4</option>
+	<option value="5" name="data.rating">5</option>
+	<option value="6" name="data.rating">6</option>
+	<option value="7" name="data.rating">7</option>
+	<option value="8" name="data.rating">8</option>
+	<option value="9" name="data.rating">9</option>
+	<option value="10" name="data.rating">10</option>
+	<option value="11" name="data.rating">11</option>
+	<option value="12" name="data.rating">12</option>
+{{/select}}
+</select>
+

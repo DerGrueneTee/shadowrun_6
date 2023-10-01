@@ -3,13 +3,20 @@
  * Pre-loaded templates are compiled and cached for fast access when rendering
  * @return {Promise}
  */
-export const preloadHandlebarsTemplates = async function() {
-
+export const preloadHandlebarsTemplates = async function () {
 	const templatePaths = [
+		"systems/shadowrun6-eden/templates/combat-tracker.html",
+		"systems/shadowrun6-eden/templates/combat-trackerv9.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogEdge.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogOpposed.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogSpell.html",
 		"systems/shadowrun6-eden/templates/dialog/partRollDialogWeapon.html",
+		"systems/shadowrun6-eden/templates/parts/npc_edit_critter.html",
+		"systems/shadowrun6-eden/templates/parts/npc_edit_grunt.html",
+		"systems/shadowrun6-eden/templates/parts/npc_edit_spirit.html",
+		"systems/shadowrun6-eden/templates/parts/npc_full_edit_sheet.html",
+		"systems/shadowrun6-eden/templates/parts/npc_usage_sheet.html",
+		"systems/shadowrun6-eden/templates/parts/npc_usage_spirit.html",
 		"systems/shadowrun6-eden/templates/parts/attributes.html",
 		"systems/shadowrun6-eden/templates/parts/edge-token.html",
 		"systems/shadowrun6-eden/templates/parts/initiatives.html",
@@ -17,6 +24,7 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/attributes-augmented.html",
 		"systems/shadowrun6-eden/templates/parts/monitors.html",
 		"systems/shadowrun6-eden/templates/parts/npc-attributes.html",
+		"systems/shadowrun6-eden/templates/parts/npc-attributes-ro.html",
 		"systems/shadowrun6-eden/templates/parts/npc-augmentations.html",
 		"systems/shadowrun6-eden/templates/parts/npc-complex-forms.html",
 		"systems/shadowrun6-eden/templates/parts/npc-critterpowers.html",
@@ -66,12 +74,14 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/shadowrun6-eden/templates/parts/section-lifestyles.html",
 		"systems/shadowrun6-eden/templates/parts/section-vehicles.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-accessories.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-brain.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-monitor.html",
+		"systems/shadowrun6-eden/templates/parts/vehicle-piloting.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-software.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-speed.html",
 		"systems/shadowrun6-eden/templates/parts/vehicle-stats.html",
-		"systems/shadowrun6-eden/templates/parts/vehicle-weapons.html",
-		];
+		"systems/shadowrun6-eden/templates/parts/vehicle-weapons.html"
+	];
 
 	console.log(`Load templates`);
 	return loadTemplates(templatePaths);

@@ -4,6 +4,7 @@
 			"Player",
 			"NPC",
 			"Critter",
+			"Spirit",
 			"Vehicle"
 		],
 		"templates": {
@@ -212,19 +213,9 @@
 					"dice": 1,
 					"diceMod": 0
 				  },
-				  "matrixar": {
+				  "matrix": {
 					"mod": 0,
 					"dice": 1,
-					"diceMod": 0
-				  },
-				  "matrixcold": {
-					"mod": 0,
-					"dice": 2,
-					"diceMod": 0
-				  },
-			     "matrixhot": {
-					"mod": 0,
-					"dice": 3,
 					"diceMod": 0
 				  },
 				  "physical": {
@@ -233,6 +224,20 @@
 					"diceMod": 0
 				  },
 				  "actions": 0
+				}
+			},
+			"movement-template": {
+				"walk": 5,
+				"sprint": 10,
+				"perHit": 1
+			},
+			"vehicleskill-template": {
+				"skills": {
+					"piloting": {
+						"points": 0,
+						"modifier": 0,
+						"pool": 0
+					}
 				}
 			},
 			"skill-template": {
@@ -389,12 +394,15 @@
 				"defenserating-template",
 				"resist-template",
 				"initiative-template",
+				"movement-template",
 				"skill-template",
 				"knowledge-template",
-				"magic-template"
+				"magic-template",
+				"movement-template"
 			],
 			"metatype": "",
 			"mortype": "mundane",
+			"matrixIni": "vrcold",
 			"gender": "",
 			"nuyen": 0,
 			"overwatch": 0,
@@ -402,6 +410,7 @@
 		},
 		"NPC": {
 			"name": "",
+			"type": "npc",
 			"templates": [
 				"attribute-template",
 				"monitor-template",
@@ -409,11 +418,16 @@
 				"defenserating-template",
 				"resist-template",
 				"initiative-template",
+				"movement-template",
 				"skill-template",
 				"knowledge-template",
 				"magic-template"
 			],
-			"mortype": "mundane"
+			"mortype": "mundane",
+			"matrixIni": "vrcold",
+			"rating" : 1,
+			"gruntmeta": "",
+			"editmode": false
 		},
 		"Critter": {
 			"name": "",
@@ -423,11 +437,26 @@
 				"initiative-template",
 				"skill-template",
 				"knowledge-template"
-			]
+			],
+			"editmode": false
+		},
+		"Spirit": {
+			"name": "",
+			"templates": [
+				"attribute-template",
+				"monitor-template",
+				"initiative-template",
+				"skill-template",
+				"knowledge-template"
+			],
+			"rating" : 1,
+			"spiritType": "",
+			"editmode": false
 		},
 		"Vehicle": {
 			"templates": [
-				"monitor-template"
+				"monitor-template",
+				"vehicleskill-template"
 			],
 			"handlOn": 1,
 			"handlOff": 2,
@@ -468,7 +497,8 @@
 			"adeptpower",
 			"spell",
 			"ritual",
-			"focus"
+			"focus",
+			"software"
 		],
 		"templates": {
 			"genesis": {
@@ -665,6 +695,14 @@
 				"genesis",
 				"skill-value"
 			]
+		},
+		"software": {
+			"templates": [
+				"genesis"
+			],
+			"type": "SOFTWARE",
+			"subtype": "AUTOSOFT",
+			"rating": 1
 		},
 		"spell": {
 			"templates": [

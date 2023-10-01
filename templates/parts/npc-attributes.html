@@ -13,7 +13,7 @@
     {{#each attributes as |attribute id|}}
     {{#ifIn id ../config.NPC_ATTRIBUTES}}
     		  <td class="attribute2" id="{{id}}">
-             <input class="centered" name="data.attributes.{{id}}.base" type="text" value="{{attribute.base}}" data-dtype="Number">
+             <input class="centered" data-field="data.attributes.{{id}}.base" type="text" value="{{attribute.base}}" data-dtype="Number">
     		  </td>
     {{/ifIn}}
     {{/each}}

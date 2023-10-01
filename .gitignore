@@ -55,3 +55,4 @@ install.zip
 /module/
 
 /tsconfig.nojson
+/.vscode/

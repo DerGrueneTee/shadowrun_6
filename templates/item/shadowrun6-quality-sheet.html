@@ -6,15 +6,15 @@
         <div class="section">
         <dl>
             <dt>{{localize 'shadowrun6.qualityedit.explain'}}</dt>
-            <dd><input type="text" value="{{item.data.data.explain}}" name="data.explain" /></dd>
+            <dd><input type="text" value="{{item.system.explain}}" name="data.explain" /></dd>
             <dt>{{localize 'shadowrun6.qualityedit.description'}}:</dt>
             <dd>
-                <textarea type="text" name="data.description" class="secondary" placeholder="Details" cols="20" rows="6">{{item.data.data.description}}</textarea> 
+                <textarea type="text" name="data.description" class="secondary" placeholder="Details" cols="20" rows="6">{{item.system.description}}</textarea>
            </dd>
             <dt>{{localize 'shadowrun6.qualityedit.category'}}</dt>
-            <dd>  
+            <dd>
                 <select name="data.category">
-                {{#select item.data.data.category}}
+                {{#select item.system.category}}
                 {{#each config.QUALITY_CATEGORIES as |category id|}}
                 <option value="{{@category}}">{{localize (concat "QUALITY_CATEGORIES." category)}}</option>
                 {{/each}}

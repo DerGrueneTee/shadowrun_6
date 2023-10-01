@@ -1,0 +1,14 @@
+<div style="flex:3">
+<input id="grunt_isgrunt" name="gruntrules" type="checkbox" value="{{data.gruntrules}}" />
+<label for="grunt_isgrunt">{{localize 'shadowrun6.npc.gruntrules' }}</label>
+</div>
+<div style="flex:5">
+<label for="grunt_mortype">{{localize 'shadowrun6.npc.mortype'}}:</label>
+<select id="grunt_mortype" name="data.mortype" data-field="data.mortype">
+	{{#select system.mortype}}
+	{{#each config.MOR_TYPES as |type id|}}
+	<option value="{{@type}}" name=data.mortype>{{localize (concat "shadowrun6.mortype." type)}}</option>
+	{{/each}}
+{{/select}}
+</select>
+</div>

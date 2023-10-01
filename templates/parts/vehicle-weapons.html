@@ -4,16 +4,16 @@
 	 <a class="item-control weapon-create" title="{{localize 'shadowrun6.section.weapon.add' }}"><h2 class="fas fa-plus"></h2></a>
 	</div>
 	  <table>
- 		{{#each actor.items as |item id|}} 
+ 		{{#each actor.items as |item id|}}
 		{{#if (eq item.type 'gear')}}
-		{{#if (eq item.data.data.type "WEAPON_FIREARMS") }}
-       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.data.data.description}}">
-       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.data.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
-         <td><label class="middle-column important-column">{{item.data.data.dmgDef}}</label></td>
-         <td><label class="middle-column" >{{attackrating item.data.data.attackRating}}</label></td>
+		{{#if (eq item.system.type "WEAPON_FIREARMS") }}
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{item.system.description}}">
+       	<td style="margin-right: 1rem"><button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
+         <td><label class="middle-column important-column">{{item.system.dmgDef}}</label></td>
+         <td><label class="middle-column" >{{attackrating item.system.attackRating}}</label></td>
          <td class="skill-pool" style="width: 3em">
-         	<label class="item-pool" data-skill="engineering" data-skillspec="gunnery">{{item.data.data.pool}}</label>
-         	<a class="item-control item-roll" data-item-id="{{this.id}}" title="{{localize (concat "skill." item.data.data.skill)}}"><i class="fas fa-dice-six"></i></a>
+         	<label class="item-pool" data-skill="engineering" data-skillspec="gunnery">{{item.system.pool}}</label>
+         	<a class="item-control item-roll" data-item-id="{{this.id}}" title="{{localize (concat "skill." item.system.skill)}}"><i class="fas fa-dice-six"></i></a>
          </td>
 			<td class="item-controls">
 				<td class="centered"><a class="item-control item-edit" title='{{localize 'shadowrun6.label.edit' }}'><i
@@ -23,12 +23,12 @@
        </tr>
        <tr>
          <td colspan="6">
-         	<div class="collapsible-content {{item.data.flags.shadowrun6-eden.collapse-state}}">
-        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.data.data.accessories}}</textarea>
-         	{{ localize 'shadowrun6.label.firemode_current' }} 
+         	<div class="collapsible-content {{item.flags.shadowrun6-eden.collapse-state}}">
+        	   {{ localize 'shadowrun6.label.modifications' }} <textarea class="box" type="text"     data-item-id="{{this.id}}" data-field="data.accessories" type="text" data-dtype="Text" style="width: 25em">{{item.system.accessories}}</textarea>
+         	{{ localize 'shadowrun6.label.firemode_current' }}
          	<select name="firemodeUsed" data-field="firemodeUsed" >
          	{{#select firemodeUsed}}
-            {{#each item.data.data.modes as |available id|}}
+            {{#each item.system.modes as |available id|}}
             {{#if available}}
              <option value="{{id}}" data-item-firemode="{{id}}">{{localize (concat "shadowrun6.item.firemode." id)}}</option>
             {{/if}}
@@ -36,13 +36,13 @@
          		{{/select}}
          	</select>
 			   <br/>
-         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" {{checked item.data.data.wild}} data-check="data.wild"     type="checkbox" data-dtype="Boolean"/><br/>
-         	{{ localize 'shadowrun6.label.poolmod' }} <input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.modifier" type="text"     value="{{item.data.data.modifier}}" data-dtype="Number" style="width: 1.5em"/>
+         	{{ localize 'shadowrun6.label.wilddie' }} <input class="centered box" type="checkbox" data-item-id="{{this.id}}" {{checked item.system.wild}} data-check="data.wild"     type="checkbox" data-dtype="Boolean"/><br/>
+         	{{ localize 'shadowrun6.label.poolmod' }} <input class="centered box" type="text"     data-item-id="{{this.id}}" data-field="data.modifier" type="text"     value="{{item.system.modifier}}" data-dtype="Number" style="width: 1.5em"/>
          	</div>
          </td>
        </tr>
 		{{/if}}
 		{{/if}}
        {{/each}}
-     </table> 
+     </table>
    </div>
