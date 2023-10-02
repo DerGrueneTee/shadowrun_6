@@ -219,10 +219,17 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 			console.log("rollMode = ", form.rollMode.value);
 			configured.rollMode = form.rollMode.value;
 
-			formula = createFormula(configured, dialog);
 			let base: number = configured.pool ? configured.pool : 0;
 			let mod: number = dialog.modifier ? dialog.modifier : 0;
-			configured.pool = +base + +mod;
+			let woundMod: number = form.useWoundModifier.checked ? prepared.actor.getWoundPenalties() : 0;
+
+			configured.pool = +base + +mod + -woundMod;
+
+			/* Check for a negative pool! Set to 0 if negative so the universe doesn't explode */
+			if(configured.pool < 0) configured.pool = 0;
+
+			/* Build the roll formula */
+			formula = createFormula(configured, dialog);
 		}
 		console.log("_dialogClosed: ", formula);
 
@@ -243,6 +250,7 @@ function createFormula(roll: ConfiguredRoll, dialog: RollDialog): string {
 	console.log("createFormula-------------------------------");
 	console.log("--pool = " + roll.pool);
 	console.log("--modifier = " + dialog.modifier);
+
 	let regular: number = +(roll.pool ? roll.pool : 0) + (dialog.modifier ? dialog.modifier : 0);
 	let wild: number = 0;
 	if (roll.useWildDie > 0) {
