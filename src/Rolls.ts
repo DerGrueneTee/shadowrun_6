@@ -58,7 +58,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			data.edge = data.actor ? lifeform.edge.value : 0;
 		}
 		if (!data.calcPool || data.calcPool == 0) {
-			data.calcPool = data.pool;
+			data.calcPool = data.pool - data.actor.getWoundModifier();
 		}
 
 		/*
@@ -221,9 +221,10 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 
 			let base: number = configured.pool ? configured.pool : 0;
 			let mod: number = dialog.modifier ? dialog.modifier : 0;
-			let woundMod: number = form.useWoundModifier.checked ? prepared.actor.getWoundPenalties() : 0;
+			let woundMod: number = form.useWoundModifier.checked ? prepared.actor.getWoundModifier() : 0;
 
 			configured.pool = +base + +mod + -woundMod;
+			prepared.calcPool = configured.pool;
 
 			/* Check for a negative pool! Set to 0 if negative so the universe doesn't explode */
 			if(configured.pool < 0) configured.pool = 0;
