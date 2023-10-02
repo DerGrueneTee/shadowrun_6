@@ -89,7 +89,7 @@
 
 
                     {{#each item.system.attackRating as |arating id|}}
-                    <td data-array="data.attackRating">
+                    <td data-array="system.attackRating">
                         <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.6em"
                             class="centered box" />
                     </td>
@@ -103,7 +103,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select name="data.skill" data-field="data.skill">
+                        <select name="system.skill" data-field="system.skill">
                         <option value="">-</option>
                             {{#select item.system.skill}}
                             {{#each config.SKILLS_WEAPON as |skill id|}}
@@ -113,9 +113,9 @@
                         </select>
                     </td>
                     <td>
-        	   			<select name="data.skillSpec" data-field="data.skillSpec">
+        	   			<select name="system.skillSpec" data-field="system.skillSpec">
         	   			{{#if item.system.skill}}
-                     {{selectOptions (lookup config.skill_special item.system.skill) selected=system.skillSpec localize=true}}
+                     {{selectOptions (lookup config.skill_special item.system.skill) selected=item.system.skillSpec localize=true}}
                      {{/if}}
          				</select>
                     </td>
