@@ -58,7 +58,7 @@ async function _showRollDialog(data: PreparedRoll): Promise<SR6Roll> {
 			data.edge = data.actor ? lifeform.edge.value : 0;
 		}
 		if (!data.calcPool || data.calcPool == 0) {
-			data.calcPool = data.pool;
+			data.calcPool = data.pool - data.actor.getWoundModifier();
 		}
 
 		/*
@@ -219,10 +219,18 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 			console.log("rollMode = ", form.rollMode.value);
 			configured.rollMode = form.rollMode.value;
 
-			formula = createFormula(configured, dialog);
 			let base: number = configured.pool ? configured.pool : 0;
 			let mod: number = dialog.modifier ? dialog.modifier : 0;
-			configured.pool = +base + +mod;
+			let woundMod: number = form.useWoundModifier.checked ? prepared.actor.getWoundModifier() : 0;
+
+			configured.pool = +base + +mod + -woundMod;
+			prepared.calcPool = configured.pool;
+
+			/* Check for a negative pool! Set to 0 if negative so the universe doesn't explode */
+			if(configured.pool < 0) configured.pool = 0;
+
+			/* Build the roll formula */
+			formula = createFormula(configured, dialog);
 		}
 		console.log("_dialogClosed: ", formula);
 
@@ -243,6 +251,7 @@ function createFormula(roll: ConfiguredRoll, dialog: RollDialog): string {
 	console.log("createFormula-------------------------------");
 	console.log("--pool = " + roll.pool);
 	console.log("--modifier = " + dialog.modifier);
+
 	let regular: number = +(roll.pool ? roll.pool : 0) + (dialog.modifier ? dialog.modifier : 0);
 	let wild: number = 0;
 	if (roll.useWildDie > 0) {

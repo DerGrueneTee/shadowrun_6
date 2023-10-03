@@ -2,11 +2,11 @@ import { MagicOrResonanceDefinition } from "./DefinitionTypes.js";
 import { ComplexForm, Gear, MatrixDevice, Persona, Spell, Weapon } from "./ItemTypes.js";
 
 export class Attribute {
-	base: number;
-	mod: number;
+	base: number = 0;
+	mod: number = 0;
 	modString: string = "";
-	augment: number;
-	pool: number;
+	augment: number = 0;
+	pool: number = 0;
 }
 
 export class Attributes {

@@ -22,13 +22,13 @@
    {{#if data.spell}}
    {{> "systems/shadowrun6-eden/templates/dialog/partRollDialogSpell.html"}}
    {{/if}}
-   
+
    <!--  Weapon stats -->
   {{#if (eq data.rollType "weapon")}}
 	{{> "systems/shadowrun6-eden/templates/dialog/partRollDialogWeapon.html"}}
   {{/if}}
-    
-    
+
+
     {{#if data.defendWith}}
 	{{> "systems/shadowrun6-eden/templates/dialog/partRollDialogOpposed.html"}}
     {{/if}}
@@ -50,8 +50,13 @@
         {{/if}}
     	</tr>
       <tr>
+        <td colspan="4"></td>
+        <td style="text-align:right">{{localize "shadowrun6.roll.wound-modifier"}}</td>
+        <td><input type="checkbox" id="useWoundModifier" checked {{checked data.useWoundModifier}} /></td>
+      </tr>
+      <tr>
         <td>{{localize "shadowrun6.roll.modifier"}}</td>
-        <td colspan="3"><input type="text" name="modifier" value="{{data.modifier}}" style="width: 3em"/></td>
+        <td colspan="3"><input type="text" id="modifier" value="{{data.modifier}}" style="width: 3em"/></td>
         <td style="text-align:right">{{localize "shadowrun6.roll.wilddie"}}</td>
         <td><input type="checkbox" name="useWildDie" {{checked data.useWildDie}} /></td>
       </tr>
@@ -63,7 +68,7 @@
             <option value="{{mode}}">{{localize label}}</option>
         {{/each}}
         {{/select}}
-        </select></td>     		
+        </select></td>
     		<td style="text-align:right">{{localize "shadowrun6.roll.explode"}}</td>
     		<td><input type="checkbox" name="explode" value="{{data.explode}}" /></td>
     	</tr>

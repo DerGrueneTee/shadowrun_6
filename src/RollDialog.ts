@@ -117,6 +117,11 @@ export class RollDialog extends Dialog {
 
 		// React to attribute change
 		html.find(".rollAttributeSelector").change(this._onAttribChange.bind(this));
+
+		// React to Wound Modifier checkbox
+		html.find("#useWoundModifier").change(this._updateDicePool.bind(this));
+		// React to change in modifier
+		html.find("#modifier").change(this._updateDicePool.bind(this));
 	}
 
 	//-------------------------------------------------------------
@@ -368,7 +373,18 @@ export class RollDialog extends Dialog {
 
 	//-------------------------------------------------------------
 	_updateDicePool(data: ConfiguredRoll) {
-		$("label[name='dicePool']")[0].innerText = (parseInt(data.pool as any) + parseInt(this.modifier as any)).toString();
+		// Get the value of the user entered modifier ..
+		let userModifier : number = parseInt( (document.getElementById("modifier") as HTMLInputElement).value);
+		// .. and update the roll
+		this.modifier = userModifier?userModifier:0;
+		// Get the value of the checkbox if the calculated wound penality should be used
+		let useWoundModifier : boolean = (document.getElementById("useWoundModifier") as HTMLInputElement).checked;
+
+		// Calculate new sum
+		console.log("updateDicePool: ",this);
+		console.log("updateDicePool2: ",this.prepared.pool, this.modifier , this.actor.getWoundModifier());
+		let sum : number = this.prepared.pool + parseInt(this.modifier as any) - (useWoundModifier?this.actor.getWoundModifier():0);
+		$("label[name='dicePool']")[0].innerText = sum.toString();
 	}
 
 	//-------------------------------------------------------------

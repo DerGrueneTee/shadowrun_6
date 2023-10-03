@@ -61,7 +61,7 @@
                 </tr>
  {{log "shadowrun6-gear-sheet.html this=" item.system}}
                 <tr>
-                    <td style="width: 2.5em"><input type="number" value="{{item.system.dmg}}" name="data.dmg" class="box centered" /></td>
+                    <td style="width: 2.5em"><input type="number" value="{{item.system.dmg}}" name="system.dmg" class="box centered" /></td>
                     <td>
                         <select name="data.stun">
                             {{#select item.system.stun}}
@@ -72,24 +72,24 @@
                     </td>
 					<td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_ss'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.system.modes.SS}}
-                            name="data.modes.SS" " />
+                            name="system.modes.SS" " />
                     </td>
                     <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_sa'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.system.modes.SA}}
-                            name="data.modes.SA" />
+                            name="system.modes.SA" />
                     </td>
                     <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_bf'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.system.modes.BF}}
-                            name="data.modes.BF" />
+                            name="system.modes.BF" />
                     </td>
                     <td style="width: 4em"><span style="vertical-align: middle;">{{localize 'shadowrun6.item.mode_fa'}}</span><input
                             style="vertical-align: middle;" type="checkbox" {{checked item.system.modes.FA}}
-                            name="data.modes.FA" />
+                            name="system.modes.FA" />
                     </td>
 
 
                     {{#each item.system.attackRating as |arating id|}}
-                    <td data-array="data.attackRating">
+                    <td data-array="system.attackRating">
                         <input type="number" value="{{arating}}" data-array-field data-index="{{id}}" style="width:1.6em"
                             class="centered box" />
                     </td>
@@ -103,7 +103,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <select name="data.skill" data-field="data.skill">
+                        <select name="system.skill" data-field="system.skill">
                         <option value="">-</option>
                             {{#select item.system.skill}}
                             {{#each config.SKILLS_WEAPON as |skill id|}}
@@ -113,9 +113,9 @@
                         </select>
                     </td>
                     <td>
-        	   			<select name="data.skillSpec" data-field="data.skillSpec">
+        	   			<select name="system.skillSpec" data-field="system.skillSpec">
         	   			{{#if item.system.skill}}
-                     {{selectOptions (lookup config.skill_special item.system.skill) selected=system.skillSpec localize=true}}
+                     {{selectOptions (lookup config.skill_special item.system.skill) selected=item.system.skillSpec localize=true}}
                      {{/if}}
          				</select>
                     </td>
