@@ -29,7 +29,7 @@
                     <td><select name="data.subtype" data-field="data.subtype" class="subtypeselect">
                             {{#select item.system.subtype}}
                             <option value=""></option>
-                            {{#each (gearSubtype system.type) as |subtype id|}}>
+                            {{#each (gearSubtype data.system.type) as |subtype id|}}>
                             <option value="{{@subtype}}">{{localize (concat "shadowrun6.gear.subtype." subtype)}}
                             </option>
                             {{/each}}
