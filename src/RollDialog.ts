@@ -533,7 +533,7 @@ export class RollDialog extends Dialog {
 		console.log("_onAttribChange ", this.options);
 		let actor: Shadowrun6Actor = (this.options as any).actor;
 		let prepared: PreparedRoll = (this.options as any).prepared;
-		let configured: ConfiguredRoll = (this.options as any).configured;
+		let configured: ConfiguredRoll = (this.options as any).dialogResult;
 
 		// Ignore this, if there is no actor
 		if (!actor) {
