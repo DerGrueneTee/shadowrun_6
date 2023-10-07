@@ -1272,6 +1272,7 @@ export class Shadowrun6Actor extends Actor {
 		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
 		roll.pool = this._getSkillPool(roll.skillId, roll.skillSpec, attrib);
+		roll.calcPool = roll.pool;
 		console.log("updateSkillRoll()", roll);
 	}
 
