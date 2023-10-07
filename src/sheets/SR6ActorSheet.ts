@@ -536,7 +536,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 		event.preventDefault();
 
 		let roll: PreparedRoll = new PreparedRoll();
-		roll.pool = event.currentTarget.dataset.pool;
+		roll.pool = parseInt(event.currentTarget.dataset.pool);
 		roll.rollType = RollType.Common;
 
 		let classList = event.currentTarget.classList;
