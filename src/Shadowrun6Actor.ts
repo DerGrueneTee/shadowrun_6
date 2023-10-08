@@ -1161,7 +1161,7 @@ export class Shadowrun6Actor extends Actor {
 	_getSkillPool(skillId, spec, attrib: string | undefined = undefined) {
 		const system : SR6Actor = getSystemData(this);
 		if (!skillId) throw "Skill ID may not be undefined";
-		const skl = (system as Lifeform).skills[skillId];
+		const skl : Skill = (system as Lifeform).skills[skillId];
 		if (!skillId) {
 			throw "Unknown skill '" + skillId + "'";
 		}
@@ -1172,8 +1172,8 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 		// Calculate pool
-		let value = skl.points + skl.modifier;
-		if (skl.base == 0) {
+		let value : number = skl.points + skl.modifier;
+		if (skl.points == 0) {
 			if (skillDef.useUntrained) {
 				value -= 1;
 			} else return 0;
@@ -1188,7 +1188,7 @@ export class Shadowrun6Actor extends Actor {
 		}
 
 		// Add attribute
-		value = parseInt(value);
+		value = parseInt(""+value);
 		value += parseInt((system as Lifeform).attributes[attrib].pool);
 
 		return value;
@@ -1272,6 +1272,7 @@ export class Shadowrun6Actor extends Actor {
 		roll.checkText = this._getSkillCheckText(roll);
 		// Calculate pool
 		roll.pool = this._getSkillPool(roll.skillId, roll.skillSpec, attrib);
+		roll.calcPool = roll.pool;
 		console.log("updateSkillRoll()", roll);
 	}
 

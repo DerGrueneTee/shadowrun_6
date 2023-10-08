@@ -383,8 +383,9 @@ export class RollDialog extends Dialog {
 		// Calculate new sum
 		console.log("updateDicePool: ",this);
 		console.log("updateDicePool2: ",this.prepared.pool, this.modifier , this.actor.getWoundModifier());
-		let sum : number = this.prepared.pool + parseInt(this.modifier as any) - (useWoundModifier?this.actor.getWoundModifier():0);
-		$("label[name='dicePool']")[0].innerText = sum.toString();
+		this.prepared.calcPool = this.prepared.pool + this.modifier - (useWoundModifier?this.actor.getWoundModifier():0);
+
+		$("label[name='dicePool']")[0].innerText = this.prepared.calcPool.toString();
 	}
 
 	//-------------------------------------------------------------
@@ -532,7 +533,7 @@ export class RollDialog extends Dialog {
 		console.log("_onAttribChange ", this.options);
 		let actor: Shadowrun6Actor = (this.options as any).actor;
 		let prepared: PreparedRoll = (this.options as any).prepared;
-		let configured: ConfiguredRoll = (this.options as any).configured;
+		let configured: ConfiguredRoll = (this.options as any).dialogResult;
 
 		// Ignore this, if there is no actor
 		if (!actor) {
