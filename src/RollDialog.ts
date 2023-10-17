@@ -382,8 +382,11 @@ export class RollDialog extends Dialog {
 
 		// Calculate new sum
 		console.log("updateDicePool: ",this);
-		console.log("updateDicePool2: ",this.prepared.pool, this.modifier , this.actor.getWoundModifier());
-		this.prepared.calcPool = this.prepared.pool + this.modifier - (useWoundModifier?this.actor.getWoundModifier():0);
+		let woundMod = (this.actor)?this.actor.getWoundModifier():0;
+		if (this.actor) {
+			console.log("updateDicePool2: ",this.prepared.pool, this.modifier , woundMod);
+		}
+		//this.prepared.calcPool = this.prepared.pool + this.modifier - (useWoundModifier?woundMod:0);
 
 		$("label[name='dicePool']")[0].innerText = this.prepared.calcPool.toString();
 	}
