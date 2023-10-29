@@ -125,7 +125,7 @@ const PROGRAMS_LINES: string[] = ["Programme:", "Programs:"]; // FR rolls this i
 const PERSONA_LINES: string[] = ["Lebende Persona:"]; // DE specific
 const POWERS_LINES: string[] = ["Kräfte:"]; // DE specific
 const AGE_LINES: string[] = ["Alter"]; // DE specific extra books
-const INFLUENCE_LINES: string[] = ["Einflussstufe","Einﬂuss"]; // DE specific extra books
+const INFLUENCE_LINES: string[] = ["Einflussstufe"]; // DE specific extra books
 const DESC_LINES: string[] = ["Bevorzugte Zahlungsmethode"]; // DE specific extra books
 
 function isSectionStart(line: string): SectionType {
@@ -806,7 +806,7 @@ class Status {
 class Initiative {
     public initiative: number;
     public die?: number;
-    constructor(def: string) { //trim()
+    constructor(def: string) {
         let matches = def.match(/^(\d+)\s+[+]\s+(\d+)[WwDd]6/);
         if (matches == null) {
             this.initiative = parseInt(def);
