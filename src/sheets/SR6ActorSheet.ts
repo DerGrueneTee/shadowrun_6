@@ -381,6 +381,8 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 	//-----------------------------------------------------
 	_setDamage(html, i, monitorAttribute, id, event) {
 		if (!isLifeform(getSystemData(this.actor))) return;
+		if (!event.currentTarget.dataset.value)
+			event.currentTarget.dataset.value = 0;
 		switch (event.target.parentNode.getAttribute("id")) {
 			case "barPhyBoxes":
 				console.log("setDamage (physical health to " + event.currentTarget.dataset.value + ")");
@@ -405,7 +407,7 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 
 	//-----------------------------------------------------
 	_redrawBar(html, id, monitorAttribute: Monitor) {
-		if (!monitorAttribute || !monitorAttribute.value) return;
+		if (!monitorAttribute || monitorAttribute.value<0) return;
 		//let vMax = parseInt(html.find("#data"+id+"Max")[0].value);
 		//let vCur = parseInt(html.find("#data"+id+"Cur")[0].value);
 		let perc = (monitorAttribute.value / monitorAttribute.max) * 100;
