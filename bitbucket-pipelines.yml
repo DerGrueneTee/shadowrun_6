@@ -26,12 +26,12 @@ pipelines:
           - envsubst < system-template.json > package/shadowrun6-eden/system.json
           - cd package/ ; zip -r ../shadowrun6-eden-beta.zip shadowrun6-eden ; cd ..
           - cp package/shadowrun6-eden/system.json system-beta.json
-          - pipe: atlassian/bitbucket-upload-file:0.6.0
+          - pipe: atlassian/bitbucket-upload-file:0.3.2
             variables:
               BITBUCKET_USERNAME: $BITBUCKET_USERNAME
               BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
               FILENAME: 'shadowrun6-eden-beta.zip'
-          - pipe: atlassian/bitbucket-upload-file:0.6.0
+          - pipe: atlassian/bitbucket-upload-file:0.3.2
             variables:
               BITBUCKET_USERNAME: $BITBUCKET_USERNAME
               BITBUCKET_APP_PASSWORD: $BITBUCKET_APP_PASSWORD
