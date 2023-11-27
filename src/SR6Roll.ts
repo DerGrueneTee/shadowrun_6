@@ -69,12 +69,7 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 			}
 		} else {
 			console.log("Unmodified roll " + this._formula);
-			// Automatically add success for any formula that doesnt have it.
-			var formula = this._formula;
-			if(formula.indexOf("cs") == -1) {
-				formula = formula + "cs>=5";
-			}
-			let die: Evaluated<Roll> = new Roll(formula).evaluate({ async: false });
+			let die: Evaluated<Roll> = new Roll(this._formula).evaluate({ async: false });
 			this.results = (die.terms[0] as any).results;
 			this._total = die._total;
 			this.terms = die.terms;
