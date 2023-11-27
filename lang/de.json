@@ -620,7 +620,8 @@
       "spell": "Abrakadabra",
       "vehicles": "Geile Karre",
       "weapon": "Was mit viel Wumms",
-      "weaponclose": "Etwas fürs Grobe"
+      "weaponclose": "Etwas fürs Grobe",
+      "weaponspecial": "Das ist doch keine Waffe?"
     },
     "npc": {
     	"subtype": {

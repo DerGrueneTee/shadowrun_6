@@ -202,15 +202,15 @@ Hooks.once("init", async function () {
 	 * Change default icon
 	 */
 	function onCreateItem(item, options, userId) {
-		console.log("onCreateItem  " + item.data.type);
 		let actor  : Shadowrun6Actor = getActorData(item);
+		let system : GenesisData = getSystemData(item) as GenesisData;
+		console.log("onCreateItem  " + item.system.type+" with ",options);
 		if (actor.img == "icons/svg/item-bag.svg" && CONFIG.SR6.icons[actor.type]) {
 			(actor as any).img = CONFIG.SR6.icons[actor.type].default;
 			item.updateSource({ ["img"]: actor.img });
 		}
 
 		// If it is a compendium item, copy over text description
-		let system : GenesisData = getSystemData(item) as GenesisData;
 			let key: string = actor.type + "." + system.genesisID;
 			console.log("Item with genesisID - check for " + key);
 			if (!(game as Game).i18n.localize(key + "name").startsWith(key)) {

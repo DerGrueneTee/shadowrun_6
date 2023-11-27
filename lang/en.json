@@ -642,7 +642,8 @@
       "survival": "Handy swiss army knife",
       "vehicles": "Awesome ride",
       "weapon": "Named weapons are much cooler",
-      "weaponclose": "Something heavy"
+      "weaponclose": "Something heavy",
+      "weaponspecial": "Weird weapon"
     },
     "npc": {
     	"subtype": {

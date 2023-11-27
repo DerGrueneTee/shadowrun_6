@@ -255,6 +255,16 @@ export class Shadowrun6ActorSheet extends ActorSheet {
 			};
 			return this.actor.createEmbeddedDocuments("Item", [itemData]);
 		});
+		html.find(".weapon-special-create").click((ev) => {
+			const itemData = {
+				name: (game as Game).i18n.localize("shadowrun6.newitem.weaponspecial"),
+				type: "gear",
+				data: {
+					type: "WEAPON_SPECIAL"
+				}
+			};
+			return this.actor.createEmbeddedDocuments("Item", [itemData]);
+		});
 		html.find('.critterpower-create').click(ev => {
 			const itemData = {
 				name: (game as Game).i18n.localize("shadowrun6.newitem.critterpower"),
