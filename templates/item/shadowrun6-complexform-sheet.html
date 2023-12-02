@@ -1,7 +1,7 @@
 <form class="flexcol {{cssClass}}" autocomplete="off">
     {{!-- Sheet Body --}}
     <section class="sheet-body">
-        <h2><input type="text" value="{{item.name}}" name="name" /></h2>
+        <h2><input type="text" value="{{item.name}}" data-field="name" /></h2>
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="92" width="92"
             style="background-color: var(--highlight-color)" />
         <div class="section">
@@ -14,7 +14,7 @@
                 <tr>
                     <!--// select leer, electronics, cracking -->
                     <td class="box centered">
-                        <select name="data.skill">
+                        <select data-field="data.skill">
                             {{#select item.system.skill}}
                             <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
                             <option value="electronics">{{localize 'skill.electronics'}}</option>
@@ -23,7 +23,7 @@
                         </select>
                     </td>
                     <td class="box centered">
-                        <select name="data.oppAttr1">
+                        <select data-field="data.oppAttr1">
                             {{#select item.system.oppAttr1}}
                             <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
                             <option value="devRating">{{localize 'shadowrun6.label.devicerating.short'}}</option>
@@ -35,7 +35,7 @@
                         </select>
                     </td>
                     <td class="box centered">
-                        <select name="data.oppAttr2">
+                        <select data-field="data.oppAttr2">
                             {{#select item.system.oppAttr2}}
                             <option value="">{{localize 'shadowrun6.complexform.none'}}</option>
                             <option value="devRating">{{localize 'shadowrun6.label.devicerating.short'}}</option>
@@ -55,22 +55,22 @@
                 </tr>
                 <tr>
                     <td class="box centered">
-                        <select name="data.duration">
+                        <select data-field="data.duration">
                             {{selectOptions config.spell_duration selected=item.system.duration localize=true}}
                         </select>
                     </td>
                     <td class="box centered">
-                        <input name="data.fading" value="{{item.system.fading}}" type="text" class="box centered"
+                        <input data-field="data.fading" value="{{item.system.fading}}" type="text" class="box centered"
                             style="width:2em" />
                     </td>
                     <td class="box centered">
-                        <input name="data.threshold" value="{{item.system.threshold}}" type="text" class="box centered"
+                        <input data-field="data.threshold" value="{{item.system.threshold}}" type="text" class="box centered"
                             style="width:2em" />
                     </td>
                 </tr>
             </table>
             <h3>{{localize 'shadowrun6.item.description'}}</h3>
-            <textarea class="box" type="text" name="system.description" cols="50"
+            <textarea class="box" type="text" data-field="system.description" cols="50"
                 rows="8">{{item.system.description}}</textarea>
         </div>
     </section>
