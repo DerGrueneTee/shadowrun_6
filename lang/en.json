@@ -162,6 +162,8 @@
       "rating": "Rating",
       "loyalty": "Loyalty",
       "loyalty_short": "Loy",
+      "favors": "Favors",
+      "favors_short": "Fav",
       "type": "Type"
     },
     "defense": {
