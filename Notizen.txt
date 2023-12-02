@@ -1,0 +1,8 @@
+token.actor.createEmbeddedDocuments("ActiveEffect",
+        [{
+            label: game.i18n.localize(effect.label),
+            icon: effect.icon,
+            origin: token.actor.uuid,
+            flags: { core: { statusId: effect.id } }
+        }]
+    )
