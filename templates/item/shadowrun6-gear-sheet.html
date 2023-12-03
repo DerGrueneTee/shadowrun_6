@@ -100,6 +100,9 @@
                 <tr>
                     <th>{{localize 'shadowrun6.item.skill'}}</th>
                     <th>{{localize 'shadowrun6.item.skillspec'}}</th>
+                    {{#if (eq item.system.type "WEAPON_CLOSE_COMBAT")}}
+                    <th>{{localize 'shadowrun6.item.strWeapon'}}</th>
+                    {{/if}}
                 </tr>
                 <tr>
                     <td>
@@ -119,6 +122,10 @@
                      {{/if}}
          				</select>
                     </td>
+                    {{#if (eq item.system.type "WEAPON_CLOSE_COMBAT")}}
+                    <td><input style="vertical-align: middle;" type="checkbox" {{checked item.system.strWeapon}}
+                            data-field="data.strWeapon" /></td>
+                    {{/if}}
                 </tr>
             </table>
             {{/if}}
