@@ -7,7 +7,7 @@
          {{#each actor.items as |item id|}}
         {{#if (eq item.type 'gear')}}
         {{#if (or (eq item.system.type "WEAPON_FIREARMS") (eq item.system.type "WEAPON_RANGED"))}}
-       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{description item.system 'item'}}">
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{sr6_description item.system 'item'}}">
            <td style="margin-right: 1rem"><button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column important-column">{{item.system.dmgDef}}</label></td>
          <td><label class="middle-column" >{{attackrating item.system.attackRating}}</label></td>
@@ -44,7 +44,7 @@
          {{#each actor.items as |item id|}}
         {{#iff item.type '==' 'gear'}}
         {{#iff item.system.type '==' "WEAPON_CLOSE_COMBAT"}}
-       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{description item.system 'item'}}">
+       <tr class="draggable item" data-item-id="{{this.id}}"  title="{{sr6_description item.system 'item'}}">
            <td style="margin-right: 1rem"><button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
          <td><label class="middle-column important-column">{{item.system.dmgDef}}</label></td>
          <td><label class="middle-column" >{{attackrating item.system.attackRating}}</label></td>
@@ -80,7 +80,7 @@
             {{#each actor.items as |item id|}}
             {{#iff item.type '==' 'gear'}}
             {{#iff item.system.type '==' "WEAPON_SPECIAL"}}
-        <tr class="draggable item" data-item-id="{{this.id}}"  title="{{description item.system 'item'}}">
+        <tr class="draggable item" data-item-id="{{this.id}}"  title="{{sr6_description item.system 'item'}}">
             <td style="margin-right: 1rem"><button type="button" class="collapsible {{item.flags.shadowrun6-eden.collapse-state}}" data-item-id="{{this.id}}">+</button><label class="item-name" data-skill="{{id}}">{{item.name}}</label></td>
             <td><label class="middle-column important-column">{{item.system.dmgDef}}</label></td>
             <td><label class="middle-column" >{{attackrating item.system.attackRating}}</label></td>

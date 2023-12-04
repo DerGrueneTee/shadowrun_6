@@ -104,7 +104,7 @@ export const defineHandlebarHelper = async function () {
 	Handlebars.registerHelper("itemsOfGeartype", itemsOfGeartype);
 	Handlebars.registerHelper("skillPointsNotZero", skillPointsNotZero);
 
-	Handlebars.registerHelper("description", function (itemData: GenesisData, type) {
+	Handlebars.registerHelper("sr6_description", function (itemData: GenesisData, type) {
 		let fallback: string = itemData.description;
 		let key = type + "." + itemData.genesisID + ".desc";
 		let name = (game as any).i18n.localize(key);

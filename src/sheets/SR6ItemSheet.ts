@@ -117,7 +117,7 @@ export class SR6ItemSheet extends ItemSheet {
 			let newValue: any[][] = [];
 
 			if (!(idx >= 0 && array !== "")) return;
-			
+
 			/* Duplicate the data from the object. Sets null & NaN to 0 */
 			if (field) {
 				newValue = duplicate(
