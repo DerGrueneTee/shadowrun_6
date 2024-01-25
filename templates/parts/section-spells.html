@@ -12,6 +12,7 @@
 	        <th style="text-align:left">{{ localize 'shadowrun6.label.column.name' }}</th>
 	        <th>{{ localize 'shadowrun6.section.spells.column.range' }}</th>
 	        <th></th>
+			<th>{{ localize 'shadowrun6.section.spells.column.sustained' }}</th>
 	        <th>{{ localize 'shadowrun6.section.spells.column.drain' }}</th>
 	        <th colspan="2">{{ localize 'shadowrun6.label.column.action' }}</th>
 	      </tr>
@@ -26,6 +27,14 @@
 				{{#if item.system.alchemic}}
 				<i class="fas fa-flask"></i>
 				{{/if}}
+			</td>
+			<td>
+				{{#iff item.system.duration '==' 'sustained'}}
+				<label class="switch">
+					<input type="checkbox" data-item-id="{{this.id}}" data-check="data.isSustained" {{checked item.system.isSustained}} type="checkbox" data-dtype="Boolean"/>
+						<span class="shadowrun6-slider round"></span>
+				</label>
+				{{/iff}}
 			</td>
 			<td class="centered"style="width: 3em"> <input type="text" value="{{item.system.drain}}" data-field="data.drain" data-type="Number"/></td>
 			<td class="centered">

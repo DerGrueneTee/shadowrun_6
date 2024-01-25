@@ -808,6 +808,7 @@
 		},
       "configure": "Configure your roll",
       "wound-modifier": "Use wound modifier",
+      "sustained-spell-modifier": "Use sustained spell modifier",
       "criticalglitch": "Critical glitch",
       "heal_apply": "Heal",
       "damage": "Damage: ",
@@ -998,7 +999,12 @@
         "column.alchemic": "Alch.",
         "column.drain": "Drain",
         "column.range": "Range",
+        "column.sustained": "Sust.",
         "title": "Spells"
+      },
+      "sustained": {
+        "add": "Add new spell",
+        "title": "Sustained Spells"
       },
 		"survival": "Survival",
       "vehicles": {

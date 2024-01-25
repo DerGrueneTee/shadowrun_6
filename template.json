@@ -720,7 +720,8 @@
 			"multiSense": false,
 			"isOpposed": true,
 			"withEssence": false,
-			"wildDie": false
+			"wildDie": false,
+			"isSustained": false
 		}
 	}
 }
