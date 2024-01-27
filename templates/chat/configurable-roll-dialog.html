@@ -38,7 +38,7 @@
     <h4 class="highlight" style="margin:0px">{{localize "shadowrun6.roll.configure"}}</h4>
     <table style="background-color: transparent; border: 0px">
     	<tr>
-    	  <td rowspan="4">
+    	  <td rowspan="5">
     	    <div class="edge-roll" style="flex: 0.48; margin-right: 10px">
 	         <img src="systems/shadowrun6-eden/images/BlankDice.png" style="border: 0px; height: auto; width: 48px; z-index: 0; position:absolute; filter: drop-shadow(0 0 4px #000000);" />
 		      <label class="edge-value" name="dicePool">{{data.calcPool}}</label>
@@ -49,6 +49,11 @@
     		<td><input type="text" name="threshold" value="{{data.threshold}}" style="width: 3em"/></td>
         {{/if}}
     	</tr>
+      <tr>
+        <td colspan="4"></td>
+        <td style="text-align:right">{{localize "shadowrun6.roll.sustained-spell-modifier"}}</td>
+        <td><input type="checkbox" id="useSustainedSpellModifier" checked {{checked data.useSustainedSpellModifier}} /></td>
+      </tr>
       <tr>
         <td colspan="4"></td>
         <td style="text-align:right">{{localize "shadowrun6.roll.wound-modifier"}}</td>

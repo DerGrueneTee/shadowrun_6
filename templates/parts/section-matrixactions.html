@@ -2,7 +2,7 @@
 	<div class="section-head">
 		<h2 class="section-title">{{ localize 'shadowrun6.section.matrix_actions.title' }}</h2>
 	</div>
-	<div style="column-count: 2; margin-right: 5px;">
+	<div style="column-count: 2; background: radial-gradient(circle at center, #B6B6A4 100%, transparent 100%) no-repeat center; background-size: 2px 100%; margin-right: 5px;">
  		{{#each config.MATRIX_ACTIONS as |action idx|}}
        <div class="draggable item" data-matrix-action-id="{{this.id}}" style="display: flex; font-size:small; align-items:center;">
        	<label style="flex-grow:6">{{localize (concat 'shadowrun6.matrixaction.' this.id)}}</label>
