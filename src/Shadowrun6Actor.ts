@@ -1112,6 +1112,29 @@ export class Shadowrun6Actor extends Actor {
 	}
 
 	//---------------------------------------------------------
+	_getSustainedSpellsModifier() : number {
+		const actorData = getActorData(this);
+		const items = actorData.items;
+		let sustainedCount : number = 0;
+		items.forEach((item) => {
+			console.log("Item: " + item.name);
+			let itemSystem : Spell = getSystemData(item);
+			if (item.type == "spell" && itemSystem.duration == "sustained") {
+				console.log("Type: " + item.type, "Duration: " + itemSystem.duration);
+				if (itemSystem.isSustained) {
+					console.log("Sustained: " + itemSystem.isSustained);
+					sustainedCount++;
+				}
+			}
+		});
+		if(sustainedCount > 0) {
+			sustainedCount = sustainedCount - 1;
+		}
+		console.log("Sustained Spells Modifier: " + sustainedCount);
+		return sustainedCount;
+	}
+
+	//---------------------------------------------------------
 	/**
 	 * Convert skill, optional skill specialization and optional threshold
 	 * into a roll name for display

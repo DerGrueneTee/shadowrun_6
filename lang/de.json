@@ -122,8 +122,18 @@
       "activation_minor": "Nebenhandlung",
       "activation_passive": "Passiv",
       "cost": "Kosten",
-      "haslevel": "Hat Stufe"
+      "haslevel": "Hat Stufe",
+      "pp": "KP",
+      "perLevel": "pro Stufe"
     },
+	 "critterpower": {
+		"actiontitle": "Aktion",
+		"action": {
+			"auto": "Auto",
+			"major": "Haupt",
+			"minor": "Neben"
+	  }
+	 },
     "attack_rating": {
       "astral": "Mana Angr.W",
       "matrix": "Matrix Angr.W",
@@ -150,6 +160,8 @@
       "rating_short": "St",
       "loyalty": "Loyalität",
       "loyalty_short": "Loy",
+      "favors": "Gefallen",
+      "favors_short": "Gef.",
       "type": "Art"
     },
     "defense": {
@@ -397,6 +409,7 @@
     },
     "item": {
       "accessories": "Einbauten",
+      "strWeapon": "verw. Stärke",
       "ammunition": "Munition",
       "attackvalues": "Angriffswerte",
       "availability": "Verfüg.",
@@ -458,6 +471,7 @@
       "GENETICS": "GENETICS (fehlt noch)",
       "MAGICAL": "MAGICAL (fehlt noch)",
       "NANOWARE": "NANOWARE (fehlt noch)",
+      "SOFTWARE": "Software",
       "SURVIVAL": "Überlebensausrüstung",
       "TOOLS": "TOOLS (fehlt noch)",
       "VEHICLES": "Fahrzeuge",
@@ -500,6 +514,7 @@
       "edit": "Bearbeiten",
       "extended_test": "Ausgedehnte Probe",
       "expertise": "Expertise",
+      "faster": "Beschleunigen",
       "features": "Merkmale",
       "firemode_current": "Akt. Feuermodus",
       "firemodes": "Feuermodi",
@@ -618,6 +633,7 @@
         "language": "Unverständliches Gemurmel"
       },
       "spell": "Abrakadabra",
+      "survival": "Das Schweizer Taschenmesser",
       "vehicles": "Geile Karre",
       "weapon": "Was mit viel Wumms",
       "weaponclose": "Etwas fürs Grobe",
@@ -762,6 +778,7 @@
           "damage_stun": "Widerstehe {damage} Betäubungsschaden"
         }
       },
+      "apply_damage": "Schaden anwenden",
       "ar_0": "Sehr nah",
       "ar_1": "Nah",
       "ar_2": "Mittel",
@@ -774,7 +791,14 @@
         "narrow_burst": "Enge Salve",
         "wide_burst": "Weite Salve"
       },
+      "button": {
+			"defense": "Verteidigen",
+			"drain"  : "Entzug widerstehen",
+			"soak"   : "Schaden widerstehen"
+		},
       "configure": "Justiere deinen Wurf",
+      "wound-modifier": "Verwende Wundabzug",
+      "sustained-spell-modifier": "Abzug durch aufr. Zauber",
       "criticalglitch": "Kritischer Patzer",
       "damage": "Schaden: ",
       "damage_apply": "Schaden zufügen",
@@ -957,7 +981,12 @@
         "column.alchemic": "Alch.",
         "column.drain": "Entzug",
         "column.range": "Reichw",
+        "column.sustained": "Aufr.",
         "title": "Zauber"
+      },
+      "sustained": {
+        "add": "Zauber ergänzen",
+        "title": "Aufrechterhaltene Zauber"
       },
       "survival": "Überlebensausrüstung",
       "vehicles": {
