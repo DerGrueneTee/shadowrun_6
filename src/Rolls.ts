@@ -165,6 +165,10 @@ function _dialogClosed(type: ReallyRoll, form: HTMLFormElement, prepared: Prepar
 	configured.updateSpecifics(prepared);
 	console.log("dialogClosed: configured=", configured);
 
+	if(prepared.rollType == "weapon") {
+
+	}
+
 	/* Check if attacker gets edge */
 	if (configured.actor && configured.edgePlayer > 0) {
 		console.log("Actor " + configured.actor.data._id + " gets " + configured.edgePlayer + " Edge");
