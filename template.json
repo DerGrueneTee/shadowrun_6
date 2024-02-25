@@ -577,6 +577,8 @@
 			"countable": false,
 			"availDef": "",
 			"avail": 0,
+			"ammocap": 0,
+			"ammocount": 0,
 			"priceDef": "",
 			"price": 0,
 			"customName": "",
