@@ -406,7 +406,11 @@
 			"gender": "",
 			"nuyen": 0,
 			"overwatch": 0,
-			"notes": "Write something"
+			"notes": "Write something",
+			"karma": 0,
+			"karma_total": 0,
+			"heat": 0,
+			"reputation": 0
 		},
 		"NPC": {
 			"name": "",

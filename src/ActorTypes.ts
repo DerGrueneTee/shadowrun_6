@@ -158,7 +158,12 @@ export class MatrixUser extends Lifeform {
 	persona: Persona = new Persona();
 }
 
-export class Player extends MatrixUser {}
+export class Player extends MatrixUser {
+	karma : number = 0;
+	karma_total : number = 0;
+	heat : number = 0;
+	reputation : number = 0;
+}
 
 export enum VehicleOpMode {
 	MANUAL = "manual",

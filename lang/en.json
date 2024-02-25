@@ -936,12 +936,18 @@
         "column.rating": "Lv",
         "title": "Foci"
       },
+      "gear" : {
+        "title" : "Gear"
+      },
+      "karma" : {
+        "title" : "Karma, Heat, Reputation",
+        "karma" : "Karma",
+        "heat"  : "Heat",
+        "reputation": "Reputation"
+      },
       "lifestyles" : {
         "add": "Add new lifestyle",
         "title" : "Lifestyles"
-      },
-      "gear" : {
-        "title" : "Gear"
       },
       "matrix_base": {
         "overwatch": "Overwatch"

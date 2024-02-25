@@ -69,6 +69,7 @@ export const preloadHandlebarsTemplates = async function () {
 		"systems/shadowrun6-eden/templates/parts/section-soakresist.html",
 		"systems/shadowrun6-eden/templates/parts/section-spells.html",
 		"systems/shadowrun6-eden/templates/parts/section-weapons.html",
+		"systems/shadowrun6-eden/templates/parts/section-karma_rep.html",
 		"systems/shadowrun6-eden/templates/parts/section-sins.html",
 		"systems/shadowrun6-eden/templates/parts/section-contacts.html",
 		"systems/shadowrun6-eden/templates/parts/section-lifestyles.html",

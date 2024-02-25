@@ -921,6 +921,15 @@
         "column.rating": "St.",
         "title": "Foci"
       },
+      "gear" : {
+        "title" : "Ausrüstung"
+      },
+      "karma" : {
+        "title" : "Karma, Fahndungsstufe, Ruf",
+        "karma" : "Karma",
+        "heat"  : "Fahndungsstufe",
+        "reputation": "Ruf"
+      },
       "lifestyles": {
         "add": "Neuen Lebensstil hinzufügen",
         "title": "Lebensstile"

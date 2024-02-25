@@ -50,6 +50,9 @@ function isSpiritOrSprite(obj: any): obj is Spirit {
 function isMatrixUser(obj: any): obj is MatrixUser {
 	return obj.persona != undefined;
 }
+function isPlayer(obj: any): obj is Player {
+	return obj.karma != undefined;
+}
 function isGear(obj: any): obj is Gear {
 	return obj.skill != undefined;
 }
@@ -103,6 +106,13 @@ export class Shadowrun6Actor extends Actor {
 		const actorData : Shadowrun6Actor = getActorData(this);
 		const system: SR6Actor = getSystemData(this);
 		console.log("Shadowrun6Actor.prepareData() " + actorData.name + " = " + actorData.type);
+		if (isPlayer(system)) {
+			if (!system.karma) system.karma=0;
+			if (!system.karma_total) system.karma_total=0;
+			if (!system.heat) system.heat=0;
+			if (!system.reputation) system.reputation=0;
+		}
+
 
 		try {
 			if (actorData.type === "Spirit") {
