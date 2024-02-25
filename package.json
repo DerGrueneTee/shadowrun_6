@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "shadowrun6-eden",
+  "version": "1.0.0",
+  "description": "",
+  "sideEffects": [
+    "src/Shadowrun6.ts"
+  ],
+  "author": "Stefan Prelle",
+  "devDependencies": {
+    "@league-of-foundry-developers/foundry-vtt-types": "^9.280.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "prettier": "2.7.1",
+    "prettier-eslint": "^15.0.1",
+    "prettier-eslint-cli": "^6.0.1",
+    "typescript": "4.6.2"
+  },
+  "dependencies": {
+    "common.js": "^1.1.1"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "prettier": "prettier-eslint --eslint-config-path=$PWD/.eslintrc.json  --write \"{,src/**/*}.ts\""
+  }
+}
