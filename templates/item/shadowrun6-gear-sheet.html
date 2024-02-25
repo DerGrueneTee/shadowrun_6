@@ -10,7 +10,7 @@
                     <!--Typ, Subtyp, Verfügbarkeit, Preis-->
                     <th>{{localize 'shadowrun6.item.type'}}</th>
                     <th>{{localize 'shadowrun6.item.subtype'}}</th>
-                    <!--th>{{localize 'shadowrun6.label.column.count'}}</th-->
+                    <th>{{localize 'shadowrun6.label.column.count'}}.</th>
                     <th>{{localize 'shadowrun6.label.column.rating'}}</th>
                     <th>{{localize 'shadowrun6.item.availability'}}</th>
                     <th>{{localize 'shadowrun6.item.price'}}</th>
@@ -35,8 +35,8 @@
                             {{/each}}
                             {{/select}}
                         </select></td>
-                    <!--td><input style="vertical-align: middle;" type="checkbox" {{checked item.system.countable}}
-                            data-field="data.countable" /></td-->
+                    <td style="text-align: center;"><input style="vertical-align: middle;" type="checkbox" {{checked item.system.countable}}
+                            data-field="data.countable" /></td>
                     <td><input style="vertical-align: middle;" type="checkbox" {{checked item.system.needsRating}}
                             data-field="data.needsRating" /></td>
                     <td><input type="text" value="{{item.system.availDef}}" data-field="data.availDef" class="box centered"
