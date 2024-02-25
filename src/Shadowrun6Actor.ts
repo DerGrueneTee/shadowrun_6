@@ -246,6 +246,7 @@ export class Shadowrun6Actor extends Actor {
 		   // Magic rating
  		   data.attributes.mag.base = 0;
  		   data.essence = force;
+ 		   if (!data.defenserating) data.defenserating = new Ratings();
  		   data.defenserating.physical.base = force;
  		   data.defenserating.astral.base = force;
 
