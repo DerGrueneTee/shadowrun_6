@@ -34,7 +34,6 @@ export default class SR6Roll extends Roll<ConfiguredRoll> {
 		console.log("ENTER evaluate()");
 		console.log("   this: ", this);
 		console.log("   formula: ", this._formula);
-
 		if (this.configured.buttonType === ReallyRoll.AUTOHITS) {
 			// Hits have been bought
 			console.log("BOUGHT HITS for pool", this.configured.pool);
