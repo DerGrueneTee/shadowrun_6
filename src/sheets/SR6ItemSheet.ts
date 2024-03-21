@@ -85,6 +85,9 @@ export class SR6ItemSheet extends ItemSheet {
 				const itemId: string = getActorData(this.object)._id!;
 				const field = element.dataset.field;
 				console.log("Try to update field '" + field + "' of item " + itemId + " with value " + value, this.item);
+				if (element.type=="number" || (element.dataset && element.dataset.dtype && element.dataset.dtype=="Number")) {
+					value = parseInt (element.value);
+				}
 				if (this.item) {
 					await this.item.update({ [field]: value });
 				} else {
