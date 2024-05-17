@@ -347,6 +347,7 @@ export class SR6Config {
 			pistols_light  : "shadowrun6.special.firearms.pistols_light",
 			pistols_heavy  : "shadowrun6.special.firearms.pistols_heavy",
 			machine_pistols: "shadowrun6.special.firearms.machine_pistols",
+			machine_guns   : "shadowrun6.special.firearms.machine_guns",
 			submachine_guns: "shadowrun6.special.firearms.submachine_guns",
 			rifles         : "shadowrun6.special.firearms.rifles",
 			shotguns       : "shadowrun6.special.firearms.shotguns",

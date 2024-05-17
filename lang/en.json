@@ -1138,6 +1138,7 @@
         "rifles": "Rifles",
         "shotguns": "Shotguns",
         "submachine_guns": "Submachine Guns",
+        "machine_guns": "Machine Guns",
         "tasers": "Taser"
       },
       "influence": {
