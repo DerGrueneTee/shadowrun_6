@@ -1128,7 +1128,6 @@ export class Shadowrun6Actor extends Actor {
 		const items = actorData.items;
 		let sustainedCount : number = 0;
 		items.forEach((item) => {
-			console.log("Item: " + item.name);
 			let itemSystem : Spell = getSystemData(item);
 			if (item.type == "spell" && itemSystem.duration == "sustained") {
 				console.log("Type: " + item.type, "Duration: " + itemSystem.duration);
@@ -1291,7 +1290,7 @@ export class Shadowrun6Actor extends Actor {
 			let token: Token = val as Token;
 			let actor: Shadowrun6Actor = token.actor as Shadowrun6Actor;
 			let here: number = map(actor);
-			console.log("Defense Rating of ",token.data._id," is ",here)
+			console.log("Defense Rating of ",token," is ",here)
 			if (here > highest) highest = here;
 		}
 		return highest;
@@ -1390,7 +1389,7 @@ export class Shadowrun6Actor extends Actor {
 		console.log("ääääääääääääääääää targets ", roll.targets);
 		let highestDefenseRating: number = this._getHighestDefenseRating((a) => {
 			console.log("Determine defense rating of ", a);
-			return a.data.data.defenserating.physical.pool;
+			return a.system.defenserating.physical.pool;
 		});
 		console.log("Highest defense rating of targets: " + highestDefenseRating);
 		if (highestDefenseRating > 0) roll.defenseRating = highestDefenseRating;
@@ -1449,7 +1448,7 @@ export class Shadowrun6Actor extends Actor {
 		// and what defense eventually applies
 		let hasDamageResist = !ritual;
 		roll.attackRating = roll.performer.attackrating.astral.pool;
-		let highestDefenseRating = this._getHighestDefenseRating((a) => a.data.data.defenserating.physical.pool);
+		let highestDefenseRating = this._getHighestDefenseRating((a) => a.system.defenserating.physical.pool);
 		console.log("Highest defense rating of targets: " + highestDefenseRating);
 		if (highestDefenseRating > 0) roll.defenseRating = highestDefenseRating;
 		roll.canAmpUpSpell = roll.spell.category === "combat";
