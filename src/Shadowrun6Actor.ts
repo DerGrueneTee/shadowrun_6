@@ -522,7 +522,7 @@ export class Shadowrun6Actor extends Actor {
 			let itemSystem : Gear = getSystemData(item);
 			if (item.type == "gear" && itemSystem.type == "ARMOR" && isArmor(itemSystem)) {
 				if (itemSystem.usedForPool) {
-					data.defenserating.physical.pool += itemSystem.defense;
+					data.defenserating.physical.pool += parseInt( itemSystem.defense as any);
 					data.defenserating.physical.modString += "\n+" + itemSystem.defense + " " + item.name;
 				}
 			}
